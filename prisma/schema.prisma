@@ -1,0 +1,632 @@
+// Velvet Code - Real Estate CRM SaaS PostgreSQL Schema
+// Multi-Tenant Architecture with organization_id isolation
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MANAGER
+  AGENT
+}
+
+enum BusinessType {
+  AGENT
+  BROKER
+  AGENCY
+  BUILDER
+  PROPERTY_CONSULTANT
+  OTHER
+}
+
+enum SubscriptionTier {
+  STARTER
+  PROFESSIONAL
+  BUSINESS
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  UNPAID
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  SITE_VISIT
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum LeadPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum LeadSource {
+  WEBSITE
+  WHATSAPP
+  INSTAGRAM
+  FACEBOOK
+  REFERRAL
+  PHONE
+  WALK_IN
+  OTHER
+}
+
+enum PropertyType {
+  APARTMENT
+  VILLA
+  PLOT
+  COMMERCIAL
+  PENTHOUSE
+  DUPLEX
+}
+
+enum PropertyStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+  RENTED
+  INACTIVE
+}
+
+enum DealStage {
+  NEW_LEAD
+  QUALIFIED
+  SITE_VISIT
+  NEGOTIATION
+  DOCUMENTATION
+  CLOSED_WON
+  CLOSED_LOST
+}
+
+enum SiteVisitStatus {
+  SCHEDULED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  RESCHEDULED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  OVERDUE
+}
+
+enum FollowUpType {
+  CALL
+  WHATSAPP
+  EMAIL
+  MEETING
+  SITE_VISIT
+  OTHER
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum MessageStatus {
+  QUEUED
+  SENT
+  DELIVERED
+  READ
+  FAILED
+}
+
+// ==========================================
+// Multi-Tenant Core: Organizations & Users
+// ==========================================
+
+model Organization {
+  id                String            @id @default(cuid())
+  name              String
+  slug              String            @unique
+  logoUrl           String?
+  phone             String?
+  email             String?
+  address           String?
+  city              String?
+  state             String?
+  country           String            @default("India")
+  businessType      BusinessType      @default(AGENCY)
+  website           String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Multi-tenant relations
+  memberships       Membership[]
+  subscription      Subscription?
+  leads             Lead[]
+  clients           Client[]
+  properties        Property[]
+  deals             Deal[]
+  siteVisits        SiteVisit[]
+  tasks             Task[]
+  calendarEvents    CalendarEvent[]
+  conversations     Conversation[]
+  messageTemplates  MessageTemplate[]
+  automations       Automation[]
+  documents         Document[]
+  notifications     Notification[]
+  aiUsages          AIUsage[]
+  activityLogs      ActivityLog[]
+  invoices          Invoice[]
+  integrations      IntegrationConfig[]
+
+  @@index([slug])
+}
+
+model User {
+  id             String        @id @default(cuid())
+  name           String
+  email          String        @unique
+  phone          String?
+  avatarUrl      String?
+  passwordHash   String?
+  isSuperAdmin   Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  memberships    Membership[]
+  assignedLeads  Lead[]        @relation("AssignedAgent")
+  assignedProps  Property[]    @relation("PropertyAgent")
+  assignedDeals  Deal[]        @relation("DealAgent")
+  siteVisits     SiteVisit[]   @relation("AgentVisits")
+  tasks          Task[]        @relation("AssignedTasks")
+  activityLogs   ActivityLog[]
+}
+
+model Membership {
+  id             String       @id @default(cuid())
+  userId         String
+  organizationId String
+  role           Role         @default(AGENT)
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@index([organizationId])
+  @@index([userId])
+}
+
+// ==========================================
+// SaaS Subscriptions & Billing
+// ==========================================
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  organizationId       String             @unique
+  tier                 SubscriptionTier   @default(STARTER)
+  status               SubscriptionStatus @default(TRIALING)
+  priceMonthlyINR      Int                @default(499)
+  billingCycle         String             @default("monthly") // monthly | annual
+  currentPeriodStart   DateTime           @default(now())
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean            @default(false)
+  razorpaySubscriptionId String?
+  razorpayCustomerId   String?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  // Limits
+  maxUsers             Int                @default(1)
+  maxLeads             Int                @default(100)
+  maxProperties        Int                @default(25)
+  monthlyAIQuota       Int                @default(100)
+
+  organization         Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+model Invoice {
+  id                   String       @id @default(cuid())
+  organizationId       String
+  invoiceNumber        String       @unique
+  amountINR            Int
+  taxINR               Int          @default(0)
+  totalINR             Int
+  status               String       @default("paid") // paid | pending | failed
+  pdfUrl               String?
+  paymentMethod        String?      @default("UPI / Card")
+  razorpayPaymentId    String?
+  billingPeriodStart   DateTime
+  billingPeriodEnd     DateTime
+  createdAt            DateTime     @default(now())
+
+  organization         Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  @@index([organizationId])
+}
+
+// ==========================================
+// CRM: Leads & Clients
+// ==========================================
+
+model Lead {
+  id                String        @id @default(cuid())
+  organizationId    String
+  name              String
+  phone             String
+  email             String?
+  source            LeadSource    @default(WEBSITE)
+  status            LeadStatus    @default(NEW)
+  priority          LeadPriority  @default(MEDIUM)
+  budgetMinINR      BigInt?
+  budgetMaxINR      BigInt?
+  preferredLocation String?
+  preferredType     PropertyType?
+  assignedToId      String?
+  nextFollowUpAt    DateTime?
+  notes             String?
+  score             Int           @default(50)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  organization      Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  assignedTo        User?         @relation("AssignedAgent", fields: [assignedToId], references: [id])
+  interestedPropertyId String?
+  interestedProperty Property?    @relation(fields: [interestedPropertyId], references: [id])
+  siteVisits        SiteVisit[]
+  deals             Deal[]
+  tasks             Task[]
+  conversations     Conversation[]
+  activityLogs      ActivityLog[]
+
+  @@index([organizationId, status])
+  @@index([organizationId, assignedToId])
+}
+
+model Client {
+  id                String        @id @default(cuid())
+  organizationId    String
+  name              String
+  phone             String
+  email             String?
+  budgetINR         BigInt?
+  preferredLocation String?
+  preferredType     PropertyType?
+  requirements      String?
+  notes             String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  organization      Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  deals             Deal[]
+  siteVisits        SiteVisit[]
+  documents         Document[]
+  tasks             Task[]
+  activityLogs      ActivityLog[]
+
+  @@index([organizationId])
+}
+
+// ==========================================
+// CRM: Properties Inventory
+// ==========================================
+
+model Property {
+  id                String          @id @default(cuid())
+  organizationId    String
+  title             String
+  description       String?
+  propertyType      PropertyType    @default(APARTMENT)
+  status            PropertyStatus  @default(AVAILABLE)
+  priceINR          BigInt
+  areaSqFt          Int
+  bedrooms          Int?
+  bathrooms         Int?
+  furnishing        String?         // Furnished, Semi-Furnished, Unfurnished
+  facing            String?         // North, East, North-East, etc.
+  address           String
+  locality          String
+  city              String
+  state             String
+  pincode           String?
+  ownerName         String?
+  ownerPhone        String?
+  amenities         String[]        @default([])
+  featuredImageUrl  String?
+  images            String[]        @default([])
+  assignedAgentId   String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  organization      Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  assignedAgent     User?           @relation("PropertyAgent", fields: [assignedAgentId], references: [id])
+  interestedLeads   Lead[]
+  siteVisits        SiteVisit[]
+  deals             Deal[]
+  documents         Document[]
+
+  @@index([organizationId, status])
+  @@index([organizationId, city])
+}
+
+// ==========================================
+// CRM: Deals & Sales Pipeline
+// ==========================================
+
+model Deal {
+  id                String        @id @default(cuid())
+  organizationId    String
+  title             String
+  dealValueINR      BigInt
+  stage             DealStage     @default(NEW_LEAD)
+  probability       Int           @default(20) // 0-100%
+  expectedCloseDate DateTime?
+  leadId            String?
+  clientId          String?
+  propertyId        String?
+  assignedAgentId   String?
+  notes             String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  organization      Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  lead              Lead?         @relation(fields: [leadId], references: [id])
+  client            Client?       @relation(fields: [clientId], references: [id])
+  property          Property?     @relation(fields: [propertyId], references: [id])
+  assignedAgent     User?         @relation("DealAgent", fields: [assignedAgentId], references: [id])
+  documents         Document[]
+  tasks             Task[]
+  activityLogs      ActivityLog[]
+
+  @@index([organizationId, stage])
+}
+
+// ==========================================
+// CRM: Site Visits & Tasks
+// ==========================================
+
+model SiteVisit {
+  id                String          @id @default(cuid())
+  organizationId    String
+  leadId            String?
+  clientId          String?
+  propertyId        String
+  assignedAgentId   String
+  visitDate         DateTime
+  timeSlot          String          // e.g., "11:00 AM"
+  status            SiteVisitStatus @default(SCHEDULED)
+  checkInAt         DateTime?
+  checkOutAt        DateTime?
+  feedback          String?
+  photos            String[]        @default([])
+  notes             String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  organization      Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  lead              Lead?           @relation(fields: [leadId], references: [id])
+  client            Client?         @relation(fields: [clientId], references: [id])
+  property          Property        @relation(fields: [propertyId], references: [id])
+  assignedAgent     User            @relation("AgentVisits", fields: [assignedAgentId], references: [id])
+
+  @@index([organizationId, visitDate])
+}
+
+model Task {
+  id                String        @id @default(cuid())
+  organizationId    String
+  title             String
+  description       String?
+  priority          TaskPriority  @default(MEDIUM)
+  status            TaskStatus    @default(PENDING)
+  dueDate           DateTime
+  assignedUserId    String
+  leadId            String?
+  clientId          String?
+  dealId            String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  organization      Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  assignedUser      User          @relation("AssignedTasks", fields: [assignedUserId], references: [id])
+  lead              Lead?         @relation(fields: [leadId], references: [id])
+  client            Client?       @relation(fields: [clientId], references: [id])
+  deal              Deal?         @relation(fields: [dealId], references: [id])
+
+  @@index([organizationId, dueDate])
+  @@index([organizationId, status])
+}
+
+model CalendarEvent {
+  id                String        @id @default(cuid())
+  organizationId    String
+  title             String
+  description       String?
+  eventType         String        // VISIT | FOLLOW_UP | MEETING | DEADLINE
+  startTime         DateTime
+  endTime           DateTime
+  allDay            Boolean       @default(false)
+  relatedId         String?
+  createdAt         DateTime      @default(now())
+
+  organization      Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  @@index([organizationId, startTime])
+}
+
+// ==========================================
+// WhatsApp CRM & Automation
+// ==========================================
+
+model Conversation {
+  id                String            @id @default(cuid())
+  organizationId    String
+  customerPhone     String
+  customerName      String
+  leadId            String?
+  lastMessageText   String?
+  lastMessageAt     DateTime          @default(now())
+  unreadCount       Int               @default(0)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  lead              Lead?             @relation(fields: [leadId], references: [id])
+  messages          Message[]
+
+  @@unique([organizationId, customerPhone])
+  @@index([organizationId, lastMessageAt])
+}
+
+model Message {
+  id                String            @id @default(cuid())
+  conversationId    String
+  direction         MessageDirection  @default(OUTBOUND)
+  status            MessageStatus     @default(DELIVERED)
+  body              String
+  mediaUrl          String?
+  mediaType         String?           // image | document | audio
+  whatsappMessageId String?
+  createdAt         DateTime          @default(now())
+
+  conversation      Conversation      @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  @@index([conversationId, createdAt])
+}
+
+model MessageTemplate {
+  id                String            @id @default(cuid())
+  organizationId    String
+  name              String
+  category          String            // WELCOME | SITE_VISIT | FOLLOW_UP | CELEBRATION
+  body              String
+  variables         String[]          // e.g. ["customer_name", "property_name"]
+  createdAt         DateTime          @default(now())
+
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+model Automation {
+  id                String            @id @default(cuid())
+  organizationId    String
+  name              String
+  triggerEvent      String            // LEAD_CREATED | VISIT_SCHEDULED | VISIT_REMINDER | INACTIVE_3D | DEAL_WON
+  conditionJson     String?           // JSON filter conditions
+  actionType        String            // SEND_WHATSAPP | CREATE_TASK | ASSIGN_AGENT
+  templateId        String?
+  isActive          Boolean           @default(true)
+  executionCount    Int               @default(0)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+// ==========================================
+// Realty AI, Documents, Notifications & Audits
+// ==========================================
+
+model AIUsage {
+  id                String            @id @default(cuid())
+  organizationId    String
+  userId            String
+  feature           String            // LEAD_ANALYSIS | MSG_GEN | PROPERTY_MATCH | SUMMARY
+  tokensUsed        Int               @default(0)
+  prompt            String?
+  createdAt         DateTime          @default(now())
+
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  @@index([organizationId, createdAt])
+}
+
+model Document {
+  id                String            @id @default(cuid())
+  organizationId    String
+  title             String
+  category          String            // PROPERTY | CLIENT_KYC | DEAL | LEGAL | OTHER
+  fileUrl           String
+  fileSize          Int?
+  fileType          String?
+  propertyId        String?
+  clientId          String?
+  dealId            String?
+  createdAt         DateTime          @default(now())
+
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  property          Property?         @relation(fields: [propertyId], references: [id])
+  client            Client?           @relation(fields: [clientId], references: [id])
+  deal              Deal?             @relation(fields: [dealId], references: [id])
+
+  @@index([organizationId, category])
+}
+
+model Notification {
+  id                String            @id @default(cuid())
+  organizationId    String
+  userId            String?
+  title             String
+  message           String
+  type              String            // LEAD | WHATSAPP | VISIT | TASK | BILLING | AI
+  isRead            Boolean           @default(false)
+  link              String?
+  createdAt         DateTime          @default(now())
+
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  @@index([organizationId, isRead])
+}
+
+model ActivityLog {
+  id                String            @id @default(cuid())
+  organizationId    String
+  userId            String?
+  action            String            // CREATE_LEAD | UPDATE_DEAL | SCHEDULE_VISIT | etc.
+  entityType        String            // Lead | Property | Deal | SiteVisit | Task
+  entityId          String
+  description       String
+  metadataJson      String?
+  createdAt         DateTime          @default(now())
+
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user              User?             @relation(fields: [userId], references: [id])
+  lead              Lead?             @relation(fields: [leadId], references: [id])
+  client            Client?           @relation(fields: [clientId], references: [id])
+  deal              Deal?             @relation(fields: [dealId], references: [id])
+  leadId            String?
+  clientId          String?
+  dealId            String?
+
+  @@index([organizationId, createdAt])
+}
+
+model IntegrationConfig {
+  id                String            @id @default(cuid())
+  organizationId    String
+  provider          String            // WHATSAPP_API | RAZORPAY | CLOUDINARY | OPENAI
+  status            String            @default("not_connected") // connected | not_connected | error
+  configJson        String?           // Encrypted credentials in production
+  lastCheckedAt     DateTime?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  @@unique([organizationId, provider])
+}
