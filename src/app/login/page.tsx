@@ -7,24 +7,21 @@ import { VelvetCodeLogo } from '@/components/brand/VelvetCodeLogo';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { useCRMStore } from '@/lib/store';
-import { INITIAL_USERS } from '@/lib/mock-data';
 import {
   Lock,
   Mail,
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
-  Sparkles,
-  Zap,
   AlertCircle,
 } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
   const { setCurrentUser } = useCRMStore();
-  const [email, setEmail] = useState('srilakshman73@gmail.com');
-  const [password, setPassword] = useState('Velvetcode@123');
-  const [rememberMe, setRememberMe] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -54,46 +51,11 @@ export default function LoginPage() {
       }
 
       setIsLoading(false);
-      // Route based on role
-      router.push(data.redirectTo || (data.user.role === 'OWNER' ? '/admin/dashboard' : '/app/dashboard'));
+      // Route based on role returned securely by the server
+      router.push(data.redirectTo || (data.user?.role === 'OWNER' ? '/admin/dashboard' : '/app/dashboard'));
     } catch (err) {
       setErrorMessage('Network error connecting to authentication server');
       setIsLoading(false);
-    }
-  };
-
-  const handleQuickDemo = (userKey: 'owner' | 'admin' | 'manager' | 'agent') => {
-    setErrorMessage(null);
-    if (userKey === 'owner') {
-      setEmail('srilakshman73@gmail.com');
-      setPassword('Velvetcode@123');
-      const ownerUser = INITIAL_USERS[0];
-      setCurrentUser({
-        ...ownerUser,
-        name: 'Velvet Code',
-        email: 'srilakshman73@gmail.com',
-        role: 'OWNER',
-        isSuperAdmin: true,
-      });
-      router.push('/admin/dashboard');
-    } else if (userKey === 'admin') {
-      setEmail('ananya@apexrealty.in');
-      setPassword('password123');
-      const adminUser = INITIAL_USERS[2];
-      setCurrentUser(adminUser);
-      router.push('/app/dashboard');
-    } else if (userKey === 'manager') {
-      setEmail('karthik@apexrealty.in');
-      setPassword('password123');
-      const managerUser = INITIAL_USERS[3];
-      setCurrentUser(managerUser);
-      router.push('/app/dashboard');
-    } else if (userKey === 'agent') {
-      setEmail('divya@apexrealty.in');
-      setPassword('password123');
-      const agentUser = INITIAL_USERS[4] || INITIAL_USERS[3];
-      setCurrentUser(agentUser);
-      router.push('/app/dashboard');
     }
   };
 
@@ -159,73 +121,6 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* Quick Demo Role Switcher */}
-          <div className="p-4 rounded-xl bg-zinc-950 border border-amber-500/30 space-y-2.5 shadow-lg">
-            <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-amber-400">
-              <span className="flex items-center gap-1">
-                <Zap className="w-3.5 h-3.5" /> Quick Demo Role Login
-              </span>
-              <span className="text-[10px] text-zinc-500 font-normal">1-Click Sign In</span>
-            </div>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <button
-                type="button"
-                onClick={() => handleQuickDemo('owner')}
-                className="p-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-amber-500/40 text-left hover:border-amber-400 transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <p className="font-bold text-amber-300">Velvet Code</p>
-                  <span className="px-1.5 py-0.2 text-[9px] font-bold bg-amber-500/20 text-amber-400 rounded">
-                    OWNER
-                  </span>
-                </div>
-                <p className="text-[10px] text-zinc-400 truncate mt-0.5">srilakshman73@gmail.com</p>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickDemo('admin')}
-                className="p-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-left hover:border-amber-500/40 transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <p className="font-semibold text-white">Ananya Iyer</p>
-                  <span className="px-1.5 py-0.2 text-[9px] font-bold bg-blue-500/20 text-blue-400 rounded">
-                    ADMIN
-                  </span>
-                </div>
-                <p className="text-[10px] text-zinc-400 truncate mt-0.5">Tenant Agency Admin</p>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickDemo('manager')}
-                className="p-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-left hover:border-amber-500/40 transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <p className="font-semibold text-white">Karthik S</p>
-                  <span className="px-1.5 py-0.2 text-[9px] font-bold bg-purple-500/20 text-purple-400 rounded">
-                    MANAGER
-                  </span>
-                </div>
-                <p className="text-[10px] text-zinc-400 truncate mt-0.5">Sales Manager</p>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickDemo('agent')}
-                className="p-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-left hover:border-amber-500/40 transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <p className="font-semibold text-white">Divya K</p>
-                  <span className="px-1.5 py-0.2 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 rounded">
-                    AGENT
-                  </span>
-                </div>
-                <p className="text-[10px] text-zinc-400 truncate mt-0.5">Sales Consultant</p>
-              </button>
-            </div>
-          </div>
-
           {errorMessage && (
             <div className="p-3 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
@@ -238,7 +133,8 @@ export default function LoginPage() {
               label="Email Address"
               type="email"
               required
-              placeholder="srilakshman73@gmail.com"
+              autoComplete="username"
+              placeholder="name@agency.in"
               leftIcon={<Mail className="w-4 h-4" />}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -248,6 +144,7 @@ export default function LoginPage() {
               label="Password"
               type="password"
               required
+              autoComplete="current-password"
               placeholder="••••••••"
               leftIcon={<Lock className="w-4 h-4" />}
               value={password}
