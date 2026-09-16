@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useCRMStore } from '@/lib/store';
-import { formatINR } from '@/lib/utils';
 import {
   Sparkles,
   X,
@@ -71,11 +70,11 @@ export function RealtyAIFloatingWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-20 sm:bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-black font-bold shadow-2xl shadow-amber-500/40 hover:shadow-amber-500/60 hover:scale-105 active:scale-95 transition-all duration-200 group border border-amber-300/50"
+          className="fixed bottom-20 sm:bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#A374] hover:bg-[#8F642B] text-[#151515] font-bold shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 group border border-[#A374]/60"
         >
           <div className="relative">
-            <Sparkles className="w-5 h-5 animate-pulse text-zinc-950" />
-            <span className="absolute -top-1 -right-1 w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+            <Sparkles className="w-5 h-5 text-[#151515]" />
+            <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#2E6B4F] rounded-full animate-ping" />
           </div>
           <span className="text-sm font-bold tracking-tight">Ask Realty AI</span>
         </button>
@@ -83,23 +82,23 @@ export function RealtyAIFloatingWidget() {
 
       {/* Floating Chat Modal Panel */}
       {isOpen && (
-        <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 w-[92vw] sm:w-[420px] h-[580px] max-h-[85vh] bg-zinc-950 border border-amber-500/40 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+        <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 w-[92vw] sm:w-[420px] h-[580px] max-h-[85vh] bg-[#FFFCF6] border border-[#DDD4C4] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200 text-[#24211D]">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-md">
+          <div className="flex items-center justify-between p-4 border-b border-[#DDD4C4] bg-[#F7F3EA]/90 backdrop-blur-md">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 text-black shadow-md">
+              <div className="p-2 rounded-xl bg-[#A374] text-[#151515] shadow-xs">
                 <Bot className="w-5 h-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-bold text-white tracking-wide">
+                  <h3 className="text-sm font-bold text-[#24211D] tracking-wide">
                     Realty AI
                   </h3>
-                  <span className="px-1.5 py-0.5 text-[9px] font-semibold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded">
+                  <span className="px-1.5 py-0.5 text-[9px] font-bold uppercase bg-[#A374]/20 text-[#7A5320] border border-[#A374]/40 rounded">
                     CRM Agent
                   </span>
                 </div>
-                <p className="text-[11px] text-zinc-400">
+                <p className="text-[11px] text-[#766F63]">
                   Intelligent Real Estate Assistant
                 </p>
               </div>
@@ -109,13 +108,13 @@ export function RealtyAIFloatingWidget() {
               <button
                 onClick={clearAIChat}
                 title="Reset Conversation"
-                className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors"
+                className="p-1.5 text-[#766F63] hover:text-[#24211D] rounded-lg hover:bg-[#EFE8DA] transition-colors"
               >
                 <RotateCcw className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors"
+                className="p-1.5 text-[#766F63] hover:text-[#24211D] rounded-lg hover:bg-[#EFE8DA] transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -123,14 +122,14 @@ export function RealtyAIFloatingWidget() {
           </div>
 
           {/* Usage Meter Bar */}
-          <div className="px-4 py-1.5 bg-zinc-900/40 border-b border-zinc-800/80 flex items-center justify-between text-[11px] text-zinc-400">
+          <div className="px-4 py-1.5 bg-[#F7F3EA]/60 border-b border-[#DDD4C4] flex items-center justify-between text-[11px] text-[#766F63]">
             <span className="flex items-center gap-1">
-              <Zap className="w-3.5 h-3.5 text-amber-400" />
+              <Zap className="w-3.5 h-3.5 text-[#8F642B]" />
               AI Quota: {subscription.usage.aiRequestsUsed} / {currentPlanLimits.monthlyAIQuota} used
             </span>
             <Link
               href="/app/billing"
-              className="text-amber-400 hover:underline font-medium text-[10px]"
+              className="text-[#8F642B] hover:underline font-bold text-[10px]"
             >
               Upgrade
             </Link>
@@ -144,7 +143,7 @@ export function RealtyAIFloatingWidget() {
                 className={`flex gap-2.5 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.role === 'assistant' && (
-                  <div className="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-7 h-7 rounded-full bg-[#A374]/20 border border-[#A374]/40 text-[#8F642B] flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Sparkles className="w-3.5 h-3.5" />
                   </div>
                 )}
@@ -152,37 +151,37 @@ export function RealtyAIFloatingWidget() {
                 <div
                   className={`max-w-[85%] p-3.5 rounded-2xl leading-relaxed whitespace-pre-wrap ${
                     msg.role === 'user'
-                      ? 'bg-amber-500 text-black font-medium rounded-tr-none shadow-md'
-                      : 'bg-zinc-900 text-zinc-200 border border-zinc-800/90 rounded-tl-none shadow-sm'
+                      ? 'bg-[#A374] text-[#151515] font-semibold rounded-tr-none shadow-xs'
+                      : 'bg-[#F7F3EA] text-[#24211D] border border-[#DDD4C4] rounded-tl-none shadow-xs'
                   }`}
                 >
                   <div>{msg.content}</div>
 
                   {/* Contextual Action Draft Preview */}
                   {msg.actionDraft && msg.role === 'assistant' && (
-                    <div className="mt-3 p-3 rounded-xl bg-zinc-950/80 border border-amber-500/30 text-zinc-100">
-                      <div className="flex items-center justify-between text-[10px] font-semibold text-amber-400 uppercase tracking-wider mb-1.5">
+                    <div className="mt-3 p-3 rounded-xl bg-[#FFFCF6] border border-[#A374]/40 text-[#24211D]">
+                      <div className="flex items-center justify-between text-[10px] font-bold text-[#8F642B] uppercase tracking-wider mb-1.5">
                         <span className="flex items-center gap-1">
                           <MessageSquare className="w-3 h-3" />
                           Prepared Action Draft
                         </span>
                         {msg.actionDraft.isExecuted ? (
-                          <span className="text-emerald-400 flex items-center gap-0.5">
+                          <span className="text-[#2E6B4F] flex items-center gap-0.5">
                             <CheckCircle2 className="w-3 h-3" /> Ready / Opened
                           </span>
                         ) : (
-                          <span className="text-zinc-400">Requires Confirmation</span>
+                          <span className="text-[#766F63]">Requires Confirmation</span>
                         )}
                       </div>
 
                       {msg.actionDraft.recipientName && (
-                        <p className="text-[11px] text-zinc-300 mb-1">
+                        <p className="text-[11px] text-[#24211D] mb-1">
                           To: <strong>{msg.actionDraft.recipientName}</strong> ({msg.actionDraft.recipientPhone})
                         </p>
                       )}
 
                       {msg.actionDraft.messageText && (
-                        <p className="text-[11px] italic text-zinc-300 bg-zinc-900 p-2 rounded border border-zinc-800 my-2">
+                        <p className="text-[11px] italic text-[#24211D] bg-[#F7F3EA] p-2.5 rounded-lg border border-[#DDD4C4] my-2">
                           "{msg.actionDraft.messageText}"
                         </p>
                       )}
@@ -199,7 +198,7 @@ export function RealtyAIFloatingWidget() {
                           </Button>
                           <Link
                             href="/app/whatsapp"
-                            className="text-[11px] text-zinc-400 hover:text-white flex items-center gap-0.5 underline"
+                            className="text-[11px] text-[#766F63] hover:text-[#24211D] flex items-center gap-0.5 underline font-semibold"
                           >
                             Open Inbox <ExternalLink className="w-2.5 h-2.5" />
                           </Link>
@@ -210,7 +209,7 @@ export function RealtyAIFloatingWidget() {
                 </div>
 
                 {msg.role === 'user' && (
-                  <div className="w-7 h-7 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-7 h-7 rounded-full bg-[#EFE8DA] border border-[#DDD4C4] text-[#24211D] flex items-center justify-center flex-shrink-0 mt-0.5 font-bold text-[10px]">
                     <UserIcon className="w-3.5 h-3.5" />
                   </div>
                 )}
@@ -220,7 +219,7 @@ export function RealtyAIFloatingWidget() {
           </div>
 
           {/* Quick Prompts Carousel */}
-          <div className="px-3 py-2 bg-zinc-950 border-t border-zinc-900 overflow-x-auto flex gap-1.5 no-scrollbar">
+          <div className="px-3 py-2 bg-[#F7F3EA] border-t border-[#DDD4C4] overflow-x-auto flex gap-1.5 no-scrollbar">
             {quickPrompts.map((prompt, idx) => (
               <button
                 key={idx}
@@ -228,7 +227,7 @@ export function RealtyAIFloatingWidget() {
                   setInputValue(prompt);
                   sendAIMessage(prompt);
                 }}
-                className="px-2.5 py-1 text-[10px] font-medium bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-amber-300 border border-zinc-800 rounded-full whitespace-nowrap transition-colors"
+                className="px-2.5 py-1 text-[10px] font-semibold bg-[#FFFCF6] hover:bg-[#EFE8DA] text-[#24211D] hover:text-[#8F642B] border border-[#DDD4C4] rounded-full whitespace-nowrap transition-colors"
               >
                 {prompt}
               </button>
@@ -238,21 +237,21 @@ export function RealtyAIFloatingWidget() {
           {/* Message Input Form */}
           <form
             onSubmit={handleSend}
-            className="p-3 bg-zinc-900/90 border-t border-zinc-800 flex items-center gap-2"
+            className="p-3 bg-[#F7F3EA] border-t border-[#DDD4C4] flex items-center gap-2"
           >
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask Realty AI about your leads, deals, properties..."
-              className="flex-1 bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-zinc-500 outline-none focus:border-amber-400/70"
+              className="flex-1 bg-[#FFFCF6] border border-[#DDD4C4] rounded-xl px-3.5 py-2 text-xs text-[#24211D] placeholder:text-[#766F63]/60 outline-none focus:border-[#A374]"
             />
             <Button
               type="submit"
               variant="gold"
               size="sm"
               disabled={!inputValue.trim()}
-              className="px-3"
+              className="px-3 font-bold"
             >
               <Send className="w-3.5 h-3.5" />
             </Button>

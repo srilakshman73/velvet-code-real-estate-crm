@@ -57,15 +57,15 @@ export default function DocumentsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-              <FileText className="w-6 h-6 text-amber-400" />
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+              <FileText className="w-6 h-6 text-[#A374]" />
               Document Vault & Legal KYC
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30 rounded-full">
               {documents.length} Encrypted Files
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
             Store property brochures, floor plans, buyer PAN/KYC cards, and draft sale agreements.
           </p>
         </div>
@@ -81,15 +81,15 @@ export default function DocumentsPage() {
       </div>
 
       {/* Filter Bar */}
-      <div className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#766F63] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search documents by name or property..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-zinc-900 border border-zinc-800 rounded-xl text-xs text-white placeholder:text-zinc-500 outline-none"
+            className="w-full pl-9 pr-4 py-2 bg-white border border-[#DDD4C4] rounded-xl text-xs text-[#24211D] placeholder:text-[#766F63] outline-none focus:border-[#A374]"
           />
         </div>
 
@@ -100,8 +100,8 @@ export default function DocumentsPage() {
               onClick={() => setFilter(cat)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors ${
                 filter === cat
-                  ? 'bg-amber-500 text-black'
-                  : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
+                  ? 'bg-[#A374] text-white shadow-xs'
+                  : 'bg-white text-[#766F63] hover:text-[#24211D] border border-[#DDD4C4]'
               }`}
             >
               {cat === 'ALL' ? 'All Files' : cat.replace('_', ' ')}
@@ -124,32 +124,32 @@ export default function DocumentsPage() {
           {filteredDocs.map((doc) => (
             <div
               key={doc.id}
-              className="p-5 rounded-2xl bg-zinc-950 border border-zinc-800 hover:border-amber-500/40 shadow-xl transition-all space-y-3 flex flex-col justify-between"
+              className="p-5 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] transition-all space-y-3 flex flex-col justify-between"
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-zinc-850 text-amber-400 rounded">
+                  <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#F7F3EA] text-[#8F642B] rounded border border-[#DDD4C4]">
                     {doc.category}
                   </span>
-                  <span className="text-xs text-zinc-500 font-mono">{doc.fileSizeMB} MB • {doc.fileType}</span>
+                  <span className="text-xs text-[#766F63] font-mono">{doc.fileSizeMB} MB • {doc.fileType}</span>
                 </div>
 
-                <h3 className="text-sm font-bold text-white line-clamp-1">{doc.title}</h3>
+                <h3 className="text-sm font-serif font-bold text-[#24211D] line-clamp-1">{doc.title}</h3>
                 {doc.relatedName && (
-                  <p className="text-xs text-zinc-400 truncate">Related: {doc.relatedName}</p>
+                  <p className="text-xs text-[#766F63] truncate">Related: {doc.relatedName}</p>
                 )}
               </div>
 
-              <div className="pt-3 border-t border-zinc-800 flex items-center justify-between text-xs">
+              <div className="pt-3 border-t border-[#DDD4C4] flex items-center justify-between text-xs">
                 <button
                   onClick={() => alert(`Downloading ${doc.title}...`)}
-                  className="text-amber-400 hover:underline font-semibold flex items-center gap-1"
+                  className="text-[#8F642B] hover:underline font-semibold flex items-center gap-1"
                 >
                   <Download className="w-3.5 h-3.5" /> Download PDF
                 </button>
                 <button
                   onClick={() => deleteDocument(doc.id)}
-                  className="text-zinc-600 hover:text-rose-400 p-1"
+                  className="text-[#766F63] hover:text-[#8B2635] p-1 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -195,7 +195,7 @@ export default function DocumentsPage() {
             onChange={(e) => setNewDocForm({ ...newDocForm, relatedName: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-800">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
             <Button
               type="button"
               variant="secondary"

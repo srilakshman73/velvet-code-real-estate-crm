@@ -42,7 +42,7 @@ export default function BillingPage() {
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#f59e0b', '#10b981', '#ffffff'],
+        colors: ['#A374', '#2E6B4F', '#24211D'],
       });
     } catch {
       // ignore
@@ -55,15 +55,15 @@ export default function BillingPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-              <CreditCard className="w-6 h-6 text-amber-400" />
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+              <CreditCard className="w-6 h-6 text-[#A374]" />
               Subscription & Workspace Billing
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#2E6B4F]/10 text-[#2E6B4F] border border-[#2E6B4F]/20 rounded-full">
               Status: {subscription.status}
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
             Manage your real estate SaaS plan tier, usage quotas, payment gateway, and invoice receipts.
           </p>
         </div>
@@ -79,16 +79,16 @@ export default function BillingPage() {
       </div>
 
       {/* Current Plan Overview Card */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-zinc-950 border border-amber-500/30 shadow-2xl space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-6">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD4C4] pb-6">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#8F642B] font-serif">
               Active SaaS Plan
             </span>
-            <h2 className="text-3xl font-extrabold text-white mt-1">
+            <h2 className="text-3xl font-serif font-bold text-[#24211D] mt-1">
               {currentPlanLimits.name} Plan
             </h2>
-            <p className="text-sm text-zinc-300 mt-1">
+            <p className="text-sm text-[#766F63] mt-1">
               ₹{subscription.priceMonthlyINR.toLocaleString('en-IN')}/month • Next renewal on 01 Oct 2026
             </p>
           </div>
@@ -98,7 +98,7 @@ export default function BillingPage() {
               variant="gold"
               size="md"
               onClick={() => setIsUpgradeModalOpen(true)}
-              className="font-bold shadow-lg shadow-amber-500/20"
+              className="font-bold shadow-md"
             >
               Upgrade Plan
             </Button>
@@ -108,33 +108,33 @@ export default function BillingPage() {
         {/* Real-time Usage Progress Bars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
           {/* 1. Users */}
-          <div className="space-y-2 p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C4] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-zinc-400">Agent Seats:</span>
-              <span className="text-white font-mono">
+              <span className="text-[#766F63]">Agent Seats:</span>
+              <span className="text-[#24211D] font-mono">
                 {users.length} / {currentPlanLimits.maxUsers}
               </span>
             </div>
-            <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
               <div
-                className="h-full bg-amber-400 rounded-full"
+                className="h-full bg-[#A374] rounded-full"
                 style={{ width: `${(users.length / currentPlanLimits.maxUsers) * 100}%` }}
               />
             </div>
-            <p className="text-[10px] text-zinc-500">Enforced on backend</p>
+            <p className="text-[10px] text-[#766F63]">Enforced on backend</p>
           </div>
 
           {/* 2. Leads */}
-          <div className="space-y-2 p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C4] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-zinc-400">Lead Storage:</span>
-              <span className="text-white font-mono">
+              <span className="text-[#766F63]">Lead Storage:</span>
+              <span className="text-[#24211D] font-mono">
                 248 / {currentPlanLimits.maxLeads === -1 ? 'Unlimited' : currentPlanLimits.maxLeads}
               </span>
             </div>
-            <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
               <div
-                className="h-full bg-emerald-400 rounded-full"
+                className="h-full bg-[#2E6B4F] rounded-full"
                 style={{
                   width: `${Math.min(
                     (248 / (currentPlanLimits.maxLeads === -1 ? 1000 : currentPlanLimits.maxLeads)) *
@@ -144,21 +144,21 @@ export default function BillingPage() {
                 }}
               />
             </div>
-            <p className="text-[10px] text-zinc-500">Active buyer records</p>
+            <p className="text-[10px] text-[#766F63]">Active buyer records</p>
           </div>
 
           {/* 3. Properties */}
-          <div className="space-y-2 p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C4] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-zinc-400">Property Listings:</span>
-              <span className="text-white font-mono">
+              <span className="text-[#766F63]">Property Listings:</span>
+              <span className="text-[#24211D] font-mono">
                 {properties.length} /{' '}
                 {currentPlanLimits.maxProperties === -1 ? 'Unlimited' : currentPlanLimits.maxProperties}
               </span>
             </div>
-            <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
               <div
-                className="h-full bg-blue-400 rounded-full"
+                className="h-full bg-[#3B5BDB] rounded-full"
                 style={{
                   width: `${Math.min(
                     (properties.length /
@@ -169,41 +169,41 @@ export default function BillingPage() {
                 }}
               />
             </div>
-            <p className="text-[10px] text-zinc-500">Live active inventory</p>
+            <p className="text-[10px] text-[#766F63]">Live active inventory</p>
           </div>
 
           {/* 4. AI Inferences */}
-          <div className="space-y-2 p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C4] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-zinc-400">Realty AI Quota:</span>
-              <span className="text-amber-300 font-mono">
+              <span className="text-[#766F63]">Realty AI Quota:</span>
+              <span className="text-[#8F642B] font-mono">
                 {subscription.usage.aiRequestsUsed} / {currentPlanLimits.monthlyAIQuota}
               </span>
             </div>
-            <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
               <div
-                className="h-full bg-amber-400 rounded-full"
+                className="h-full bg-[#A374] rounded-full"
                 style={{
                   width: `${(subscription.usage.aiRequestsUsed / currentPlanLimits.monthlyAIQuota) * 100}%`,
                 }}
               />
             </div>
-            <p className="text-[10px] text-zinc-500">Resets on next cycle</p>
+            <p className="text-[10px] text-[#766F63]">Resets on next cycle</p>
           </div>
         </div>
       </div>
 
       {/* Invoices Table */}
       <div className="space-y-4">
-        <h3 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
-          <Receipt className="w-5 h-5 text-amber-400" />
+        <h3 className="text-lg font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+          <Receipt className="w-5 h-5 text-[#A374]" />
           Invoice & Payment History
         </h3>
 
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-950 overflow-hidden shadow-xl">
+        <div className="rounded-2xl border border-[#DDD4C4] bg-[#FFFCF6] overflow-hidden shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <table className="w-full text-left text-xs sm:text-sm">
             <thead>
-              <tr className="bg-zinc-900/90 border-b border-zinc-800 text-zinc-400 font-semibold">
+              <tr className="bg-[#F7F3EA] border-b border-[#DDD4C4] text-[#766F63] font-semibold">
                 <th className="p-4">Invoice #</th>
                 <th className="p-4">Billing Period</th>
                 <th className="p-4">Amount</th>
@@ -212,24 +212,24 @@ export default function BillingPage() {
                 <th className="p-4 text-right">Download</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800/60">
+            <tbody className="divide-y divide-[#DDD4C4]/60">
               {INITIAL_INVOICES.map((inv) => (
-                <tr key={inv.id} className="hover:bg-zinc-900/30 transition-colors">
-                  <td className="p-4 font-bold text-white font-mono">{inv.invoiceNumber}</td>
-                  <td className="p-4 text-zinc-300">Monthly SaaS Subscription</td>
-                  <td className="p-4 font-extrabold text-amber-300 font-mono">
+                <tr key={inv.id} className="hover:bg-[#F7F3EA]/60 transition-colors">
+                  <td className="p-4 font-bold text-[#24211D] font-mono">{inv.invoiceNumber}</td>
+                  <td className="p-4 text-[#766F63]">Monthly SaaS Subscription</td>
+                  <td className="p-4 font-extrabold text-[#8F642B] font-mono">
                     ₹{inv.totalINR}
                   </td>
-                  <td className="p-4 text-zinc-300">{inv.paymentMethod}</td>
+                  <td className="p-4 text-[#766F63]">{inv.paymentMethod}</td>
                   <td className="p-4">
-                    <span className="px-2 py-0.5 text-xs font-bold bg-emerald-500/20 text-emerald-400 rounded">
+                    <span className="px-2.5 py-0.5 text-xs font-bold bg-[#2E6B4F]/10 text-[#2E6B4F] rounded border border-[#2E6B4F]/20">
                       Paid
                     </span>
                   </td>
                   <td className="p-4 text-right">
                     <button
                       onClick={() => alert(`Downloading Invoice ${inv.invoiceNumber} PDF...`)}
-                      className="text-amber-400 hover:underline font-semibold flex items-center gap-1 ml-auto text-xs"
+                      className="text-[#8F642B] hover:underline font-semibold flex items-center gap-1 ml-auto text-xs"
                     >
                       <Download className="w-3.5 h-3.5" /> PDF
                     </button>
@@ -255,35 +255,35 @@ export default function BillingPage() {
             return (
               <div
                 key={plan.tier}
-                className={`p-5 rounded-2xl border flex flex-col justify-between space-y-4 ${
+                className={`p-5 rounded-2xl border flex flex-col justify-between space-y-4 transition-all ${
                   isCurrent
-                    ? 'bg-amber-500/10 border-amber-400 shadow-lg'
-                    : 'bg-zinc-900/70 border-zinc-800'
+                    ? 'bg-[#A374]/10 border-[#A374] shadow-md'
+                    : 'bg-white border-[#DDD4C4]'
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <h4 className="font-bold text-white text-base">{plan.name}</h4>
+                    <h4 className="font-serif font-bold text-[#24211D] text-base">{plan.name}</h4>
                     {isCurrent && (
-                      <span className="px-2 py-0.5 text-[9px] font-bold bg-amber-500 text-black rounded">
+                      <span className="px-2 py-0.5 text-[9px] font-bold bg-[#A374] text-white rounded">
                         Current
                       </span>
                     )}
                   </div>
-                  <p className="text-2xl font-extrabold text-white mt-2">
+                  <p className="text-2xl font-serif font-extrabold text-[#24211D] mt-2">
                     ₹{plan.priceMonthlyINR}/mo
                   </p>
-                  <ul className="mt-4 space-y-2 text-xs text-zinc-300">
+                  <ul className="mt-4 space-y-2 text-xs text-[#766F63]">
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#A374]" />
                       <span>{plan.maxUsers} User Seat(s)</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#A374]" />
                       <span>{plan.maxLeads === -1 ? 'Unlimited' : plan.maxLeads} Leads</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#A374]" />
                       <span>{plan.monthlyAIQuota} AI Queries</span>
                     </li>
                   </ul>

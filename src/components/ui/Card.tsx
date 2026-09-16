@@ -8,17 +8,17 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Card({ className, variant = 'default', orientation, children, ...props }: CardProps) {
   const variantClasses = {
-    default: 'bg-zinc-900/90 border border-zinc-800/80 shadow-md',
-    glass: 'bg-zinc-900/60 backdrop-blur-xl border border-white/10 shadow-xl',
+    default: 'bg-[#FFFCF6] border border-[#DDD4C4] aurum-card-shadow',
+    glass: 'bg-[#FFFCF6]/85 backdrop-blur-md border border-[#DDD4C4]/80 shadow-sm',
     'gold-border':
-      'bg-zinc-900/95 border border-amber-500/30 shadow-xl shadow-amber-500/5',
+      'bg-[#FFFCF6] border border-[#A374]/60 shadow-[0_4px_20px_-4px_rgba(163,116,0,0.12)]',
     interactive:
-      'bg-zinc-900/90 border border-zinc-800 hover:border-amber-500/40 hover:shadow-lg hover:shadow-amber-500/5 transition-all duration-200 cursor-pointer',
+      'bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374] hover:shadow-[0_10px_28px_-4px_rgba(163,116,0,0.14)] transition-all duration-200 cursor-pointer',
   };
 
   return (
     <div
-      className={cn('rounded-xl p-5 text-zinc-100', variantClasses[variant], className)}
+      className={cn('rounded-2xl p-5 sm:p-6 text-[#24211D]', variantClasses[variant], className)}
       {...props}
     >
       {children}
@@ -32,7 +32,7 @@ export function CardHeader({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('flex items-center justify-between pb-4 mb-4 border-b border-zinc-800/60', className)} {...props}>
+    <div className={cn('flex items-center justify-between pb-4 mb-4 border-b border-[#DDD4C4]/70', className)} {...props}>
       {children}
     </div>
   );
@@ -45,7 +45,7 @@ export function CardTitle({
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn('text-base font-semibold text-white tracking-tight flex items-center gap-2', className)}
+      className={cn('text-base font-bold text-[#24211D] tracking-tight flex items-center gap-2', className)}
       {...props}
     >
       {children}
@@ -59,7 +59,7 @@ export function CardDescription({
   ...props
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn('text-xs text-zinc-400 mt-1', className)} {...props}>
+    <p className={cn('text-xs text-[#766F63] mt-1', className)} {...props}>
       {children}
     </p>
   );

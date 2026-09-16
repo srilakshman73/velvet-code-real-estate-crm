@@ -27,59 +27,72 @@ export function MetricCard({
   const isNegative = (changePercent ?? 0) < 0;
 
   const accentStyles = {
-    gold: 'border-amber-500/30 hover:border-amber-500/50 bg-gradient-to-b from-zinc-900 via-zinc-900 to-amber-950/20 text-amber-300',
-    emerald: 'border-emerald-500/30 hover:border-emerald-500/50 bg-gradient-to-b from-zinc-900 via-zinc-900 to-emerald-950/20 text-emerald-400',
-    blue: 'border-blue-500/30 hover:border-blue-500/50 bg-gradient-to-b from-zinc-900 via-zinc-900 to-blue-950/20 text-blue-400',
-    purple: 'border-purple-500/30 hover:border-purple-500/50 bg-gradient-to-b from-zinc-900 via-zinc-900 to-purple-950/20 text-purple-400',
-    default: 'border-zinc-800 hover:border-zinc-700 bg-zinc-900/90 text-zinc-300',
+    gold: 'border-[#DDD4C4] hover:border-[#A374]/80 bg-[#FFFCF6]',
+    emerald: 'border-[#DDD4C4] hover:border-[#2E6B4F]/80 bg-[#FFFCF6]',
+    blue: 'border-[#DDD4C4] hover:border-[#3D5A80]/80 bg-[#FFFCF6]',
+    purple: 'border-[#DDD4C4] hover:border-[#6B5B95]/80 bg-[#FFFCF6]',
+    default: 'border-[#DDD4C4] hover:border-[#A374]/60 bg-[#FFFCF6]',
+  };
+
+  const iconAccent = {
+    gold: 'bg-[#A374]/15 border-[#A374]/30 text-[#8F642B]',
+    emerald: 'bg-[#2E6B4F]/15 border-[#2E6B4F]/30 text-[#2E6B4F]',
+    blue: 'bg-[#3D5A80]/15 border-[#3D5A80]/30 text-[#293E58]',
+    purple: 'bg-[#6B5B95]/15 border-[#6B5B95]/30 text-[#524474]',
+    default: 'bg-[#F7F3EA] border-[#DDD4C4] text-[#8F642B]',
   };
 
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-xl p-5 border shadow-lg transition-all duration-200 group',
+        'relative overflow-hidden rounded-2xl p-5 sm:p-6 border aurum-card-shadow transition-all duration-200 group',
         accentStyles[variant],
         className
       )}
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-1">
+          <p className="text-xs font-bold uppercase tracking-wider text-[#766F63] mb-1">
             {title}
           </p>
-          <div className="text-2xl lg:text-3xl font-bold text-white tracking-tight font-sans">
+          <div className="text-2xl sm:text-3xl font-extrabold text-[#24211D] tracking-tight font-sans">
             {value}
           </div>
         </div>
-        <div className="p-2.5 rounded-xl bg-zinc-950/80 border border-zinc-800/80 text-zinc-200 shadow-inner group-hover:scale-105 transition-transform">
+        <div
+          className={cn(
+            'p-3 rounded-xl border shadow-xs group-hover:scale-105 transition-transform flex items-center justify-center',
+            iconAccent[variant]
+          )}
+        >
           {icon}
         </div>
       </div>
 
       {(changePercent !== undefined || subtitle) && (
-        <div className="mt-3.5 flex items-center justify-between text-xs pt-3 border-t border-zinc-800/60">
+        <div className="mt-4 flex items-center justify-between text-xs pt-3 border-t border-[#DDD4C4]/60">
           {changePercent !== undefined && (
-            <div className="flex items-center gap-1 font-medium">
+            <div className="flex items-center gap-1 font-semibold">
               {isPositive ? (
-                <span className="flex items-center text-emerald-400 gap-0.5">
+                <span className="flex items-center text-[#2E6B4F] gap-0.5">
                   <TrendingUp className="w-3.5 h-3.5" />
                   +{changePercent}%
                 </span>
               ) : isNegative ? (
-                <span className="flex items-center text-rose-400 gap-0.5">
+                <span className="flex items-center text-[#8B2635] gap-0.5">
                   <TrendingDown className="w-3.5 h-3.5" />
                   {changePercent}%
                 </span>
               ) : (
-                <span className="flex items-center text-zinc-400 gap-0.5">
+                <span className="flex items-center text-[#766F63] gap-0.5">
                   <Minus className="w-3.5 h-3.5" />
                   0%
                 </span>
               )}
-              <span className="text-zinc-500">{changeLabel}</span>
+              <span className="text-[#766F63] font-normal">{changeLabel}</span>
             </div>
           )}
-          {subtitle && <span className="text-zinc-400 font-medium">{subtitle}</span>}
+          {subtitle && <span className="text-[#766F63] font-medium">{subtitle}</span>}
         </div>
       )}
     </div>

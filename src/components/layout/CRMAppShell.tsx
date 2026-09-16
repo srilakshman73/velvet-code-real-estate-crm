@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { VelvetCodeLogo } from '@/components/brand/VelvetCodeLogo';
 import { useCRMStore } from '@/lib/store';
 import { GlobalSearchModal } from './GlobalSearchModal';
@@ -47,7 +47,6 @@ interface CRMAppShellProps {
 
 export function CRMAppShell({ children }: CRMAppShellProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
@@ -62,7 +61,6 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
     users,
     setCurrentUser,
     isOwnerSupportMode,
-    supportOrg,
     exitSupportMode,
     subscription,
     currentPlanLimits,
@@ -102,7 +100,7 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
     {
       group: 'PROPERTIES',
       items: [
-        { label: 'All Properties', href: '/app/properties', icon: Building2 },
+        { label: 'Properties', href: '/app/properties', icon: Building2 },
       ],
     },
     {
@@ -158,30 +156,30 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0B0D11] text-zinc-100 flex flex-col antialiased font-sans">
+    <div className="min-h-screen bg-[#F7F3EA] text-[#24211D] flex flex-col antialiased font-sans">
       <GlobalSearchModal />
       <NotificationDrawer isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />
       <RealtyAIFloatingWidget />
 
       <div className="flex-1 flex overflow-hidden">
         {/* ========================================== */}
-        {/* DESKTOP SIDEBAR */}
+        {/* DESKTOP DARK CHARCOAL SIDEBAR */}
         {/* ========================================== */}
         <aside
-          className={`hidden md:flex flex-col border-r border-zinc-800/80 bg-zinc-950/95 transition-all duration-300 z-30 ${
+          className={`hidden md:flex flex-col border-r border-[#24221E] bg-[#151515] transition-all duration-300 z-30 ${
             isCollapsed ? 'w-20' : 'w-64'
           }`}
         >
           {/* Brand Header */}
-          <div className="h-20 px-4 flex items-center justify-between border-b border-zinc-800/80">
+          <div className="h-20 px-4 flex items-center justify-between border-b border-[#24221E]">
             {isCollapsed ? (
-              <VelvetCodeLogo variant="icon" href="/app" size="sm" />
+              <VelvetCodeLogo variant="icon" href="/app" size="sm" theme="dark" />
             ) : (
-              <VelvetCodeLogo variant="horizontal" href="/app" size="md" />
+              <VelvetCodeLogo variant="horizontal" href="/app" size="md" theme="dark" />
             )}
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/60 transition-colors"
+              className="p-1.5 text-[#DDD4C4]/70 hover:text-white rounded-lg hover:bg-[#24221E] transition-colors"
               title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
               {isCollapsed ? (
@@ -194,31 +192,31 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
 
           {/* Multi-Tenant Organization Switcher */}
           {!isCollapsed && (
-            <div className="p-3 border-b border-zinc-800/60 relative">
+            <div className="p-3 border-b border-[#24221E] relative">
               <div
                 onClick={() => setIsOrgDropdownOpen(!isOrgDropdownOpen)}
-                className="flex items-center justify-between p-2 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 cursor-pointer transition-colors"
+                className="flex items-center justify-between p-2.5 rounded-xl bg-[#1E1B18] hover:bg-[#24221E] border border-[#332F2A] cursor-pointer transition-colors"
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-xs flex-shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-[#A374]/20 border border-[#A374]/40 flex items-center justify-center text-[#A374] font-bold text-xs flex-shrink-0">
                     <Building className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold text-white truncate">
+                    <p className="text-xs font-bold text-[#F7F3EA] truncate">
                       {currentOrg.name}
                     </p>
-                    <p className="text-[10px] text-amber-400 font-medium">
+                    <p className="text-[10px] text-[#A374] font-medium">
                       {subscription.tier} Plan • {currentOrg.city}
                     </p>
                   </div>
                 </div>
-                <ChevronDown className="w-3.5 h-3.5 text-zinc-400 flex-shrink-0 ml-1" />
+                <ChevronDown className="w-3.5 h-3.5 text-[#DDD4C4]/60 flex-shrink-0 ml-1" />
               </div>
 
               {/* Org Switcher Dropdown */}
               {isOrgDropdownOpen && (
-                <div className="absolute top-full left-3 right-3 mt-1 bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl p-2 z-50 animate-in fade-in">
-                  <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider px-2 py-1">
+                <div className="absolute top-full left-3 right-3 mt-1 bg-[#1E1B18] border border-[#332F2A] rounded-xl shadow-2xl p-2 z-50 animate-in fade-in">
+                  <p className="text-[10px] font-bold text-[#DDD4C4]/60 uppercase tracking-wider px-2 py-1">
                     Switch Workspace Tenant
                   </p>
                   {organizations.map((org) => (
@@ -230,19 +228,19 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
                       }}
                       className={`flex items-center justify-between p-2 rounded-lg cursor-pointer text-xs ${
                         org.id === currentOrg.id
-                          ? 'bg-amber-500/15 text-amber-300 font-semibold border border-amber-500/30'
-                          : 'hover:bg-zinc-800 text-zinc-300'
+                          ? 'bg-[#A374]/20 text-[#A374] font-bold border border-[#A374]/40'
+                          : 'hover:bg-[#24221E] text-[#DDD4C4]'
                       }`}
                     >
                       <span className="truncate">{org.name}</span>
-                      <span className="text-[10px] text-zinc-400">{org.businessType}</span>
+                      <span className="text-[10px] text-[#DDD4C4]/60">{org.businessType}</span>
                     </div>
                   ))}
-                  <div className="mt-1 pt-1 border-t border-zinc-800">
+                  <div className="mt-1 pt-1 border-t border-[#332F2A]">
                     <Link
                       href="/onboarding"
                       onClick={() => setIsOrgDropdownOpen(false)}
-                      className="flex items-center gap-1.5 p-1.5 text-xs text-amber-400 hover:text-amber-300 font-medium"
+                      className="flex items-center gap-1.5 p-1.5 text-xs text-[#A374] hover:text-[#C9A45C] font-semibold"
                     >
                       <PlusCircle className="w-3.5 h-3.5" />
                       Create New Workspace
@@ -254,11 +252,11 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
           )}
 
           {/* Navigation Items */}
-          <nav className="flex-1 overflow-y-auto p-3 space-y-5">
+          <nav className="flex-1 overflow-y-auto p-3 space-y-5 dark-scrollbar">
             {navGroups.map((grp, idx) => (
               <div key={idx}>
                 {!isCollapsed && (
-                  <p className="text-[10px] font-bold tracking-wider uppercase text-zinc-400 px-3 mb-1.5">
+                  <p className="text-[10px] font-bold tracking-wider uppercase text-[#DDD4C4]/50 px-3 mb-1.5">
                     {grp.group}
                   </p>
                 )}
@@ -275,27 +273,27 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
                         href={item.href}
                         className={`flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                           isActive
-                            ? 'bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-300 border-l-2 border-amber-400 font-semibold shadow-inner'
-                            : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60'
+                            ? 'bg-[#A374]/20 text-[#F7F3EA] border-l-2 border-[#A374] font-bold shadow-inner'
+                            : 'text-[#DDD4C4]/80 hover:text-white hover:bg-[#1E1B18]'
                         } ${isCollapsed ? 'justify-center px-2' : ''}`}
                         title={isCollapsed ? item.label : undefined}
                       >
                         <Icon
                           className={`w-4 h-4 flex-shrink-0 ${
                             isActive
-                              ? 'text-amber-400'
+                              ? 'text-[#A374]'
                               : item.accent === 'emerald'
-                              ? 'text-emerald-400'
+                              ? 'text-[#3B825E]'
                               : item.accent === 'gold'
-                              ? 'text-amber-400'
-                              : 'text-zinc-400'
+                              ? 'text-[#A374]'
+                              : 'text-[#DDD4C4]/60'
                           }`}
                         />
                         {!isCollapsed && (
                           <span className="flex-1 truncate">{item.label}</span>
                         )}
                         {!isCollapsed && item.badge && (
-                          <span className="px-1.5 py-0.5 text-[9px] font-bold bg-amber-500/20 text-amber-400 rounded">
+                          <span className="px-1.5 py-0.5 text-[9px] font-bold bg-[#A374]/25 text-[#A374] rounded">
                             {item.badge}
                           </span>
                         )}
@@ -309,30 +307,30 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
 
           {/* Sidebar Footer: Subscription & Plan Tier */}
           {!isCollapsed && (
-            <div className="p-3 border-t border-zinc-800/80 bg-zinc-950/60">
-              <div className="p-3 rounded-xl bg-zinc-900 border border-amber-500/20 shadow-md">
-                <div className="flex items-center justify-between text-xs font-semibold text-white mb-1.5">
-                  <span className="flex items-center gap-1.5">
-                    <Zap className="w-3.5 h-3.5 text-amber-400" />
+            <div className="p-3 border-t border-[#24221E] bg-[#151515]">
+              <div className="p-3 rounded-xl bg-[#1E1B18] border border-[#A374]/30 shadow-sm">
+                <div className="flex items-center justify-between text-xs font-semibold text-[#F7F3EA] mb-1.5">
+                  <span className="flex items-center gap-1.5 font-bold">
+                    <Zap className="w-3.5 h-3.5 text-[#A374]" />
                     {subscription.tier} Plan
                   </span>
                   <Link
                     href="/app/billing"
-                    className="text-[10px] font-bold text-amber-400 hover:underline"
+                    className="text-[10px] font-bold text-[#A374] hover:underline"
                   >
                     Upgrade
                   </Link>
                 </div>
-                <div className="space-y-1 text-[10px] text-zinc-400">
+                <div className="space-y-1 text-[10px] text-[#DDD4C4]/70">
                   <div className="flex justify-between">
                     <span>Leads Quota</span>
-                    <span className="text-zinc-200">
+                    <span className="text-[#F7F3EA] font-semibold">
                       {subscription.usage.leadsCount} / {currentPlanLimits.maxLeads === -1 ? '∞' : currentPlanLimits.maxLeads}
                     </span>
                   </div>
-                  <div className="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-[#24221E] rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-amber-500 to-amber-300 rounded-full"
+                      className="h-full bg-[#A374] rounded-full"
                       style={{
                         width: `${Math.min(
                           (subscription.usage.leadsCount /
@@ -352,31 +350,31 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
         {/* ========================================== */}
         {/* MAIN WORKSPACE CONTENT AREA */}
         {/* ========================================== */}
-        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#F7F3EA]">
           {/* Top Global Navigation Bar */}
-          <header className="h-16 px-4 sm:px-6 bg-zinc-950/90 border-b border-zinc-800/80 backdrop-blur-md flex items-center justify-between z-20">
+          <header className="h-16 px-4 sm:px-6 bg-[#FFFCF6] border-b border-[#DDD4C4] backdrop-blur-md flex items-center justify-between z-20 shadow-2xs">
             {/* Mobile Header / Brand */}
             <div className="flex items-center gap-3 md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-900"
+                className="p-2 text-[#24211D] hover:text-[#8F642B] rounded-lg hover:bg-[#EFE8DA]"
               >
                 <Menu className="w-5 h-5" />
               </button>
-              <VelvetCodeLogo variant="icon" href="/app" size="sm" />
+              <VelvetCodeLogo variant="icon" href="/app" size="sm" theme="light" />
             </div>
 
             {/* Global Search Bar (Cmd+K) */}
             <div className="hidden sm:flex items-center flex-1 max-w-md">
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="w-full flex items-center justify-between px-3.5 py-1.5 text-xs text-zinc-400 bg-zinc-900/80 border border-zinc-800 hover:border-zinc-700 rounded-xl transition-all cursor-pointer shadow-inner"
+                className="w-full flex items-center justify-between px-3.5 py-1.5 text-xs text-[#766F63] bg-[#F7F3EA] border border-[#DDD4C4] hover:border-[#A374]/60 rounded-xl transition-all cursor-pointer shadow-2xs"
               >
                 <span className="flex items-center gap-2">
-                  <Search className="w-3.5 h-3.5 text-amber-400" />
+                  <Search className="w-3.5 h-3.5 text-[#A374]" />
                   Search leads, properties, deals, tasks...
                 </span>
-                <kbd className="px-1.5 py-0.5 font-mono text-[10px] bg-zinc-800 border border-zinc-700 rounded text-zinc-400">
+                <kbd className="px-1.5 py-0.5 font-mono text-[10px] bg-[#EFE8DA] border border-[#DDD4C4] rounded text-[#766F63]">
                   ⌘K
                 </kbd>
               </button>
@@ -387,12 +385,12 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
               {/* Quick Add Actions */}
               <div className="hidden lg:flex items-center gap-2">
                 <Link href="/app/leads">
-                  <Button variant="subtle" size="xs" leftIcon={<PlusCircle className="w-3.5 h-3.5 text-amber-400" />}>
+                  <Button variant="subtle" size="xs" leftIcon={<PlusCircle className="w-3.5 h-3.5 text-[#8F642B]" />}>
                     Add Lead
                   </Button>
                 </Link>
                 <Link href="/app/properties">
-                  <Button variant="subtle" size="xs" leftIcon={<PlusCircle className="w-3.5 h-3.5 text-amber-400" />}>
+                  <Button variant="subtle" size="xs" leftIcon={<PlusCircle className="w-3.5 h-3.5 text-[#8F642B]" />}>
                     Add Property
                   </Button>
                 </Link>
@@ -401,48 +399,48 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
               {/* Notifications Trigger */}
               <button
                 onClick={() => setIsNotifOpen(true)}
-                className="relative p-2 text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-900 border border-transparent hover:border-zinc-800 transition-colors"
+                className="relative p-2 text-[#766F63] hover:text-[#24211D] rounded-xl hover:bg-[#EFE8DA] border border-transparent hover:border-[#DDD4C4] transition-colors"
                 title="Notifications"
               >
                 <Bell className="w-4 h-4" />
                 {unreadNotifs > 0 && (
-                  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+                  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#A374] rounded-full animate-pulse" />
                 )}
               </button>
 
-              {/* Demo User / Role Switcher */}
+              {/* User Profile / Role Switcher */}
               <div className="relative">
                 <div
                   onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-                  className="flex items-center gap-2.5 p-1.5 pl-2 pr-3 rounded-xl bg-zinc-900/90 hover:bg-zinc-850 border border-zinc-800 cursor-pointer transition-colors"
+                  className="flex items-center gap-2.5 p-1.5 pl-2 pr-3 rounded-xl bg-[#F7F3EA] hover:bg-[#EFE8DA] border border-[#DDD4C4] cursor-pointer transition-colors"
                 >
-                  <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-300 text-black font-bold text-xs flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <div className="w-7 h-7 rounded-lg bg-[#A374] text-[#151515] font-bold text-xs flex items-center justify-center flex-shrink-0 shadow-2xs">
                     {getInitials(currentUser.name)}
                   </div>
                   <div className="hidden xl:block text-left">
-                    <p className="text-xs font-semibold text-white leading-tight">
+                    <p className="text-xs font-bold text-[#24211D] leading-tight">
                       {currentUser.name}
                     </p>
-                    <p className="text-[10px] text-amber-400 font-medium">
+                    <p className="text-[10px] text-[#8F642B] font-semibold">
                       {currentUser.role}
                     </p>
                   </div>
-                  <ChevronDown className="w-3.5 h-3.5 text-zinc-400" />
+                  <ChevronDown className="w-3.5 h-3.5 text-[#766F63]" />
                 </div>
 
                 {/* User Switcher Dropdown */}
                 {isUserDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-56 bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl p-2 z-50 animate-in fade-in">
-                    <div className="px-3 py-2 border-b border-zinc-800 mb-1">
-                      <p className="text-xs font-bold text-white">{currentUser.name}</p>
-                      <p className="text-[11px] text-zinc-400 truncate">{currentUser.email}</p>
-                      <span className="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-bold uppercase bg-amber-500/20 text-amber-300 rounded">
+                  <div className="absolute right-0 top-full mt-2 w-56 bg-[#FFFCF6] border border-[#DDD4C4] rounded-xl shadow-2xl p-2 z-50 animate-in fade-in">
+                    <div className="px-3 py-2 border-b border-[#DDD4C4] mb-1">
+                      <p className="text-xs font-bold text-[#24211D]">{currentUser.name}</p>
+                      <p className="text-[11px] text-[#766F63] truncate">{currentUser.email}</p>
+                      <span className="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-bold uppercase bg-[#A374]/20 text-[#7A5320] rounded">
                         {currentUser.role}
                       </span>
                     </div>
 
-                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider px-2 py-1">
-                      Switch Demo Role
+                    <p className="text-[10px] font-bold text-[#766F63] uppercase tracking-wider px-2 py-1">
+                      Switch Role Context
                     </p>
                     {users.map((u) => (
                       <div
@@ -453,21 +451,21 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
                         }}
                         className={`flex items-center justify-between p-2 rounded-lg cursor-pointer text-xs ${
                           u.id === currentUser.id
-                            ? 'bg-amber-500/15 text-amber-300 font-semibold'
-                            : 'hover:bg-zinc-800 text-zinc-300'
+                            ? 'bg-[#A374]/15 text-[#7A5320] font-bold'
+                            : 'hover:bg-[#EFE8DA] text-[#24211D]'
                         }`}
                       >
                         <span>{u.name}</span>
-                        <span className="text-[10px] text-zinc-400">{u.role}</span>
+                        <span className="text-[10px] text-[#766F63]">{u.role}</span>
                       </div>
                     ))}
 
-                    <div className="mt-2 pt-2 border-t border-zinc-800 space-y-1">
+                    <div className="mt-2 pt-2 border-t border-[#DDD4C4] space-y-1">
                       {currentUser.role === 'OWNER' && (
                         <Link
                           href="/admin"
                           onClick={() => setIsUserDropdownOpen(false)}
-                          className="flex items-center gap-2 p-2 rounded-lg text-xs text-amber-400 hover:bg-zinc-800 font-medium"
+                          className="flex items-center gap-2 p-2 rounded-lg text-xs text-[#8F642B] hover:bg-[#EFE8DA] font-bold"
                         >
                           <Shield className="w-3.5 h-3.5" />
                           SaaS Master Admin Panel
@@ -476,7 +474,7 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
                       <Link
                         href="/login"
                         onClick={() => setIsUserDropdownOpen(false)}
-                        className="flex items-center gap-2 p-2 rounded-lg text-xs text-rose-400 hover:bg-zinc-800 font-medium"
+                        className="flex items-center gap-2 p-2 rounded-lg text-xs text-[#8B2635] hover:bg-[#8B2635]/10 font-bold"
                       >
                         <LogOut className="w-3.5 h-3.5" />
                         Sign Out
@@ -490,19 +488,19 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
 
           {/* Owner Support Mode Persistent Banner */}
           {isOwnerSupportMode && (
-            <div className="bg-amber-500/15 border-b border-amber-500/40 px-4 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-amber-300 z-20">
+            <div className="bg-[#A374]/20 border-b border-[#A374]/40 px-4 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#7A5320] z-20">
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded bg-amber-500 text-black font-bold text-[10px] uppercase">
+                <span className="px-2 py-0.5 rounded bg-[#A374] text-[#151515] font-bold text-[10px] uppercase">
                   OWNER SUPPORT MODE
                 </span>
                 <span>
-                  Viewing tenant organization: <strong className="text-white">{currentOrg.name}</strong> ({currentOrg.id})
+                  Viewing tenant organization: <strong className="text-[#24211D]">{currentOrg.name}</strong> ({currentOrg.id})
                 </span>
               </div>
               <Link href="/admin/organizations">
                 <button
                   onClick={exitSupportMode}
-                  className="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-black font-semibold rounded-lg transition-colors cursor-pointer text-xs"
+                  className="px-3 py-1 bg-[#A374] hover:bg-[#8F642B] text-[#151515] font-bold rounded-lg transition-colors cursor-pointer text-xs"
                 >
                   Exit Support Mode & Return to Admin &rarr;
                 </button>
@@ -520,7 +518,7 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
       {/* ========================================== */}
       {/* MOBILE BOTTOM NAVIGATION BAR */}
       {/* ========================================== */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-zinc-950/95 border-t border-zinc-800/90 backdrop-blur-xl px-2 py-1.5 flex items-center justify-around shadow-2xl">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#151515]/95 border-t border-[#24221E] backdrop-blur-xl px-2 py-1.5 flex items-center justify-around shadow-2xl">
         {mobileBottomNav.map((item) => {
           const Icon = item.icon;
           const isActive =
@@ -532,7 +530,7 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
               key={item.href}
               href={item.href}
               className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-lg text-[10px] font-medium transition-colors ${
-                isActive ? 'text-amber-400 font-bold' : 'text-zinc-400 hover:text-zinc-200'
+                isActive ? 'text-[#A374] font-bold' : 'text-[#DDD4C4]/70 hover:text-white'
               }`}
             >
               <Icon className="w-4 h-4 mb-0.5" />
@@ -548,29 +546,29 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
       {isMobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-50 overflow-hidden">
           <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 bg-[#151515]/80 backdrop-blur-xs"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 w-4/5 max-w-xs bg-zinc-950 border-r border-zinc-800 p-5 flex flex-col overflow-y-auto">
-            <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
-              <VelvetCodeLogo size="sm" href="/app" />
+          <div className="fixed inset-y-0 left-0 w-4/5 max-w-xs bg-[#151515] border-r border-[#24221E] p-5 flex flex-col overflow-y-auto text-[#DDD4C4]">
+            <div className="flex items-center justify-between pb-4 border-b border-[#24221E]">
+              <VelvetCodeLogo size="sm" href="/app" theme="dark" />
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-1 text-zinc-400 hover:text-white"
+                className="p-1 text-[#DDD4C4] hover:text-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="py-4 border-b border-zinc-800">
-              <p className="text-xs font-bold text-white">{currentOrg.name}</p>
-              <p className="text-[11px] text-amber-400">{subscription.tier} Plan</p>
+            <div className="py-4 border-b border-[#24221E]">
+              <p className="text-xs font-bold text-[#F7F3EA]">{currentOrg.name}</p>
+              <p className="text-[11px] text-[#A374] font-semibold">{subscription.tier} Plan</p>
             </div>
 
-            <div className="py-4 flex-1 space-y-4">
+            <div className="py-4 flex-1 space-y-4 dark-scrollbar">
               {navGroups.map((grp, i) => (
                 <div key={i}>
-                  <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-2">
+                  <p className="text-[10px] font-bold text-[#DDD4C4]/50 uppercase tracking-wider mb-2">
                     {grp.group}
                   </p>
                   <div className="space-y-1">
@@ -584,8 +582,8 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
                           onClick={() => setIsMobileMenuOpen(false)}
                           className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${
                             isActive
-                              ? 'bg-amber-500/20 text-amber-300 font-semibold'
-                              : 'text-zinc-300 hover:bg-zinc-900'
+                              ? 'bg-[#A374]/20 text-[#A374] font-bold'
+                              : 'text-[#DDD4C4] hover:bg-[#1E1B18]'
                           }`}
                         >
                           <Icon className="w-4 h-4" />
@@ -598,18 +596,18 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
               ))}
             </div>
 
-            <div className="pt-4 border-t border-zinc-800 space-y-2">
+            <div className="pt-4 border-t border-[#24221E] space-y-2">
               <Link
                 href="/admin"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-xs font-semibold text-amber-400 py-1"
+                className="block text-xs font-bold text-[#A374] py-1"
               >
                 Velvet Code SaaS Admin ↗
               </Link>
               <Link
                 href="/login"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-xs font-semibold text-rose-400 py-1"
+                className="block text-xs font-bold text-[#8B2635] py-1"
               >
                 Sign Out
               </Link>

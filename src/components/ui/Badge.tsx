@@ -28,31 +28,31 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const sizeClasses = {
-    xs: 'px-1.5 py-0.5 text-[10px] font-medium rounded',
-    sm: 'px-2 py-0.5 text-xs font-medium rounded-md',
-    md: 'px-2.5 py-1 text-xs font-semibold rounded-md',
+    xs: 'px-1.5 py-0.5 text-[10px] font-semibold rounded',
+    sm: 'px-2 py-0.5 text-xs font-semibold rounded-md',
+    md: 'px-2.5 py-1 text-xs font-bold rounded-md',
   };
 
   const variantClasses: Record<string, string> = {
-    gold: 'bg-amber-500/15 text-amber-300 border border-amber-500/30',
-    emerald: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30',
-    success: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30',
-    blue: 'bg-blue-500/15 text-blue-400 border border-blue-500/30',
-    info: 'bg-blue-500/15 text-blue-400 border border-blue-500/30',
-    purple: 'bg-purple-500/15 text-purple-400 border border-purple-500/30',
-    amber: 'bg-amber-500/15 text-amber-400 border border-amber-500/30',
-    warning: 'bg-amber-500/15 text-amber-400 border border-amber-500/30',
-    rose: 'bg-rose-500/15 text-rose-400 border border-rose-500/30',
-    error: 'bg-rose-500/15 text-rose-400 border border-rose-500/30',
-    zinc: 'bg-zinc-800 text-zinc-300 border border-zinc-700/60',
-    neutral: 'bg-zinc-800 text-zinc-300 border border-zinc-700/60',
-    outline: 'bg-transparent text-zinc-400 border border-zinc-700',
+    gold: 'bg-[#A374]/15 text-[#7A5320] border border-[#A374]/40',
+    emerald: 'bg-[#2E6B4F]/15 text-[#2E6B4F] border border-[#2E6B4F]/35',
+    success: 'bg-[#2E6B4F]/15 text-[#2E6B4F] border border-[#2E6B4F]/35',
+    blue: 'bg-[#3D5A80]/15 text-[#293E58] border border-[#3D5A80]/30',
+    info: 'bg-[#3D5A80]/15 text-[#293E58] border border-[#3D5A80]/30',
+    purple: 'bg-[#6B5B95]/15 text-[#524474] border border-[#6B5B95]/30',
+    amber: 'bg-[#B87B28]/15 text-[#8A5612] border border-[#B87B28]/35',
+    warning: 'bg-[#B87B28]/15 text-[#8A5612] border border-[#B87B28]/35',
+    rose: 'bg-[#8B2635]/15 text-[#8B2635] border border-[#8B2635]/30',
+    error: 'bg-[#8B2635]/15 text-[#8B2635] border border-[#8B2635]/30',
+    zinc: 'bg-[#EFE8DA] text-[#766F63] border border-[#DDD4C4]',
+    neutral: 'bg-[#EFE8DA] text-[#766F63] border border-[#DDD4C4]',
+    outline: 'bg-transparent text-[#766F63] border border-[#DDD4C4]',
   };
 
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 leading-none whitespace-nowrap',
+        'inline-flex items-center gap-1 leading-none whitespace-nowrap select-none',
         sizeClasses[size],
         variantClasses[variant],
         className

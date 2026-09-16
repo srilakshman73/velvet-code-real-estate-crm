@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { VelvetCodeLogo } from '@/components/brand/VelvetCodeLogo';
 import { Button } from '@/components/ui/Button';
 import { buildWhatsAppUrl } from '@/lib/utils';
-import { Menu, X, MessageSquare, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Menu, X, MessageSquare, ArrowRight } from 'lucide-react';
 
 export function PublicHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,10 +21,10 @@ export function PublicHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 w-full border-b border-[#DDD4C4] bg-[#F7F3EA]/90 backdrop-blur-md transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo */}
-        <VelvetCodeLogo href="/" size="md" />
+        <VelvetCodeLogo href="/" size="md" theme="light" />
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
@@ -34,10 +34,10 @@ export function PublicHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-sm font-semibold tracking-wide transition-colors ${
                   isActive
-                    ? 'text-amber-400 font-semibold'
-                    : 'text-zinc-300 hover:text-white'
+                    ? 'text-[#8F642B] border-b-2 border-[#A374] pb-0.5'
+                    : 'text-[#24211D] hover:text-[#8F642B]'
                 }`}
               >
                 {link.label}
@@ -52,7 +52,7 @@ export function PublicHeader() {
             href={buildWhatsAppUrl('919443647190', 'Hello Velvet Code, I want to inquire about your Real Estate CRM SaaS.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold text-[#2E6B4F] bg-[#2E6B4F]/10 hover:bg-[#2E6B4F]/15 border border-[#2E6B4F]/30 rounded-lg transition-colors"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             +91 94436 47190
@@ -66,7 +66,7 @@ export function PublicHeader() {
 
           <Link href="/register">
             <Button variant="gold" size="sm" rightIcon={<ArrowRight className="w-4 h-4" />}>
-              Start Free Trial
+              Get Started
             </Button>
           </Link>
         </div>
@@ -75,12 +75,12 @@ export function PublicHeader() {
         <div className="md:hidden flex items-center gap-2">
           <Link href="/register">
             <Button variant="gold" size="xs">
-              Try Free
+              Get Started
             </Button>
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-900"
+            className="p-2 text-[#24211D] hover:text-[#8F642B] rounded-lg hover:bg-[#EFE8DA]"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -89,26 +89,26 @@ export function PublicHeader() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-zinc-800 bg-zinc-950 p-5 space-y-4 animate-in slide-in-from-top-2">
+        <div className="md:hidden border-b border-[#DDD4C4] bg-[#FFFCF6] p-5 space-y-4 animate-in slide-in-from-top-2 shadow-xl">
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-zinc-200 hover:text-amber-400 py-1"
+                className="text-base font-semibold text-[#24211D] hover:text-[#8F642B] py-1 border-b border-[#DDD4C4]/40"
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          <div className="pt-4 border-t border-zinc-800 space-y-3">
+          <div className="pt-4 border-t border-[#DDD4C4] space-y-3">
             <a
               href={buildWhatsAppUrl('919443647190', 'Hello Velvet Code, I want to inquire about your Real Estate CRM SaaS.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2 text-sm font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-xl"
+              className="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-semibold text-[#2E6B4F] bg-[#2E6B4F]/10 border border-[#2E6B4F]/30 rounded-xl"
             >
               <MessageSquare className="w-4 h-4" />
               WhatsApp: +91 94436 47190
@@ -122,7 +122,7 @@ export function PublicHeader() {
               </Link>
               <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
                 <Button variant="gold" size="sm" className="w-full">
-                  Free Trial
+                  Get Started
                 </Button>
               </Link>
             </div>

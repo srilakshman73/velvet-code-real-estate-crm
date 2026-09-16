@@ -2,7 +2,7 @@ import React from 'react';
 import { PublicHeader } from '@/components/layout/PublicHeader';
 import { PublicFooter } from '@/components/layout/PublicFooter';
 import { CoreModulesShowcase, FinalCTASection } from '@/components/marketing/LandingSections';
-import { Sparkles, CheckCircle2, Zap, ShieldCheck, MessageSquare, Bot, Building2 } from 'lucide-react';
+import { CheckCircle2, Zap, MessageSquare, Building2 } from 'lucide-react';
 
 export const metadata = {
   title: 'Features & CRM Capabilities — Velvet Code',
@@ -59,18 +59,18 @@ export default function FeaturesPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0D11] text-zinc-100">
+    <div className="min-h-screen flex flex-col bg-[#F7F3EA] text-[#24211D]">
       <PublicHeader />
       <main className="flex-1">
         {/* Header */}
         <section className="py-20 text-center max-w-4xl mx-auto px-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8F642B] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Platform Capabilities
           </span>
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-white mt-4 tracking-tight">
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#24211D] mt-4 tracking-tight font-serif">
             The Complete Real Estate Tech Stack
           </h1>
-          <p className="text-lg text-zinc-400 mt-4 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-[#766F63] mt-4 leading-relaxed max-w-2xl mx-auto">
             Everything your agency needs to capture leads, showcase property inventory, manage site visits, and close multi-crore deals.
           </p>
         </section>
@@ -91,30 +91,30 @@ export default function FeaturesPage() {
                 }`}
               >
                 <div className="flex-1 space-y-4">
-                  <div className="p-3 rounded-xl bg-amber-500/10 text-amber-400 w-fit border border-amber-500/30">
+                  <div className="p-3 rounded-xl bg-[#F7F3EA] text-[#8F642B] w-fit border border-[#DDD4C4]">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#24211D] tracking-tight font-serif">
                     {item.title}
                   </h2>
-                  <p className="text-sm text-zinc-300 leading-relaxed">{item.desc}</p>
-                  <ul className="space-y-2.5 pt-2 text-xs sm:text-sm text-zinc-300">
+                  <p className="text-sm text-[#766F63] leading-relaxed">{item.desc}</p>
+                  <ul className="space-y-2.5 pt-2 text-xs sm:text-sm text-[#24211D]">
                     {item.bullets.map((b, bIdx) => (
                       <li key={bIdx} className="flex items-center gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-[#2E6B4F] flex-shrink-0" />
                         <span>{b}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="flex-1 w-full p-6 sm:p-8 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl">
-                  <div className="p-4 rounded-xl bg-zinc-900 border border-amber-500/20 space-y-3">
-                    <div className="flex items-center justify-between text-xs text-amber-400 font-semibold border-b border-zinc-800 pb-2">
+                <div className="flex-1 w-full p-6 sm:p-8 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] aurum-card-shadow">
+                  <div className="p-5 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] space-y-3">
+                    <div className="flex items-center justify-between text-xs text-[#8F642B] font-bold border-b border-[#DDD4C4] pb-2">
                       <span>Feature Spotlight</span>
-                      <span className="text-zinc-500">Live in Production</span>
+                      <span className="text-[#766F63] font-medium">Live in Production</span>
                     </div>
-                    <p className="text-xs text-zinc-300 italic">
+                    <p className="text-xs text-[#24211D] italic leading-relaxed">
                       "Velvet Code eliminated our manual spreadsheets and missed WhatsApp inquiries. Our pipeline visibility increased tenfold."
                     </p>
                   </div>

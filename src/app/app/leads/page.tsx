@@ -8,27 +8,18 @@ import { Button } from '@/components/ui/Button';
 import { Input, Select, Textarea } from '@/components/ui/Input';
 import { Modal, Drawer } from '@/components/ui/Modal';
 import { EmptyState } from '@/components/ui/EmptyState';
-import { formatINR, formatDate, formatRelativeTime, buildWhatsAppUrl } from '@/lib/utils';
+import { formatINR, buildWhatsAppUrl } from '@/lib/utils';
 import {
   Users,
   PlusCircle,
   Search,
-  Filter,
   Download,
   Upload,
   Phone,
   MessageSquare,
-  Mail,
-  CalendarCheck,
-  Building2,
   Trash2,
-  Edit,
-  Eye,
-  CheckCircle2,
-  X,
   LayoutGrid,
   List,
-  Kanban as KanbanIcon,
   Sparkles,
 } from 'lucide-react';
 
@@ -41,11 +32,9 @@ export default function LeadsPage() {
     importLeads,
     properties,
     users,
-    siteVisits,
-    deals,
   } = useCRMStore();
 
-  const [viewMode, setViewMode] = useState<'table' | 'cards' | 'kanban'>('table');
+  const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
   const [sourceFilter, setSourceFilter] = useState<string>('ALL');
@@ -160,19 +149,19 @@ export default function LeadsPage() {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#F7F3EA] text-[#24211D]">
       {/* Header & Main Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#24211D] tracking-tight font-serif">
               Lead Management
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full">
+            <span className="px-2.5 py-0.5 text-xs font-bold bg-[#A374]/20 text-[#7A5320] border border-[#A374]/40 rounded-full">
               {filteredLeads.length} Leads
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
             Capture, score, qualify, and convert buyer inquiries across all channels.
           </p>
         </div>
@@ -208,16 +197,16 @@ export default function LeadsPage() {
       </div>
 
       {/* Filter & View Switcher Bar */}
-      <div className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800/90 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] aurum-card-shadow flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Search */}
         <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#766F63] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search leads by name, phone, property..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-zinc-900 border border-zinc-800 rounded-xl text-xs text-white placeholder:text-zinc-500 outline-none focus:border-amber-400/80"
+            className="w-full pl-9 pr-4 py-2 bg-[#F7F3EA] border border-[#DDD4C4] rounded-xl text-xs text-[#24211D] placeholder:text-[#766F63]/60 outline-none focus:border-[#A374]"
           />
         </div>
 
@@ -226,7 +215,7 @@ export default function LeadsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-300 outline-none"
+            className="bg-[#F7F3EA] border border-[#DDD4C4] rounded-xl px-3 py-2 text-xs text-[#24211D] font-semibold outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Statuses</option>
             <option value="NEW">New Lead</option>
@@ -241,7 +230,7 @@ export default function LeadsPage() {
           <select
             value={sourceFilter}
             onChange={(e) => setSourceFilter(e.target.value)}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-300 outline-none"
+            className="bg-[#F7F3EA] border border-[#DDD4C4] rounded-xl px-3 py-2 text-xs text-[#24211D] font-semibold outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Sources</option>
             <option value="WHATSAPP">WhatsApp</option>
@@ -254,11 +243,11 @@ export default function LeadsPage() {
           </select>
 
           {/* View Mode Toggle */}
-          <div className="bg-zinc-900 border border-zinc-800 p-1 rounded-xl flex items-center gap-1 ml-auto">
+          <div className="bg-[#F7F3EA] border border-[#DDD4C4] p-1 rounded-xl flex items-center gap-1 ml-auto">
             <button
               onClick={() => setViewMode('table')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'table' ? 'bg-amber-500 text-black' : 'text-zinc-400 hover:text-white'
+                viewMode === 'table' ? 'bg-[#A374] text-[#151515]' : 'text-[#766F63] hover:text-[#24211D]'
               }`}
               title="Table View"
             >
@@ -267,7 +256,7 @@ export default function LeadsPage() {
             <button
               onClick={() => setViewMode('cards')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'cards' ? 'bg-amber-500 text-black' : 'text-zinc-400 hover:text-white'
+                viewMode === 'cards' ? 'bg-[#A374] text-[#151515]' : 'text-[#766F63] hover:text-[#24211D]'
               }`}
               title="Grid Cards"
             >
@@ -290,11 +279,11 @@ export default function LeadsPage() {
         />
       ) : viewMode === 'table' ? (
         /* TABLE VIEW */
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-950 overflow-hidden shadow-xl">
+        <div className="rounded-2xl border border-[#DDD4C4] bg-[#FFFCF6] overflow-hidden aurum-card-shadow">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="bg-zinc-900/90 border-b border-zinc-800 text-zinc-400 font-semibold">
+                <tr className="bg-[#F7F3EA] border-b border-[#DDD4C4] text-[#766F63] font-bold">
                   <th className="p-4">Customer</th>
                   <th className="p-4">Source</th>
                   <th className="p-4">Status</th>
@@ -305,48 +294,48 @@ export default function LeadsPage() {
                   <th className="p-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800/60">
+              <tbody className="divide-y divide-[#DDD4C4]/60">
                 {filteredLeads.map((lead) => (
                   <tr
                     key={lead.id}
                     onClick={() => openDetail(lead)}
-                    className="hover:bg-zinc-900/50 cursor-pointer transition-colors group"
+                    className="hover:bg-[#EFE8DA]/40 cursor-pointer transition-colors group"
                   >
                     <td className="p-4">
-                      <div className="font-bold text-white text-sm group-hover:text-amber-300 transition-colors">
+                      <div className="font-bold text-[#24211D] text-sm group-hover:text-[#8F642B] transition-colors">
                         {lead.name}
                       </div>
-                      <div className="text-[11px] text-zinc-400 flex items-center gap-2 mt-0.5">
+                      <div className="text-[11px] text-[#766F63] flex items-center gap-2 mt-0.5 font-medium">
                         <span>{lead.phone}</span>
                         {lead.email && <span>• {lead.email}</span>}
                       </div>
                     </td>
                     <td className="p-4">
-                      <span className="px-2 py-0.5 text-[10px] font-semibold bg-zinc-800 text-zinc-300 rounded border border-zinc-700">
+                      <span className="px-2 py-0.5 text-[10px] font-semibold bg-[#F7F3EA] text-[#766F63] rounded border border-[#DDD4C4]">
                         {lead.source}
                       </span>
                     </td>
                     <td className="p-4">
                       <LeadStatusBadge status={lead.status} />
                     </td>
-                    <td className="p-4 font-medium text-zinc-200">
+                    <td className="p-4 font-semibold text-[#24211D]">
                       {lead.interestedPropertyName || 'General Portfolio'}
                     </td>
-                    <td className="p-4 font-bold text-amber-300 font-mono">
+                    <td className="p-4 font-bold text-[#8F642B] font-mono">
                       {lead.budgetMaxINR ? formatINR(lead.budgetMaxINR, true) : 'Flexible'}
                     </td>
                     <td className="p-4">
                       <div className="flex items-center gap-1.5">
-                        <span className="font-extrabold text-emerald-400">{lead.score}%</span>
-                        <div className="w-12 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                        <span className="font-extrabold text-[#2E6B4F]">{lead.score}%</span>
+                        <div className="w-12 h-1.5 bg-[#EFE8DA] rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-emerald-500 rounded-full"
+                            className="h-full bg-[#2E6B4F] rounded-full"
                             style={{ width: `${lead.score}%` }}
                           />
                         </div>
                       </div>
                     </td>
-                    <td className="p-4 text-zinc-300">
+                    <td className="p-4 text-[#766F63] font-medium">
                       {lead.assignedToName || 'Unassigned'}
                     </td>
                     <td className="p-4 text-right" onClick={(e) => e.stopPropagation()}>
@@ -355,21 +344,21 @@ export default function LeadsPage() {
                           href={buildWhatsAppUrl(lead.phone, `Hello ${lead.name}, connecting regarding ${lead.interestedPropertyName || 'your inquiry'}.`)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 transition-colors"
+                          className="p-1.5 rounded-lg bg-[#2E6B4F]/10 hover:bg-[#2E6B4F]/20 text-[#2E6B4F] border border-[#2E6B4F]/30 transition-colors"
                           title="Open WhatsApp"
                         >
                           <MessageSquare className="w-3.5 h-3.5" />
                         </a>
                         <a
                           href={`tel:${lead.phone}`}
-                          className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors"
+                          className="p-1.5 rounded-lg bg-[#F7F3EA] hover:bg-[#EFE8DA] text-[#24211D] border border-[#DDD4C4] transition-colors"
                           title="Call Lead"
                         >
                           <Phone className="w-3.5 h-3.5" />
                         </a>
                         <button
                           onClick={() => deleteLead(lead.id)}
-                          className="p-1.5 rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-zinc-800 transition-colors"
+                          className="p-1.5 rounded-lg text-[#766F63] hover:text-[#8B2635] hover:bg-[#8B2635]/10 transition-colors"
                           title="Delete Lead"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -389,7 +378,7 @@ export default function LeadsPage() {
             <div
               key={lead.id}
               onClick={() => openDetail(lead)}
-              className="p-5 rounded-2xl bg-zinc-950 border border-zinc-800/90 hover:border-amber-500/40 cursor-pointer shadow-lg hover:shadow-amber-500/5 transition-all space-y-3 flex flex-col justify-between"
+              className="p-5 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374] cursor-pointer aurum-card-shadow hover:shadow-md transition-all space-y-3 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
@@ -397,41 +386,41 @@ export default function LeadsPage() {
                   <PriorityBadge priority={lead.priority} />
                 </div>
 
-                <h3 className="text-base font-bold text-white hover:text-amber-300 transition-colors">
+                <h3 className="text-base font-bold text-[#24211D] hover:text-[#8F642B] transition-colors">
                   {lead.name}
                 </h3>
-                <p className="text-xs text-zinc-400 mt-0.5">{lead.phone}</p>
+                <p className="text-xs text-[#766F63] mt-0.5 font-medium">{lead.phone}</p>
 
-                <div className="mt-3 p-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs space-y-1">
+                <div className="mt-3 p-3 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] text-xs space-y-1">
                   <div className="flex justify-between">
-                    <span className="text-zinc-400">Budget:</span>
-                    <span className="font-bold text-amber-300">
+                    <span className="text-[#766F63]">Budget:</span>
+                    <span className="font-bold text-[#8F642B] font-mono">
                       {lead.budgetMaxINR ? formatINR(lead.budgetMaxINR, true) : 'Flexible'}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-zinc-400">Property:</span>
-                    <span className="text-zinc-200 truncate max-w-[160px]">
+                    <span className="text-[#766F63]">Property:</span>
+                    <span className="text-[#24211D] font-semibold truncate max-w-[160px]">
                       {lead.interestedPropertyName || 'General'}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between text-xs">
-                <span className="text-zinc-500">Score: <strong className="text-emerald-400">{lead.score}%</strong></span>
+              <div className="pt-3 border-t border-[#DDD4C4] flex items-center justify-between text-xs">
+                <span className="text-[#766F63]">Score: <strong className="text-[#2E6B4F]">{lead.score}%</strong></span>
                 <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                   <a
                     href={buildWhatsAppUrl(lead.phone, `Hello ${lead.name}, regarding your real estate inquiry.`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
+                    className="p-1.5 rounded-lg bg-[#2E6B4F]/10 text-[#2E6B4F] hover:bg-[#2E6B4F]/20"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                   </a>
                   <a
                     href={`tel:${lead.phone}`}
-                    className="p-1.5 rounded-lg bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                    className="p-1.5 rounded-lg bg-[#F7F3EA] text-[#24211D] border border-[#DDD4C4] hover:bg-[#EFE8DA]"
                   >
                     <Phone className="w-3.5 h-3.5" />
                   </a>
@@ -451,7 +440,7 @@ export default function LeadsPage() {
           onClose={() => setIsDrawerOpen(false)}
           title={
             <div className="flex items-center gap-2.5">
-              <span className="text-lg font-bold text-white">{selectedLead.name}</span>
+              <span className="text-lg font-bold text-[#24211D]">{selectedLead.name}</span>
               <LeadStatusBadge status={selectedLead.status} />
             </div>
           }
@@ -465,16 +454,16 @@ export default function LeadsPage() {
                 href={buildWhatsAppUrl(selectedLead.phone, `Hello ${selectedLead.name}, connecting from Velvet Code.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs"
+                className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-[#2E6B4F] hover:bg-[#24563F] text-white font-bold text-xs shadow-xs"
               >
                 <MessageSquare className="w-4 h-4" />
                 WhatsApp Chat
               </a>
               <a
                 href={`tel:${selectedLead.phone}`}
-                className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-semibold text-xs border border-zinc-700"
+                className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-[#FFFCF6] hover:bg-[#EFE8DA] text-[#24211D] font-bold text-xs border border-[#DDD4C4]"
               >
-                <Phone className="w-4 h-4 text-blue-400" />
+                <Phone className="w-4 h-4 text-[#3D5A80]" />
                 Call Phone
               </a>
               <Button
@@ -491,69 +480,69 @@ export default function LeadsPage() {
             </div>
 
             {/* Core Details */}
-            <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3">
-              <h4 className="font-bold text-white text-xs uppercase tracking-wider text-amber-400">
+            <div className="p-4 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] space-y-3">
+              <h4 className="font-bold text-[#8F642B] text-xs uppercase tracking-wider">
                 Contact & Profile Information
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div>
-                  <span className="text-zinc-500 block">Phone Number</span>
-                  <span className="text-white font-semibold">{selectedLead.phone}</span>
+                  <span className="text-[#766F63] block">Phone Number</span>
+                  <span className="text-[#24211D] font-bold">{selectedLead.phone}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Email Address</span>
-                  <span className="text-white">{selectedLead.email || 'N/A'}</span>
+                  <span className="text-[#766F63] block">Email Address</span>
+                  <span className="text-[#24211D]">{selectedLead.email || 'N/A'}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Lead Source</span>
-                  <span className="text-white font-medium">{selectedLead.source}</span>
+                  <span className="text-[#766F63] block">Lead Source</span>
+                  <span className="text-[#24211D] font-medium">{selectedLead.source}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Target Budget</span>
-                  <span className="text-amber-300 font-bold">
+                  <span className="text-[#766F63] block">Target Budget</span>
+                  <span className="text-[#8F642B] font-bold font-mono">
                     {selectedLead.budgetMaxINR ? formatINR(selectedLead.budgetMaxINR) : 'Flexible'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Preferred City / Area</span>
-                  <span className="text-white">{selectedLead.preferredLocation || 'Chennai Metros'}</span>
+                  <span className="text-[#766F63] block">Preferred City / Area</span>
+                  <span className="text-[#24211D]">{selectedLead.preferredLocation || 'Chennai Metros'}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Assigned Consultant</span>
-                  <span className="text-white">{selectedLead.assignedToName || 'Velvet Code'}</span>
+                  <span className="text-[#766F63] block">Assigned Consultant</span>
+                  <span className="text-[#24211D]">{selectedLead.assignedToName || 'Velvet Code'}</span>
                 </div>
               </div>
             </div>
 
             {/* Interested Property */}
-            <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
-              <h4 className="font-bold text-white text-xs uppercase tracking-wider text-amber-400">
+            <div className="p-4 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] space-y-2">
+              <h4 className="font-bold text-[#8F642B] text-xs uppercase tracking-wider">
                 Property Interest
               </h4>
-              <p className="text-sm font-semibold text-white">
+              <p className="text-sm font-bold text-[#24211D]">
                 {selectedLead.interestedPropertyName || 'The Grand Emerald Heights - 3BHK'}
               </p>
             </div>
 
             {/* Notes & Activity */}
-            <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
-              <h4 className="font-bold text-white text-xs uppercase tracking-wider text-amber-400">
+            <div className="p-4 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] space-y-2">
+              <h4 className="font-bold text-[#8F642B] text-xs uppercase tracking-wider">
                 Consultant Notes
               </h4>
-              <p className="text-xs text-zinc-300 leading-relaxed bg-zinc-900 p-3 rounded-lg border border-zinc-850">
+              <p className="text-xs text-[#766F63] leading-relaxed bg-[#FFFCF6] p-3 rounded-lg border border-[#DDD4C4]">
                 {selectedLead.notes || 'No custom notes logged yet.'}
               </p>
             </div>
 
             {/* Realty AI Conversion Score */}
-            <div className="p-4 rounded-xl bg-gradient-to-br from-amber-950/20 to-zinc-950 border border-amber-500/30 space-y-2">
+            <div className="p-4 rounded-xl bg-[#FFFCF6] border border-[#A374]/50 aurum-card-shadow space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                <span className="text-xs font-bold text-[#8F642B] flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" /> Realty AI Score
                 </span>
-                <span className="text-lg font-extrabold text-white">{selectedLead.score}%</span>
+                <span className="text-lg font-extrabold text-[#2E6B4F]">{selectedLead.score}%</span>
               </div>
-              <p className="text-xs text-zinc-400">
+              <p className="text-xs text-[#766F63]">
                 Based on verified budget, fast response rate, and site visit engagement history.
               </p>
             </div>
@@ -680,7 +669,7 @@ export default function LeadsPage() {
             onChange={(e) => setNewLeadForm({ ...newLeadForm, notes: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-800">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
             <Button
               type="button"
               variant="secondary"
@@ -706,18 +695,18 @@ export default function LeadsPage() {
         description="Upload your lead spreadsheet to automatically parse names, phone numbers, and budgets."
       >
         <div className="space-y-4 text-xs sm:text-sm">
-          <div className="border-2 border-dashed border-zinc-700 rounded-2xl p-8 text-center bg-zinc-950/60 hover:border-amber-400 transition-colors cursor-pointer">
-            <Upload className="w-8 h-8 text-amber-400 mx-auto mb-2" />
-            <p className="font-semibold text-white">Drag and drop your .csv or .xlsx file</p>
-            <p className="text-zinc-500 text-xs mt-1">Supports UTF-8 CSV exports from 99acres, Magicbricks, Meta</p>
+          <div className="border-2 border-dashed border-[#DDD4C4] rounded-2xl p-8 text-center bg-[#F7F3EA] hover:border-[#A374] transition-colors cursor-pointer">
+            <Upload className="w-8 h-8 text-[#8F642B] mx-auto mb-2" />
+            <p className="font-bold text-[#24211D]">Drag and drop your .csv or .xlsx file</p>
+            <p className="text-[#766F63] text-xs mt-1">Supports UTF-8 CSV exports from 99acres, Magicbricks, Meta</p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-300">
-            <p className="font-semibold text-amber-400 mb-1">Quick Demo Import:</p>
+          <div className="p-3.5 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] text-xs text-[#24211D]">
+            <p className="font-bold text-[#8F642B] mb-1">Quick Demo Import:</p>
             <p>Click below to import 5 sample Chennai & Bangalore property buyer leads instantly.</p>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-800">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
             <Button
               variant="gold"
               size="sm"

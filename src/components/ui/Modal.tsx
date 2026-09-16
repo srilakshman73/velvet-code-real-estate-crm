@@ -49,37 +49,37 @@ export function Modal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity animate-in fade-in"
+        className="fixed inset-0 bg-[#151515]/70 backdrop-blur-xs transition-opacity animate-in fade-in"
         onClick={onClose}
       />
 
       {/* Modal Content */}
       <div
         className={cn(
-          'relative w-full bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl z-10 overflow-hidden text-zinc-100 animate-in zoom-in-95 duration-150',
+          'relative w-full bg-[#FFFCF6] border border-[#DDD4C4] rounded-2xl shadow-2xl z-10 overflow-hidden text-[#24211D] animate-in zoom-in-95 duration-150',
           maxWidthMap[maxWidth]
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between p-5 border-b border-zinc-800/80 bg-zinc-950/40">
+        <div className="flex items-start justify-between p-5 border-b border-[#DDD4C4]/70 bg-[#F7F3EA]/50">
           <div>
             {typeof title === 'string' ? (
-              <h2 className="text-lg font-bold text-white tracking-tight">{title}</h2>
+              <h2 className="text-lg font-bold text-[#24211D] tracking-tight">{title}</h2>
             ) : (
               title
             )}
-            {description && <p className="text-xs text-zinc-400 mt-1">{description}</p>}
+            {description && <p className="text-xs text-[#766F63] mt-1">{description}</p>}
           </div>
           <button
             onClick={onClose}
-            className="text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-zinc-800 transition-colors"
+            className="text-[#766F63] hover:text-[#24211D] p-1.5 rounded-lg hover:bg-[#EFE8DA] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="p-5 max-h-[80vh] overflow-y-auto">{children}</div>
+        <div className="p-5 sm:p-6 max-h-[80vh] overflow-y-auto">{children}</div>
       </div>
     </div>
   );
@@ -128,37 +128,37 @@ export function Drawer({
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-[#151515]/70 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
         <div
           className={cn(
-            'w-screen bg-zinc-900 border-l border-zinc-800 shadow-2xl flex flex-col',
+            'w-screen bg-[#FFFCF6] border-l border-[#DDD4C4] shadow-2xl flex flex-col text-[#24211D]',
             sizeMap[size]
           )}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-5 border-b border-zinc-800 bg-zinc-950/60">
+          <div className="flex items-center justify-between p-5 border-b border-[#DDD4C4]/70 bg-[#F7F3EA]/60">
             <div>
               {typeof title === 'string' ? (
-                <h3 className="text-base font-bold text-white tracking-tight">{title}</h3>
+                <h3 className="text-base font-bold text-[#24211D] tracking-tight">{title}</h3>
               ) : (
                 title
               )}
-              {subtitle && <p className="text-xs text-zinc-400 mt-0.5">{subtitle}</p>}
+              {subtitle && <p className="text-xs text-[#766F63] mt-0.5">{subtitle}</p>}
             </div>
             <button
               onClick={onClose}
-              className="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-zinc-800 transition-colors"
+              className="text-[#766F63] hover:text-[#24211D] p-1.5 rounded-lg hover:bg-[#EFE8DA] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Drawer Body */}
-          <div className="flex-1 overflow-y-auto p-5">{children}</div>
+          <div className="flex-1 overflow-y-auto p-5 sm:p-6">{children}</div>
         </div>
       </div>
     </div>

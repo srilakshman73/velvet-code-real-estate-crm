@@ -22,17 +22,17 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        'flex flex-col items-center justify-center p-8 sm:p-12 text-center rounded-2xl bg-zinc-900/40 border border-zinc-800/80 border-dashed',
+        'flex flex-col items-center justify-center p-8 sm:p-12 text-center rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] border-dashed aurum-card-shadow',
         className
       )}
     >
-      <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 text-amber-400 mb-4 shadow-inner">
+      <div className="p-4 rounded-2xl bg-[#F7F3EA] border border-[#DDD4C4] text-[#8F642B] mb-4 shadow-xs">
         {icon}
       </div>
-      <h3 className="text-base sm:text-lg font-bold text-white tracking-tight mb-1">
+      <h3 className="text-base sm:text-lg font-bold text-[#24211D] tracking-tight mb-1">
         {title}
       </h3>
-      <p className="text-xs sm:text-sm text-zinc-400 max-w-sm mb-6 leading-relaxed">
+      <p className="text-xs sm:text-sm text-[#766F63] max-w-sm mb-6 leading-relaxed">
         {description}
       </p>
       {actionLabel && onAction && (

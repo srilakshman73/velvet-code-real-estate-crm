@@ -14,7 +14,7 @@ import {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0D11] text-zinc-100 selection:bg-amber-500/30 selection:text-amber-200">
+    <div className="min-h-screen flex flex-col bg-[#F7F3EA] text-[#24211D]">
       <PublicHeader />
       <main className="flex-1">
         <LandingHero />

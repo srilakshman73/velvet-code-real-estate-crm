@@ -12,7 +12,6 @@ import {
   Briefcase,
   CheckCircle2,
   ArrowRight,
-  TrendingUp,
 } from 'lucide-react';
 
 export const metadata = {
@@ -91,18 +90,18 @@ export default function SolutionsPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0D11] text-zinc-100">
+    <div className="min-h-screen flex flex-col bg-[#F7F3EA] text-[#24211D]">
       <PublicHeader />
       <main className="flex-1">
         {/* Hero */}
         <section className="py-20 text-center max-w-4xl mx-auto px-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8F642B] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Tailored Industry Solutions
           </span>
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-white mt-4 tracking-tight">
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#24211D] mt-4 tracking-tight font-serif">
             Designed for Every Real Estate Business Model
           </h1>
-          <p className="text-lg text-zinc-400 mt-4 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-[#766F63] mt-4 leading-relaxed max-w-2xl mx-auto">
             Whether you are an independent property broker or a multi-city builder, Velvet Code provides the exact CRM tools required to scale your revenue.
           </p>
         </section>
@@ -115,35 +114,35 @@ export default function SolutionsPage() {
               <div
                 key={sol.id}
                 id={sol.id}
-                className="p-8 sm:p-10 rounded-2xl bg-zinc-950 border border-zinc-800/80 hover:border-amber-500/40 transition-all shadow-xl space-y-6"
+                className="p-8 sm:p-10 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374] transition-all aurum-card-shadow space-y-6"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD4C4] pb-6">
                   <div className="flex items-center gap-4">
-                    <div className="p-3.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                    <div className="p-3.5 rounded-xl bg-[#F7F3EA] text-[#8F642B] border border-[#DDD4C4]">
                       <Icon className="w-7 h-7" />
                     </div>
                     <div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#8F642B]">
                         {sol.tag}
                       </span>
-                      <h2 className="text-2xl font-bold text-white mt-0.5">{sol.title}</h2>
+                      <h2 className="text-2xl font-bold text-[#24211D] mt-0.5 font-serif">{sol.title}</h2>
                     </div>
                   </div>
                   <Link href="/register">
                     <Button variant="gold" size="sm" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                      Explore Solution
+                      Get Started
                     </Button>
                   </Link>
                 </div>
 
-                <p className="text-sm text-zinc-300 leading-relaxed max-w-3xl">
+                <p className="text-sm text-[#766F63] leading-relaxed max-w-3xl">
                   {sol.desc}
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   {sol.benefits.map((b, i) => (
-                    <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#24211D]">
+                      <CheckCircle2 className="w-4 h-4 text-[#2E6B4F] flex-shrink-0 mt-0.5" />
                       <span>{b}</span>
                     </div>
                   ))}

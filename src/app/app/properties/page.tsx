@@ -136,15 +136,15 @@ export default function PropertiesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight">
               Property Inventory
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30 rounded-full">
               {filteredProperties.length} Properties Listed
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
-            Manage your real estate listings, high-resolution media galleries, and unit availability.
+          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+            Manage your high-end real estate portfolio, visual galleries, and unit availability.
           </p>
         </div>
 
@@ -159,15 +159,15 @@ export default function PropertiesPage() {
       </div>
 
       {/* Filter Bar */}
-      <div className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800/90 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#766F63] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search properties by title, locality, city..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-zinc-900 border border-zinc-800 rounded-xl text-xs text-white placeholder:text-zinc-500 outline-none focus:border-amber-400/80"
+            className="w-full pl-9 pr-4 py-2 bg-white border border-[#DDD4C4] rounded-xl text-xs text-[#24211D] placeholder:text-[#766F63] outline-none focus:border-[#A374] focus:ring-2 focus:ring-[#A374]/15"
           />
         </div>
 
@@ -175,7 +175,7 @@ export default function PropertiesPage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-300 outline-none"
+            className="bg-white border border-[#DDD4C4] rounded-xl px-3 py-2 text-xs text-[#24211D] outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Property Types</option>
             <option value="APARTMENT">Apartments / Flats</option>
@@ -188,7 +188,7 @@ export default function PropertiesPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-300 outline-none"
+            className="bg-white border border-[#DDD4C4] rounded-xl px-3 py-2 text-xs text-[#24211D] outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Statuses</option>
             <option value="AVAILABLE">Available</option>
@@ -197,11 +197,11 @@ export default function PropertiesPage() {
             <option value="RENTED">Rented</option>
           </select>
 
-          <div className="bg-zinc-900 border border-zinc-800 p-1 rounded-xl flex items-center gap-1 ml-auto">
+          <div className="bg-[#F7F3EA] border border-[#DDD4C4] p-1 rounded-xl flex items-center gap-1 ml-auto">
             <button
               onClick={() => setViewMode('grid')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'grid' ? 'bg-amber-500 text-black' : 'text-zinc-400 hover:text-white'
+                viewMode === 'grid' ? 'bg-[#A374] text-white shadow-sm' : 'text-[#766F63] hover:text-[#24211D]'
               }`}
             >
               <LayoutGrid className="w-4 h-4" />
@@ -209,7 +209,7 @@ export default function PropertiesPage() {
             <button
               onClick={() => setViewMode('table')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'table' ? 'bg-amber-500 text-black' : 'text-zinc-400 hover:text-white'
+                viewMode === 'table' ? 'bg-[#A374] text-white shadow-sm' : 'text-[#766F63] hover:text-[#24211D]'
               }`}
             >
               <List className="w-4 h-4" />
@@ -223,7 +223,7 @@ export default function PropertiesPage() {
         <EmptyState
           icon={<Building2 className="w-8 h-8" />}
           title="No properties listed yet"
-          description="Add your first apartment, villa, or commercial property listing."
+          description="Add your first luxury apartment, villa, or commercial property listing."
           actionLabel="Add Property"
           onAction={() => setIsAddModalOpen(true)}
         />
@@ -233,69 +233,69 @@ export default function PropertiesPage() {
             <div
               key={prop.id}
               onClick={() => openDetail(prop)}
-              className="rounded-2xl bg-zinc-950 border border-zinc-800/90 overflow-hidden hover:border-amber-500/40 cursor-pointer shadow-xl hover:shadow-amber-500/5 transition-all flex flex-col justify-between group"
+              className="rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] overflow-hidden hover:border-[#A374] cursor-pointer shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(163,116,36,0.12)] transition-all flex flex-col justify-between group"
             >
               {/* Featured Image */}
-              <div className="relative h-48 w-full bg-zinc-900 overflow-hidden">
+              <div className="relative h-48 w-full bg-[#ECE5D8] overflow-hidden">
                 <img
                   src={prop.featuredImageUrl || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'}
                   alt={prop.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-3 left-3 flex gap-2">
                   <span
-                    className={`px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md shadow-md ${
+                    className={`px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md shadow-sm border ${
                       prop.status === 'AVAILABLE'
-                        ? 'bg-emerald-600 text-white'
+                        ? 'bg-[#2E6B4F] text-white border-[#2E6B4F]'
                         : prop.status === 'RESERVED'
-                        ? 'bg-amber-600 text-white'
-                        : 'bg-rose-600 text-white'
+                        ? 'bg-[#B87B28] text-white border-[#B87B28]'
+                        : 'bg-[#8B2635] text-white border-[#8B2635]'
                     }`}
                   >
                     {prop.status}
                   </span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-black/70 backdrop-blur-sm text-zinc-200 rounded-md">
+                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#151515]/80 backdrop-blur-sm text-[#F7F3EA] rounded-md">
                     {prop.propertyType}
                   </span>
                 </div>
-                <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-md text-amber-300 font-extrabold text-sm font-mono shadow-lg border border-amber-500/30">
+                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-lg bg-[#151515]/90 backdrop-blur-md text-[#F7F3EA] font-extrabold text-sm font-mono shadow-md border border-[#A374]/40">
                   {formatINR(prop.priceINR, true)}
                 </div>
               </div>
 
               {/* Body */}
               <div className="p-5 space-y-3">
-                <h3 className="text-base font-bold text-white group-hover:text-amber-300 transition-colors line-clamp-1">
+                <h3 className="text-base font-serif font-bold text-[#24211D] group-hover:text-[#8F642B] transition-colors line-clamp-1">
                   {prop.title}
                 </h3>
 
-                <p className="text-xs text-zinc-400 flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+                <p className="text-xs text-[#766F63] flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-[#A374] flex-shrink-0" />
                   <span>{prop.locality}, {prop.city}</span>
                 </p>
 
-                <div className="grid grid-cols-3 gap-2 py-2 border-y border-zinc-850 text-xs text-zinc-300">
+                <div className="grid grid-cols-3 gap-2 py-2 border-y border-[#DDD4C4] text-xs text-[#24211D]">
                   <div className="flex items-center gap-1">
-                    <Maximize2 className="w-3.5 h-3.5 text-zinc-500" />
+                    <Maximize2 className="w-3.5 h-3.5 text-[#766F63]" />
                     <span>{prop.areaSqFt} sq.ft</span>
                   </div>
                   {prop.bedrooms && (
                     <div className="flex items-center gap-1">
-                      <Bed className="w-3.5 h-3.5 text-zinc-500" />
+                      <Bed className="w-3.5 h-3.5 text-[#766F63]" />
                       <span>{prop.bedrooms} BHK</span>
                     </div>
                   )}
                   {prop.bathrooms && (
                     <div className="flex items-center gap-1">
-                      <Bath className="w-3.5 h-3.5 text-zinc-500" />
+                      <Bath className="w-3.5 h-3.5 text-[#766F63]" />
                       <span>{prop.bathrooms} Bath</span>
                     </div>
                   )}
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-zinc-400 pt-1">
+                <div className="flex items-center justify-between text-xs text-[#766F63] pt-1">
                   <span>Rate: {formatINRPricePerSqFt(prop.priceINR, prop.areaSqFt)}</span>
-                  <span className="text-amber-400 font-medium">
+                  <span className="text-[#8F642B] font-semibold">
                     {prop.interestedLeadsCount || 12} Inquiries
                   </span>
                 </div>
@@ -305,10 +305,10 @@ export default function PropertiesPage() {
         </div>
       ) : (
         /* TABLE VIEW */
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-950 overflow-hidden shadow-xl">
+        <div className="rounded-2xl border border-[#DDD4C4] bg-[#FFFCF6] overflow-hidden shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-zinc-900/90 border-b border-zinc-800 text-zinc-400 font-semibold">
+              <tr className="bg-[#F7F3EA] border-b border-[#DDD4C4] text-[#766F63] font-semibold">
                 <th className="p-4">Property</th>
                 <th className="p-4">Type</th>
                 <th className="p-4">Location</th>
@@ -319,40 +319,40 @@ export default function PropertiesPage() {
                 <th className="p-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800/60">
+            <tbody className="divide-y divide-[#DDD4C4]/60">
               {filteredProperties.map((prop) => (
                 <tr
                   key={prop.id}
                   onClick={() => openDetail(prop)}
-                  className="hover:bg-zinc-900/40 cursor-pointer transition-colors"
+                  className="hover:bg-[#F7F3EA]/60 cursor-pointer transition-colors"
                 >
-                  <td className="p-4 font-bold text-white hover:text-amber-300">
+                  <td className="p-4 font-serif font-bold text-[#24211D] hover:text-[#8F642B]">
                     {prop.title}
                   </td>
-                  <td className="p-4 text-zinc-300">{prop.propertyType}</td>
-                  <td className="p-4 text-zinc-300">{prop.locality}, {prop.city}</td>
-                  <td className="p-4 font-extrabold text-amber-300 font-mono">
+                  <td className="p-4 text-[#766F63]">{prop.propertyType}</td>
+                  <td className="p-4 text-[#766F63]">{prop.locality}, {prop.city}</td>
+                  <td className="p-4 font-extrabold text-[#8F642B] font-mono">
                     {formatINR(prop.priceINR, true)}
                   </td>
-                  <td className="p-4 text-zinc-300">{prop.areaSqFt} sq.ft</td>
+                  <td className="p-4 text-[#766F63]">{prop.areaSqFt} sq.ft</td>
                   <td className="p-4">
                     <span
-                      className={`px-2 py-0.5 text-[10px] font-bold rounded ${
+                      className={`px-2 py-0.5 text-[10px] font-bold rounded border ${
                         prop.status === 'AVAILABLE'
-                          ? 'bg-emerald-500/20 text-emerald-400'
+                          ? 'bg-[#2E6B4F]/10 text-[#2E6B4F] border-[#2E6B4F]/20'
                           : prop.status === 'RESERVED'
-                          ? 'bg-amber-500/20 text-amber-300'
-                          : 'bg-rose-500/20 text-rose-400'
+                          ? 'bg-[#B87B28]/10 text-[#8F642B] border-[#B87B28]/25'
+                          : 'bg-[#8B2635]/10 text-[#8B2635] border-[#8B2635]/20'
                       }`}
                     >
                       {prop.status}
                     </span>
                   </td>
-                  <td className="p-4 text-zinc-300">{prop.assignedAgentName || 'Velvet Code'}</td>
+                  <td className="p-4 text-[#766F63]">{prop.assignedAgentName || 'Velvet Code'}</td>
                   <td className="p-4 text-right" onClick={(e) => e.stopPropagation()}>
                     <button
                       onClick={() => setPropertyToDelete(prop)}
-                      className="p-1.5 text-zinc-500 hover:text-rose-400 rounded-lg hover:bg-zinc-800"
+                      className="p-1.5 text-[#766F63] hover:text-[#8B2635] rounded-lg hover:bg-[#8B2635]/10 transition-colors"
                       title="Delete Property"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -375,78 +375,78 @@ export default function PropertiesPage() {
           size="lg"
         >
           <div className="space-y-6 text-xs sm:text-sm">
-            <div className="relative h-56 w-full rounded-xl overflow-hidden border border-zinc-800">
+            <div className="relative h-56 w-full rounded-xl overflow-hidden border border-[#DDD4C4]">
               <img
                 src={selectedProperty.featuredImageUrl}
                 alt={selectedProperty.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-3 right-3 px-3 py-1 rounded-lg bg-black/80 backdrop-blur-md text-amber-300 font-bold font-mono">
+              <div className="absolute top-3 right-3 px-3 py-1 rounded-lg bg-[#151515]/90 backdrop-blur-md text-[#F7F3EA] font-bold font-mono border border-[#A374]/30">
                 {formatINR(selectedProperty.priceINR)}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3">
-              <h4 className="font-bold text-amber-400 uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-white border border-[#DDD4C4] space-y-3">
+              <h4 className="font-bold text-[#8F642B] uppercase tracking-wider text-xs font-serif">
                 Specifications & Layout
               </h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
                 <div>
-                  <span className="text-zinc-500 block">Carpet / Super Area</span>
-                  <span className="text-white font-semibold">{selectedProperty.areaSqFt} sq.ft</span>
+                  <span className="text-[#766F63] block">Carpet / Super Area</span>
+                  <span className="text-[#24211D] font-semibold">{selectedProperty.areaSqFt} sq.ft</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Bedrooms / Baths</span>
-                  <span className="text-white font-semibold">
+                  <span className="text-[#766F63] block">Bedrooms / Baths</span>
+                  <span className="text-[#24211D] font-semibold">
                     {selectedProperty.bedrooms || 0} BHK / {selectedProperty.bathrooms || 0} Bath
                   </span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Furnishing</span>
-                  <span className="text-white font-semibold">{selectedProperty.furnishing || 'Semi'}</span>
+                  <span className="text-[#766F63] block">Furnishing</span>
+                  <span className="text-[#24211D] font-semibold">{selectedProperty.furnishing || 'Semi'}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Facing Direction</span>
-                  <span className="text-white font-semibold">{selectedProperty.facing || 'East'}</span>
+                  <span className="text-[#766F63] block">Facing Direction</span>
+                  <span className="text-[#24211D] font-semibold">{selectedProperty.facing || 'East'}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Location</span>
-                  <span className="text-white font-semibold">{selectedProperty.locality}, {selectedProperty.city}</span>
+                  <span className="text-[#766F63] block">Location</span>
+                  <span className="text-[#24211D] font-semibold">{selectedProperty.locality}, {selectedProperty.city}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block">Listing Status</span>
-                  <span className="text-emerald-400 font-bold">{selectedProperty.status}</span>
+                  <span className="text-[#766F63] block">Listing Status</span>
+                  <span className="text-[#2E6B4F] font-bold">{selectedProperty.status}</span>
                 </div>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
-              <h4 className="font-bold text-amber-400 uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-white border border-[#DDD4C4] space-y-2">
+              <h4 className="font-bold text-[#8F642B] uppercase tracking-wider text-xs font-serif">
                 Amenities & Features
               </h4>
               <div className="flex flex-wrap gap-2 pt-1">
                 {selectedProperty.amenities.map((a, i) => (
                   <span
                     key={i}
-                    className="px-2.5 py-1 text-xs bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-300 flex items-center gap-1.5"
+                    className="px-2.5 py-1 text-xs bg-[#F7F3EA] border border-[#DDD4C4] rounded-lg text-[#24211D] flex items-center gap-1.5"
                   >
-                    <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                    <CheckCircle2 className="w-3 h-3 text-[#2E6B4F]" />
                     {a}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
-              <h4 className="font-bold text-amber-400 uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-white border border-[#DDD4C4] space-y-2">
+              <h4 className="font-bold text-[#8F642B] uppercase tracking-wider text-xs font-serif">
                 Description & Highlights
               </h4>
-              <p className="text-xs text-zinc-300 leading-relaxed bg-zinc-900 p-3 rounded-lg border border-zinc-850">
+              <p className="text-xs text-[#24211D] leading-relaxed bg-[#F7F3EA] p-3 rounded-lg border border-[#DDD4C4]">
                 {selectedProperty.description}
               </p>
             </div>
 
-            <div className="pt-4 border-t border-zinc-800 flex justify-end">
+            <div className="pt-4 border-t border-[#DDD4C4] flex justify-end">
               <Button
                 variant="danger"
                 size="sm"
@@ -531,7 +531,7 @@ export default function PropertiesPage() {
             onChange={(e) => setNewPropForm({ ...newPropForm, description: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-800">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
             <Button
               type="button"
               variant="secondary"
@@ -555,8 +555,8 @@ export default function PropertiesPage() {
           title="Confirm Property Deletion"
         >
           <div className="space-y-4">
-            <p className="text-xs text-zinc-300">
-              Are you sure you want to permanently delete <strong className="text-white">{propertyToDelete.title}</strong> from your organization inventory?
+            <p className="text-xs text-[#24211D]">
+              Are you sure you want to permanently delete <strong className="text-[#8F642B]">{propertyToDelete.title}</strong> from your organization inventory?
             </p>
             <div className="flex items-center justify-end gap-3 pt-2">
               <Button

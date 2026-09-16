@@ -36,8 +36,8 @@ interface GlobalUser {
 const GLOBAL_USERS_DATA: GlobalUser[] = [
   {
     id: 'usr-admin-01',
-    name: 'Velvet Code',
-    email: 'srilakshman73@gmail.com',
+    name: 'Velvet Code Admin',
+    email: 'admin@velvetcode.in',
     phone: '+91 94436 47190',
     role: 'SUPER_ADMIN',
     organizationName: 'Velvet Code HQ',
@@ -171,16 +171,16 @@ export default function AdminUsersPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-white tracking-tight">Platform Users Directory</h1>
-          <p className="text-sm text-neutral-400 mt-1">
+          <h1 className="text-3xl font-serif font-bold text-[#24211D] tracking-tight">Platform Users Directory</h1>
+          <p className="text-sm text-[#766F63] mt-1">
             Browse and administer registered real estate agents, managers, and tenant owners across India.
           </p>
         </div>
       </div>
 
       {feedbackMessage && (
-        <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs text-amber-300 flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0" />
+        <div className="p-3 bg-[#A374]/15 border border-[#A374]/30 rounded-xl text-xs text-[#8F642B] flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-[#8F642B] flex-shrink-0" />
           <span>{feedbackMessage}</span>
         </div>
       )}
@@ -192,13 +192,13 @@ export default function AdminUsersPage() {
             placeholder="Search by agent name, email, or brokerage organization..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            icon={<Search className="w-4 h-4 text-neutral-500" />}
+            icon={<Search className="w-4 h-4 text-[#766F63]" />}
           />
         </div>
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-2 text-xs text-neutral-300 focus:outline-none"
+          className="bg-white border border-[#DDD4C4] rounded-lg px-3 py-2 text-xs text-[#24211D] focus:outline-none focus:border-[#A374]"
         >
           <option value="ALL">All Roles</option>
           <option value="SUPER_ADMIN">Super Admin</option>
@@ -209,55 +209,55 @@ export default function AdminUsersPage() {
       </div>
 
       {/* Users Table */}
-      <Card orientation="vertical" className="p-0 overflow-hidden">
+      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-neutral-900/80 border-b border-neutral-800 text-neutral-400">
+            <thead className="bg-[#F7F3EA] border-b border-[#DDD4C4] text-[#766F63]">
               <tr>
-                <th className="py-3 px-4 font-medium">User Profile</th>
-                <th className="py-3 px-4 font-medium">Organization</th>
-                <th className="py-3 px-4 font-medium">Role</th>
-                <th className="py-3 px-4 font-medium">Contact</th>
-                <th className="py-3 px-4 font-medium">Last Active</th>
-                <th className="py-3 px-4 font-medium">Status</th>
-                <th className="py-3 px-4 font-medium text-right">Actions</th>
+                <th className="py-3 px-4 font-semibold">User Profile</th>
+                <th className="py-3 px-4 font-semibold">Organization</th>
+                <th className="py-3 px-4 font-semibold">Role</th>
+                <th className="py-3 px-4 font-semibold">Contact</th>
+                <th className="py-3 px-4 font-semibold">Last Active</th>
+                <th className="py-3 px-4 font-semibold">Status</th>
+                <th className="py-3 px-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-800/60">
+            <tbody className="divide-y divide-[#DDD4C4]/60">
               {filteredUsers.map((user) => (
-                <tr key={user.id} className="hover:bg-neutral-900/40 transition-colors">
-                  <td className="py-3 px-4 font-medium text-white">
+                <tr key={user.id} className="hover:bg-[#F7F3EA]/60 transition-colors">
+                  <td className="py-3 px-4 font-medium text-[#24211D]">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500/20 to-amber-600/20 border border-amber-500/30 text-amber-300 flex items-center justify-center font-bold text-xs">
+                      <div className="w-8 h-8 rounded-full bg-[#A374]/15 border border-[#A374]/30 text-[#8F642B] font-serif flex items-center justify-center font-bold text-xs">
                         {user.name.charAt(0)}
                       </div>
                       <div>
-                        <div className="text-sm font-semibold text-white flex items-center gap-1.5">
+                        <div className="text-sm font-serif font-bold text-[#24211D] flex items-center gap-1.5">
                           {user.name}
                           {user.isSuperAdmin && (
                             <span title="Master Platform Owner">
-                              <Shield className="w-3.5 h-3.5 text-amber-400" />
+                              <Shield className="w-3.5 h-3.5 text-[#A374]" />
                             </span>
                           )}
                         </div>
-                        <div className="text-[10px] text-neutral-400 font-mono">{user.id}</div>
+                        <div className="text-[10px] text-[#766F63] font-mono">{user.id}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-neutral-300">
-                    <div className="font-medium text-neutral-200">{user.organizationName}</div>
-                    <div className="text-[10px] text-neutral-500 font-mono">{user.organizationId}</div>
+                  <td className="py-3 px-4 text-[#766F63]">
+                    <div className="font-semibold text-[#24211D]">{user.organizationName}</div>
+                    <div className="text-[10px] text-[#766F63] font-mono">{user.organizationId}</div>
                   </td>
                   <td className="py-3 px-4">
                     <Badge variant={user.role === 'SUPER_ADMIN' ? 'gold' : user.role === 'OWNER' ? 'info' : 'neutral'}>
                       {user.role}
                     </Badge>
                   </td>
-                  <td className="py-3 px-4 text-neutral-300">
+                  <td className="py-3 px-4 text-[#766F63]">
                     <div>{user.email}</div>
-                    <div className="text-[10px] text-neutral-500">{user.phone}</div>
+                    <div className="text-[10px] text-[#766F63]">{user.phone}</div>
                   </td>
-                  <td className="py-3 px-4 text-neutral-400">
+                  <td className="py-3 px-4 text-[#766F63]">
                     {user.lastActive}
                   </td>
                   <td className="py-3 px-4">
@@ -271,7 +271,7 @@ export default function AdminUsersPage() {
                         variant="ghost"
                         size="xs"
                         onClick={() => setUserToDelete(user)}
-                        className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10"
+                        className="text-[#8B2635] hover:text-[#701E2B] hover:bg-[#8B2635]/10"
                         icon={<Trash2 className="w-3.5 h-3.5" />}
                       >
                         Delete
@@ -293,12 +293,12 @@ export default function AdminUsersPage() {
           title="Confirm User Deletion"
         >
           <div className="space-y-4">
-            <div className="flex items-start gap-3 p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-300 text-xs">
-              <AlertTriangle className="w-5 h-5 flex-shrink-0 text-rose-400 mt-0.5" />
+            <div className="flex items-start gap-3 p-3 bg-[#8B2635]/10 border border-[#8B2635]/20 rounded-xl text-[#8B2635] text-xs">
+              <AlertTriangle className="w-5 h-5 flex-shrink-0 text-[#8B2635] mt-0.5" />
               <div>
-                <p className="font-semibold text-rose-200">Destructive Platform Owner Action</p>
-                <p className="mt-1">
-                  Are you sure you want to permanently delete user <strong className="text-white">{userToDelete.name}</strong> ({userToDelete.email}) belonging to <strong className="text-white">{userToDelete.organizationName}</strong>?
+                <p className="font-bold text-[#8B2635]">Destructive Platform Owner Action</p>
+                <p className="mt-1 text-[#24211D]">
+                  Are you sure you want to permanently delete user <strong className="text-[#8B2635]">{userToDelete.name}</strong> ({userToDelete.email}) belonging to <strong className="text-[#24211D]">{userToDelete.organizationName}</strong>?
                 </p>
               </div>
             </div>

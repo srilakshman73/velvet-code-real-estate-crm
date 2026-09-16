@@ -35,40 +35,40 @@ export default function CalendarPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight">
               Real Estate Activity Calendar
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30 rounded-full">
               September 2026
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
             Site viewings, client calls, meeting schedules, and transaction closing dates.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="bg-zinc-900 border border-zinc-800 p-1 rounded-xl flex text-xs">
+          <div className="bg-[#FFFCF6] border border-[#DDD4C4] p-1 rounded-xl flex text-xs shadow-sm">
             <button
               onClick={() => setViewMode('MONTH')}
-              className={`px-3 py-1.5 rounded-lg font-medium ${
-                viewMode === 'MONTH' ? 'bg-amber-500 text-black font-semibold' : 'text-zinc-400'
+              className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                viewMode === 'MONTH' ? 'bg-[#A374] text-white font-semibold shadow-sm' : 'text-[#766F63] hover:text-[#24211D]'
               }`}
             >
               Month
             </button>
             <button
               onClick={() => setViewMode('WEEK')}
-              className={`px-3 py-1.5 rounded-lg font-medium ${
-                viewMode === 'WEEK' ? 'bg-amber-500 text-black font-semibold' : 'text-zinc-400'
+              className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                viewMode === 'WEEK' ? 'bg-[#A374] text-white font-semibold shadow-sm' : 'text-[#766F63] hover:text-[#24211D]'
               }`}
             >
               Week
             </button>
             <button
               onClick={() => setViewMode('DAY')}
-              className={`px-3 py-1.5 rounded-lg font-medium ${
-                viewMode === 'DAY' ? 'bg-amber-500 text-black font-semibold' : 'text-zinc-400'
+              className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                viewMode === 'DAY' ? 'bg-[#A374] text-white font-semibold shadow-sm' : 'text-[#766F63] hover:text-[#24211D]'
               }`}
             >
               Day
@@ -78,35 +78,35 @@ export default function CalendarPage() {
       </div>
 
       {/* Calendar Grid Container */}
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-4 sm:p-6 shadow-2xl">
-        <div className="flex items-center justify-between pb-4 border-b border-zinc-800 mb-4">
+      <div className="rounded-2xl border border-[#DDD4C4] bg-[#FFFCF6] p-4 sm:p-6 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#DDD4C4] mb-4">
           <div className="flex items-center gap-3">
-            <h2 className="text-lg font-bold text-white">September 2026</h2>
+            <h2 className="text-lg font-serif font-bold text-[#24211D]">September 2026</h2>
             <div className="flex items-center gap-1">
-              <button className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white">
+              <button className="p-1 rounded-lg hover:bg-[#F7F3EA] text-[#766F63] hover:text-[#24211D] transition-colors">
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <button className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white">
+              <button className="p-1 rounded-lg hover:bg-[#F7F3EA] text-[#766F63] hover:text-[#24211D] transition-colors">
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
 
           <div className="flex items-center gap-4 text-xs">
-            <span className="flex items-center gap-1.5 text-blue-400">
-              <span className="w-2 h-2 rounded-full bg-blue-400" /> Site Visits
+            <span className="flex items-center gap-1.5 text-[#3B5BDB] font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#3B5BDB]" /> Site Visits
             </span>
-            <span className="flex items-center gap-1.5 text-amber-400">
-              <span className="w-2 h-2 rounded-full bg-amber-400" /> Follow-ups
+            <span className="flex items-center gap-1.5 text-[#8F642B] font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#A374]" /> Follow-ups
             </span>
-            <span className="flex items-center gap-1.5 text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" /> Tasks
+            <span className="flex items-center gap-1.5 text-[#2E6B4F] font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#2E6B4F]" /> Tasks
             </span>
           </div>
         </div>
 
         {/* Days of week header */}
-        <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-zinc-400 uppercase tracking-wider pb-2 border-b border-zinc-850">
+        <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-[#766F63] uppercase tracking-wider pb-2 border-b border-[#DDD4C4]">
           <div>Mon</div>
           <div>Tue</div>
           <div>Wed</div>
@@ -127,20 +127,20 @@ export default function CalendarPage() {
                 key={day}
                 className={`min-h-[100px] p-2 rounded-xl border flex flex-col justify-between transition-colors ${
                   isToday
-                    ? 'bg-amber-950/20 border-amber-500/50 shadow-md'
-                    : 'bg-zinc-900/40 border-zinc-800/80 hover:border-zinc-700'
+                    ? 'bg-[#A374]/10 border-[#A374] shadow-sm'
+                    : 'bg-white border-[#DDD4C4] hover:border-[#A374]'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span
                     className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${
-                      isToday ? 'bg-amber-400 text-black font-extrabold' : 'text-zinc-300'
+                      isToday ? 'bg-[#A374] text-white font-extrabold' : 'text-[#24211D]'
                     }`}
                   >
                     {day}
                   </span>
                   {isToday && (
-                    <span className="text-[9px] font-extrabold text-amber-400 uppercase">
+                    <span className="text-[9px] font-extrabold text-[#8F642B] uppercase">
                       Today
                     </span>
                   )}
@@ -150,7 +150,7 @@ export default function CalendarPage() {
                   {visits.map((v) => (
                     <div
                       key={v.id}
-                      className="px-1.5 py-0.5 rounded bg-blue-500/20 border border-blue-500/40 text-blue-300 text-[10px] truncate"
+                      className="px-1.5 py-0.5 rounded bg-[#3B5BDB]/10 border border-[#3B5BDB]/20 text-[#2F49B0] text-[10px] truncate font-medium"
                       title={v.propertyName}
                     >
                       📍 {v.timeSlot} {v.propertyName}
@@ -159,7 +159,7 @@ export default function CalendarPage() {
                   {fus.map((f) => (
                     <div
                       key={f.id}
-                      className="px-1.5 py-0.5 rounded bg-amber-500/20 border border-amber-500/40 text-amber-300 text-[10px] truncate"
+                      className="px-1.5 py-0.5 rounded bg-[#A374]/15 border border-[#A374]/30 text-[#8F642B] text-[10px] truncate font-medium"
                       title={f.notes}
                     >
                       📞 {f.leadName}
@@ -168,7 +168,7 @@ export default function CalendarPage() {
                   {tks.map((t) => (
                     <div
                       key={t.id}
-                      className="px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] truncate"
+                      className="px-1.5 py-0.5 rounded bg-[#2E6B4F]/10 border border-[#2E6B4F]/20 text-[#2E6B4F] text-[10px] truncate font-medium"
                       title={t.title}
                     >
                       ✓ {t.title}
@@ -176,7 +176,7 @@ export default function CalendarPage() {
                   ))}
                 </div>
 
-                <div className="text-[9px] text-zinc-500 text-right">
+                <div className="text-[9px] text-[#766F63] text-right">
                   {visits.length + fus.length + tks.length > 0 &&
                     `${visits.length + fus.length + tks.length} events`}
                 </div>

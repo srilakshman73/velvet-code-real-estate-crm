@@ -94,23 +94,23 @@ export default function WhatsAppCRMPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-              <MessageSquare className="w-6 h-6 text-emerald-400" />
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+              <MessageSquare className="w-6 h-6 text-[#2E6B4F]" />
               WhatsApp Cloud CRM
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="px-3 py-1 text-xs font-semibold bg-[#2E6B4F]/10 text-[#2E6B4F] border border-[#2E6B4F]/20 rounded-full flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#2E6B4F] animate-pulse" />
               Live Inbox Connected
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
-            Official Business API Stream • Tappable click-to-chat with <strong className="text-emerald-400">+91 94436 47190</strong>
+          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+            Official Meta Cloud API • Direct click-to-chat with <strong className="text-[#2E6B4F] font-mono">+91 94436 47190</strong>
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           <Link href="/app/whatsapp/automation">
-            <Button variant="outline" size="sm" leftIcon={<Zap className="w-3.5 h-3.5 text-amber-400" />}>
+            <Button variant="outline" size="sm" leftIcon={<Zap className="w-3.5 h-3.5 text-[#8F642B]" />}>
               Visual Automation Builder
             </Button>
           </Link>
@@ -118,7 +118,7 @@ export default function WhatsAppCRMPage() {
             href={buildWhatsAppUrl('919443647190', 'Hello Velvet Code, I want to test the WhatsApp integration.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/20 transition-all"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#2E6B4F] hover:bg-[#255740] text-white font-bold text-xs shadow-sm transition-all"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             +91 94436 47190
@@ -128,58 +128,58 @@ export default function WhatsAppCRMPage() {
 
       {/* 4 WhatsApp KPI Metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-1">
-          <p className="text-xs uppercase tracking-wider text-zinc-400 font-semibold">
+        <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-1">
+          <p className="text-xs uppercase tracking-wider text-[#766F63] font-semibold font-serif">
             Messages Sent
           </p>
-          <p className="text-2xl font-bold text-white font-mono">1,284</p>
-          <p className="text-[11px] text-emerald-400 font-medium">99.8% Delivery Rate</p>
+          <p className="text-2xl font-bold text-[#24211D] font-mono">1,284</p>
+          <p className="text-[11px] text-[#2E6B4F] font-medium">99.8% Delivery Rate</p>
         </div>
-        <div className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-1">
-          <p className="text-xs uppercase tracking-wider text-zinc-400 font-semibold">
+        <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-1">
+          <p className="text-xs uppercase tracking-wider text-[#766F63] font-semibold font-serif">
             Replies Received
           </p>
-          <p className="text-2xl font-bold text-white font-mono">842</p>
-          <p className="text-[11px] text-emerald-400 font-medium">65.5% High Engagement</p>
+          <p className="text-2xl font-bold text-[#24211D] font-mono">842</p>
+          <p className="text-[11px] text-[#2E6B4F] font-medium">65.5% High Engagement</p>
         </div>
-        <div className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-1">
-          <p className="text-xs uppercase tracking-wider text-zinc-400 font-semibold">
+        <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-1">
+          <p className="text-xs uppercase tracking-wider text-[#766F63] font-semibold font-serif">
             Pending Replies
           </p>
-          <p className="text-2xl font-bold text-amber-400 font-mono">37</p>
-          <p className="text-[11px] text-zinc-400 font-medium">Avg response 4 mins</p>
+          <p className="text-2xl font-bold text-[#8F642B] font-mono">37</p>
+          <p className="text-[11px] text-[#766F63] font-medium">Avg response 4 mins</p>
         </div>
-        <div className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-1">
-          <p className="text-xs uppercase tracking-wider text-zinc-400 font-semibold">
+        <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-1">
+          <p className="text-xs uppercase tracking-wider text-[#766F63] font-semibold font-serif">
             Active Chats
           </p>
-          <p className="text-2xl font-bold text-emerald-400 font-mono">64</p>
-          <p className="text-[11px] text-zinc-400 font-medium">In CRM Pipeline</p>
+          <p className="text-2xl font-bold text-[#2E6B4F] font-mono">64</p>
+          <p className="text-[11px] text-[#766F63] font-medium">In CRM Pipeline</p>
         </div>
       </div>
 
       {/* ========================================== */}
       {/* 3-COLUMN WHATSAPP CRM INBOX */}
       {/* ========================================== */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-2xl border border-zinc-800 bg-zinc-950 shadow-2xl overflow-hidden h-[750px]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-2xl border border-[#DDD4C4] bg-[#FFFCF6] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] overflow-hidden h-[750px]">
         {/* ========================================== */}
         {/* COLUMN 1: CONVERSATIONS LIST (3 Cols) */}
         {/* ========================================== */}
-        <div className="lg:col-span-4 border-r border-zinc-800 flex flex-col bg-zinc-950/90">
-          <div className="p-3.5 border-b border-zinc-800 bg-zinc-900/60">
+        <div className="lg:col-span-4 border-r border-[#DDD4C4] flex flex-col bg-white">
+          <div className="p-3.5 border-b border-[#DDD4C4] bg-[#F7F3EA]/80">
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-[#766F63] absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search WhatsApp messages..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-8 pr-3 py-1.5 bg-zinc-950 border border-zinc-800 rounded-lg text-xs text-white placeholder:text-zinc-500 outline-none"
+                className="w-full pl-8 pr-3 py-1.5 bg-white border border-[#DDD4C4] rounded-lg text-xs text-[#24211D] placeholder:text-[#766F63] outline-none focus:border-[#A374]"
               />
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto divide-y divide-zinc-900">
+          <div className="flex-1 overflow-y-auto divide-y divide-[#DDD4C4]/50">
             {filteredConversations.map((conv) => {
               const isSelected = conv.id === activeConv?.id;
               return (
@@ -188,27 +188,27 @@ export default function WhatsAppCRMPage() {
                   onClick={() => setActiveConversationId(conv.id)}
                   className={`p-3.5 cursor-pointer transition-all ${
                     isSelected
-                      ? 'bg-zinc-900 border-l-2 border-emerald-400'
-                      : 'hover:bg-zinc-900/40'
+                      ? 'bg-[#F7F3EA] border-l-4 border-[#2E6B4F]'
+                      : 'hover:bg-[#F7F3EA]/50'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-1 mb-1">
-                    <span className="font-bold text-white text-xs truncate">
+                    <span className="font-serif font-bold text-[#24211D] text-xs truncate">
                       {conv.customerName}
                     </span>
-                    <span className="text-[10px] text-zinc-500 flex-shrink-0">
+                    <span className="text-[10px] text-[#766F63] flex-shrink-0">
                       {formatRelativeTime(conv.lastMessageAt)}
                     </span>
                   </div>
 
-                  <p className="text-xs text-zinc-400 line-clamp-1 leading-relaxed">
+                  <p className="text-xs text-[#766F63] line-clamp-1 leading-relaxed">
                     {conv.lastMessageText}
                   </p>
 
                   <div className="mt-2 flex items-center justify-between text-[10px]">
-                    <span className="text-emerald-400 font-mono">{conv.customerPhone}</span>
+                    <span className="text-[#2E6B4F] font-mono font-medium">{conv.customerPhone}</span>
                     {conv.unreadCount > 0 && (
-                      <span className="px-1.5 py-0.5 rounded-full bg-emerald-500 text-black font-extrabold text-[9px]">
+                      <span className="px-1.5 py-0.5 rounded-full bg-[#2E6B4F] text-white font-extrabold text-[9px]">
                         {conv.unreadCount}
                       </span>
                     )}
@@ -222,19 +222,19 @@ export default function WhatsAppCRMPage() {
         {/* ========================================== */}
         {/* COLUMN 2: ACTIVE CHAT THREAD (5 Cols) */}
         {/* ========================================== */}
-        <div className="lg:col-span-5 flex flex-col bg-zinc-900/30">
+        <div className="lg:col-span-5 flex flex-col bg-[#F7F3EA]/30">
           {activeConv ? (
             <>
               {/* Chat Header */}
-              <div className="p-3.5 border-b border-zinc-800 bg-zinc-950/80 flex items-center justify-between">
+              <div className="p-3.5 border-b border-[#DDD4C4] bg-white flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-bold text-white">{activeConv.customerName}</h3>
+                    <h3 className="text-sm font-serif font-bold text-[#24211D]">{activeConv.customerName}</h3>
                     {activeConv.leadStatus && (
                       <LeadStatusBadge status={activeConv.leadStatus} />
                     )}
                   </div>
-                  <p className="text-[11px] text-zinc-400 font-mono mt-0.5">
+                  <p className="text-[11px] text-[#766F63] font-mono mt-0.5">
                     {activeConv.customerPhone}
                   </p>
                 </div>
@@ -244,7 +244,7 @@ export default function WhatsAppCRMPage() {
                     variant="subtle"
                     size="xs"
                     onClick={() => setIsTemplateModalOpen(true)}
-                    leftIcon={<FileText className="w-3.5 h-3.5 text-amber-400" />}
+                    leftIcon={<FileText className="w-3.5 h-3.5 text-[#8F642B]" />}
                   >
                     Templates
                   </Button>
@@ -252,7 +252,7 @@ export default function WhatsAppCRMPage() {
               </div>
 
               {/* Chat Messages */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:16px_16px]">
+              <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[radial-gradient(#DDD4C4_1px,transparent_1px)] [background-size:16px_16px]">
                 {activeConv.messages.map((msg) => {
                   const isOut = msg.direction === 'OUTBOUND';
                   return (
@@ -261,14 +261,14 @@ export default function WhatsAppCRMPage() {
                       className={`flex flex-col ${isOut ? 'items-end' : 'items-start'}`}
                     >
                       <div
-                        className={`max-w-[85%] p-3 rounded-2xl text-xs leading-relaxed whitespace-pre-wrap shadow-md ${
+                        className={`max-w-[85%] p-3.5 rounded-2xl text-xs leading-relaxed whitespace-pre-wrap shadow-sm ${
                           isOut
-                            ? 'bg-emerald-900/80 text-emerald-50 border border-emerald-500/30 rounded-tr-none'
-                            : 'bg-zinc-900 text-zinc-200 border border-zinc-800 rounded-tl-none'
+                            ? 'bg-[#2E6B4F] text-white rounded-tr-none'
+                            : 'bg-white text-[#24211D] border border-[#DDD4C4] rounded-tl-none'
                         }`}
                       >
                         {msg.mediaUrl && (
-                          <div className="mb-2 rounded-lg overflow-hidden border border-zinc-700">
+                          <div className="mb-2 rounded-lg overflow-hidden border border-[#DDD4C4]/50">
                             <img
                               src={msg.mediaUrl}
                               alt="Attached Brochure"
@@ -277,9 +277,9 @@ export default function WhatsAppCRMPage() {
                           </div>
                         )}
                         <p>{msg.body}</p>
-                        <div className="mt-1 flex items-center justify-end gap-1 text-[9px] text-zinc-400">
+                        <div className={`mt-1 flex items-center justify-end gap-1 text-[9px] ${isOut ? 'text-white/80' : 'text-[#766F63]'}`}>
                           <span>{msg.createdAt.split('T')[1]?.substring(0, 5) || '11:42'}</span>
-                          {isOut && <CheckCheck className="w-3 h-3 text-emerald-400" />}
+                          {isOut && <CheckCheck className="w-3 h-3 text-white" />}
                         </div>
                       </div>
                     </div>
@@ -290,14 +290,14 @@ export default function WhatsAppCRMPage() {
               {/* Chat Input */}
               <form
                 onSubmit={handleSendMessage}
-                className="p-3 border-t border-zinc-800 bg-zinc-950 flex items-center gap-2"
+                className="p-3 border-t border-[#DDD4C4] bg-white flex items-center gap-2"
               >
                 <input
                   type="text"
                   placeholder="Type a verified WhatsApp message..."
                   value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
-                  className="flex-1 bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-zinc-500 outline-none focus:border-emerald-400"
+                  className="flex-1 bg-[#F7F3EA]/50 border border-[#DDD4C4] rounded-xl px-3.5 py-2 text-xs text-[#24211D] placeholder:text-[#766F63] outline-none focus:border-[#2E6B4F]"
                 />
                 <Button type="submit" variant="emerald" size="sm" className="px-3">
                   <Send className="w-4 h-4" />
@@ -305,7 +305,7 @@ export default function WhatsAppCRMPage() {
               </form>
             </>
           ) : (
-            <div className="flex-1 flex items-center justify-center text-zinc-500 text-xs">
+            <div className="flex-1 flex items-center justify-center text-[#766F63] text-xs">
               Select a conversation to begin messaging
             </div>
           )}
@@ -314,35 +314,35 @@ export default function WhatsAppCRMPage() {
         {/* ========================================== */}
         {/* COLUMN 3: CONTEXTUAL CRM SIDEBAR (3 Cols) */}
         {/* ========================================== */}
-        <div className="lg:col-span-3 border-l border-zinc-800 p-4 bg-zinc-950/90 overflow-y-auto space-y-4 text-xs">
-          <div className="pb-3 border-b border-zinc-800">
-            <h4 className="font-bold text-amber-400 uppercase tracking-wider text-[11px] mb-2">
+        <div className="lg:col-span-3 border-l border-[#DDD4C4] p-4 bg-white overflow-y-auto space-y-4 text-xs">
+          <div className="pb-3 border-b border-[#DDD4C4]">
+            <h4 className="font-serif font-bold text-[#8F642B] uppercase tracking-wider text-[11px] mb-2">
               Buyer CRM Context
             </h4>
-            <p className="font-bold text-white text-sm">{activeConv?.customerName}</p>
-            <p className="text-zinc-400">{activeConv?.customerPhone}</p>
+            <p className="font-serif font-bold text-[#24211D] text-sm">{activeConv?.customerName}</p>
+            <p className="text-[#766F63]">{activeConv?.customerPhone}</p>
           </div>
 
-          <div className="space-y-2 p-3 rounded-xl bg-zinc-900 border border-zinc-800">
+          <div className="space-y-2 p-3 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4]">
             <div className="flex justify-between">
-              <span className="text-zinc-400">Budget:</span>
-              <span className="font-bold text-amber-300">{activeConv?.budget || '₹1.45 Cr'}</span>
+              <span className="text-[#766F63]">Budget:</span>
+              <span className="font-bold text-[#8F642B] font-mono">{activeConv?.budget || '₹1.45 Cr'}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-zinc-400">Property:</span>
-              <span className="text-zinc-200 truncate max-w-[120px]">
+              <span className="text-[#766F63]">Property:</span>
+              <span className="text-[#24211D] font-medium truncate max-w-[120px]">
                 {activeConv?.interestedProperty || 'Emerald Heights'}
               </span>
             </div>
           </div>
 
           {/* 1-Click Property Share Tool */}
-          <div className="space-y-2 p-3 rounded-xl bg-zinc-900 border border-zinc-800">
-            <p className="font-bold text-white text-[11px]">Instant Brochure Dispatch</p>
+          <div className="space-y-2 p-3 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4]">
+            <p className="font-serif font-bold text-[#24211D] text-[11px]">Instant Brochure Dispatch</p>
             <select
               value={selectedPropertyShare}
               onChange={(e) => setSelectedPropertyShare(e.target.value)}
-              className="w-full bg-zinc-950 border border-zinc-800 text-[11px] text-zinc-300 rounded p-1.5 outline-none"
+              className="w-full bg-white border border-[#DDD4C4] text-[11px] text-[#24211D] rounded p-1.5 outline-none focus:border-[#A374]"
             >
               <option value="">Select Property Brochure...</option>
               {properties.map((p) => (
@@ -367,17 +367,17 @@ export default function WhatsAppCRMPage() {
           <div className="space-y-1.5 pt-2">
             <Link
               href="/app/leads"
-              className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/60 hover:bg-zinc-900 text-zinc-300 font-medium text-[11px]"
+              className="flex items-center justify-between p-2 rounded-lg bg-[#F7F3EA] hover:bg-[#DDD4C4]/40 text-[#24211D] font-medium text-[11px] transition-colors"
             >
               <span>View Full Lead Record</span>
-              <ExternalLink className="w-3 h-3 text-zinc-400" />
+              <ExternalLink className="w-3 h-3 text-[#766F63]" />
             </Link>
             <Link
               href="/app/site-visits"
-              className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/60 hover:bg-zinc-900 text-zinc-300 font-medium text-[11px]"
+              className="flex items-center justify-between p-2 rounded-lg bg-[#F7F3EA] hover:bg-[#DDD4C4]/40 text-[#24211D] font-medium text-[11px] transition-colors"
             >
               <span>Schedule Site Visit</span>
-              <ExternalLink className="w-3 h-3 text-zinc-400" />
+              <ExternalLink className="w-3 h-3 text-[#766F63]" />
             </Link>
           </div>
         </div>
@@ -395,17 +395,17 @@ export default function WhatsAppCRMPage() {
             <div
               key={tpl.id}
               onClick={() => handleApplyTemplate(tpl.body)}
-              className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 hover:border-emerald-400 cursor-pointer transition-all space-y-2 group"
+              className="p-4 rounded-xl bg-white border border-[#DDD4C4] hover:border-[#2E6B4F] cursor-pointer transition-all space-y-2 group shadow-sm"
             >
               <div className="flex items-center justify-between">
-                <span className="font-bold text-white group-hover:text-emerald-300">
+                <span className="font-serif font-bold text-[#24211D] group-hover:text-[#2E6B4F] transition-colors">
                   {tpl.name}
                 </span>
-                <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-500/10 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-bold text-[#2E6B4F] uppercase bg-[#2E6B4F]/10 px-2 py-0.5 rounded">
                   {tpl.category}
                 </span>
               </div>
-              <p className="text-xs text-zinc-300 italic">"{tpl.body}"</p>
+              <p className="text-xs text-[#766F63] italic">"{tpl.body}"</p>
             </div>
           ))}
         </div>

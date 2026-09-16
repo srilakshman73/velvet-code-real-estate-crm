@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { SAAS_PLANS } from '@/lib/mock-data';
-import { formatINR, buildWhatsAppUrl } from '@/lib/utils';
+import { buildWhatsAppUrl } from '@/lib/utils';
 import {
   Users,
   Building2,
@@ -12,19 +12,9 @@ import {
   CalendarCheck,
   MessageSquare,
   Sparkles,
-  Zap,
-  BarChart3,
-  ShieldCheck,
   CheckCircle2,
   ArrowRight,
   ChevronDown,
-  Layers,
-  Award,
-  PhoneCall,
-  Clock,
-  FileCheck,
-  DollarSign,
-  TrendingUp,
 } from 'lucide-react';
 
 // ==========================================
@@ -39,18 +29,18 @@ export function TrustedTechSection() {
   ];
 
   return (
-    <section className="py-16 border-y border-zinc-800/80 bg-zinc-950/60">
+    <section className="py-16 border-y border-[#DDD4C4] bg-[#EFE8DA]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-xs font-bold uppercase tracking-widest text-zinc-400 mb-10">
+        <p className="text-center text-xs font-bold uppercase tracking-widest text-[#766F63] mb-10">
           Engineered for High-Performance Real Estate Sales Teams Across India
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {stats.map((s, i) => (
             <div key={i} className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white font-sans bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 bg-clip-text text-transparent">
+              <div className="text-3xl sm:text-4xl font-extrabold text-[#24211D] font-serif">
                 {s.value}
               </div>
-              <p className="text-xs sm:text-sm text-zinc-400 font-medium">{s.label}</p>
+              <p className="text-xs sm:text-sm text-[#766F63] font-medium">{s.label}</p>
             </div>
           ))}
         </div>
@@ -109,16 +99,16 @@ export function CoreModulesShowcase() {
   ];
 
   return (
-    <section className="py-24 bg-[#0B0D11]">
+    <section className="py-24 bg-[#F7F3EA]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8F642B] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Comprehensive CRM Modules
           </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white mt-4 tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-bold text-[#24211D] mt-4 tracking-tight font-serif">
             Every Tool You Need to Scale Your Real Estate Agency
           </h2>
-          <p className="text-base text-zinc-400 mt-4 leading-relaxed">
+          <p className="text-base text-[#766F63] mt-4 leading-relaxed">
             Built from the ground up for agents, brokers, builders, and property consultants.
           </p>
         </div>
@@ -129,25 +119,25 @@ export function CoreModulesShowcase() {
             return (
               <div
                 key={i}
-                className="group relative rounded-2xl p-7 bg-zinc-900/70 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-500/40 transition-all duration-300 shadow-lg hover:shadow-amber-500/5 flex flex-col justify-between"
+                className="group relative rounded-2xl p-7 bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374] aurum-card-hover aurum-card-shadow flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-amber-400 group-hover:scale-110 group-hover:border-amber-500/40 transition-all">
+                    <div className="p-3 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] text-[#8F642B] group-hover:scale-105 group-hover:border-[#A374]/50 transition-all">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 bg-zinc-950 px-2.5 py-1 rounded-md border border-zinc-800">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#766F63] bg-[#F7F3EA] px-2.5 py-1 rounded-md border border-[#DDD4C4]">
                       {f.tag}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">
+                  <h3 className="text-lg font-bold text-[#24211D] mb-2 group-hover:text-[#8F642B] transition-colors">
                     {f.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#766F63] leading-relaxed">
                     {f.description}
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-zinc-800/60 flex items-center text-xs font-semibold text-amber-400 group-hover:text-amber-300">
+                <div className="mt-6 pt-4 border-t border-[#DDD4C4]/60 flex items-center text-xs font-bold text-[#8F642B] group-hover:text-[#7A5320]">
                   <span>Explore module</span>
                   <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -165,33 +155,33 @@ export function CoreModulesShowcase() {
 // ==========================================
 export function WhatsAppAndAIShowcase() {
   return (
-    <section className="py-24 border-t border-zinc-800/80 bg-gradient-to-b from-zinc-950 via-zinc-900/40 to-zinc-950">
+    <section className="py-24 border-t border-[#DDD4C4] bg-[#EFE8DA]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column: Official WhatsApp */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#2E6B4F]/10 border border-[#2E6B4F]/30 text-[#2E6B4F] text-xs font-bold">
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Official WhatsApp Business Architecture</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#24211D] tracking-tight font-serif">
               Connect With Buyers on India's #1 Messaging App
             </h2>
-            <p className="text-sm text-zinc-300 leading-relaxed">
+            <p className="text-sm text-[#766F63] leading-relaxed">
               Real estate deals happen on WhatsApp. Velvet Code gives you a complete 3-column WhatsApp CRM inbox with instant lead capture, automated site visit confirmations, and template broadcasts.
             </p>
 
-            <ul className="space-y-3 text-xs sm:text-sm text-zinc-300">
+            <ul className="space-y-3 text-xs sm:text-sm text-[#24211D]">
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#2E6B4F] flex-shrink-0" />
                 <span>Zero message delay — Instant automated response upon inquiry submission</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#2E6B4F] flex-shrink-0" />
                 <span>Pre-approved templates with dynamic customer and property variables</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#2E6B4F] flex-shrink-0" />
                 <span>Official click-to-chat integration with <strong>+91 94436 47190</strong></span>
               </li>
             </ul>
@@ -201,7 +191,7 @@ export function WhatsAppAndAIShowcase() {
                 href={buildWhatsAppUrl('919443647190', 'Hello, I want to see the WhatsApp CRM demo.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/20 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#2E6B4F] hover:bg-[#24563F] text-white font-bold text-xs shadow-md transition-all"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Test Live WhatsApp Channel (+91 94436 47190)</span>
@@ -210,41 +200,41 @@ export function WhatsAppAndAIShowcase() {
           </div>
 
           {/* Right Column: Realty AI Card */}
-          <div className="rounded-2xl border border-amber-500/30 bg-zinc-950 p-6 shadow-2xl shadow-amber-500/5 relative overflow-hidden">
-            <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
+          <div className="rounded-2xl border border-[#DDD4C4] bg-[#FFFCF6] p-6 aurum-card-shadow relative overflow-hidden">
+            <div className="flex items-center justify-between pb-4 border-b border-[#DDD4C4]">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400">
+                <div className="p-2 rounded-xl bg-[#A374]/20 text-[#8F642B]">
                   <Sparkles className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white">Realty AI in Action</h3>
-                  <p className="text-[11px] text-zinc-400">Contextual CRM Intelligence Engine</p>
+                  <h3 className="text-sm font-bold text-[#24211D]">Realty AI in Action</h3>
+                  <p className="text-[11px] text-[#766F63]">Contextual CRM Intelligence Engine</p>
                 </div>
               </div>
-              <span className="px-2 py-0.5 text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded">
+              <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A374]/20 text-[#7A5320] border border-[#A374]/40 rounded">
                 Strict Org Isolation
               </span>
             </div>
 
             <div className="py-4 space-y-3 text-xs">
-              <div className="p-3 rounded-xl bg-zinc-900/90 border border-zinc-800 text-zinc-300">
-                <span className="font-semibold text-amber-400">Agent Prompt:</span> "Which leads are most likely to convert this week?"
+              <div className="p-3.5 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] text-[#24211D]">
+                <span className="font-bold text-[#8F642B]">Agent Prompt:</span> "Which leads are most likely to convert this week?"
               </div>
-              <div className="p-3.5 rounded-xl bg-zinc-900 border border-amber-500/30 text-zinc-200 space-y-2">
-                <span className="font-semibold text-emerald-400 flex items-center gap-1">
+              <div className="p-3.5 rounded-xl bg-[#FFFCF6] border border-[#A374]/40 text-[#24211D] space-y-2">
+                <span className="font-bold text-[#2E6B4F] flex items-center gap-1">
                   <Sparkles className="w-3.5 h-3.5" /> Realty AI Output:
                 </span>
-                <p className="text-xs leading-relaxed">
-                  "1. <strong>Rahul Sharma</strong> (92% Score) — Budget ₹1.45 Cr match for Emerald Heights. Loan pre-approved with HDFC.<br/>
-                  2. <strong>Dr. Priya Raghavan</strong> (88% Score) — Sobha Windsor Villa site visit confirmed for tomorrow.<br/>
+                <p className="text-xs leading-relaxed text-[#766F63]">
+                  "1. <strong className="text-[#24211D]">Rahul Sharma</strong> (92% Score) — Budget ₹1.45 Cr match for Emerald Heights. Loan pre-approved with HDFC.<br/>
+                  2. <strong className="text-[#24211D]">Dr. Priya Raghavan</strong> (88% Score) — Sobha Windsor Villa site visit confirmed for tomorrow.<br/>
                   <em>Drafted personalized WhatsApp follow-up ready for user approval.</em>"
                 </p>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs text-zinc-400">
+            <div className="pt-2 border-t border-[#DDD4C4] flex items-center justify-between text-xs text-[#766F63]">
               <span>Security Rule: Never sends without agent review.</span>
-              <Link href="/app/ai" className="text-amber-400 font-semibold hover:underline">
+              <Link href="/app/ai" className="text-[#8F642B] font-bold hover:underline">
                 Try Realty AI ↗
               </Link>
             </div>
@@ -262,37 +252,37 @@ export function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="py-24 bg-[#0B0D11] border-t border-zinc-800/80">
+    <section id="pricing" className="py-24 bg-[#F7F3EA] border-t border-[#DDD4C4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8F642B] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Transparent SaaS Pricing
           </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white mt-4 tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-bold text-[#24211D] mt-4 tracking-tight font-serif">
             Plans Built for Solopreneurs to Enterprise Agencies
           </h2>
-          <p className="text-base text-zinc-400 mt-4 leading-relaxed">
+          <p className="text-base text-[#766F63] mt-4 leading-relaxed">
             All plans include multi-tenant organization isolation and 14-day risk-free trial.
           </p>
 
           {/* Monthly / Annual Toggle */}
           <div className="mt-8 flex items-center justify-center gap-4">
-            <span className={`text-xs font-semibold ${!isAnnual ? 'text-white' : 'text-zinc-400'}`}>
+            <span className={`text-xs font-bold ${!isAnnual ? 'text-[#24211D]' : 'text-[#766F63]'}`}>
               Monthly Billing
             </span>
             <button
               onClick={() => setIsAnnual(!isAnnual)}
-              className="relative w-12 h-6 rounded-full bg-zinc-800 p-1 border border-zinc-700 transition-colors"
+              className="relative w-12 h-6 rounded-full bg-[#DDD4C4] p-1 border border-[#C9A45C]/40 transition-colors"
             >
               <div
-                className={`w-4 h-4 rounded-full bg-amber-400 transition-transform ${
+                className={`w-4 h-4 rounded-full bg-[#A374] transition-transform ${
                   isAnnual ? 'translate-x-6' : 'translate-x-0'
                 }`}
               />
             </button>
-            <span className={`text-xs font-semibold flex items-center gap-1.5 ${isAnnual ? 'text-white' : 'text-zinc-400'}`}>
+            <span className={`text-xs font-bold flex items-center gap-1.5 ${isAnnual ? 'text-[#24211D]' : 'text-[#766F63]'}`}>
               Annual Billing
-              <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full">
+              <span className="px-2 py-0.5 text-[10px] font-bold bg-[#2E6B4F]/15 text-[#2E6B4F] border border-[#2E6B4F]/30 rounded-full">
                 Save 20%
               </span>
             </span>
@@ -310,48 +300,48 @@ export function PricingSection() {
             return (
               <div
                 key={plan.tier}
-                className={`relative rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 ${
+                className={`relative rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 aurum-card-shadow ${
                   isPopular
-                    ? 'bg-zinc-900 border-2 border-amber-400 shadow-2xl shadow-amber-500/10 scale-105'
-                    : 'bg-zinc-950/80 border border-zinc-800 hover:border-zinc-700'
+                    ? 'bg-[#FFFCF6] border-2 border-[#A374] scale-105 shadow-xl'
+                    : 'bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374]/60'
                 }`}
               >
                 {isPopular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-black text-[11px] font-extrabold uppercase tracking-wider shadow-md">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#A374] text-[#151515] text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
                     Most Popular Choice
                   </div>
                 )}
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-bold text-white">{plan.name}</h3>
-                    <span className="text-xs font-semibold text-zinc-400">
+                    <h3 className="text-xl font-bold text-[#24211D]">{plan.name}</h3>
+                    <span className="text-xs font-semibold text-[#766F63]">
                       {plan.maxUsers} {plan.maxUsers === 1 ? 'User' : 'Users'}
                     </span>
                   </div>
 
                   <div className="mt-4 mb-6">
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-extrabold text-white font-sans">
+                      <span className="text-4xl font-extrabold text-[#24211D] font-sans">
                         ₹{price.toLocaleString('en-IN')}
                       </span>
-                      <span className="text-xs text-zinc-400 font-medium">/month</span>
+                      <span className="text-xs text-[#766F63] font-medium">/month</span>
                     </div>
                     {isAnnual && (
-                      <p className="text-[11px] text-emerald-400 font-medium mt-1">
+                      <p className="text-[11px] text-[#2E6B4F] font-bold mt-1">
                         Billed annually (₹{plan.priceAnnualINR.toLocaleString('en-IN')}/yr)
                       </p>
                     )}
                   </div>
 
-                  <div className="pt-4 border-t border-zinc-800 space-y-3">
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+                  <div className="pt-4 border-t border-[#DDD4C4] space-y-3">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#766F63]">
                       Plan Includes:
                     </p>
-                    <ul className="space-y-2.5 text-xs text-zinc-300">
+                    <ul className="space-y-2.5 text-xs text-[#24211D]">
                       {plan.features.map((feat, idx) => (
                         <li key={idx} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-[#8F642B] flex-shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -359,17 +349,17 @@ export function PricingSection() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-zinc-800/80">
+                <div className="mt-8 pt-6 border-t border-[#DDD4C4]">
                   <Link href="/register">
                     <Button
                       variant={isPopular ? 'gold' : 'secondary'}
                       size="md"
                       className="w-full font-bold"
                     >
-                      Start Free Trial
+                      Get Started
                     </Button>
                   </Link>
-                  <p className="text-[10px] text-center text-zinc-400 mt-2">
+                  <p className="text-[10px] text-center text-[#766F63] mt-2">
                     14-day trial • Cancel anytime
                   </p>
                 </div>
@@ -411,13 +401,13 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-24 border-t border-zinc-800/80 bg-zinc-950">
+    <section className="py-24 border-t border-[#DDD4C4] bg-[#EFE8DA]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8F642B] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Real Estate Leadership
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#24211D] mt-4 tracking-tight font-serif">
             Trusted by Top Real Estate Agencies & Builders
           </h2>
         </div>
@@ -426,17 +416,17 @@ export function TestimonialsSection() {
           {reviews.map((r, i) => (
             <div
               key={i}
-              className="p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800 flex flex-col justify-between space-y-6"
+              className="p-7 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] aurum-card-shadow flex flex-col justify-between space-y-6"
             >
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed italic">
+              <p className="text-xs sm:text-sm text-[#24211D] leading-relaxed italic">
                 "{r.quote}"
               </p>
-              <div className="pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+              <div className="pt-4 border-t border-[#DDD4C4] flex items-center justify-between">
                 <div>
-                  <h4 className="text-sm font-bold text-white">{r.author}</h4>
-                  <p className="text-[11px] text-zinc-400">{r.role}</p>
+                  <h4 className="text-sm font-bold text-[#24211D]">{r.author}</h4>
+                  <p className="text-[11px] text-[#766F63]">{r.role}</p>
                 </div>
-                <span className="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                <span className="text-[10px] font-bold text-[#8F642B] bg-[#A374]/15 px-2.5 py-1 rounded-md border border-[#A374]/30">
                   {r.properties}
                 </span>
               </div>
@@ -478,13 +468,13 @@ export function FAQSection() {
   ];
 
   return (
-    <section className="py-24 border-t border-zinc-800/80 bg-[#0B0D11]">
+    <section className="py-24 border-t border-[#DDD4C4] bg-[#F7F3EA]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8F642B] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Frequently Asked Questions
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#24211D] mt-4 tracking-tight font-serif">
             Everything You Need to Know About Velvet Code CRM
           </h2>
         </div>
@@ -495,21 +485,21 @@ export function FAQSection() {
             return (
               <div
                 key={idx}
-                className="rounded-xl border border-zinc-800 bg-zinc-900/60 overflow-hidden transition-colors"
+                className="rounded-2xl border border-[#DDD4C4] bg-[#FFFCF6] overflow-hidden aurum-card-shadow transition-colors"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-semibold text-white hover:text-amber-300"
+                  className="w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-bold text-[#24211D] hover:text-[#8F642B]"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
-                    className={`w-4 h-4 text-amber-400 transition-transform ${
+                    className={`w-4 h-4 text-[#A374] transition-transform ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-zinc-300 leading-relaxed border-t border-zinc-800/60 pt-3">
+                  <div className="px-5 pb-5 text-xs sm:text-sm text-[#766F63] leading-relaxed border-t border-[#DDD4C4]/60 pt-3">
                     {faq.a}
                   </div>
                 )}
@@ -527,14 +517,14 @@ export function FAQSection() {
 // ==========================================
 export function FinalCTASection() {
   return (
-    <section className="py-24 border-t border-zinc-800 bg-gradient-to-br from-amber-950/30 via-zinc-950 to-zinc-950 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-amber-500/10 blur-[130px] rounded-full pointer-events-none" />
+    <section className="py-24 border-t border-[#DDD4C4] bg-[#EFE8DA] relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#A374]/15 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-bold text-[#24211D] tracking-tight leading-tight font-serif">
           Ready to Modernize Your Real Estate Sales Engine?
         </h2>
-        <p className="text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg text-[#766F63] max-w-2xl mx-auto leading-relaxed">
           Join leading real estate agencies, brokers, and developers managing their leads, properties, and deals on Velvet Code.
         </p>
 
@@ -543,17 +533,17 @@ export function FinalCTASection() {
             <Button
               variant="gold"
               size="lg"
-              className="w-full sm:w-auto font-bold text-base px-8 py-3.5 shadow-2xl shadow-amber-500/30"
+              className="w-full sm:w-auto font-bold text-base px-8 py-3.5 shadow-xl"
               rightIcon={<ArrowRight className="w-5 h-5" />}
             >
-              Start Free 14-Day Trial
+              Get Started
             </Button>
           </Link>
           <a
             href={buildWhatsAppUrl('919443647190', 'Hello Velvet Code, I would like to schedule a private CRM walkthrough.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base shadow-xl shadow-emerald-600/20 transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#2E6B4F] hover:bg-[#24563F] text-white font-bold text-base shadow-md transition-all"
           >
             <MessageSquare className="w-5 h-5" />
             <span>Chat on WhatsApp: +91 94436 47190</span>

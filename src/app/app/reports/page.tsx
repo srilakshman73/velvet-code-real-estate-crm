@@ -34,12 +34,12 @@ export default function ReportsPage() {
   const [filter, setFilter] = useState('ThisMonth');
 
   const leadConversionFunnel = [
-    { stage: 'Total Inquiries', count: 248, fill: '#3B82F6' },
-    { stage: 'Contacted', count: 184, fill: '#8B5CF6' },
-    { stage: 'Qualified Buyers', count: 96, fill: '#F59E0B' },
-    { stage: 'Site Visits Scheduled', count: 42, fill: '#EC4899' },
-    { stage: 'Negotiation', count: 18, fill: '#EAB308' },
-    { stage: 'Closed Won 🏆', count: 6, fill: '#10B981' },
+    { stage: 'Total Inquiries', count: 248, fill: '#3B5BDB' },
+    { stage: 'Contacted', count: 184, fill: '#7048E8' },
+    { stage: 'Qualified Buyers', count: 96, fill: '#B87B28' },
+    { stage: 'Site Visits Scheduled', count: 42, fill: '#A374' },
+    { stage: 'Negotiation', count: 18, fill: '#D97706' },
+    { stage: 'Closed Won 🏆', count: 6, fill: '#2E6B4F' },
   ];
 
   const agentPerformance = [
@@ -64,27 +64,27 @@ export default function ReportsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-              <BarChart3 className="w-6 h-6 text-amber-400" />
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+              <BarChart3 className="w-6 h-6 text-[#A374]" />
               Executive Analytics & Reports
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30 rounded-full">
               Real-Time Metrics
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
             Conversion funnels, agent revenue leaderboards, and marketing channel ROI.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="bg-zinc-900 border border-zinc-800 p-1 rounded-xl flex text-xs">
+          <div className="bg-[#FFFCF6] border border-[#DDD4C4] p-1 rounded-xl flex text-xs shadow-xs">
             {['Today', '7 Days', '30 Days', 'ThisMonth'].map((t) => (
               <button
                 key={t}
                 onClick={() => setFilter(t)}
                 className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  filter === t ? 'bg-amber-500 text-black font-semibold' : 'text-zinc-400 hover:text-white'
+                  filter === t ? 'bg-[#A374] text-white font-semibold shadow-xs' : 'text-[#766F63] hover:text-[#24211D]'
                 }`}
               >
                 {t === 'ThisMonth' ? 'This Month' : t}
@@ -106,22 +106,22 @@ export default function ReportsPage() {
       {/* Conversion Funnel & Agent Leaderboard */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Conversion Funnel */}
-        <div className="lg:col-span-6 p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-4 shadow-xl">
-          <div className="border-b border-zinc-800 pb-3">
-            <h3 className="text-base font-bold text-white tracking-tight">
+        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+          <div className="border-b border-[#DDD4C4] pb-3">
+            <h3 className="text-base font-serif font-bold text-[#24211D] tracking-tight">
               Lead Conversion Funnel
             </h3>
-            <p className="text-xs text-zinc-400">Visitor inquiry to Closed Won transaction velocity</p>
+            <p className="text-xs text-[#766F63]">Visitor inquiry to Closed Won transaction velocity</p>
           </div>
 
           <div className="space-y-3 pt-2">
             {leadConversionFunnel.map((step, idx) => (
               <div key={idx} className="space-y-1">
                 <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-zinc-300">{step.stage}</span>
-                  <span className="text-white font-mono">{step.count} leads</span>
+                  <span className="text-[#24211D]">{step.stage}</span>
+                  <span className="text-[#8F642B] font-mono">{step.count} leads</span>
                 </div>
-                <div className="w-full h-3 bg-zinc-900 rounded-full overflow-hidden">
+                <div className="w-full h-3 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
@@ -136,30 +136,32 @@ export default function ReportsPage() {
         </div>
 
         {/* Agent Revenue Leaderboard */}
-        <div className="lg:col-span-6 p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-4 shadow-xl">
-          <div className="border-b border-zinc-800 pb-3">
-            <h3 className="text-base font-bold text-white tracking-tight">
+        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+          <div className="border-b border-[#DDD4C4] pb-3">
+            <h3 className="text-base font-serif font-bold text-[#24211D] tracking-tight">
               Sales Consultant Revenue Contribution
             </h3>
-            <p className="text-xs text-zinc-400">Closed commission vs active pipeline in Lakhs INR</p>
+            <p className="text-xs text-[#766F63]">Closed commission vs active pipeline in Lakhs INR</p>
           </div>
 
           <div className="h-64 w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={agentPerformance} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
-                <XAxis type="number" stroke="#71717a" fontSize={11} tickFormatter={(v) => `₹${v}L`} />
-                <YAxis dataKey="name" type="category" stroke="#a1a1aa" fontSize={11} width={130} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#ECE5D8" horizontal={false} />
+                <XAxis type="number" stroke="#766F63" fontSize={11} tickFormatter={(v) => `₹${v}L`} />
+                <YAxis dataKey="name" type="category" stroke="#24211D" fontSize={11} width={130} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#18181b',
-                    borderColor: '#3f3f46',
-                    borderRadius: '0.5rem',
+                    backgroundColor: '#FFFCF6',
+                    borderColor: '#DDD4C4',
+                    borderRadius: '0.75rem',
                     fontSize: '12px',
+                    color: '#24211D',
+                    boxShadow: '0 10px 25px -5px rgba(21,21,21,0.08)',
                   }}
                   formatter={(val: any) => [`₹${val} Lakhs`, 'Contribution']}
                 />
-                <Bar dataKey="revenue" fill="#f59e0b" radius={[0, 6, 6, 0]} />
+                <Bar dataKey="revenue" fill="#A374" radius={[0, 6, 6, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

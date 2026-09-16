@@ -9,6 +9,7 @@ interface VelvetCodeLogoProps {
   href?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showTagline?: boolean;
+  theme?: 'light' | 'dark' | 'auto';
 }
 
 export function VelvetCodeLogo({
@@ -17,20 +18,35 @@ export function VelvetCodeLogo({
   href = '/',
   size = 'md',
   showTagline = true,
+  theme = 'auto',
 }: VelvetCodeLogoProps) {
   const sizeMap = {
-    sm: { img: 28, text: 'text-base', tag: 'text-[9px]' },
-    md: { img: 36, text: 'text-lg', tag: 'text-[10px]' },
-    lg: { img: 48, text: 'text-2xl', tag: 'text-xs' },
-    xl: { img: 64, text: 'text-3xl', tag: 'text-sm' },
+    sm: { img: 28, text: 'text-sm', tag: 'text-[9px]' },
+    md: { img: 36, text: 'text-base', tag: 'text-[10px]' },
+    lg: { img: 46, text: 'text-xl', tag: 'text-xs' },
+    xl: { img: 60, text: 'text-2xl', tag: 'text-xs' },
   };
 
   const currentSize = sizeMap[size];
 
+  const textStyle =
+    theme === 'dark'
+      ? 'text-[#F7F3EA]'
+      : theme === 'light'
+      ? 'text-[#24211D]'
+      : 'text-[#24211D] dark:text-[#F7F3EA]';
+
+  const tagStyle =
+    theme === 'dark'
+      ? 'text-[#DDD4C4]/80'
+      : theme === 'light'
+      ? 'text-[#766F63]'
+      : 'text-[#766F63] dark:text-[#DDD4C4]/80';
+
   const content = (
     <div className={cn('flex items-center gap-3 select-none group', className)}>
       {/* Official Gold Metallic Brand Logo Symbol */}
-      <div className="relative flex-shrink-0 overflow-hidden rounded-lg bg-black border border-amber-500/20 shadow-md group-hover:border-amber-400/40 transition-colors">
+      <div className="relative flex-shrink-0 overflow-hidden rounded-lg bg-[#151515] border border-[#A374]/30 shadow-sm group-hover:border-[#A374]/60 transition-colors">
         <Image
           src="/brand/velvet-code-logo.jpeg"
           alt="Velvet Code - Technology & Digital Solutions"
@@ -43,11 +59,12 @@ export function VelvetCodeLogo({
 
       {variant !== 'icon' && (
         <div className="flex flex-col justify-center">
-          <div className="flex items-center gap-1.5 leading-none">
+          <div className="flex items-center gap-1.5 leading-tight">
             <span
               className={cn(
-                'font-bold tracking-wider uppercase text-white font-sans bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 bg-clip-text text-transparent',
-                currentSize.text
+                'font-bold tracking-widest uppercase font-sans transition-colors',
+                currentSize.text,
+                textStyle
               )}
             >
               VELVET CODE
@@ -56,8 +73,9 @@ export function VelvetCodeLogo({
           {showTagline && (
             <span
               className={cn(
-                'text-zinc-400 font-medium tracking-tight mt-0.5 whitespace-nowrap',
-                currentSize.tag
+                'font-medium tracking-tight whitespace-nowrap',
+                currentSize.tag,
+                tagStyle
               )}
             >
               Technology & Digital Solutions
@@ -79,23 +97,37 @@ export function VelvetCodeLogo({
   );
 }
 
-export function VelvetCodeLogoFull({ className }: { className?: string }) {
+export function VelvetCodeLogoFull({ className, theme = 'dark' }: { className?: string; theme?: 'light' | 'dark' }) {
+  const isDark = theme === 'dark';
   return (
-    <div className={cn('flex flex-col items-center text-center p-4 bg-zinc-950/80 rounded-2xl border border-amber-500/20', className)}>
-      <div className="relative w-28 h-28 rounded-xl overflow-hidden border border-amber-500/30 shadow-2xl mb-3">
+    <div
+      className={cn(
+        'flex flex-col items-center text-center p-5 rounded-2xl border',
+        isDark
+          ? 'bg-[#151515] border-[#A374]/30 text-[#F7F3EA]'
+          : 'bg-[#FFFCF6] border-[#DDD4C4] text-[#24211D] aurum-card-shadow',
+        className
+      )}
+    >
+      <div className="relative w-24 h-24 rounded-xl overflow-hidden border border-[#A374]/40 shadow-xl mb-3 bg-[#151515]">
         <Image
           src="/brand/velvet-code-logo.jpeg"
           alt="Velvet Code"
           fill
-          sizes="112px"
+          sizes="96px"
           className="object-contain"
           priority
         />
       </div>
-      <h2 className="text-xl font-bold tracking-widest uppercase bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 bg-clip-text text-transparent">
+      <h2
+        className={cn(
+          'text-lg font-bold tracking-widest uppercase',
+          isDark ? 'text-[#F7F3EA]' : 'text-[#24211D]'
+        )}
+      >
         VELVET CODE
       </h2>
-      <p className="text-xs text-zinc-400 font-medium tracking-wide mt-1">
+      <p className={cn('text-xs font-medium tracking-wide mt-1', isDark ? 'text-[#DDD4C4]' : 'text-[#766F63]')}>
         Technology & Digital Solutions
       </p>
     </div>
