@@ -182,19 +182,19 @@ export function WhatsAppAndAIShowcase() {
               </li>
               <li className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#2E6B4F] flex-shrink-0" />
-                <span>Official click-to-chat integration with <strong>+91 63833 9515</strong></span>
+                <span>Official click-to-chat integration with <strong>+91 63833 95915</strong></span>
               </li>
             </ul>
 
             <div className="pt-2">
               <a
-                href={buildWhatsAppUrl('91638339515', 'Hello, I would like to know more about your Real Estate CRM.')}
+                href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#2E6B4F] hover:bg-[#24563F] text-white font-bold text-xs shadow-md transition-all"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>Test Live WhatsApp Channel (+91 63833 9515)</span>
+                <span>Test Live WhatsApp Channel (+91 63833 95915)</span>
               </a>
             </div>
           </div>
@@ -447,7 +447,7 @@ export function FAQSection() {
   const faqs = [
     {
       q: 'How does the official WhatsApp CRM integration work?',
-      a: 'Velvet Code provides a built-in 3-column WhatsApp inbox that integrates with official WhatsApp Cloud API and click-to-chat channels (such as +91 63833 9515 & +91 94436 47190). You can send templates, share property brochures, and log all chat history directly under the customer’s CRM profile.',
+      a: 'Velvet Code provides a built-in 3-column WhatsApp inbox that integrates with official WhatsApp Cloud API and click-to-chat channels (such as +91 63833 95915 & +91 94436 47190). You can send templates, share property brochures, and log all chat history directly under the customer’s CRM profile.',
     },
     {
       q: 'Is my real estate agency data completely isolated from other organizations?',
@@ -540,13 +540,13 @@ export function FinalCTASection() {
             </Button>
           </Link>
           <a
-            href={buildWhatsAppUrl('91638339515', 'Hello, I would like to know more about your Real Estate CRM.')}
+            href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#2E6B4F] hover:bg-[#24563F] text-white font-bold text-base shadow-md transition-all"
           >
             <MessageSquare className="w-5 h-5" />
-            <span>Chat on WhatsApp: +91 63833 9515</span>
+            <span>Chat on WhatsApp: +91 63833 95915</span>
           </a>
         </div>
       </div>

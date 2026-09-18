@@ -25,7 +25,7 @@ export default function ContactPage() {
   };
 
   const officialWhatsAppUrl = buildWhatsAppUrl(
-    '91638339515',
+    '916383395915',
     'Hello, I would like to know more about your Real Estate CRM.'
   );
 
@@ -73,7 +73,7 @@ export default function ContactPage() {
                 >
                   <div className="flex items-center gap-2.5">
                     <MessageSquare className="w-5 h-5 fill-current" />
-                    <span>Chat on WhatsApp: +91 63833 9515</span>
+                    <span>Chat on WhatsApp: +91 63833 95915</span>
                   </div>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
@@ -91,7 +91,7 @@ export default function ContactPage() {
                       <div className="space-y-1 mt-0.5">
                         <div>
                           <a href={officialWhatsAppUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#8F642B] text-[#766F63] font-medium">
-                            +91 63833 9515 <span className="text-[11px] text-[#2E6B4F] font-bold">(Primary WhatsApp)</span>
+                            +91 63833 95915 <span className="text-[11px] text-[#2E6B4F] font-bold">(Primary WhatsApp)</span>
                           </a>
                         </div>
                         <div>

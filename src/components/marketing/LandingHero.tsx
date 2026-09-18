@@ -31,13 +31,13 @@ export function LandingHero() {
             <span className="tracking-wide uppercase text-[11px]">VELVET CODE &bull; REAL ESTATE CRM</span>
           </div>
           <a
-            href={buildWhatsAppUrl('91638339515', 'Hello, I would like to know more about your Real Estate CRM.')}
+            href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFFCF6] border border-[#2E6B4F]/40 text-[#2E6B4F] text-xs font-bold hover:bg-[#2E6B4F]/10 transition-colors aurum-card-shadow"
           >
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>Official WhatsApp: +91 63833 9515</span>
+            <span>Official WhatsApp: +91 63833 95915</span>
           </a>
         </div>
 
@@ -318,12 +318,12 @@ export function LandingHero() {
                     When site visit is confirmed → Velvet Code automatically delivers instant branded confirmation & Google Maps pin.
                   </p>
                   <a
-                    href={buildWhatsAppUrl('91638339515', 'Hello, I would like to know more about your Real Estate CRM.')}
+                    href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-[#2E6B4F] hover:underline font-bold text-[11px] pt-1"
                   >
-                    <MessageSquare className="w-3.5 h-3.5" /> Test Official WhatsApp: +91 63833 9515
+                    <MessageSquare className="w-3.5 h-3.5" /> Test Official WhatsApp: +91 63833 95915
                   </a>
                 </div>
               </div>

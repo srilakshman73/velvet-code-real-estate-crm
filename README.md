@@ -82,7 +82,7 @@ graph TD
 * Direct Meta WhatsApp Cloud API integration.
 * 3-column inbox with real-time conversations, rich media previews, and property brochure dispatch.
 * Visual Trigger-Condition-Action automation builder (e.g. Instant brochure dispatch on website inquiry).
-* Click-to-Chat direct routing to `+91 63833 9515` / `+91 94436 47190`.
+* Click-to-Chat direct routing to `+91 63833 95915` / `+91 94436 47190`.
 
 ### 2. Realty AI Engine (`/app/ai`)
 * Predictive Lead Scoring (0–100 probability index based on engagement, budget, and timeline).
@@ -210,4 +210,4 @@ In the Vercel Project Dashboard (`Settings -> Environment Variables`), configure
 ## 📄 License & Brand Ownership
 
 Copyright &copy; 2026 **Velvet Code** (*Technology & Digital Solutions*). All rights reserved.
-Official WhatsApp: `+91 63833 9515` &bull; Support: `+91 94436 47190` &bull; Email: `srilakshman73@gmail.com`
+Official WhatsApp: `+91 63833 95915` &bull; Support: `+91 94436 47190` &bull; Email: `srilakshman73@gmail.com`

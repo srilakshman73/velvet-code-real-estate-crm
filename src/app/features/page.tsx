@@ -52,7 +52,7 @@ export default function FeaturesPage() {
         'Full 3-column WhatsApp inbox with customer CRM sidebar',
         'Pre-approved WhatsApp templates with dynamic variables',
         'Visual trigger-condition-action workflow builder',
-        'Click-to-chat integration with +91 63833 9515 & +91 94436 47190',
+        'Click-to-chat integration with +91 63833 95915 & +91 94436 47190',
       ],
       icon: MessageSquare,
     },
