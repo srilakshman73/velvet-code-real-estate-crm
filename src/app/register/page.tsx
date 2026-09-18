@@ -64,7 +64,7 @@ export default function RegisterPage() {
         id: `org-reg-${Date.now()}`,
         name: formData.agencyName || 'My Real Estate Agency',
         slug: (formData.agencyName || 'agency').toLowerCase().replace(/\s+/g, '-'),
-        phone: formData.phone || '+91 94436 47190',
+        phone: formData.phone || '+91 63833 95915',
         email: formData.email,
         country: 'India',
         businessType: formData.businessType,
@@ -105,7 +105,7 @@ export default function RegisterPage() {
             Deploy Your Agency's Complete CRM in 60 Seconds
           </h2>
           <p className="text-sm text-[#DDD4C4]/80 leading-relaxed">
-            Get instant access to 25+ demo leads, luxury property inventory, deals pipeline, and Realty AI with pre-configured Indian real estate templates.
+            Get instant access to real estate leads management, luxury property inventory, deals pipeline, and Realty AI with pre-configured Indian real estate templates.
           </p>
 
           <div className="pt-4 space-y-3 text-xs text-[#DDD4C4]">
@@ -188,7 +188,7 @@ export default function RegisterPage() {
                 label="Phone / WhatsApp *"
                 type="tel"
                 required
-                placeholder="+91 94436 47190"
+                placeholder="+91 63833 95915"
                 leftIcon={<Phone className="w-4 h-4" />}
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}

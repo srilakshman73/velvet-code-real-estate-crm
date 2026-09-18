@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 
 export default function TasksPage() {
-  const { tasks, addTask, updateTaskStatus, deleteTask, users, leads, deals } = useCRMStore();
+  const { tasks, addTask, updateTaskStatus, deleteTask, users, leads, deals, currentUser } = useCRMStore();
   const [filter, setFilter] = useState<'ALL' | 'PENDING' | 'COMPLETED'>('ALL');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -29,7 +29,7 @@ export default function TasksPage() {
     description: '',
     priority: 'MEDIUM' as TaskPriority,
     dueDate: new Date().toISOString().split('T')[0],
-    assignedUserId: 'usr-karthik-04',
+    assignedUserId: currentUser?.id || 'usr-admin-01',
     leadId: '',
   });
 
@@ -62,7 +62,7 @@ export default function TasksPage() {
       description: '',
       priority: 'MEDIUM',
       dueDate: new Date().toISOString().split('T')[0],
-      assignedUserId: 'usr-karthik-04',
+      assignedUserId: currentUser?.id || 'usr-admin-01',
       leadId: '',
     });
   };
@@ -203,7 +203,7 @@ export default function TasksPage() {
           <Input
             label="Task Title *"
             required
-            placeholder="e.g. Call Rahul Sharma regarding second car park allotment"
+            placeholder="e.g. Follow up on property viewing and agreement terms"
             value={newTaskForm.title}
             onChange={(e) => setNewTaskForm({ ...newTaskForm, title: e.target.value })}
           />

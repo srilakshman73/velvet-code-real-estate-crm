@@ -166,7 +166,7 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   const [organizations, setOrganizations] = useState<Organization[]>(INITIAL_ORGANIZATIONS);
   const [currentOrg, setCurrentOrg] = useState<Organization>(INITIAL_ORGANIZATIONS[0]);
   const [users, setUsers] = useState<User[]>(INITIAL_USERS);
-  const [currentUser, setCurrentUser] = useState<User>(INITIAL_USERS[1]); // Default to Velvet Code (Owner)
+  const [currentUser, setCurrentUser] = useState<User>(INITIAL_USERS[0]); // Default to Sri Lakshman (Owner)
 
   // Subscription State
   const [subscription, setSubscription] = useState<Subscription>(INITIAL_SUBSCRIPTION);
@@ -180,7 +180,7 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
   const [followUps, setFollowUps] = useState<FollowUpItem[]>(INITIAL_FOLLOW_UPS);
   const [conversations, setConversations] = useState<WhatsAppConversation[]>(INITIAL_WHATSAPP_CONVERSATIONS);
-  const [activeConversationId, setActiveConversationId] = useState<string>('conv-01');
+  const [activeConversationId, setActiveConversationId] = useState<string>('');
   const [templates, setTemplates] = useState<WhatsAppTemplate[]>(INITIAL_WHATSAPP_TEMPLATES);
   const [automations, setAutomations] = useState<AutomationRule[]>(INITIAL_AUTOMATIONS);
   const [documents, setDocuments] = useState<DocumentRecord[]>(INITIAL_DOCUMENTS);
@@ -193,7 +193,7 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
       id: 'msg-welcome',
       role: 'assistant',
       content:
-        'Hello Velvet Code! I am **Realty AI**, your intelligent real estate assistant. I have secure real-time access to your leads, properties, site visits, and deals.\n\nAsk me to analyze your leads, draft personalized WhatsApp messages, or check property inventory!',
+        'Hello Sri Lakshman! I am **Realty AI**, your intelligent real estate assistant. I have secure real-time access to your leads, properties, site visits, and deals.\n\nAsk me to analyze your leads, draft personalized WhatsApp messages, or check property inventory!',
       timestamp: new Date().toISOString(),
     },
   ]);

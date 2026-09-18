@@ -61,7 +61,7 @@ export function PublicFooter() {
             <div className="pt-2 space-y-2 text-xs text-[#DDD4C4]/80">
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#A374]" />
-                <span>+91 63833 95915 • +91 94436 47190</span>
+                <span>+91 63833 95915</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#A374]" />

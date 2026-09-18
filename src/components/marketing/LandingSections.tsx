@@ -225,9 +225,9 @@ export function WhatsAppAndAIShowcase() {
                   <Sparkles className="w-3.5 h-3.5" /> Realty AI Output:
                 </span>
                 <p className="text-xs leading-relaxed text-[#766F63]">
-                  "1. <strong className="text-[#24211D]">Rahul Sharma</strong> (92% Score) — Budget ₹1.45 Cr match for Emerald Heights. Loan pre-approved with HDFC.<br/>
-                  2. <strong className="text-[#24211D]">Dr. Priya Raghavan</strong> (88% Score) — Sobha Windsor Villa site visit confirmed for tomorrow.<br/>
-                  <em>Drafted personalized WhatsApp follow-up ready for user approval.</em>"
+                  "1. <strong className="text-[#24211D]">Luxury Villa Inquiry</strong> (92% Conversion Score) — Budget ₹2.50 Cr match. Verified buyer profile.<br/>
+                  2. <strong className="text-[#24211D]">Commercial IT Hub Lead</strong> (88% Conversion Score) — Site visit scheduled for tomorrow.<br/>
+                  <em>Drafted personalized WhatsApp follow-up ready for agent review.</em>"
                 </p>
               </div>
             </div>
@@ -447,7 +447,7 @@ export function FAQSection() {
   const faqs = [
     {
       q: 'How does the official WhatsApp CRM integration work?',
-      a: 'Velvet Code provides a built-in 3-column WhatsApp inbox that integrates with official WhatsApp Cloud API and click-to-chat channels (such as +91 63833 95915 & +91 94436 47190). You can send templates, share property brochures, and log all chat history directly under the customer’s CRM profile.',
+      a: 'Velvet Code provides a built-in 3-column WhatsApp inbox that integrates with official WhatsApp Cloud API and click-to-chat channels (such as +91 63833 95915). You can send templates, share property brochures, and log all chat history directly under the customer’s CRM profile.',
     },
     {
       q: 'Is my real estate agency data completely isolated from other organizations?',

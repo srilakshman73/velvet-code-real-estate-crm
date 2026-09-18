@@ -60,9 +60,9 @@ export default function RealtyAIPage() {
     { label: "Today's Follow-ups", query: "Show me today's follow-ups" },
     { label: 'Highest Conversion Leads', query: 'Which leads are most likely to convert?' },
     { label: 'Properties Under ₹1.5 Cr', query: 'Show properties below ₹1.5 Crore' },
-    { label: "Rahul Sharma's History", query: "Summarize Rahul Sharma's history" },
+    { label: "Lead Pipeline Summary", query: "Summarize our active lead pipeline" },
     { label: 'Revenue Performance Analysis', query: 'Analyze our monthly revenue and sales performance' },
-    { label: 'Draft Follow-up to Dr. Priya', query: 'Draft a personalized follow-up WhatsApp message to Dr. Priya' },
+    { label: 'Draft Welcome Message', query: 'Draft a personalized follow-up WhatsApp message for new inquiries' },
   ];
 
   return (
@@ -248,7 +248,7 @@ export default function RealtyAIPage() {
                   <TrendingUp className="w-3.5 h-3.5 text-[#2E6B4F]" /> High Intent Pipeline
                 </span>
                 <p className="text-[#766F63]">
-                  Rahul Sharma & Dr. Priya have an <strong>88%+ conversion probability</strong>. Potential revenue: ₹5.30 Cr.
+                  High-intent inquiries in your CRM are evaluated in real time for <strong>conversion probability and budget match</strong>.
                 </p>
               </div>
 

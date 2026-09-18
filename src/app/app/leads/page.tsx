@@ -57,7 +57,7 @@ export default function LeadsPage() {
     budgetMaxINR: 15000000,
     preferredLocation: 'OMR, Chennai',
     interestedPropertyId: '',
-    assignedToId: 'usr-karthik-04',
+    assignedToId: 'usr-admin-01',
     notes: '',
   });
 
@@ -114,7 +114,7 @@ export default function LeadsPage() {
       budgetMaxINR: 15000000,
       preferredLocation: 'OMR, Chennai',
       interestedPropertyId: '',
-      assignedToId: 'usr-karthik-04',
+      assignedToId: 'usr-admin-01',
       notes: '',
     });
   };
@@ -695,34 +695,65 @@ export default function LeadsPage() {
         description="Upload your lead spreadsheet to automatically parse names, phone numbers, and budgets."
       >
         <div className="space-y-4 text-xs sm:text-sm">
-          <div className="border-2 border-dashed border-[#DDD4C4] rounded-2xl p-8 text-center bg-[#F7F3EA] hover:border-[#A374] transition-colors cursor-pointer">
+          <label className="border-2 border-dashed border-[#DDD4C4] rounded-2xl p-8 text-center bg-[#F7F3EA] hover:border-[#A374] transition-colors cursor-pointer block">
             <Upload className="w-8 h-8 text-[#8F642B] mx-auto mb-2" />
-            <p className="font-bold text-[#24211D]">Drag and drop your .csv or .xlsx file</p>
-            <p className="text-[#766F63] text-xs mt-1">Supports UTF-8 CSV exports from 99acres, Magicbricks, Meta</p>
-          </div>
+            <p className="font-bold text-[#24211D]">Click to select or drop your .csv lead spreadsheet</p>
+            <p className="text-[#766F63] text-xs mt-1">Supports UTF-8 CSV exports with Name, Phone, Email, Budget columns</p>
+            <input
+              type="file"
+              accept=".csv"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                  const text = event.target?.result as string;
+                  if (!text) return;
+                  const lines = text.split('\n').filter((l) => l.trim().length > 0);
+                  if (lines.length <= 1) {
+                    alert('No lead rows found in the selected CSV.');
+                    return;
+                  }
+                  const parsed: Partial<Lead>[] = [];
+                  for (let i = 1; i < lines.length; i++) {
+                    const cols = lines[i].split(',').map((c) => c.trim().replace(/^["']|["']$/g, ''));
+                    if (cols[0] && cols[1]) {
+                      parsed.push({
+                        name: cols[0],
+                        phone: cols[1],
+                        email: cols[2] || undefined,
+                        budgetMaxINR: cols[3] ? Number(cols[3].replace(/[^0-9]/g, '')) : undefined,
+                        source: 'WEBSITE',
+                        status: 'NEW',
+                      });
+                    }
+                  }
+                  if (parsed.length > 0) {
+                    const count = importLeads(parsed);
+                    alert(`Successfully imported ${count} leads.`);
+                    setIsImportModalOpen(false);
+                  } else {
+                    alert('Could not parse any valid leads. Please ensure Column 1 is Name and Column 2 is Phone.');
+                  }
+                };
+                reader.readAsText(file);
+              }}
+            />
+          </label>
 
           <div className="p-3.5 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] text-xs text-[#24211D]">
-            <p className="font-bold text-[#8F642B] mb-1">Quick Demo Import:</p>
-            <p>Click below to import 5 sample Chennai & Bangalore property buyer leads instantly.</p>
+            <p className="font-bold text-[#8F642B] mb-1">CSV Format Guidance:</p>
+            <p className="text-[#766F63]">Columns: <code className="bg-white px-1 py-0.5 rounded border text-[#24211D]">Name, Phone, Email, Budget, Location</code></p>
           </div>
 
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
             <Button
-              variant="gold"
+              variant="secondary"
               size="sm"
-              onClick={() => {
-                const sampleImport: Partial<Lead>[] = [
-                  { name: 'Karthikeyan Balaji', phone: '+91 98401 99001', source: 'WEBSITE', budgetMaxINR: 12500000, preferredLocation: 'OMR, Chennai' },
-                  { name: 'Swaminathan Narayanan', phone: '+91 98402 88112', source: 'WHATSAPP', budgetMaxINR: 22000000, preferredLocation: 'Whitefield, Bangalore' },
-                  { name: 'Dr. Meera Chandrasekhar', phone: '+91 94440 77223', source: 'REFERRAL', budgetMaxINR: 35000000, preferredLocation: 'ECR, Chennai' },
-                  { name: 'Sunil & Ritu Grover', phone: '+91 98200 66334', source: 'INSTAGRAM', budgetMaxINR: 18000000, preferredLocation: 'Worli, Mumbai' },
-                  { name: 'Gopalakrishnan V', phone: '+91 98450 55445', source: 'PHONE', budgetMaxINR: 9500000, preferredLocation: 'Hitec City, Hyderabad' },
-                ];
-                importLeads(sampleImport);
-                setIsImportModalOpen(false);
-              }}
+              onClick={() => setIsImportModalOpen(false)}
             >
-              Import 5 Demo Leads
+              Cancel
             </Button>
           </div>
         </div>

@@ -87,10 +87,10 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
           {/* Owner Profile Badge */}
           <div className="hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#1E1B18] border border-[#332F2A] text-xs">
             <div className="w-6 h-6 rounded-md bg-[#A374] text-[#151515] font-bold text-[10px] flex items-center justify-center">
-              VC
+              SL
             </div>
             <div>
-              <span className="font-bold text-[#F7F3EA]">Velvet Code</span>
+              <span className="font-bold text-[#F7F3EA]">Sri Lakshman</span>
               <span className="text-[#A374] font-mono text-[10px] ml-1.5 font-bold">(OWNER)</span>
             </div>
           </div>
@@ -140,11 +140,11 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
           <div className="mt-auto p-4 rounded-xl bg-[#1E1B18] border border-[#332F2A] text-xs space-y-2">
             <div className="flex items-center justify-between text-[#DDD4C4]/70">
               <span>Platform MRR</span>
-              <span className="font-bold text-[#3B825E] font-mono">₹12.4 Lakhs</span>
+              <span className="font-bold text-[#3B825E] font-mono">₹0</span>
             </div>
             <div className="flex items-center justify-between text-[#DDD4C4]/70">
               <span>Active Orgs</span>
-              <span className="font-bold text-[#F7F3EA] font-mono">864 / 1,248</span>
+              <span className="font-bold text-[#F7F3EA] font-mono">1</span>
             </div>
             <div className="pt-2 border-t border-[#332F2A] text-[10px] text-[#DDD4C4]/50">
               Global Platform Master Tier

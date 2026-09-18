@@ -86,7 +86,7 @@ export default function TeamPage() {
                     {u.role}
                   </span>
                 </td>
-                <td className="p-4 text-[#766F63]">{u.phone || '+91 94436 47190'}</td>
+                <td className="p-4 text-[#766F63]">{u.phone || '+91 63833 95915'}</td>
                 <td className="p-4">
                   <span className="inline-flex items-center gap-1.5 text-xs text-[#2E6B4F] font-medium">
                     <span className="w-2 h-2 rounded-full bg-[#2E6B4F]" /> Active

@@ -61,7 +61,7 @@ export default function PropertiesPage() {
     ownerPhone: '+91 98400 44332',
     featuredImageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
     amenities: ['Swimming Pool', 'Clubhouse & Gym', '2 Covered Car Parks', '24/7 Power Backup'],
-    assignedAgentId: 'usr-karthik-04',
+    assignedAgentId: 'usr-admin-01',
   });
 
   const [propertyToDelete, setPropertyToDelete] = useState<Property | null>(null);

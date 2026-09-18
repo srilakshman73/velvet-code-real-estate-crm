@@ -39,15 +39,15 @@ export default function SettingsPage() {
 
   // Agency General Settings
   const [orgForm, setOrgForm] = useState({
-    name: currentOrg.name || 'Velvet Realty Solutions',
+    name: currentOrg.name || 'Velvet Code Realty',
     businessType: currentOrg.businessType || 'AGENCY',
-    phone: currentOrg.phone || '+91 94436 47190',
-    email: currentOrg.email || 'contact@velvetcode.in',
-    address: currentOrg.address || '45, Anna Salai, Guindy Industrial Estate',
+    phone: currentOrg.phone || '+91 63833 95915',
+    email: currentOrg.email || 'srilakshman73@gmail.com',
+    address: currentOrg.address || 'Capital Park Towers, Anna Salai',
     city: currentOrg.city || 'Chennai',
     state: currentOrg.state || 'Tamil Nadu',
     country: 'India',
-    website: currentOrg.website || 'https://velvetcode.in',
+    website: currentOrg.website || 'https://velvet-code-real-estate-crm.vercel.app',
     reraNumber: 'TN/RERA/AG/0148/2023',
     currency: 'INR (₹)',
     timezone: 'Asia/Kolkata (GMT +5:30)',
@@ -55,10 +55,10 @@ export default function SettingsPage() {
 
   // WhatsApp Cloud API Configuration
   const [waConfig, setWaConfig] = useState({
-    wabaId: 'WABA_9443647190_VC',
-    phoneNumberId: 'PN_9443647190',
-    displayPhoneNumber: '+91 94436 47190',
-    accessToken: 'EAAG9443647190VC_MetaGraphApiToken_Production_Secured',
+    wabaId: 'WABA_6383395915_VC',
+    phoneNumberId: 'PN_6383395915',
+    displayPhoneNumber: '+91 63833 95915',
+    accessToken: 'EAAG6383395915VC_MetaGraphApiToken_Production_Secured',
     webhookVerifyToken: 'velvetcode_crm_webhook_verify_2026',
     webhookUrl: 'https://api.velvetcode.in/webhooks/whatsapp',
     autoGreetingEnabled: true,

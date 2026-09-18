@@ -39,7 +39,7 @@ export default function DealsPipelinePage() {
     expectedCloseDate: '2026-10-15',
     leadId: '',
     propertyId: '',
-    assignedAgentId: 'usr-karthik-04',
+    assignedAgentId: 'usr-admin-01',
     notes: '',
   });
 
@@ -302,7 +302,7 @@ export default function DealsPipelinePage() {
           <Input
             label="Deal Title *"
             required
-            placeholder="e.g. Emerald Heights 3BHK - Rahul Sharma"
+            placeholder="e.g. Luxury 3BHK Apartment Booking"
             value={newDealForm.title}
             onChange={(e) => setNewDealForm({ ...newDealForm, title: e.target.value })}
           />

@@ -220,7 +220,7 @@ export function LandingHero() {
                     <div className="space-y-2 text-xs">
                       <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#F7F3EA] border border-[#DDD4C4]">
                         <div>
-                          <p className="font-bold text-[#24211D]">Rahul Sharma</p>
+                          <p className="font-bold text-[#24211D]">High-Intent Luxury Buyer</p>
                           <p className="text-[11px] text-[#766F63]">Emerald Heights 3BHK • ₹1.45 Cr</p>
                         </div>
                         <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A374]/20 text-[#7A5320] rounded">
@@ -229,7 +229,7 @@ export function LandingHero() {
                       </div>
                       <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#F7F3EA] border border-[#DDD4C4]">
                         <div>
-                          <p className="font-bold text-[#24211D]">Dr. Priya Raghavan</p>
+                          <p className="font-bold text-[#24211D]">Sea-Facing Villa Buyer</p>
                           <p className="text-[11px] text-[#766F63]">Sobha Windsor Villa • ₹3.85 Cr</p>
                         </div>
                         <span className="px-2 py-0.5 text-[10px] font-bold bg-[#6B5B95]/15 text-[#524474] rounded">
@@ -244,20 +244,20 @@ export function LandingHero() {
                       <h4 className="text-xs font-bold text-[#24211D] uppercase tracking-wider">
                         Today's High-Priority Follow-ups
                       </h4>
-                      <span className="text-[10px] text-[#8B2635] font-bold">3 Actionable</span>
+                      <span className="text-[10px] text-[#8B2635] font-bold">Active Tasks</span>
                     </div>
                     <div className="space-y-2 text-xs">
                       <div className="p-2.5 rounded-lg bg-[#F7F3EA] border border-[#DDD4C4] flex items-center justify-between">
                         <div>
-                          <p className="font-bold text-[#24211D]">Call Rahul Sharma (Parking Allotment)</p>
-                          <p className="text-[10px] text-[#766F63]">Due Today at 03:30 PM • Karthik S</p>
+                          <p className="font-bold text-[#24211D]">Call Villa Buyer (Parking Allotment)</p>
+                          <p className="text-[10px] text-[#766F63]">Due Today at 03:30 PM • Client Priority</p>
                         </div>
                         <span className="text-[10px] font-bold text-[#2E6B4F]">Call Now</span>
                       </div>
                       <div className="p-2.5 rounded-lg bg-[#F7F3EA] border border-[#DDD4C4] flex items-center justify-between">
                         <div>
-                          <p className="font-bold text-[#24211D]">WhatsApp Sobha Villa Pin to Dr. Priya</p>
-                          <p className="text-[10px] text-[#766F63]">Due Today at 04:00 PM • Ananya I</p>
+                          <p className="font-bold text-[#24211D]">WhatsApp Villa Brochure & Pin</p>
+                          <p className="text-[10px] text-[#766F63]">Due Today at 04:00 PM • Instant Send</p>
                         </div>
                         <span className="text-[10px] font-bold text-[#2E6B4F]">WhatsApp</span>
                       </div>
@@ -272,25 +272,25 @@ export function LandingHero() {
               <div className="p-4 space-y-3 animate-in fade-in">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-[#FFFCF6] border border-[#3D5A80]/40">
-                    <p className="font-bold text-[#293E58] mb-2">1. Qualified Leads (14)</p>
+                    <p className="font-bold text-[#293E58] mb-2">1. Qualified Leads</p>
                     <div className="p-2.5 rounded-lg bg-[#F7F3EA] border border-[#DDD4C4] space-y-1">
-                      <p className="font-bold text-[#24211D]">Suresh Kumar</p>
+                      <p className="font-bold text-[#24211D]">Qualified Penthouse Lead</p>
                       <p className="text-[10px] text-[#766F63]">Prestige Cyber View • ₹92 Lakhs</p>
-                      <span className="text-[10px] text-[#766F63]">Source: Referral • Score: 79%</span>
+                      <span className="text-[10px] text-[#766F63]">Source: Website • Score: 85%</span>
                     </div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-[#FFFCF6] border border-[#A374]/50">
-                    <p className="font-bold text-[#8F642B] mb-2">2. Site Visits Scheduled (8)</p>
+                    <p className="font-bold text-[#8F642B] mb-2">2. Site Visits Scheduled</p>
                     <div className="p-2.5 rounded-lg bg-[#F7F3EA] border border-[#DDD4C4] space-y-1">
-                      <p className="font-bold text-[#24211D]">Dr. Priya Raghavan</p>
+                      <p className="font-bold text-[#24211D]">Luxury Villa Client</p>
                       <p className="text-[10px] text-[#766F63]">Sobha Windsor Villa • ₹3.85 Cr</p>
                       <span className="text-[10px] text-[#8F642B] font-semibold">Tomorrow at 11:00 AM</span>
                     </div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-[#FFFCF6] border border-[#2E6B4F]/40">
-                    <p className="font-bold text-[#2E6B4F] mb-2">3. Negotiation & Won (6)</p>
+                    <p className="font-bold text-[#2E6B4F] mb-2">3. Negotiation & Won</p>
                     <div className="p-2.5 rounded-lg bg-[#F7F3EA] border border-[#DDD4C4] space-y-1">
-                      <p className="font-bold text-[#24211D]">Rajesh Varma (Closed Won 🏆)</p>
+                      <p className="font-bold text-[#24211D]">Commercial Investor (Closed Won 🏆)</p>
                       <p className="text-[10px] text-[#766F63]">Aura Penthouse • ₹5.20 Cr</p>
                       <span className="text-[10px] text-[#2E6B4F] font-bold">Token ₹25L Received</span>
                     </div>
@@ -305,9 +305,9 @@ export function LandingHero() {
                 <div className="p-3.5 rounded-xl bg-[#FFFCF6] border border-[#DDD4C4] space-y-2">
                   <p className="font-bold text-[#2E6B4F]">WhatsApp Cloud CRM Stream</p>
                   <div className="p-2.5 rounded-lg bg-[#F7F3EA] border border-[#2E6B4F]/30">
-                    <p className="font-bold text-[#24211D]">Rahul Sharma (+91 98401 22334)</p>
+                    <p className="font-bold text-[#24211D]">Verified Contact (+91 63833 95915)</p>
                     <p className="text-[#766F63] italic mt-1">
-                      "Thanks Karthik, I reviewed the legal agreement. Looks good! Can we confirm the second parking slot?"
+                      "I reviewed the property specification sheet. Looks great! Can we confirm the private viewing time?"
                     </p>
                     <p className="text-[10px] text-[#766F63] mt-1 font-semibold">11:42 AM • Read & Verified</p>
                   </div>
@@ -339,7 +339,7 @@ export function LandingHero() {
                   <div>
                     <p className="font-bold text-[#24211D]">Realty AI Conversion Analysis</p>
                     <p className="text-[#766F63] mt-1 leading-relaxed">
-                      "Rahul Sharma and Dr. Anand Ramanathan have reached <strong>92%+ conversion probability</strong>. Total potential booking value: <strong>₹2.87 Crores</strong>. Recommended action: Issue token application form today."
+                      "Active buyer inquiries have reached <strong>92%+ conversion probability</strong>. Total potential booking value: <strong>₹2.87 Crores</strong>. Recommended action: Issue booking application form today."
                     </p>
                   </div>
                 </div>

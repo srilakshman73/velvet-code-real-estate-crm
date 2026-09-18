@@ -43,18 +43,18 @@ import {
 } from 'recharts';
 
 const MRR_HISTORY = [
-  { month: 'Apr', mrr: 720000, newOrgs: 42 },
-  { month: 'May', mrr: 840000, newOrgs: 55 },
-  { month: 'Jun', mrr: 950000, newOrgs: 68 },
-  { month: 'Jul', mrr: 1060000, newOrgs: 74 },
-  { month: 'Aug', mrr: 1150000, newOrgs: 79 },
-  { month: 'Sep', mrr: 1240000, newOrgs: 84 },
+  { month: 'Apr', mrr: 0, newOrgs: 0 },
+  { month: 'May', mrr: 0, newOrgs: 0 },
+  { month: 'Jun', mrr: 0, newOrgs: 0 },
+  { month: 'Jul', mrr: 0, newOrgs: 0 },
+  { month: 'Aug', mrr: 0, newOrgs: 0 },
+  { month: 'Sep', mrr: 0, newOrgs: 1 },
 ];
 
 const TIER_DISTRIBUTION = [
-  { name: 'Starter (₹599)', value: 412, color: '#3B5BDB' },
-  { name: 'Professional (₹1,499)', value: 342, color: '#A374' },
-  { name: 'Business (₹3,999)', value: 110, color: '#2E6B4F' },
+  { name: 'Starter (₹499)', value: 0, color: '#3B5BDB' },
+  { name: 'Professional (₹1,499)', value: 1, color: '#A374' },
+  { name: 'Business (₹3,999)', value: 0, color: '#2E6B4F' },
 ];
 
 export default function AdminDashboardPage() {
@@ -100,7 +100,7 @@ export default function AdminDashboardPage() {
             <div className="text-2xl font-serif font-bold text-[#24211D]">{formatINR(stats.monthlyRecurringRevenueINR)}</div>
             <div className="flex items-center gap-1.5 mt-1 text-xs text-[#2E6B4F] font-semibold">
               <ArrowUpRight className="w-3.5 h-3.5" />
-              <span>+14.2% MoM growth</span>
+              <span>Starting Platform Baseline</span>
             </div>
           </div>
         </Card>
@@ -115,7 +115,7 @@ export default function AdminDashboardPage() {
           <div className="mt-3">
             <div className="text-2xl font-serif font-bold text-[#24211D]">{stats.totalOrganizations.toLocaleString()}</div>
             <div className="flex items-center gap-1.5 mt-1 text-xs text-[#8F642B] font-semibold">
-              <span>+{stats.newCustomersThisMonth} signed up this month</span>
+              <span>+{stats.newCustomersThisMonth} registered tenant</span>
             </div>
           </div>
         </Card>
@@ -130,7 +130,7 @@ export default function AdminDashboardPage() {
           <div className="mt-3">
             <div className="text-2xl font-serif font-bold text-[#24211D]">{stats.totalActiveUsers.toLocaleString()}</div>
             <div className="flex items-center gap-1.5 mt-1 text-xs text-[#766F63]">
-              <span>Across 18+ Indian tier-1 & tier-2 hubs</span>
+              <span>Master platform owner active</span>
             </div>
           </div>
         </Card>

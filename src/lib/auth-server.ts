@@ -47,7 +47,7 @@ export async function getServerSession(req?: NextRequest): Promise<Authenticated
   if (role === 'OWNER' || (email && email.toLowerCase() === ownerEmail)) {
     return {
       userId: 'usr-admin-01',
-      name: 'Velvet Code',
+      name: 'Sri Lakshman',
       email: ownerEmail,
       role: 'OWNER',
       organizationId: 'org-root-00',

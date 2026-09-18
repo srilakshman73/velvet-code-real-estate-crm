@@ -31,32 +31,42 @@ import {
 } from 'recharts';
 
 export default function ReportsPage() {
+  const { leads, deals, siteVisits, users } = useCRMStore();
   const [filter, setFilter] = useState('ThisMonth');
 
+  const totalInquiries = leads.length;
+  const contactedLeads = leads.filter((l) => l.status !== 'NEW').length;
+  const qualifiedLeads = leads.filter(
+    (l) => l.status === 'QUALIFIED' || l.status === 'SITE_VISIT' || l.status === 'NEGOTIATION' || l.status === 'WON'
+  ).length;
+  const siteVisitsCount = siteVisits.length;
+  const inNegotiationCount = deals.filter((d) => d.stage === 'NEGOTIATION' || d.stage === 'DOCUMENTATION').length;
+  const closedWonCount = deals.filter((d) => d.stage === 'CLOSED_WON').length;
+
   const leadConversionFunnel = [
-    { stage: 'Total Inquiries', count: 248, fill: '#3B5BDB' },
-    { stage: 'Contacted', count: 184, fill: '#7048E8' },
-    { stage: 'Qualified Buyers', count: 96, fill: '#B87B28' },
-    { stage: 'Site Visits Scheduled', count: 42, fill: '#A374' },
-    { stage: 'Negotiation', count: 18, fill: '#D97706' },
-    { stage: 'Closed Won 🏆', count: 6, fill: '#2E6B4F' },
+    { stage: 'Total Inquiries', count: totalInquiries, fill: '#3B5BDB' },
+    { stage: 'Contacted', count: contactedLeads, fill: '#7048E8' },
+    { stage: 'Qualified Buyers', count: qualifiedLeads, fill: '#B87B28' },
+    { stage: 'Site Visits Scheduled', count: siteVisitsCount, fill: '#A374' },
+    { stage: 'Negotiation', count: inNegotiationCount, fill: '#D97706' },
+    { stage: 'Closed Won 🏆', count: closedWonCount, fill: '#2E6B4F' },
   ];
 
-  const agentPerformance = [
-    { name: 'Velvet Code', revenue: 52.0, deals: 1, visits: 3 },
-    { name: 'Karthik Subramanian', revenue: 28.7, deals: 2, visits: 8 },
-    { name: 'Ananya Iyer', revenue: 38.5, deals: 1, visits: 5 },
-    { name: 'Divya Krishnan', revenue: 17.6, deals: 2, visits: 6 },
-  ];
+  const maxFunnelCount = Math.max(...leadConversionFunnel.map((s) => s.count), 1);
 
-  const monthlyRevenue = [
-    { month: 'Apr', revenue: 14.2 },
-    { month: 'May', revenue: 16.8 },
-    { month: 'Jun', revenue: 18.5 },
-    { month: 'Jul', revenue: 21.0 },
-    { month: 'Aug', revenue: 20.4 },
-    { month: 'Sep', revenue: 24.8 },
-  ];
+  const agentPerformance = users.map((u) => {
+    const userDeals = deals.filter((d) => d.assignedAgentId === u.id);
+    const userWonRev = userDeals
+      .filter((d) => d.stage === 'CLOSED_WON')
+      .reduce((sum, d) => sum + d.dealValueINR, 0);
+    const userVisits = siteVisits.filter((v) => v.assignedAgentId === u.id).length;
+    return {
+      name: u.name,
+      revenue: userWonRev / 100000,
+      deals: userDeals.length,
+      visits: userVisits,
+    };
+  });
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto">
@@ -125,7 +135,7 @@ export default function ReportsPage() {
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
-                      width: `${(step.count / 248) * 100}%`,
+                      width: step.count > 0 ? `${(step.count / maxFunnelCount) * 100}%` : '0%',
                       backgroundColor: step.fill,
                     }}
                   />

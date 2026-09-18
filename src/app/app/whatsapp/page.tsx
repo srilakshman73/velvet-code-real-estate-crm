@@ -7,6 +7,7 @@ import { WhatsAppConversation, WhatsAppMessage } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { Input, Textarea, Select } from '@/components/ui/Input';
 import { Modal } from '@/components/ui/Modal';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { LeadStatusBadge } from '@/components/ui/Badge';
 import { formatTime, formatRelativeTime, buildWhatsAppUrl } from '@/lib/utils';
 import {
@@ -38,6 +39,7 @@ export default function WhatsAppCRMPage() {
     templates,
     properties,
     leads,
+    currentUser,
   } = useCRMStore();
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -57,6 +59,16 @@ export default function WhatsAppCRMPage() {
       c.lastMessageText.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const totalSent = conversations.reduce(
+    (sum, c) => sum + c.messages.filter((m) => m.direction === 'OUTBOUND').length,
+    0
+  );
+  const totalReceived = conversations.reduce(
+    (sum, c) => sum + c.messages.filter((m) => m.direction === 'INBOUND').length,
+    0
+  );
+  const totalUnread = conversations.filter((c) => c.unreadCount > 0).length;
+
   const handleSendMessage = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!messageInput.trim() || !activeConv) return;
@@ -68,11 +80,11 @@ export default function WhatsAppCRMPage() {
     if (!activeConv) return;
     const filled = templateBody
       .replace(/{{customer_name}}/g, activeConv.customerName)
-      .replace(/{{property_name}}/g, activeConv.interestedProperty || 'The Grand Emerald Heights')
-      .replace(/{{agent_name}}/g, 'Karthik Subramanian')
-      .replace(/{{site_visit_date}}/g, '15 Sep 2026')
+      .replace(/{{property_name}}/g, activeConv.interestedProperty || 'Residential Property')
+      .replace(/{{agent_name}}/g, currentUser.name || 'Sri Lakshman')
+      .replace(/{{site_visit_date}}/g, 'Tomorrow')
       .replace(/{{site_visit_time}}/g, '11:00 AM')
-      .replace(/{{property_price}}/g, activeConv.budget || '₹1.45 Cr');
+      .replace(/{{property_price}}/g, activeConv.budget || 'Market Price');
 
     setMessageInput(filled);
     setIsTemplateModalOpen(false);
@@ -83,7 +95,7 @@ export default function WhatsAppCRMPage() {
     const prop = properties.find((p) => p.id === selectedPropertyShare);
     if (!prop) return;
 
-    const propMsg = `Here are the verified details for ${prop.title}:\n• Price: ₹${(prop.priceINR / 10000000).toFixed(2)} Cr\n• Location: ${prop.locality}, ${prop.city}\n• Area: ${prop.areaSqFt} sq.ft (${prop.bedrooms || 3} BHK)\n• Amenities: ${prop.amenities.slice(0, 3).join(', ')}\n\nWould you like me to schedule a private viewing?`;
+    const propMsg = `Here are the verified details for ${prop.title}:\n• Price: ₹${(prop.priceINR / 10000000).toFixed(2)} Cr\n• Location: ${prop.locality}, ${prop.city}\n• Area: ${prop.areaSqFt} sq.ft (${prop.bedrooms || 3} BHK)\n• Amenities: ${prop.amenities.slice(0, 3).join(', ')}\n\nWould you like to schedule a private viewing?`;
     sendWhatsAppMessage(activeConv.id, propMsg, prop.featuredImageUrl);
     setSelectedPropertyShare('');
   };
@@ -104,7 +116,8 @@ export default function WhatsAppCRMPage() {
             </span>
           </div>
           <p className="text-xs sm:text-sm text-[#766F63] mt-1">
-            Official Meta Cloud API • Direct click-to-chat with <strong className="text-[#2E6B4F] font-mono">+91 63833 95915</strong>
+            Official Meta Cloud API • Direct click-to-chat with{' '}
+            <strong className="text-[#2E6B4F] font-mono">+91 63833 95915</strong>
           </p>
         </div>
 
@@ -132,28 +145,28 @@ export default function WhatsAppCRMPage() {
           <p className="text-xs uppercase tracking-wider text-[#766F63] font-semibold font-serif">
             Messages Sent
           </p>
-          <p className="text-2xl font-bold text-[#24211D] font-mono">1,284</p>
-          <p className="text-[11px] text-[#2E6B4F] font-medium">99.8% Delivery Rate</p>
+          <p className="text-2xl font-bold text-[#24211D] font-mono">{totalSent}</p>
+          <p className="text-[11px] text-[#2E6B4F] font-medium">100% Delivery Reliability</p>
         </div>
         <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-1">
           <p className="text-xs uppercase tracking-wider text-[#766F63] font-semibold font-serif">
             Replies Received
           </p>
-          <p className="text-2xl font-bold text-[#24211D] font-mono">842</p>
-          <p className="text-[11px] text-[#2E6B4F] font-medium">65.5% High Engagement</p>
+          <p className="text-2xl font-bold text-[#24211D] font-mono">{totalReceived}</p>
+          <p className="text-[11px] text-[#2E6B4F] font-medium">Real-Time Ingestion</p>
         </div>
         <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-1">
           <p className="text-xs uppercase tracking-wider text-[#766F63] font-semibold font-serif">
             Pending Replies
           </p>
-          <p className="text-2xl font-bold text-[#8F642B] font-mono">37</p>
-          <p className="text-[11px] text-[#766F63] font-medium">Avg response 4 mins</p>
+          <p className="text-2xl font-bold text-[#8F642B] font-mono">{totalUnread}</p>
+          <p className="text-[11px] text-[#766F63] font-medium">Unread Inquiries</p>
         </div>
         <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-1">
           <p className="text-xs uppercase tracking-wider text-[#766F63] font-semibold font-serif">
             Active Chats
           </p>
-          <p className="text-2xl font-bold text-[#2E6B4F] font-mono">64</p>
+          <p className="text-2xl font-bold text-[#2E6B4F] font-mono">{conversations.length}</p>
           <p className="text-[11px] text-[#766F63] font-medium">In CRM Pipeline</p>
         </div>
       </div>
@@ -163,7 +176,7 @@ export default function WhatsAppCRMPage() {
       {/* ========================================== */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-2xl border border-[#DDD4C4] bg-[#FFFCF6] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] overflow-hidden h-[750px]">
         {/* ========================================== */}
-        {/* COLUMN 1: CONVERSATIONS LIST (3 Cols) */}
+        {/* COLUMN 1: CONVERSATIONS LIST (4 Cols) */}
         {/* ========================================== */}
         <div className="lg:col-span-4 border-r border-[#DDD4C4] flex flex-col bg-white">
           <div className="p-3.5 border-b border-[#DDD4C4] bg-[#F7F3EA]/80">
@@ -180,42 +193,52 @@ export default function WhatsAppCRMPage() {
           </div>
 
           <div className="flex-1 overflow-y-auto divide-y divide-[#DDD4C4]/50">
-            {filteredConversations.map((conv) => {
-              const isSelected = conv.id === activeConv?.id;
-              return (
-                <div
-                  key={conv.id}
-                  onClick={() => setActiveConversationId(conv.id)}
-                  className={`p-3.5 cursor-pointer transition-all ${
-                    isSelected
-                      ? 'bg-[#F7F3EA] border-l-4 border-[#2E6B4F]'
-                      : 'hover:bg-[#F7F3EA]/50'
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-1 mb-1">
-                    <span className="font-serif font-bold text-[#24211D] text-xs truncate">
-                      {conv.customerName}
-                    </span>
-                    <span className="text-[10px] text-[#766F63] flex-shrink-0">
-                      {formatRelativeTime(conv.lastMessageAt)}
-                    </span>
-                  </div>
-
-                  <p className="text-xs text-[#766F63] line-clamp-1 leading-relaxed">
-                    {conv.lastMessageText}
-                  </p>
-
-                  <div className="mt-2 flex items-center justify-between text-[10px]">
-                    <span className="text-[#2E6B4F] font-mono font-medium">{conv.customerPhone}</span>
-                    {conv.unreadCount > 0 && (
-                      <span className="px-1.5 py-0.5 rounded-full bg-[#2E6B4F] text-white font-extrabold text-[9px]">
-                        {conv.unreadCount}
+            {filteredConversations.length === 0 ? (
+              <div className="p-8 text-center text-[#766F63] space-y-2">
+                <MessageSquare className="w-8 h-8 text-[#DDD4C4] mx-auto" />
+                <p className="font-serif font-bold text-sm text-[#24211D]">No conversations yet</p>
+                <p className="text-xs">
+                  When leads message your business WhatsApp (+91 63833 95915) or you start outreach, conversations will appear here.
+                </p>
+              </div>
+            ) : (
+              filteredConversations.map((conv) => {
+                const isSelected = conv.id === activeConv?.id;
+                return (
+                  <div
+                    key={conv.id}
+                    onClick={() => setActiveConversationId(conv.id)}
+                    className={`p-3.5 cursor-pointer transition-all ${
+                      isSelected
+                        ? 'bg-[#F7F3EA] border-l-4 border-[#2E6B4F]'
+                        : 'hover:bg-[#F7F3EA]/50'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-1 mb-1">
+                      <span className="font-serif font-bold text-[#24211D] text-xs truncate">
+                        {conv.customerName}
                       </span>
-                    )}
+                      <span className="text-[10px] text-[#766F63] flex-shrink-0">
+                        {formatRelativeTime(conv.lastMessageAt)}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-[#766F63] line-clamp-1 leading-relaxed">
+                      {conv.lastMessageText}
+                    </p>
+
+                    <div className="mt-2 flex items-center justify-between text-[10px]">
+                      <span className="text-[#2E6B4F] font-mono font-medium">{conv.customerPhone}</span>
+                      {conv.unreadCount > 0 && (
+                        <span className="px-1.5 py-0.5 rounded-full bg-[#2E6B4F] text-white font-extrabold text-[9px]">
+                          {conv.unreadCount}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </div>
 
@@ -305,8 +328,12 @@ export default function WhatsAppCRMPage() {
               </form>
             </>
           ) : (
-            <div className="flex-1 flex items-center justify-center text-[#766F63] text-xs">
-              Select a conversation to begin messaging
+            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-[#766F63] space-y-2">
+              <MessageSquare className="w-10 h-10 text-[#DDD4C4]" />
+              <p className="font-serif font-bold text-sm text-[#24211D]">No conversations yet</p>
+              <p className="text-xs max-w-xs">
+                Select a contact from the inbox or start a conversation by connecting with your leads.
+              </p>
             </div>
           )}
         </div>
@@ -319,19 +346,19 @@ export default function WhatsAppCRMPage() {
             <h4 className="font-serif font-bold text-[#8F642B] uppercase tracking-wider text-[11px] mb-2">
               Buyer CRM Context
             </h4>
-            <p className="font-serif font-bold text-[#24211D] text-sm">{activeConv?.customerName}</p>
-            <p className="text-[#766F63]">{activeConv?.customerPhone}</p>
+            <p className="font-serif font-bold text-[#24211D] text-sm">{activeConv?.customerName || 'No contact selected'}</p>
+            <p className="text-[#766F63]">{activeConv?.customerPhone || '+91 63833 95915'}</p>
           </div>
 
           <div className="space-y-2 p-3 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4]">
             <div className="flex justify-between">
               <span className="text-[#766F63]">Budget:</span>
-              <span className="font-bold text-[#8F642B] font-mono">{activeConv?.budget || '₹1.45 Cr'}</span>
+              <span className="font-bold text-[#8F642B] font-mono">{activeConv?.budget || 'N/A'}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-[#766F63]">Property:</span>
               <span className="text-[#24211D] font-medium truncate max-w-[120px]">
-                {activeConv?.interestedProperty || 'Emerald Heights'}
+                {activeConv?.interestedProperty || 'General Inquiry'}
               </span>
             </div>
           </div>
@@ -351,7 +378,7 @@ export default function WhatsAppCRMPage() {
                 </option>
               ))}
             </select>
-            {selectedPropertyShare && (
+            {selectedPropertyShare && activeConv && (
               <Button
                 variant="emerald"
                 size="xs"

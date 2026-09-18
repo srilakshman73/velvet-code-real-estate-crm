@@ -29,9 +29,9 @@ export default function AdminPlatformSettingsPage() {
   const [platformConfig, setPlatformConfig] = useState({
     companyName: 'Velvet Code',
     tagline: 'Technology & Digital Solutions',
-    supportPhone: '+91 94436 47190',
-    supportEmail: 'support@velvetcode.in',
-    hqAddress: 'Guindy Cyber City, Anna Salai, Chennai, Tamil Nadu, 600032',
+    supportPhone: '+91 63833 95915',
+    supportEmail: 'srilakshman73@gmail.com',
+    hqAddress: 'Capital Park Towers, Anna Salai, Chennai, Tamil Nadu, 600032',
     razorpayKeyId: 'rzp_live_VC_RealEstate_2026_Secured',
     razorpayKeySecret: '••••••••••••••••••••••••••••••••',
     razorpayWebhookSecret: 'whsec_rzp_velvetcode_live_prod_2026',

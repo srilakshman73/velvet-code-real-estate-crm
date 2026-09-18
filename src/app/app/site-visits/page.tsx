@@ -36,9 +36,9 @@ export default function SiteVisitsPage() {
 
   const [newVisitForm, setNewVisitForm] = useState({
     leadId: '',
-    customerPhone: '+91 94436 47190',
+    customerPhone: '+91 63833 95915',
     propertyId: '',
-    assignedAgentId: 'usr-karthik-04',
+    assignedAgentId: 'usr-admin-01',
     visitDate: new Date().toISOString().split('T')[0],
     timeSlot: '11:00 AM',
     notes: 'Buyer requested complete amenities walkthrough.',
@@ -219,7 +219,7 @@ export default function SiteVisitsPage() {
                 )}
 
                 <a
-                  href={buildWhatsAppUrl(v.customerPhone || '919443647190', `Hello, your site visit for ${v.propertyName} is scheduled for ${v.visitDate} at ${v.timeSlot}.`)}
+                  href={buildWhatsAppUrl(v.customerPhone || '916383395915', `Hello, your site visit for ${v.propertyName} is scheduled for ${v.visitDate} at ${v.timeSlot}.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1.5 rounded-lg bg-[#2E6B4F]/10 text-[#2E6B4F] hover:bg-[#2E6B4F]/20 ml-auto transition-colors"

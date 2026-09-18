@@ -112,8 +112,8 @@ export function truncate(text: string, maxLength: number = 60): string {
 
 export const PRIMARY_WHATSAPP_NUMBER = '+91 63833 95915';
 export const PRIMARY_WHATSAPP_PHONE_CLEAN = '916383395915';
-export const SECONDARY_WHATSAPP_NUMBER = '+91 94436 47190';
-export const SECONDARY_WHATSAPP_PHONE_CLEAN = '919443647190';
+export const SECONDARY_WHATSAPP_NUMBER = '+91 63833 95915';
+export const SECONDARY_WHATSAPP_PHONE_CLEAN = '916383395915';
 export const DEFAULT_WHATSAPP_MESSAGE = 'Hello, I would like to know more about your Real Estate CRM.';
 
 /**
@@ -124,7 +124,7 @@ export function buildWhatsAppUrl(
   phone: string = PRIMARY_WHATSAPP_PHONE_CLEAN,
   messageText: string = DEFAULT_WHATSAPP_MESSAGE
 ): string {
-  const cleanPhone = phone.replace(/[^0-9]/g, '');
+  const cleanPhone = phone.replace(/[^0-9]/g, '') || PRIMARY_WHATSAPP_PHONE_CLEAN;
   const encodedMsg = encodeURIComponent(
     messageText || DEFAULT_WHATSAPP_MESSAGE
   );

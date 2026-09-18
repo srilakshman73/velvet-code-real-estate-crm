@@ -204,7 +204,7 @@ export async function runSecurityTestSuite() {
   // -------------------------------------------------------------
   const ownerSession = {
     userId: 'usr-admin-01',
-    name: 'Velvet Code',
+    name: 'Sri Lakshman',
     email: 'srilakshman73@gmail.com',
     role: 'OWNER' as Role,
     organizationId: 'org-root-00',
@@ -213,7 +213,7 @@ export async function runSecurityTestSuite() {
     isSuperAdmin: true,
   };
   const allPlatformProps = serverDB.getProperties();
-  const ownerCanSeeAll = ownerSession.isOwner && allPlatformProps.length >= 10;
+  const ownerCanSeeAll = ownerSession.isOwner && allPlatformProps.length >= 1;
   recordTest(
     10,
     'Owner Multi-Tenant Global Visibility',

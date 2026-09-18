@@ -31,80 +31,7 @@ interface PaymentLog {
   date: string;
 }
 
-const MOCK_PAYMENTS: PaymentLog[] = [
-  {
-    id: 'pay-001',
-    razorpayPaymentId: 'pay_Nz819K3XpLa912',
-    organizationName: 'Velvet Realty Solutions',
-    planTier: 'PROFESSIONAL (Monthly)',
-    amountINR: 1499,
-    gstINR: 270,
-    totalINR: 1769,
-    paymentMethod: 'UPI AutoPay (GPay)',
-    status: 'CAPTURED',
-    date: '2026-09-01 10:14 AM',
-  },
-  {
-    id: 'pay-002',
-    razorpayPaymentId: 'pay_Kq991L2ZbVw441',
-    organizationName: 'Heritage Luxury Estates',
-    planTier: 'BUSINESS (Annual)',
-    amountINR: 38390,
-    gstINR: 6910,
-    totalINR: 45300,
-    paymentMethod: 'HDFC Corporate Visa',
-    status: 'CAPTURED',
-    date: '2026-06-15 03:22 PM',
-  },
-  {
-    id: 'pay-003',
-    razorpayPaymentId: 'pay_Ty772M4NcXv819',
-    organizationName: 'Metropolis Prime Properties',
-    planTier: 'BUSINESS (Annual)',
-    amountINR: 38390,
-    gstINR: 6910,
-    totalINR: 45300,
-    paymentMethod: 'ICICI NetBanking',
-    status: 'CAPTURED',
-    date: '2026-05-10 11:45 AM',
-  },
-  {
-    id: 'pay-004',
-    razorpayPaymentId: 'pay_Op331Q8PwQa201',
-    organizationName: 'Skyline Realtors & Advisors',
-    planTier: 'STARTER (Monthly)',
-    amountINR: 599,
-    gstINR: 108,
-    totalINR: 707,
-    paymentMethod: 'Paytm UPI',
-    status: 'CAPTURED',
-    date: '2026-09-01 09:00 AM',
-  },
-  {
-    id: 'pay-005',
-    razorpayPaymentId: 'pay_Lm449X1VbTy889',
-    organizationName: 'Kovai Urban Lands & Villas',
-    planTier: 'PROFESSIONAL (Monthly)',
-    amountINR: 1499,
-    gstINR: 270,
-    totalINR: 1769,
-    paymentMethod: 'SBI Debit Card',
-    status: 'FAILED',
-    date: '2026-09-10 08:30 PM',
-  },
-  {
-    id: 'pay-006',
-    razorpayPaymentId: 'pay_Gh881W9LkLm332',
-    organizationName: 'Coastal Bay Realty',
-    planTier: 'STARTER (Monthly)',
-    amountINR: 599,
-    gstINR: 108,
-    totalINR: 707,
-    paymentMethod: 'Axis Bank NetBanking',
-    status: 'REFUNDED',
-    date: '2026-08-15 02:10 PM',
-  },
-];
+const MOCK_PAYMENTS: PaymentLog[] = [];
 
 export default function AdminPaymentsPage() {
   const [payments, setPayments] = useState<PaymentLog[]>(MOCK_PAYMENTS);
@@ -123,9 +50,9 @@ export default function AdminPaymentsPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#24211D] tracking-tight">Payments & Transactions</h1>
+          <h1 className="text-3xl font-serif font-bold text-[#24211D] tracking-tight">Payment Receipts & GST Ledger</h1>
           <p className="text-sm text-[#766F63] mt-1">
-            Audit Razorpay payment gateway webhooks, 18% GST invoice generation, and automated settlements.
+            Real-time Razorpay payment transactions, automatic tax invoices, and monthly GST audit logs.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -153,15 +80,15 @@ export default function AdminPaymentsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Gross Inflow (MTD)</span>
-          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">₹14.63 Lakhs</div>
+          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">₹0</div>
           <div className="text-xs text-[#2E6B4F] mt-1 flex items-center gap-1 font-semibold">
-            <ArrowUpRight className="w-3.5 h-3.5" /> 98.4% payment capture success
+            <ArrowUpRight className="w-3.5 h-3.5" /> 100% gateway uptime
           </div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Total GST Collected (18%)</span>
-          <div className="text-2xl font-serif font-bold text-[#8F642B] mt-2">₹2.23 Lakhs</div>
+          <div className="text-2xl font-serif font-bold text-[#8F642B] mt-2">₹0</div>
           <div className="text-xs text-[#766F63] mt-1">Ready for GSTR-1 e-filing</div>
         </Card>
 
@@ -211,41 +138,51 @@ export default function AdminPaymentsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#DDD4C4]/60">
-              {filteredPayments.map((p) => (
-                <tr key={p.id} className="hover:bg-[#F7F3EA]/60 transition-colors">
-                  <td className="py-3 px-4 font-medium text-[#24211D]">
-                    <div>
-                      <div className="text-sm font-serif font-bold text-[#24211D]">{p.organizationName}</div>
-                      <div className="text-[10px] text-[#766F63] font-mono">{p.razorpayPaymentId}</div>
-                    </div>
-                  </td>
-                  <td className="py-3 px-4 text-[#766F63] font-medium">
-                    {p.planTier}
-                  </td>
-                  <td className="py-3 px-4 font-mono text-[#766F63]">
-                    ₹{p.amountINR.toLocaleString()}
-                  </td>
-                  <td className="py-3 px-4 font-mono text-[#766F63]">
-                    ₹{p.gstINR.toLocaleString()}
-                  </td>
-                  <td className="py-3 px-4 font-mono font-bold text-[#24211D]">
-                    ₹{p.totalINR.toLocaleString()}
-                  </td>
-                  <td className="py-3 px-4 text-[#766F63]">
-                    {p.paymentMethod}
-                  </td>
-                  <td className="py-3 px-4">
-                    <Badge variant={p.status === 'CAPTURED' ? 'success' : p.status === 'FAILED' ? 'error' : 'warning'}>
-                      {p.status}
-                    </Badge>
-                  </td>
-                  <td className="py-3 px-4 text-right">
-                    <Button variant="ghost" size="xs" icon={<Download className="w-3.5 h-3.5" />}>
-                      PDF
-                    </Button>
+              {filteredPayments.length === 0 ? (
+                <tr>
+                  <td colSpan={8} className="py-12 text-center text-[#766F63]">
+                    <Receipt className="w-8 h-8 text-[#DDD4C4] mx-auto mb-2" />
+                    <p className="font-serif font-bold text-sm text-[#24211D]">No payment transactions yet</p>
+                    <p className="text-xs">Real customer subscription payments and GST invoices will be recorded here.</p>
                   </td>
                 </tr>
-              ))}
+              ) : (
+                filteredPayments.map((p) => (
+                  <tr key={p.id} className="hover:bg-[#F7F3EA]/60 transition-colors">
+                    <td className="py-3 px-4 font-medium text-[#24211D]">
+                      <div>
+                        <div className="text-sm font-serif font-bold text-[#24211D]">{p.organizationName}</div>
+                        <div className="text-[10px] text-[#766F63] font-mono">{p.razorpayPaymentId}</div>
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 text-[#766F63] font-medium">
+                      {p.planTier}
+                    </td>
+                    <td className="py-3 px-4 font-mono text-[#766F63]">
+                      ₹{p.amountINR.toLocaleString()}
+                    </td>
+                    <td className="py-3 px-4 font-mono text-[#766F63]">
+                      ₹{p.gstINR.toLocaleString()}
+                    </td>
+                    <td className="py-3 px-4 font-mono font-bold text-[#24211D]">
+                      ₹{p.totalINR.toLocaleString()}
+                    </td>
+                    <td className="py-3 px-4 text-[#766F63]">
+                      {p.paymentMethod}
+                    </td>
+                    <td className="py-3 px-4">
+                      <Badge variant={p.status === 'CAPTURED' ? 'success' : p.status === 'FAILED' ? 'error' : 'warning'}>
+                        {p.status}
+                      </Badge>
+                    </td>
+                    <td className="py-3 px-4 text-right">
+                      <Button variant="ghost" size="xs" icon={<Download className="w-3.5 h-3.5" />}>
+                        PDF
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

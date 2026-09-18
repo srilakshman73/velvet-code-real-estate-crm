@@ -60,8 +60,8 @@ export function RealtyAIFloatingWidget() {
     "Show me today's follow-ups",
     'Which leads are most likely to convert?',
     'Show properties below ₹1.5 Crore',
-    "Summarize Rahul Sharma's history",
-    'Draft a follow-up WhatsApp to Dr. Priya',
+    "Summarize our active lead pipeline",
+    'Draft a personalized follow-up WhatsApp message',
   ];
 
   return (

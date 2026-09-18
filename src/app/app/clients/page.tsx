@@ -258,14 +258,14 @@ export default function ClientsPage() {
             <Input
               label="Client Name *"
               required
-              placeholder="e.g. Dr. Priya Raghavan"
+              placeholder="e.g. Ramesh Balaji"
               value={newClientForm.name}
               onChange={(e) => setNewClientForm({ ...newClientForm, name: e.target.value })}
             />
             <Input
               label="Phone Number *"
               required
-              placeholder="+91 94436 47190"
+              placeholder="+91 98765 43210"
               value={newClientForm.phone}
               onChange={(e) => setNewClientForm({ ...newClientForm, phone: e.target.value })}
             />
@@ -275,7 +275,7 @@ export default function ClientsPage() {
             <Input
               label="Email"
               type="email"
-              placeholder="priya@domain.com"
+              placeholder="client@domain.com"
               value={newClientForm.email}
               onChange={(e) => setNewClientForm({ ...newClientForm, email: e.target.value })}
             />

@@ -28,12 +28,12 @@ import {
 } from 'recharts';
 
 const USAGE_TIMELINE = [
-  { time: '00:00', aiCalls: 1200, waMessages: 4100 },
-  { time: '04:00', aiCalls: 450, waMessages: 1200 },
-  { time: '08:00', aiCalls: 5400, waMessages: 18200 },
-  { time: '12:00', aiCalls: 9800, waMessages: 34100 },
-  { time: '16:00', aiCalls: 12400, waMessages: 42000 },
-  { time: '20:00', aiCalls: 7600, waMessages: 26500 },
+  { time: '00:00', aiCalls: 0, waMessages: 0 },
+  { time: '04:00', aiCalls: 0, waMessages: 0 },
+  { time: '08:00', aiCalls: 0, waMessages: 0 },
+  { time: '12:00', aiCalls: 0, waMessages: 0 },
+  { time: '16:00', aiCalls: 0, waMessages: 0 },
+  { time: '20:00', aiCalls: 0, waMessages: 0 },
 ];
 
 export default function AdminUsagePage() {
@@ -56,8 +56,8 @@ export default function AdminUsagePage() {
             <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">AI Inferences (MTD)</span>
             <Sparkles className="w-4 h-4 text-[#A374]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">184,500</div>
-          <div className="text-xs text-[#8F642B] mt-1 font-medium">214M tokens processed</div>
+          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">0</div>
+          <div className="text-xs text-[#8F642B] mt-1 font-medium">0 tokens processed</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
@@ -65,8 +65,8 @@ export default function AdminUsagePage() {
             <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">WhatsApp Messages Sent</span>
             <MessageSquare className="w-4 h-4 text-[#2E6B4F]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">432,000</div>
-          <div className="text-xs text-[#2E6B4F] mt-1 font-medium">99.6% delivery success rate</div>
+          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">0</div>
+          <div className="text-xs text-[#2E6B4F] mt-1 font-medium">100% delivery reliability</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
@@ -74,8 +74,8 @@ export default function AdminUsagePage() {
             <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">PostgreSQL DB Size</span>
             <Database className="w-4 h-4 text-[#3B5BDB]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">18.4 GB</div>
-          <div className="text-xs text-[#3B5BDB] mt-1 font-medium">1,248 isolated tenant schemas</div>
+          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">24 MB</div>
+          <div className="text-xs text-[#3B5BDB] mt-1 font-medium">Isolated tenant schema ready</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
@@ -83,8 +83,8 @@ export default function AdminUsagePage() {
             <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Average API Latency</span>
             <Zap className="w-4 h-4 text-[#7048E8]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">142 ms</div>
-          <div className="text-xs text-[#2E6B4F] mt-1 font-medium">Under 200ms target SLA</div>
+          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">85 ms</div>
+          <div className="text-xs text-[#2E6B4F] mt-1 font-medium">Optimal edge latency</div>
         </Card>
       </div>
 

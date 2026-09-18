@@ -6,6 +6,7 @@ import { useCRMStore } from '@/lib/store';
 import { MetricCard } from '@/components/ui/MetricCard';
 import { LeadStatusBadge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { formatINR, buildWhatsAppUrl } from '@/lib/utils';
 import {
   Users,
@@ -19,6 +20,7 @@ import {
   Clock,
   ChevronRight,
   Award,
+  Building2,
 } from 'lucide-react';
 import {
   AreaChart,
@@ -37,6 +39,7 @@ export default function DashboardPage() {
   const {
     currentOrg,
     currentUser,
+    users,
     leads,
     deals,
     siteVisits,
@@ -46,28 +49,47 @@ export default function DashboardPage() {
 
   const [dateRange, setDateRange] = useState<'30D' | 'ThisMonth' | 'AllTime'>('ThisMonth');
 
-  // Revenue Trend Data (Past 6 Months in Lakhs INR)
+  // Dynamic Closed Revenue
+  const closedWonRevenue = deals
+    .filter((d) => d.stage === 'CLOSED_WON')
+    .reduce((sum, d) => sum + d.dealValueINR, 0);
+
+  const activePipelineCount = deals.filter(
+    (d) => d.stage !== 'CLOSED_WON' && d.stage !== 'CLOSED_LOST'
+  ).length;
+
+  // Revenue Trend Data (Clean fallback)
   const revenueChartData = [
-    { month: 'Apr', revenueLakhs: 14.2, leads: 110 },
-    { month: 'May', revenueLakhs: 16.8, leads: 145 },
-    { month: 'Jun', revenueLakhs: 18.5, leads: 180 },
-    { month: 'Jul', revenueLakhs: 21.0, leads: 205 },
-    { month: 'Aug', revenueLakhs: 20.4, leads: 220 },
-    { month: 'Sep', revenueLakhs: 24.8, leads: 248 },
+    { month: 'Apr', revenueLakhs: 0, leads: 0 },
+    { month: 'May', revenueLakhs: 0, leads: 0 },
+    { month: 'Jun', revenueLakhs: 0, leads: 0 },
+    { month: 'Jul', revenueLakhs: 0, leads: 0 },
+    { month: 'Aug', revenueLakhs: 0, leads: 0 },
+    { month: 'Sep', revenueLakhs: closedWonRevenue / 100000, leads: leads.length },
   ];
 
-  // Lead Source Distribution
-  const leadSourceData = [
-    { name: 'WhatsApp', value: 38, color: '#2E6B4F' },
-    { name: 'Website', value: 28, color: '#A374' },
-    { name: 'Referral', value: 16, color: '#3D5A80' },
-    { name: 'Meta Ads', value: 12, color: '#6B5B95' },
-    { name: 'Walk-in', value: 6, color: '#B87B28' },
-  ];
+  // Lead Source Distribution (Dynamic or clean default)
+  const sourceCounts: { [key: string]: number } = {};
+  leads.forEach((l) => {
+    sourceCounts[l.source] = (sourceCounts[l.source] || 0) + 1;
+  });
 
-  // Filtered Follow-ups
-  const dueTodayFollowUps = followUps.filter((f) => f.status === 'DUE_TODAY' || f.status === 'OVERDUE');
-  const upcomingVisits = siteVisits.filter((v) => v.status === 'CONFIRMED' || v.status === 'SCHEDULED').slice(0, 4);
+  const leadSourceData =
+    leads.length > 0
+      ? Object.keys(sourceCounts).map((source, idx) => ({
+          name: source,
+          value: Math.round((sourceCounts[source] / leads.length) * 100),
+          color: ['#2E6B4F', '#A374', '#3D5A80', '#6B5B95', '#B87B28'][idx % 5],
+        }))
+      : [{ name: 'Direct Inquiries', value: 100, color: '#A374' }];
+
+  // Filtered Follow-ups & Visits
+  const dueTodayFollowUps = followUps.filter(
+    (f) => f.status === 'DUE_TODAY' || f.status === 'OVERDUE'
+  );
+  const upcomingVisits = siteVisits
+    .filter((v) => v.status === 'CONFIRMED' || v.status === 'SCHEDULED')
+    .slice(0, 4);
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#F7F3EA] text-[#24211D]">
@@ -80,7 +102,8 @@ export default function DashboardPage() {
             Good morning, {currentUser.name} 👋
           </h1>
           <p className="text-xs sm:text-sm text-[#766F63] mt-1">
-            Here's what's happening with your real estate business at <strong className="text-[#24211D]">{currentOrg.name}</strong>.
+            Here's what's happening with your real estate business at{' '}
+            <strong className="text-[#24211D]">{currentOrg.name}</strong>.
           </p>
         </div>
 
@@ -118,36 +141,36 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
           title="Total Leads"
-          value="248"
-          changePercent={12.4}
-          changeLabel="vs last month"
+          value={leads.length.toString()}
+          changePercent={leads.length > 0 ? 100 : 0}
+          changeLabel={leads.length > 0 ? 'active contacts' : 'No leads yet'}
           icon={<Users className="w-5 h-5 text-[#3D5A80]" />}
           variant="blue"
         />
 
         <MetricCard
           title="Site Visits"
-          value="42"
-          changePercent={8.2}
-          changeLabel="confirmed viewings"
+          value={siteVisits.length.toString()}
+          changePercent={siteVisits.length > 0 ? 100 : 0}
+          changeLabel={siteVisits.length > 0 ? 'scheduled viewings' : 'No visits scheduled'}
           icon={<CalendarCheck className="w-5 h-5 text-[#6B5B95]" />}
           variant="purple"
         />
 
         <MetricCard
           title="Active Deals"
-          value="18"
-          changePercent={15.1}
-          changeLabel="active in pipeline"
+          value={activePipelineCount.toString()}
+          changePercent={activePipelineCount > 0 ? 100 : 0}
+          changeLabel={activePipelineCount > 0 ? 'in sales pipeline' : 'No active deals'}
           icon={<Kanban className="w-5 h-5 text-[#8F642B]" />}
           variant="gold"
         />
 
         <MetricCard
-          title="Revenue (This Month)"
-          value="₹24.8L"
-          changePercent={21.3}
-          changeLabel="closed commissions"
+          title="Revenue"
+          value={closedWonRevenue > 0 ? formatINR(closedWonRevenue, true) : '₹0'}
+          changePercent={closedWonRevenue > 0 ? 100 : 0}
+          changeLabel={closedWonRevenue > 0 ? 'closed transactions' : 'No closed deals yet'}
           icon={<DollarSign className="w-5 h-5 text-[#2E6B4F]" />}
           variant="emerald"
         />
@@ -256,8 +279,10 @@ export default function DashboardPage() {
               </PieChart>
             </ResponsiveContainer>
             <div className="absolute text-center">
-              <p className="text-xl font-extrabold text-[#24211D]">38%</p>
-              <p className="text-[10px] text-[#766F63] font-semibold">WhatsApp CRM</p>
+              <p className="text-xl font-extrabold text-[#24211D]">
+                {leads.length > 0 ? `${leads.length}` : '0'}
+              </p>
+              <p className="text-[10px] text-[#766F63] font-semibold">Total Leads</p>
             </div>
           </div>
 
@@ -303,60 +328,68 @@ export default function DashboardPage() {
               </Link>
             </div>
 
-            <div className="space-y-3">
-              {dueTodayFollowUps.map((fu) => (
-                <div
-                  key={fu.id}
-                  className="p-4 rounded-xl bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374]/60 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
-                >
-                  <div className="space-y-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-[#24211D] text-sm truncate">{fu.leadName}</span>
-                      <span
-                        className={`px-2 py-0.5 text-[10px] font-bold rounded ${
-                          fu.status === 'OVERDUE'
-                            ? 'bg-[#8B2635]/15 text-[#8B2635]'
-                            : 'bg-[#B87B28]/15 text-[#8A5612]'
-                        }`}
-                      >
-                        {fu.status === 'OVERDUE' ? '⚠️ Overdue' : '⏰ Due Today'}
-                      </span>
+            {dueTodayFollowUps.length === 0 ? (
+              <EmptyState
+                icon={<Clock className="w-6 h-6 text-[#8F642B]" />}
+                title="No follow-ups due today"
+                description="You are completely up to date. Schedule follow-ups with your leads to stay on top of client conversations."
+              />
+            ) : (
+              <div className="space-y-3">
+                {dueTodayFollowUps.map((fu) => (
+                  <div
+                    key={fu.id}
+                    className="p-4 rounded-xl bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374]/60 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
+                  >
+                    <div className="space-y-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-[#24211D] text-sm truncate">{fu.leadName}</span>
+                        <span
+                          className={`px-2 py-0.5 text-[10px] font-bold rounded ${
+                            fu.status === 'OVERDUE'
+                              ? 'bg-[#8B2635]/15 text-[#8B2635]'
+                              : 'bg-[#B87B28]/15 text-[#8A5612]'
+                          }`}
+                        >
+                          {fu.status === 'OVERDUE' ? '⚠️ Overdue' : '⏰ Due Today'}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[#766F63] truncate">
+                        {fu.propertyName || 'Inquiry'} • {fu.notes}
+                      </p>
                     </div>
-                    <p className="text-xs text-[#766F63] truncate">
-                      {fu.propertyName || 'Inquiry'} • {fu.notes}
-                    </p>
+
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <a
+                        href={`tel:${fu.customerPhone}`}
+                        className="p-2 rounded-xl bg-[#F7F3EA] hover:bg-[#EFE8DA] text-[#24211D] transition-colors text-xs flex items-center gap-1 border border-[#DDD4C4]"
+                        title="Call Client"
+                      >
+                        <Phone className="w-3.5 h-3.5 text-[#3D5A80]" />
+                      </a>
+
+                      <a
+                        href={buildWhatsAppUrl(fu.customerPhone, `Hello ${fu.leadName}, following up on ${fu.propertyName || 'your inquiry'}.`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-xl bg-[#2E6B4F]/10 hover:bg-[#2E6B4F]/20 text-[#2E6B4F] border border-[#2E6B4F]/30 transition-colors text-xs flex items-center gap-1"
+                        title="Send WhatsApp"
+                      >
+                        <MessageSquare className="w-3.5 h-3.5" />
+                      </a>
+
+                      <Button
+                        variant="gold"
+                        size="xs"
+                        onClick={() => completeFollowUp(fu.id)}
+                      >
+                        Complete
+                      </Button>
+                    </div>
                   </div>
-
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <a
-                      href={`tel:${fu.customerPhone}`}
-                      className="p-2 rounded-xl bg-[#F7F3EA] hover:bg-[#EFE8DA] text-[#24211D] transition-colors text-xs flex items-center gap-1 border border-[#DDD4C4]"
-                      title="Call Client"
-                    >
-                      <Phone className="w-3.5 h-3.5 text-[#3D5A80]" />
-                    </a>
-
-                    <a
-                      href={buildWhatsAppUrl(fu.customerPhone, `Hello ${fu.leadName}, following up on ${fu.propertyName || 'your inquiry'}.`)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-xl bg-[#2E6B4F]/10 hover:bg-[#2E6B4F]/20 text-[#2E6B4F] border border-[#2E6B4F]/30 transition-colors text-xs flex items-center gap-1"
-                      title="Send WhatsApp"
-                    >
-                      <MessageSquare className="w-3.5 h-3.5" />
-                    </a>
-
-                    <Button
-                      variant="gold"
-                      size="xs"
-                      onClick={() => completeFollowUp(fu.id)}
-                    >
-                      Complete
-                    </Button>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Recent Hot Leads */}
@@ -374,50 +407,60 @@ export default function DashboardPage() {
               </Link>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead>
-                  <tr className="text-[#766F63] border-b border-[#DDD4C4] pb-2 font-bold">
-                    <th className="pb-2">Lead Name</th>
-                    <th className="pb-2">Budget</th>
-                    <th className="pb-2">Status</th>
-                    <th className="pb-2">Score</th>
-                    <th className="pb-2 text-right">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#DDD4C4]/60">
-                  {leads.slice(0, 5).map((l) => (
-                    <tr key={l.id} className="hover:bg-[#EFE8DA]/40 transition-colors">
-                      <td className="py-3 font-bold text-[#24211D]">
-                        <Link href="/app/leads" className="hover:text-[#8F642B]">
-                          {l.name}
-                        </Link>
-                        <p className="text-[10px] text-[#766F63] font-normal">{l.phone}</p>
-                      </td>
-                      <td className="py-3 text-[#24211D] font-bold font-mono">
-                        {l.budgetMaxINR ? formatINR(l.budgetMaxINR, true) : 'Flexible'}
-                      </td>
-                      <td className="py-3">
-                        <LeadStatusBadge status={l.status} />
-                      </td>
-                      <td className="py-3">
-                        <span className="font-extrabold text-[#2E6B4F]">{l.score}%</span>
-                      </td>
-                      <td className="py-3 text-right">
-                        <a
-                          href={buildWhatsAppUrl(l.phone, `Hello ${l.name}, connecting regarding ${l.interestedPropertyName || 'your inquiry'}.`)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-[11px] font-bold text-[#2E6B4F] hover:underline"
-                        >
-                          <MessageSquare className="w-3 h-3" /> WhatsApp
-                        </a>
-                      </td>
+            {leads.length === 0 ? (
+              <EmptyState
+                icon={<Users className="w-6 h-6 text-[#8F642B]" />}
+                title="No leads yet"
+                description="Start by adding your first buyer lead or capture direct inquiries from your WhatsApp CRM and landing page."
+                actionLabel="Add First Lead"
+                onAction={() => (window.location.href = '/app/leads')}
+              />
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead>
+                    <tr className="text-[#766F63] border-b border-[#DDD4C4] pb-2 font-bold">
+                      <th className="pb-2">Lead Name</th>
+                      <th className="pb-2">Budget</th>
+                      <th className="pb-2">Status</th>
+                      <th className="pb-2">Score</th>
+                      <th className="pb-2 text-right">Action</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="divide-y divide-[#DDD4C4]/60">
+                    {leads.slice(0, 5).map((l) => (
+                      <tr key={l.id} className="hover:bg-[#EFE8DA]/40 transition-colors">
+                        <td className="py-3 font-bold text-[#24211D]">
+                          <Link href="/app/leads" className="hover:text-[#8F642B]">
+                            {l.name}
+                          </Link>
+                          <p className="text-[10px] text-[#766F63] font-normal">{l.phone}</p>
+                        </td>
+                        <td className="py-3 text-[#24211D] font-bold font-mono">
+                          {l.budgetMaxINR ? formatINR(l.budgetMaxINR, true) : 'Flexible'}
+                        </td>
+                        <td className="py-3">
+                          <LeadStatusBadge status={l.status} />
+                        </td>
+                        <td className="py-3">
+                          <span className="font-extrabold text-[#2E6B4F]">{l.score}%</span>
+                        </td>
+                        <td className="py-3 text-right">
+                          <a
+                            href={buildWhatsAppUrl(l.phone, `Hello ${l.name}, connecting regarding ${l.interestedPropertyName || 'your inquiry'}.`)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[11px] font-bold text-[#2E6B4F] hover:underline"
+                          >
+                            <MessageSquare className="w-3 h-3" /> WhatsApp
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
 
@@ -445,49 +488,52 @@ export default function DashboardPage() {
               </Link>
             </div>
 
-            <div className="space-y-3">
-              {upcomingVisits.map((v) => (
-                <div
-                  key={v.id}
-                  className="p-3.5 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] space-y-2 shadow-2xs"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#24211D]">{v.propertyName}</span>
-                    <span className="px-2 py-0.5 text-[10px] font-bold bg-[#3D5A80]/15 text-[#293E58] rounded">
-                      {v.timeSlot}
-                    </span>
+            {upcomingVisits.length === 0 ? (
+              <EmptyState
+                icon={<CalendarCheck className="w-6 h-6 text-[#3D5A80]" />}
+                title="No site visits scheduled"
+                description="Coordinate private viewings with prospective buyers to track site visits and feedback."
+              />
+            ) : (
+              <div className="space-y-3">
+                {upcomingVisits.map((v) => (
+                  <div
+                    key={v.id}
+                    className="p-3.5 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] space-y-2 shadow-2xs"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#24211D]">{v.propertyName}</span>
+                      <span className="px-2 py-0.5 text-[10px] font-bold bg-[#3D5A80]/15 text-[#293E58] rounded">
+                        {v.timeSlot}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs text-[#766F63]">
+                      <span>Buyer: <strong className="text-[#24211D]">{v.leadName || 'Client'}</strong></span>
+                      <span>Date: <strong className="text-[#24211D]">{v.visitDate}</strong></span>
+                    </div>
+                    <p className="text-[11px] text-[#766F63] truncate">
+                      Assigned: {v.assignedAgentName || currentUser.name} • {v.propertyLocation || 'Venue'}
+                    </p>
                   </div>
-                  <div className="flex items-center justify-between text-xs text-[#766F63]">
-                    <span>Buyer: <strong className="text-[#24211D]">{v.leadName || 'Client'}</strong></span>
-                    <span>Date: <strong className="text-[#24211D]">{v.visitDate}</strong></span>
-                  </div>
-                  <p className="text-[11px] text-[#766F63] truncate">
-                    Assigned: {v.assignedAgentName} • {v.propertyLocation}
-                  </p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Agent Performance Leaderboard */}
+          {/* Team Performance Overview */}
           <div className="p-6 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] aurum-card-shadow space-y-4">
             <div className="flex items-center justify-between border-b border-[#DDD4C4] pb-4">
               <h3 className="text-base font-bold text-[#24211D] tracking-tight flex items-center gap-2">
                 <Award className="w-4 h-4 text-[#8F642B]" />
-                Top Sales Consultants
+                Sales Consultants
               </h3>
-              <span className="text-xs text-[#766F63] font-medium">Monthly Leaderboard</span>
+              <span className="text-xs text-[#766F63] font-medium">Team Overview</span>
             </div>
 
             <div className="space-y-3 text-xs">
-              {[
-                { name: 'Velvet Code', deals: '₹5.20 Cr', count: '1 Closed', visits: 3, role: 'Owner' },
-                { name: 'Karthik Subramanian', deals: '₹2.87 Cr (Pipe)', count: '2 In Neg.', visits: 8, role: 'Manager' },
-                { name: 'Ananya Iyer', deals: '₹3.85 Cr (Pipe)', count: '1 Scheduled', visits: 5, role: 'Admin' },
-                { name: 'Divya Krishnan', deals: '₹1.76 Cr (Pipe)', count: '2 Qualified', visits: 6, role: 'Agent' },
-              ].map((agent, i) => (
+              {users.map((u, i) => (
                 <div
-                  key={i}
+                  key={u.id}
                   className="flex items-center justify-between p-3 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4]"
                 >
                   <div className="flex items-center gap-2.5">
@@ -495,13 +541,15 @@ export default function DashboardPage() {
                       {i + 1}
                     </div>
                     <div>
-                      <p className="font-bold text-[#24211D]">{agent.name}</p>
-                      <p className="text-[10px] text-[#766F63]">{agent.role} • {agent.visits} visits</p>
+                      <p className="font-bold text-[#24211D]">{u.name}</p>
+                      <p className="text-[10px] text-[#766F63]">{u.role} • {u.email}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-[#8F642B] font-mono">{agent.deals}</p>
-                    <p className="text-[10px] text-[#2E6B4F] font-bold">{agent.count}</p>
+                    <p className="font-bold text-[#8F642B] font-mono">
+                      {closedWonRevenue > 0 ? formatINR(closedWonRevenue, true) : '₹0'}
+                    </p>
+                    <p className="text-[10px] text-[#2E6B4F] font-bold">Active</p>
                   </div>
                 </div>
               ))}

@@ -35,7 +35,7 @@ interface GlobalSub {
 const MOCK_SUBS: GlobalSub[] = [
   {
     id: 'sub-apex-01',
-    organizationName: 'Velvet Realty Solutions',
+    organizationName: 'Velvet Code Realty',
     tier: 'PROFESSIONAL',
     status: 'ACTIVE',
     billingCycle: 'monthly',
@@ -43,61 +43,6 @@ const MOCK_SUBS: GlobalSub[] = [
     currentPeriodEnd: '2026-10-01',
     paymentMethod: 'UPI AutoPay (Razorpay)',
     autoRenew: true,
-  },
-  {
-    id: 'sub-heritage-02',
-    organizationName: 'Heritage Luxury Estates',
-    tier: 'BUSINESS',
-    status: 'ACTIVE',
-    billingCycle: 'annual',
-    priceINR: 38390,
-    currentPeriodEnd: '2027-06-15',
-    paymentMethod: 'Corporate Credit Card',
-    autoRenew: true,
-  },
-  {
-    id: 'sub-metro-03',
-    organizationName: 'Metropolis Prime Properties',
-    tier: 'BUSINESS',
-    status: 'ACTIVE',
-    billingCycle: 'annual',
-    priceINR: 38390,
-    currentPeriodEnd: '2027-05-10',
-    paymentMethod: 'NetBanking NACH',
-    autoRenew: true,
-  },
-  {
-    id: 'sub-skyline-04',
-    organizationName: 'Skyline Realtors & Advisors',
-    tier: 'STARTER',
-    status: 'ACTIVE',
-    billingCycle: 'monthly',
-    priceINR: 599,
-    currentPeriodEnd: '2026-09-30',
-    paymentMethod: 'HDFC Debit Card',
-    autoRenew: true,
-  },
-  {
-    id: 'sub-coimbatore-05',
-    organizationName: 'Kovai Urban Lands & Villas',
-    tier: 'PROFESSIONAL',
-    status: 'PAST_DUE',
-    billingCycle: 'monthly',
-    priceINR: 1499,
-    currentPeriodEnd: '2026-09-10',
-    paymentMethod: 'ICICI UPI',
-    autoRenew: false,
-  },
-  {
-    id: 'sub-coastal-06',
-    organizationName: 'Coastal Bay Realty',
-    tier: 'STARTER',
-    status: 'CANCELED',
-    billingCycle: 'monthly',
-    priceINR: 599,
-    currentPeriodEnd: '2026-09-01',
-    paymentMethod: 'Axis Card',
-    autoRenew: false,
   },
 ];
 
@@ -127,22 +72,22 @@ export default function AdminSubscriptionsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Annualized Run Rate (ARR)</span>
-          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">₹1.48 Crore</div>
+          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">₹0</div>
           <div className="text-xs text-[#2E6B4F] mt-1 flex items-center gap-1 font-semibold">
-            <ArrowUpRight className="w-3.5 h-3.5" /> +18.4% compared to last quarter
+            <ArrowUpRight className="w-3.5 h-3.5" /> Starting Platform Baseline
           </div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Active Paid Subscriptions</span>
-          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">864 Contracts</div>
-          <div className="text-xs text-[#8F642B] mt-1 font-medium">94.8% auto-renewal rate</div>
+          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">{subs.length} Contract</div>
+          <div className="text-xs text-[#8F642B] mt-1 font-medium">100% renewal baseline</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Average Revenue Per Tenant (ARPU)</span>
-          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">₹1,435 / mo</div>
-          <div className="text-xs text-[#3B5BDB] mt-1 font-medium">Driven by Professional tier adoption</div>
+          <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">₹0 / mo</div>
+          <div className="text-xs text-[#3B5BDB] mt-1 font-medium">Professional & Business tiers</div>
         </Card>
       </div>
 

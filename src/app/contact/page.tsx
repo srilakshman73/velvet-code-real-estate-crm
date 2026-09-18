@@ -87,16 +87,11 @@ export default function ContactPage() {
                   <div className="flex items-start gap-3">
                     <Phone className="w-4 h-4 text-[#8F642B] mt-0.5" />
                     <div>
-                      <p className="font-bold text-[#24211D]">Phone / WhatsApp Contacts</p>
+                      <p className="font-bold text-[#24211D]">Phone / WhatsApp Contact</p>
                       <div className="space-y-1 mt-0.5">
                         <div>
                           <a href={officialWhatsAppUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#8F642B] text-[#766F63] font-medium">
                             +91 63833 95915 <span className="text-[11px] text-[#2E6B4F] font-bold">(Primary WhatsApp)</span>
-                          </a>
-                        </div>
-                        <div>
-                          <a href="tel:+919443647190" className="hover:text-[#8F642B] text-[#766F63]">
-                            +91 94436 47190 <span className="text-[11px] text-[#766F63]">(Support & Operations)</span>
                           </a>
                         </div>
                       </div>
@@ -137,7 +132,7 @@ export default function ContactPage() {
                     <h3 className="text-2xl font-bold text-[#24211D]">Thank You for Contacting Us!</h3>
                     <p className="text-sm text-[#766F63] max-w-md mx-auto leading-relaxed">
                       Our real estate technology consultant will reach out via phone/WhatsApp at{' '}
-                      <strong className="text-[#8F642B]">{formData.phone || '+91 94436 47190'}</strong> within 2 hours.
+                      <strong className="text-[#8F642B]">{formData.phone || '+91 63833 95915'}</strong> within 2 hours.
                     </p>
                     <Button
                       variant="outline"

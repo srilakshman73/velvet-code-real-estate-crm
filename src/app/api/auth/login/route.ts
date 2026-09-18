@@ -30,9 +30,9 @@ export async function POST(request: Request) {
 
       const ownerUser = {
         id: 'usr-admin-01',
-        name: 'Velvet Code',
+        name: 'Sri Lakshman',
         email: 'srilakshman73@gmail.com',
-        phone: '+91 94436 47190',
+        phone: '+91 63833 95915',
         role: 'OWNER',
         organizationId: 'org-root-00',
         organizationName: 'Velvet Code HQ',
