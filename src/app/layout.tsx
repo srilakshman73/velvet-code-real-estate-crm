@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Playfair_Display, Manrope } from 'next/font/google';
 import './globals.css';
 import { CRMStoreProvider } from '@/lib/store';
+import { FloatingWhatsAppButton } from '@/components/layout/FloatingWhatsAppButton';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -62,8 +63,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${manrope.variable} h-full bg-[#F7F3EA] text-[#24211D]`}>
       <body className="min-h-full flex flex-col font-sans antialiased bg-[#F7F3EA] text-[#24211D] selection:bg-[#A374]/30 selection:text-[#24211D]">
-        <CRMStoreProvider>{children}</CRMStoreProvider>
+        <CRMStoreProvider>
+          {children}
+          <FloatingWhatsAppButton />
+        </CRMStoreProvider>
       </body>
     </html>
   );
 }
+

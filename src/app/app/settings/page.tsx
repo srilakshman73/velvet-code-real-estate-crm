@@ -296,13 +296,13 @@ export default function SettingsPage() {
                 </p>
               </div>
               <a
-                href={buildWhatsAppUrl('919443647190', 'Hello Velvet Code, I am checking my CRM WhatsApp integration status.')}
+                href={buildWhatsAppUrl('91638339515', 'Hello, I would like to know more about your Real Estate CRM.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#2E6B4F]/10 text-[#2E6B4F] border border-[#2E6B4F]/20 text-xs font-medium hover:bg-[#2E6B4F]/20 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
-                Test Official Chat (+91 94436 47190)
+                Test Official Chat (+91 63833 9515)
                 <ExternalLink className="w-3 h-3" />
               </a>
             </div>

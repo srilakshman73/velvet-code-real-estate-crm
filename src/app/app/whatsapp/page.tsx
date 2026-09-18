@@ -104,7 +104,7 @@ export default function WhatsAppCRMPage() {
             </span>
           </div>
           <p className="text-xs sm:text-sm text-[#766F63] mt-1">
-            Official Meta Cloud API • Direct click-to-chat with <strong className="text-[#2E6B4F] font-mono">+91 94436 47190</strong>
+            Official Meta Cloud API • Direct click-to-chat with <strong className="text-[#2E6B4F] font-mono">+91 63833 9515</strong>
           </p>
         </div>
 
@@ -115,13 +115,13 @@ export default function WhatsAppCRMPage() {
             </Button>
           </Link>
           <a
-            href={buildWhatsAppUrl('919443647190', 'Hello Velvet Code, I want to test the WhatsApp integration.')}
+            href={buildWhatsAppUrl('91638339515', 'Hello, I would like to know more about your Real Estate CRM.')}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#2E6B4F] hover:bg-[#255740] text-white font-bold text-xs shadow-sm transition-all"
           >
             <MessageSquare className="w-3.5 h-3.5" />
-            +91 94436 47190
+            +91 63833 9515
           </a>
         </div>
       </div>

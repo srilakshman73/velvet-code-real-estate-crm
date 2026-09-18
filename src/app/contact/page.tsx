@@ -25,8 +25,8 @@ export default function ContactPage() {
   };
 
   const officialWhatsAppUrl = buildWhatsAppUrl(
-    '919443647190',
-    'Hello Velvet Code, I would like to know more about your Real Estate CRM.'
+    '91638339515',
+    'Hello, I would like to know more about your Real Estate CRM.'
   );
 
   return (
@@ -73,7 +73,7 @@ export default function ContactPage() {
                 >
                   <div className="flex items-center gap-2.5">
                     <MessageSquare className="w-5 h-5 fill-current" />
-                    <span>Chat on WhatsApp: +91 94436 47190</span>
+                    <span>Chat on WhatsApp: +91 63833 9515</span>
                   </div>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
@@ -87,10 +87,19 @@ export default function ContactPage() {
                   <div className="flex items-start gap-3">
                     <Phone className="w-4 h-4 text-[#8F642B] mt-0.5" />
                     <div>
-                      <p className="font-bold text-[#24211D]">Phone / WhatsApp</p>
-                      <a href="tel:+919443647190" className="hover:text-[#8F642B] text-[#766F63]">
-                        +91 94436 47190
-                      </a>
+                      <p className="font-bold text-[#24211D]">Phone / WhatsApp Contacts</p>
+                      <div className="space-y-1 mt-0.5">
+                        <div>
+                          <a href={officialWhatsAppUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#8F642B] text-[#766F63] font-medium">
+                            +91 63833 9515 <span className="text-[11px] text-[#2E6B4F] font-bold">(Primary WhatsApp)</span>
+                          </a>
+                        </div>
+                        <div>
+                          <a href="tel:+919443647190" className="hover:text-[#8F642B] text-[#766F63]">
+                            +91 94436 47190 <span className="text-[11px] text-[#766F63]">(Support & Operations)</span>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
 

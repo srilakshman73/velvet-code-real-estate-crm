@@ -13,8 +13,8 @@ import {
 
 export function PublicFooter() {
   const whatsappUrl = buildWhatsAppUrl(
-    '919443647190',
-    'Hello Velvet Code, I would like to know more about your Real Estate CRM SaaS.'
+    '91638339515',
+    'Hello, I would like to know more about your Real Estate CRM.'
   );
 
   return (
@@ -43,7 +43,7 @@ export function PublicFooter() {
             className="flex items-center gap-3 px-6 py-3.5 rounded-xl bg-[#2E6B4F] hover:bg-[#24563F] text-white font-bold text-sm shadow-xl transition-all"
           >
             <MessageSquare className="w-5 h-5 fill-current" />
-            <span>Chat on WhatsApp: +91 94436 47190</span>
+            <span>Chat on WhatsApp: +91 63833 9515</span>
             <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
@@ -61,7 +61,7 @@ export function PublicFooter() {
             <div className="pt-2 space-y-2 text-xs text-[#DDD4C4]/80">
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#A374]" />
-                <span>+91 94436 47190</span>
+                <span>+91 63833 9515 • +91 94436 47190</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#A374]" />

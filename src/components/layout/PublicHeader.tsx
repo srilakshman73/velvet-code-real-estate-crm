@@ -49,13 +49,13 @@ export function PublicHeader() {
         {/* Actions */}
         <div className="hidden md:flex items-center gap-3.5">
           <a
-            href={buildWhatsAppUrl('919443647190', 'Hello Velvet Code, I want to inquire about your Real Estate CRM SaaS.')}
+            href={buildWhatsAppUrl('91638339515', 'Hello, I would like to know more about your Real Estate CRM.')}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold text-[#2E6B4F] bg-[#2E6B4F]/10 hover:bg-[#2E6B4F]/15 border border-[#2E6B4F]/30 rounded-lg transition-colors"
           >
             <MessageSquare className="w-3.5 h-3.5" />
-            +91 94436 47190
+            +91 63833 9515
           </a>
 
           <Link href="/login">
@@ -105,13 +105,13 @@ export function PublicHeader() {
 
           <div className="pt-4 border-t border-[#DDD4C4] space-y-3">
             <a
-              href={buildWhatsAppUrl('919443647190', 'Hello Velvet Code, I want to inquire about your Real Estate CRM SaaS.')}
+              href={buildWhatsAppUrl('91638339515', 'Hello, I would like to know more about your Real Estate CRM.')}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-semibold text-[#2E6B4F] bg-[#2E6B4F]/10 border border-[#2E6B4F]/30 rounded-xl"
             >
               <MessageSquare className="w-4 h-4" />
-              WhatsApp: +91 94436 47190
+              WhatsApp: +91 63833 9515
             </a>
 
             <div className="grid grid-cols-2 gap-2">
