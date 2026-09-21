@@ -52,9 +52,9 @@ const MRR_HISTORY = [
 ];
 
 const TIER_DISTRIBUTION = [
-  { name: 'Starter (₹499)', value: 0, color: '#3B5BDB' },
+  { name: 'Starter (₹499)', value: 0, color: '#A87932' },
   { name: 'Professional (₹1,499)', value: 1, color: '#A374' },
-  { name: 'Business (₹3,999)', value: 0, color: '#2E6B4F' },
+  { name: 'Business (₹3,999)', value: 0, color: '#2F6B52' },
 ];
 
 export default function AdminDashboardPage() {
@@ -66,10 +66,10 @@ export default function AdminDashboardPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-serif font-bold text-[#24211D] tracking-tight">SaaS Master Control</h1>
+            <h1 className="text-3xl font-serif font-bold text-[#26231E] tracking-tight">SaaS Master Control</h1>
             <Badge variant="gold">Root Admin</Badge>
           </div>
-          <p className="text-sm text-[#766F63] mt-1">
+          <p className="text-sm text-[#756E63] mt-1">
             Global metrics, tenant health, financial throughput, and multi-tenant infrastructure status.
           </p>
         </div>
@@ -89,62 +89,62 @@ export default function AdminDashboardPage() {
 
       {/* Top 4 Primary SaaS Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DCD3C2] shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Monthly Recurring Revenue</span>
-            <div className="p-2 rounded-lg bg-[#2E6B4F]/10 text-[#2E6B4F] border border-[#2E6B4F]/20">
+            <span className="text-xs font-semibold text-[#756E63] uppercase tracking-wider font-serif">Monthly Recurring Revenue</span>
+            <div className="p-2 rounded-lg bg-[#2F6B52]/10 text-[#2F6B52] border border-[#2F6B52]/20">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-serif font-bold text-[#24211D]">{formatINR(stats.monthlyRecurringRevenueINR)}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#2E6B4F] font-semibold">
+            <div className="text-2xl font-serif font-bold text-[#26231E]">{formatINR(stats.monthlyRecurringRevenueINR)}</div>
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#2F6B52] font-semibold">
               <ArrowUpRight className="w-3.5 h-3.5" />
               <span>Starting Platform Baseline</span>
             </div>
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DCD3C2] shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Active Organizations</span>
+            <span className="text-xs font-semibold text-[#756E63] uppercase tracking-wider font-serif">Active Organizations</span>
             <div className="p-2 rounded-lg bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30">
               <Building className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-serif font-bold text-[#24211D]">{stats.totalOrganizations.toLocaleString()}</div>
+            <div className="text-2xl font-serif font-bold text-[#26231E]">{stats.totalOrganizations.toLocaleString()}</div>
             <div className="flex items-center gap-1.5 mt-1 text-xs text-[#8F642B] font-semibold">
               <span>+{stats.newCustomersThisMonth} registered tenant</span>
             </div>
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DCD3C2] shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Total Active Agents</span>
-            <div className="p-2 rounded-lg bg-[#3B5BDB]/10 text-[#2F49B0] border border-[#3B5BDB]/20">
+            <span className="text-xs font-semibold text-[#756E63] uppercase tracking-wider font-serif">Total Active Agents</span>
+            <div className="p-2 rounded-lg bg-[#171613]/5 text-[#171613] border border-[#DCD3C2]">
               <Users className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-serif font-bold text-[#24211D]">{stats.totalActiveUsers.toLocaleString()}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#766F63]">
+            <div className="text-2xl font-serif font-bold text-[#26231E]">{stats.totalActiveUsers.toLocaleString()}</div>
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#756E63]">
               <span>Master platform owner active</span>
             </div>
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DCD3C2] shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Revenue Churn Rate</span>
-            <div className="p-2 rounded-lg bg-[#7048E8]/10 text-[#5F3DC4] border border-[#7048E8]/20">
+            <span className="text-xs font-semibold text-[#756E63] uppercase tracking-wider font-serif">Revenue Churn Rate</span>
+            <div className="p-2 rounded-lg bg-[#A87932]/10 text-[#A87932] border border-[#A87932]/25">
               <Activity className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-serif font-bold text-[#24211D]">{stats.churnRatePercent}%</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#2E6B4F] font-semibold">
+            <div className="text-2xl font-serif font-bold text-[#26231E]">{stats.churnRatePercent}%</div>
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#2F6B52] font-semibold">
               <ArrowDownRight className="w-3.5 h-3.5" />
               <span>-0.4% lower than SaaS benchmark</span>
             </div>

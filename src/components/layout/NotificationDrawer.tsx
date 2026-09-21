@@ -34,7 +34,7 @@ export function NotificationDrawer({ isOpen, onClose }: NotificationDrawerProps)
       case 'WHATSAPP':
         return <MessageSquare className="w-4 h-4 text-[#2E6B4F]" />;
       case 'VISIT':
-        return <CalendarCheck className="w-4 h-4 text-[#3D5A80]" />;
+        return <CalendarCheck className="w-4 h-4 text-[#A87932]" />;
       case 'LEAD':
         return <Trophy className="w-4 h-4 text-[#A374]" />;
       case 'AI':

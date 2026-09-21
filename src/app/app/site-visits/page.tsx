@@ -93,7 +93,7 @@ export default function SiteVisitsPage() {
             <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight">
               Site Visits Management
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#7048E8]/10 text-[#5F3DC4] border border-[#7048E8]/20 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/40 rounded-full font-serif">
               {siteVisits.length} Recorded Visits
             </span>
           </div>

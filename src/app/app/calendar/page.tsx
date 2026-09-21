@@ -93,20 +93,20 @@ export default function CalendarPage() {
           </div>
 
           <div className="flex items-center gap-4 text-xs">
-            <span className="flex items-center gap-1.5 text-[#3B5BDB] font-medium">
-              <span className="w-2 h-2 rounded-full bg-[#3B5BDB]" /> Site Visits
+            <span className="flex items-center gap-1.5 text-[#A87932] font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#A87932]" /> Site Visits
             </span>
             <span className="flex items-center gap-1.5 text-[#8F642B] font-medium">
               <span className="w-2 h-2 rounded-full bg-[#A374]" /> Follow-ups
             </span>
-            <span className="flex items-center gap-1.5 text-[#2E6B4F] font-medium">
-              <span className="w-2 h-2 rounded-full bg-[#2E6B4F]" /> Tasks
+            <span className="flex items-center gap-1.5 text-[#2F6B52] font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#2F6B52]" /> Tasks
             </span>
           </div>
         </div>
 
         {/* Days of week header */}
-        <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-[#766F63] uppercase tracking-wider pb-2 border-b border-[#DDD4C4]">
+        <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-[#756E63] uppercase tracking-wider pb-2 border-b border-[#DCD3C2]">
           <div>Mon</div>
           <div>Tue</div>
           <div>Wed</div>
@@ -128,13 +128,13 @@ export default function CalendarPage() {
                 className={`min-h-[100px] p-2 rounded-xl border flex flex-col justify-between transition-colors ${
                   isToday
                     ? 'bg-[#A374]/10 border-[#A374] shadow-sm'
-                    : 'bg-white border-[#DDD4C4] hover:border-[#A374]'
+                    : 'bg-white border-[#DCD3C2] hover:border-[#A374]'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span
                     className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${
-                      isToday ? 'bg-[#A374] text-white font-extrabold' : 'text-[#24211D]'
+                      isToday ? 'bg-[#A374] text-white font-extrabold' : 'text-[#26231E]'
                     }`}
                   >
                     {day}
@@ -150,7 +150,7 @@ export default function CalendarPage() {
                   {visits.map((v) => (
                     <div
                       key={v.id}
-                      className="px-1.5 py-0.5 rounded bg-[#3B5BDB]/10 border border-[#3B5BDB]/20 text-[#2F49B0] text-[10px] truncate font-medium"
+                      className="px-1.5 py-0.5 rounded bg-[#A87932]/10 border border-[#A87932]/25 text-[#A87932] text-[10px] truncate font-medium"
                       title={v.propertyName}
                     >
                       📍 {v.timeSlot} {v.propertyName}

@@ -254,7 +254,7 @@ export default function RealtyAIPage() {
 
               <div className="p-3.5 rounded-xl bg-white border border-[#DDD4C4] space-y-1 shadow-2xs">
                 <span className="font-bold text-[#24211D] flex items-center gap-1.5">
-                  <Building className="w-3.5 h-3.5 text-[#3B5BDB]" /> Hot Property Demand
+                  <Building className="w-3.5 h-3.5 text-[#A374]" /> Hot Property Demand
                 </span>
                 <p className="text-[#766F63]">
                   <strong>The Grand Emerald Heights</strong> has 14 matched inquiries looking for 3BHK configurations.
@@ -263,7 +263,7 @@ export default function RealtyAIPage() {
 
               <div className="p-3.5 rounded-xl bg-white border border-[#DDD4C4] space-y-1 shadow-2xs">
                 <span className="font-bold text-[#24211D] flex items-center gap-1.5">
-                  <Users className="w-3.5 h-3.5 text-[#7048E8]" /> Agent Velocity
+                  <Users className="w-3.5 h-3.5 text-[#B8893C]" /> Agent Velocity
                 </span>
                 <p className="text-[#766F63]">
                   Average site visit to booking time: <strong>11 days</strong> (34% faster than industry benchmark).

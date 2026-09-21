@@ -85,7 +85,7 @@ export default function WhatsAppAutomationPage() {
 
                 {/* 2. CONDITION */}
                 <div className="p-3 rounded-xl bg-white border border-[#DDD4C4] flex items-center gap-2 shadow-xs">
-                  <span className="text-[10px] font-bold uppercase text-[#3B5BDB] font-serif">Condition:</span>
+                  <span className="text-[10px] font-bold uppercase text-[#A87932] font-serif">Condition:</span>
                   <span className="text-[#24211D]">Valid Phone & Verified Org</span>
                 </div>
 

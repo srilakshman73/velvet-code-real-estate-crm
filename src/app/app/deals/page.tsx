@@ -44,13 +44,13 @@ export default function DealsPipelinePage() {
   });
 
   const stages: { key: DealStage; label: string; color: string; badge: string }[] = [
-    { key: 'NEW_LEAD', label: 'New Lead', color: 'border-t-[#DDD4C4]', badge: 'bg-[#766F63]/10 text-[#766F63]' },
-    { key: 'QUALIFIED', label: 'Qualified', color: 'border-t-[#3B5BDB]', badge: 'bg-[#3B5BDB]/10 text-[#2F49B0]' },
-    { key: 'SITE_VISIT', label: 'Site Visit', color: 'border-t-[#7048E8]', badge: 'bg-[#7048E8]/10 text-[#5F3DC4]' },
-    { key: 'NEGOTIATION', label: 'Negotiation', color: 'border-t-[#B87B28]', badge: 'bg-[#B87B28]/10 text-[#8F642B]' },
-    { key: 'DOCUMENTATION', label: 'Documentation', color: 'border-t-[#A374]', badge: 'bg-[#A374]/15 text-[#8F642B]' },
-    { key: 'CLOSED_WON', label: 'Closed Won 🏆', color: 'border-t-[#2E6B4F]', badge: 'bg-[#2E6B4F]/10 text-[#2E6B4F]' },
-    { key: 'CLOSED_LOST', label: 'Closed Lost', color: 'border-t-[#8B2635]', badge: 'bg-[#8B2635]/10 text-[#8B2635]' },
+    { key: 'NEW_LEAD', label: 'New Lead', color: 'border-t-[#DCD3C2]', badge: 'bg-[#756E63]/10 text-[#756E63]' },
+    { key: 'QUALIFIED', label: 'Qualified', color: 'border-t-[#C9A45C]', badge: 'bg-[#C9A45C]/15 text-[#8F642B]' },
+    { key: 'SITE_VISIT', label: 'Site Visit', color: 'border-t-[#A87932]', badge: 'bg-[#A87932]/15 text-[#A87932]' },
+    { key: 'NEGOTIATION', label: 'Negotiation', color: 'border-t-[#B8893C]', badge: 'bg-[#B8893C]/15 text-[#8F642B]' },
+    { key: 'DOCUMENTATION', label: 'Documentation', color: 'border-t-[#A374]', badge: 'bg-[#A374]/20 text-[#7A5320]' },
+    { key: 'CLOSED_WON', label: 'Closed Won 🏆', color: 'border-t-[#2F6B52]', badge: 'bg-[#2F6B52]/15 text-[#2F6B52]' },
+    { key: 'CLOSED_LOST', label: 'Closed Lost', color: 'border-t-[#8B3D3D]', badge: 'bg-[#8B3D3D]/15 text-[#8B3D3D]' },
   ];
 
   // Pipeline Totals

@@ -79,7 +79,7 @@ export default function DashboardPage() {
       ? Object.keys(sourceCounts).map((source, idx) => ({
           name: source,
           value: Math.round((sourceCounts[source] / leads.length) * 100),
-          color: ['#2E6B4F', '#A374', '#3D5A80', '#6B5B95', '#B87B28'][idx % 5],
+          color: ['#2F6B52', '#A374', '#171613', '#C9A45C', '#A87932'][idx % 5],
         }))
       : [{ name: 'Direct Inquiries', value: 100, color: '#A374' }];
 
@@ -92,27 +92,27 @@ export default function DashboardPage() {
     .slice(0, 4);
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#F7F3EA] text-[#24211D]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#F7F3EA] text-[#26231E]">
       {/* ========================================== */}
       {/* HEADER SECTION */}
       {/* ========================================== */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#24211D] tracking-tight font-serif">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#26231E] tracking-tight font-serif">
             Good morning, {currentUser.name} 👋
           </h1>
-          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+          <p className="text-xs sm:text-sm text-[#756E63] mt-1">
             Here's what's happening with your real estate business at{' '}
-            <strong className="text-[#24211D]">{currentOrg.name}</strong>.
+            <strong className="text-[#26231E]">{currentOrg.name}</strong>.
           </p>
         </div>
 
         <div className="flex items-center gap-2.5">
-          <div className="bg-[#FFFCF6] border border-[#DDD4C4] p-1 rounded-xl flex text-xs aurum-card-shadow">
+          <div className="bg-[#FFFDF8] border border-[#DCD3C2] p-1 rounded-xl flex text-xs aurum-card-shadow">
             <button
               onClick={() => setDateRange('30D')}
               className={`px-3 py-1.5 rounded-lg font-semibold transition-colors ${
-                dateRange === '30D' ? 'bg-[#A374] text-[#151515]' : 'text-[#766F63] hover:text-[#24211D]'
+                dateRange === '30D' ? 'bg-[#A374] text-[#171613]' : 'text-[#756E63] hover:text-[#26231E]'
               }`}
             >
               Last 30 Days
@@ -120,7 +120,7 @@ export default function DashboardPage() {
             <button
               onClick={() => setDateRange('ThisMonth')}
               className={`px-3 py-1.5 rounded-lg font-semibold transition-colors ${
-                dateRange === 'ThisMonth' ? 'bg-[#A374] text-[#151515]' : 'text-[#766F63] hover:text-[#24211D]'
+                dateRange === 'ThisMonth' ? 'bg-[#A374] text-[#171613]' : 'text-[#756E63] hover:text-[#26231E]'
               }`}
             >
               This Month
@@ -144,8 +144,8 @@ export default function DashboardPage() {
           value={leads.length.toString()}
           changePercent={leads.length > 0 ? 100 : 0}
           changeLabel={leads.length > 0 ? 'active contacts' : 'No leads yet'}
-          icon={<Users className="w-5 h-5 text-[#3D5A80]" />}
-          variant="blue"
+          icon={<Users className="w-5 h-5 text-[#8F642B]" />}
+          variant="gold"
         />
 
         <MetricCard
@@ -153,8 +153,8 @@ export default function DashboardPage() {
           value={siteVisits.length.toString()}
           changePercent={siteVisits.length > 0 ? 100 : 0}
           changeLabel={siteVisits.length > 0 ? 'scheduled viewings' : 'No visits scheduled'}
-          icon={<CalendarCheck className="w-5 h-5 text-[#6B5B95]" />}
-          variant="purple"
+          icon={<CalendarCheck className="w-5 h-5 text-[#A87932]" />}
+          variant="amber"
         />
 
         <MetricCard
@@ -162,8 +162,8 @@ export default function DashboardPage() {
           value={activePipelineCount.toString()}
           changePercent={activePipelineCount > 0 ? 100 : 0}
           changeLabel={activePipelineCount > 0 ? 'in sales pipeline' : 'No active deals'}
-          icon={<Kanban className="w-5 h-5 text-[#8F642B]" />}
-          variant="gold"
+          icon={<Kanban className="w-5 h-5 text-[#171613]" />}
+          variant="charcoal"
         />
 
         <MetricCard
@@ -171,7 +171,7 @@ export default function DashboardPage() {
           value={closedWonRevenue > 0 ? formatINR(closedWonRevenue, true) : '₹0'}
           changePercent={closedWonRevenue > 0 ? 100 : 0}
           changeLabel={closedWonRevenue > 0 ? 'closed transactions' : 'No closed deals yet'}
-          icon={<DollarSign className="w-5 h-5 text-[#2E6B4F]" />}
+          icon={<DollarSign className="w-5 h-5 text-[#2F6B52]" />}
           variant="emerald"
         />
       </div>
@@ -365,7 +365,7 @@ export default function DashboardPage() {
                         className="p-2 rounded-xl bg-[#F7F3EA] hover:bg-[#EFE8DA] text-[#24211D] transition-colors text-xs flex items-center gap-1 border border-[#DDD4C4]"
                         title="Call Client"
                       >
-                        <Phone className="w-3.5 h-3.5 text-[#3D5A80]" />
+                        <Phone className="w-3.5 h-3.5 text-[#A87932]" />
                       </a>
 
                       <a
@@ -470,7 +470,7 @@ export default function DashboardPage() {
           <div className="p-6 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] aurum-card-shadow space-y-4">
             <div className="flex items-center justify-between border-b border-[#DDD4C4] pb-4">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-[#F7F3EA] text-[#3D5A80] border border-[#DDD4C4]">
+                <div className="p-2 rounded-xl bg-[#F7F3EA] text-[#A87932] border border-[#DDD4C4]">
                   <CalendarCheck className="w-4 h-4" />
                 </div>
                 <div>
@@ -490,7 +490,7 @@ export default function DashboardPage() {
 
             {upcomingVisits.length === 0 ? (
               <EmptyState
-                icon={<CalendarCheck className="w-6 h-6 text-[#3D5A80]" />}
+                icon={<CalendarCheck className="w-6 h-6 text-[#A87932]" />}
                 title="No site visits scheduled"
                 description="Coordinate private viewings with prospective buyers to track site visits and feedback."
               />
@@ -503,7 +503,7 @@ export default function DashboardPage() {
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-[#24211D]">{v.propertyName}</span>
-                      <span className="px-2 py-0.5 text-[10px] font-bold bg-[#3D5A80]/15 text-[#293E58] rounded">
+                      <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A87932]/15 text-[#8F642B] rounded">
                         {v.timeSlot}
                       </span>
                     </div>

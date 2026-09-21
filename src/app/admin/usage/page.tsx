@@ -72,16 +72,16 @@ export default function AdminUsagePage() {
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">PostgreSQL DB Size</span>
-            <Database className="w-4 h-4 text-[#3B5BDB]" />
+            <Database className="w-4 h-4 text-[#A87932]" />
           </div>
           <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">24 MB</div>
-          <div className="text-xs text-[#3B5BDB] mt-1 font-medium">Isolated tenant schema ready</div>
+          <div className="text-xs text-[#A87932] mt-1 font-medium">Isolated tenant schema ready</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Average API Latency</span>
-            <Zap className="w-4 h-4 text-[#7048E8]" />
+            <Zap className="w-4 h-4 text-[#B8893C]" />
           </div>
           <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">85 ms</div>
           <div className="text-xs text-[#2E6B4F] mt-1 font-medium">Optimal edge latency</div>

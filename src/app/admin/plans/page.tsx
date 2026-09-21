@@ -129,9 +129,9 @@ export default function AdminPlansPage() {
 
                   <div className="flex items-center justify-between py-1.5 border-b border-[#DDD4C4]/60">
                     <span className="text-[#766F63] flex items-center gap-1.5">
-                      <Sliders className="w-3.5 h-3.5 text-[#7048E8]" /> Custom Automations:
+                      <Sliders className="w-3.5 h-3.5 text-[#A374]" /> Custom Automations:
                     </span>
-                    <span className={`font-semibold ${plan.hasAutomation ? 'text-[#7048E8]' : 'text-[#766F63]'}`}>
+                    <span className={`font-semibold ${plan.hasAutomation ? 'text-[#8F642B]' : 'text-[#766F63]'}`}>
                       {plan.hasAutomation ? 'Enabled ✓' : 'Disabled'}
                     </span>
                   </div>

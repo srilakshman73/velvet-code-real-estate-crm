@@ -38,20 +38,20 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const variantClasses = {
-      gold: 'bg-[#A374] hover:bg-[#8F642B] active:bg-[#7A5320] text-[#151515] font-bold border border-[#A374]/60 shadow-[0_4px_16px_-2px_rgba(163,116,0,0.25)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,0,0.35)] transition-all duration-200',
-      primary: 'bg-[#A374] hover:bg-[#8F642B] active:bg-[#7A5320] text-[#151515] font-bold border border-[#A374]/60 shadow-[0_4px_16px_-2px_rgba(163,116,0,0.25)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,0,0.35)] transition-all duration-200',
+      gold: 'bg-[#A374] hover:bg-[#B8893C] active:bg-[#7A5320] text-[#171613] font-bold border border-[#A374]/60 shadow-[0_4px_16px_-2px_rgba(163,116,0,0.25)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,0,0.35)] transition-all duration-200',
+      primary: 'bg-[#A374] hover:bg-[#B8893C] active:bg-[#7A5320] text-[#171613] font-bold border border-[#A374]/60 shadow-[0_4px_16px_-2px_rgba(163,116,0,0.25)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,0,0.35)] transition-all duration-200',
       secondary:
-        'bg-[#FFFCF6] hover:bg-[#EFE8DA] text-[#24211D] border border-[#DDD4C4] shadow-xs active:scale-[0.99] transition-all',
+        'bg-[#FFFDF8] hover:bg-[#EFE8DA] text-[#26231E] border border-[#DCD3C2] shadow-xs active:scale-[0.99] transition-all',
       subtle:
-        'bg-[#EFE8DA] hover:bg-[#E5DDCB] text-[#24211D] border border-[#DDD4C4] transition-all',
+        'bg-[#EFE8DA] hover:bg-[#E2D8C6] text-[#26231E] border border-[#DCD3C2] transition-all',
       outline:
-        'bg-transparent hover:bg-[#A374]/10 text-[#8F642B] border border-[#A374]/60 hover:border-[#8F642B] active:scale-[0.99] transition-all',
+        'bg-transparent hover:bg-[#A374]/10 text-[#7A5320] border border-[#A374]/60 hover:border-[#B8893C] active:scale-[0.99] transition-all',
       ghost:
-        'bg-transparent hover:bg-[#EFE8DA]/80 text-[#766F63] hover:text-[#24211D] transition-colors',
+        'bg-transparent hover:bg-[#EFE8DA]/80 text-[#756E63] hover:text-[#26231E] transition-colors',
       danger:
-        'bg-[#8B2635] hover:bg-[#731E2A] text-white shadow-xs transition-all',
+        'bg-[#8B3D3D] hover:bg-[#722E2E] text-white shadow-xs transition-all',
       emerald:
-        'bg-[#2E6B4F] hover:bg-[#24563F] text-white shadow-sm font-medium transition-all',
+        'bg-[#2F6B52] hover:bg-[#24543F] text-white shadow-sm font-medium transition-all',
     };
 
     return (

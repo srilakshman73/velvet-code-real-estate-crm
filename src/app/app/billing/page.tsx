@@ -158,7 +158,7 @@ export default function BillingPage() {
             </div>
             <div className="w-full h-2 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
               <div
-                className="h-full bg-[#3B5BDB] rounded-full"
+                className="h-full bg-[#A87932] rounded-full"
                 style={{
                   width: `${Math.min(
                     (properties.length /

@@ -232,7 +232,7 @@ export function LandingHero() {
                           <p className="font-bold text-[#24211D]">Sea-Facing Villa Buyer</p>
                           <p className="text-[11px] text-[#766F63]">Sobha Windsor Villa • ₹3.85 Cr</p>
                         </div>
-                        <span className="px-2 py-0.5 text-[10px] font-bold bg-[#6B5B95]/15 text-[#524474] rounded">
+                        <span className="px-2 py-0.5 text-[10px] font-bold bg-[#C9A45C]/20 text-[#8F642B] rounded">
                           Site Visit (88%)
                         </span>
                       </div>
@@ -271,8 +271,8 @@ export function LandingHero() {
             {activeTab === 'leads' && (
               <div className="p-4 space-y-3 animate-in fade-in">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                  <div className="p-3.5 rounded-xl bg-[#FFFCF6] border border-[#3D5A80]/40">
-                    <p className="font-bold text-[#293E58] mb-2">1. Qualified Leads</p>
+                  <div className="p-3.5 rounded-xl bg-[#FFFCF6] border border-[#C9A45C]/40">
+                    <p className="font-bold text-[#8F642B] mb-2">1. Qualified Leads</p>
                     <div className="p-2.5 rounded-lg bg-[#F7F3EA] border border-[#DDD4C4] space-y-1">
                       <p className="font-bold text-[#24211D]">Qualified Penthouse Lead</p>
                       <p className="text-[10px] text-[#766F63]">Prestige Cyber View • ₹92 Lakhs</p>

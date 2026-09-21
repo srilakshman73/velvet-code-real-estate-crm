@@ -44,12 +44,12 @@ export default function ReportsPage() {
   const closedWonCount = deals.filter((d) => d.stage === 'CLOSED_WON').length;
 
   const leadConversionFunnel = [
-    { stage: 'Total Inquiries', count: totalInquiries, fill: '#3B5BDB' },
-    { stage: 'Contacted', count: contactedLeads, fill: '#7048E8' },
-    { stage: 'Qualified Buyers', count: qualifiedLeads, fill: '#B87B28' },
-    { stage: 'Site Visits Scheduled', count: siteVisitsCount, fill: '#A374' },
-    { stage: 'Negotiation', count: inNegotiationCount, fill: '#D97706' },
-    { stage: 'Closed Won 🏆', count: closedWonCount, fill: '#2E6B4F' },
+    { stage: 'Total Inquiries', count: totalInquiries, fill: '#756E63' },
+    { stage: 'Contacted', count: contactedLeads, fill: '#C9A45C' },
+    { stage: 'Qualified Buyers', count: qualifiedLeads, fill: '#B8893C' },
+    { stage: 'Site Visits Scheduled', count: siteVisitsCount, fill: '#A87932' },
+    { stage: 'Negotiation', count: inNegotiationCount, fill: '#A374' },
+    { stage: 'Closed Won 🏆', count: closedWonCount, fill: '#2F6B52' },
   ];
 
   const maxFunnelCount = Math.max(...leadConversionFunnel.map((s) => s.count), 1);

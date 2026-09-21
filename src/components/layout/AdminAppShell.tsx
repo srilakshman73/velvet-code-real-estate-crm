@@ -73,9 +73,9 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#151515] text-[#F7F3EA] flex flex-col font-sans antialiased">
+    <div className="min-h-screen bg-[#F7F3EA] text-[#26231E] flex flex-col font-sans antialiased">
       {/* Top Admin Banner */}
-      <header className="h-16 px-4 sm:px-8 bg-[#151515] border-b border-[#24221E] flex items-center justify-between z-30">
+      <header className="h-16 px-4 sm:px-8 bg-[#171613] border-b border-[#24221E] flex items-center justify-between z-30">
         <div className="flex items-center gap-4">
           <VelvetCodeLogo variant="horizontal" href="/admin" size="sm" theme="dark" />
           <span className="hidden sm:inline-block px-2.5 py-1 text-[11px] font-bold tracking-widest uppercase bg-[#A374]/20 text-[#A374] border border-[#A374]/40 rounded-md">
@@ -85,12 +85,12 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
 
         <div className="flex items-center gap-3">
           {/* Owner Profile Badge */}
-          <div className="hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#1E1B18] border border-[#332F2A] text-xs">
-            <div className="w-6 h-6 rounded-md bg-[#A374] text-[#151515] font-bold text-[10px] flex items-center justify-center">
+          <div className="hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#24221E] border border-[#332F2A] text-xs">
+            <div className="w-6 h-6 rounded-md bg-[#A374] text-[#171613] font-bold text-[10px] flex items-center justify-center">
               SL
             </div>
             <div>
-              <span className="font-bold text-[#F7F3EA]">Sri Lakshman</span>
+              <span className="font-bold text-[#EFE8DA]">Sri Lakshman</span>
               <span className="text-[#A374] font-mono text-[10px] ml-1.5 font-bold">(OWNER)</span>
             </div>
           </div>
@@ -102,7 +102,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#DDD4C4] hover:text-white"
+            className="md:hidden p-2 text-[#EFE8DA] hover:text-white"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -111,7 +111,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
 
       <div className="flex-1 flex overflow-hidden">
         {/* Sidebar */}
-        <aside className="hidden md:flex flex-col w-64 bg-[#151515] border-r border-[#24221E] p-4 space-y-6">
+        <aside className="hidden md:flex flex-col w-64 bg-[#171613] border-r border-[#24221E] p-4 space-y-6">
           <div className="space-y-1">
             <p className="text-[10px] font-bold text-[#A374] uppercase tracking-wider px-3 mb-2">
               SaaS Administration
@@ -125,11 +125,11 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
                   href={item.href}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-[#A374]/20 text-[#F7F3EA] border-l-2 border-[#A374] font-bold shadow-inner'
-                      : 'text-[#DDD4C4]/70 hover:text-white hover:bg-[#1E1B18]'
+                      ? 'bg-[#A374]/20 text-[#EFE8DA] border-l-2 border-[#A374] font-bold shadow-inner'
+                      : 'text-[#EFE8DA]/70 hover:text-white hover:bg-[#24221E]'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#A374]' : 'text-[#DDD4C4]/60'}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#A374]' : 'text-[#EFE8DA]/60'}`} />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -137,30 +137,30 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
           </div>
 
           {/* Quick Metrics in Sidebar */}
-          <div className="mt-auto p-4 rounded-xl bg-[#1E1B18] border border-[#332F2A] text-xs space-y-2">
-            <div className="flex items-center justify-between text-[#DDD4C4]/70">
+          <div className="mt-auto p-4 rounded-xl bg-[#24221E] border border-[#332F2A] text-xs space-y-2">
+            <div className="flex items-center justify-between text-[#EFE8DA]/70">
               <span>Platform MRR</span>
-              <span className="font-bold text-[#3B825E] font-mono">₹0</span>
+              <span className="font-bold text-[#2F6B52] font-mono">₹0</span>
             </div>
-            <div className="flex items-center justify-between text-[#DDD4C4]/70">
+            <div className="flex items-center justify-between text-[#EFE8DA]/70">
               <span>Active Orgs</span>
-              <span className="font-bold text-[#F7F3EA] font-mono">1</span>
+              <span className="font-bold text-[#EFE8DA] font-mono">1</span>
             </div>
-            <div className="pt-2 border-t border-[#332F2A] text-[10px] text-[#DDD4C4]/50">
+            <div className="pt-2 border-t border-[#332F2A] text-[10px] text-[#EFE8DA]/50">
               Global Platform Master Tier
             </div>
           </div>
         </aside>
 
         {/* Main Admin View */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#181614] text-[#F7F3EA]">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#F7F3EA] text-[#26231E]">
           {children}
         </main>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-50 bg-[#151515]/90 backdrop-blur-sm p-6 pt-20">
+        <div className="md:hidden fixed inset-0 z-50 bg-[#171613]/90 backdrop-blur-sm p-6 pt-20">
           <div className="space-y-2">
             {adminNav.map((item) => {
               const Icon = item.icon;
@@ -171,7 +171,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm ${
-                    isActive ? 'bg-[#A374]/20 text-[#A374] font-bold' : 'text-[#DDD4C4]'
+                    isActive ? 'bg-[#A374]/20 text-[#A374] font-bold' : 'text-[#EFE8DA]'
                   }`}
                 >
                   <Icon className="w-5 h-5" />

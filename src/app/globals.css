@@ -3,29 +3,32 @@
 @layer base {
   :root {
     --aurum-gold: #A374;
-    --aurum-gold-hover: #8F642B;
+    --aurum-gold-hover: #B8893C;
     --aurum-gold-dark: #7A5320;
     --aurum-gold-light: #C9A45C;
     --aurum-gold-soft: #D8BD7A;
     --aurum-gold-cream: #E6D3A3;
     --aurum-bg: #F7F3EA;
     --aurum-bg-secondary: #EFE8DA;
-    --aurum-surface: #FFFCF6;
-    --aurum-dark: #151515;
+    --aurum-card: #FFFDF8;
+    --aurum-surface: #FFFDF8;
+    --aurum-surface-pure: #FFFFFF;
+    --aurum-dark: #171613;
     --aurum-dark-secondary: #24221E;
-    --aurum-dark-surface: #1E1B18;
-    --aurum-text: #24211D;
-    --aurum-text-muted: #766F63;
-    --aurum-border: #DDD4C4;
-    --aurum-border-light: #EAE2D5;
-    --aurum-success: #2E6B4F;
-    --aurum-warning: #B87B28;
-    --aurum-danger: #8B2635;
+    --aurum-dark-surface: #1E1C18;
+    --aurum-text: #26231E;
+    --aurum-text-muted: #756E63;
+    --aurum-border: #DCD3C2;
+    --aurum-border-gold: #C9A45C;
+    --aurum-border-light: #EFE8DA;
+    --aurum-success: #2F6B52;
+    --aurum-warning: #A87932;
+    --aurum-danger: #8B3D3D;
   }
 
   body {
     background-color: #F7F3EA;
-    color: #24211D;
+    color: #26231E;
     font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
   }
@@ -45,7 +48,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #DDD4C4;
+    background: #DCD3C2;
     border-radius: 9999px;
   }
 
@@ -56,7 +59,7 @@
 
 /* Dark mode / dark panel scrollbar override */
 .dark-scrollbar::-webkit-scrollbar-track {
-  background: #151515;
+  background: #171613;
 }
 .dark-scrollbar::-webkit-scrollbar-thumb {
   background: #24221E;

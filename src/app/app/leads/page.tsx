@@ -463,7 +463,7 @@ export default function LeadsPage() {
                 href={`tel:${selectedLead.phone}`}
                 className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-[#FFFCF6] hover:bg-[#EFE8DA] text-[#24211D] font-bold text-xs border border-[#DDD4C4]"
               >
-                <Phone className="w-4 h-4 text-[#3D5A80]" />
+                <Phone className="w-4 h-4 text-[#A87932]" />
                 Call Phone
               </a>
               <Button

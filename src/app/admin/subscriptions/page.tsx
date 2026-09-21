@@ -87,7 +87,7 @@ export default function AdminSubscriptionsPage() {
         <Card orientation="vertical" className="bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#766F63] uppercase tracking-wider font-serif">Average Revenue Per Tenant (ARPU)</span>
           <div className="text-2xl font-serif font-bold text-[#24211D] mt-2">₹0 / mo</div>
-          <div className="text-xs text-[#3B5BDB] mt-1 font-medium">Professional & Business tiers</div>
+          <div className="text-xs text-[#A87932] mt-1 font-medium">Professional & Business tiers</div>
         </Card>
       </div>
 

@@ -86,13 +86,13 @@ export default function FollowUpsPage() {
           onClick={() => setActiveTab('UPCOMING')}
           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
             activeTab === 'UPCOMING'
-              ? 'bg-[#3B5BDB]/10 border-[#3B5BDB] text-[#24211D] shadow-md'
-              : 'bg-[#FFFCF6] border-[#DDD4C4] text-[#766F63] hover:border-[#3B5BDB]'
+              ? 'bg-[#C9A45C]/15 border-[#A374] text-[#24211D] shadow-md'
+              : 'bg-[#FFFCF6] border-[#DDD4C4] text-[#766F63] hover:border-[#A374]'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#3B5BDB]">Upcoming</span>
-            <CalendarCheck className="w-4 h-4 text-[#3B5BDB]" />
+            <span className="text-xs font-bold uppercase tracking-wider text-[#A87932]">Upcoming</span>
+            <CalendarCheck className="w-4 h-4 text-[#A87932]" />
           </div>
           <p className="text-2xl sm:text-3xl font-extrabold text-[#24211D] mt-2 font-mono">
             {upcomingCount}
@@ -146,7 +146,7 @@ export default function FollowUpsPage() {
                 href={`tel:${fu.customerPhone}`}
                 className="px-3 py-1.5 rounded-xl bg-white hover:bg-[#F7F3EA] text-[#24211D] border border-[#DDD4C4] text-xs font-semibold flex items-center gap-1.5 transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 text-[#3B5BDB]" />
+                <Phone className="w-3.5 h-3.5 text-[#A87932]" />
                 <span>Call Phone</span>
               </a>
 
