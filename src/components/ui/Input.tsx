@@ -18,13 +18,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-bold text-[#24211D] mb-1.5">
+          <label htmlFor={inputId} className="block text-xs font-bold text-[#29251F] mb-1.5">
             {label}
           </label>
         )}
         <div className="relative flex items-center">
           {effectiveLeftIcon && (
-            <div className="absolute left-3 text-[#766F63] pointer-events-none flex items-center">
+            <div className="absolute left-3 text-[#857C6E] pointer-events-none flex items-center">
               {effectiveLeftIcon}
             </div>
           )}
@@ -32,22 +32,22 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             ref={ref}
             className={cn(
-              'w-full bg-[#FFFCF6] border border-[#DDD4C4] rounded-xl px-3.5 py-2 text-sm text-[#24211D] placeholder:text-[#766F63]/60 transition-colors focus:border-[#A374] focus:ring-1 focus:ring-[#A374]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed shadow-2xs',
+              'w-full bg-[#FFFDF8] border border-[#DDD4C5] rounded-xl px-3.5 py-2 text-sm text-[#29251F] placeholder:text-[#958B7D] transition-colors focus:border-[#A374] focus:ring-1 focus:ring-[#A374]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed shadow-2xs',
               effectiveLeftIcon && 'pl-9',
               rightIcon && 'pr-9',
-              error && 'border-[#8B2635] focus:border-[#8B2635] focus:ring-[#8B2635]/20',
+              error && 'border-[#8B4A4A] focus:border-[#8B4A4A] focus:ring-[#8B4A4A]/20',
               className
             )}
             {...props}
           />
           {rightIcon && (
-            <div className="absolute right-3 text-[#766F63] flex items-center">
+            <div className="absolute right-3 text-[#857C6E] flex items-center">
               {rightIcon}
             </div>
           )}
         </div>
-        {error && <p className="text-xs text-[#8B2635] font-medium mt-1">{error}</p>}
-        {!error && helperText && <p className="text-xs text-[#766F63] mt-1">{helperText}</p>}
+        {error && <p className="text-xs text-[#8B4A4A] font-medium mt-1">{error}</p>}
+        {!error && helperText && <p className="text-xs text-[#857C6E] mt-1">{helperText}</p>}
       </div>
     );
   }
@@ -66,7 +66,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-bold text-[#24211D] mb-1.5">
+          <label htmlFor={inputId} className="block text-xs font-bold text-[#29251F] mb-1.5">
             {label}
           </label>
         )}
@@ -75,13 +75,13 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           rows={rows}
           className={cn(
-            'w-full bg-[#FFFCF6] border border-[#DDD4C4] rounded-xl px-3.5 py-2 text-sm text-[#24211D] placeholder:text-[#766F63]/60 transition-colors focus:border-[#A374] focus:ring-1 focus:ring-[#A374]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed resize-y shadow-2xs',
-            error && 'border-[#8B2635] focus:border-[#8B2635] focus:ring-[#8B2635]/20',
+            'w-full bg-[#FFFDF8] border border-[#DDD4C5] rounded-xl px-3.5 py-2 text-sm text-[#29251F] placeholder:text-[#958B7D] transition-colors focus:border-[#A374] focus:ring-1 focus:ring-[#A374]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed resize-y shadow-2xs',
+            error && 'border-[#8B4A4A] focus:border-[#8B4A4A] focus:ring-[#8B4A4A]/20',
             className
           )}
           {...props}
         />
-        {error && <p className="text-xs text-[#8B2635] font-medium mt-1">{error}</p>}
+        {error && <p className="text-xs text-[#8B4A4A] font-medium mt-1">{error}</p>}
       </div>
     );
   }
@@ -101,7 +101,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-bold text-[#24211D] mb-1.5">
+          <label htmlFor={inputId} className="block text-xs font-bold text-[#29251F] mb-1.5">
             {label}
           </label>
         )}
@@ -109,21 +109,21 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           id={inputId}
           ref={ref}
           className={cn(
-            'w-full bg-[#FFFCF6] border border-[#DDD4C4] rounded-xl px-3.5 py-2 text-sm text-[#24211D] placeholder:text-[#766F63]/60 transition-colors focus:border-[#A374] focus:ring-1 focus:ring-[#A374]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed shadow-2xs',
-            error && 'border-[#8B2635] focus:border-[#8B2635] focus:ring-[#8B2635]/20',
+            'w-full bg-[#FFFDF8] border border-[#DDD4C5] rounded-xl px-3.5 py-2 text-sm text-[#29251F] placeholder:text-[#958B7D] transition-colors focus:border-[#A374] focus:ring-1 focus:ring-[#A374]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed shadow-2xs',
+            error && 'border-[#8B4A4A] focus:border-[#8B4A4A] focus:ring-[#8B4A4A]/20',
             className
           )}
           {...props}
         >
           {options
             ? options.map((opt) => (
-                <option key={opt.value} value={opt.value} className="bg-[#FFFCF6] text-[#24211D]">
+                <option key={opt.value} value={opt.value} className="bg-[#FFFDF8] text-[#29251F]">
                   {opt.label}
                 </option>
               ))
             : children}
         </select>
-        {error && <p className="text-xs text-[#8B2635] font-medium mt-1">{error}</p>}
+        {error && <p className="text-xs text-[#8B4A4A] font-medium mt-1">{error}</p>}
       </div>
     );
   }

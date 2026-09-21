@@ -116,14 +116,14 @@ export default function SettingsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#24211D] tracking-tight">Organization Settings</h1>
-          <p className="text-sm text-[#766F63] mt-1">
+          <h1 className="text-3xl font-serif font-bold text-[#29251F] tracking-tight">Organization Settings</h1>
+          <p className="text-sm text-[#625B51] mt-1">
             Configure your workspace, WhatsApp Cloud API tokens, Realty AI parameters, and notifications.
           </p>
         </div>
         <div className="flex items-center gap-3">
           {savedSuccess && (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#2E6B4F]/10 border border-[#2E6B4F]/20 text-[#2E6B4F] rounded-lg text-xs animate-in fade-in font-medium">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#3D7258]/10 border border-[#3D7258]/20 text-[#3D7258] rounded-lg text-xs animate-in fade-in font-medium">
               <CheckCircle2 className="w-4 h-4" />
               Settings saved successfully
             </div>
@@ -135,7 +135,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Settings Navigation Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#DDD4C4] overflow-x-auto pb-px scrollbar-none">
+      <div className="flex items-center gap-2 border-b border-[#DDD4C5] overflow-x-auto pb-px scrollbar-none">
         {[
           { id: 'general', label: 'Agency Profile', icon: Building },
           { id: 'whatsapp', label: 'WhatsApp Cloud API', icon: MessageSquare },
@@ -152,8 +152,8 @@ export default function SettingsPage() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
                 isActive
-                  ? 'border-[#A374] text-[#8F642B] bg-[#A374]/10 font-semibold'
-                  : 'border-transparent text-[#766F63] hover:text-[#24211D] hover:border-[#DDD4C4]'
+                  ? 'border-[#A374] text-[#7A5720] bg-[#A374]/10 font-semibold'
+                  : 'border-transparent text-[#625B51] hover:text-[#29251F] hover:border-[#DDD4C5]'
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -169,8 +169,8 @@ export default function SettingsPage() {
       {activeTab === 'general' && (
         <form onSubmit={handleSave} className="space-y-6">
           <Card orientation="vertical">
-            <h2 className="text-lg font-serif font-bold text-[#24211D] mb-1">Company & Brand Identity</h2>
-            <p className="text-xs text-[#766F63] mb-6">
+            <h2 className="text-lg font-serif font-bold text-[#29251F] mb-1">Company & Brand Identity</h2>
+            <p className="text-xs text-[#625B51] mb-6">
               This information is reflected on client proposals, PDF brochures, invoice receipts, and WhatsApp message signatures.
             </p>
 
@@ -182,11 +182,11 @@ export default function SettingsPage() {
                 required
               />
               <div>
-                <label className="block text-xs font-semibold text-[#24211D] mb-1.5">Business Entity Type</label>
+                <label className="block text-xs font-semibold text-[#29251F] mb-1.5">Business Entity Type</label>
                 <select
                   value={orgForm.businessType}
                   onChange={(e) => setOrgForm({ ...orgForm, businessType: e.target.value as any })}
-                  className="w-full bg-white border border-[#DDD4C4] rounded-lg px-3.5 py-2.5 text-sm text-[#24211D] focus:outline-none focus:border-[#A374]"
+                  className="w-full bg-white border border-[#DDD4C5] rounded-lg px-3.5 py-2.5 text-sm text-[#29251F] focus:outline-none focus:border-[#A374]"
                 >
                   <option value="AGENCY">Real Estate Agency / Firm</option>
                   <option value="BROKER">Independent Broker</option>
@@ -199,14 +199,14 @@ export default function SettingsPage() {
                 label="Primary Business Phone"
                 value={orgForm.phone}
                 onChange={(e) => setOrgForm({ ...orgForm, phone: e.target.value })}
-                icon={<Phone className="w-4 h-4 text-[#766F63]" />}
+                icon={<Phone className="w-4 h-4 text-[#625B51]" />}
               />
               <Input
                 label="Official Email Address"
                 type="email"
                 value={orgForm.email}
                 onChange={(e) => setOrgForm({ ...orgForm, email: e.target.value })}
-                icon={<Mail className="w-4 h-4 text-[#766F63]" />}
+                icon={<Mail className="w-4 h-4 text-[#625B51]" />}
               />
 
               <Input
@@ -219,7 +219,7 @@ export default function SettingsPage() {
                 label="Official Website URL"
                 value={orgForm.website}
                 onChange={(e) => setOrgForm({ ...orgForm, website: e.target.value })}
-                icon={<Globe className="w-4 h-4 text-[#766F63]" />}
+                icon={<Globe className="w-4 h-4 text-[#625B51]" />}
               />
 
               <div className="md:col-span-2">
@@ -227,7 +227,7 @@ export default function SettingsPage() {
                   label="Office Physical Address"
                   value={orgForm.address}
                   onChange={(e) => setOrgForm({ ...orgForm, address: e.target.value })}
-                  icon={<MapPin className="w-4 h-4 text-[#766F63]" />}
+                  icon={<MapPin className="w-4 h-4 text-[#625B51]" />}
                 />
               </div>
 
@@ -245,18 +245,18 @@ export default function SettingsPage() {
           </Card>
 
           <Card orientation="vertical">
-            <h2 className="text-lg font-serif font-bold text-[#24211D] mb-1">Regional & Localization Preferences</h2>
-            <p className="text-xs text-[#766F63] mb-6">
+            <h2 className="text-lg font-serif font-bold text-[#29251F] mb-1">Regional & Localization Preferences</h2>
+            <p className="text-xs text-[#625B51] mb-6">
               Defaults used for lead budgets, deal currency conversions, and follow-up scheduling.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-xs font-semibold text-[#24211D] mb-1.5">Default Currency</label>
+                <label className="block text-xs font-semibold text-[#29251F] mb-1.5">Default Currency</label>
                 <select
                   value={orgForm.currency}
                   onChange={(e) => setOrgForm({ ...orgForm, currency: e.target.value })}
-                  className="w-full bg-white border border-[#DDD4C4] rounded-lg px-3.5 py-2.5 text-sm text-[#24211D] focus:outline-none focus:border-[#A374]"
+                  className="w-full bg-white border border-[#DDD4C5] rounded-lg px-3.5 py-2.5 text-sm text-[#29251F] focus:outline-none focus:border-[#A374]"
                 >
                   <option value="INR (₹)">INR (₹ - Indian Rupee, Lakhs & Crores format)</option>
                   <option value="USD ($)">USD ($ - US Dollar)</option>
@@ -265,11 +265,11 @@ export default function SettingsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#24211D] mb-1.5">Workspace Timezone</label>
+                <label className="block text-xs font-semibold text-[#29251F] mb-1.5">Workspace Timezone</label>
                 <select
                   value={orgForm.timezone}
                   onChange={(e) => setOrgForm({ ...orgForm, timezone: e.target.value })}
-                  className="w-full bg-white border border-[#DDD4C4] rounded-lg px-3.5 py-2.5 text-sm text-[#24211D] focus:outline-none focus:border-[#A374]"
+                  className="w-full bg-white border border-[#DDD4C5] rounded-lg px-3.5 py-2.5 text-sm text-[#29251F] focus:outline-none focus:border-[#A374]"
                 >
                   <option value="Asia/Kolkata (GMT +5:30)">Asia/Kolkata (GMT +5:30 - India Standard Time)</option>
                   <option value="Asia/Dubai (GMT +4:00)">Asia/Dubai (GMT +4:00 - Gulf Standard Time)</option>
@@ -288,10 +288,10 @@ export default function SettingsPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-serif font-bold text-[#24211D]">Meta WhatsApp Cloud API Configuration</h2>
+                  <h2 className="text-lg font-serif font-bold text-[#29251F]">Meta WhatsApp Cloud API Configuration</h2>
                   <Badge variant="success">Connected & Verified</Badge>
                 </div>
-                <p className="text-xs text-[#766F63] mt-1">
+                <p className="text-xs text-[#625B51] mt-1">
                   Connect your Meta Business Manager WhatsApp Phone Number to enable automated customer messaging and two-way CRM sync.
                 </p>
               </div>
@@ -299,7 +299,7 @@ export default function SettingsPage() {
                 href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#2E6B4F]/10 text-[#2E6B4F] border border-[#2E6B4F]/20 text-xs font-medium hover:bg-[#2E6B4F]/20 transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#3D7258]/10 text-[#3D7258] border border-[#3D7258]/20 text-xs font-medium hover:bg-[#3D7258]/20 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
                 Test Official Chat (+91 63833 95915)
@@ -337,25 +337,25 @@ export default function SettingsPage() {
           </Card>
 
           <Card orientation="vertical">
-            <h2 className="text-lg font-serif font-bold text-[#24211D] mb-1">Webhook Inbound Sync</h2>
-            <p className="text-xs text-[#766F63] mb-6">
+            <h2 className="text-lg font-serif font-bold text-[#29251F] mb-1">Webhook Inbound Sync</h2>
+            <p className="text-xs text-[#625B51] mb-6">
               Configure these endpoints in your Meta App Dashboard &gt; WhatsApp &gt; Configuration to receive incoming messages, read receipts, and delivery statuses.
             </p>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-[#24211D] mb-1.5">Callback URL</label>
+                <label className="block text-xs font-semibold text-[#29251F] mb-1.5">Callback URL</label>
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
                     readOnly
                     value={waConfig.webhookUrl}
-                    className="flex-1 bg-white border border-[#DDD4C4] rounded-lg px-3.5 py-2.5 text-sm text-[#24211D] font-mono focus:outline-none"
+                    className="flex-1 bg-white border border-[#DDD4C5] rounded-lg px-3.5 py-2.5 text-sm text-[#29251F] font-mono focus:outline-none"
                   />
                   <Button
                     variant="outline"
                     onClick={() => handleCopy(waConfig.webhookUrl, 'webhook-url')}
-                    icon={copiedKey === 'webhook-url' ? <CheckCircle2 className="w-4 h-4 text-[#2E6B4F]" /> : <Copy className="w-4 h-4" />}
+                    icon={copiedKey === 'webhook-url' ? <CheckCircle2 className="w-4 h-4 text-[#3D7258]" /> : <Copy className="w-4 h-4" />}
                   >
                     {copiedKey === 'webhook-url' ? 'Copied' : 'Copy'}
                   </Button>
@@ -363,26 +363,26 @@ export default function SettingsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#24211D] mb-1.5">Verify Token</label>
+                <label className="block text-xs font-semibold text-[#29251F] mb-1.5">Verify Token</label>
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
                     readOnly
                     value={waConfig.webhookVerifyToken}
-                    className="flex-1 bg-white border border-[#DDD4C4] rounded-lg px-3.5 py-2.5 text-sm text-[#24211D] font-mono focus:outline-none"
+                    className="flex-1 bg-white border border-[#DDD4C5] rounded-lg px-3.5 py-2.5 text-sm text-[#29251F] font-mono focus:outline-none"
                   />
                   <Button
                     variant="outline"
                     onClick={() => handleCopy(waConfig.webhookVerifyToken, 'verify-token')}
-                    icon={copiedKey === 'verify-token' ? <CheckCircle2 className="w-4 h-4 text-[#2E6B4F]" /> : <Copy className="w-4 h-4" />}
+                    icon={copiedKey === 'verify-token' ? <CheckCircle2 className="w-4 h-4 text-[#3D7258]" /> : <Copy className="w-4 h-4" />}
                   >
                     {copiedKey === 'verify-token' ? 'Copied' : 'Copy'}
                   </Button>
                 </div>
               </div>
 
-              <div className="pt-4 flex items-center justify-between border-t border-[#DDD4C4]">
-                <div className="flex items-center gap-2 text-xs text-[#766F63]">
+              <div className="pt-4 flex items-center justify-between border-t border-[#DDD4C5]">
+                <div className="flex items-center gap-2 text-xs text-[#625B51]">
                   <Shield className="w-4 h-4 text-[#A374]" />
                   SSL Certificate 256-bit encryption active. Webhook signature validated with App Secret.
                 </div>
@@ -407,10 +407,10 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-serif font-bold text-[#24211D]">Realty AI Autonomous Engine</h2>
+                  <h2 className="text-lg font-serif font-bold text-[#29251F]">Realty AI Autonomous Engine</h2>
                   <Badge variant="gold">Active on {currentPlanLimits.tier}</Badge>
                 </div>
-                <p className="text-xs text-[#766F63] mt-1">
+                <p className="text-xs text-[#625B51] mt-1">
                   Adjust model hyperparameters, lead scoring sensitivity, and personalized agent prompts.
                 </p>
               </div>
@@ -419,11 +419,11 @@ export default function SettingsPage() {
 
             <div className="space-y-5">
               <div>
-                <label className="block text-xs font-semibold text-[#24211D] mb-1.5">AI Engine Foundation Model</label>
+                <label className="block text-xs font-semibold text-[#29251F] mb-1.5">AI Engine Foundation Model</label>
                 <select
                   value={aiConfig.provider}
                   onChange={(e) => setAiConfig({ ...aiConfig, provider: e.target.value })}
-                  className="w-full bg-white border border-[#DDD4C4] rounded-lg px-3.5 py-2.5 text-sm text-[#24211D] focus:outline-none focus:border-[#A374]"
+                  className="w-full bg-white border border-[#DDD4C5] rounded-lg px-3.5 py-2.5 text-sm text-[#29251F] focus:outline-none focus:border-[#A374]"
                 >
                   <option value="gemini-1.5-pro">Google Gemini 1.5 Pro (Ultra-Fast Indian Real Estate Specialist)</option>
                   <option value="gemini-1.5-flash">Google Gemini 1.5 Flash (Low-Latency High-Volume Automations)</option>
@@ -432,42 +432,42 @@ export default function SettingsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#24211D] mb-1.5">System Persona & Domain Instructions</label>
+                <label className="block text-xs font-semibold text-[#29251F] mb-1.5">System Persona & Domain Instructions</label>
                 <textarea
                   rows={3}
                   value={aiConfig.systemPromptPersona}
                   onChange={(e) => setAiConfig({ ...aiConfig, systemPromptPersona: e.target.value })}
-                  className="w-full bg-white border border-[#DDD4C4] rounded-lg p-3 text-sm text-[#24211D] focus:outline-none focus:border-[#A374]"
+                  className="w-full bg-white border border-[#DDD4C5] rounded-lg p-3 text-sm text-[#29251F] focus:outline-none focus:border-[#A374]"
                 />
-                <p className="text-xs text-[#766F63] mt-1">
+                <p className="text-xs text-[#625B51] mt-1">
                   Realty AI will tailor WhatsApp drafts, brochure blurbs, and lead evaluations according to this persona.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-4 border-t border-[#DDD4C4]">
-                <div className="flex items-center justify-between p-3.5 bg-white rounded-xl border border-[#DDD4C4]">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-4 border-t border-[#DDD4C5]">
+                <div className="flex items-center justify-between p-3.5 bg-white rounded-xl border border-[#DDD4C5]">
                   <div>
-                    <div className="text-sm font-semibold text-[#24211D]">Automatic Lead Scoring</div>
-                    <div className="text-xs text-[#766F63]">Recalculate 0-100 probability score on every inquiry update</div>
+                    <div className="text-sm font-semibold text-[#29251F]">Automatic Lead Scoring</div>
+                    <div className="text-xs text-[#625B51]">Recalculate 0-100 probability score on every inquiry update</div>
                   </div>
                   <input
                     type="checkbox"
                     checked={aiConfig.autoScoreLeads}
                     onChange={(e) => setAiConfig({ ...aiConfig, autoScoreLeads: e.target.checked })}
-                    className="w-4 h-4 rounded text-[#A374] focus:ring-[#A374] bg-white border-[#DDD4C4]"
+                    className="w-4 h-4 rounded text-[#A374] focus:ring-[#A374] bg-white border-[#DDD4C5]"
                   />
                 </div>
 
-                <div className="flex items-center justify-between p-3.5 bg-white rounded-xl border border-[#DDD4C4]">
+                <div className="flex items-center justify-between p-3.5 bg-white rounded-xl border border-[#DDD4C5]">
                   <div>
-                    <div className="text-sm font-semibold text-[#24211D]">Instant Follow-up Suggestions</div>
-                    <div className="text-xs text-[#766F63]">Generate 1-click WhatsApp copy after site visits</div>
+                    <div className="text-sm font-semibold text-[#29251F]">Instant Follow-up Suggestions</div>
+                    <div className="text-xs text-[#625B51]">Generate 1-click WhatsApp copy after site visits</div>
                   </div>
                   <input
                     type="checkbox"
                     checked={aiConfig.autoDraftFollowups}
                     onChange={(e) => setAiConfig({ ...aiConfig, autoDraftFollowups: e.target.checked })}
-                    className="w-4 h-4 rounded text-[#A374] focus:ring-[#A374] bg-white border-[#DDD4C4]"
+                    className="w-4 h-4 rounded text-[#A374] focus:ring-[#A374] bg-white border-[#DDD4C5]"
                   />
                 </div>
               </div>
@@ -479,12 +479,12 @@ export default function SettingsPage() {
       {/* 4. NOTIFICATIONS TAB */}
       {activeTab === 'notifications' && (
         <Card orientation="vertical">
-          <h2 className="text-lg font-serif font-bold text-[#24211D] mb-1">Notification Channels & Alerts</h2>
-          <p className="text-xs text-[#766F63] mb-6">
+          <h2 className="text-lg font-serif font-bold text-[#29251F] mb-1">Notification Channels & Alerts</h2>
+          <p className="text-xs text-[#625B51] mb-6">
             Choose when and where your sales agents and leadership receive system alerts.
           </p>
 
-          <div className="divide-y divide-[#DDD4C4]">
+          <div className="divide-y divide-[#DDD4C5]">
             {[
               { id: 'emailNewLead', title: 'New Inbound Lead Alert', desc: 'Email notification whenever a lead arrives from Web or Ads.', key: 'emailNewLead' },
               { id: 'waNewLead', title: 'WhatsApp Instant Notification', desc: 'Send an alert to the assigned broker phone immediately.', key: 'waNewLead' },
@@ -494,14 +494,14 @@ export default function SettingsPage() {
             ].map((item) => (
               <div key={item.id} className="py-4 flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-semibold text-[#24211D]">{item.title}</div>
-                  <div className="text-xs text-[#766F63]">{item.desc}</div>
+                  <div className="text-sm font-semibold text-[#29251F]">{item.title}</div>
+                  <div className="text-xs text-[#625B51]">{item.desc}</div>
                 </div>
                 <input
                   type="checkbox"
                   checked={(notifications as any)[item.key]}
                   onChange={(e) => setNotifications({ ...notifications, [item.key]: e.target.checked })}
-                  className="w-4 h-4 rounded text-[#A374] focus:ring-[#A374] bg-white border-[#DDD4C4]"
+                  className="w-4 h-4 rounded text-[#A374] focus:ring-[#A374] bg-white border-[#DDD4C5]"
                 />
               </div>
             ))}
@@ -513,32 +513,32 @@ export default function SettingsPage() {
       {activeTab === 'security' && (
         <div className="space-y-6">
           <Card orientation="vertical">
-            <h2 className="text-lg font-serif font-bold text-[#24211D] mb-1">Multi-Tenant Access & Role Permissions</h2>
-            <p className="text-xs text-[#766F63] mb-6">
+            <h2 className="text-lg font-serif font-bold text-[#29251F] mb-1">Multi-Tenant Access & Role Permissions</h2>
+            <p className="text-xs text-[#625B51] mb-6">
               Velvet Code isolates all records with row-level tenant security (<code>organization_id</code>).
             </p>
 
             <div className="space-y-4">
-              <div className="p-4 rounded-xl bg-white border border-[#DDD4C4] flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-white border border-[#DDD4C5] flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-semibold text-[#24211D]">Two-Factor Authentication (2FA)</div>
-                  <div className="text-xs text-[#766F63]">Enforce TOTP authenticator app for all admin and owner accounts.</div>
+                  <div className="text-sm font-semibold text-[#29251F]">Two-Factor Authentication (2FA)</div>
+                  <div className="text-xs text-[#625B51]">Enforce TOTP authenticator app for all admin and owner accounts.</div>
                 </div>
                 <Badge variant="outline">Recommended</Badge>
               </div>
 
-              <div className="p-4 rounded-xl bg-white border border-[#DDD4C4] flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-white border border-[#DDD4C5] flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-semibold text-[#24211D]">IP Whitelisting & Session Timeout</div>
-                  <div className="text-xs text-[#766F63]">Automatically logout inactive agents after 12 hours.</div>
+                  <div className="text-sm font-semibold text-[#29251F]">IP Whitelisting & Session Timeout</div>
+                  <div className="text-xs text-[#625B51]">Automatically logout inactive agents after 12 hours.</div>
                 </div>
                 <Badge variant="success">Active</Badge>
               </div>
 
-              <div className="p-4 rounded-xl bg-white border border-[#DDD4C4] flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-white border border-[#DDD4C5] flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-semibold text-[#24211D]">Lead Phone Masking</div>
-                  <div className="text-xs text-[#766F63]">Prevent junior agents from exporting raw buyer telephone contact lists.</div>
+                  <div className="text-sm font-semibold text-[#29251F]">Lead Phone Masking</div>
+                  <div className="text-xs text-[#625B51]">Prevent junior agents from exporting raw buyer telephone contact lists.</div>
                 </div>
                 <Badge variant="warning">Business Tier Only</Badge>
               </div>
@@ -563,16 +563,16 @@ export default function SettingsPage() {
               <Card key={i} orientation="vertical" className="flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <div className="p-2 rounded-lg bg-[#F7F3EA] border border-[#DDD4C4] text-[#8F642B]">
+                    <div className="p-2 rounded-lg bg-[#F4F0E7] border border-[#DDD4C5] text-[#7A5720]">
                       <Icon className="w-5 h-5" />
                     </div>
                     <Badge variant={int.connected ? 'success' : 'neutral'}>{int.status}</Badge>
                   </div>
-                  <h3 className="text-sm font-serif font-bold text-[#24211D]">{int.name}</h3>
-                  <p className="text-xs text-[#766F63] mt-1">{int.desc}</p>
+                  <h3 className="text-sm font-serif font-bold text-[#29251F]">{int.name}</h3>
+                  <p className="text-xs text-[#625B51] mt-1">{int.desc}</p>
                 </div>
-                <div className="pt-4 mt-4 border-t border-[#DDD4C4] flex items-center justify-between">
-                  <span className="text-xs text-[#766F63]">v2.4 API</span>
+                <div className="pt-4 mt-4 border-t border-[#DDD4C5] flex items-center justify-between">
+                  <span className="text-xs text-[#625B51]">v2.4 API</span>
                   <Button variant="ghost" size="sm">Configure</Button>
                 </div>
               </Card>

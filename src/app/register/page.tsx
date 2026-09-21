@@ -88,45 +88,45 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F3EA] text-[#24211D] flex">
-      {/* Left Brand Panel - Luxury Dark Charcoal */}
-      <div className="hidden lg:flex flex-col justify-between w-1/2 p-12 bg-[#151515] border-r border-[#24221E] relative overflow-hidden text-[#F7F3EA]">
+    <div className="min-h-screen bg-[#F4F0E7] text-[#29251F] flex">
+      {/* Left Brand Panel - Warm Luxury Cream */}
+      <div className="hidden lg:flex flex-col justify-between w-1/2 p-12 bg-[#E9E2D5] border-r border-[#DDD4C5] relative overflow-hidden text-[#29251F]">
         <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#A374]/15 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="relative z-10">
-          <VelvetCodeLogo size="lg" theme="dark" />
+          <VelvetCodeLogo size="lg" theme="light" />
         </div>
 
         <div className="relative z-10 space-y-6 max-w-lg">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#A374] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30 font-serif">
             Create Your Workspace
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#F7F3EA] tracking-tight leading-tight font-serif">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#29251F] tracking-tight leading-tight font-serif">
             Deploy Your Agency's Complete CRM in 60 Seconds
           </h2>
-          <p className="text-sm text-[#DDD4C4]/80 leading-relaxed">
+          <p className="text-sm text-[#625B51] leading-relaxed">
             Get instant access to real estate leads management, luxury property inventory, deals pipeline, and Realty AI with pre-configured Indian real estate templates.
           </p>
 
-          <div className="pt-4 space-y-3 text-xs text-[#DDD4C4]">
+          <div className="pt-4 space-y-3 text-xs text-[#29251F]">
             <div className="flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-[#3B825E]" />
+              <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
               <span>Full 14-day free trial on all features</span>
             </div>
             <div className="flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-[#3B825E]" />
+              <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
               <span>No credit card or setup fees required</span>
             </div>
             <div className="flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-[#3B825E]" />
+              <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
               <span>Instant WhatsApp CRM channel integration</span>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 pt-8 border-t border-[#24221E] text-xs text-[#DDD4C4]/60 flex items-center justify-between">
+        <div className="relative z-10 pt-8 border-t border-[#DDD4C5] text-xs text-[#857C6E] flex items-center justify-between">
           <span>Enterprise Real Estate Infrastructure</span>
-          <span className="flex items-center gap-1 text-[#3B825E] font-semibold">
+          <span className="flex items-center gap-1 text-[#3D7258] font-semibold">
             <ShieldCheck className="w-4 h-4" /> 100% Isolated Tenant DB
           </span>
         </div>
@@ -140,16 +140,16 @@ export default function RegisterPage() {
 
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#24211D] tracking-tight font-serif">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#29251F] tracking-tight font-serif">
               Create your workspace
             </h1>
-            <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+            <p className="text-xs sm:text-sm text-[#857C6E] mt-1">
               Start managing your real estate leads, properties, and deals.
             </p>
           </div>
 
           {errorMsg && (
-            <div className="p-3.5 rounded-xl bg-[#8B2635]/10 border border-[#8B2635]/30 text-[#8B2635] text-xs font-medium">
+            <div className="p-3.5 rounded-xl bg-[#8B4A4A]/10 border border-[#8B4A4A]/30 text-[#8B4A4A] text-xs font-medium">
               {errorMsg}
             </div>
           )}
@@ -223,13 +223,13 @@ export default function RegisterPage() {
               />
             </div>
 
-            <p className="text-[11px] text-[#766F63] leading-relaxed">
+            <p className="text-[11px] text-[#857C6E] leading-relaxed">
               By creating a workspace, you agree to Velvet Code's{' '}
-              <Link href="/terms" className="text-[#8F642B] hover:underline font-bold">
+              <Link href="/terms" className="text-[#7A5720] hover:underline font-bold">
                 Terms of Service
               </Link>{' '}
               and{' '}
-              <Link href="/privacy" className="text-[#8F642B] hover:underline font-bold">
+              <Link href="/privacy" className="text-[#7A5720] hover:underline font-bold">
                 Privacy Policy
               </Link>
               .
@@ -247,9 +247,9 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <p className="text-center text-xs text-[#766F63]">
+          <p className="text-center text-xs text-[#857C6E]">
             Already have an account?{' '}
-            <Link href="/login" className="text-[#8F642B] hover:text-[#7A5320] font-bold">
+            <Link href="/login" className="text-[#7A5720] hover:text-[#8D632F] font-bold">
               Sign in
             </Link>
           </p>

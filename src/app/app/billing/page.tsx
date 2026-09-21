@@ -42,7 +42,7 @@ export default function BillingPage() {
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#A374', '#2E6B4F', '#24211D'],
+        colors: ['#A374', '#3D7258', '#29251F'],
       });
     } catch {
       // ignore
@@ -55,15 +55,15 @@ export default function BillingPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight flex items-center gap-2">
               <CreditCard className="w-6 h-6 text-[#A374]" />
               Subscription & Workspace Billing
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#2E6B4F]/10 text-[#2E6B4F] border border-[#2E6B4F]/20 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#3D7258]/10 text-[#3D7258] border border-[#3D7258]/20 rounded-full">
               Status: {subscription.status}
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
             Manage your real estate SaaS plan tier, usage quotas, payment gateway, and invoice receipts.
           </p>
         </div>
@@ -79,16 +79,16 @@ export default function BillingPage() {
       </div>
 
       {/* Current Plan Overview Card */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD4C4] pb-6">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD4C5] pb-6">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#8F642B] font-serif">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#7A5720] font-serif">
               Active SaaS Plan
             </span>
-            <h2 className="text-3xl font-serif font-bold text-[#24211D] mt-1">
+            <h2 className="text-3xl font-serif font-bold text-[#29251F] mt-1">
               {currentPlanLimits.name} Plan
             </h2>
-            <p className="text-sm text-[#766F63] mt-1">
+            <p className="text-sm text-[#625B51] mt-1">
               ₹{subscription.priceMonthlyINR.toLocaleString('en-IN')}/month • Next renewal on 01 Oct 2026
             </p>
           </div>
@@ -108,33 +108,33 @@ export default function BillingPage() {
         {/* Real-time Usage Progress Bars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
           {/* 1. Users */}
-          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C4] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C5] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-[#766F63]">Agent Seats:</span>
-              <span className="text-[#24211D] font-mono">
+              <span className="text-[#625B51]">Agent Seats:</span>
+              <span className="text-[#29251F] font-mono">
                 {users.length} / {currentPlanLimits.maxUsers}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
+            <div className="w-full h-2 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
               <div
                 className="h-full bg-[#A374] rounded-full"
                 style={{ width: `${(users.length / currentPlanLimits.maxUsers) * 100}%` }}
               />
             </div>
-            <p className="text-[10px] text-[#766F63]">Enforced on backend</p>
+            <p className="text-[10px] text-[#625B51]">Enforced on backend</p>
           </div>
 
           {/* 2. Leads */}
-          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C4] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C5] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-[#766F63]">Lead Storage:</span>
-              <span className="text-[#24211D] font-mono">
+              <span className="text-[#625B51]">Lead Storage:</span>
+              <span className="text-[#29251F] font-mono">
                 248 / {currentPlanLimits.maxLeads === -1 ? 'Unlimited' : currentPlanLimits.maxLeads}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
+            <div className="w-full h-2 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
               <div
-                className="h-full bg-[#2E6B4F] rounded-full"
+                className="h-full bg-[#3D7258] rounded-full"
                 style={{
                   width: `${Math.min(
                     (248 / (currentPlanLimits.maxLeads === -1 ? 1000 : currentPlanLimits.maxLeads)) *
@@ -144,19 +144,19 @@ export default function BillingPage() {
                 }}
               />
             </div>
-            <p className="text-[10px] text-[#766F63]">Active buyer records</p>
+            <p className="text-[10px] text-[#625B51]">Active buyer records</p>
           </div>
 
           {/* 3. Properties */}
-          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C4] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C5] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-[#766F63]">Property Listings:</span>
-              <span className="text-[#24211D] font-mono">
+              <span className="text-[#625B51]">Property Listings:</span>
+              <span className="text-[#29251F] font-mono">
                 {properties.length} /{' '}
                 {currentPlanLimits.maxProperties === -1 ? 'Unlimited' : currentPlanLimits.maxProperties}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
+            <div className="w-full h-2 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
               <div
                 className="h-full bg-[#A87932] rounded-full"
                 style={{
@@ -169,18 +169,18 @@ export default function BillingPage() {
                 }}
               />
             </div>
-            <p className="text-[10px] text-[#766F63]">Live active inventory</p>
+            <p className="text-[10px] text-[#625B51]">Live active inventory</p>
           </div>
 
           {/* 4. AI Inferences */}
-          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C4] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C5] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-[#766F63]">Realty AI Quota:</span>
-              <span className="text-[#8F642B] font-mono">
+              <span className="text-[#625B51]">Realty AI Quota:</span>
+              <span className="text-[#7A5720] font-mono">
                 {subscription.usage.aiRequestsUsed} / {currentPlanLimits.monthlyAIQuota}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
+            <div className="w-full h-2 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
               <div
                 className="h-full bg-[#A374] rounded-full"
                 style={{
@@ -188,22 +188,22 @@ export default function BillingPage() {
                 }}
               />
             </div>
-            <p className="text-[10px] text-[#766F63]">Resets on next cycle</p>
+            <p className="text-[10px] text-[#625B51]">Resets on next cycle</p>
           </div>
         </div>
       </div>
 
       {/* Invoices Table */}
       <div className="space-y-4">
-        <h3 className="text-lg font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+        <h3 className="text-lg font-serif font-bold text-[#29251F] tracking-tight flex items-center gap-2">
           <Receipt className="w-5 h-5 text-[#A374]" />
           Invoice & Payment History
         </h3>
 
-        <div className="rounded-2xl border border-[#DDD4C4] bg-[#FFFCF6] overflow-hidden shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <div className="rounded-2xl border border-[#DDD4C5] bg-[#FFFDF8] overflow-hidden shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <table className="w-full text-left text-xs sm:text-sm">
             <thead>
-              <tr className="bg-[#F7F3EA] border-b border-[#DDD4C4] text-[#766F63] font-semibold">
+              <tr className="bg-[#F4F0E7] border-b border-[#DDD4C5] text-[#625B51] font-semibold">
                 <th className="p-4">Invoice #</th>
                 <th className="p-4">Billing Period</th>
                 <th className="p-4">Amount</th>
@@ -212,24 +212,24 @@ export default function BillingPage() {
                 <th className="p-4 text-right">Download</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD4C4]/60">
+            <tbody className="divide-y divide-[#DDD4C5]/60">
               {INITIAL_INVOICES.map((inv) => (
-                <tr key={inv.id} className="hover:bg-[#F7F3EA]/60 transition-colors">
-                  <td className="p-4 font-bold text-[#24211D] font-mono">{inv.invoiceNumber}</td>
-                  <td className="p-4 text-[#766F63]">Monthly SaaS Subscription</td>
-                  <td className="p-4 font-extrabold text-[#8F642B] font-mono">
+                <tr key={inv.id} className="hover:bg-[#F4F0E7]/60 transition-colors">
+                  <td className="p-4 font-bold text-[#29251F] font-mono">{inv.invoiceNumber}</td>
+                  <td className="p-4 text-[#625B51]">Monthly SaaS Subscription</td>
+                  <td className="p-4 font-extrabold text-[#7A5720] font-mono">
                     ₹{inv.totalINR}
                   </td>
-                  <td className="p-4 text-[#766F63]">{inv.paymentMethod}</td>
+                  <td className="p-4 text-[#625B51]">{inv.paymentMethod}</td>
                   <td className="p-4">
-                    <span className="px-2.5 py-0.5 text-xs font-bold bg-[#2E6B4F]/10 text-[#2E6B4F] rounded border border-[#2E6B4F]/20">
+                    <span className="px-2.5 py-0.5 text-xs font-bold bg-[#3D7258]/10 text-[#3D7258] rounded border border-[#3D7258]/20">
                       Paid
                     </span>
                   </td>
                   <td className="p-4 text-right">
                     <button
                       onClick={() => alert(`Downloading Invoice ${inv.invoiceNumber} PDF...`)}
-                      className="text-[#8F642B] hover:underline font-semibold flex items-center gap-1 ml-auto text-xs"
+                      className="text-[#7A5720] hover:underline font-semibold flex items-center gap-1 ml-auto text-xs"
                     >
                       <Download className="w-3.5 h-3.5" /> PDF
                     </button>
@@ -258,22 +258,22 @@ export default function BillingPage() {
                 className={`p-5 rounded-2xl border flex flex-col justify-between space-y-4 transition-all ${
                   isCurrent
                     ? 'bg-[#A374]/10 border-[#A374] shadow-md'
-                    : 'bg-white border-[#DDD4C4]'
+                    : 'bg-white border-[#DDD4C5]'
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <h4 className="font-serif font-bold text-[#24211D] text-base">{plan.name}</h4>
+                    <h4 className="font-serif font-bold text-[#29251F] text-base">{plan.name}</h4>
                     {isCurrent && (
                       <span className="px-2 py-0.5 text-[9px] font-bold bg-[#A374] text-white rounded">
                         Current
                       </span>
                     )}
                   </div>
-                  <p className="text-2xl font-serif font-extrabold text-[#24211D] mt-2">
+                  <p className="text-2xl font-serif font-extrabold text-[#29251F] mt-2">
                     ₹{plan.priceMonthlyINR}/mo
                   </p>
-                  <ul className="mt-4 space-y-2 text-xs text-[#766F63]">
+                  <ul className="mt-4 space-y-2 text-xs text-[#625B51]">
                     <li className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#A374]" />
                       <span>{plan.maxUsers} User Seat(s)</span>

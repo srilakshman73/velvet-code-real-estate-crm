@@ -44,11 +44,11 @@ export default function DealsPipelinePage() {
   });
 
   const stages: { key: DealStage; label: string; color: string; badge: string }[] = [
-    { key: 'NEW_LEAD', label: 'New Lead', color: 'border-t-[#DCD3C2]', badge: 'bg-[#756E63]/10 text-[#756E63]' },
-    { key: 'QUALIFIED', label: 'Qualified', color: 'border-t-[#C9A45C]', badge: 'bg-[#C9A45C]/15 text-[#8F642B]' },
+    { key: 'NEW_LEAD', label: 'New Lead', color: 'border-t-[#DDD4C5]', badge: 'bg-[#625B51]/10 text-[#625B51]' },
+    { key: 'QUALIFIED', label: 'Qualified', color: 'border-t-[#C9A45C]', badge: 'bg-[#C9A45C]/15 text-[#7A5720]' },
     { key: 'SITE_VISIT', label: 'Site Visit', color: 'border-t-[#A87932]', badge: 'bg-[#A87932]/15 text-[#A87932]' },
-    { key: 'NEGOTIATION', label: 'Negotiation', color: 'border-t-[#B8893C]', badge: 'bg-[#B8893C]/15 text-[#8F642B]' },
-    { key: 'DOCUMENTATION', label: 'Documentation', color: 'border-t-[#A374]', badge: 'bg-[#A374]/20 text-[#7A5320]' },
+    { key: 'NEGOTIATION', label: 'Negotiation', color: 'border-t-[#B8893C]', badge: 'bg-[#B8893C]/15 text-[#7A5720]' },
+    { key: 'DOCUMENTATION', label: 'Documentation', color: 'border-t-[#A374]', badge: 'bg-[#A374]/20 text-[#7A5720]' },
     { key: 'CLOSED_WON', label: 'Closed Won 🏆', color: 'border-t-[#2F6B52]', badge: 'bg-[#2F6B52]/15 text-[#2F6B52]' },
     { key: 'CLOSED_LOST', label: 'Closed Lost', color: 'border-t-[#8B3D3D]', badge: 'bg-[#8B3D3D]/15 text-[#8B3D3D]' },
   ];
@@ -70,7 +70,7 @@ export default function DealsPipelinePage() {
           particleCount: 100,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#A374', '#2E6B4F', '#24211D'],
+          colors: ['#A374', '#3D7258', '#29251F'],
         });
       } catch {
         // ignore
@@ -113,17 +113,17 @@ export default function DealsPipelinePage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight">
               Sales Deals Pipeline
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
               {deals.length} Active Deals
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
             Total Pipeline Value:{' '}
-            <strong className="text-[#8F642B] font-mono font-bold">{formatINR(totalPipelineValue, true)}</strong> • Closed Won:{' '}
-            <strong className="text-[#2E6B4F] font-mono font-bold">{formatINR(wonDealsValue, true)}</strong>
+            <strong className="text-[#7A5720] font-mono font-bold">{formatINR(totalPipelineValue, true)}</strong> • Closed Won:{' '}
+            <strong className="text-[#3D7258] font-mono font-bold">{formatINR(wonDealsValue, true)}</strong>
           </p>
         </div>
 
@@ -147,50 +147,50 @@ export default function DealsPipelinePage() {
             return (
               <div
                 key={st.key}
-                className={`w-72 flex-shrink-0 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] ${st.color} border-t-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col max-h-[78vh]`}
+                className={`w-72 flex-shrink-0 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] ${st.color} border-t-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col max-h-[78vh]`}
               >
                 {/* Column Header */}
-                <div className="p-4 border-b border-[#DDD4C4]">
+                <div className="p-4 border-b border-[#DDD4C5]">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-bold text-[#24211D] uppercase tracking-wider font-serif">
+                    <h3 className="text-xs font-bold text-[#29251F] uppercase tracking-wider font-serif">
                       {st.label}
                     </h3>
-                    <span className={`px-2 py-0.5 text-[10px] font-bold rounded-md border border-[#DDD4C4] ${st.badge}`}>
+                    <span className={`px-2 py-0.5 text-[10px] font-bold rounded-md border border-[#DDD4C5] ${st.badge}`}>
                       {stageDeals.length}
                     </span>
                   </div>
-                  <p className="text-xs font-extrabold text-[#8F642B] font-mono mt-1">
+                  <p className="text-xs font-extrabold text-[#7A5720] font-mono mt-1">
                     {formatINR(stageValue, true)}
                   </p>
                 </div>
 
                 {/* Cards List */}
-                <div className="p-3 space-y-3 overflow-y-auto flex-1 bg-[#F7F3EA]/30">
+                <div className="p-3 space-y-3 overflow-y-auto flex-1 bg-[#F4F0E7]/30">
                   {stageDeals.map((deal) => (
                     <div
                       key={deal.id}
                       onClick={() => openDetail(deal)}
-                      className="p-4 rounded-xl bg-white border border-[#DDD4C4] hover:border-[#A374] cursor-pointer shadow-[0_2px_8px_-2px_rgba(21,21,21,0.04)] hover:shadow-[0_8px_20px_-4px_rgba(163,116,36,0.12)] transition-all space-y-2.5 group"
+                      className="p-4 rounded-xl bg-white border border-[#DDD4C5] hover:border-[#A374] cursor-pointer shadow-[0_2px_8px_-2px_rgba(21,21,21,0.04)] hover:shadow-[0_8px_20px_-4px_rgba(163,116,36,0.12)] transition-all space-y-2.5 group"
                     >
                       <div className="flex items-start justify-between gap-1">
-                        <h4 className="text-xs font-serif font-bold text-[#24211D] group-hover:text-[#8F642B] transition-colors line-clamp-1">
+                        <h4 className="text-xs font-serif font-bold text-[#29251F] group-hover:text-[#7A5720] transition-colors line-clamp-1">
                           {deal.title}
                         </h4>
-                        <span className="text-[10px] font-bold text-[#2E6B4F] flex-shrink-0 bg-[#2E6B4F]/10 px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] font-bold text-[#3D7258] flex-shrink-0 bg-[#3D7258]/10 px-1.5 py-0.5 rounded">
                           {deal.probability}%
                         </span>
                       </div>
 
-                      <div className="space-y-1 text-[11px] text-[#766F63]">
-                        <p className="truncate text-[#24211D] font-medium">
+                      <div className="space-y-1 text-[11px] text-[#625B51]">
+                        <p className="truncate text-[#29251F] font-medium">
                           {deal.propertyName || 'Property'}
                         </p>
-                        <p className="text-xs font-extrabold text-[#8F642B] font-mono">
+                        <p className="text-xs font-extrabold text-[#7A5720] font-mono">
                           {formatINR(deal.dealValueINR, true)}
                         </p>
                       </div>
 
-                      <div className="pt-2 border-t border-[#DDD4C4]/60 flex items-center justify-between text-[10px] text-[#766F63]">
+                      <div className="pt-2 border-t border-[#DDD4C5]/60 flex items-center justify-between text-[10px] text-[#625B51]">
                         <span>Agent: {deal.assignedAgentName?.split(' ')[0] || 'Vikram'}</span>
                         <span>{deal.expectedCloseDate || '2026-10'}</span>
                       </div>
@@ -205,7 +205,7 @@ export default function DealsPipelinePage() {
                           onChange={(e) =>
                             handleStageChange(deal.id, e.target.value as DealStage)
                           }
-                          className="bg-[#F7F3EA] border border-[#DDD4C4] text-[10px] text-[#24211D] rounded px-1.5 py-1 w-full outline-none focus:border-[#A374]"
+                          className="bg-[#F4F0E7] border border-[#DDD4C5] text-[10px] text-[#29251F] rounded px-1.5 py-1 w-full outline-none focus:border-[#A374]"
                         >
                           {stages.map((s) => (
                             <option key={s.key} value={s.key}>
@@ -233,42 +233,42 @@ export default function DealsPipelinePage() {
           size="lg"
         >
           <div className="space-y-6 text-xs sm:text-sm">
-            <div className="p-4 rounded-xl bg-white border border-[#DDD4C4] space-y-3">
-              <h4 className="font-bold text-[#8F642B] uppercase tracking-wider text-xs font-serif">
+            <div className="p-4 rounded-xl bg-white border border-[#DDD4C5] space-y-3">
+              <h4 className="font-bold text-[#7A5720] uppercase tracking-wider text-xs font-serif">
                 Deal Parameters & Milestones
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div>
-                  <span className="text-[#766F63] block">Total Deal Value</span>
-                  <span className="text-[#8F642B] font-extrabold text-base font-mono">
+                  <span className="text-[#625B51] block">Total Deal Value</span>
+                  <span className="text-[#7A5720] font-extrabold text-base font-mono">
                     {formatINR(selectedDeal.dealValueINR)}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[#766F63] block">Current Stage</span>
-                  <span className="text-[#24211D] font-bold">{selectedDeal.stage}</span>
+                  <span className="text-[#625B51] block">Current Stage</span>
+                  <span className="text-[#29251F] font-bold">{selectedDeal.stage}</span>
                 </div>
                 <div>
-                  <span className="text-[#766F63] block">Buyer Name</span>
-                  <span className="text-[#24211D]">{selectedDeal.leadName || 'Client'}</span>
+                  <span className="text-[#625B51] block">Buyer Name</span>
+                  <span className="text-[#29251F]">{selectedDeal.leadName || 'Client'}</span>
                 </div>
                 <div>
-                  <span className="text-[#766F63] block">Target Closing Date</span>
-                  <span className="text-[#24211D]">{selectedDeal.expectedCloseDate || '2026-09-30'}</span>
+                  <span className="text-[#625B51] block">Target Closing Date</span>
+                  <span className="text-[#29251F]">{selectedDeal.expectedCloseDate || '2026-09-30'}</span>
                 </div>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#DDD4C4] space-y-2">
-              <h4 className="font-bold text-[#8F642B] uppercase tracking-wider text-xs font-serif">
+            <div className="p-4 rounded-xl bg-white border border-[#DDD4C5] space-y-2">
+              <h4 className="font-bold text-[#7A5720] uppercase tracking-wider text-xs font-serif">
                 Deal Notes & Milestones
               </h4>
-              <p className="text-xs text-[#24211D] bg-[#F7F3EA] p-3 rounded-lg border border-[#DDD4C4]">
+              <p className="text-xs text-[#29251F] bg-[#F4F0E7] p-3 rounded-lg border border-[#DDD4C5]">
                 {selectedDeal.notes || 'Legal review in progress.'}
               </p>
             </div>
 
-            <div className="flex items-center justify-between pt-4 border-t border-[#DDD4C4]">
+            <div className="flex items-center justify-between pt-4 border-t border-[#DDD4C5]">
               <Button
                 variant="danger"
                 size="xs"
@@ -368,7 +368,7 @@ export default function DealsPipelinePage() {
             onChange={(e) => setNewDealForm({ ...newDealForm, notes: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
             <Button
               type="button"
               variant="secondary"

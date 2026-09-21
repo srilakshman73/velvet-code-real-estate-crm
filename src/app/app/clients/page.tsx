@@ -79,14 +79,14 @@ export default function ClientsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#26231E] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight">
               Converted Clients
             </h1>
             <span className="px-2.5 py-0.5 text-xs font-bold bg-[#2F6B52]/15 text-[#2F6B52] border border-[#2F6B52]/30 rounded-full">
               {filteredClients.length} Active Clients
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#756E63] mt-1">
+          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
             Manage your active buyers, repeat real estate investors, and high-net-worth customer portfolios.
           </p>
         </div>
@@ -102,15 +102,15 @@ export default function ClientsPage() {
       </div>
 
       {/* Search Bar */}
-      <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-[#DCD3C2] shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)] flex items-center justify-between">
+      <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)] flex items-center justify-between">
         <div className="relative w-full max-w-md">
-          <Search className="w-4 h-4 text-[#756E63] absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#625B51] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search clients by name, phone, email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-white border border-[#DCD3C2] rounded-xl text-xs text-[#26231E] placeholder:text-[#756E63] outline-none focus:border-[#A374]"
+            className="w-full pl-9 pr-4 py-2 bg-white border border-[#DDD4C5] rounded-xl text-xs text-[#29251F] placeholder:text-[#625B51] outline-none focus:border-[#A374]"
           />
         </div>
       </div>
@@ -130,41 +130,41 @@ export default function ClientsPage() {
             <div
               key={client.id}
               onClick={() => openDetail(client)}
-              className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DCD3C2] hover:border-[#A374] cursor-pointer shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)] hover:shadow-[0_8px_24px_-4px_rgba(163,116,0,0.15)] transition-all space-y-4 flex flex-col justify-between group"
+              className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374] cursor-pointer shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)] hover:shadow-[0_8px_24px_-4px_rgba(163,116,0,0.15)] transition-all space-y-4 flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between">
                   <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#2F6B52]/15 text-[#2F6B52] border border-[#2F6B52]/30 rounded-md">
                     Verified Buyer
                   </span>
-                  <span className="text-xs text-[#756E63]">
+                  <span className="text-xs text-[#625B51]">
                     {client.totalDealsCount} Closed Deal{client.totalDealsCount > 1 ? 's' : ''}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-serif font-bold text-[#26231E] mt-3 group-hover:text-[#8F642B] transition-colors">
+                <h3 className="text-lg font-serif font-bold text-[#29251F] mt-3 group-hover:text-[#7A5720] transition-colors">
                   {client.name}
                 </h3>
-                <p className="text-xs text-[#756E63] mt-0.5 font-medium">{client.phone}</p>
+                <p className="text-xs text-[#625B51] mt-0.5 font-medium">{client.phone}</p>
 
-                <div className="mt-4 p-3 rounded-xl bg-[#F7F3EA] border border-[#DCD3C2] space-y-1.5 text-xs">
+                <div className="mt-4 p-3 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] space-y-1.5 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#756E63]">Lifetime Transactions:</span>
-                    <span className="font-bold text-[#8F642B] font-mono">
+                    <span className="text-[#625B51]">Lifetime Transactions:</span>
+                    <span className="font-bold text-[#7A5720] font-mono">
                       {client.totalDealsValueINR ? formatINR(client.totalDealsValueINR, true) : '₹5.20 Cr'}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#756E63]">Preferred Hub:</span>
-                    <span className="text-[#26231E] truncate max-w-[180px] font-medium">
+                    <span className="text-[#625B51]">Preferred Hub:</span>
+                    <span className="text-[#29251F] truncate max-w-[180px] font-medium">
                       {client.preferredLocation || 'South India Metros'}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#DCD3C2] flex items-center justify-between text-xs" onClick={(e) => e.stopPropagation()}>
-                <span className="text-[#756E63] font-serif font-semibold">VIP Investor</span>
+              <div className="pt-3 border-t border-[#DDD4C5] flex items-center justify-between text-xs" onClick={(e) => e.stopPropagation()}>
+                <span className="text-[#625B51] font-serif font-semibold">VIP Investor</span>
                 <div className="flex items-center gap-2">
                   <a
                     href={buildWhatsAppUrl(client.phone, `Hello ${client.name}, connecting from Velvet Code.`)}
@@ -177,10 +177,10 @@ export default function ClientsPage() {
                   </a>
                   <a
                     href={`tel:${client.phone}`}
-                    className="p-2 rounded-lg bg-white border border-[#DCD3C2] text-[#26231E] hover:bg-[#F7F3EA] transition-colors"
+                    className="p-2 rounded-lg bg-white border border-[#DDD4C5] text-[#29251F] hover:bg-[#F4F0E7] transition-colors"
                     title="Call Client"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[#756E63]" />
+                    <Phone className="w-3.5 h-3.5 text-[#625B51]" />
                   </a>
                 </div>
               </div>
@@ -199,46 +199,46 @@ export default function ClientsPage() {
           size="lg"
         >
           <div className="space-y-6 text-xs sm:text-sm">
-            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DCD3C2] space-y-3">
-              <h4 className="font-bold text-[#8F642B] font-serif uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-3">
+              <h4 className="font-bold text-[#7A5720] font-serif uppercase tracking-wider text-xs">
                 Contact & Investment Profile
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div>
-                  <span className="text-[#756E63] block">Phone</span>
-                  <span className="text-[#26231E] font-semibold">{selectedClient.phone}</span>
+                  <span className="text-[#625B51] block">Phone</span>
+                  <span className="text-[#29251F] font-semibold">{selectedClient.phone}</span>
                 </div>
                 <div>
-                  <span className="text-[#756E63] block">Email</span>
-                  <span className="text-[#26231E]">{selectedClient.email || 'N/A'}</span>
+                  <span className="text-[#625B51] block">Email</span>
+                  <span className="text-[#29251F]">{selectedClient.email || 'N/A'}</span>
                 </div>
                 <div>
-                  <span className="text-[#756E63] block">Target Budget</span>
-                  <span className="text-[#8F642B] font-bold font-mono">
+                  <span className="text-[#625B51] block">Target Budget</span>
+                  <span className="text-[#7A5720] font-bold font-mono">
                     {selectedClient.budgetINR ? formatINR(selectedClient.budgetINR) : '₹5.0 Cr+'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[#756E63] block">Preferred Area</span>
-                  <span className="text-[#26231E]">{selectedClient.preferredLocation}</span>
+                  <span className="text-[#625B51] block">Preferred Area</span>
+                  <span className="text-[#29251F]">{selectedClient.preferredLocation}</span>
                 </div>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DCD3C2] space-y-2">
-              <h4 className="font-bold text-[#8F642B] font-serif uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-2">
+              <h4 className="font-bold text-[#7A5720] font-serif uppercase tracking-wider text-xs">
                 Portfolio Requirements
               </h4>
-              <p className="text-xs text-[#26231E] bg-[#F7F3EA] p-3 rounded-lg border border-[#DCD3C2]">
+              <p className="text-xs text-[#29251F] bg-[#F4F0E7] p-3 rounded-lg border border-[#DDD4C5]">
                 {selectedClient.requirements || 'Looking for beachside vacation homes and high ROI rental suites.'}
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DCD3C2] space-y-2">
-              <h4 className="font-bold text-[#8F642B] font-serif uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-2">
+              <h4 className="font-bold text-[#7A5720] font-serif uppercase tracking-wider text-xs">
                 Client History & Notes
               </h4>
-              <p className="text-xs text-[#26231E] bg-[#F7F3EA] p-3 rounded-lg border border-[#DCD3C2]">
+              <p className="text-xs text-[#29251F] bg-[#F4F0E7] p-3 rounded-lg border border-[#DDD4C5]">
                 {selectedClient.notes || 'VIP Customer with verified funds.'}
               </p>
             </div>
@@ -308,7 +308,7 @@ export default function ClientsPage() {
             }
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DCD3C2]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
             <Button
               type="button"
               variant="secondary"

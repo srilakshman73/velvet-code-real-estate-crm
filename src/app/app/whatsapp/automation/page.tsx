@@ -33,20 +33,20 @@ export default function WhatsAppAutomationPage() {
         <div>
           <Link
             href="/app/whatsapp"
-            className="inline-flex items-center gap-1.5 text-xs text-[#766F63] hover:text-[#24211D] mb-2 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-[#625B51] hover:text-[#29251F] mb-2 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to WhatsApp Inbox
           </Link>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight flex items-center gap-2">
               <Zap className="w-6 h-6 text-[#A374]" />
               WhatsApp Visual Automation Engine
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
               {automations.filter((a) => a.isActive).length} Active Rules
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
             Build event-driven workflows: Trigger → Condition → Action → WhatsApp Template Delivery.
           </p>
         </div>
@@ -68,33 +68,33 @@ export default function WhatsAppAutomationPage() {
             key={rule.id}
             className={`p-6 rounded-2xl border transition-all ${
               rule.isActive
-                ? 'bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]'
-                : 'bg-[#F7F3EA]/60 border-[#DDD4C4]/60 opacity-60'
+                ? 'bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]'
+                : 'bg-[#F4F0E7]/60 border-[#DDD4C5]/60 opacity-60'
             }`}
           >
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               {/* Visual Flow Pipeline */}
               <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
                 {/* 1. TRIGGER */}
-                <div className="p-3 rounded-xl bg-white border border-[#DDD4C4] flex items-center gap-2 shadow-xs">
-                  <span className="text-[10px] font-bold uppercase text-[#8F642B] font-serif">Trigger:</span>
-                  <strong className="text-[#24211D]">{rule.triggerEvent}</strong>
+                <div className="p-3 rounded-xl bg-white border border-[#DDD4C5] flex items-center gap-2 shadow-xs">
+                  <span className="text-[10px] font-bold uppercase text-[#7A5720] font-serif">Trigger:</span>
+                  <strong className="text-[#29251F]">{rule.triggerEvent}</strong>
                 </div>
 
-                <ArrowRight className="w-4 h-4 text-[#766F63] hidden sm:block" />
+                <ArrowRight className="w-4 h-4 text-[#625B51] hidden sm:block" />
 
                 {/* 2. CONDITION */}
-                <div className="p-3 rounded-xl bg-white border border-[#DDD4C4] flex items-center gap-2 shadow-xs">
+                <div className="p-3 rounded-xl bg-white border border-[#DDD4C5] flex items-center gap-2 shadow-xs">
                   <span className="text-[10px] font-bold uppercase text-[#A87932] font-serif">Condition:</span>
-                  <span className="text-[#24211D]">Valid Phone & Verified Org</span>
+                  <span className="text-[#29251F]">Valid Phone & Verified Org</span>
                 </div>
 
-                <ArrowRight className="w-4 h-4 text-[#766F63] hidden sm:block" />
+                <ArrowRight className="w-4 h-4 text-[#625B51] hidden sm:block" />
 
                 {/* 3. ACTION */}
-                <div className="p-3 rounded-xl bg-white border border-[#2E6B4F]/30 flex items-center gap-2 shadow-xs">
-                  <span className="text-[10px] font-bold uppercase text-[#2E6B4F] font-serif">Action:</span>
-                  <strong className="text-[#2E6B4F]">
+                <div className="p-3 rounded-xl bg-white border border-[#3D7258]/30 flex items-center gap-2 shadow-xs">
+                  <span className="text-[10px] font-bold uppercase text-[#3D7258] font-serif">Action:</span>
+                  <strong className="text-[#3D7258]">
                     {rule.actionType} ({rule.templateName || 'Direct Task'})
                   </strong>
                 </div>
@@ -103,18 +103,18 @@ export default function WhatsAppAutomationPage() {
               {/* Execution Stats & Toggle */}
               <div className="flex items-center gap-4 flex-shrink-0 self-end lg:self-center">
                 <div className="text-right text-xs">
-                  <p className="text-[#766F63]">Fired <strong className="text-[#24211D]">{rule.executionCount}</strong> times</p>
-                  <p className="text-[10px] text-[#2E6B4F] font-medium">100% SLA Executed</p>
+                  <p className="text-[#625B51]">Fired <strong className="text-[#29251F]">{rule.executionCount}</strong> times</p>
+                  <p className="text-[10px] text-[#3D7258] font-medium">100% SLA Executed</p>
                 </div>
 
                 <button
                   onClick={() => toggleAutomation(rule.id)}
-                  className="p-1 text-[#766F63] hover:text-[#24211D] transition-transform active:scale-95"
+                  className="p-1 text-[#625B51] hover:text-[#29251F] transition-transform active:scale-95"
                 >
                   {rule.isActive ? (
-                    <ToggleRight className="w-9 h-9 text-[#2E6B4F]" />
+                    <ToggleRight className="w-9 h-9 text-[#3D7258]" />
                   ) : (
-                    <ToggleLeft className="w-9 h-9 text-[#766F63]" />
+                    <ToggleLeft className="w-9 h-9 text-[#625B51]" />
                   )}
                 </button>
               </div>
@@ -161,7 +161,7 @@ export default function WhatsAppAutomationPage() {
             options={templates.map((t) => ({ value: t.id, label: t.name }))}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
             <Button
               variant="secondary"
               size="sm"

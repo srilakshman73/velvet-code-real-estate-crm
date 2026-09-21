@@ -73,14 +73,14 @@ export default function TasksPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight">
               Task Management
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
               {tasks.filter((t) => t.status !== 'COMPLETED').length} Pending
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
             Assign sales tasks, client follow-ups, and property documentation milestones.
           </p>
         </div>
@@ -96,7 +96,7 @@ export default function TasksPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#DDD4C4] pb-3">
+      <div className="flex items-center gap-2 border-b border-[#DDD4C5] pb-3">
         {[
           { id: 'ALL', label: 'All Tasks' },
           { id: 'PENDING', label: 'Pending Action' },
@@ -108,7 +108,7 @@ export default function TasksPage() {
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               filter === tab.id
                 ? 'bg-[#A374] text-white shadow-sm'
-                : 'bg-[#FFFCF6] text-[#766F63] hover:text-[#24211D] border border-[#DDD4C4]'
+                : 'bg-[#FFFDF8] text-[#625B51] hover:text-[#29251F] border border-[#DDD4C5]'
             }`}
           >
             {tab.label}
@@ -134,8 +134,8 @@ export default function TasksPage() {
                 key={t.id}
                 className={`p-4 sm:p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                   isCompleted
-                    ? 'bg-[#F7F3EA]/60 border-[#DDD4C4]/60 opacity-60'
-                    : 'bg-[#FFFCF6] border-[#DDD4C4] shadow-[0_2px_12px_-2px_rgba(21,21,21,0.04)] hover:border-[#A374]'
+                    ? 'bg-[#F4F0E7]/60 border-[#DDD4C5]/60 opacity-60'
+                    : 'bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_2px_12px_-2px_rgba(21,21,21,0.04)] hover:border-[#A374]'
                 }`}
               >
                 <div className="flex items-start gap-3.5 min-w-0">
@@ -145,8 +145,8 @@ export default function TasksPage() {
                     }
                     className={`mt-1 w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${
                       isCompleted
-                        ? 'bg-[#2E6B4F] border-[#2E6B4F] text-white'
-                        : 'border-[#DDD4C4] bg-white hover:border-[#A374]'
+                        ? 'bg-[#3D7258] border-[#3D7258] text-white'
+                        : 'border-[#DDD4C5] bg-white hover:border-[#A374]'
                     }`}
                   >
                     {isCompleted && <CheckCircle2 className="w-4 h-4" />}
@@ -156,7 +156,7 @@ export default function TasksPage() {
                     <div className="flex flex-wrap items-center gap-2">
                       <h4
                         className={`text-sm font-bold ${
-                          isCompleted ? 'line-through text-[#766F63]' : 'text-[#24211D] font-serif'
+                          isCompleted ? 'line-through text-[#625B51]' : 'text-[#29251F] font-serif'
                         }`}
                       >
                         {t.title}
@@ -165,10 +165,10 @@ export default function TasksPage() {
                     </div>
 
                     {t.description && (
-                      <p className="text-xs text-[#766F63]">{t.description}</p>
+                      <p className="text-xs text-[#625B51]">{t.description}</p>
                     )}
 
-                    <div className="flex flex-wrap items-center gap-4 text-[11px] text-[#766F63] pt-1">
+                    <div className="flex flex-wrap items-center gap-4 text-[11px] text-[#625B51] pt-1">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5 text-[#A374]" /> Due: {t.dueDate}
                       </span>
@@ -181,7 +181,7 @@ export default function TasksPage() {
                 <div className="flex items-center gap-2 flex-shrink-0 self-end sm:self-center">
                   <button
                     onClick={() => deleteTask(t.id)}
-                    className="p-1.5 text-[#766F63] hover:text-[#8B2635] rounded-lg hover:bg-[#8B2635]/10 transition-colors"
+                    className="p-1.5 text-[#625B51] hover:text-[#8B4A4A] rounded-lg hover:bg-[#8B4A4A]/10 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -269,7 +269,7 @@ export default function TasksPage() {
             onChange={(e) => setNewTaskForm({ ...newTaskForm, description: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
             <Button
               type="button"
               variant="secondary"

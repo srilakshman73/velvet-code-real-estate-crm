@@ -90,14 +90,14 @@ export default function SiteVisitsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight">
               Site Visits Management
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/40 rounded-full font-serif">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/40 rounded-full font-serif">
               {siteVisits.length} Recorded Visits
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
             Schedule luxury property viewings, dispatch WhatsApp directions, and record client impressions.
           </p>
         </div>
@@ -113,7 +113,7 @@ export default function SiteVisitsPage() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#DDD4C4] pb-3">
+      <div className="flex items-center gap-2 border-b border-[#DDD4C5] pb-3">
         {[
           { id: 'ALL', label: 'All Visits' },
           { id: 'TODAY', label: "Today's Schedule" },
@@ -126,7 +126,7 @@ export default function SiteVisitsPage() {
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === tab.id
                 ? 'bg-[#A374] text-white shadow-sm'
-                : 'bg-[#FFFCF6] text-[#766F63] hover:text-[#24211D] border border-[#DDD4C4]'
+                : 'bg-[#FFFDF8] text-[#625B51] hover:text-[#29251F] border border-[#DDD4C5]'
             }`}
           >
             {tab.label}
@@ -148,42 +148,42 @@ export default function SiteVisitsPage() {
           {filteredVisits.map((v) => (
             <div
               key={v.id}
-              className="p-6 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-4 flex flex-col justify-between hover:border-[#A374] transition-all"
+              className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-4 flex flex-col justify-between hover:border-[#A374] transition-all"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <SiteVisitStatusBadge status={v.status} />
-                  <span className="text-xs font-bold text-[#8F642B] bg-[#F7F3EA] px-2.5 py-1 rounded-lg border border-[#DDD4C4]">
+                  <span className="text-xs font-bold text-[#7A5720] bg-[#F4F0E7] px-2.5 py-1 rounded-lg border border-[#DDD4C5]">
                     {v.timeSlot}
                   </span>
                 </div>
 
-                <h3 className="text-base font-serif font-bold text-[#24211D] leading-snug">
+                <h3 className="text-base font-serif font-bold text-[#29251F] leading-snug">
                   {v.propertyName}
                 </h3>
 
-                <p className="text-xs text-[#766F63] flex items-center gap-1.5">
+                <p className="text-xs text-[#625B51] flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-[#A374] flex-shrink-0" />
                   <span>{v.propertyLocation}</span>
                 </p>
 
-                <div className="p-3 rounded-xl bg-[#F7F3EA] border border-[#DDD4C4] text-xs space-y-1.5">
+                <div className="p-3 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] text-xs space-y-1.5">
                   <div className="flex justify-between">
-                    <span className="text-[#766F63]">Buyer:</span>
-                    <span className="font-semibold text-[#24211D]">{v.leadName || 'Client'}</span>
+                    <span className="text-[#625B51]">Buyer:</span>
+                    <span className="font-semibold text-[#29251F]">{v.leadName || 'Client'}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#766F63]">Date:</span>
-                    <span className="text-[#24211D]">{v.visitDate}</span>
+                    <span className="text-[#625B51]">Date:</span>
+                    <span className="text-[#29251F]">{v.visitDate}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#766F63]">Assigned Agent:</span>
-                    <span className="text-[#24211D]">{v.assignedAgentName}</span>
+                    <span className="text-[#625B51]">Assigned Agent:</span>
+                    <span className="text-[#29251F]">{v.assignedAgentName}</span>
                   </div>
                 </div>
 
                 {v.feedback && (
-                  <div className="p-2.5 rounded-lg bg-[#2E6B4F]/10 border border-[#2E6B4F]/20 text-xs text-[#2E6B4F]">
+                  <div className="p-2.5 rounded-lg bg-[#3D7258]/10 border border-[#3D7258]/20 text-xs text-[#3D7258]">
                     <div className="flex items-center gap-1 font-bold mb-0.5">
                       <Star className="w-3.5 h-3.5 fill-[#A374] text-[#A374]" />
                       <span>{v.rating} / 5 Stars Feedback</span>
@@ -194,7 +194,7 @@ export default function SiteVisitsPage() {
               </div>
 
               {/* Action Controls */}
-              <div className="pt-3 border-t border-[#DDD4C4] flex items-center justify-between text-xs">
+              <div className="pt-3 border-t border-[#DDD4C5] flex items-center justify-between text-xs">
                 {v.status === 'CONFIRMED' || v.status === 'SCHEDULED' ? (
                   <>
                     <Button
@@ -213,7 +213,7 @@ export default function SiteVisitsPage() {
                     </Button>
                   </>
                 ) : (
-                  <span className="text-[#2E6B4F] text-xs font-semibold flex items-center gap-1">
+                  <span className="text-[#3D7258] text-xs font-semibold flex items-center gap-1">
                     <CheckCircle2 className="w-4 h-4" /> Visit Completed
                   </span>
                 )}
@@ -222,7 +222,7 @@ export default function SiteVisitsPage() {
                   href={buildWhatsAppUrl(v.customerPhone || '916383395915', `Hello, your site visit for ${v.propertyName} is scheduled for ${v.visitDate} at ${v.timeSlot}.`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-1.5 rounded-lg bg-[#2E6B4F]/10 text-[#2E6B4F] hover:bg-[#2E6B4F]/20 ml-auto transition-colors"
+                  className="p-1.5 rounded-lg bg-[#3D7258]/10 text-[#3D7258] hover:bg-[#3D7258]/20 ml-auto transition-colors"
                   title="WhatsApp Confirmation"
                 >
                   <MessageSquare className="w-4 h-4" />
@@ -311,7 +311,7 @@ export default function SiteVisitsPage() {
             onChange={(e) => setNewVisitForm({ ...newVisitForm, notes: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
             <Button
               type="button"
               variant="secondary"
@@ -337,7 +337,7 @@ export default function SiteVisitsPage() {
         >
           <div className="space-y-4 text-xs sm:text-sm">
             <div>
-              <label className="block text-xs font-semibold text-[#24211D] mb-1.5">
+              <label className="block text-xs font-semibold text-[#29251F] mb-1.5">
                 Client Rating (1 to 5 Stars)
               </label>
               <div className="flex items-center gap-2">
@@ -348,8 +348,8 @@ export default function SiteVisitsPage() {
                     onClick={() => setFeedbackRating(star)}
                     className={`p-2 rounded-lg border transition-all ${
                       feedbackRating >= star
-                        ? 'bg-[#A374]/20 border-[#A374] text-[#8F642B]'
-                        : 'bg-white border-[#DDD4C4] text-[#766F63]'
+                        ? 'bg-[#A374]/20 border-[#A374] text-[#7A5720]'
+                        : 'bg-white border-[#DDD4C5] text-[#625B51]'
                     }`}
                   >
                     <Star className="w-5 h-5 fill-current" />
@@ -366,7 +366,7 @@ export default function SiteVisitsPage() {
               onChange={(e) => setFeedbackText(e.target.value)}
             />
 
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
               <Button
                 variant="secondary"
                 size="sm"

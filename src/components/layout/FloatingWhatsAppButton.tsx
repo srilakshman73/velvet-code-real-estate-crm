@@ -27,11 +27,11 @@ export function FloatingWhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Chat on WhatsApp with Velvet Code at ${PRIMARY_WHATSAPP_NUMBER}`}
-        className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#2E6B4F] hover:bg-[#24563F] text-white font-bold text-xs sm:text-sm shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 border border-[#2E6B4F]/40 focus:outline-none focus:ring-2 focus:ring-[#A374] focus:ring-offset-2"
+        className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#3D7258] hover:bg-[#2E5943] text-white font-bold text-xs sm:text-sm shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 border border-[#3D7258]/40 focus:outline-none focus:ring-2 focus:ring-[#A374] focus:ring-offset-2"
       >
         <div className="relative">
           <MessageSquare className="w-5 h-5 fill-current" />
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#4ADE80] rounded-full border-2 border-[#2E6B4F] animate-pulse" />
+          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#4ADE80] rounded-full border-2 border-[#3D7258] animate-pulse" />
         </div>
         <span className="hidden sm:inline font-semibold tracking-wide">
           WhatsApp {PRIMARY_WHATSAPP_NUMBER}

@@ -44,7 +44,7 @@ export default function ReportsPage() {
   const closedWonCount = deals.filter((d) => d.stage === 'CLOSED_WON').length;
 
   const leadConversionFunnel = [
-    { stage: 'Total Inquiries', count: totalInquiries, fill: '#756E63' },
+    { stage: 'Total Inquiries', count: totalInquiries, fill: '#625B51' },
     { stage: 'Contacted', count: contactedLeads, fill: '#C9A45C' },
     { stage: 'Qualified Buyers', count: qualifiedLeads, fill: '#B8893C' },
     { stage: 'Site Visits Scheduled', count: siteVisitsCount, fill: '#A87932' },
@@ -74,27 +74,27 @@ export default function ReportsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight flex items-center gap-2">
               <BarChart3 className="w-6 h-6 text-[#A374]" />
               Executive Analytics & Reports
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
               Real-Time Metrics
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
             Conversion funnels, agent revenue leaderboards, and marketing channel ROI.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="bg-[#FFFCF6] border border-[#DDD4C4] p-1 rounded-xl flex text-xs shadow-xs">
+          <div className="bg-[#FFFDF8] border border-[#DDD4C5] p-1 rounded-xl flex text-xs shadow-xs">
             {['Today', '7 Days', '30 Days', 'ThisMonth'].map((t) => (
               <button
                 key={t}
                 onClick={() => setFilter(t)}
                 className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                  filter === t ? 'bg-[#A374] text-white font-semibold shadow-xs' : 'text-[#766F63] hover:text-[#24211D]'
+                  filter === t ? 'bg-[#A374] text-white font-semibold shadow-xs' : 'text-[#625B51] hover:text-[#29251F]'
                 }`}
               >
                 {t === 'ThisMonth' ? 'This Month' : t}
@@ -116,22 +116,22 @@ export default function ReportsPage() {
       {/* Conversion Funnel & Agent Leaderboard */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Conversion Funnel */}
-        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-          <div className="border-b border-[#DDD4C4] pb-3">
-            <h3 className="text-base font-serif font-bold text-[#24211D] tracking-tight">
+        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+          <div className="border-b border-[#DDD4C5] pb-3">
+            <h3 className="text-base font-serif font-bold text-[#29251F] tracking-tight">
               Lead Conversion Funnel
             </h3>
-            <p className="text-xs text-[#766F63]">Visitor inquiry to Closed Won transaction velocity</p>
+            <p className="text-xs text-[#625B51]">Visitor inquiry to Closed Won transaction velocity</p>
           </div>
 
           <div className="space-y-3 pt-2">
             {leadConversionFunnel.map((step, idx) => (
               <div key={idx} className="space-y-1">
                 <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-[#24211D]">{step.stage}</span>
-                  <span className="text-[#8F642B] font-mono">{step.count} leads</span>
+                  <span className="text-[#29251F]">{step.stage}</span>
+                  <span className="text-[#7A5720] font-mono">{step.count} leads</span>
                 </div>
-                <div className="w-full h-3 bg-[#F7F3EA] rounded-full overflow-hidden border border-[#DDD4C4]/50">
+                <div className="w-full h-3 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
@@ -146,27 +146,27 @@ export default function ReportsPage() {
         </div>
 
         {/* Agent Revenue Leaderboard */}
-        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-          <div className="border-b border-[#DDD4C4] pb-3">
-            <h3 className="text-base font-serif font-bold text-[#24211D] tracking-tight">
+        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+          <div className="border-b border-[#DDD4C5] pb-3">
+            <h3 className="text-base font-serif font-bold text-[#29251F] tracking-tight">
               Sales Consultant Revenue Contribution
             </h3>
-            <p className="text-xs text-[#766F63]">Closed commission vs active pipeline in Lakhs INR</p>
+            <p className="text-xs text-[#625B51]">Closed commission vs active pipeline in Lakhs INR</p>
           </div>
 
           <div className="h-64 w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={agentPerformance} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="#ECE5D8" horizontal={false} />
-                <XAxis type="number" stroke="#766F63" fontSize={11} tickFormatter={(v) => `₹${v}L`} />
-                <YAxis dataKey="name" type="category" stroke="#24211D" fontSize={11} width={130} />
+                <XAxis type="number" stroke="#625B51" fontSize={11} tickFormatter={(v) => `₹${v}L`} />
+                <YAxis dataKey="name" type="category" stroke="#29251F" fontSize={11} width={130} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#FFFCF6',
-                    borderColor: '#DDD4C4',
+                    backgroundColor: '#FFFDF8',
+                    borderColor: '#DDD4C5',
                     borderRadius: '0.75rem',
                     fontSize: '12px',
-                    color: '#24211D',
+                    color: '#29251F',
                     boxShadow: '0 10px 25px -5px rgba(21,21,21,0.08)',
                   }}
                   formatter={(val: any) => [`₹${val} Lakhs`, 'Contribution']}

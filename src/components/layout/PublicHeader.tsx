@@ -21,7 +21,7 @@ export function PublicHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#DDD4C4] bg-[#F7F3EA]/90 backdrop-blur-md transition-colors duration-200">
+    <header className="sticky top-0 z-40 w-full border-b border-[#DDD4C5] bg-[#F8F5EE]/95 backdrop-blur-md transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo */}
         <VelvetCodeLogo href="/" size="md" theme="light" />
@@ -36,8 +36,8 @@ export function PublicHeader() {
                 href={link.href}
                 className={`text-sm font-semibold tracking-wide transition-colors ${
                   isActive
-                    ? 'text-[#8F642B] border-b-2 border-[#A374] pb-0.5'
-                    : 'text-[#24211D] hover:text-[#8F642B]'
+                    ? 'text-[#7A5720] border-b-2 border-[#A374] pb-0.5'
+                    : 'text-[#29251F] hover:text-[#7A5720]'
                 }`}
               >
                 {link.label}
@@ -52,7 +52,7 @@ export function PublicHeader() {
             href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold text-[#2E6B4F] bg-[#2E6B4F]/10 hover:bg-[#2E6B4F]/15 border border-[#2E6B4F]/30 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold text-[#3D7258] bg-[#3D7258]/10 hover:bg-[#3D7258]/15 border border-[#3D7258]/30 rounded-lg transition-colors"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             +91 63833 95915
@@ -80,7 +80,7 @@ export function PublicHeader() {
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-[#24211D] hover:text-[#8F642B] rounded-lg hover:bg-[#EFE8DA]"
+            className="p-2 text-[#29251F] hover:text-[#7A5720] rounded-lg hover:bg-[#ECE6DA]"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -89,26 +89,26 @@ export function PublicHeader() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-[#DDD4C4] bg-[#FFFCF6] p-5 space-y-4 animate-in slide-in-from-top-2 shadow-xl">
+        <div className="md:hidden border-b border-[#DDD4C5] bg-[#FFFDF8] p-5 space-y-4 animate-in slide-in-from-top-2 shadow-xl">
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-semibold text-[#24211D] hover:text-[#8F642B] py-1 border-b border-[#DDD4C4]/40"
+                className="text-base font-semibold text-[#29251F] hover:text-[#7A5720] py-1 border-b border-[#DDD4C5]/40"
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          <div className="pt-4 border-t border-[#DDD4C4] space-y-3">
+          <div className="pt-4 border-t border-[#DDD4C5] space-y-3">
             <a
               href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-semibold text-[#2E6B4F] bg-[#2E6B4F]/10 border border-[#2E6B4F]/30 rounded-xl"
+              className="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-semibold text-[#3D7258] bg-[#3D7258]/10 border border-[#3D7258]/30 rounded-xl"
             >
               <MessageSquare className="w-4 h-4" />
               WhatsApp: +91 63833 95915

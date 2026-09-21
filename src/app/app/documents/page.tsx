@@ -57,15 +57,15 @@ export default function DocumentsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211D] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight flex items-center gap-2">
               <FileText className="w-6 h-6 text-[#A374]" />
               Document Vault & Legal KYC
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#8F642B] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
               {documents.length} Encrypted Files
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#766F63] mt-1">
+          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
             Store property brochures, floor plans, buyer PAN/KYC cards, and draft sale agreements.
           </p>
         </div>
@@ -81,15 +81,15 @@ export default function DocumentsPage() {
       </div>
 
       {/* Filter Bar */}
-      <div className="p-4 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-[#766F63] absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#625B51] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search documents by name or property..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-white border border-[#DDD4C4] rounded-xl text-xs text-[#24211D] placeholder:text-[#766F63] outline-none focus:border-[#A374]"
+            className="w-full pl-9 pr-4 py-2 bg-white border border-[#DDD4C5] rounded-xl text-xs text-[#29251F] placeholder:text-[#625B51] outline-none focus:border-[#A374]"
           />
         </div>
 
@@ -101,7 +101,7 @@ export default function DocumentsPage() {
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors ${
                 filter === cat
                   ? 'bg-[#A374] text-white shadow-xs'
-                  : 'bg-white text-[#766F63] hover:text-[#24211D] border border-[#DDD4C4]'
+                  : 'bg-white text-[#625B51] hover:text-[#29251F] border border-[#DDD4C5]'
               }`}
             >
               {cat === 'ALL' ? 'All Files' : cat.replace('_', ' ')}
@@ -124,32 +124,32 @@ export default function DocumentsPage() {
           {filteredDocs.map((doc) => (
             <div
               key={doc.id}
-              className="p-5 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] transition-all space-y-3 flex flex-col justify-between"
+              className="p-5 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] transition-all space-y-3 flex flex-col justify-between"
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#F7F3EA] text-[#8F642B] rounded border border-[#DDD4C4]">
+                  <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#F4F0E7] text-[#7A5720] rounded border border-[#DDD4C5]">
                     {doc.category}
                   </span>
-                  <span className="text-xs text-[#766F63] font-mono">{doc.fileSizeMB} MB • {doc.fileType}</span>
+                  <span className="text-xs text-[#625B51] font-mono">{doc.fileSizeMB} MB • {doc.fileType}</span>
                 </div>
 
-                <h3 className="text-sm font-serif font-bold text-[#24211D] line-clamp-1">{doc.title}</h3>
+                <h3 className="text-sm font-serif font-bold text-[#29251F] line-clamp-1">{doc.title}</h3>
                 {doc.relatedName && (
-                  <p className="text-xs text-[#766F63] truncate">Related: {doc.relatedName}</p>
+                  <p className="text-xs text-[#625B51] truncate">Related: {doc.relatedName}</p>
                 )}
               </div>
 
-              <div className="pt-3 border-t border-[#DDD4C4] flex items-center justify-between text-xs">
+              <div className="pt-3 border-t border-[#DDD4C5] flex items-center justify-between text-xs">
                 <button
                   onClick={() => alert(`Downloading ${doc.title}...`)}
-                  className="text-[#8F642B] hover:underline font-semibold flex items-center gap-1"
+                  className="text-[#7A5720] hover:underline font-semibold flex items-center gap-1"
                 >
                   <Download className="w-3.5 h-3.5" /> Download PDF
                 </button>
                 <button
                   onClick={() => deleteDocument(doc.id)}
-                  className="text-[#766F63] hover:text-[#8B2635] p-1 transition-colors"
+                  className="text-[#625B51] hover:text-[#8B4A4A] p-1 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -195,7 +195,7 @@ export default function DocumentsPage() {
             onChange={(e) => setNewDocForm({ ...newDocForm, relatedName: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
             <Button
               type="button"
               variant="secondary"

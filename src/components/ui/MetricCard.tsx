@@ -27,23 +27,23 @@ export function MetricCard({
   const isNegative = (changePercent ?? 0) < 0;
 
   const accentStyles: Record<string, string> = {
-    gold: 'border-[#DCD3C2] hover:border-[#A374]/80 bg-[#FFFDF8]',
-    emerald: 'border-[#DCD3C2] hover:border-[#2F6B52]/80 bg-[#FFFDF8]',
-    amber: 'border-[#DCD3C2] hover:border-[#A87932]/80 bg-[#FFFDF8]',
-    charcoal: 'border-[#DCD3C2] hover:border-[#171613]/80 bg-[#FFFDF8]',
-    blue: 'border-[#DCD3C2] hover:border-[#A374]/80 bg-[#FFFDF8]',
-    purple: 'border-[#DCD3C2] hover:border-[#A87932]/80 bg-[#FFFDF8]',
-    default: 'border-[#DCD3C2] hover:border-[#A374]/60 bg-[#FFFDF8]',
+    gold: 'border-[#DDD4C5] hover:border-[#A374]/80 bg-[#FFFDF8]',
+    emerald: 'border-[#DDD4C5] hover:border-[#3D7258]/80 bg-[#FFFDF8]',
+    amber: 'border-[#DDD4C5] hover:border-[#A87932]/80 bg-[#FFFDF8]',
+    charcoal: 'border-[#DDD4C5] hover:border-[#29251F]/80 bg-[#FFFDF8]',
+    blue: 'border-[#DDD4C5] hover:border-[#A374]/80 bg-[#FFFDF8]',
+    purple: 'border-[#DDD4C5] hover:border-[#A87932]/80 bg-[#FFFDF8]',
+    default: 'border-[#DDD4C5] hover:border-[#A374]/60 bg-[#FFFDF8]',
   };
 
   const iconAccent: Record<string, string> = {
-    gold: 'bg-[#A374]/15 border-[#A374]/30 text-[#8F642B]',
-    emerald: 'bg-[#2F6B52]/15 border-[#2F6B52]/30 text-[#2F6B52]',
+    gold: 'bg-[#A374]/15 border-[#A374]/30 text-[#7A5720]',
+    emerald: 'bg-[#3D7258]/15 border-[#3D7258]/30 text-[#3D7258]',
     amber: 'bg-[#A87932]/15 border-[#A87932]/30 text-[#A87932]',
-    charcoal: 'bg-[#171613]/10 border-[#171613]/20 text-[#171613]',
-    blue: 'bg-[#A374]/15 border-[#A374]/30 text-[#8F642B]',
+    charcoal: 'bg-[#29251F]/10 border-[#29251F]/20 text-[#29251F]',
+    blue: 'bg-[#A374]/15 border-[#A374]/30 text-[#7A5720]',
     purple: 'bg-[#A87932]/15 border-[#A87932]/30 text-[#A87932]',
-    default: 'bg-[#F7F3EA] border-[#DCD3C2] text-[#8F642B]',
+    default: 'bg-[#F4F0E7] border-[#DDD4C5] text-[#7A5720]',
   };
 
   return (
@@ -56,16 +56,16 @@ export function MetricCard({
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-wider text-[#756E63] mb-1">
+          <p className="text-xs font-bold uppercase tracking-wider text-[#756D61] mb-1">
             {title}
           </p>
-          <div className="text-2xl sm:text-3xl font-extrabold text-[#26231E] tracking-tight font-sans">
+          <div className="text-2xl sm:text-3xl font-extrabold text-[#29251F] tracking-tight font-sans">
             {value}
           </div>
         </div>
         <div
           className={cn(
-            'p-3 rounded-xl border shadow-xs group-hover:scale-105 transition-transform flex items-center justify-center',
+            'p-3 rounded-xl border shadow-2xs group-hover:scale-105 transition-transform flex items-center justify-center',
             iconAccent[variant] || iconAccent.default
           )}
         >
@@ -74,29 +74,29 @@ export function MetricCard({
       </div>
 
       {(changePercent !== undefined || subtitle) && (
-        <div className="mt-4 flex items-center justify-between text-xs pt-3 border-t border-[#DCD3C2]/60">
+        <div className="mt-4 flex items-center justify-between text-xs pt-3 border-t border-[#DDD4C5]/60">
           {changePercent !== undefined && (
             <div className="flex items-center gap-1 font-semibold">
               {isPositive ? (
-                <span className="flex items-center text-[#2F6B52] gap-0.5">
+                <span className="flex items-center text-[#3D7258] gap-0.5">
                   <TrendingUp className="w-3.5 h-3.5" />
                   +{changePercent}%
                 </span>
               ) : isNegative ? (
-                <span className="flex items-center text-[#8B3D3D] gap-0.5">
+                <span className="flex items-center text-[#8B4A4A] gap-0.5">
                   <TrendingDown className="w-3.5 h-3.5" />
                   {changePercent}%
                 </span>
               ) : (
-                <span className="flex items-center text-[#756E63] gap-0.5">
+                <span className="flex items-center text-[#756D61] gap-0.5">
                   <Minus className="w-3.5 h-3.5" />
                   0%
                 </span>
               )}
-              <span className="text-[#756E63] font-normal">{changeLabel}</span>
+              <span className="text-[#756D61] font-normal">{changeLabel}</span>
             </div>
           )}
-          {subtitle && <span className="text-[#756E63] font-medium">{subtitle}</span>}
+          {subtitle && <span className="text-[#857C6E] font-medium">{subtitle}</span>}
         </div>
       )}
     </div>

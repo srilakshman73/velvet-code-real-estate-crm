@@ -90,18 +90,18 @@ export default function SolutionsPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F3EA] text-[#24211D]">
+    <div className="min-h-screen flex flex-col bg-[#F4F0E7] text-[#29251F]">
       <PublicHeader />
       <main className="flex-1">
         {/* Hero */}
         <section className="py-20 text-center max-w-4xl mx-auto px-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#8F642B] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Tailored Industry Solutions
           </span>
-          <h1 className="text-4xl sm:text-6xl font-bold text-[#24211D] mt-4 tracking-tight font-serif">
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#29251F] mt-4 tracking-tight font-serif">
             Designed for Every Real Estate Business Model
           </h1>
-          <p className="text-lg text-[#766F63] mt-4 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-[#625B51] mt-4 leading-relaxed max-w-2xl mx-auto">
             Whether you are an independent property broker or a multi-city builder, Velvet Code provides the exact CRM tools required to scale your revenue.
           </p>
         </section>
@@ -114,18 +114,18 @@ export default function SolutionsPage() {
               <div
                 key={sol.id}
                 id={sol.id}
-                className="p-8 sm:p-10 rounded-2xl bg-[#FFFCF6] border border-[#DDD4C4] hover:border-[#A374] transition-all aurum-card-shadow space-y-6"
+                className="p-8 sm:p-10 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374] transition-all aurum-card-shadow space-y-6"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD4C4] pb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD4C5] pb-6">
                   <div className="flex items-center gap-4">
-                    <div className="p-3.5 rounded-xl bg-[#F7F3EA] text-[#8F642B] border border-[#DDD4C4]">
+                    <div className="p-3.5 rounded-xl bg-[#F4F0E7] text-[#7A5720] border border-[#DDD4C5]">
                       <Icon className="w-7 h-7" />
                     </div>
                     <div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#8F642B]">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A5720]">
                         {sol.tag}
                       </span>
-                      <h2 className="text-2xl font-bold text-[#24211D] mt-0.5 font-serif">{sol.title}</h2>
+                      <h2 className="text-2xl font-bold text-[#29251F] mt-0.5 font-serif">{sol.title}</h2>
                     </div>
                   </div>
                   <Link href="/register">
@@ -135,14 +135,14 @@ export default function SolutionsPage() {
                   </Link>
                 </div>
 
-                <p className="text-sm text-[#766F63] leading-relaxed max-w-3xl">
+                <p className="text-sm text-[#625B51] leading-relaxed max-w-3xl">
                   {sol.desc}
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   {sol.benefits.map((b, i) => (
-                    <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#24211D]">
-                      <CheckCircle2 className="w-4 h-4 text-[#2E6B4F] flex-shrink-0 mt-0.5" />
+                    <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#29251F]">
+                      <CheckCircle2 className="w-4 h-4 text-[#3D7258] flex-shrink-0 mt-0.5" />
                       <span>{b}</span>
                     </div>
                   ))}

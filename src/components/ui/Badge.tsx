@@ -33,18 +33,18 @@ export function Badge({
   };
 
   const variantClasses: Record<string, string> = {
-    gold: 'bg-[#A374]/15 text-[#7A5320] border border-[#A374]/40',
-    emerald: 'bg-[#2F6B52]/15 text-[#2F6B52] border border-[#2F6B52]/35',
-    success: 'bg-[#2F6B52]/15 text-[#2F6B52] border border-[#2F6B52]/35',
-    charcoal: 'bg-[#171613]/10 text-[#171613] border border-[#171613]/25',
-    amber: 'bg-[#A87932]/15 text-[#8A5612] border border-[#A87932]/35',
-    warning: 'bg-[#A87932]/15 text-[#8A5612] border border-[#A87932]/35',
-    rose: 'bg-[#8B3D3D]/15 text-[#8B3D3D] border border-[#8B3D3D]/30',
-    error: 'bg-[#8B3D3D]/15 text-[#8B3D3D] border border-[#8B3D3D]/30',
-    zinc: 'bg-[#EFE8DA] text-[#756E63] border border-[#DCD3C2]',
-    neutral: 'bg-[#EFE8DA] text-[#756E63] border border-[#DCD3C2]',
-    info: 'bg-[#C9A45C]/15 text-[#7A5320] border border-[#C9A45C]/35',
-    outline: 'bg-transparent text-[#756E63] border border-[#DCD3C2]',
+    gold: 'bg-[#A374]/15 text-[#7A5720] border border-[#A374]/35',
+    emerald: 'bg-[#3D7258]/15 text-[#3D7258] border border-[#3D7258]/30',
+    success: 'bg-[#3D7258]/15 text-[#3D7258] border border-[#3D7258]/30',
+    charcoal: 'bg-[#29251F]/10 text-[#29251F] border border-[#29251F]/20',
+    amber: 'bg-[#A87932]/15 text-[#8A5612] border border-[#A87932]/30',
+    warning: 'bg-[#A87932]/15 text-[#8A5612] border border-[#A87932]/30',
+    rose: 'bg-[#8B4A4A]/15 text-[#8B4A4A] border border-[#8B4A4A]/30',
+    error: 'bg-[#8B4A4A]/15 text-[#8B4A4A] border border-[#8B4A4A]/30',
+    zinc: 'bg-[#ECE6DA] text-[#625B51] border border-[#DDD4C5]',
+    neutral: 'bg-[#ECE6DA] text-[#625B51] border border-[#DDD4C5]',
+    info: 'bg-[#D8C7A5]/25 text-[#7A5720] border border-[#D8C7A5]/40',
+    outline: 'bg-transparent text-[#625B51] border border-[#DDD4C5]',
   };
 
   return (
