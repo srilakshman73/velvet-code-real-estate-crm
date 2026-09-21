@@ -38,20 +38,20 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const variantClasses = {
-      gold: 'bg-[#A374] hover:bg-[#8D632F] active:bg-[#805B25] text-[#FFFDF8] font-bold border border-[#A374]/60 shadow-[0_4px_16px_-2px_rgba(163,116,0,0.22)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,0,0.30)] transition-all duration-200',
-      primary: 'bg-[#A374] hover:bg-[#8D632F] active:bg-[#805B25] text-[#FFFDF8] font-bold border border-[#A374]/60 shadow-[0_4px_16px_-2px_rgba(163,116,0,0.22)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,0,0.30)] transition-all duration-200',
+      gold: 'bg-[#A37432] hover:bg-[#8A5E25] active:bg-[#7A5520] text-[#FFF9F0] font-bold border border-[#A37432]/60 shadow-[0_4px_16px_-2px_rgba(163,116,50,0.22)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,50,0.30)] transition-all duration-200',
+      primary: 'bg-[#A37432] hover:bg-[#8A5E25] active:bg-[#7A5520] text-[#FFF9F0] font-bold border border-[#A37432]/60 shadow-[0_4px_16px_-2px_rgba(163,116,50,0.22)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,50,0.30)] transition-all duration-200',
       secondary:
-        'bg-[#F1ECE3] hover:bg-[#E6DCCE] text-[#514A40] hover:text-[#29251F] border border-[#CFC3B1] shadow-2xs active:scale-[0.99] transition-all',
+        'bg-[#F5EAD3] hover:bg-[#E9DFC8] text-[#4A3922] hover:text-[#2C241A] border border-[#CDB78F] shadow-2xs active:scale-[0.99] transition-all',
       subtle:
-        'bg-[#E9E1D4] hover:bg-[#D4C9B9] text-[#29251F] border border-[#D4C9B9] transition-all',
+        'bg-[#EFE2C8] hover:bg-[#D8C7A5] text-[#2C241A] border border-[#D8C7A5] transition-all',
       outline:
-        'bg-transparent hover:bg-[#A374]/10 text-[#805B25] border border-[#A374]/60 hover:border-[#8D632F] active:scale-[0.99] transition-all',
+        'bg-transparent hover:bg-[#A37432]/10 text-[#7A5520] border border-[#A37432]/60 hover:border-[#8A5E25] active:scale-[0.99] transition-all',
       ghost:
-        'bg-transparent hover:bg-[#F1ECE3] text-[#81786A] hover:text-[#29251F] transition-colors',
+        'bg-transparent hover:bg-[#F4EAD7] text-[#8A7A63] hover:text-[#2C241A] transition-colors',
       danger:
         'bg-[#8B4A4A] hover:bg-[#723636] text-white shadow-xs transition-all',
       emerald:
-        'bg-[#3D7258] hover:bg-[#2E5943] text-white shadow-sm font-medium transition-all',
+        'bg-[#547A61] hover:bg-[#3D7258] text-white shadow-sm font-medium transition-all',
     };
 
     return (
@@ -59,7 +59,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={disabled || isLoading}
         className={cn(
-          'inline-flex items-center justify-center select-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none transition-all outline-none focus-visible:ring-2 focus-visible:ring-[#A374] focus-visible:ring-offset-2 focus-visible:ring-offset-[#E8E1D5]',
+          'inline-flex items-center justify-center select-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none transition-all outline-none focus-visible:ring-2 focus-visible:ring-[#A37432] focus-visible:ring-offset-2 focus-visible:ring-offset-[#E9DFC8]',
           sizeClasses[size],
           variantClasses[effectiveVariant],
           className

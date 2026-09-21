@@ -31,18 +31,18 @@ export function VelvetCodeLogo({
 
   const textStyle =
     theme === 'dark'
-      ? 'text-[#E8E1D5]'
-      : 'text-[#29251F]';
+      ? 'text-[#E9DFC8]'
+      : 'text-[#2C241A]';
 
   const tagStyle =
     theme === 'dark'
-      ? 'text-[#D4C9B9]/80'
-      : 'text-[#81786A]';
+      ? 'text-[#D8C7A5]/80'
+      : 'text-[#8A7A63]';
 
   const content = (
     <div className={cn('flex items-center gap-3 select-none group', className)}>
       {/* Official Gold Metallic Brand Logo Symbol */}
-      <div className="relative flex-shrink-0 overflow-hidden rounded-lg bg-[#29251F] border border-[#A374]/30 shadow-sm group-hover:border-[#A374]/60 transition-colors">
+      <div className="relative flex-shrink-0 overflow-hidden rounded-lg bg-[#2C241A] border border-[#A37432]/30 shadow-sm group-hover:border-[#A37432]/60 transition-colors">
         <Image
           src="/brand/velvet-code-logo.jpeg"
           alt="Velvet Code - Technology & Digital Solutions"
@@ -100,12 +100,12 @@ export function VelvetCodeLogoFull({ className, theme = 'light' }: { className?:
       className={cn(
         'flex flex-col items-center text-center p-5 rounded-2xl border',
         isDark
-          ? 'bg-[#29251F] border-[#A374]/30 text-[#E8E1D5]'
-          : 'bg-[#FFFDF8] border-[#D4C9B9] text-[#29251F] aurum-card-shadow',
+          ? 'bg-[#2C241A] border-[#A37432]/30 text-[#E9DFC8]'
+          : 'bg-[#FFF9F0] border-[#D8C7A5] text-[#2C241A] aurum-card-shadow',
         className
       )}
     >
-      <div className="relative w-24 h-24 rounded-xl overflow-hidden border border-[#A374]/40 shadow-xl mb-3 bg-[#29251F]">
+      <div className="relative w-24 h-24 rounded-xl overflow-hidden border border-[#A37432]/40 shadow-xl mb-3 bg-[#2C241A]">
         <Image
           src="/brand/velvet-code-logo.jpeg"
           alt="Velvet Code"
@@ -118,12 +118,12 @@ export function VelvetCodeLogoFull({ className, theme = 'light' }: { className?:
       <h2
         className={cn(
           'text-lg font-bold tracking-widest uppercase',
-          isDark ? 'text-[#E8E1D5]' : 'text-[#29251F]'
+          isDark ? 'text-[#E9DFC8]' : 'text-[#2C241A]'
         )}
       >
         VELVET CODE
       </h2>
-      <p className={cn('text-xs font-medium tracking-wide mt-1', isDark ? 'text-[#D4C9B9]' : 'text-[#81786A]')}>
+      <p className={cn('text-xs font-medium tracking-wide mt-1', isDark ? 'text-[#D8C7A5]' : 'text-[#8A7A63]')}>
         Technology & Digital Solutions
       </p>
     </div>

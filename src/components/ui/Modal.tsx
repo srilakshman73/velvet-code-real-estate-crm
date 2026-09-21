@@ -49,30 +49,30 @@ export function Modal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[#2D261C]/25 backdrop-blur-xs transition-opacity animate-in fade-in"
+        className="fixed inset-0 bg-[#2C241A]/25 backdrop-blur-xs transition-opacity animate-in fade-in"
         onClick={onClose}
       />
 
       {/* Modal Content */}
       <div
         className={cn(
-          'relative w-full bg-[#FFFDF8] border border-[#D8CEBF] rounded-2xl shadow-2xl z-10 overflow-hidden text-[#29251F] animate-in zoom-in-95 duration-150',
+          'relative w-full bg-[#FFF9F0] border border-[#D8C7A5] rounded-2xl shadow-2xl z-10 overflow-hidden text-[#2C241A] animate-in zoom-in-95 duration-150',
           maxWidthMap[maxWidth]
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between p-5 border-b border-[#D4C9B9] bg-[#F1ECE3]/80">
+        <div className="flex items-start justify-between p-5 border-b border-[#D8C7A5] bg-[#F4EAD7]/80">
           <div>
             {typeof title === 'string' ? (
-              <h2 className="text-lg font-bold text-[#29251F] tracking-tight">{title}</h2>
+              <h2 className="text-lg font-bold text-[#2C241A] tracking-tight">{title}</h2>
             ) : (
               title
             )}
-            {description && <p className="text-xs text-[#625B51] mt-1">{description}</p>}
+            {description && <p className="text-xs text-[#6A5A44] mt-1">{description}</p>}
           </div>
           <button
             onClick={onClose}
-            className="text-[#81786A] hover:text-[#29251F] p-1.5 rounded-lg hover:bg-[#E8E1D5] transition-colors"
+            className="text-[#8A7A63] hover:text-[#2C241A] p-1.5 rounded-lg hover:bg-[#E9DFC8] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -128,30 +128,30 @@ export function Drawer({
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[#2D261C]/25 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-[#2C241A]/25 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
         <div
           className={cn(
-            'w-screen bg-[#FFFDF8] border-l border-[#D8CEBF] shadow-2xl flex flex-col text-[#29251F]',
+            'w-screen bg-[#FFF9F0] border-l border-[#D8C7A5] shadow-2xl flex flex-col text-[#2C241A]',
             sizeMap[size]
           )}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-5 border-b border-[#D4C9B9] bg-[#F1ECE3]/80">
+          <div className="flex items-center justify-between p-5 border-b border-[#D8C7A5] bg-[#F4EAD7]/80">
             <div>
               {typeof title === 'string' ? (
-                <h3 className="text-base font-bold text-[#29251F] tracking-tight">{title}</h3>
+                <h3 className="text-base font-bold text-[#2C241A] tracking-tight">{title}</h3>
               ) : (
                 title
               )}
-              {subtitle && <p className="text-xs text-[#625B51] mt-0.5">{subtitle}</p>}
+              {subtitle && <p className="text-xs text-[#6A5A44] mt-0.5">{subtitle}</p>}
             </div>
             <button
               onClick={onClose}
-              className="text-[#81786A] hover:text-[#29251F] p-1.5 rounded-lg hover:bg-[#E8E1D5] transition-colors"
+              className="text-[#8A7A63] hover:text-[#2C241A] p-1.5 rounded-lg hover:bg-[#E9DFC8] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>

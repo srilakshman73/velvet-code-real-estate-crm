@@ -88,51 +88,51 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#E8E1D5] text-[#29251F] flex">
-      {/* Left Brand Panel - Warm Champagne Stone */}
-      <div className="hidden lg:flex flex-col justify-between w-1/2 p-12 bg-[#D4C9B9] border-r border-[#D4C9B9] relative overflow-hidden text-[#29251F]">
-        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#A374]/15 blur-[120px] rounded-full pointer-events-none" />
+    <div className="min-h-screen bg-[#E9DFC8] text-[#2C241A] flex">
+      {/* Left Brand Panel - Luxury Champagne Stone */}
+      <div className="hidden lg:flex flex-col justify-between w-1/2 p-12 bg-[#D8C7A5] border-r border-[#D8C7A5] relative overflow-hidden text-[#2C241A]">
+        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#A37432]/15 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="relative z-10">
           <VelvetCodeLogo size="lg" theme="light" />
         </div>
 
         <div className="relative z-10 space-y-6 max-w-lg">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30 font-serif">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30 font-serif">
             Create Your Workspace
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#29251F] tracking-tight leading-tight font-serif">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight leading-tight font-serif">
             Deploy Your Agency's Complete CRM in 60 Seconds
           </h2>
-          <p className="text-sm text-[#625B51] leading-relaxed">
+          <p className="text-sm text-[#6A5A44] leading-relaxed">
             Get instant access to real estate leads management, luxury property inventory, deals pipeline, and Realty AI with pre-configured Indian real estate templates.
           </p>
 
-          <div className="pt-4 space-y-3 text-xs text-[#29251F]">
+          <div className="pt-4 space-y-3 text-xs text-[#2C241A]">
             <div className="flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
+              <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
               <span>Full 14-day free trial on all features</span>
             </div>
             <div className="flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
+              <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
               <span>No credit card or setup fees required</span>
             </div>
             <div className="flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
+              <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
               <span>Instant WhatsApp CRM channel integration</span>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 pt-8 border-t border-[#D4C9B9] text-xs text-[#81786A] flex items-center justify-between">
+        <div className="relative z-10 pt-8 border-t border-[#D8C7A5] text-xs text-[#8A7A63] flex items-center justify-between">
           <span>Enterprise Real Estate Infrastructure</span>
-          <span className="flex items-center gap-1 text-[#3D7258] font-semibold">
+          <span className="flex items-center gap-1 text-[#547A61] font-semibold">
             <ShieldCheck className="w-4 h-4" /> 100% Isolated Tenant DB
           </span>
         </div>
       </div>
 
-      {/* Right Registration Form - Warm Stone */}
+      {/* Right Registration Form - Light Gold Luxury Background */}
       <div className="flex-1 flex flex-col justify-center p-6 sm:p-12 lg:p-16 max-w-xl mx-auto w-full">
         <div className="lg:hidden mb-8">
           <VelvetCodeLogo size="md" theme="light" />
@@ -140,10 +140,10 @@ export default function RegisterPage() {
 
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#29251F] tracking-tight font-serif">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
               Create your workspace
             </h1>
-            <p className="text-xs sm:text-sm text-[#81786A] mt-1">
+            <p className="text-xs sm:text-sm text-[#8A7A63] mt-1">
               Start managing your real estate leads, properties, and deals.
             </p>
           </div>
@@ -207,7 +207,7 @@ export default function RegisterPage() {
                   { value: 'BROKER', label: 'Real Estate Broker' },
                   { value: 'BUILDER', label: 'Builder / Developer' },
                   { value: 'AGENT', label: 'Independent Agent' },
-                  { value: 'PROPERTY_CONSULTANT', label: 'Property Consultant' },
+                  { value: 'PROPERTY_CONSULTANT', label: 'Commercial Consultant' },
                   { value: 'OTHER', label: 'Other Real Estate Professional' },
                 ]}
               />
@@ -223,13 +223,13 @@ export default function RegisterPage() {
               />
             </div>
 
-            <p className="text-[11px] text-[#81786A] leading-relaxed">
+            <p className="text-[11px] text-[#8A7A63] leading-relaxed">
               By creating a workspace, you agree to Velvet Code's{' '}
-              <Link href="/terms" className="text-[#805B25] hover:underline font-bold">
+              <Link href="/terms" className="text-[#7A5520] hover:underline font-bold">
                 Terms of Service
               </Link>{' '}
               and{' '}
-              <Link href="/privacy" className="text-[#805B25] hover:underline font-bold">
+              <Link href="/privacy" className="text-[#7A5520] hover:underline font-bold">
                 Privacy Policy
               </Link>
               .
@@ -247,9 +247,9 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <p className="text-center text-xs text-[#81786A]">
+          <p className="text-center text-xs text-[#8A7A63]">
             Already have an account?{' '}
-            <Link href="/login" className="text-[#805B25] hover:text-[#8D632F] font-bold">
+            <Link href="/login" className="text-[#7A5520] hover:text-[#8A5E25] font-bold">
               Sign in
             </Link>
           </p>

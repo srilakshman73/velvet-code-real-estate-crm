@@ -52,14 +52,14 @@ export default function AdminPlatformSettingsPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#29251F] tracking-tight">Platform Global Settings</h1>
-          <p className="text-sm text-[#625B51] mt-1">
+          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Platform Global Settings</h1>
+          <p className="text-sm text-[#6A5A44] mt-1">
             Velvet Code SaaS platform environment configurations, payment gateway secrets, and AI keys.
           </p>
         </div>
         <div className="flex items-center gap-3">
           {saveSuccess && (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#3D7258]/10 border border-[#3D7258]/20 text-[#3D7258] rounded-lg text-xs font-medium">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#547A61]/10 border border-[#547A61]/20 text-[#547A61] rounded-lg text-xs font-medium">
               <CheckCircle2 className="w-4 h-4" />
               Platform configuration updated
             </div>
@@ -72,9 +72,9 @@ export default function AdminPlatformSettingsPage() {
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* Brand & Legal Entity Card */}
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-serif font-bold text-[#29251F]">SaaS Provider Entity & Support Channel</h2>
+            <h2 className="text-lg font-serif font-bold text-[#2C241A]">SaaS Provider Entity & Support Channel</h2>
             <VelvetCodeLogo variant="horizontal" size="sm" />
           </div>
 
@@ -93,14 +93,14 @@ export default function AdminPlatformSettingsPage() {
               label="Official WhatsApp Support & Inquiries"
               value={platformConfig.supportPhone}
               onChange={(e) => setPlatformConfig({ ...platformConfig, supportPhone: e.target.value })}
-              icon={<Phone className="w-4 h-4 text-[#3D7258]" />}
+              icon={<Phone className="w-4 h-4 text-[#547A61]" />}
               helperText="Click-to-chat destination for all marketing & tenant inquiries"
             />
             <Input
               label="Official Platform Support Email"
               value={platformConfig.supportEmail}
               onChange={(e) => setPlatformConfig({ ...platformConfig, supportEmail: e.target.value })}
-              icon={<Mail className="w-4 h-4 text-[#625B51]" />}
+              icon={<Mail className="w-4 h-4 text-[#6A5A44]" />}
             />
             <div className="md:col-span-2">
               <Input
@@ -113,9 +113,9 @@ export default function AdminPlatformSettingsPage() {
         </Card>
 
         {/* Global API Gateway Keys */}
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-          <h2 className="text-lg font-serif font-bold text-[#29251F] mb-1">Global Gateway Credentials & Secrets</h2>
-          <p className="text-xs text-[#625B51] mb-6">
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
+          <h2 className="text-lg font-serif font-bold text-[#2C241A] mb-1">Global Gateway Credentials & Secrets</h2>
+          <p className="text-xs text-[#6A5A44] mb-6">
             Platform-wide master credentials for Indian payment processing and AI inference orchestration.
           </p>
 
@@ -124,46 +124,46 @@ export default function AdminPlatformSettingsPage() {
               label="Razorpay Master Live Key ID"
               value={platformConfig.razorpayKeyId}
               onChange={(e) => setPlatformConfig({ ...platformConfig, razorpayKeyId: e.target.value })}
-              icon={<Key className="w-4 h-4 text-[#625B51]" />}
+              icon={<Key className="w-4 h-4 text-[#6A5A44]" />}
             />
             <Input
               label="Razorpay Master Key Secret"
               type="password"
               value={platformConfig.razorpayKeySecret}
               onChange={(e) => setPlatformConfig({ ...platformConfig, razorpayKeySecret: e.target.value })}
-              icon={<Lock className="w-4 h-4 text-[#625B51]" />}
+              icon={<Lock className="w-4 h-4 text-[#6A5A44]" />}
             />
             <Input
               label="Razorpay Webhook Verification Secret"
               value={platformConfig.razorpayWebhookSecret}
               onChange={(e) => setPlatformConfig({ ...platformConfig, razorpayWebhookSecret: e.target.value })}
-              icon={<Shield className="w-4 h-4 text-[#625B51]" />}
+              icon={<Shield className="w-4 h-4 text-[#6A5A44]" />}
             />
             <Input
               label="Google Gemini 1.5 Pro Master API Key"
               type="password"
               value={platformConfig.geminiApiKey}
               onChange={(e) => setPlatformConfig({ ...platformConfig, geminiApiKey: e.target.value })}
-              icon={<Sparkles className="w-4 h-4 text-[#A374]" />}
+              icon={<Sparkles className="w-4 h-4 text-[#A37432]" />}
             />
           </div>
         </Card>
 
         {/* System Operations & Maintenance */}
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-          <h2 className="text-lg font-serif font-bold text-[#29251F] mb-1">System Operations & Trial Policies</h2>
-          <p className="text-xs text-[#625B51] mb-6">
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
+          <h2 className="text-lg font-serif font-bold text-[#2C241A] mb-1">System Operations & Trial Policies</h2>
+          <p className="text-xs text-[#6A5A44] mb-6">
             Manage platform operational mode and tenant onboarding trial terms.
           </p>
 
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 rounded-xl bg-white border border-[#D4C9B9]">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5]">
               <div>
-                <div className="text-sm font-semibold text-[#29251F] flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-[#805B25]" />
+                <div className="text-sm font-semibold text-[#2C241A] flex items-center gap-2">
+                  <AlertTriangle className="w-4 h-4 text-[#7A5520]" />
                   Scheduled Maintenance Mode
                 </div>
-                <div className="text-xs text-[#625B51]">
+                <div className="text-xs text-[#6A5A44]">
                   When enabled, tenants will see a graceful maintenance banner. APIs remain read-only.
                 </div>
               </div>
@@ -171,7 +171,7 @@ export default function AdminPlatformSettingsPage() {
                 type="checkbox"
                 checked={platformConfig.maintenanceMode}
                 onChange={(e) => setPlatformConfig({ ...platformConfig, maintenanceMode: e.target.checked })}
-                className="w-4 h-4 rounded text-[#A374] focus:ring-[#A374] bg-white border-[#D4C9B9]"
+                className="w-4 h-4 rounded text-[#A37432] focus:ring-[#A37432] bg-[#FFF9F0] border-[#D8C7A5]"
               />
             </div>
 

@@ -17,26 +17,26 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#E8E1D5] text-[#29251F] flex items-center justify-center p-6">
-      <div className="w-full max-w-md bg-[#FFFDF8] border border-[#D4C9B9] rounded-2xl p-8 aurum-card-shadow space-y-6">
+    <div className="min-h-screen bg-[#E9DFC8] text-[#2C241A] flex items-center justify-center p-6">
+      <div className="w-full max-w-md bg-[#FFF9F0] border border-[#D8C7A5] rounded-2xl p-8 aurum-card-shadow space-y-6">
         <div className="text-center space-y-3">
           <VelvetCodeLogo size="md" className="justify-center" theme="light" />
-          <h1 className="text-2xl font-bold text-[#29251F] tracking-tight font-serif">
+          <h1 className="text-2xl font-bold text-[#2C241A] tracking-tight font-serif">
             Reset Your Password
           </h1>
-          <p className="text-xs text-[#625B51]">
+          <p className="text-xs text-[#6A5A44]">
             Enter your registered agency email address and we will send you a password reset link.
           </p>
         </div>
 
         {submitted ? (
           <div className="text-center py-6 space-y-4">
-            <div className="w-12 h-12 rounded-full bg-[#3D7258]/15 text-[#3D7258] flex items-center justify-center mx-auto border border-[#3D7258]/30">
+            <div className="w-12 h-12 rounded-full bg-[#547A61]/15 text-[#547A61] flex items-center justify-center mx-auto border border-[#547A61]/30">
               <CheckCircle2 className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-[#29251F]">Reset Link Dispatched</h3>
-            <p className="text-xs text-[#625B51] leading-relaxed">
-              We have sent recovery instructions to <strong className="text-[#805B25]">{email}</strong>.
+            <h3 className="text-base font-bold text-[#2C241A]">Reset Link Dispatched</h3>
+            <p className="text-xs text-[#6A5A44] leading-relaxed">
+              We have sent recovery instructions to <strong className="text-[#7A5520]">{email}</strong>.
             </p>
             <Link href="/login">
               <Button variant="gold" size="sm" className="w-full mt-2 font-bold">
@@ -65,7 +65,7 @@ export default function ForgotPasswordPage() {
         <div className="text-center pt-2">
           <Link
             href="/login"
-            className="text-xs text-[#625B51] hover:text-[#29251F] inline-flex items-center gap-1.5 font-semibold"
+            className="text-xs text-[#6A5A44] hover:text-[#2C241A] inline-flex items-center gap-1.5 font-semibold"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to login
           </Link>

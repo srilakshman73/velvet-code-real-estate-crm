@@ -2,34 +2,35 @@
 
 @layer base {
   :root {
-    --aurum-gold: #A374;
-    --aurum-gold-hover: #8D632F;
-    --aurum-gold-dark: #805B25;
-    --aurum-gold-light: #D8C7A5;
-    --aurum-gold-soft: #F2E9D8;
-    --aurum-gold-cream: #E7DED0;
-    --aurum-bg: #E8E1D5;
-    --aurum-bg-secondary: #F1ECE3;
-    --aurum-header: #F1ECE3;
-    --aurum-sidebar: #D4C9B9;
-    --aurum-card: #FFFDF8;
-    --aurum-surface: #FFFDF8;
+    --aurum-gold: #A37432;
+    --aurum-gold-hover: #8A5E25;
+    --aurum-gold-dark: #7A5520;
+    --aurum-gold-light: #C39A5B;
+    --aurum-gold-soft: #F5EAD3;
+    --aurum-gold-cream: #E5D1A8;
+    --aurum-bg: #E9DFC8;
+    --aurum-bg-secondary: #F4EAD7;
+    --aurum-header: #F4EAD7;
+    --aurum-sidebar: #D8C7A5;
+    --aurum-card: #FFF9F0;
+    --aurum-surface: #FFF9F0;
     --aurum-surface-pure: #FFFFFF;
-    --aurum-text: #29251F;
-    --aurum-text-secondary: #625B51;
-    --aurum-text-muted: #81786A;
-    --aurum-border: #D4C9B9;
-    --aurum-card-border: #D8CEBF;
-    --aurum-border-light: #E2D9CC;
-    --aurum-border-gold: #C9A45C;
-    --aurum-success: #3D7258;
+    --aurum-text: #2C241A;
+    --aurum-text-secondary: #6A5A44;
+    --aurum-text-muted: #8A7A63;
+    --aurum-border: #D8C7A5;
+    --aurum-border-header: #D6C4A0;
+    --aurum-card-border: #D8C7A5;
+    --aurum-border-light: #DDD0B8;
+    --aurum-border-gold: #C39A5B;
+    --aurum-success: #547A61;
     --aurum-warning: #A87932;
     --aurum-danger: #8B4A4A;
   }
 
   body {
-    background-color: #E8E1D5;
-    color: #29251F;
+    background-color: #E9DFC8;
+    color: #2C241A;
     font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
   }
@@ -45,16 +46,16 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #E8E1D5;
+    background: #E9DFC8;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #D4C9B9;
+    background: #D8C7A5;
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #A374;
+    background: #A37432;
   }
 }
 
@@ -66,28 +67,28 @@
   background: #2D2A24;
 }
 .dark-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #A374;
+  background: #A37432;
 }
 
 /* Aurum Champagne Gold Text Gradient */
 .gold-gradient-text {
-  background: linear-gradient(135deg, #805B25 0%, #A374 40%, #C9A45C 70%, #A374 100%);
+  background: linear-gradient(135deg, #7A5520 0%, #A37432 40%, #C39A5B 70%, #A37432 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gold-gradient-text-light {
-  background: linear-gradient(135deg, #FFFDF8 0%, #F2E9D8 40%, #C9A45C 80%, #D8C7A5 100%);
+  background: linear-gradient(135deg, #FFF9F0 0%, #F5EAD3 40%, #C39A5B 80%, #D8C7A5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gold-border-glow {
-  box-shadow: 0 4px 20px -4px rgba(163, 116, 0, 0.15);
+  box-shadow: 0 4px 20px -4px rgba(163, 116, 50, 0.15);
 }
 
 .aurum-card-shadow {
-  box-shadow: 0 8px 24px rgba(76, 62, 42, 0.06);
+  box-shadow: 0 8px 24px rgba(120, 90, 40, 0.08);
 }
 
 .aurum-card-hover {
@@ -95,8 +96,8 @@
 }
 .aurum-card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -4px rgba(163, 116, 0, 0.12), 0 2px 6px 0 rgba(76, 62, 42, 0.06);
-  border-color: #C9A45C;
+  box-shadow: 0 12px 30px -4px rgba(163, 116, 50, 0.14), 0 2px 6px 0 rgba(120, 90, 40, 0.08);
+  border-color: #C39A5B;
 }
 
 .no-scrollbar::-webkit-scrollbar {

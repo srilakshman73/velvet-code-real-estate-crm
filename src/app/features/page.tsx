@@ -59,18 +59,18 @@ export default function FeaturesPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#E8E1D5] text-[#29251F]">
+    <div className="min-h-screen flex flex-col bg-[#E9DFC8] text-[#2C241A]">
       <PublicHeader />
       <main className="flex-1">
         {/* Header */}
         <section className="py-20 text-center max-w-4xl mx-auto px-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Platform Capabilities
           </span>
-          <h1 className="text-4xl sm:text-6xl font-bold text-[#29251F] mt-4 tracking-tight font-serif">
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
             The Complete Real Estate Tech Stack
           </h1>
-          <p className="text-lg text-[#625B51] mt-4 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-[#6A5A44] mt-4 leading-relaxed max-w-2xl mx-auto">
             Everything your agency needs to capture leads, showcase property inventory, manage site visits, and close multi-crore deals.
           </p>
         </section>
@@ -91,30 +91,30 @@ export default function FeaturesPage() {
                 }`}
               >
                 <div className="flex-1 space-y-4">
-                  <div className="p-3 rounded-xl bg-[#E8E1D5] text-[#805B25] w-fit border border-[#D4C9B9]">
+                  <div className="p-3 rounded-xl bg-[#E9DFC8] text-[#7A5520] w-fit border border-[#D8C7A5]">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#29251F] tracking-tight font-serif">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
                     {item.title}
                   </h2>
-                  <p className="text-sm text-[#625B51] leading-relaxed">{item.desc}</p>
-                  <ul className="space-y-2.5 pt-2 text-xs sm:text-sm text-[#29251F]">
+                  <p className="text-sm text-[#6A5A44] leading-relaxed">{item.desc}</p>
+                  <ul className="space-y-2.5 pt-2 text-xs sm:text-sm text-[#2C241A]">
                     {item.bullets.map((b, bIdx) => (
                       <li key={bIdx} className="flex items-center gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-[#3D7258] flex-shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-[#547A61] flex-shrink-0" />
                         <span>{b}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="flex-1 w-full p-6 sm:p-8 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow">
-                  <div className="p-5 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] space-y-3">
-                    <div className="flex items-center justify-between text-xs text-[#805B25] font-bold border-b border-[#D4C9B9] pb-2">
+                <div className="flex-1 w-full p-6 sm:p-8 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow">
+                  <div className="p-5 rounded-xl bg-[#E9DFC8] border border-[#D8C7A5] space-y-3">
+                    <div className="flex items-center justify-between text-xs text-[#7A5520] font-bold border-b border-[#D8C7A5] pb-2">
                       <span>Feature Spotlight</span>
-                      <span className="text-[#625B51] font-medium">Live in Production</span>
+                      <span className="text-[#6A5A44] font-medium">Live in Production</span>
                     </div>
-                    <p className="text-xs text-[#29251F] italic leading-relaxed">
+                    <p className="text-xs text-[#2C241A] italic leading-relaxed">
                       "Velvet Code eliminated our manual spreadsheets and missed WhatsApp inquiries. Our pipeline visibility increased tenfold."
                     </p>
                   </div>

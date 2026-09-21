@@ -28,19 +28,19 @@ export default function TeamPage() {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight flex items-center gap-2">
-              <Users2 className="w-6 h-6 text-[#A374]" />
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+              <Users2 className="w-6 h-6 text-[#A37432]" />
               Team & Role Management
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#805B25] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
               {users.length} / {currentPlanLimits.maxUsers} Seats Used
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
+          <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
             Manage your real estate agents, sales managers, and role-based permissions.
           </p>
         </div>
@@ -56,10 +56,10 @@ export default function TeamPage() {
       </div>
 
       {/* Users Table */}
-      <div className="rounded-2xl border border-[#D4C9B9] bg-[#FFFDF8] overflow-hidden shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+      <div className="rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] overflow-hidden shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
         <table className="w-full text-left text-xs sm:text-sm">
           <thead>
-            <tr className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51] font-semibold">
+            <tr className="bg-[#F4EAD7] border-b border-[#D8C7A5] text-[#2C241A] font-semibold">
               <th className="p-4">Member</th>
               <th className="p-4">Role</th>
               <th className="p-4">Contact</th>
@@ -67,32 +67,32 @@ export default function TeamPage() {
               <th className="p-4 text-right">Permissions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#D4C9B9]/60">
+          <tbody className="divide-y divide-[#D8C7A5]/60">
             {users.map((u) => (
-              <tr key={u.id} className="hover:bg-[#E8E1D5]/60 transition-colors">
+              <tr key={u.id} className="hover:bg-[#F7EEDC] transition-colors">
                 <td className="p-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#A374]/15 text-[#805B25] font-serif font-bold flex items-center justify-center flex-shrink-0 border border-[#A374]/30">
+                    <div className="w-9 h-9 rounded-xl bg-[#A37432]/15 text-[#7A5520] font-serif font-bold flex items-center justify-center flex-shrink-0 border border-[#A37432]/30">
                       {getInitials(u.name)}
                     </div>
                     <div>
-                      <p className="font-serif font-bold text-[#29251F] text-sm">{u.name}</p>
-                      <p className="text-xs text-[#625B51]">{u.email}</p>
+                      <p className="font-serif font-bold text-[#2C241A] text-sm">{u.name}</p>
+                      <p className="text-xs text-[#6A5A44]">{u.email}</p>
                     </div>
                   </div>
                 </td>
                 <td className="p-4">
-                  <span className="px-2.5 py-1 text-xs font-bold uppercase bg-[#E8E1D5] text-[#805B25] rounded-md border border-[#D4C9B9]">
+                  <span className="px-2.5 py-1 text-xs font-bold uppercase bg-[#F4EAD7] text-[#7A5520] rounded-md border border-[#D8C7A5]">
                     {u.role}
                   </span>
                 </td>
-                <td className="p-4 text-[#625B51]">{u.phone || '+91 63833 95915'}</td>
+                <td className="p-4 text-[#6A5A44]">{u.phone || '+91 63833 95915'}</td>
                 <td className="p-4">
-                  <span className="inline-flex items-center gap-1.5 text-xs text-[#3D7258] font-medium">
-                    <span className="w-2 h-2 rounded-full bg-[#3D7258]" /> Active
+                  <span className="inline-flex items-center gap-1.5 text-xs text-[#547A61] font-medium">
+                    <span className="w-2 h-2 rounded-full bg-[#547A61]" /> Active
                   </span>
                 </td>
-                <td className="p-4 text-right text-xs text-[#625B51]">
+                <td className="p-4 text-right text-xs text-[#6A5A44]">
                   {u.role === 'OWNER' ? 'Full Control' : u.role === 'ADMIN' ? 'Manage & Assign' : 'Assigned Leads Only'}
                 </td>
               </tr>
@@ -134,7 +134,7 @@ export default function TeamPage() {
               { value: 'ADMIN', label: 'Admin (Full CRM Management)' },
             ]}
           />
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D4C9B9]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
             <Button
               type="button"
               variant="secondary"

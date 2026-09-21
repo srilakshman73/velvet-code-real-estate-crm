@@ -9,40 +9,40 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#E8E1D5] text-[#29251F]">
+    <div className="min-h-screen flex flex-col bg-[#E9DFC8] text-[#2C241A]">
       <PublicHeader />
       <main className="flex-1 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-sm text-[#625B51] leading-relaxed">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-sm text-[#6A5A44] leading-relaxed">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-[#29251F] tracking-tight font-serif">
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight font-serif">
               Privacy Policy
             </h1>
-            <p className="text-xs text-[#625B51] mt-2">Last updated: September 16, 2026</p>
+            <p className="text-xs text-[#6A5A44] mt-2">Last updated: September 16, 2026</p>
           </div>
 
-          <section className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-3">
-            <h2 className="text-lg font-bold text-[#29251F]">1. Commitment to Data Confidentiality</h2>
+          <section className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow space-y-3">
+            <h2 className="text-lg font-bold text-[#2C241A]">1. Commitment to Data Confidentiality</h2>
             <p>
               Velvet Code operates a multi-tenant Real Estate CRM SaaS platform. We strictly isolate all organization data. Under no circumstances is customer, lead, or property inventory data shared across different subscriber organizations.
             </p>
           </section>
 
-          <section className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-3">
-            <h2 className="text-lg font-bold text-[#29251F]">2. Multi-Tenant Organization Isolation</h2>
+          <section className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow space-y-3">
+            <h2 className="text-lg font-bold text-[#2C241A]">2. Multi-Tenant Organization Isolation</h2>
             <p>
-              Every record created within the application is bounded by an <code className="text-[#805B25] font-bold">organization_id</code>. Database-level authorization rules prevent cross-tenant queries and ensure that your client lists, deal sizes, and internal notes remain private to your team members only.
+              Every record created within the application is bounded by an <code className="text-[#7A5520] font-bold">organization_id</code>. Database-level authorization rules prevent cross-tenant queries and ensure that your client lists, deal sizes, and internal notes remain private to your team members only.
             </p>
           </section>
 
-          <section className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-3">
-            <h2 className="text-lg font-bold text-[#29251F]">3. Realty AI & Model Data Policy</h2>
+          <section className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow space-y-3">
+            <h2 className="text-lg font-bold text-[#2C241A]">3. Realty AI & Model Data Policy</h2>
             <p>
               Realty AI processes CRM context solely in real-time to generate responses for authenticated users within your organization. Your proprietary CRM data is never used to train public foundational AI models.
             </p>
           </section>
 
-          <section className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-3">
-            <h2 className="text-lg font-bold text-[#29251F]">4. WhatsApp Business API Communication</h2>
+          <section className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow space-y-3">
+            <h2 className="text-lg font-bold text-[#2C241A]">4. WhatsApp Business API Communication</h2>
             <p>
               All WhatsApp messages sent through the platform adhere to the official WhatsApp Business policies. External WhatsApp messages are never dispatched silently without authorized user approval or explicit automated rules configured by the organization admin.
             </p>

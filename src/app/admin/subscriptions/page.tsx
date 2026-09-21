@@ -61,8 +61,8 @@ export default function AdminSubscriptionsPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#29251F] tracking-tight">Tenant Subscriptions</h1>
-          <p className="text-sm text-[#625B51] mt-1">
+          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Tenant Subscriptions</h1>
+          <p className="text-sm text-[#6A5A44] mt-1">
             Real-time tracking of Razorpay subscription contracts, renewals, and revenue run-rates.
           </p>
         </div>
@@ -70,23 +70,23 @@ export default function AdminSubscriptionsPage() {
 
       {/* Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-          <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Annualized Run Rate (ARR)</span>
-          <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">₹0</div>
-          <div className="text-xs text-[#3D7258] mt-1 flex items-center gap-1 font-semibold">
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Annualized Run Rate (ARR)</span>
+          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">₹0</div>
+          <div className="text-xs text-[#547A61] mt-1 flex items-center gap-1 font-semibold">
             <ArrowUpRight className="w-3.5 h-3.5" /> Starting Platform Baseline
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-          <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Active Paid Subscriptions</span>
-          <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">{subs.length} Contract</div>
-          <div className="text-xs text-[#805B25] mt-1 font-medium">100% renewal baseline</div>
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Active Paid Subscriptions</span>
+          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">{subs.length} Contract</div>
+          <div className="text-xs text-[#7A5520] mt-1 font-medium">100% renewal baseline</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-          <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Average Revenue Per Tenant (ARPU)</span>
-          <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">₹0 / mo</div>
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Average Revenue Per Tenant (ARPU)</span>
+          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">₹0 / mo</div>
           <div className="text-xs text-[#A87932] mt-1 font-medium">Professional & Business tiers</div>
         </Card>
       </div>
@@ -98,13 +98,13 @@ export default function AdminSubscriptionsPage() {
             placeholder="Search subscription by organization or contract ID..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            icon={<Search className="w-4 h-4 text-[#625B51]" />}
+            icon={<Search className="w-4 h-4 text-[#6A5A44]" />}
           />
         </div>
         <select
           value={tierFilter}
           onChange={(e) => setTierFilter(e.target.value)}
-          className="bg-white border border-[#D4C9B9] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
+          className="bg-[#FFF9F0] border border-[#D8C7A5] rounded-lg px-3 py-2 text-xs text-[#2C241A] focus:outline-none focus:border-[#A37432]"
         >
           <option value="ALL">All Tiers</option>
           <option value="STARTER">Starter Tier</option>
@@ -114,10 +114,10 @@ export default function AdminSubscriptionsPage() {
       </div>
 
       {/* Subscriptions Table */}
-      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51]">
+            <thead className="bg-[#F4EAD7] border-b border-[#D8C7A5] text-[#6A5A44]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Contract & Organization</th>
                 <th className="py-3 px-4 font-semibold">Plan Tier</th>
@@ -129,13 +129,13 @@ export default function AdminSubscriptionsPage() {
                 <th className="py-3 px-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#D4C9B9]/60">
+            <tbody className="divide-y divide-[#D8C7A5]/60">
               {filteredSubs.map((sub) => (
-                <tr key={sub.id} className="hover:bg-[#E8E1D5]/60 transition-colors">
-                  <td className="py-3 px-4 font-medium text-[#29251F]">
+                <tr key={sub.id} className="hover:bg-[#F7EEDC] transition-colors">
+                  <td className="py-3 px-4 font-medium text-[#2C241A]">
                     <div>
-                      <div className="text-sm font-serif font-bold text-[#29251F]">{sub.organizationName}</div>
-                      <div className="text-[10px] text-[#625B51] font-mono">{sub.id}</div>
+                      <div className="text-sm font-serif font-bold text-[#2C241A]">{sub.organizationName}</div>
+                      <div className="text-[10px] text-[#6A5A44] font-mono">{sub.id}</div>
                     </div>
                   </td>
                   <td className="py-3 px-4">
@@ -143,16 +143,16 @@ export default function AdminSubscriptionsPage() {
                       {sub.tier}
                     </Badge>
                   </td>
-                  <td className="py-3 px-4 capitalize text-[#625B51]">
+                  <td className="py-3 px-4 capitalize text-[#6A5A44]">
                     {sub.billingCycle}
                   </td>
-                  <td className="py-3 px-4 font-mono font-bold text-[#29251F]">
+                  <td className="py-3 px-4 font-mono font-bold text-[#2C241A]">
                     ₹{sub.priceINR.toLocaleString()}
                   </td>
-                  <td className="py-3 px-4 text-[#625B51]">
+                  <td className="py-3 px-4 text-[#6A5A44]">
                     {sub.currentPeriodEnd}
                   </td>
-                  <td className="py-3 px-4 text-[#625B51]">
+                  <td className="py-3 px-4 text-[#6A5A44]">
                     {sub.paymentMethod}
                   </td>
                   <td className="py-3 px-4">

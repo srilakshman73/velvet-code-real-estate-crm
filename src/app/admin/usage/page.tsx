@@ -41,8 +41,8 @@ export default function AdminUsagePage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#29251F] tracking-tight">Platform Resource Telemetry</h1>
-          <p className="text-sm text-[#625B51] mt-1">
+          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Platform Resource Telemetry</h1>
+          <p className="text-sm text-[#6A5A44] mt-1">
             Global compute metrics for Realty AI token consumption, WhatsApp Meta Cloud throughput, and PostgreSQL multi-tenant storage.
           </p>
         </div>
@@ -51,56 +51,56 @@ export default function AdminUsagePage() {
 
       {/* Top 4 Telemetry Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">AI Inferences (MTD)</span>
-            <Sparkles className="w-4 h-4 text-[#A374]" />
+            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">AI Inferences (MTD)</span>
+            <Sparkles className="w-4 h-4 text-[#A37432]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">0</div>
-          <div className="text-xs text-[#805B25] mt-1 font-medium">0 tokens processed</div>
+          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">0</div>
+          <div className="text-xs text-[#7A5520] mt-1 font-medium">0 tokens processed</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">WhatsApp Messages Sent</span>
-            <MessageSquare className="w-4 h-4 text-[#3D7258]" />
+            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">WhatsApp Messages Sent</span>
+            <MessageSquare className="w-4 h-4 text-[#547A61]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">0</div>
-          <div className="text-xs text-[#3D7258] mt-1 font-medium">100% delivery reliability</div>
+          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">0</div>
+          <div className="text-xs text-[#547A61] mt-1 font-medium">100% delivery reliability</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">PostgreSQL DB Size</span>
-            <Database className="w-4 h-4 text-[#A87932]" />
+            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">PostgreSQL DB Size</span>
+            <Database className="w-4 h-4 text-[#C39A5B]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">24 MB</div>
-          <div className="text-xs text-[#A87932] mt-1 font-medium">Isolated tenant schema ready</div>
+          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">24 MB</div>
+          <div className="text-xs text-[#7A5520] mt-1 font-medium">Isolated tenant schema ready</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Average API Latency</span>
-            <Zap className="w-4 h-4 text-[#B8893C]" />
+            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Average API Latency</span>
+            <Zap className="w-4 h-4 text-[#A37432]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">85 ms</div>
-          <div className="text-xs text-[#3D7258] mt-1 font-medium">Optimal edge latency</div>
+          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">85 ms</div>
+          <div className="text-xs text-[#547A61] mt-1 font-medium">Optimal edge latency</div>
         </Card>
       </div>
 
       {/* Real-Time Hourly Throughput Chart */}
-      <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+      <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-base font-serif font-bold text-[#29251F]">24-Hour Traffic Throughput</h2>
-            <p className="text-xs text-[#625B51]">Realty AI inferences & WhatsApp Cloud API events by time of day</p>
+            <h2 className="text-base font-serif font-bold text-[#2C241A]">24-Hour Traffic Throughput</h2>
+            <p className="text-xs text-[#6A5A44]">Realty AI inferences & WhatsApp Cloud API events by time of day</p>
           </div>
           <div className="flex items-center gap-4 text-xs">
-            <span className="flex items-center gap-1.5 text-[#3D7258] font-semibold">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#3D7258]" /> WhatsApp Events
+            <span className="flex items-center gap-1.5 text-[#547A61] font-semibold">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#547A61]" /> WhatsApp Events
             </span>
-            <span className="flex items-center gap-1.5 text-[#805B25] font-semibold">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#A374]" /> AI Prompts
+            <span className="flex items-center gap-1.5 text-[#7A5520] font-semibold">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#A37432]" /> AI Prompts
             </span>
           </div>
         </div>
@@ -110,32 +110,32 @@ export default function AdminUsagePage() {
             <AreaChart data={USAGE_TIMELINE}>
               <defs>
                 <linearGradient id="waGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3D7258" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#3D7258" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#547A61" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#547A61" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="aiGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#A374" stopOpacity={0.4} />
-                  <stop offset="95%" stopColor="#A374" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#A37432" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#A37432" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#ECE5D8" />
-              <XAxis dataKey="time" stroke="#625B51" fontSize={11} />
-              <YAxis stroke="#625B51" fontSize={11} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#DDD0B8" />
+              <XAxis dataKey="time" stroke="#8A7A63" fontSize={11} />
+              <YAxis stroke="#8A7A63" fontSize={11} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#FFFDF8',
-                  borderColor: '#D4C9B9',
+                  backgroundColor: '#FFF9F0',
+                  borderColor: '#D8C7A5',
                   borderRadius: '8px',
-                  color: '#29251F',
+                  color: '#2C241A',
                   fontSize: '12px',
-                  boxShadow: '0 10px 25px -5px rgba(21,21,21,0.08)',
+                  boxShadow: '0 8px 24px rgba(120,90,40,0.08)',
                 }}
               />
               <Area
                 type="monotone"
                 dataKey="waMessages"
                 name="WhatsApp"
-                stroke="#3D7258"
+                stroke="#547A61"
                 strokeWidth={2}
                 fillOpacity={1}
                 fill="url(#waGrad)"
@@ -144,7 +144,7 @@ export default function AdminUsagePage() {
                 type="monotone"
                 dataKey="aiCalls"
                 name="Realty AI"
-                stroke="#A374"
+                stroke="#A37432"
                 strokeWidth={2}
                 fillOpacity={1}
                 fill="url(#aiGrad)"
@@ -155,13 +155,13 @@ export default function AdminUsagePage() {
       </Card>
 
       {/* Top Consuming Tenants */}
-      <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-        <h2 className="text-base font-serif font-bold text-[#29251F] mb-1">Top Resource Consuming Brokerages</h2>
-        <p className="text-xs text-[#625B51] mb-4">Tenants with highest API traffic and token consumption this month</p>
+      <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
+        <h2 className="text-base font-serif font-bold text-[#2C241A] mb-1">Top Resource Consuming Brokerages</h2>
+        <p className="text-xs text-[#6A5A44] mb-4">Tenants with highest API traffic and token consumption this month</p>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51]">
+            <thead className="bg-[#F4EAD7] border-b border-[#D8C7A5] text-[#6A5A44]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Brokerage Tenant</th>
                 <th className="py-3 px-4 font-semibold">Plan Tier</th>
@@ -171,22 +171,22 @@ export default function AdminUsagePage() {
                 <th className="py-3 px-4 font-semibold">Quota Usage</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#D4C9B9]/60">
+            <tbody className="divide-y divide-[#D8C7A5]/60">
               {[
                 { name: 'Metropolis Prime Properties', tier: 'BUSINESS', ai: '42,100', wa: '112,000', storage: '2.4 GB', quota: '42%' },
                 { name: 'Heritage Luxury Estates', tier: 'BUSINESS', ai: '38,400', wa: '94,500', storage: '1.9 GB', quota: '38%' },
                 { name: 'Velvet Realty Solutions', tier: 'PROFESSIONAL', ai: '24,200', wa: '58,000', storage: '840 MB', quota: '80%' },
                 { name: 'Kovai Urban Lands', tier: 'PROFESSIONAL', ai: '8,400', wa: '21,000', storage: '410 MB', quota: '28%' },
               ].map((tenant, idx) => (
-                <tr key={idx} className="hover:bg-[#E8E1D5]/60 transition-colors">
-                  <td className="py-3 px-4 font-medium font-serif text-[#29251F]">{tenant.name}</td>
+                <tr key={idx} className="hover:bg-[#F7EEDC] transition-colors">
+                  <td className="py-3 px-4 font-medium font-serif text-[#2C241A]">{tenant.name}</td>
                   <td className="py-3 px-4">
                     <Badge variant={tenant.tier === 'BUSINESS' ? 'gold' : 'info'}>{tenant.tier}</Badge>
                   </td>
-                  <td className="py-3 px-4 font-mono text-[#805B25] font-semibold">{tenant.ai}</td>
-                  <td className="py-3 px-4 font-mono text-[#3D7258] font-semibold">{tenant.wa}</td>
-                  <td className="py-3 px-4 font-mono text-[#625B51]">{tenant.storage}</td>
-                  <td className="py-3 px-4 font-mono font-bold text-[#29251F]">{tenant.quota}</td>
+                  <td className="py-3 px-4 font-mono text-[#7A5520] font-semibold">{tenant.ai}</td>
+                  <td className="py-3 px-4 font-mono text-[#547A61] font-semibold">{tenant.wa}</td>
+                  <td className="py-3 px-4 font-mono text-[#6A5A44]">{tenant.storage}</td>
+                  <td className="py-3 px-4 font-mono font-bold text-[#2C241A]">{tenant.quota}</td>
                 </tr>
               ))}
             </tbody>

@@ -117,31 +117,31 @@ export function GlobalSearchModal() {
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 p-4 sm:p-6">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[#2D261C]/25 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-[#2C241A]/25 backdrop-blur-xs transition-opacity"
         onClick={() => setIsSearchOpen(false)}
       />
 
-      <div className="relative w-full max-w-2xl bg-[#FFFDF8] border border-[#D4C9B9] rounded-2xl shadow-2xl overflow-hidden z-10 text-[#29251F] animate-in zoom-in-95 duration-150">
+      <div className="relative w-full max-w-2xl bg-[#FFF9F0] border border-[#D8C7A5] rounded-2xl shadow-2xl overflow-hidden z-10 text-[#2C241A] animate-in zoom-in-95 duration-150">
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3.5 border-b border-[#D4C9B9] bg-[#F1ECE3]/70">
-          <Search className="w-5 h-5 text-[#A374] mr-3 flex-shrink-0" />
+        <div className="flex items-center px-4 py-3.5 border-b border-[#D8C7A5] bg-[#F4EAD7]/70">
+          <Search className="w-5 h-5 text-[#A37432] mr-3 flex-shrink-0" />
           <input
             autoFocus
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search leads, properties, deals, tasks, or jump to page... (Esc to exit)"
-            className="w-full bg-transparent text-sm text-[#29251F] placeholder:text-[#958B7D] outline-none font-medium"
+            className="w-full bg-transparent text-sm text-[#2C241A] placeholder:text-[#8A7A63] outline-none font-medium"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="text-[#81786A] hover:text-[#29251F] p-1 rounded-md"
+              className="text-[#8A7A63] hover:text-[#2C241A] p-1 rounded-md"
             >
               <X className="w-4 h-4" />
             </button>
           )}
-          <span className="ml-2 px-1.5 py-0.5 text-[10px] font-mono bg-[#F1ECE3] text-[#625B51] rounded border border-[#D4C9B9]">
+          <span className="ml-2 px-1.5 py-0.5 text-[10px] font-mono bg-[#F4EAD7] text-[#6A5A44] rounded border border-[#D8C7A5]">
             ESC
           </span>
         </div>
@@ -151,8 +151,8 @@ export function GlobalSearchModal() {
           {/* Leads */}
           {matchedLeads.length > 0 && (
             <div>
-              <p className="text-[11px] font-bold text-[#625B51] uppercase tracking-wider px-3 mb-1.5 flex items-center gap-1.5">
-                <Users className="w-3.5 h-3.5 text-[#A374]" />
+              <p className="text-[11px] font-bold text-[#6A5A44] uppercase tracking-wider px-3 mb-1.5 flex items-center gap-1.5">
+                <Users className="w-3.5 h-3.5 text-[#A37432]" />
                 Leads
               </p>
               <div className="space-y-1">
@@ -160,17 +160,17 @@ export function GlobalSearchModal() {
                   <div
                     key={lead.id}
                     onClick={() => handleSelect('/app/leads')}
-                    className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[#F1ECE3] cursor-pointer group transition-colors"
+                    className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[#F4EAD7] cursor-pointer group transition-colors"
                   >
                     <div>
-                      <div className="text-sm font-bold text-[#29251F] group-hover:text-[#805B25]">
+                      <div className="text-sm font-bold text-[#2C241A] group-hover:text-[#7A5520]">
                         {lead.name}
                       </div>
-                      <div className="text-xs text-[#625B51]">
+                      <div className="text-xs text-[#6A5A44]">
                         {lead.phone} • {lead.interestedPropertyName || 'General Lead'} • {lead.status}
                       </div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#625B51] group-hover:text-[#805B25] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-[#6A5A44] group-hover:text-[#7A5520] group-hover:translate-x-1 transition-all" />
                   </div>
                 ))}
               </div>
@@ -180,8 +180,8 @@ export function GlobalSearchModal() {
           {/* Properties */}
           {matchedProperties.length > 0 && (
             <div>
-              <p className="text-[11px] font-bold text-[#625B51] uppercase tracking-wider px-3 mb-1.5 flex items-center gap-1.5">
-                <Building2 className="w-3.5 h-3.5 text-[#A374]" />
+              <p className="text-[11px] font-bold text-[#6A5A44] uppercase tracking-wider px-3 mb-1.5 flex items-center gap-1.5">
+                <Building2 className="w-3.5 h-3.5 text-[#A37432]" />
                 Properties
               </p>
               <div className="space-y-1">
@@ -189,17 +189,17 @@ export function GlobalSearchModal() {
                   <div
                     key={prop.id}
                     onClick={() => handleSelect('/app/properties')}
-                    className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[#F1ECE3] cursor-pointer group transition-colors"
+                    className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[#F4EAD7] cursor-pointer group transition-colors"
                   >
                     <div>
-                      <div className="text-sm font-bold text-[#29251F] group-hover:text-[#805B25]">
+                      <div className="text-sm font-bold text-[#2C241A] group-hover:text-[#7A5520]">
                         {prop.title}
                       </div>
-                      <div className="text-xs text-[#625B51]">
+                      <div className="text-xs text-[#6A5A44]">
                         {formatINR(prop.priceINR, true)} • {prop.locality}, {prop.city} • {prop.status}
                       </div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#625B51] group-hover:text-[#805B25] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-[#6A5A44] group-hover:text-[#7A5520] group-hover:translate-x-1 transition-all" />
                   </div>
                 ))}
               </div>
@@ -209,8 +209,8 @@ export function GlobalSearchModal() {
           {/* Deals */}
           {matchedDeals.length > 0 && (
             <div>
-              <p className="text-[11px] font-bold text-[#625B51] uppercase tracking-wider px-3 mb-1.5 flex items-center gap-1.5">
-                <Kanban className="w-3.5 h-3.5 text-[#A374]" />
+              <p className="text-[11px] font-bold text-[#6A5A44] uppercase tracking-wider px-3 mb-1.5 flex items-center gap-1.5">
+                <Kanban className="w-3.5 h-3.5 text-[#A37432]" />
                 Deals Pipeline
               </p>
               <div className="space-y-1">
@@ -218,17 +218,17 @@ export function GlobalSearchModal() {
                   <div
                     key={deal.id}
                     onClick={() => handleSelect('/app/deals')}
-                    className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[#F1ECE3] cursor-pointer group transition-colors"
+                    className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[#F4EAD7] cursor-pointer group transition-colors"
                   >
                     <div>
-                      <div className="text-sm font-bold text-[#29251F] group-hover:text-[#805B25]">
+                      <div className="text-sm font-bold text-[#2C241A] group-hover:text-[#7A5520]">
                         {deal.title}
                       </div>
-                      <div className="text-xs text-[#625B51]">
+                      <div className="text-xs text-[#6A5A44]">
                         {formatINR(deal.dealValueINR, true)} • Stage: {deal.stage} • Probability: {deal.probability}%
                       </div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#625B51] group-hover:text-[#805B25] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-[#6A5A44] group-hover:text-[#7A5520] group-hover:translate-x-1 transition-all" />
                   </div>
                 ))}
               </div>
@@ -237,7 +237,7 @@ export function GlobalSearchModal() {
 
           {/* Quick Navigation */}
           <div>
-            <p className="text-[11px] font-bold text-[#625B51] uppercase tracking-wider px-3 mb-1.5">
+            <p className="text-[11px] font-bold text-[#6A5A44] uppercase tracking-wider px-3 mb-1.5">
               Quick Navigation
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -247,12 +247,12 @@ export function GlobalSearchModal() {
                   <div
                     key={item.href}
                     onClick={() => handleSelect(item.href)}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#F1ECE3] cursor-pointer group transition-colors"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#F4EAD7] cursor-pointer group transition-colors"
                   >
-                    <div className="p-1.5 rounded-lg bg-[#E8E1D5] border border-[#D4C9B9] group-hover:bg-[#A374]/20 text-[#805B25] transition-colors">
+                    <div className="p-1.5 rounded-lg bg-[#E9DFC8] border border-[#D8C7A5] group-hover:bg-[#A37432]/20 text-[#7A5520] transition-colors">
                       <Icon className="w-4 h-4" />
                     </div>
-                    <span className="text-sm font-semibold text-[#29251F] group-hover:text-[#805B25]">
+                    <span className="text-sm font-semibold text-[#2C241A] group-hover:text-[#7A5520]">
                       {item.label}
                     </span>
                   </div>
@@ -263,15 +263,15 @@ export function GlobalSearchModal() {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-4 py-2.5 bg-[#E8E1D5] border-t border-[#D4C9B9] text-[11px] text-[#625B51]">
+        <div className="flex items-center justify-between px-4 py-2.5 bg-[#E9DFC8] border-t border-[#D8C7A5] text-[11px] text-[#6A5A44]">
           <span>Search Velvet Code CRM</span>
           <div className="flex items-center gap-3">
             <span>
-              Use <kbd className="px-1 py-0.5 rounded bg-[#F1ECE3] border border-[#D4C9B9] font-mono">↑</kbd>{' '}
-              <kbd className="px-1 py-0.5 rounded bg-[#F1ECE3] border border-[#D4C9B9] font-mono">↓</kbd> to navigate
+              Use <kbd className="px-1 py-0.5 rounded bg-[#F4EAD7] border border-[#D8C7A5] font-mono">↑</kbd>{' '}
+              <kbd className="px-1 py-0.5 rounded bg-[#F4EAD7] border border-[#D8C7A5] font-mono">↓</kbd> to navigate
             </span>
             <span>
-              <kbd className="px-1.5 py-0.5 rounded bg-[#F1ECE3] border border-[#D4C9B9] font-mono">ESC</kbd> to close
+              <kbd className="px-1.5 py-0.5 rounded bg-[#F4EAD7] border border-[#D8C7A5] font-mono">ESC</kbd> to close
             </span>
           </div>
         </div>

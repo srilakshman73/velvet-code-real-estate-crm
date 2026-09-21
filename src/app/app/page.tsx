@@ -79,9 +79,9 @@ export default function DashboardPage() {
       ? Object.keys(sourceCounts).map((source, idx) => ({
           name: source,
           value: Math.round((sourceCounts[source] / leads.length) * 100),
-          color: ['#A374', '#C9A45C', '#D8C7A5', '#547A61', '#9A8E7C'][idx % 5],
+          color: ['#A37432', '#C39A5B', '#E5D1A8', '#547A61', '#8A7A63'][idx % 5],
         }))
-      : [{ name: 'Direct Inquiries', value: 100, color: '#A374' }];
+      : [{ name: 'Direct Inquiries', value: 100, color: '#A37432' }];
 
   // Filtered Follow-ups & Visits
   const dueTodayFollowUps = followUps.filter(
@@ -92,27 +92,27 @@ export default function DashboardPage() {
     .slice(0, 4);
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#E8E1D5] text-[#29251F]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
       {/* ========================================== */}
       {/* HEADER SECTION */}
       {/* ========================================== */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#29251F] tracking-tight font-serif">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
             Good morning, {currentUser.name} 👋
           </h1>
-          <p className="text-xs sm:text-sm text-[#625B51] mt-1">
+          <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
             Here's what's happening with your real estate business at{' '}
-            <strong className="text-[#29251F]">{currentOrg.name}</strong>.
+            <strong className="text-[#2C241A]">{currentOrg.name}</strong>.
           </p>
         </div>
 
         <div className="flex items-center gap-2.5">
-          <div className="bg-[#FFFDF8] border border-[#D4C9B9] p-1 rounded-xl flex text-xs aurum-card-shadow">
+          <div className="bg-[#FFF9F0] border border-[#D8C7A5] p-1 rounded-xl flex text-xs shadow-[0_4px_16px_rgba(120,90,40,0.06)]">
             <button
               onClick={() => setDateRange('30D')}
               className={`px-3 py-1.5 rounded-lg font-semibold transition-colors ${
-                dateRange === '30D' ? 'bg-[#A374] text-[#171613]' : 'text-[#625B51] hover:text-[#29251F]'
+                dateRange === '30D' ? 'bg-[#A37432] text-white' : 'text-[#6A5A44] hover:text-[#2C241A]'
               }`}
             >
               Last 30 Days
@@ -120,7 +120,7 @@ export default function DashboardPage() {
             <button
               onClick={() => setDateRange('ThisMonth')}
               className={`px-3 py-1.5 rounded-lg font-semibold transition-colors ${
-                dateRange === 'ThisMonth' ? 'bg-[#A374] text-[#171613]' : 'text-[#625B51] hover:text-[#29251F]'
+                dateRange === 'ThisMonth' ? 'bg-[#A37432] text-white' : 'text-[#6A5A44] hover:text-[#2C241A]'
               }`}
             >
               This Month
@@ -144,7 +144,7 @@ export default function DashboardPage() {
           value={leads.length.toString()}
           changePercent={leads.length > 0 ? 100 : 0}
           changeLabel={leads.length > 0 ? 'active contacts' : 'No leads yet'}
-          icon={<Users className="w-5 h-5 text-[#805B25]" />}
+          icon={<Users className="w-5 h-5 text-[#7A5520]" />}
           variant="gold"
         />
 
@@ -153,7 +153,7 @@ export default function DashboardPage() {
           value={siteVisits.length.toString()}
           changePercent={siteVisits.length > 0 ? 100 : 0}
           changeLabel={siteVisits.length > 0 ? 'scheduled viewings' : 'No visits scheduled'}
-          icon={<CalendarCheck className="w-5 h-5 text-[#A87932]" />}
+          icon={<CalendarCheck className="w-5 h-5 text-[#C39A5B]" />}
           variant="amber"
         />
 
@@ -162,7 +162,7 @@ export default function DashboardPage() {
           value={activePipelineCount.toString()}
           changePercent={activePipelineCount > 0 ? 100 : 0}
           changeLabel={activePipelineCount > 0 ? 'in sales pipeline' : 'No active deals'}
-          icon={<Kanban className="w-5 h-5 text-[#171613]" />}
+          icon={<Kanban className="w-5 h-5 text-[#2C241A]" />}
           variant="charcoal"
         />
 
@@ -171,7 +171,7 @@ export default function DashboardPage() {
           value={closedWonRevenue > 0 ? formatINR(closedWonRevenue, true) : '₹0'}
           changePercent={closedWonRevenue > 0 ? 100 : 0}
           changeLabel={closedWonRevenue > 0 ? 'closed transactions' : 'No closed deals yet'}
-          icon={<DollarSign className="w-5 h-5 text-[#2F6B52]" />}
+          icon={<DollarSign className="w-5 h-5 text-[#547A61]" />}
           variant="emerald"
         />
       </div>
@@ -181,20 +181,20 @@ export default function DashboardPage() {
       {/* ========================================== */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Revenue Performance Chart */}
-        <div className="lg:col-span-8 p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
-          <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
+        <div className="lg:col-span-8 p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4">
+          <div className="flex items-center justify-between border-b border-[#D8C7A5] pb-4">
             <div>
-              <h3 className="text-base font-bold text-[#29251F] tracking-tight flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-[#805B25]" />
+              <h3 className="text-base font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-[#7A5520]" />
                 Revenue Analytics & Growth Trend
               </h3>
-              <p className="text-xs text-[#625B51] mt-0.5">
+              <p className="text-xs text-[#6A5A44] mt-0.5">
                 Monthly closed revenue performance in Lakhs INR
               </p>
             </div>
             <div className="flex items-center gap-4 text-xs">
-              <span className="flex items-center gap-1.5 text-[#805B25] font-bold">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#A374]" /> Revenue (₹ Lakhs)
+              <span className="flex items-center gap-1.5 text-[#7A5520] font-bold">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#A37432]" /> Revenue (₹ Lakhs)
               </span>
             </div>
           </div>
@@ -204,14 +204,14 @@ export default function DashboardPage() {
               <AreaChart data={revenueChartData}>
                 <defs>
                   <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#A374" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="#A374" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#A37432" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="#A37432" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#F1ECE3" vertical={false} />
-                <XAxis dataKey="month" stroke="#625B51" fontSize={12} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#DDD0B8" vertical={false} />
+                <XAxis dataKey="month" stroke="#8A7A63" fontSize={12} tickLine={false} />
                 <YAxis
-                  stroke="#625B51"
+                  stroke="#8A7A63"
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
@@ -219,19 +219,19 @@ export default function DashboardPage() {
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#FFFDF8',
-                    borderColor: '#D4C9B9',
+                    backgroundColor: '#FFF9F0',
+                    borderColor: '#D8C7A5',
                     borderRadius: '0.75rem',
-                    color: '#29251F',
+                    color: '#2C241A',
                     fontSize: '12px',
-                    boxShadow: '0 4px 14px rgba(36,33,29,0.08)',
+                    boxShadow: '0 8px 24px rgba(120,90,40,0.08)',
                   }}
                   formatter={(value: any) => [`₹${value} Lakhs`, 'Revenue']}
                 />
                 <Area
                   type="monotone"
                   dataKey="revenueLakhs"
-                  stroke="#A374"
+                  stroke="#A37432"
                   strokeWidth={3}
                   fillOpacity={1}
                   fill="url(#goldGradient)"
@@ -242,13 +242,13 @@ export default function DashboardPage() {
         </div>
 
         {/* Lead Ingestion Sources Donut */}
-        <div className="lg:col-span-4 p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4 flex flex-col justify-between">
-          <div className="border-b border-[#D4C9B9] pb-4">
-            <h3 className="text-base font-bold text-[#29251F] tracking-tight flex items-center gap-2">
-              <MessageSquare className="w-4 h-4 text-[#3D7258]" />
+        <div className="lg:col-span-4 p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4 flex flex-col justify-between">
+          <div className="border-b border-[#D8C7A5] pb-4">
+            <h3 className="text-base font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+              <MessageSquare className="w-4 h-4 text-[#547A61]" />
               Lead Channel Breakdown
             </h3>
-            <p className="text-xs text-[#625B51] mt-0.5">Top inquiry generation sources</p>
+            <p className="text-xs text-[#6A5A44] mt-0.5">Top inquiry generation sources</p>
           </div>
 
           <div className="h-44 w-full relative flex items-center justify-center">
@@ -269,20 +269,20 @@ export default function DashboardPage() {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#FFFDF8',
-                    borderColor: '#D4C9B9',
+                    backgroundColor: '#FFF9F0',
+                    borderColor: '#D8C7A5',
                     borderRadius: '0.5rem',
-                    color: '#29251F',
+                    color: '#2C241A',
                     fontSize: '12px',
                   }}
                 />
               </PieChart>
             </ResponsiveContainer>
             <div className="absolute text-center">
-              <p className="text-xl font-extrabold text-[#29251F]">
+              <p className="text-xl font-extrabold text-[#2C241A]">
                 {leads.length > 0 ? `${leads.length}` : '0'}
               </p>
-              <p className="text-[10px] text-[#625B51] font-semibold">Total Leads</p>
+              <p className="text-[10px] text-[#6A5A44] font-semibold">Total Leads</p>
             </div>
           </div>
 
@@ -290,8 +290,8 @@ export default function DashboardPage() {
             {leadSourceData.map((s, i) => (
               <div key={i} className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: s.color }} />
-                <span className="text-[#29251F] font-medium truncate">{s.name}</span>
-                <span className="text-[#625B51] ml-auto font-bold">{s.value}%</span>
+                <span className="text-[#2C241A] font-medium truncate">{s.name}</span>
+                <span className="text-[#6A5A44] ml-auto font-bold">{s.value}%</span>
               </div>
             ))}
           </div>
@@ -305,24 +305,24 @@ export default function DashboardPage() {
         {/* Left Column: Follow-ups & Hot Leads */}
         <div className="lg:col-span-7 space-y-6">
           {/* Actionable Follow-ups */}
-          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
-            <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
+          <div className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4">
+            <div className="flex items-center justify-between border-b border-[#D8C7A5] pb-4">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-[#E8E1D5] text-[#805B25] border border-[#D4C9B9]">
+                <div className="p-2 rounded-xl bg-[#F4EAD7] text-[#7A5520] border border-[#D8C7A5]">
                   <Clock className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-[#29251F] tracking-tight">
+                  <h3 className="text-base font-bold text-[#2C241A] tracking-tight">
                     Today's High-Priority Follow-ups
                   </h3>
-                  <p className="text-xs text-[#625B51]">
+                  <p className="text-xs text-[#6A5A44]">
                     {dueTodayFollowUps.length} follow-ups requiring direct agent action
                   </p>
                 </div>
               </div>
               <Link
                 href="/app/follow-ups"
-                className="text-xs font-bold text-[#805B25] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#7A5520] hover:underline flex items-center gap-1"
               >
                 View all <ChevronRight className="w-3.5 h-3.5" />
               </Link>
@@ -330,7 +330,7 @@ export default function DashboardPage() {
 
             {dueTodayFollowUps.length === 0 ? (
               <EmptyState
-                icon={<Clock className="w-6 h-6 text-[#805B25]" />}
+                icon={<Clock className="w-6 h-6 text-[#7A5520]" />}
                 title="No follow-ups due today"
                 description="You are completely up to date. Schedule follow-ups with your leads to stay on top of client conversations."
               />
@@ -339,22 +339,22 @@ export default function DashboardPage() {
                 {dueTodayFollowUps.map((fu) => (
                   <div
                     key={fu.id}
-                    className="p-4 rounded-xl bg-[#FFFDF8] border border-[#D4C9B9] hover:border-[#A374]/60 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
+                    className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#A37432]/60 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm"
                   >
                     <div className="space-y-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-[#29251F] text-sm truncate">{fu.leadName}</span>
+                        <span className="font-bold text-[#2C241A] text-sm truncate">{fu.leadName}</span>
                         <span
                           className={`px-2 py-0.5 text-[10px] font-bold rounded ${
                             fu.status === 'OVERDUE'
                               ? 'bg-[#8B4A4A]/15 text-[#8B4A4A]'
-                              : 'bg-[#B87B28]/15 text-[#8A5612]'
+                              : 'bg-[#A37432]/15 text-[#7A5520]'
                           }`}
                         >
                           {fu.status === 'OVERDUE' ? '⚠️ Overdue' : '⏰ Due Today'}
                         </span>
                       </div>
-                      <p className="text-xs text-[#625B51] truncate">
+                      <p className="text-xs text-[#6A5A44] truncate">
                         {fu.propertyName || 'Inquiry'} • {fu.notes}
                       </p>
                     </div>
@@ -362,17 +362,17 @@ export default function DashboardPage() {
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <a
                         href={`tel:${fu.customerPhone}`}
-                        className="p-2 rounded-xl bg-[#E8E1D5] hover:bg-[#F1ECE3] text-[#29251F] transition-colors text-xs flex items-center gap-1 border border-[#D4C9B9]"
+                        className="p-2 rounded-xl bg-[#F4EAD7] hover:bg-[#E9DFC8] text-[#2C241A] transition-colors text-xs flex items-center gap-1 border border-[#D8C7A5]"
                         title="Call Client"
                       >
-                        <Phone className="w-3.5 h-3.5 text-[#A87932]" />
+                        <Phone className="w-3.5 h-3.5 text-[#C39A5B]" />
                       </a>
 
                       <a
                         href={buildWhatsAppUrl(fu.customerPhone, `Hello ${fu.leadName}, following up on ${fu.propertyName || 'your inquiry'}.`)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-xl bg-[#3D7258]/10 hover:bg-[#3D7258]/20 text-[#3D7258] border border-[#3D7258]/30 transition-colors text-xs flex items-center gap-1"
+                        className="p-2 rounded-xl bg-[#547A61]/10 hover:bg-[#547A61]/20 text-[#547A61] border border-[#547A61]/30 transition-colors text-xs flex items-center gap-1"
                         title="Send WhatsApp"
                       >
                         <MessageSquare className="w-3.5 h-3.5" />
@@ -393,15 +393,15 @@ export default function DashboardPage() {
           </div>
 
           {/* Recent Hot Leads */}
-          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
-            <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
-              <h3 className="text-base font-bold text-[#29251F] tracking-tight flex items-center gap-2">
-                <Users className="w-4 h-4 text-[#805B25]" />
+          <div className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4">
+            <div className="flex items-center justify-between border-b border-[#D8C7A5] pb-4">
+              <h3 className="text-base font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+                <Users className="w-4 h-4 text-[#7A5520]" />
                 Recent Verified Buyer Leads
               </h3>
               <Link
                 href="/app/leads"
-                className="text-xs font-bold text-[#805B25] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#7A5520] hover:underline flex items-center gap-1"
               >
                 All leads <ChevronRight className="w-3.5 h-3.5" />
               </Link>
@@ -409,7 +409,7 @@ export default function DashboardPage() {
 
             {leads.length === 0 ? (
               <EmptyState
-                icon={<Users className="w-6 h-6 text-[#805B25]" />}
+                icon={<Users className="w-6 h-6 text-[#7A5520]" />}
                 title="No leads yet"
                 description="Start by adding your first buyer lead or capture direct inquiries from your WhatsApp CRM and landing page."
                 actionLabel="Add First Lead"
@@ -419,7 +419,7 @@ export default function DashboardPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead>
-                    <tr className="text-[#625B51] border-b border-[#D4C9B9] pb-2 font-bold">
+                    <tr className="text-[#6A5A44] border-b border-[#D8C7A5] pb-2 font-bold">
                       <th className="pb-2">Lead Name</th>
                       <th className="pb-2">Budget</th>
                       <th className="pb-2">Status</th>
@@ -427,30 +427,30 @@ export default function DashboardPage() {
                       <th className="pb-2 text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#D4C9B9]/60">
+                  <tbody className="divide-y divide-[#D8C7A5]/60">
                     {leads.slice(0, 5).map((l) => (
-                      <tr key={l.id} className="hover:bg-[#F1ECE3]/40 transition-colors">
-                        <td className="py-3 font-bold text-[#29251F]">
-                          <Link href="/app/leads" className="hover:text-[#805B25]">
+                      <tr key={l.id} className="hover:bg-[#F7EEDC] transition-colors">
+                        <td className="py-3 font-bold text-[#2C241A]">
+                          <Link href="/app/leads" className="hover:text-[#7A5520]">
                             {l.name}
                           </Link>
-                          <p className="text-[10px] text-[#625B51] font-normal">{l.phone}</p>
+                          <p className="text-[10px] text-[#6A5A44] font-normal">{l.phone}</p>
                         </td>
-                        <td className="py-3 text-[#29251F] font-bold font-mono">
+                        <td className="py-3 text-[#2C241A] font-bold font-mono">
                           {l.budgetMaxINR ? formatINR(l.budgetMaxINR, true) : 'Flexible'}
                         </td>
                         <td className="py-3">
                           <LeadStatusBadge status={l.status} />
                         </td>
                         <td className="py-3">
-                          <span className="font-extrabold text-[#3D7258]">{l.score}%</span>
+                          <span className="font-extrabold text-[#547A61]">{l.score}%</span>
                         </td>
                         <td className="py-3 text-right">
                           <a
                             href={buildWhatsAppUrl(l.phone, `Hello ${l.name}, connecting regarding ${l.interestedPropertyName || 'your inquiry'}.`)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-[11px] font-bold text-[#3D7258] hover:underline"
+                            className="inline-flex items-center gap-1 text-[11px] font-bold text-[#547A61] hover:underline"
                           >
                             <MessageSquare className="w-3 h-3" /> WhatsApp
                           </a>
@@ -467,22 +467,22 @@ export default function DashboardPage() {
         {/* Right Column: Upcoming Site Visits & Team Leaderboard */}
         <div className="lg:col-span-5 space-y-6">
           {/* Upcoming Site Visits */}
-          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
-            <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
+          <div className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4">
+            <div className="flex items-center justify-between border-b border-[#D8C7A5] pb-4">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-[#E8E1D5] text-[#A87932] border border-[#D4C9B9]">
+                <div className="p-2 rounded-xl bg-[#F4EAD7] text-[#C39A5B] border border-[#D8C7A5]">
                   <CalendarCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-[#29251F] tracking-tight">
+                  <h3 className="text-base font-bold text-[#2C241A] tracking-tight">
                     Upcoming Site Visits
                   </h3>
-                  <p className="text-xs text-[#625B51]">Scheduled property walkthroughs</p>
+                  <p className="text-xs text-[#6A5A44]">Scheduled property walkthroughs</p>
                 </div>
               </div>
               <Link
                 href="/app/site-visits"
-                className="text-xs font-bold text-[#805B25] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#7A5520] hover:underline flex items-center gap-1"
               >
                 Schedule <ChevronRight className="w-3.5 h-3.5" />
               </Link>
@@ -490,7 +490,7 @@ export default function DashboardPage() {
 
             {upcomingVisits.length === 0 ? (
               <EmptyState
-                icon={<CalendarCheck className="w-6 h-6 text-[#A87932]" />}
+                icon={<CalendarCheck className="w-6 h-6 text-[#C39A5B]" />}
                 title="No site visits scheduled"
                 description="Coordinate private viewings with prospective buyers to track site visits and feedback."
               />
@@ -499,19 +499,19 @@ export default function DashboardPage() {
                 {upcomingVisits.map((v) => (
                   <div
                     key={v.id}
-                    className="p-3.5 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] space-y-2 shadow-2xs"
+                    className="p-3.5 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-2 shadow-sm"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#29251F]">{v.propertyName}</span>
-                      <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A87932]/15 text-[#805B25] rounded">
+                      <span className="text-xs font-bold text-[#2C241A]">{v.propertyName}</span>
+                      <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A37432]/15 text-[#7A5520] rounded">
                         {v.timeSlot}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-xs text-[#625B51]">
-                      <span>Buyer: <strong className="text-[#29251F]">{v.leadName || 'Client'}</strong></span>
-                      <span>Date: <strong className="text-[#29251F]">{v.visitDate}</strong></span>
+                    <div className="flex items-center justify-between text-xs text-[#6A5A44]">
+                      <span>Buyer: <strong className="text-[#2C241A]">{v.leadName || 'Client'}</strong></span>
+                      <span>Date: <strong className="text-[#2C241A]">{v.visitDate}</strong></span>
                     </div>
-                    <p className="text-[11px] text-[#625B51] truncate">
+                    <p className="text-[11px] text-[#6A5A44] truncate">
                       Assigned: {v.assignedAgentName || currentUser.name} • {v.propertyLocation || 'Venue'}
                     </p>
                   </div>
@@ -521,35 +521,35 @@ export default function DashboardPage() {
           </div>
 
           {/* Team Performance Overview */}
-          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
-            <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
-              <h3 className="text-base font-bold text-[#29251F] tracking-tight flex items-center gap-2">
-                <Award className="w-4 h-4 text-[#805B25]" />
+          <div className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4">
+            <div className="flex items-center justify-between border-b border-[#D8C7A5] pb-4">
+              <h3 className="text-base font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+                <Award className="w-4 h-4 text-[#7A5520]" />
                 Sales Consultants
               </h3>
-              <span className="text-xs text-[#625B51] font-medium">Team Overview</span>
+              <span className="text-xs text-[#6A5A44] font-medium">Team Overview</span>
             </div>
 
             <div className="space-y-3 text-xs">
               {users.map((u, i) => (
                 <div
                   key={u.id}
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9]"
+                  className="flex items-center justify-between p-3 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5]"
                 >
                   <div className="flex items-center gap-2.5">
-                    <div className="w-6 h-6 rounded-full bg-[#A374]/25 text-[#805B25] font-bold flex items-center justify-center text-[10px]">
+                    <div className="w-6 h-6 rounded-full bg-[#A37432]/25 text-[#7A5520] font-bold flex items-center justify-center text-[10px]">
                       {i + 1}
                     </div>
                     <div>
-                      <p className="font-bold text-[#29251F]">{u.name}</p>
-                      <p className="text-[10px] text-[#625B51]">{u.role} • {u.email}</p>
+                      <p className="font-bold text-[#2C241A]">{u.name}</p>
+                      <p className="text-[10px] text-[#6A5A44]">{u.role} • {u.email}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-[#805B25] font-mono">
+                    <p className="font-bold text-[#7A5520] font-mono">
                       {closedWonRevenue > 0 ? formatINR(closedWonRevenue, true) : '₹0'}
                     </p>
-                    <p className="text-[10px] text-[#3D7258] font-bold">Active</p>
+                    <p className="text-[10px] text-[#547A61] font-bold">Active</p>
                   </div>
                 </div>
               ))}

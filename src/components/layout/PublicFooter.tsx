@@ -18,19 +18,19 @@ export function PublicFooter() {
   );
 
   return (
-    <footer className="w-full bg-[#1F1D19] border-t border-[#2D2A24] text-[#D4C9B9]/80">
+    <footer className="w-full bg-[#1F1D19] border-t border-[#2D2A24] text-[#D8C7A5]/80">
       {/* Official WhatsApp Banner */}
       <div className="border-b border-[#2D2A24] bg-[#29251F] py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-center md:text-left">
-            <div className="p-3.5 rounded-2xl bg-[#3D7258]/20 border border-[#3D7258]/40 text-[#547A61] shadow-lg">
+            <div className="p-3.5 rounded-2xl bg-[#547A61]/20 border border-[#547A61]/40 text-[#547A61] shadow-lg">
               <MessageSquare className="w-7 h-7" />
             </div>
             <div>
-              <h4 className="text-lg font-bold text-[#FFFDF8] tracking-tight">
+              <h4 className="text-lg font-bold text-[#FFF9F0] tracking-tight">
                 Need an Instant Demo or Consultation?
               </h4>
-              <p className="text-sm text-[#D4C9B9]/70 mt-0.5">
+              <p className="text-sm text-[#D8C7A5]/70 mt-0.5">
                 Connect directly with our enterprise real estate technology specialists on WhatsApp.
               </p>
             </div>
@@ -40,7 +40,7 @@ export function PublicFooter() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-6 py-3.5 rounded-xl bg-[#3D7258] hover:bg-[#2E5943] text-[#FFFDF8] font-bold text-sm shadow-xl transition-all"
+            className="flex items-center gap-3 px-6 py-3.5 rounded-xl bg-[#547A61] hover:bg-[#3D7258] text-[#FFF9F0] font-bold text-sm shadow-xl transition-all"
           >
             <MessageSquare className="w-5 h-5 fill-current" />
             <span>Chat on WhatsApp: +91 63833 95915</span>
@@ -55,20 +55,20 @@ export function PublicFooter() {
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <VelvetCodeLogo size="lg" theme="dark" />
-            <p className="text-sm text-[#D4C9B9]/70 leading-relaxed max-w-sm">
+            <p className="text-sm text-[#D8C7A5]/70 leading-relaxed max-w-sm">
               The premier Aurum-inspired Real Estate CRM SaaS platform engineered for agencies, brokers, developers, and consultants.
             </p>
-            <div className="pt-2 space-y-2 text-xs text-[#D4C9B9]/80">
+            <div className="pt-2 space-y-2 text-xs text-[#D8C7A5]/80">
               <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[#A374]" />
+                <Phone className="w-3.5 h-3.5 text-[#A37432]" />
                 <span>+91 63833 95915</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-[#A374]" />
+                <Mail className="w-3.5 h-3.5 text-[#A37432]" />
                 <span>solutions@velvetcode.tech</span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#A374]" />
+                <MapPin className="w-3.5 h-3.5 text-[#A37432]" />
                 <span>Chennai • Bangalore • Mumbai, India</span>
               </div>
             </div>
@@ -76,37 +76,37 @@ export function PublicFooter() {
 
           {/* Product */}
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#E8E1D5] mb-4">
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#E9DFC8] mb-4">
               Platform
             </h5>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/features" className="hover:text-[#A374] transition-colors">
+                <Link href="/features" className="hover:text-[#A37432] transition-colors">
                   Features Catalog
                 </Link>
               </li>
               <li>
-                <Link href="/solutions" className="hover:text-[#A374] transition-colors">
+                <Link href="/solutions" className="hover:text-[#A37432] transition-colors">
                   Solutions by Business
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="hover:text-[#A374] transition-colors">
+                <Link href="/pricing" className="hover:text-[#A37432] transition-colors">
                   Subscription Plans
                 </Link>
               </li>
               <li>
-                <Link href="/app/leads" className="hover:text-[#A374] transition-colors">
+                <Link href="/app/leads" className="hover:text-[#A37432] transition-colors">
                   Lead Management CRM
                 </Link>
               </li>
               <li>
-                <Link href="/app/whatsapp" className="hover:text-[#A374] transition-colors">
+                <Link href="/app/whatsapp" className="hover:text-[#A37432] transition-colors">
                   WhatsApp Engine
                 </Link>
               </li>
               <li>
-                <Link href="/app/ai" className="hover:text-[#A374] transition-colors">
+                <Link href="/app/ai" className="hover:text-[#A37432] transition-colors">
                   Realty AI Assistant
                 </Link>
               </li>
@@ -115,32 +115,32 @@ export function PublicFooter() {
 
           {/* Solutions */}
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#E8E1D5] mb-4">
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#E9DFC8] mb-4">
               Solutions
             </h5>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/solutions#agents" className="hover:text-[#A374] transition-colors">
+                <Link href="/solutions#agents" className="hover:text-[#A37432] transition-colors">
                   For Independent Agents
                 </Link>
               </li>
               <li>
-                <Link href="/solutions#brokers" className="hover:text-[#A374] transition-colors">
+                <Link href="/solutions#brokers" className="hover:text-[#A37432] transition-colors">
                   For Real Estate Brokers
                 </Link>
               </li>
               <li>
-                <Link href="/solutions#agencies" className="hover:text-[#A374] transition-colors">
+                <Link href="/solutions#agencies" className="hover:text-[#A37432] transition-colors">
                   For Real Estate Agencies
                 </Link>
               </li>
               <li>
-                <Link href="/solutions#builders" className="hover:text-[#A374] transition-colors">
+                <Link href="/solutions#builders" className="hover:text-[#A37432] transition-colors">
                   For Builders & Developers
                 </Link>
               </li>
               <li>
-                <Link href="/solutions#consultants" className="hover:text-[#A374] transition-colors">
+                <Link href="/solutions#consultants" className="hover:text-[#A37432] transition-colors">
                   For Property Consultants
                 </Link>
               </li>
@@ -149,32 +149,32 @@ export function PublicFooter() {
 
           {/* Company & Legal */}
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#E8E1D5] mb-4">
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#E9DFC8] mb-4">
               Company
             </h5>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/about" className="hover:text-[#A374] transition-colors">
+                <Link href="/about" className="hover:text-[#A37432] transition-colors">
                   About Velvet Code
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-[#A374] transition-colors">
+                <Link href="/contact" className="hover:text-[#A37432] transition-colors">
                   Contact Support
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-[#A374] transition-colors">
+                <Link href="/privacy" className="hover:text-[#A37432] transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-[#A374] transition-colors">
+                <Link href="/terms" className="hover:text-[#A37432] transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/admin" className="hover:text-[#A374] transition-colors text-xs text-[#A374]">
+                <Link href="/admin" className="hover:text-[#A37432] transition-colors text-xs text-[#A37432]">
                   Velvet Code Admin ↗
                 </Link>
               </li>
@@ -183,10 +183,10 @@ export function PublicFooter() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-[#24221E] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#D4C9B9]/60">
+        <div className="mt-12 pt-8 border-t border-[#24221E] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#D8C7A5]/60">
           <p>© {new Date().getFullYear()} Velvet Code. All rights reserved. Technology & Digital Solutions</p>
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5 text-[#3B825E] font-semibold">
+            <span className="flex items-center gap-1.5 text-[#547A61] font-semibold">
               <ShieldCheck className="w-4 h-4" />
               100% Multi-Tenant Data Isolation
             </span>

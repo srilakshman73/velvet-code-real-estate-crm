@@ -27,23 +27,23 @@ export function MetricCard({
   const isNegative = (changePercent ?? 0) < 0;
 
   const accentStyles: Record<string, string> = {
-    gold: 'border-[#D8CEBF] hover:border-[#A374]/80 bg-[#FFFDF8]',
-    emerald: 'border-[#D8CEBF] hover:border-[#3D7258]/80 bg-[#FFFDF8]',
-    amber: 'border-[#D8CEBF] hover:border-[#A87932]/80 bg-[#FFFDF8]',
-    charcoal: 'border-[#D8CEBF] hover:border-[#29251F]/80 bg-[#FFFDF8]',
-    blue: 'border-[#D8CEBF] hover:border-[#A374]/80 bg-[#FFFDF8]',
-    purple: 'border-[#D8CEBF] hover:border-[#A87932]/80 bg-[#FFFDF8]',
-    default: 'border-[#D8CEBF] hover:border-[#A374]/60 bg-[#FFFDF8]',
+    gold: 'border-[#D8C7A5] hover:border-[#A37432]/80 bg-[#FFF9F0]',
+    emerald: 'border-[#D8C7A5] hover:border-[#547A61]/80 bg-[#FFF9F0]',
+    amber: 'border-[#D8C7A5] hover:border-[#A87932]/80 bg-[#FFF9F0]',
+    charcoal: 'border-[#D8C7A5] hover:border-[#2C241A]/80 bg-[#FFF9F0]',
+    blue: 'border-[#D8C7A5] hover:border-[#A37432]/80 bg-[#FFF9F0]',
+    purple: 'border-[#D8C7A5] hover:border-[#A87932]/80 bg-[#FFF9F0]',
+    default: 'border-[#D8C7A5] hover:border-[#A37432]/60 bg-[#FFF9F0]',
   };
 
   const iconAccent: Record<string, string> = {
-    gold: 'bg-[#A374]/15 border-[#A374]/30 text-[#805B25]',
-    emerald: 'bg-[#3D7258]/15 border-[#3D7258]/30 text-[#3D7258]',
+    gold: 'bg-[#A37432]/15 border-[#A37432]/30 text-[#7A5520]',
+    emerald: 'bg-[#547A61]/15 border-[#547A61]/30 text-[#547A61]',
     amber: 'bg-[#A87932]/15 border-[#A87932]/30 text-[#A87932]',
-    charcoal: 'bg-[#29251F]/10 border-[#29251F]/20 text-[#29251F]',
-    blue: 'bg-[#A374]/15 border-[#A374]/30 text-[#805B25]',
+    charcoal: 'bg-[#2C241A]/10 border-[#2C241A]/20 text-[#2C241A]',
+    blue: 'bg-[#A37432]/15 border-[#A37432]/30 text-[#7A5520]',
     purple: 'bg-[#A87932]/15 border-[#A87932]/30 text-[#A87932]',
-    default: 'bg-[#F1ECE3] border-[#D8CEBF] text-[#805B25]',
+    default: 'bg-[#F4EAD7] border-[#D8C7A5] text-[#7A5520]',
   };
 
   return (
@@ -56,10 +56,10 @@ export function MetricCard({
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-wider text-[#756D61] mb-1">
+          <p className="text-xs font-bold uppercase tracking-wider text-[#6A5A44] mb-1">
             {title}
           </p>
-          <div className="text-2xl sm:text-3xl font-extrabold text-[#29251F] tracking-tight font-sans">
+          <div className="text-2xl sm:text-3xl font-extrabold text-[#2C241A] tracking-tight font-sans">
             {value}
           </div>
         </div>
@@ -74,11 +74,11 @@ export function MetricCard({
       </div>
 
       {(changePercent !== undefined || subtitle) && (
-        <div className="mt-4 flex items-center justify-between text-xs pt-3 border-t border-[#D8CEBF]/60">
+        <div className="mt-4 flex items-center justify-between text-xs pt-3 border-t border-[#D8C7A5]/60">
           {changePercent !== undefined && (
             <div className="flex items-center gap-1 font-semibold">
               {isPositive ? (
-                <span className="flex items-center text-[#3D7258] gap-0.5">
+                <span className="flex items-center text-[#547A61] gap-0.5">
                   <TrendingUp className="w-3.5 h-3.5" />
                   +{changePercent}%
                 </span>
@@ -88,15 +88,15 @@ export function MetricCard({
                   {changePercent}%
                 </span>
               ) : (
-                <span className="flex items-center text-[#756D61] gap-0.5">
+                <span className="flex items-center text-[#6A5A44] gap-0.5">
                   <Minus className="w-3.5 h-3.5" />
                   0%
                 </span>
               )}
-              <span className="text-[#756D61] font-normal">{changeLabel}</span>
+              <span className="text-[#6A5A44] font-normal">{changeLabel}</span>
             </div>
           )}
-          {subtitle && <span className="text-[#81786A] font-medium">{subtitle}</span>}
+          {subtitle && <span className="text-[#8A7A63] font-medium">{subtitle}</span>}
         </div>
       )}
     </div>
