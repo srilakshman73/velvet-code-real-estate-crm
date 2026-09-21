@@ -70,7 +70,7 @@ export default function AdminSubscriptionsPage() {
 
       {/* Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Annualized Run Rate (ARR)</span>
           <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">₹0</div>
           <div className="text-xs text-[#3D7258] mt-1 flex items-center gap-1 font-semibold">
@@ -78,13 +78,13 @@ export default function AdminSubscriptionsPage() {
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Active Paid Subscriptions</span>
           <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">{subs.length} Contract</div>
-          <div className="text-xs text-[#7A5720] mt-1 font-medium">100% renewal baseline</div>
+          <div className="text-xs text-[#805B25] mt-1 font-medium">100% renewal baseline</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Average Revenue Per Tenant (ARPU)</span>
           <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">₹0 / mo</div>
           <div className="text-xs text-[#A87932] mt-1 font-medium">Professional & Business tiers</div>
@@ -104,7 +104,7 @@ export default function AdminSubscriptionsPage() {
         <select
           value={tierFilter}
           onChange={(e) => setTierFilter(e.target.value)}
-          className="bg-white border border-[#DDD4C5] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
+          className="bg-white border border-[#D4C9B9] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
         >
           <option value="ALL">All Tiers</option>
           <option value="STARTER">Starter Tier</option>
@@ -114,10 +114,10 @@ export default function AdminSubscriptionsPage() {
       </div>
 
       {/* Subscriptions Table */}
-      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#F4F0E7] border-b border-[#DDD4C5] text-[#625B51]">
+            <thead className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Contract & Organization</th>
                 <th className="py-3 px-4 font-semibold">Plan Tier</th>
@@ -129,9 +129,9 @@ export default function AdminSubscriptionsPage() {
                 <th className="py-3 px-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD4C5]/60">
+            <tbody className="divide-y divide-[#D4C9B9]/60">
               {filteredSubs.map((sub) => (
-                <tr key={sub.id} className="hover:bg-[#F4F0E7]/60 transition-colors">
+                <tr key={sub.id} className="hover:bg-[#E8E1D5]/60 transition-colors">
                   <td className="py-3 px-4 font-medium text-[#29251F]">
                     <div>
                       <div className="text-sm font-serif font-bold text-[#29251F]">{sub.organizationName}</div>

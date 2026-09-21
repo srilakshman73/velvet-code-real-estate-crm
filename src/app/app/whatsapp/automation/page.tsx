@@ -42,7 +42,7 @@ export default function WhatsAppAutomationPage() {
               <Zap className="w-6 h-6 text-[#A374]" />
               WhatsApp Visual Automation Engine
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#805B25] border border-[#A374]/30 rounded-full">
               {automations.filter((a) => a.isActive).length} Active Rules
             </span>
           </div>
@@ -68,23 +68,23 @@ export default function WhatsAppAutomationPage() {
             key={rule.id}
             className={`p-6 rounded-2xl border transition-all ${
               rule.isActive
-                ? 'bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]'
-                : 'bg-[#F4F0E7]/60 border-[#DDD4C5]/60 opacity-60'
+                ? 'bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]'
+                : 'bg-[#E8E1D5]/60 border-[#D4C9B9]/60 opacity-60'
             }`}
           >
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               {/* Visual Flow Pipeline */}
               <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
                 {/* 1. TRIGGER */}
-                <div className="p-3 rounded-xl bg-white border border-[#DDD4C5] flex items-center gap-2 shadow-xs">
-                  <span className="text-[10px] font-bold uppercase text-[#7A5720] font-serif">Trigger:</span>
+                <div className="p-3 rounded-xl bg-white border border-[#D4C9B9] flex items-center gap-2 shadow-xs">
+                  <span className="text-[10px] font-bold uppercase text-[#805B25] font-serif">Trigger:</span>
                   <strong className="text-[#29251F]">{rule.triggerEvent}</strong>
                 </div>
 
                 <ArrowRight className="w-4 h-4 text-[#625B51] hidden sm:block" />
 
                 {/* 2. CONDITION */}
-                <div className="p-3 rounded-xl bg-white border border-[#DDD4C5] flex items-center gap-2 shadow-xs">
+                <div className="p-3 rounded-xl bg-white border border-[#D4C9B9] flex items-center gap-2 shadow-xs">
                   <span className="text-[10px] font-bold uppercase text-[#A87932] font-serif">Condition:</span>
                   <span className="text-[#29251F]">Valid Phone & Verified Org</span>
                 </div>
@@ -161,7 +161,7 @@ export default function WhatsAppAutomationPage() {
             options={templates.map((t) => ({ value: t.id, label: t.name }))}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D4C9B9]">
             <Button
               variant="secondary"
               size="sm"

@@ -56,12 +56,12 @@ export function Modal({
       {/* Modal Content */}
       <div
         className={cn(
-          'relative w-full bg-[#FFFDF8] border border-[#DDD4C5] rounded-2xl shadow-2xl z-10 overflow-hidden text-[#29251F] animate-in zoom-in-95 duration-150',
+          'relative w-full bg-[#FFFDF8] border border-[#D8CEBF] rounded-2xl shadow-2xl z-10 overflow-hidden text-[#29251F] animate-in zoom-in-95 duration-150',
           maxWidthMap[maxWidth]
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between p-5 border-b border-[#DDD4C5] bg-[#F8F5EE]/70">
+        <div className="flex items-start justify-between p-5 border-b border-[#D4C9B9] bg-[#F1ECE3]/80">
           <div>
             {typeof title === 'string' ? (
               <h2 className="text-lg font-bold text-[#29251F] tracking-tight">{title}</h2>
@@ -72,7 +72,7 @@ export function Modal({
           </div>
           <button
             onClick={onClose}
-            className="text-[#857C6E] hover:text-[#29251F] p-1.5 rounded-lg hover:bg-[#ECE6DA] transition-colors"
+            className="text-[#81786A] hover:text-[#29251F] p-1.5 rounded-lg hover:bg-[#E8E1D5] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -135,12 +135,12 @@ export function Drawer({
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
         <div
           className={cn(
-            'w-screen bg-[#FFFDF8] border-l border-[#DDD4C5] shadow-2xl flex flex-col text-[#29251F]',
+            'w-screen bg-[#FFFDF8] border-l border-[#D8CEBF] shadow-2xl flex flex-col text-[#29251F]',
             sizeMap[size]
           )}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-5 border-b border-[#DDD4C5] bg-[#F8F5EE]/70">
+          <div className="flex items-center justify-between p-5 border-b border-[#D4C9B9] bg-[#F1ECE3]/80">
             <div>
               {typeof title === 'string' ? (
                 <h3 className="text-base font-bold text-[#29251F] tracking-tight">{title}</h3>
@@ -151,7 +151,7 @@ export function Drawer({
             </div>
             <button
               onClick={onClose}
-              className="text-[#857C6E] hover:text-[#29251F] p-1.5 rounded-lg hover:bg-[#ECE6DA] transition-colors"
+              className="text-[#81786A] hover:text-[#29251F] p-1.5 rounded-lg hover:bg-[#E8E1D5] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>

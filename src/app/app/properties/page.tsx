@@ -139,7 +139,7 @@ export default function PropertiesPage() {
             <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight">
               Property Inventory
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#805B25] border border-[#A374]/30 rounded-full">
               {filteredProperties.length} Properties Listed
             </span>
           </div>
@@ -159,7 +159,7 @@ export default function PropertiesPage() {
       </div>
 
       {/* Filter Bar */}
-      <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="relative w-full md:w-80">
           <Search className="w-4 h-4 text-[#625B51] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -167,7 +167,7 @@ export default function PropertiesPage() {
             placeholder="Search properties by title, locality, city..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-white border border-[#DDD4C5] rounded-xl text-xs text-[#29251F] placeholder:text-[#625B51] outline-none focus:border-[#A374] focus:ring-2 focus:ring-[#A374]/15"
+            className="w-full pl-9 pr-4 py-2 bg-white border border-[#D4C9B9] rounded-xl text-xs text-[#29251F] placeholder:text-[#625B51] outline-none focus:border-[#A374] focus:ring-2 focus:ring-[#A374]/15"
           />
         </div>
 
@@ -175,7 +175,7 @@ export default function PropertiesPage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="bg-white border border-[#DDD4C5] rounded-xl px-3 py-2 text-xs text-[#29251F] outline-none focus:border-[#A374]"
+            className="bg-white border border-[#D4C9B9] rounded-xl px-3 py-2 text-xs text-[#29251F] outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Property Types</option>
             <option value="APARTMENT">Apartments / Flats</option>
@@ -188,7 +188,7 @@ export default function PropertiesPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-white border border-[#DDD4C5] rounded-xl px-3 py-2 text-xs text-[#29251F] outline-none focus:border-[#A374]"
+            className="bg-white border border-[#D4C9B9] rounded-xl px-3 py-2 text-xs text-[#29251F] outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Statuses</option>
             <option value="AVAILABLE">Available</option>
@@ -197,7 +197,7 @@ export default function PropertiesPage() {
             <option value="RENTED">Rented</option>
           </select>
 
-          <div className="bg-[#F4F0E7] border border-[#DDD4C5] p-1 rounded-xl flex items-center gap-1 ml-auto">
+          <div className="bg-[#E8E1D5] border border-[#D4C9B9] p-1 rounded-xl flex items-center gap-1 ml-auto">
             <button
               onClick={() => setViewMode('grid')}
               className={`p-1.5 rounded-lg transition-colors ${
@@ -233,7 +233,7 @@ export default function PropertiesPage() {
             <div
               key={prop.id}
               onClick={() => openDetail(prop)}
-              className="rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] overflow-hidden hover:border-[#A374] cursor-pointer shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(163,116,36,0.12)] transition-all flex flex-col justify-between group"
+              className="rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] overflow-hidden hover:border-[#A374] cursor-pointer shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(163,116,36,0.12)] transition-all flex flex-col justify-between group"
             >
               {/* Featured Image */}
               <div className="relative h-48 w-full bg-[#ECE5D8] overflow-hidden">
@@ -265,7 +265,7 @@ export default function PropertiesPage() {
 
               {/* Body */}
               <div className="p-5 space-y-3">
-                <h3 className="text-base font-serif font-bold text-[#29251F] group-hover:text-[#7A5720] transition-colors line-clamp-1">
+                <h3 className="text-base font-serif font-bold text-[#29251F] group-hover:text-[#805B25] transition-colors line-clamp-1">
                   {prop.title}
                 </h3>
 
@@ -274,7 +274,7 @@ export default function PropertiesPage() {
                   <span>{prop.locality}, {prop.city}</span>
                 </p>
 
-                <div className="grid grid-cols-3 gap-2 py-2 border-y border-[#DDD4C5] text-xs text-[#29251F]">
+                <div className="grid grid-cols-3 gap-2 py-2 border-y border-[#D4C9B9] text-xs text-[#29251F]">
                   <div className="flex items-center gap-1">
                     <Maximize2 className="w-3.5 h-3.5 text-[#625B51]" />
                     <span>{prop.areaSqFt} sq.ft</span>
@@ -295,7 +295,7 @@ export default function PropertiesPage() {
 
                 <div className="flex items-center justify-between text-xs text-[#625B51] pt-1">
                   <span>Rate: {formatINRPricePerSqFt(prop.priceINR, prop.areaSqFt)}</span>
-                  <span className="text-[#7A5720] font-semibold">
+                  <span className="text-[#805B25] font-semibold">
                     {prop.interestedLeadsCount || 12} Inquiries
                   </span>
                 </div>
@@ -305,10 +305,10 @@ export default function PropertiesPage() {
         </div>
       ) : (
         /* TABLE VIEW */
-        <div className="rounded-2xl border border-[#DDD4C5] bg-[#FFFDF8] overflow-hidden shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <div className="rounded-2xl border border-[#D4C9B9] bg-[#FFFDF8] overflow-hidden shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-[#F4F0E7] border-b border-[#DDD4C5] text-[#625B51] font-semibold">
+              <tr className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51] font-semibold">
                 <th className="p-4">Property</th>
                 <th className="p-4">Type</th>
                 <th className="p-4">Location</th>
@@ -319,19 +319,19 @@ export default function PropertiesPage() {
                 <th className="p-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD4C5]/60">
+            <tbody className="divide-y divide-[#D4C9B9]/60">
               {filteredProperties.map((prop) => (
                 <tr
                   key={prop.id}
                   onClick={() => openDetail(prop)}
-                  className="hover:bg-[#F4F0E7]/60 cursor-pointer transition-colors"
+                  className="hover:bg-[#E8E1D5]/60 cursor-pointer transition-colors"
                 >
-                  <td className="p-4 font-serif font-bold text-[#29251F] hover:text-[#7A5720]">
+                  <td className="p-4 font-serif font-bold text-[#29251F] hover:text-[#805B25]">
                     {prop.title}
                   </td>
                   <td className="p-4 text-[#625B51]">{prop.propertyType}</td>
                   <td className="p-4 text-[#625B51]">{prop.locality}, {prop.city}</td>
-                  <td className="p-4 font-extrabold text-[#7A5720] font-mono">
+                  <td className="p-4 font-extrabold text-[#805B25] font-mono">
                     {formatINR(prop.priceINR, true)}
                   </td>
                   <td className="p-4 text-[#625B51]">{prop.areaSqFt} sq.ft</td>
@@ -341,7 +341,7 @@ export default function PropertiesPage() {
                         prop.status === 'AVAILABLE'
                           ? 'bg-[#3D7258]/10 text-[#3D7258] border-[#3D7258]/20'
                           : prop.status === 'RESERVED'
-                          ? 'bg-[#B87B28]/10 text-[#7A5720] border-[#B87B28]/25'
+                          ? 'bg-[#B87B28]/10 text-[#805B25] border-[#B87B28]/25'
                           : 'bg-[#8B4A4A]/10 text-[#8B4A4A] border-[#8B4A4A]/20'
                       }`}
                     >
@@ -375,7 +375,7 @@ export default function PropertiesPage() {
           size="lg"
         >
           <div className="space-y-6 text-xs sm:text-sm">
-            <div className="relative h-56 w-full rounded-xl overflow-hidden border border-[#DDD4C5]">
+            <div className="relative h-56 w-full rounded-xl overflow-hidden border border-[#D4C9B9]">
               <img
                 src={selectedProperty.featuredImageUrl}
                 alt={selectedProperty.title}
@@ -386,8 +386,8 @@ export default function PropertiesPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#DDD4C5] space-y-3">
-              <h4 className="font-bold text-[#7A5720] uppercase tracking-wider text-xs font-serif">
+            <div className="p-4 rounded-xl bg-white border border-[#D4C9B9] space-y-3">
+              <h4 className="font-bold text-[#805B25] uppercase tracking-wider text-xs font-serif">
                 Specifications & Layout
               </h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
@@ -420,15 +420,15 @@ export default function PropertiesPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#DDD4C5] space-y-2">
-              <h4 className="font-bold text-[#7A5720] uppercase tracking-wider text-xs font-serif">
+            <div className="p-4 rounded-xl bg-white border border-[#D4C9B9] space-y-2">
+              <h4 className="font-bold text-[#805B25] uppercase tracking-wider text-xs font-serif">
                 Amenities & Features
               </h4>
               <div className="flex flex-wrap gap-2 pt-1">
                 {selectedProperty.amenities.map((a, i) => (
                   <span
                     key={i}
-                    className="px-2.5 py-1 text-xs bg-[#F4F0E7] border border-[#DDD4C5] rounded-lg text-[#29251F] flex items-center gap-1.5"
+                    className="px-2.5 py-1 text-xs bg-[#E8E1D5] border border-[#D4C9B9] rounded-lg text-[#29251F] flex items-center gap-1.5"
                   >
                     <CheckCircle2 className="w-3 h-3 text-[#3D7258]" />
                     {a}
@@ -437,16 +437,16 @@ export default function PropertiesPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#DDD4C5] space-y-2">
-              <h4 className="font-bold text-[#7A5720] uppercase tracking-wider text-xs font-serif">
+            <div className="p-4 rounded-xl bg-white border border-[#D4C9B9] space-y-2">
+              <h4 className="font-bold text-[#805B25] uppercase tracking-wider text-xs font-serif">
                 Description & Highlights
               </h4>
-              <p className="text-xs text-[#29251F] leading-relaxed bg-[#F4F0E7] p-3 rounded-lg border border-[#DDD4C5]">
+              <p className="text-xs text-[#29251F] leading-relaxed bg-[#E8E1D5] p-3 rounded-lg border border-[#D4C9B9]">
                 {selectedProperty.description}
               </p>
             </div>
 
-            <div className="pt-4 border-t border-[#DDD4C5] flex justify-end">
+            <div className="pt-4 border-t border-[#D4C9B9] flex justify-end">
               <Button
                 variant="danger"
                 size="sm"
@@ -531,7 +531,7 @@ export default function PropertiesPage() {
             onChange={(e) => setNewPropForm({ ...newPropForm, description: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D4C9B9]">
             <Button
               type="button"
               variant="secondary"
@@ -556,7 +556,7 @@ export default function PropertiesPage() {
         >
           <div className="space-y-4">
             <p className="text-xs text-[#29251F]">
-              Are you sure you want to permanently delete <strong className="text-[#7A5720]">{propertyToDelete.title}</strong> from your organization inventory?
+              Are you sure you want to permanently delete <strong className="text-[#805B25]">{propertyToDelete.title}</strong> from your organization inventory?
             </p>
             <div className="flex items-center justify-end gap-3 pt-2">
               <Button

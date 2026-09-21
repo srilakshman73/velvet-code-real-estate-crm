@@ -102,7 +102,7 @@ export default function ClientsPage() {
       </div>
 
       {/* Search Bar */}
-      <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)] flex items-center justify-between">
+      <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)] flex items-center justify-between">
         <div className="relative w-full max-w-md">
           <Search className="w-4 h-4 text-[#625B51] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -110,7 +110,7 @@ export default function ClientsPage() {
             placeholder="Search clients by name, phone, email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-white border border-[#DDD4C5] rounded-xl text-xs text-[#29251F] placeholder:text-[#625B51] outline-none focus:border-[#A374]"
+            className="w-full pl-9 pr-4 py-2 bg-white border border-[#D4C9B9] rounded-xl text-xs text-[#29251F] placeholder:text-[#625B51] outline-none focus:border-[#A374]"
           />
         </div>
       </div>
@@ -130,7 +130,7 @@ export default function ClientsPage() {
             <div
               key={client.id}
               onClick={() => openDetail(client)}
-              className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374] cursor-pointer shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)] hover:shadow-[0_8px_24px_-4px_rgba(163,116,0,0.15)] transition-all space-y-4 flex flex-col justify-between group"
+              className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] hover:border-[#A374] cursor-pointer shadow-[0_4px_20px_-4px_rgba(23,22,19,0.05)] hover:shadow-[0_8px_24px_-4px_rgba(163,116,0,0.15)] transition-all space-y-4 flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between">
@@ -142,15 +142,15 @@ export default function ClientsPage() {
                   </span>
                 </div>
 
-                <h3 className="text-lg font-serif font-bold text-[#29251F] mt-3 group-hover:text-[#7A5720] transition-colors">
+                <h3 className="text-lg font-serif font-bold text-[#29251F] mt-3 group-hover:text-[#805B25] transition-colors">
                   {client.name}
                 </h3>
                 <p className="text-xs text-[#625B51] mt-0.5 font-medium">{client.phone}</p>
 
-                <div className="mt-4 p-3 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] space-y-1.5 text-xs">
+                <div className="mt-4 p-3 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] space-y-1.5 text-xs">
                   <div className="flex justify-between">
                     <span className="text-[#625B51]">Lifetime Transactions:</span>
-                    <span className="font-bold text-[#7A5720] font-mono">
+                    <span className="font-bold text-[#805B25] font-mono">
                       {client.totalDealsValueINR ? formatINR(client.totalDealsValueINR, true) : '₹5.20 Cr'}
                     </span>
                   </div>
@@ -163,7 +163,7 @@ export default function ClientsPage() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#DDD4C5] flex items-center justify-between text-xs" onClick={(e) => e.stopPropagation()}>
+              <div className="pt-3 border-t border-[#D4C9B9] flex items-center justify-between text-xs" onClick={(e) => e.stopPropagation()}>
                 <span className="text-[#625B51] font-serif font-semibold">VIP Investor</span>
                 <div className="flex items-center gap-2">
                   <a
@@ -177,7 +177,7 @@ export default function ClientsPage() {
                   </a>
                   <a
                     href={`tel:${client.phone}`}
-                    className="p-2 rounded-lg bg-white border border-[#DDD4C5] text-[#29251F] hover:bg-[#F4F0E7] transition-colors"
+                    className="p-2 rounded-lg bg-white border border-[#D4C9B9] text-[#29251F] hover:bg-[#E8E1D5] transition-colors"
                     title="Call Client"
                   >
                     <Phone className="w-3.5 h-3.5 text-[#625B51]" />
@@ -199,8 +199,8 @@ export default function ClientsPage() {
           size="lg"
         >
           <div className="space-y-6 text-xs sm:text-sm">
-            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-3">
-              <h4 className="font-bold text-[#7A5720] font-serif uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#D4C9B9] space-y-3">
+              <h4 className="font-bold text-[#805B25] font-serif uppercase tracking-wider text-xs">
                 Contact & Investment Profile
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
@@ -214,7 +214,7 @@ export default function ClientsPage() {
                 </div>
                 <div>
                   <span className="text-[#625B51] block">Target Budget</span>
-                  <span className="text-[#7A5720] font-bold font-mono">
+                  <span className="text-[#805B25] font-bold font-mono">
                     {selectedClient.budgetINR ? formatINR(selectedClient.budgetINR) : '₹5.0 Cr+'}
                   </span>
                 </div>
@@ -225,20 +225,20 @@ export default function ClientsPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-2">
-              <h4 className="font-bold text-[#7A5720] font-serif uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#D4C9B9] space-y-2">
+              <h4 className="font-bold text-[#805B25] font-serif uppercase tracking-wider text-xs">
                 Portfolio Requirements
               </h4>
-              <p className="text-xs text-[#29251F] bg-[#F4F0E7] p-3 rounded-lg border border-[#DDD4C5]">
+              <p className="text-xs text-[#29251F] bg-[#E8E1D5] p-3 rounded-lg border border-[#D4C9B9]">
                 {selectedClient.requirements || 'Looking for beachside vacation homes and high ROI rental suites.'}
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-2">
-              <h4 className="font-bold text-[#7A5720] font-serif uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#D4C9B9] space-y-2">
+              <h4 className="font-bold text-[#805B25] font-serif uppercase tracking-wider text-xs">
                 Client History & Notes
               </h4>
-              <p className="text-xs text-[#29251F] bg-[#F4F0E7] p-3 rounded-lg border border-[#DDD4C5]">
+              <p className="text-xs text-[#29251F] bg-[#E8E1D5] p-3 rounded-lg border border-[#D4C9B9]">
                 {selectedClient.notes || 'VIP Customer with verified funds.'}
               </p>
             </div>
@@ -308,7 +308,7 @@ export default function ClientsPage() {
             }
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D4C9B9]">
             <Button
               type="button"
               variant="secondary"

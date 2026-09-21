@@ -102,8 +102,8 @@ export default function AdminUsersPage() {
       </div>
 
       {feedbackMessage && (
-        <div className="p-3 bg-[#A374]/15 border border-[#A374]/30 rounded-xl text-xs text-[#7A5720] flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-[#7A5720] flex-shrink-0" />
+        <div className="p-3 bg-[#A374]/15 border border-[#A374]/30 rounded-xl text-xs text-[#805B25] flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-[#805B25] flex-shrink-0" />
           <span>{feedbackMessage}</span>
         </div>
       )}
@@ -121,7 +121,7 @@ export default function AdminUsersPage() {
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="bg-white border border-[#DDD4C5] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
+          className="bg-white border border-[#D4C9B9] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
         >
           <option value="ALL">All Roles</option>
           <option value="SUPER_ADMIN">Super Admin</option>
@@ -132,10 +132,10 @@ export default function AdminUsersPage() {
       </div>
 
       {/* Users Table */}
-      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#F4F0E7] border-b border-[#DDD4C5] text-[#625B51]">
+            <thead className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51]">
               <tr>
                 <th className="py-3 px-4 font-semibold">User Profile</th>
                 <th className="py-3 px-4 font-semibold">Organization</th>
@@ -146,12 +146,12 @@ export default function AdminUsersPage() {
                 <th className="py-3 px-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD4C5]/60">
+            <tbody className="divide-y divide-[#D4C9B9]/60">
               {filteredUsers.map((user) => (
-                <tr key={user.id} className="hover:bg-[#F4F0E7]/60 transition-colors">
+                <tr key={user.id} className="hover:bg-[#E8E1D5]/60 transition-colors">
                   <td className="py-3 px-4 font-medium text-[#29251F]">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-[#A374]/15 border border-[#A374]/30 text-[#7A5720] font-serif flex items-center justify-center font-bold text-xs">
+                      <div className="w-8 h-8 rounded-full bg-[#A374]/15 border border-[#A374]/30 text-[#805B25] font-serif flex items-center justify-center font-bold text-xs">
                         {user.name.charAt(0)}
                       </div>
                       <div>

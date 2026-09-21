@@ -29,7 +29,7 @@ export function TrustedTechSection() {
   ];
 
   return (
-    <section className="py-16 border-y border-[#DDD4C5] bg-[#ECE6DA]/70">
+    <section className="py-16 border-y border-[#D4C9B9] bg-[#F1ECE3]/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center text-xs font-bold uppercase tracking-widest text-[#625B51] mb-10">
           Engineered for High-Performance Real Estate Sales Teams Across India
@@ -99,10 +99,10 @@ export function CoreModulesShowcase() {
   ];
 
   return (
-    <section className="py-24 bg-[#F4F0E7]">
+    <section className="py-24 bg-[#E8E1D5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Comprehensive CRM Modules
           </span>
           <h2 className="text-3xl sm:text-5xl font-bold text-[#29251F] mt-4 tracking-tight font-serif">
@@ -119,25 +119,25 @@ export function CoreModulesShowcase() {
             return (
               <div
                 key={i}
-                className="group relative rounded-2xl p-7 bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374] aurum-card-hover aurum-card-shadow flex flex-col justify-between"
+                className="group relative rounded-2xl p-7 bg-[#FFFDF8] border border-[#D4C9B9] hover:border-[#A374] aurum-card-hover aurum-card-shadow flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 rounded-xl bg-[#ECE6DA] border border-[#DDD4C5] text-[#7A5720] group-hover:scale-105 group-hover:border-[#A374]/50 transition-all">
+                    <div className="p-3 rounded-xl bg-[#F1ECE3] border border-[#D4C9B9] text-[#805B25] group-hover:scale-105 group-hover:border-[#A374]/50 transition-all">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#625B51] bg-[#ECE6DA] px-2.5 py-1 rounded-md border border-[#DDD4C5]">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#625B51] bg-[#F1ECE3] px-2.5 py-1 rounded-md border border-[#D4C9B9]">
                       {f.tag}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-[#29251F] mb-2 group-hover:text-[#7A5720] transition-colors">
+                  <h3 className="text-lg font-bold text-[#29251F] mb-2 group-hover:text-[#805B25] transition-colors">
                     {f.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-[#625B51] leading-relaxed">
                     {f.description}
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-[#DDD4C5]/80 flex items-center text-xs font-bold text-[#7A5720] group-hover:text-[#8D632F]">
+                <div className="mt-6 pt-4 border-t border-[#D4C9B9]/80 flex items-center text-xs font-bold text-[#805B25] group-hover:text-[#8D632F]">
                   <span>Explore module</span>
                   <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -155,7 +155,7 @@ export function CoreModulesShowcase() {
 // ==========================================
 export function WhatsAppAndAIShowcase() {
   return (
-    <section className="py-24 border-t border-[#DDD4C5] bg-[#ECE6DA]/50">
+    <section className="py-24 border-t border-[#D4C9B9] bg-[#F1ECE3]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column: Official WhatsApp */}
@@ -200,25 +200,25 @@ export function WhatsAppAndAIShowcase() {
           </div>
 
           {/* Right Column: Realty AI Card */}
-          <div className="rounded-2xl border border-[#DDD4C5] bg-[#FFFDF8] p-6 aurum-card-shadow relative overflow-hidden">
-            <div className="flex items-center justify-between pb-4 border-b border-[#DDD4C5]">
+          <div className="rounded-2xl border border-[#D4C9B9] bg-[#FFFDF8] p-6 aurum-card-shadow relative overflow-hidden">
+            <div className="flex items-center justify-between pb-4 border-b border-[#D4C9B9]">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-[#A374]/20 text-[#7A5720]">
+                <div className="p-2 rounded-xl bg-[#A374]/20 text-[#805B25]">
                   <Sparkles className="w-4 h-4" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-[#29251F]">Realty AI in Action</h3>
-                  <p className="text-[11px] text-[#857C6E]">Contextual CRM Intelligence Engine</p>
+                  <p className="text-[11px] text-[#81786A]">Contextual CRM Intelligence Engine</p>
                 </div>
               </div>
-              <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A374]/20 text-[#7A5720] border border-[#A374]/40 rounded">
+              <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A374]/20 text-[#805B25] border border-[#A374]/40 rounded">
                 Strict Org Isolation
               </span>
             </div>
 
             <div className="py-4 space-y-3 text-xs">
-              <div className="p-3.5 rounded-xl bg-[#ECE6DA] border border-[#DDD4C5] text-[#29251F]">
-                <span className="font-bold text-[#7A5720]">Agent Prompt:</span> "Which leads are most likely to convert this week?"
+              <div className="p-3.5 rounded-xl bg-[#F1ECE3] border border-[#D4C9B9] text-[#29251F]">
+                <span className="font-bold text-[#805B25]">Agent Prompt:</span> "Which leads are most likely to convert this week?"
               </div>
               <div className="p-3.5 rounded-xl bg-[#FFFDF8] border border-[#A374]/40 text-[#29251F] space-y-2">
                 <span className="font-bold text-[#3D7258] flex items-center gap-1">
@@ -232,9 +232,9 @@ export function WhatsAppAndAIShowcase() {
               </div>
             </div>
 
-            <div className="pt-2 border-t border-[#DDD4C5] flex items-center justify-between text-xs text-[#857C6E]">
+            <div className="pt-2 border-t border-[#D4C9B9] flex items-center justify-between text-xs text-[#81786A]">
               <span>Security Rule: Never sends without agent review.</span>
-              <Link href="/app/ai" className="text-[#7A5720] font-bold hover:underline">
+              <Link href="/app/ai" className="text-[#805B25] font-bold hover:underline">
                 Try Realty AI ↗
               </Link>
             </div>
@@ -252,10 +252,10 @@ export function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="py-24 bg-[#F4F0E7] border-t border-[#DDD4C5]">
+    <section id="pricing" className="py-24 bg-[#E8E1D5] border-t border-[#D4C9B9]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Transparent SaaS Pricing
           </span>
           <h2 className="text-3xl sm:text-5xl font-bold text-[#29251F] mt-4 tracking-tight font-serif">
@@ -272,7 +272,7 @@ export function PricingSection() {
             </span>
             <button
               onClick={() => setIsAnnual(!isAnnual)}
-              className="relative w-12 h-6 rounded-full bg-[#DDD4C5] p-1 border border-[#A374]/40 transition-colors"
+              className="relative w-12 h-6 rounded-full bg-[#D4C9B9] p-1 border border-[#A374]/40 transition-colors"
             >
               <div
                 className={`w-4 h-4 rounded-full bg-[#A374] transition-transform ${
@@ -303,7 +303,7 @@ export function PricingSection() {
                 className={`relative rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 aurum-card-shadow ${
                   isPopular
                     ? 'bg-[#FFFDF8] border-2 border-[#A374] scale-105 shadow-xl'
-                    : 'bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374]/60'
+                    : 'bg-[#FFFDF8] border border-[#D4C9B9] hover:border-[#A374]/60'
                 }`}
               >
                 {isPopular && (
@@ -315,7 +315,7 @@ export function PricingSection() {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-xl font-bold text-[#29251F]">{plan.name}</h3>
-                    <span className="text-xs font-semibold text-[#857C6E]">
+                    <span className="text-xs font-semibold text-[#81786A]">
                       {plan.maxUsers} {plan.maxUsers === 1 ? 'User' : 'Users'}
                     </span>
                   </div>
@@ -325,7 +325,7 @@ export function PricingSection() {
                       <span className="text-4xl font-extrabold text-[#29251F] font-sans">
                         ₹{price.toLocaleString('en-IN')}
                       </span>
-                      <span className="text-xs text-[#857C6E] font-medium">/month</span>
+                      <span className="text-xs text-[#81786A] font-medium">/month</span>
                     </div>
                     {isAnnual && (
                       <p className="text-[11px] text-[#3D7258] font-bold mt-1">
@@ -334,14 +334,14 @@ export function PricingSection() {
                     )}
                   </div>
 
-                  <div className="pt-4 border-t border-[#DDD4C5] space-y-3">
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#857C6E]">
+                  <div className="pt-4 border-t border-[#D4C9B9] space-y-3">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#81786A]">
                       Plan Includes:
                     </p>
                     <ul className="space-y-2.5 text-xs text-[#29251F]">
                       {plan.features.map((feat, idx) => (
                         <li key={idx} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-[#7A5720] flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-[#805B25] flex-shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -349,7 +349,7 @@ export function PricingSection() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-[#DDD4C5]">
+                <div className="mt-8 pt-6 border-t border-[#D4C9B9]">
                   <Link href="/register">
                     <Button
                       variant={isPopular ? 'gold' : 'secondary'}
@@ -359,7 +359,7 @@ export function PricingSection() {
                       Get Started
                     </Button>
                   </Link>
-                  <p className="text-[10px] text-center text-[#857C6E] mt-2">
+                  <p className="text-[10px] text-center text-[#81786A] mt-2">
                     14-day trial • Cancel anytime
                   </p>
                 </div>
@@ -401,10 +401,10 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-24 border-t border-[#DDD4C5] bg-[#ECE6DA]/50">
+    <section className="py-24 border-t border-[#D4C9B9] bg-[#F1ECE3]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Real Estate Leadership
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#29251F] mt-4 tracking-tight font-serif">
@@ -416,17 +416,17 @@ export function TestimonialsSection() {
           {reviews.map((r, i) => (
             <div
               key={i}
-              className="p-7 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow flex flex-col justify-between space-y-6"
+              className="p-7 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow flex flex-col justify-between space-y-6"
             >
               <p className="text-xs sm:text-sm text-[#29251F] leading-relaxed italic">
                 "{r.quote}"
               </p>
-              <div className="pt-4 border-t border-[#DDD4C5] flex items-center justify-between">
+              <div className="pt-4 border-t border-[#D4C9B9] flex items-center justify-between">
                 <div>
                   <h4 className="text-sm font-bold text-[#29251F]">{r.author}</h4>
-                  <p className="text-[11px] text-[#857C6E]">{r.role}</p>
+                  <p className="text-[11px] text-[#81786A]">{r.role}</p>
                 </div>
-                <span className="text-[10px] font-bold text-[#7A5720] bg-[#A374]/15 px-2.5 py-1 rounded-md border border-[#A374]/30">
+                <span className="text-[10px] font-bold text-[#805B25] bg-[#A374]/15 px-2.5 py-1 rounded-md border border-[#A374]/30">
                   {r.properties}
                 </span>
               </div>
@@ -468,10 +468,10 @@ export function FAQSection() {
   ];
 
   return (
-    <section className="py-24 border-t border-[#DDD4C5] bg-[#F4F0E7]">
+    <section className="py-24 border-t border-[#D4C9B9] bg-[#E8E1D5]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Frequently Asked Questions
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#29251F] mt-4 tracking-tight font-serif">
@@ -485,11 +485,11 @@ export function FAQSection() {
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-[#DDD4C5] bg-[#FFFDF8] overflow-hidden aurum-card-shadow transition-colors"
+                className="rounded-2xl border border-[#D4C9B9] bg-[#FFFDF8] overflow-hidden aurum-card-shadow transition-colors"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-bold text-[#29251F] hover:text-[#7A5720]"
+                  className="w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-bold text-[#29251F] hover:text-[#805B25]"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
@@ -499,7 +499,7 @@ export function FAQSection() {
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-[#625B51] leading-relaxed border-t border-[#DDD4C5]/60 pt-3">
+                  <div className="px-5 pb-5 text-xs sm:text-sm text-[#625B51] leading-relaxed border-t border-[#D4C9B9]/60 pt-3">
                     {faq.a}
                   </div>
                 )}
@@ -517,7 +517,7 @@ export function FAQSection() {
 // ==========================================
 export function FinalCTASection() {
   return (
-    <section className="py-24 border-t border-[#DDD4C5] bg-[#ECE6DA] relative overflow-hidden">
+    <section className="py-24 border-t border-[#D4C9B9] bg-[#F1ECE3] relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#A374]/15 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">

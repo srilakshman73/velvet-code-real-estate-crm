@@ -51,16 +51,16 @@ export default function AdminUsagePage() {
 
       {/* Top 4 Telemetry Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">AI Inferences (MTD)</span>
             <Sparkles className="w-4 h-4 text-[#A374]" />
           </div>
           <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">0</div>
-          <div className="text-xs text-[#7A5720] mt-1 font-medium">0 tokens processed</div>
+          <div className="text-xs text-[#805B25] mt-1 font-medium">0 tokens processed</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">WhatsApp Messages Sent</span>
             <MessageSquare className="w-4 h-4 text-[#3D7258]" />
@@ -69,7 +69,7 @@ export default function AdminUsagePage() {
           <div className="text-xs text-[#3D7258] mt-1 font-medium">100% delivery reliability</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">PostgreSQL DB Size</span>
             <Database className="w-4 h-4 text-[#A87932]" />
@@ -78,7 +78,7 @@ export default function AdminUsagePage() {
           <div className="text-xs text-[#A87932] mt-1 font-medium">Isolated tenant schema ready</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Average API Latency</span>
             <Zap className="w-4 h-4 text-[#B8893C]" />
@@ -89,7 +89,7 @@ export default function AdminUsagePage() {
       </div>
 
       {/* Real-Time Hourly Throughput Chart */}
-      <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+      <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-base font-serif font-bold text-[#29251F]">24-Hour Traffic Throughput</h2>
@@ -99,7 +99,7 @@ export default function AdminUsagePage() {
             <span className="flex items-center gap-1.5 text-[#3D7258] font-semibold">
               <span className="w-2.5 h-2.5 rounded-full bg-[#3D7258]" /> WhatsApp Events
             </span>
-            <span className="flex items-center gap-1.5 text-[#7A5720] font-semibold">
+            <span className="flex items-center gap-1.5 text-[#805B25] font-semibold">
               <span className="w-2.5 h-2.5 rounded-full bg-[#A374]" /> AI Prompts
             </span>
           </div>
@@ -124,7 +124,7 @@ export default function AdminUsagePage() {
               <Tooltip
                 contentStyle={{
                   backgroundColor: '#FFFDF8',
-                  borderColor: '#DDD4C5',
+                  borderColor: '#D4C9B9',
                   borderRadius: '8px',
                   color: '#29251F',
                   fontSize: '12px',
@@ -155,13 +155,13 @@ export default function AdminUsagePage() {
       </Card>
 
       {/* Top Consuming Tenants */}
-      <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+      <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
         <h2 className="text-base font-serif font-bold text-[#29251F] mb-1">Top Resource Consuming Brokerages</h2>
         <p className="text-xs text-[#625B51] mb-4">Tenants with highest API traffic and token consumption this month</p>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#F4F0E7] border-b border-[#DDD4C5] text-[#625B51]">
+            <thead className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Brokerage Tenant</th>
                 <th className="py-3 px-4 font-semibold">Plan Tier</th>
@@ -171,19 +171,19 @@ export default function AdminUsagePage() {
                 <th className="py-3 px-4 font-semibold">Quota Usage</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD4C5]/60">
+            <tbody className="divide-y divide-[#D4C9B9]/60">
               {[
                 { name: 'Metropolis Prime Properties', tier: 'BUSINESS', ai: '42,100', wa: '112,000', storage: '2.4 GB', quota: '42%' },
                 { name: 'Heritage Luxury Estates', tier: 'BUSINESS', ai: '38,400', wa: '94,500', storage: '1.9 GB', quota: '38%' },
                 { name: 'Velvet Realty Solutions', tier: 'PROFESSIONAL', ai: '24,200', wa: '58,000', storage: '840 MB', quota: '80%' },
                 { name: 'Kovai Urban Lands', tier: 'PROFESSIONAL', ai: '8,400', wa: '21,000', storage: '410 MB', quota: '28%' },
               ].map((tenant, idx) => (
-                <tr key={idx} className="hover:bg-[#F4F0E7]/60 transition-colors">
+                <tr key={idx} className="hover:bg-[#E8E1D5]/60 transition-colors">
                   <td className="py-3 px-4 font-medium font-serif text-[#29251F]">{tenant.name}</td>
                   <td className="py-3 px-4">
                     <Badge variant={tenant.tier === 'BUSINESS' ? 'gold' : 'info'}>{tenant.tier}</Badge>
                   </td>
-                  <td className="py-3 px-4 font-mono text-[#7A5720] font-semibold">{tenant.ai}</td>
+                  <td className="py-3 px-4 font-mono text-[#805B25] font-semibold">{tenant.ai}</td>
                   <td className="py-3 px-4 font-mono text-[#3D7258] font-semibold">{tenant.wa}</td>
                   <td className="py-3 px-4 font-mono text-[#625B51]">{tenant.storage}</td>
                   <td className="py-3 px-4 font-mono font-bold text-[#29251F]">{tenant.quota}</td>

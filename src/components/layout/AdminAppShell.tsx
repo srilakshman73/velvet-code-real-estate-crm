@@ -46,8 +46,8 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
   // 403 Forbidden Access Guard for non-OWNER users
   if (!isOwner) {
     return (
-      <div className="min-h-screen bg-[#F4F0E7] text-[#29251F] flex flex-col items-center justify-center p-6 text-center">
-        <div className="max-w-md w-full p-8 rounded-2xl bg-[#FFFDF8] border border-[#8B4A4A]/30 space-y-6 shadow-xl">
+      <div className="min-h-screen bg-[#E8E1D5] text-[#29251F] flex flex-col items-center justify-center p-6 text-center">
+        <div className="max-w-md w-full p-8 rounded-2xl bg-[#FFFDF8] border border-[#D8CEBF] space-y-6 shadow-xl">
           <div className="w-16 h-16 rounded-2xl bg-[#8B4A4A]/10 border border-[#8B4A4A]/25 text-[#8B4A4A] flex items-center justify-center mx-auto">
             <Lock className="w-8 h-8" />
           </div>
@@ -56,7 +56,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
             <p className="text-xs text-[#625B51] mt-2 leading-relaxed">
               The SaaS Master Admin Headquarters is strictly restricted to the <strong>Velvet Code Platform Owner</strong>.
             </p>
-            <p className="text-xs text-[#857C6E] mt-2">
+            <p className="text-xs text-[#81786A] mt-2">
               Your account (<span className="text-[#29251F] font-semibold">{currentUser.name}</span> &bull; {currentUser.role}) does not have global multi-tenant administrator authority.
             </p>
           </div>
@@ -73,25 +73,25 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#F4F0E7] text-[#29251F] flex flex-col font-sans antialiased">
+    <div className="min-h-screen bg-[#E8E1D5] text-[#29251F] flex flex-col font-sans antialiased">
       {/* Top Admin Banner */}
-      <header className="h-16 px-4 sm:px-8 bg-[#F8F5EE] border-b border-[#DDD4C5] flex items-center justify-between z-30 shadow-2xs">
+      <header className="h-16 px-4 sm:px-8 bg-[#F1ECE3] border-b border-[#D4C9B9] flex items-center justify-between z-30 shadow-2xs">
         <div className="flex items-center gap-4">
           <VelvetCodeLogo variant="horizontal" href="/admin" size="sm" theme="light" />
-          <span className="hidden sm:inline-block px-2.5 py-1 text-[11px] font-bold tracking-widest uppercase bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-md font-serif">
+          <span className="hidden sm:inline-block px-2.5 py-1 text-[11px] font-bold tracking-widest uppercase bg-[#A374]/15 text-[#805B25] border border-[#A374]/30 rounded-md font-serif">
             SaaS Master Console
           </span>
         </div>
 
         <div className="flex items-center gap-3">
           {/* Owner Profile Badge */}
-          <div className="hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] text-xs shadow-2xs">
+          <div className="hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#E9E1D4] border border-[#D4C9B9] text-xs shadow-2xs">
             <div className="w-6 h-6 rounded-md bg-[#A374] text-[#FFFDF8] font-bold text-[10px] flex items-center justify-center">
               SL
             </div>
             <div>
               <span className="font-bold text-[#29251F]">Sri Lakshman</span>
-              <span className="text-[#7A5720] font-mono text-[10px] ml-1.5 font-bold">(OWNER)</span>
+              <span className="text-[#805B25] font-mono text-[10px] ml-1.5 font-bold">(OWNER)</span>
             </div>
           </div>
 
@@ -102,7 +102,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#29251F] hover:text-[#7A5720]"
+            className="md:hidden p-2 text-[#29251F] hover:text-[#805B25]"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -111,9 +111,9 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
 
       <div className="flex-1 flex overflow-hidden">
         {/* Sidebar */}
-        <aside className="hidden md:flex flex-col w-64 bg-[#E9E2D5] border-r border-[#DDD4C5] p-4 space-y-6">
+        <aside className="hidden md:flex flex-col w-64 bg-[#D4C9B9] border-r border-[#D4C9B9] p-4 space-y-6">
           <div className="space-y-1">
-            <p className="text-[10px] font-bold text-[#7A5720] uppercase tracking-wider px-3 mb-2 font-serif">
+            <p className="text-[10px] font-bold text-[#70685C] uppercase tracking-wider px-3 mb-2 font-serif">
               SaaS Administration
             </p>
             {adminNav.map((item) => {
@@ -125,11 +125,11 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
                   href={item.href}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-[#DCC9A0] text-[#7A5720] border-l-2 border-[#A374] font-bold shadow-xs'
-                      : 'text-[#29251F] hover:text-[#7A5720] hover:bg-[#DDD4C5]/50'
+                      ? 'bg-[#F2E9D8] text-[#805B25] border-l-2 border-[#A374] font-bold shadow-xs'
+                      : 'text-[#29251F] hover:text-[#805B25] hover:bg-[#F1ECE3]/60'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#A374]' : 'text-[#6E665A]'}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#A374]' : 'text-[#776D60]'}`} />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -137,7 +137,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
           </div>
 
           {/* Quick Metrics in Sidebar */}
-          <div className="mt-auto p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] text-xs space-y-2 shadow-2xs">
+          <div className="mt-auto p-4 rounded-xl bg-[#E9E1D4] border border-[#D4C9B9] text-xs space-y-2 shadow-2xs">
             <div className="flex items-center justify-between text-[#625B51]">
               <span>Platform MRR</span>
               <span className="font-bold text-[#3D7258] font-mono">₹0</span>
@@ -146,14 +146,14 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
               <span>Active Orgs</span>
               <span className="font-bold text-[#29251F] font-mono">1</span>
             </div>
-            <div className="pt-2 border-t border-[#DDD4C5] text-[10px] text-[#857C6E]">
+            <div className="pt-2 border-t border-[#D4C9B9] text-[10px] text-[#81786A]">
               Global Platform Master Tier
             </div>
           </div>
         </aside>
 
         {/* Main Admin View */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#F4F0E7] text-[#29251F]">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#E8E1D5] text-[#29251F]">
           {children}
         </main>
       </div>
@@ -161,7 +161,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-50 bg-[#2D261C]/30 backdrop-blur-xs p-6 pt-20">
-          <div className="bg-[#E9E2D5] border border-[#DDD4C5] rounded-2xl p-4 space-y-2 shadow-2xl">
+          <div className="bg-[#D4C9B9] border border-[#D4C9B9] rounded-2xl p-4 space-y-2 shadow-2xl">
             {adminNav.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
@@ -171,10 +171,10 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm ${
-                    isActive ? 'bg-[#DCC9A0] text-[#7A5720] font-bold' : 'text-[#29251F]'
+                    isActive ? 'bg-[#F2E9D8] text-[#805B25] font-bold' : 'text-[#29251F]'
                   }`}
                 >
-                  <Icon className="w-5 h-5 text-[#6E665A]" />
+                  <Icon className="w-5 h-5 text-[#776D60]" />
                   <span>{item.label}</span>
                 </Link>
               );

@@ -31,13 +31,13 @@ export function VelvetCodeLogo({
 
   const textStyle =
     theme === 'dark'
-      ? 'text-[#F4F0E7]'
+      ? 'text-[#E8E1D5]'
       : 'text-[#29251F]';
 
   const tagStyle =
     theme === 'dark'
-      ? 'text-[#DDD4C5]/80'
-      : 'text-[#857C6E]';
+      ? 'text-[#D4C9B9]/80'
+      : 'text-[#81786A]';
 
   const content = (
     <div className={cn('flex items-center gap-3 select-none group', className)}>
@@ -100,8 +100,8 @@ export function VelvetCodeLogoFull({ className, theme = 'light' }: { className?:
       className={cn(
         'flex flex-col items-center text-center p-5 rounded-2xl border',
         isDark
-          ? 'bg-[#29251F] border-[#A374]/30 text-[#F4F0E7]'
-          : 'bg-[#FFFDF8] border-[#DDD4C5] text-[#29251F] aurum-card-shadow',
+          ? 'bg-[#29251F] border-[#A374]/30 text-[#E8E1D5]'
+          : 'bg-[#FFFDF8] border-[#D4C9B9] text-[#29251F] aurum-card-shadow',
         className
       )}
     >
@@ -118,12 +118,12 @@ export function VelvetCodeLogoFull({ className, theme = 'light' }: { className?:
       <h2
         className={cn(
           'text-lg font-bold tracking-widest uppercase',
-          isDark ? 'text-[#F4F0E7]' : 'text-[#29251F]'
+          isDark ? 'text-[#E8E1D5]' : 'text-[#29251F]'
         )}
       >
         VELVET CODE
       </h2>
-      <p className={cn('text-xs font-medium tracking-wide mt-1', isDark ? 'text-[#DDD4C5]' : 'text-[#857C6E]')}>
+      <p className={cn('text-xs font-medium tracking-wide mt-1', isDark ? 'text-[#D4C9B9]' : 'text-[#81786A]')}>
         Technology & Digital Solutions
       </p>
     </div>

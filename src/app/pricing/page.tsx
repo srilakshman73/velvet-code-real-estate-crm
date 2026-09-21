@@ -24,12 +24,12 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4F0E7] text-[#29251F]">
+    <div className="min-h-screen flex flex-col bg-[#E8E1D5] text-[#29251F]">
       <PublicHeader />
       <main className="flex-1">
         {/* Header */}
         <section className="py-20 text-center max-w-4xl mx-auto px-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Simple & Predictable Pricing
           </span>
           <h1 className="text-4xl sm:text-6xl font-bold text-[#29251F] mt-4 tracking-tight font-serif">
@@ -44,7 +44,7 @@ export default function PricingPage() {
         <PricingSection />
 
         {/* Detailed Feature Matrix Table */}
-        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-[#DDD4C5]">
+        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-[#D4C9B9]">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-[#29251F] tracking-tight font-serif">
               Compare Plan Features
@@ -54,15 +54,15 @@ export default function PricingPage() {
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-[#DDD4C5] bg-[#FFFDF8] aurum-card-shadow">
+          <div className="overflow-x-auto rounded-2xl border border-[#D4C9B9] bg-[#FFFDF8] aurum-card-shadow">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
-                <tr className="border-b border-[#DDD4C5] bg-[#F4F0E7]">
+                <tr className="border-b border-[#D4C9B9] bg-[#E8E1D5]">
                   <th className="p-4 sm:p-5 font-bold text-[#29251F]">Feature</th>
                   <th className="p-4 sm:p-5 font-bold text-[#625B51] text-center w-1/4">
                     Starter (₹499/mo)
                   </th>
-                  <th className="p-4 sm:p-5 font-bold text-[#7A5720] text-center w-1/4 bg-[#A374]/10">
+                  <th className="p-4 sm:p-5 font-bold text-[#805B25] text-center w-1/4 bg-[#A374]/10">
                     Professional (₹1,499/mo)
                   </th>
                   <th className="p-4 sm:p-5 font-bold text-[#29251F] text-center w-1/4">
@@ -70,27 +70,27 @@ export default function PricingPage() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#DDD4C5]/60">
+              <tbody className="divide-y divide-[#D4C9B9]/60">
                 {comparisonFeatures.map((row, i) => (
-                  <tr key={i} className="hover:bg-[#ECE6DA]/40 transition-colors">
+                  <tr key={i} className="hover:bg-[#F1ECE3]/40 transition-colors">
                     <td className="p-4 sm:p-5 font-bold text-[#29251F]">{row.name}</td>
                     <td className="p-4 sm:p-5 text-center text-[#625B51] font-medium">
                       {typeof row.starter === 'boolean' ? (
                         row.starter ? (
                           <Check className="w-4 h-4 text-[#3D7258] mx-auto" />
                         ) : (
-                          <XIcon className="w-4 h-4 text-[#DDD4C5] mx-auto" />
+                          <XIcon className="w-4 h-4 text-[#D4C9B9] mx-auto" />
                         )
                       ) : (
                         row.starter
                       )}
                     </td>
-                    <td className="p-4 sm:p-5 text-center font-bold text-[#7A5720] bg-[#A374]/5">
+                    <td className="p-4 sm:p-5 text-center font-bold text-[#805B25] bg-[#A374]/5">
                       {typeof row.pro === 'boolean' ? (
                         row.pro ? (
-                          <Check className="w-4 h-4 text-[#7A5720] mx-auto" />
+                          <Check className="w-4 h-4 text-[#805B25] mx-auto" />
                         ) : (
-                          <XIcon className="w-4 h-4 text-[#DDD4C5] mx-auto" />
+                          <XIcon className="w-4 h-4 text-[#D4C9B9] mx-auto" />
                         )
                       ) : (
                         row.pro
@@ -101,7 +101,7 @@ export default function PricingPage() {
                         row.biz ? (
                           <Check className="w-4 h-4 text-[#3D7258] mx-auto" />
                         ) : (
-                          <XIcon className="w-4 h-4 text-[#DDD4C5] mx-auto" />
+                          <XIcon className="w-4 h-4 text-[#D4C9B9] mx-auto" />
                         )
                       ) : (
                         row.biz

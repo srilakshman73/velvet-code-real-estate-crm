@@ -27,23 +27,23 @@ export function MetricCard({
   const isNegative = (changePercent ?? 0) < 0;
 
   const accentStyles: Record<string, string> = {
-    gold: 'border-[#DDD4C5] hover:border-[#A374]/80 bg-[#FFFDF8]',
-    emerald: 'border-[#DDD4C5] hover:border-[#3D7258]/80 bg-[#FFFDF8]',
-    amber: 'border-[#DDD4C5] hover:border-[#A87932]/80 bg-[#FFFDF8]',
-    charcoal: 'border-[#DDD4C5] hover:border-[#29251F]/80 bg-[#FFFDF8]',
-    blue: 'border-[#DDD4C5] hover:border-[#A374]/80 bg-[#FFFDF8]',
-    purple: 'border-[#DDD4C5] hover:border-[#A87932]/80 bg-[#FFFDF8]',
-    default: 'border-[#DDD4C5] hover:border-[#A374]/60 bg-[#FFFDF8]',
+    gold: 'border-[#D8CEBF] hover:border-[#A374]/80 bg-[#FFFDF8]',
+    emerald: 'border-[#D8CEBF] hover:border-[#3D7258]/80 bg-[#FFFDF8]',
+    amber: 'border-[#D8CEBF] hover:border-[#A87932]/80 bg-[#FFFDF8]',
+    charcoal: 'border-[#D8CEBF] hover:border-[#29251F]/80 bg-[#FFFDF8]',
+    blue: 'border-[#D8CEBF] hover:border-[#A374]/80 bg-[#FFFDF8]',
+    purple: 'border-[#D8CEBF] hover:border-[#A87932]/80 bg-[#FFFDF8]',
+    default: 'border-[#D8CEBF] hover:border-[#A374]/60 bg-[#FFFDF8]',
   };
 
   const iconAccent: Record<string, string> = {
-    gold: 'bg-[#A374]/15 border-[#A374]/30 text-[#7A5720]',
+    gold: 'bg-[#A374]/15 border-[#A374]/30 text-[#805B25]',
     emerald: 'bg-[#3D7258]/15 border-[#3D7258]/30 text-[#3D7258]',
     amber: 'bg-[#A87932]/15 border-[#A87932]/30 text-[#A87932]',
     charcoal: 'bg-[#29251F]/10 border-[#29251F]/20 text-[#29251F]',
-    blue: 'bg-[#A374]/15 border-[#A374]/30 text-[#7A5720]',
+    blue: 'bg-[#A374]/15 border-[#A374]/30 text-[#805B25]',
     purple: 'bg-[#A87932]/15 border-[#A87932]/30 text-[#A87932]',
-    default: 'bg-[#F4F0E7] border-[#DDD4C5] text-[#7A5720]',
+    default: 'bg-[#F1ECE3] border-[#D8CEBF] text-[#805B25]',
   };
 
   return (
@@ -74,7 +74,7 @@ export function MetricCard({
       </div>
 
       {(changePercent !== undefined || subtitle) && (
-        <div className="mt-4 flex items-center justify-between text-xs pt-3 border-t border-[#DDD4C5]/60">
+        <div className="mt-4 flex items-center justify-between text-xs pt-3 border-t border-[#D8CEBF]/60">
           {changePercent !== undefined && (
             <div className="flex items-center gap-1 font-semibold">
               {isPositive ? (
@@ -96,7 +96,7 @@ export function MetricCard({
               <span className="text-[#756D61] font-normal">{changeLabel}</span>
             </div>
           )}
-          {subtitle && <span className="text-[#857C6E] font-medium">{subtitle}</span>}
+          {subtitle && <span className="text-[#81786A] font-medium">{subtitle}</span>}
         </div>
       )}
     </div>

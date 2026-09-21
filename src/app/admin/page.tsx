@@ -54,7 +54,7 @@ const MRR_HISTORY = [
 const TIER_DISTRIBUTION = [
   { name: 'Starter (₹499)', value: 0, color: '#D8C7A5' },
   { name: 'Professional (₹1,499)', value: 1, color: '#A374' },
-  { name: 'Business (₹3,999)', value: 0, color: '#E8DED0' },
+  { name: 'Business (₹3,999)', value: 0, color: '#E7DED0' },
 ];
 
 export default function AdminDashboardPage() {
@@ -89,7 +89,7 @@ export default function AdminDashboardPage() {
 
       {/* Top 4 Primary SaaS Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#756D61] uppercase tracking-wider font-serif">Monthly Recurring Revenue</span>
             <div className="p-2 rounded-lg bg-[#3D7258]/10 text-[#3D7258] border border-[#3D7258]/20">
@@ -105,37 +105,37 @@ export default function AdminDashboardPage() {
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#756D61] uppercase tracking-wider font-serif">Active Organizations</span>
-            <div className="p-2 rounded-lg bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30">
+            <div className="p-2 rounded-lg bg-[#A374]/15 text-[#805B25] border border-[#A374]/30">
               <Building className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
             <div className="text-2xl font-serif font-bold text-[#29251F]">{stats.totalOrganizations.toLocaleString()}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#7A5720] font-semibold">
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#805B25] font-semibold">
               <span>+{stats.newCustomersThisMonth} registered tenant</span>
             </div>
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#756D61] uppercase tracking-wider font-serif">Total Active Agents</span>
-            <div className="p-2 rounded-lg bg-[#29251F]/10 text-[#29251F] border border-[#DDD4C5]">
+            <div className="p-2 rounded-lg bg-[#29251F]/10 text-[#29251F] border border-[#D4C9B9]">
               <Users className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
             <div className="text-2xl font-serif font-bold text-[#29251F]">{stats.totalActiveUsers.toLocaleString()}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#857C6E]">
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#81786A]">
               <span>Master platform owner active</span>
             </div>
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#756D61] uppercase tracking-wider font-serif">Revenue Churn Rate</span>
             <div className="p-2 rounded-lg bg-[#A87932]/10 text-[#A87932] border border-[#A87932]/25">
@@ -153,21 +153,21 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Secondary Metrics Bar */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] text-xs shadow-2xs">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] text-xs shadow-2xs">
         <div>
-          <span className="text-[#857C6E]">Total Leads Managed:</span>
+          <span className="text-[#81786A]">Total Leads Managed:</span>
           <div className="text-base font-bold text-[#29251F] font-mono mt-0.5">{stats.totalLeadsManaged.toLocaleString()}</div>
         </div>
         <div>
-          <span className="text-[#857C6E]">Properties Inventory:</span>
+          <span className="text-[#81786A]">Properties Inventory:</span>
           <div className="text-base font-bold text-[#29251F] font-mono mt-0.5">{stats.totalPropertiesListed.toLocaleString()} units</div>
         </div>
         <div>
-          <span className="text-[#857C6E]">Realty AI Inferences:</span>
-          <div className="text-base font-bold text-[#7A5720] font-mono mt-0.5">{stats.aiRequestsProcessed.toLocaleString()}</div>
+          <span className="text-[#81786A]">Realty AI Inferences:</span>
+          <div className="text-base font-bold text-[#805B25] font-mono mt-0.5">{stats.aiRequestsProcessed.toLocaleString()}</div>
         </div>
         <div>
-          <span className="text-[#857C6E]">WhatsApp Messages:</span>
+          <span className="text-[#81786A]">WhatsApp Messages:</span>
           <div className="text-base font-bold text-[#3D7258] font-mono mt-0.5">{stats.whatsappMessagesSent.toLocaleString()}</div>
         </div>
       </div>
@@ -175,11 +175,11 @@ export default function AdminDashboardPage() {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* MRR Growth Chart */}
-        <Card orientation="vertical" className="lg:col-span-2 bg-[#FFFDF8] border-[#DDD4C5] shadow-2xs">
+        <Card orientation="vertical" className="lg:col-span-2 bg-[#FFFDF8] border-[#D4C9B9] shadow-2xs">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-base font-serif font-bold text-[#29251F]">MRR Growth Trajectory (INR)</h2>
-              <p className="text-xs text-[#857C6E]">Last 6 months revenue performance across subscription plans</p>
+              <p className="text-xs text-[#81786A]">Last 6 months revenue performance across subscription plans</p>
             </div>
             <Badge variant="success">+72.2% H1 Growth</Badge>
           </div>
@@ -192,17 +192,17 @@ export default function AdminDashboardPage() {
                     <stop offset="95%" stopColor="#A374" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E8E0D3" />
-                <XAxis dataKey="month" stroke="#857C6E" fontSize={11} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#E4DBCE" />
+                <XAxis dataKey="month" stroke="#81786A" fontSize={11} />
                 <YAxis
-                  stroke="#857C6E"
+                  stroke="#81786A"
                   fontSize={11}
                   tickFormatter={(val) => `₹${(val / 100000).toFixed(1)}L`}
                 />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: '#FFFDF8',
-                    borderColor: '#DDD4C5',
+                    borderColor: '#D4C9B9',
                     borderRadius: '8px',
                     color: '#29251F',
                     fontSize: '12px',
@@ -224,9 +224,9 @@ export default function AdminDashboardPage() {
         </Card>
 
         {/* Plan Tier Distribution */}
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-2xs">
           <h2 className="text-base font-serif font-bold text-[#29251F] mb-1">Paid Tier Distribution</h2>
-          <p className="text-xs text-[#857C6E] mb-4">864 Active Paying Tenants</p>
+          <p className="text-xs text-[#81786A] mb-4">864 Active Paying Tenants</p>
           <div className="h-48 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -246,7 +246,7 @@ export default function AdminDashboardPage() {
                 <Tooltip
                   contentStyle={{
                     backgroundColor: '#FFFDF8',
-                    borderColor: '#DDD4C5',
+                    borderColor: '#D4C9B9',
                     borderRadius: '8px',
                     color: '#29251F',
                     fontSize: '12px',
@@ -256,7 +256,7 @@ export default function AdminDashboardPage() {
               </PieChart>
             </ResponsiveContainer>
           </div>
-          <div className="space-y-2 mt-2 pt-2 border-t border-[#DDD4C5] text-xs">
+          <div className="space-y-2 mt-2 pt-2 border-t border-[#D4C9B9] text-xs">
             {TIER_DISTRIBUTION.map((tier, idx) => (
               <div key={idx} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -273,13 +273,13 @@ export default function AdminDashboardPage() {
       {/* System Infrastructure Health & Recent Organizations */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Tenants Table */}
-        <Card orientation="vertical" className="lg:col-span-2 bg-[#FFFDF8] border-[#DDD4C5] shadow-2xs">
+        <Card orientation="vertical" className="lg:col-span-2 bg-[#FFFDF8] border-[#D4C9B9] shadow-2xs">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-base font-serif font-bold text-[#29251F]">Recent Tenant Registrations</h2>
-              <p className="text-xs text-[#857C6E]">Newly onboarded real estate brokerages and consultants</p>
+              <p className="text-xs text-[#81786A]">Newly onboarded real estate brokerages and consultants</p>
             </div>
-            <Link href="/admin/organizations" className="text-xs text-[#7A5720] hover:underline font-semibold">
+            <Link href="/admin/organizations" className="text-xs text-[#805B25] hover:underline font-semibold">
               View All 1,248 &rarr;
             </Link>
           </div>
@@ -287,7 +287,7 @@ export default function AdminDashboardPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-[#DDD4C5] text-[#857C6E]">
+                <tr className="border-b border-[#D4C9B9] text-[#81786A]">
                   <th className="pb-3 font-semibold">Organization</th>
                   <th className="pb-3 font-semibold">City</th>
                   <th className="pb-3 font-semibold">Plan</th>
@@ -295,17 +295,17 @@ export default function AdminDashboardPage() {
                   <th className="pb-3 font-semibold text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#DDD4C5]/60">
+              <tbody className="divide-y divide-[#D4C9B9]/60">
                 {INITIAL_ORGANIZATIONS.map((org) => (
                   <tr key={org.id} className="hover:bg-[#F4EFE6] transition-colors">
                     <td className="py-3 font-medium text-[#29251F]">
                       <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded bg-[#A374]/15 text-[#7A5720] font-serif flex items-center justify-center font-bold text-[10px] border border-[#A374]/30">
+                        <div className="w-6 h-6 rounded bg-[#A374]/15 text-[#805B25] font-serif flex items-center justify-center font-bold text-[10px] border border-[#A374]/30">
                           {org.name.charAt(0)}
                         </div>
                         <div>
                           <div className="font-serif font-bold text-[#29251F]">{org.name}</div>
-                          <div className="text-[10px] text-[#857C6E]">{org.businessType}</div>
+                          <div className="text-[10px] text-[#81786A]">{org.businessType}</div>
                         </div>
                       </div>
                     </td>
@@ -331,12 +331,12 @@ export default function AdminDashboardPage() {
         </Card>
 
         {/* Global SaaS Infrastructure Health */}
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-2xs">
           <h2 className="text-base font-serif font-bold text-[#29251F] mb-1">Infrastructure Status</h2>
-          <p className="text-xs text-[#857C6E] mb-4">Multi-Tenant Services SLA 99.98%</p>
+          <p className="text-xs text-[#81786A] mb-4">Multi-Tenant Services SLA 99.98%</p>
 
           <div className="space-y-3.5 text-xs">
-            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFFDF8] border border-[#DDD4C5]">
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFFDF8] border border-[#D4C9B9]">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
                 <span className="text-[#29251F] font-medium">PostgreSQL Multi-Tenant DB</span>
@@ -344,7 +344,7 @@ export default function AdminDashboardPage() {
               <span className="text-[#3D7258] font-mono font-bold">14ms ping</span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFFDF8] border border-[#DDD4C5]">
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFFDF8] border border-[#D4C9B9]">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
                 <span className="text-[#29251F] font-medium">Meta WhatsApp Cloud Gateway</span>
@@ -352,7 +352,7 @@ export default function AdminDashboardPage() {
               <span className="text-[#3D7258] font-mono font-bold">100% Up</span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFFDF8] border border-[#DDD4C5]">
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFFDF8] border border-[#D4C9B9]">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
                 <span className="text-[#29251F] font-medium">Google Gemini 1.5 Pro AI API</span>
@@ -360,7 +360,7 @@ export default function AdminDashboardPage() {
               <span className="text-[#3D7258] font-mono font-bold">240ms Latency</span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFFDF8] border border-[#DDD4C5]">
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFFDF8] border border-[#D4C9B9]">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#3D7258]" />
                 <span className="text-[#29251F] font-medium">Razorpay Webhooks Listener</span>
@@ -369,10 +369,10 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
-          <div className="pt-4 mt-4 border-t border-[#DDD4C5]">
-            <div className="flex items-center justify-between text-xs text-[#857C6E]">
+          <div className="pt-4 mt-4 border-t border-[#D4C9B9]">
+            <div className="flex items-center justify-between text-xs text-[#81786A]">
               <span>Platform Version:</span>
-              <span className="font-mono text-[#7A5720] font-bold">v2.4.0-production</span>
+              <span className="font-mono text-[#805B25] font-bold">v2.4.0-production</span>
             </div>
           </div>
         </Card>

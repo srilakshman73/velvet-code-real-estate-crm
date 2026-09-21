@@ -79,7 +79,7 @@ export default function DashboardPage() {
       ? Object.keys(sourceCounts).map((source, idx) => ({
           name: source,
           value: Math.round((sourceCounts[source] / leads.length) * 100),
-          color: ['#2F6B52', '#A374', '#171613', '#C9A45C', '#A87932'][idx % 5],
+          color: ['#A374', '#C9A45C', '#D8C7A5', '#547A61', '#9A8E7C'][idx % 5],
         }))
       : [{ name: 'Direct Inquiries', value: 100, color: '#A374' }];
 
@@ -92,7 +92,7 @@ export default function DashboardPage() {
     .slice(0, 4);
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#F4F0E7] text-[#29251F]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#E8E1D5] text-[#29251F]">
       {/* ========================================== */}
       {/* HEADER SECTION */}
       {/* ========================================== */}
@@ -108,7 +108,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex items-center gap-2.5">
-          <div className="bg-[#FFFDF8] border border-[#DDD4C5] p-1 rounded-xl flex text-xs aurum-card-shadow">
+          <div className="bg-[#FFFDF8] border border-[#D4C9B9] p-1 rounded-xl flex text-xs aurum-card-shadow">
             <button
               onClick={() => setDateRange('30D')}
               className={`px-3 py-1.5 rounded-lg font-semibold transition-colors ${
@@ -144,7 +144,7 @@ export default function DashboardPage() {
           value={leads.length.toString()}
           changePercent={leads.length > 0 ? 100 : 0}
           changeLabel={leads.length > 0 ? 'active contacts' : 'No leads yet'}
-          icon={<Users className="w-5 h-5 text-[#7A5720]" />}
+          icon={<Users className="w-5 h-5 text-[#805B25]" />}
           variant="gold"
         />
 
@@ -181,11 +181,11 @@ export default function DashboardPage() {
       {/* ========================================== */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Revenue Performance Chart */}
-        <div className="lg:col-span-8 p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow space-y-4">
-          <div className="flex items-center justify-between border-b border-[#DDD4C5] pb-4">
+        <div className="lg:col-span-8 p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
+          <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
             <div>
               <h3 className="text-base font-bold text-[#29251F] tracking-tight flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-[#7A5720]" />
+                <TrendingUp className="w-4 h-4 text-[#805B25]" />
                 Revenue Analytics & Growth Trend
               </h3>
               <p className="text-xs text-[#625B51] mt-0.5">
@@ -193,7 +193,7 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="flex items-center gap-4 text-xs">
-              <span className="flex items-center gap-1.5 text-[#7A5720] font-bold">
+              <span className="flex items-center gap-1.5 text-[#805B25] font-bold">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#A374]" /> Revenue (₹ Lakhs)
               </span>
             </div>
@@ -208,7 +208,7 @@ export default function DashboardPage() {
                     <stop offset="95%" stopColor="#A374" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#ECE6DA" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#F1ECE3" vertical={false} />
                 <XAxis dataKey="month" stroke="#625B51" fontSize={12} tickLine={false} />
                 <YAxis
                   stroke="#625B51"
@@ -220,7 +220,7 @@ export default function DashboardPage() {
                 <Tooltip
                   contentStyle={{
                     backgroundColor: '#FFFDF8',
-                    borderColor: '#DDD4C5',
+                    borderColor: '#D4C9B9',
                     borderRadius: '0.75rem',
                     color: '#29251F',
                     fontSize: '12px',
@@ -242,8 +242,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Lead Ingestion Sources Donut */}
-        <div className="lg:col-span-4 p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow space-y-4 flex flex-col justify-between">
-          <div className="border-b border-[#DDD4C5] pb-4">
+        <div className="lg:col-span-4 p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4 flex flex-col justify-between">
+          <div className="border-b border-[#D4C9B9] pb-4">
             <h3 className="text-base font-bold text-[#29251F] tracking-tight flex items-center gap-2">
               <MessageSquare className="w-4 h-4 text-[#3D7258]" />
               Lead Channel Breakdown
@@ -270,7 +270,7 @@ export default function DashboardPage() {
                 <Tooltip
                   contentStyle={{
                     backgroundColor: '#FFFDF8',
-                    borderColor: '#DDD4C5',
+                    borderColor: '#D4C9B9',
                     borderRadius: '0.5rem',
                     color: '#29251F',
                     fontSize: '12px',
@@ -305,10 +305,10 @@ export default function DashboardPage() {
         {/* Left Column: Follow-ups & Hot Leads */}
         <div className="lg:col-span-7 space-y-6">
           {/* Actionable Follow-ups */}
-          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow space-y-4">
-            <div className="flex items-center justify-between border-b border-[#DDD4C5] pb-4">
+          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
+            <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-[#F4F0E7] text-[#7A5720] border border-[#DDD4C5]">
+                <div className="p-2 rounded-xl bg-[#E8E1D5] text-[#805B25] border border-[#D4C9B9]">
                   <Clock className="w-4 h-4" />
                 </div>
                 <div>
@@ -322,7 +322,7 @@ export default function DashboardPage() {
               </div>
               <Link
                 href="/app/follow-ups"
-                className="text-xs font-bold text-[#7A5720] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#805B25] hover:underline flex items-center gap-1"
               >
                 View all <ChevronRight className="w-3.5 h-3.5" />
               </Link>
@@ -330,7 +330,7 @@ export default function DashboardPage() {
 
             {dueTodayFollowUps.length === 0 ? (
               <EmptyState
-                icon={<Clock className="w-6 h-6 text-[#7A5720]" />}
+                icon={<Clock className="w-6 h-6 text-[#805B25]" />}
                 title="No follow-ups due today"
                 description="You are completely up to date. Schedule follow-ups with your leads to stay on top of client conversations."
               />
@@ -339,7 +339,7 @@ export default function DashboardPage() {
                 {dueTodayFollowUps.map((fu) => (
                   <div
                     key={fu.id}
-                    className="p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374]/60 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
+                    className="p-4 rounded-xl bg-[#FFFDF8] border border-[#D4C9B9] hover:border-[#A374]/60 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
                   >
                     <div className="space-y-1 min-w-0">
                       <div className="flex items-center gap-2">
@@ -362,7 +362,7 @@ export default function DashboardPage() {
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <a
                         href={`tel:${fu.customerPhone}`}
-                        className="p-2 rounded-xl bg-[#F4F0E7] hover:bg-[#ECE6DA] text-[#29251F] transition-colors text-xs flex items-center gap-1 border border-[#DDD4C5]"
+                        className="p-2 rounded-xl bg-[#E8E1D5] hover:bg-[#F1ECE3] text-[#29251F] transition-colors text-xs flex items-center gap-1 border border-[#D4C9B9]"
                         title="Call Client"
                       >
                         <Phone className="w-3.5 h-3.5 text-[#A87932]" />
@@ -393,15 +393,15 @@ export default function DashboardPage() {
           </div>
 
           {/* Recent Hot Leads */}
-          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow space-y-4">
-            <div className="flex items-center justify-between border-b border-[#DDD4C5] pb-4">
+          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
+            <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
               <h3 className="text-base font-bold text-[#29251F] tracking-tight flex items-center gap-2">
-                <Users className="w-4 h-4 text-[#7A5720]" />
+                <Users className="w-4 h-4 text-[#805B25]" />
                 Recent Verified Buyer Leads
               </h3>
               <Link
                 href="/app/leads"
-                className="text-xs font-bold text-[#7A5720] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#805B25] hover:underline flex items-center gap-1"
               >
                 All leads <ChevronRight className="w-3.5 h-3.5" />
               </Link>
@@ -409,7 +409,7 @@ export default function DashboardPage() {
 
             {leads.length === 0 ? (
               <EmptyState
-                icon={<Users className="w-6 h-6 text-[#7A5720]" />}
+                icon={<Users className="w-6 h-6 text-[#805B25]" />}
                 title="No leads yet"
                 description="Start by adding your first buyer lead or capture direct inquiries from your WhatsApp CRM and landing page."
                 actionLabel="Add First Lead"
@@ -419,7 +419,7 @@ export default function DashboardPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead>
-                    <tr className="text-[#625B51] border-b border-[#DDD4C5] pb-2 font-bold">
+                    <tr className="text-[#625B51] border-b border-[#D4C9B9] pb-2 font-bold">
                       <th className="pb-2">Lead Name</th>
                       <th className="pb-2">Budget</th>
                       <th className="pb-2">Status</th>
@@ -427,11 +427,11 @@ export default function DashboardPage() {
                       <th className="pb-2 text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#DDD4C5]/60">
+                  <tbody className="divide-y divide-[#D4C9B9]/60">
                     {leads.slice(0, 5).map((l) => (
-                      <tr key={l.id} className="hover:bg-[#ECE6DA]/40 transition-colors">
+                      <tr key={l.id} className="hover:bg-[#F1ECE3]/40 transition-colors">
                         <td className="py-3 font-bold text-[#29251F]">
-                          <Link href="/app/leads" className="hover:text-[#7A5720]">
+                          <Link href="/app/leads" className="hover:text-[#805B25]">
                             {l.name}
                           </Link>
                           <p className="text-[10px] text-[#625B51] font-normal">{l.phone}</p>
@@ -467,10 +467,10 @@ export default function DashboardPage() {
         {/* Right Column: Upcoming Site Visits & Team Leaderboard */}
         <div className="lg:col-span-5 space-y-6">
           {/* Upcoming Site Visits */}
-          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow space-y-4">
-            <div className="flex items-center justify-between border-b border-[#DDD4C5] pb-4">
+          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
+            <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-[#F4F0E7] text-[#A87932] border border-[#DDD4C5]">
+                <div className="p-2 rounded-xl bg-[#E8E1D5] text-[#A87932] border border-[#D4C9B9]">
                   <CalendarCheck className="w-4 h-4" />
                 </div>
                 <div>
@@ -482,7 +482,7 @@ export default function DashboardPage() {
               </div>
               <Link
                 href="/app/site-visits"
-                className="text-xs font-bold text-[#7A5720] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#805B25] hover:underline flex items-center gap-1"
               >
                 Schedule <ChevronRight className="w-3.5 h-3.5" />
               </Link>
@@ -499,11 +499,11 @@ export default function DashboardPage() {
                 {upcomingVisits.map((v) => (
                   <div
                     key={v.id}
-                    className="p-3.5 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] space-y-2 shadow-2xs"
+                    className="p-3.5 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] space-y-2 shadow-2xs"
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-[#29251F]">{v.propertyName}</span>
-                      <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A87932]/15 text-[#7A5720] rounded">
+                      <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A87932]/15 text-[#805B25] rounded">
                         {v.timeSlot}
                       </span>
                     </div>
@@ -521,10 +521,10 @@ export default function DashboardPage() {
           </div>
 
           {/* Team Performance Overview */}
-          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow space-y-4">
-            <div className="flex items-center justify-between border-b border-[#DDD4C5] pb-4">
+          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow space-y-4">
+            <div className="flex items-center justify-between border-b border-[#D4C9B9] pb-4">
               <h3 className="text-base font-bold text-[#29251F] tracking-tight flex items-center gap-2">
-                <Award className="w-4 h-4 text-[#7A5720]" />
+                <Award className="w-4 h-4 text-[#805B25]" />
                 Sales Consultants
               </h3>
               <span className="text-xs text-[#625B51] font-medium">Team Overview</span>
@@ -534,10 +534,10 @@ export default function DashboardPage() {
               {users.map((u, i) => (
                 <div
                   key={u.id}
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5]"
+                  className="flex items-center justify-between p-3 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9]"
                 >
                   <div className="flex items-center gap-2.5">
-                    <div className="w-6 h-6 rounded-full bg-[#A374]/25 text-[#7A5720] font-bold flex items-center justify-center text-[10px]">
+                    <div className="w-6 h-6 rounded-full bg-[#A374]/25 text-[#805B25] font-bold flex items-center justify-center text-[10px]">
                       {i + 1}
                     </div>
                     <div>
@@ -546,7 +546,7 @@ export default function DashboardPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-[#7A5720] font-mono">
+                    <p className="font-bold text-[#805B25] font-mono">
                       {closedWonRevenue > 0 ? formatINR(closedWonRevenue, true) : '₹0'}
                     </p>
                     <p className="text-[10px] text-[#3D7258] font-bold">Active</p>

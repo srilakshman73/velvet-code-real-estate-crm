@@ -60,9 +60,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F0E7] text-[#29251F] flex">
-      {/* Left Brand Panel (Desktop) - Warm Luxury Cream */}
-      <div className="hidden lg:flex flex-col justify-between w-1/2 p-12 bg-[#E9E2D5] border-r border-[#DDD4C5] relative overflow-hidden text-[#29251F]">
+    <div className="min-h-screen bg-[#E8E1D5] text-[#29251F] flex">
+      {/* Left Brand Panel (Desktop) - Warm Champagne Stone */}
+      <div className="hidden lg:flex flex-col justify-between w-1/2 p-12 bg-[#D4C9B9] border-r border-[#D4C9B9] relative overflow-hidden text-[#29251F]">
         <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#A374]/15 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="relative z-10">
@@ -70,7 +70,7 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10 space-y-6 max-w-lg">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30 font-serif">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30 font-serif">
             Real Estate CRM SaaS
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#29251F] tracking-tight leading-tight font-serif">
@@ -96,7 +96,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="relative z-10 pt-8 border-t border-[#DDD4C5] text-xs text-[#857C6E] flex items-center justify-between">
+        <div className="relative z-10 pt-8 border-t border-[#D4C9B9] text-xs text-[#81786A] flex items-center justify-between">
           <span>© 2026 Velvet Code. Technology & Digital Solutions.</span>
           <span className="flex items-center gap-1 text-[#3D7258] font-semibold">
             <ShieldCheck className="w-4 h-4" /> 256-Bit SSL Encrypted
@@ -104,7 +104,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Right Login Form - Soft Luxury Cream */}
+      {/* Right Login Form - Warm Stone */}
       <div className="flex-1 flex flex-col justify-center p-6 sm:p-12 lg:p-16 max-w-xl mx-auto w-full">
         {/* Mobile Logo */}
         <div className="lg:hidden mb-8">
@@ -116,7 +116,7 @@ export default function LoginPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-[#29251F] tracking-tight font-serif">
               Welcome back
             </h1>
-            <p className="text-xs sm:text-sm text-[#857C6E] mt-1">
+            <p className="text-xs sm:text-sm text-[#81786A] mt-1">
               Sign in to your Velvet Code real estate CRM workspace or SaaS Master Console.
             </p>
           </div>
@@ -152,19 +152,19 @@ export default function LoginPage() {
             />
 
             <div className="flex items-center justify-between text-xs">
-              <label className="flex items-center gap-2 cursor-pointer text-[#857C6E] hover:text-[#29251F] font-medium">
+              <label className="flex items-center gap-2 cursor-pointer text-[#81786A] hover:text-[#29251F] font-medium">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded border-[#DDD4C5] bg-[#FFFDF8] text-[#A374] focus:ring-[#A374]"
+                  className="rounded border-[#D4C9B9] bg-[#FFFDF8] text-[#A374] focus:ring-[#A374]"
                 />
                 <span>Remember me</span>
               </label>
 
               <Link
                 href="/forgot-password"
-                className="text-[#7A5720] hover:text-[#8D632F] font-bold"
+                className="text-[#805B25] hover:text-[#8D632F] font-bold"
               >
                 Forgot password?
               </Link>
@@ -182,9 +182,9 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <p className="text-center text-xs text-[#857C6E] pt-2">
+          <p className="text-center text-xs text-[#81786A] pt-2">
             Don't have an account?{' '}
-            <Link href="/register" className="text-[#7A5720] hover:text-[#8D632F] font-bold">
+            <Link href="/register" className="text-[#805B25] hover:text-[#8D632F] font-bold">
               Register new agency workspace
             </Link>
           </p>

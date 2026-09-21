@@ -79,10 +79,10 @@ export default function BillingPage() {
       </div>
 
       {/* Current Plan Overview Card */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD4C5] pb-6">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D4C9B9] pb-6">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#7A5720] font-serif">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#805B25] font-serif">
               Active SaaS Plan
             </span>
             <h2 className="text-3xl font-serif font-bold text-[#29251F] mt-1">
@@ -108,14 +108,14 @@ export default function BillingPage() {
         {/* Real-time Usage Progress Bars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
           {/* 1. Users */}
-          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C5] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#D4C9B9] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
               <span className="text-[#625B51]">Agent Seats:</span>
               <span className="text-[#29251F] font-mono">
                 {users.length} / {currentPlanLimits.maxUsers}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
+            <div className="w-full h-2 bg-[#E8E1D5] rounded-full overflow-hidden border border-[#D4C9B9]/50">
               <div
                 className="h-full bg-[#A374] rounded-full"
                 style={{ width: `${(users.length / currentPlanLimits.maxUsers) * 100}%` }}
@@ -125,14 +125,14 @@ export default function BillingPage() {
           </div>
 
           {/* 2. Leads */}
-          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C5] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#D4C9B9] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
               <span className="text-[#625B51]">Lead Storage:</span>
               <span className="text-[#29251F] font-mono">
                 248 / {currentPlanLimits.maxLeads === -1 ? 'Unlimited' : currentPlanLimits.maxLeads}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
+            <div className="w-full h-2 bg-[#E8E1D5] rounded-full overflow-hidden border border-[#D4C9B9]/50">
               <div
                 className="h-full bg-[#3D7258] rounded-full"
                 style={{
@@ -148,7 +148,7 @@ export default function BillingPage() {
           </div>
 
           {/* 3. Properties */}
-          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C5] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#D4C9B9] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
               <span className="text-[#625B51]">Property Listings:</span>
               <span className="text-[#29251F] font-mono">
@@ -156,7 +156,7 @@ export default function BillingPage() {
                 {currentPlanLimits.maxProperties === -1 ? 'Unlimited' : currentPlanLimits.maxProperties}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
+            <div className="w-full h-2 bg-[#E8E1D5] rounded-full overflow-hidden border border-[#D4C9B9]/50">
               <div
                 className="h-full bg-[#A87932] rounded-full"
                 style={{
@@ -173,14 +173,14 @@ export default function BillingPage() {
           </div>
 
           {/* 4. AI Inferences */}
-          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#DDD4C5] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-white border border-[#D4C9B9] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
               <span className="text-[#625B51]">Realty AI Quota:</span>
-              <span className="text-[#7A5720] font-mono">
+              <span className="text-[#805B25] font-mono">
                 {subscription.usage.aiRequestsUsed} / {currentPlanLimits.monthlyAIQuota}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
+            <div className="w-full h-2 bg-[#E8E1D5] rounded-full overflow-hidden border border-[#D4C9B9]/50">
               <div
                 className="h-full bg-[#A374] rounded-full"
                 style={{
@@ -200,10 +200,10 @@ export default function BillingPage() {
           Invoice & Payment History
         </h3>
 
-        <div className="rounded-2xl border border-[#DDD4C5] bg-[#FFFDF8] overflow-hidden shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <div className="rounded-2xl border border-[#D4C9B9] bg-[#FFFDF8] overflow-hidden shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <table className="w-full text-left text-xs sm:text-sm">
             <thead>
-              <tr className="bg-[#F4F0E7] border-b border-[#DDD4C5] text-[#625B51] font-semibold">
+              <tr className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51] font-semibold">
                 <th className="p-4">Invoice #</th>
                 <th className="p-4">Billing Period</th>
                 <th className="p-4">Amount</th>
@@ -212,12 +212,12 @@ export default function BillingPage() {
                 <th className="p-4 text-right">Download</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD4C5]/60">
+            <tbody className="divide-y divide-[#D4C9B9]/60">
               {INITIAL_INVOICES.map((inv) => (
-                <tr key={inv.id} className="hover:bg-[#F4F0E7]/60 transition-colors">
+                <tr key={inv.id} className="hover:bg-[#E8E1D5]/60 transition-colors">
                   <td className="p-4 font-bold text-[#29251F] font-mono">{inv.invoiceNumber}</td>
                   <td className="p-4 text-[#625B51]">Monthly SaaS Subscription</td>
-                  <td className="p-4 font-extrabold text-[#7A5720] font-mono">
+                  <td className="p-4 font-extrabold text-[#805B25] font-mono">
                     ₹{inv.totalINR}
                   </td>
                   <td className="p-4 text-[#625B51]">{inv.paymentMethod}</td>
@@ -229,7 +229,7 @@ export default function BillingPage() {
                   <td className="p-4 text-right">
                     <button
                       onClick={() => alert(`Downloading Invoice ${inv.invoiceNumber} PDF...`)}
-                      className="text-[#7A5720] hover:underline font-semibold flex items-center gap-1 ml-auto text-xs"
+                      className="text-[#805B25] hover:underline font-semibold flex items-center gap-1 ml-auto text-xs"
                     >
                       <Download className="w-3.5 h-3.5" /> PDF
                     </button>
@@ -258,7 +258,7 @@ export default function BillingPage() {
                 className={`p-5 rounded-2xl border flex flex-col justify-between space-y-4 transition-all ${
                   isCurrent
                     ? 'bg-[#A374]/10 border-[#A374] shadow-md'
-                    : 'bg-white border-[#DDD4C5]'
+                    : 'bg-white border-[#D4C9B9]'
                 }`}
               >
                 <div>

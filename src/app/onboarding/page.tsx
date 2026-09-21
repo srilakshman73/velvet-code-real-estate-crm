@@ -82,18 +82,18 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F0E7] text-[#29251F] flex flex-col justify-between p-4 sm:p-8">
+    <div className="min-h-screen bg-[#E8E1D5] text-[#29251F] flex flex-col justify-between p-4 sm:p-8">
       {/* Header */}
       <div className="max-w-3xl mx-auto w-full flex items-center justify-between py-4">
         <VelvetCodeLogo size="md" theme="light" />
         <span className="text-xs text-[#625B51] font-semibold">
-          Step <strong className="text-[#7A5720]">{step}</strong> of 5
+          Step <strong className="text-[#805B25]">{step}</strong> of 5
         </span>
       </div>
 
       {/* Progress Bar */}
       <div className="max-w-3xl mx-auto w-full my-4">
-        <div className="w-full h-1.5 bg-[#DDD4C5] rounded-full overflow-hidden">
+        <div className="w-full h-1.5 bg-[#D4C9B9] rounded-full overflow-hidden">
           <div
             className="h-full bg-[#A374] rounded-full transition-all duration-300"
             style={{ width: `${(step / 5) * 100}%` }}
@@ -102,12 +102,12 @@ export default function OnboardingPage() {
       </div>
 
       {/* Main Content Box */}
-      <div className="max-w-2xl mx-auto w-full bg-[#FFFDF8] border border-[#DDD4C5] rounded-2xl p-6 sm:p-10 aurum-card-shadow my-auto space-y-6 animate-in fade-in">
+      <div className="max-w-2xl mx-auto w-full bg-[#FFFDF8] border border-[#D4C9B9] rounded-2xl p-6 sm:p-10 aurum-card-shadow my-auto space-y-6 animate-in fade-in">
         {/* STEP 1: BUSINESS PROFILE */}
         {step === 1 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#F4F0E7] text-[#7A5720] border border-[#DDD4C5]">
+              <div className="p-2.5 rounded-xl bg-[#E8E1D5] text-[#805B25] border border-[#D4C9B9]">
                 <Building className="w-5 h-5" />
               </div>
               <div>
@@ -161,7 +161,7 @@ export default function OnboardingPage() {
         {step === 2 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#F4F0E7] text-[#7A5720] border border-[#DDD4C5]">
+              <div className="p-2.5 rounded-xl bg-[#E8E1D5] text-[#805B25] border border-[#D4C9B9]">
                 <Building className="w-5 h-5" />
               </div>
               <div>
@@ -188,7 +188,7 @@ export default function OnboardingPage() {
                   className={`p-4 rounded-xl border cursor-pointer transition-all ${
                     onboardingData.businessType === item.id
                       ? 'bg-[#A374]/15 border-[#A374] text-[#29251F] shadow-sm'
-                      : 'bg-[#FFFDF8] border-[#DDD4C5] text-[#625B51] hover:border-[#A374]/60'
+                      : 'bg-[#FFFDF8] border-[#D4C9B9] text-[#625B51] hover:border-[#A374]/60'
                   }`}
                 >
                   <p className="text-sm font-bold text-[#29251F]">{item.title}</p>
@@ -203,7 +203,7 @@ export default function OnboardingPage() {
         {step === 3 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#F4F0E7] text-[#7A5720] border border-[#DDD4C5]">
+              <div className="p-2.5 rounded-xl bg-[#E8E1D5] text-[#805B25] border border-[#D4C9B9]">
                 <Users2 className="w-5 h-5" />
               </div>
               <div>
@@ -222,7 +222,7 @@ export default function OnboardingPage() {
                   className={`p-4 rounded-xl border text-center cursor-pointer transition-all ${
                     onboardingData.teamSize === sz
                       ? 'bg-[#A374]/15 border-[#A374] text-[#29251F] font-bold shadow-sm'
-                      : 'bg-[#FFFDF8] border-[#DDD4C5] text-[#625B51] hover:border-[#A374]/60'
+                      : 'bg-[#FFFDF8] border-[#D4C9B9] text-[#625B51] hover:border-[#A374]/60'
                   }`}
                 >
                   <p className="text-sm font-semibold">{sz}</p>
@@ -236,7 +236,7 @@ export default function OnboardingPage() {
         {step === 4 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#F4F0E7] text-[#7A5720] border border-[#DDD4C5]">
+              <div className="p-2.5 rounded-xl bg-[#E8E1D5] text-[#805B25] border border-[#D4C9B9]">
                 <Sliders className="w-5 h-5" />
               </div>
               <div>
@@ -248,7 +248,7 @@ export default function OnboardingPage() {
             </div>
 
             <div className="space-y-3 pt-2">
-              <label className="flex items-center justify-between p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] cursor-pointer hover:border-[#A374]/60 transition-colors">
+              <label className="flex items-center justify-between p-4 rounded-xl bg-[#FFFDF8] border border-[#D4C9B9] cursor-pointer hover:border-[#A374]/60 transition-colors">
                 <div className="flex items-center gap-3">
                   <div className="p-2 rounded-lg bg-[#3D7258]/15 text-[#3D7258]">
                     <MessageSquare className="w-4 h-4" />
@@ -272,9 +272,9 @@ export default function OnboardingPage() {
                 />
               </label>
 
-              <label className="flex items-center justify-between p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] cursor-pointer hover:border-[#A374]/60 transition-colors">
+              <label className="flex items-center justify-between p-4 rounded-xl bg-[#FFFDF8] border border-[#D4C9B9] cursor-pointer hover:border-[#A374]/60 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-[#A374]/20 text-[#7A5720]">
+                  <div className="p-2 rounded-lg bg-[#A374]/20 text-[#805B25]">
                     <Sparkles className="w-4 h-4" />
                   </div>
                   <div>
@@ -303,7 +303,7 @@ export default function OnboardingPage() {
         {step === 5 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#F4F0E7] text-[#7A5720] border border-[#DDD4C5]">
+              <div className="p-2.5 rounded-xl bg-[#E8E1D5] text-[#805B25] border border-[#D4C9B9]">
                 <CreditCard className="w-5 h-5" />
               </div>
               <div>
@@ -326,14 +326,14 @@ export default function OnboardingPage() {
                     className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
                       isSelected
                         ? 'bg-[#A374]/15 border-[#A374] text-[#29251F] shadow-sm'
-                        : 'bg-[#FFFDF8] border-[#DDD4C5] text-[#625B51] hover:border-[#A374]/60'
+                        : 'bg-[#FFFDF8] border-[#D4C9B9] text-[#625B51] hover:border-[#A374]/60'
                     }`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-sm font-bold text-[#29251F]">{p.name}</span>
                         {isSelected && (
-                          <CheckCircle2 className="w-4 h-4 text-[#7A5720]" />
+                          <CheckCircle2 className="w-4 h-4 text-[#805B25]" />
                         )}
                       </div>
                       <p className="text-base font-extrabold text-[#29251F] font-sans">
@@ -351,7 +351,7 @@ export default function OnboardingPage() {
         )}
 
         {/* Navigation Actions */}
-        <div className="flex items-center justify-between pt-6 border-t border-[#DDD4C5]">
+        <div className="flex items-center justify-between pt-6 border-t border-[#D4C9B9]">
           {step > 1 ? (
             <Button
               type="button"

@@ -18,7 +18,7 @@ export function PublicFooter() {
   );
 
   return (
-    <footer className="w-full bg-[#1F1D19] border-t border-[#2D2A24] text-[#DDD4C5]/80">
+    <footer className="w-full bg-[#1F1D19] border-t border-[#2D2A24] text-[#D4C9B9]/80">
       {/* Official WhatsApp Banner */}
       <div className="border-b border-[#2D2A24] bg-[#29251F] py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -30,7 +30,7 @@ export function PublicFooter() {
               <h4 className="text-lg font-bold text-[#FFFDF8] tracking-tight">
                 Need an Instant Demo or Consultation?
               </h4>
-              <p className="text-sm text-[#DDD4C5]/70 mt-0.5">
+              <p className="text-sm text-[#D4C9B9]/70 mt-0.5">
                 Connect directly with our enterprise real estate technology specialists on WhatsApp.
               </p>
             </div>
@@ -55,10 +55,10 @@ export function PublicFooter() {
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <VelvetCodeLogo size="lg" theme="dark" />
-            <p className="text-sm text-[#DDD4C5]/70 leading-relaxed max-w-sm">
+            <p className="text-sm text-[#D4C9B9]/70 leading-relaxed max-w-sm">
               The premier Aurum-inspired Real Estate CRM SaaS platform engineered for agencies, brokers, developers, and consultants.
             </p>
-            <div className="pt-2 space-y-2 text-xs text-[#DDD4C5]/80">
+            <div className="pt-2 space-y-2 text-xs text-[#D4C9B9]/80">
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#A374]" />
                 <span>+91 63833 95915</span>
@@ -76,7 +76,7 @@ export function PublicFooter() {
 
           {/* Product */}
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#F4F0E7] mb-4">
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#E8E1D5] mb-4">
               Platform
             </h5>
             <ul className="space-y-2.5 text-sm">
@@ -115,7 +115,7 @@ export function PublicFooter() {
 
           {/* Solutions */}
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#F4F0E7] mb-4">
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#E8E1D5] mb-4">
               Solutions
             </h5>
             <ul className="space-y-2.5 text-sm">
@@ -149,7 +149,7 @@ export function PublicFooter() {
 
           {/* Company & Legal */}
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#F4F0E7] mb-4">
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#E8E1D5] mb-4">
               Company
             </h5>
             <ul className="space-y-2.5 text-sm">
@@ -183,7 +183,7 @@ export function PublicFooter() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-[#24221E] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#DDD4C5]/60">
+        <div className="mt-12 pt-8 border-t border-[#24221E] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#D4C9B9]/60">
           <p>© {new Date().getFullYear()} Velvet Code. All rights reserved. Technology & Digital Solutions</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 text-[#3B825E] font-semibold">

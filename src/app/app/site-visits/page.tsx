@@ -93,7 +93,7 @@ export default function SiteVisitsPage() {
             <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight">
               Site Visits Management
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/40 rounded-full font-serif">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#805B25] border border-[#A374]/40 rounded-full font-serif">
               {siteVisits.length} Recorded Visits
             </span>
           </div>
@@ -113,7 +113,7 @@ export default function SiteVisitsPage() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#DDD4C5] pb-3">
+      <div className="flex items-center gap-2 border-b border-[#D4C9B9] pb-3">
         {[
           { id: 'ALL', label: 'All Visits' },
           { id: 'TODAY', label: "Today's Schedule" },
@@ -126,7 +126,7 @@ export default function SiteVisitsPage() {
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeTab === tab.id
                 ? 'bg-[#A374] text-white shadow-sm'
-                : 'bg-[#FFFDF8] text-[#625B51] hover:text-[#29251F] border border-[#DDD4C5]'
+                : 'bg-[#FFFDF8] text-[#625B51] hover:text-[#29251F] border border-[#D4C9B9]'
             }`}
           >
             {tab.label}
@@ -148,12 +148,12 @@ export default function SiteVisitsPage() {
           {filteredVisits.map((v) => (
             <div
               key={v.id}
-              className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-4 flex flex-col justify-between hover:border-[#A374] transition-all"
+              className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-4 flex flex-col justify-between hover:border-[#A374] transition-all"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <SiteVisitStatusBadge status={v.status} />
-                  <span className="text-xs font-bold text-[#7A5720] bg-[#F4F0E7] px-2.5 py-1 rounded-lg border border-[#DDD4C5]">
+                  <span className="text-xs font-bold text-[#805B25] bg-[#E8E1D5] px-2.5 py-1 rounded-lg border border-[#D4C9B9]">
                     {v.timeSlot}
                   </span>
                 </div>
@@ -167,7 +167,7 @@ export default function SiteVisitsPage() {
                   <span>{v.propertyLocation}</span>
                 </p>
 
-                <div className="p-3 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] text-xs space-y-1.5">
+                <div className="p-3 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] text-xs space-y-1.5">
                   <div className="flex justify-between">
                     <span className="text-[#625B51]">Buyer:</span>
                     <span className="font-semibold text-[#29251F]">{v.leadName || 'Client'}</span>
@@ -194,7 +194,7 @@ export default function SiteVisitsPage() {
               </div>
 
               {/* Action Controls */}
-              <div className="pt-3 border-t border-[#DDD4C5] flex items-center justify-between text-xs">
+              <div className="pt-3 border-t border-[#D4C9B9] flex items-center justify-between text-xs">
                 {v.status === 'CONFIRMED' || v.status === 'SCHEDULED' ? (
                   <>
                     <Button
@@ -311,7 +311,7 @@ export default function SiteVisitsPage() {
             onChange={(e) => setNewVisitForm({ ...newVisitForm, notes: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D4C9B9]">
             <Button
               type="button"
               variant="secondary"
@@ -348,8 +348,8 @@ export default function SiteVisitsPage() {
                     onClick={() => setFeedbackRating(star)}
                     className={`p-2 rounded-lg border transition-all ${
                       feedbackRating >= star
-                        ? 'bg-[#A374]/20 border-[#A374] text-[#7A5720]'
-                        : 'bg-white border-[#DDD4C5] text-[#625B51]'
+                        ? 'bg-[#A374]/20 border-[#A374] text-[#805B25]'
+                        : 'bg-white border-[#D4C9B9] text-[#625B51]'
                     }`}
                   >
                     <Star className="w-5 h-5 fill-current" />
@@ -366,7 +366,7 @@ export default function SiteVisitsPage() {
               onChange={(e) => setFeedbackText(e.target.value)}
             />
 
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D4C9B9]">
               <Button
                 variant="secondary"
                 size="sm"

@@ -88,9 +88,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F0E7] text-[#29251F] flex">
-      {/* Left Brand Panel - Warm Luxury Cream */}
-      <div className="hidden lg:flex flex-col justify-between w-1/2 p-12 bg-[#E9E2D5] border-r border-[#DDD4C5] relative overflow-hidden text-[#29251F]">
+    <div className="min-h-screen bg-[#E8E1D5] text-[#29251F] flex">
+      {/* Left Brand Panel - Warm Champagne Stone */}
+      <div className="hidden lg:flex flex-col justify-between w-1/2 p-12 bg-[#D4C9B9] border-r border-[#D4C9B9] relative overflow-hidden text-[#29251F]">
         <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#A374]/15 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="relative z-10">
@@ -98,7 +98,7 @@ export default function RegisterPage() {
         </div>
 
         <div className="relative z-10 space-y-6 max-w-lg">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30 font-serif">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30 font-serif">
             Create Your Workspace
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#29251F] tracking-tight leading-tight font-serif">
@@ -124,7 +124,7 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        <div className="relative z-10 pt-8 border-t border-[#DDD4C5] text-xs text-[#857C6E] flex items-center justify-between">
+        <div className="relative z-10 pt-8 border-t border-[#D4C9B9] text-xs text-[#81786A] flex items-center justify-between">
           <span>Enterprise Real Estate Infrastructure</span>
           <span className="flex items-center gap-1 text-[#3D7258] font-semibold">
             <ShieldCheck className="w-4 h-4" /> 100% Isolated Tenant DB
@@ -132,7 +132,7 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* Right Registration Form - Soft Cream */}
+      {/* Right Registration Form - Warm Stone */}
       <div className="flex-1 flex flex-col justify-center p-6 sm:p-12 lg:p-16 max-w-xl mx-auto w-full">
         <div className="lg:hidden mb-8">
           <VelvetCodeLogo size="md" theme="light" />
@@ -143,7 +143,7 @@ export default function RegisterPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-[#29251F] tracking-tight font-serif">
               Create your workspace
             </h1>
-            <p className="text-xs sm:text-sm text-[#857C6E] mt-1">
+            <p className="text-xs sm:text-sm text-[#81786A] mt-1">
               Start managing your real estate leads, properties, and deals.
             </p>
           </div>
@@ -223,13 +223,13 @@ export default function RegisterPage() {
               />
             </div>
 
-            <p className="text-[11px] text-[#857C6E] leading-relaxed">
+            <p className="text-[11px] text-[#81786A] leading-relaxed">
               By creating a workspace, you agree to Velvet Code's{' '}
-              <Link href="/terms" className="text-[#7A5720] hover:underline font-bold">
+              <Link href="/terms" className="text-[#805B25] hover:underline font-bold">
                 Terms of Service
               </Link>{' '}
               and{' '}
-              <Link href="/privacy" className="text-[#7A5720] hover:underline font-bold">
+              <Link href="/privacy" className="text-[#805B25] hover:underline font-bold">
                 Privacy Policy
               </Link>
               .
@@ -247,9 +247,9 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <p className="text-center text-xs text-[#857C6E]">
+          <p className="text-center text-xs text-[#81786A]">
             Already have an account?{' '}
-            <Link href="/login" className="text-[#7A5720] hover:text-[#8D632F] font-bold">
+            <Link href="/login" className="text-[#805B25] hover:text-[#8D632F] font-bold">
               Sign in
             </Link>
           </p>

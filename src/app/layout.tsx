@@ -61,8 +61,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${manrope.variable} h-full bg-[#F4F0E7] text-[#29251F]`}>
-      <body className="min-h-full flex flex-col font-sans antialiased bg-[#F4F0E7] text-[#29251F] selection:bg-[#A374]/30 selection:text-[#29251F]">
+    <html lang="en" className={`${playfair.variable} ${manrope.variable} h-full bg-[#E8E1D5] text-[#29251F]`}>
+      <body className="min-h-full flex flex-col font-sans antialiased bg-[#E8E1D5] text-[#29251F] selection:bg-[#A374]/30 selection:text-[#29251F]">
         <CRMStoreProvider>
           {children}
           <FloatingWhatsAppButton />

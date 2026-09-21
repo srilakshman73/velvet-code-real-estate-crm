@@ -51,7 +51,7 @@ export default function FollowUpsPage() {
           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
             activeTab === 'OVERDUE'
               ? 'bg-[#8B4A4A]/10 border-[#8B4A4A] text-[#29251F] shadow-md'
-              : 'bg-[#FFFDF8] border-[#DDD4C5] text-[#625B51] hover:border-[#8B4A4A]'
+              : 'bg-[#FFFDF8] border-[#D4C9B9] text-[#625B51] hover:border-[#8B4A4A]'
           }`}
         >
           <div className="flex items-center justify-between">
@@ -69,14 +69,14 @@ export default function FollowUpsPage() {
           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
             activeTab === 'DUE_TODAY'
               ? 'bg-[#A374]/15 border-[#A374] text-[#29251F] shadow-md'
-              : 'bg-[#FFFDF8] border-[#DDD4C5] text-[#625B51] hover:border-[#A374]'
+              : 'bg-[#FFFDF8] border-[#D4C9B9] text-[#625B51] hover:border-[#A374]'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#7A5720]">Due Today</span>
-            <Clock className="w-4 h-4 text-[#7A5720]" />
+            <span className="text-xs font-bold uppercase tracking-wider text-[#805B25]">Due Today</span>
+            <Clock className="w-4 h-4 text-[#805B25]" />
           </div>
-          <p className="text-2xl sm:text-3xl font-extrabold text-[#7A5720] mt-2 font-mono">
+          <p className="text-2xl sm:text-3xl font-extrabold text-[#805B25] mt-2 font-mono">
             {dueTodayCount}
           </p>
           <p className="text-[11px] text-[#625B51] mt-1">Scheduled before 7 PM</p>
@@ -87,7 +87,7 @@ export default function FollowUpsPage() {
           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
             activeTab === 'UPCOMING'
               ? 'bg-[#C9A45C]/15 border-[#A374] text-[#29251F] shadow-md'
-              : 'bg-[#FFFDF8] border-[#DDD4C5] text-[#625B51] hover:border-[#A374]'
+              : 'bg-[#FFFDF8] border-[#D4C9B9] text-[#625B51] hover:border-[#A374]'
           }`}
         >
           <div className="flex items-center justify-between">
@@ -105,7 +105,7 @@ export default function FollowUpsPage() {
           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
             activeTab === 'COMPLETED'
               ? 'bg-[#3D7258]/10 border-[#3D7258] text-[#29251F] shadow-md'
-              : 'bg-[#FFFDF8] border-[#DDD4C5] text-[#625B51] hover:border-[#3D7258]'
+              : 'bg-[#FFFDF8] border-[#D4C9B9] text-[#625B51] hover:border-[#3D7258]'
           }`}
         >
           <div className="flex items-center justify-between">
@@ -124,19 +124,19 @@ export default function FollowUpsPage() {
         {filtered.map((fu) => (
           <div
             key={fu.id}
-            className="p-5 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] hover:border-[#A374] transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+            className="p-5 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] hover:border-[#A374] transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
           >
             <div className="space-y-1.5 min-w-0">
               <div className="flex items-center gap-2.5">
                 <span className="text-base font-serif font-bold text-[#29251F]">{fu.leadName}</span>
-                <span className="px-2 py-0.5 text-[10px] font-bold bg-[#F4F0E7] border border-[#DDD4C5] text-[#625B51] rounded">
+                <span className="px-2 py-0.5 text-[10px] font-bold bg-[#E8E1D5] border border-[#D4C9B9] text-[#625B51] rounded">
                   {fu.type}
                 </span>
                 <span className="text-xs text-[#625B51]">{fu.customerPhone}</span>
               </div>
 
               <p className="text-xs text-[#29251F]">
-                <strong className="text-[#7A5720] font-serif">{fu.propertyName}</strong> — {fu.notes}
+                <strong className="text-[#805B25] font-serif">{fu.propertyName}</strong> — {fu.notes}
               </p>
             </div>
 
@@ -144,7 +144,7 @@ export default function FollowUpsPage() {
               {/* Direct Tappable Call */}
               <a
                 href={`tel:${fu.customerPhone}`}
-                className="px-3 py-1.5 rounded-xl bg-white hover:bg-[#F4F0E7] text-[#29251F] border border-[#DDD4C5] text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                className="px-3 py-1.5 rounded-xl bg-white hover:bg-[#E8E1D5] text-[#29251F] border border-[#D4C9B9] text-xs font-semibold flex items-center gap-1.5 transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-[#A87932]" />
                 <span>Call Phone</span>

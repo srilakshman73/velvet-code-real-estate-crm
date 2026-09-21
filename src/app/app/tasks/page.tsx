@@ -76,7 +76,7 @@ export default function TasksPage() {
             <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight">
               Task Management
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#805B25] border border-[#A374]/30 rounded-full">
               {tasks.filter((t) => t.status !== 'COMPLETED').length} Pending
             </span>
           </div>
@@ -96,7 +96,7 @@ export default function TasksPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#DDD4C5] pb-3">
+      <div className="flex items-center gap-2 border-b border-[#D4C9B9] pb-3">
         {[
           { id: 'ALL', label: 'All Tasks' },
           { id: 'PENDING', label: 'Pending Action' },
@@ -108,7 +108,7 @@ export default function TasksPage() {
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               filter === tab.id
                 ? 'bg-[#A374] text-white shadow-sm'
-                : 'bg-[#FFFDF8] text-[#625B51] hover:text-[#29251F] border border-[#DDD4C5]'
+                : 'bg-[#FFFDF8] text-[#625B51] hover:text-[#29251F] border border-[#D4C9B9]'
             }`}
           >
             {tab.label}
@@ -134,8 +134,8 @@ export default function TasksPage() {
                 key={t.id}
                 className={`p-4 sm:p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                   isCompleted
-                    ? 'bg-[#F4F0E7]/60 border-[#DDD4C5]/60 opacity-60'
-                    : 'bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_2px_12px_-2px_rgba(21,21,21,0.04)] hover:border-[#A374]'
+                    ? 'bg-[#E8E1D5]/60 border-[#D4C9B9]/60 opacity-60'
+                    : 'bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_2px_12px_-2px_rgba(21,21,21,0.04)] hover:border-[#A374]'
                 }`}
               >
                 <div className="flex items-start gap-3.5 min-w-0">
@@ -146,7 +146,7 @@ export default function TasksPage() {
                     className={`mt-1 w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${
                       isCompleted
                         ? 'bg-[#3D7258] border-[#3D7258] text-white'
-                        : 'border-[#DDD4C5] bg-white hover:border-[#A374]'
+                        : 'border-[#D4C9B9] bg-white hover:border-[#A374]'
                     }`}
                   >
                     {isCompleted && <CheckCircle2 className="w-4 h-4" />}
@@ -269,7 +269,7 @@ export default function TasksPage() {
             onChange={(e) => setNewTaskForm({ ...newTaskForm, description: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D4C9B9]">
             <Button
               type="button"
               variant="secondary"

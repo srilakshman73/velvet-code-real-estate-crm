@@ -8,12 +8,12 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Card({ className, variant = 'default', orientation, children, ...props }: CardProps) {
   const variantClasses = {
-    default: 'bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow',
-    glass: 'bg-[#FFFDF8]/90 backdrop-blur-md border border-[#DDD4C5] shadow-xs',
+    default: 'bg-[#FFFDF8] border border-[#D8CEBF] aurum-card-shadow',
+    glass: 'bg-[#FFFDF8]/90 backdrop-blur-md border border-[#D8CEBF] shadow-xs',
     'gold-border':
       'bg-[#FFFDF8] border border-[#A374]/60 shadow-[0_4px_20px_-4px_rgba(163,116,0,0.12)]',
     interactive:
-      'bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374] hover:shadow-[0_10px_28px_-4px_rgba(163,116,0,0.14)] transition-all duration-200 cursor-pointer',
+      'bg-[#FFFDF8] border border-[#D8CEBF] hover:border-[#A374] hover:shadow-[0_10px_28px_-4px_rgba(163,116,0,0.14)] transition-all duration-200 cursor-pointer',
   };
 
   return (
@@ -32,7 +32,7 @@ export function CardHeader({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('flex items-center justify-between pb-4 mb-4 border-b border-[#DDD4C5]/80', className)} {...props}>
+    <div className={cn('flex items-center justify-between pb-4 mb-4 border-b border-[#D8CEBF]', className)} {...props}>
       {children}
     </div>
   );

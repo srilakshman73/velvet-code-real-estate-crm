@@ -17,8 +17,8 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F0E7] text-[#29251F] flex items-center justify-center p-6">
-      <div className="w-full max-w-md bg-[#FFFDF8] border border-[#DDD4C5] rounded-2xl p-8 aurum-card-shadow space-y-6">
+    <div className="min-h-screen bg-[#E8E1D5] text-[#29251F] flex items-center justify-center p-6">
+      <div className="w-full max-w-md bg-[#FFFDF8] border border-[#D4C9B9] rounded-2xl p-8 aurum-card-shadow space-y-6">
         <div className="text-center space-y-3">
           <VelvetCodeLogo size="md" className="justify-center" theme="light" />
           <h1 className="text-2xl font-bold text-[#29251F] tracking-tight font-serif">
@@ -36,7 +36,7 @@ export default function ForgotPasswordPage() {
             </div>
             <h3 className="text-base font-bold text-[#29251F]">Reset Link Dispatched</h3>
             <p className="text-xs text-[#625B51] leading-relaxed">
-              We have sent recovery instructions to <strong className="text-[#7A5720]">{email}</strong>.
+              We have sent recovery instructions to <strong className="text-[#805B25]">{email}</strong>.
             </p>
             <Link href="/login">
               <Button variant="gold" size="sm" className="w-full mt-2 font-bold">

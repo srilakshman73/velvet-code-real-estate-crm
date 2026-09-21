@@ -59,12 +59,12 @@ export default function FeaturesPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4F0E7] text-[#29251F]">
+    <div className="min-h-screen flex flex-col bg-[#E8E1D5] text-[#29251F]">
       <PublicHeader />
       <main className="flex-1">
         {/* Header */}
         <section className="py-20 text-center max-w-4xl mx-auto px-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Platform Capabilities
           </span>
           <h1 className="text-4xl sm:text-6xl font-bold text-[#29251F] mt-4 tracking-tight font-serif">
@@ -91,7 +91,7 @@ export default function FeaturesPage() {
                 }`}
               >
                 <div className="flex-1 space-y-4">
-                  <div className="p-3 rounded-xl bg-[#F4F0E7] text-[#7A5720] w-fit border border-[#DDD4C5]">
+                  <div className="p-3 rounded-xl bg-[#E8E1D5] text-[#805B25] w-fit border border-[#D4C9B9]">
                     <Icon className="w-6 h-6" />
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-bold text-[#29251F] tracking-tight font-serif">
@@ -108,9 +108,9 @@ export default function FeaturesPage() {
                   </ul>
                 </div>
 
-                <div className="flex-1 w-full p-6 sm:p-8 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow">
-                  <div className="p-5 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] space-y-3">
-                    <div className="flex items-center justify-between text-xs text-[#7A5720] font-bold border-b border-[#DDD4C5] pb-2">
+                <div className="flex-1 w-full p-6 sm:p-8 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow">
+                  <div className="p-5 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] space-y-3">
+                    <div className="flex items-center justify-between text-xs text-[#805B25] font-bold border-b border-[#D4C9B9] pb-2">
                       <span>Feature Spotlight</span>
                       <span className="text-[#625B51] font-medium">Live in Production</span>
                     </div>

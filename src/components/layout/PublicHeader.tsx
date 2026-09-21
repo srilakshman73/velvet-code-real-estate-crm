@@ -21,7 +21,7 @@ export function PublicHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#DDD4C5] bg-[#F8F5EE]/95 backdrop-blur-md transition-colors duration-200">
+    <header className="sticky top-0 z-40 w-full border-b border-[#D4C9B9] bg-[#F1ECE3]/95 backdrop-blur-md transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo */}
         <VelvetCodeLogo href="/" size="md" theme="light" />
@@ -36,8 +36,8 @@ export function PublicHeader() {
                 href={link.href}
                 className={`text-sm font-semibold tracking-wide transition-colors ${
                   isActive
-                    ? 'text-[#7A5720] border-b-2 border-[#A374] pb-0.5'
-                    : 'text-[#29251F] hover:text-[#7A5720]'
+                    ? 'text-[#805B25] border-b-2 border-[#A374] pb-0.5'
+                    : 'text-[#29251F] hover:text-[#805B25]'
                 }`}
               >
                 {link.label}
@@ -80,7 +80,7 @@ export function PublicHeader() {
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-[#29251F] hover:text-[#7A5720] rounded-lg hover:bg-[#ECE6DA]"
+            className="p-2 text-[#29251F] hover:text-[#805B25] rounded-lg hover:bg-[#E8E1D5]"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -89,21 +89,21 @@ export function PublicHeader() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-[#DDD4C5] bg-[#FFFDF8] p-5 space-y-4 animate-in slide-in-from-top-2 shadow-xl">
+        <div className="md:hidden border-b border-[#D4C9B9] bg-[#FFFDF8] p-5 space-y-4 animate-in slide-in-from-top-2 shadow-xl">
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-semibold text-[#29251F] hover:text-[#7A5720] py-1 border-b border-[#DDD4C5]/40"
+                className="text-base font-semibold text-[#29251F] hover:text-[#805B25] py-1 border-b border-[#D4C9B9]/40"
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          <div className="pt-4 border-t border-[#DDD4C5] space-y-3">
+          <div className="pt-4 border-t border-[#D4C9B9] space-y-3">
             <a
               href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
               target="_blank"

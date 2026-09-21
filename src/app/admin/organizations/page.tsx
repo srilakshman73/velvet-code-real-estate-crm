@@ -155,8 +155,8 @@ export default function AdminOrganizationsPage() {
       </div>
 
       {feedbackMessage && (
-        <div className="p-3 bg-[#A374]/15 border border-[#A374]/30 rounded-xl text-xs text-[#7A5720] flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-[#7A5720] flex-shrink-0" />
+        <div className="p-3 bg-[#A374]/15 border border-[#A374]/30 rounded-xl text-xs text-[#805B25] flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-[#805B25] flex-shrink-0" />
           <span>{feedbackMessage}</span>
         </div>
       )}
@@ -175,7 +175,7 @@ export default function AdminOrganizationsPage() {
           <select
             value={tierFilter}
             onChange={(e) => setTierFilter(e.target.value)}
-            className="bg-white border border-[#DDD4C5] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
+            className="bg-white border border-[#D4C9B9] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Tiers</option>
             <option value="STARTER">Starter Tier</option>
@@ -186,7 +186,7 @@ export default function AdminOrganizationsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-white border border-[#DDD4C5] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
+            className="bg-white border border-[#D4C9B9] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Statuses</option>
             <option value="ACTIVE">Active</option>
@@ -197,10 +197,10 @@ export default function AdminOrganizationsPage() {
       </div>
 
       {/* Tenants Table */}
-      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#F4F0E7] border-b border-[#DDD4C5] text-[#625B51]">
+            <thead className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Organization & ID</th>
                 <th className="py-3 px-4 font-semibold">Location</th>
@@ -211,12 +211,12 @@ export default function AdminOrganizationsPage() {
                 <th className="py-3 px-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD4C5]/60">
+            <tbody className="divide-y divide-[#D4C9B9]/60">
               {filteredTenants.map((org) => (
-                <tr key={org.id} className="hover:bg-[#F4F0E7]/60 transition-colors">
+                <tr key={org.id} className="hover:bg-[#E8E1D5]/60 transition-colors">
                   <td className="py-3 px-4 font-medium text-[#29251F]">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#A374]/15 border border-[#A374]/30 text-[#7A5720] font-serif flex items-center justify-center font-bold text-xs">
+                      <div className="w-8 h-8 rounded-lg bg-[#A374]/15 border border-[#A374]/30 text-[#805B25] font-serif flex items-center justify-center font-bold text-xs">
                         {org.name.charAt(0)}
                       </div>
                       <div>
@@ -237,9 +237,9 @@ export default function AdminOrganizationsPage() {
                   <td className="py-3 px-4 text-[#625B51]">
                     <div className="flex items-center gap-2 font-mono">
                       <span>{org.usersCount} agents</span>
-                      <span className="text-[#DDD4C5]">&bull;</span>
+                      <span className="text-[#D4C9B9]">&bull;</span>
                       <span>{org.leadsCount} leads</span>
-                      <span className="text-[#DDD4C5]">&bull;</span>
+                      <span className="text-[#D4C9B9]">&bull;</span>
                       <span>{org.propertiesCount} props</span>
                     </div>
                   </td>
@@ -258,7 +258,7 @@ export default function AdminOrganizationsPage() {
                         size="xs"
                         onClick={() => handleImpersonate(org)}
                         title="Enter Tenant Workspace in Support Mode"
-                        icon={<UserCheck className="w-3.5 h-3.5 text-[#7A5720]" />}
+                        icon={<UserCheck className="w-3.5 h-3.5 text-[#805B25]" />}
                       >
                         Enter CRM
                       </Button>
@@ -266,7 +266,7 @@ export default function AdminOrganizationsPage() {
                         variant="ghost"
                         size="xs"
                         onClick={() => handleToggleStatus(org.id)}
-                        className={org.status === 'ACTIVE' ? 'text-[#7A5720] hover:text-[#735022]' : 'text-[#3D7258]'}
+                        className={org.status === 'ACTIVE' ? 'text-[#805B25] hover:text-[#735022]' : 'text-[#3D7258]'}
                       >
                         {org.status === 'ACTIVE' ? 'Suspend' : 'Activate'}
                       </Button>

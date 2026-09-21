@@ -38,7 +38,7 @@ export default function CalendarPage() {
             <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#29251F] tracking-tight">
               Real Estate Activity Calendar
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#805B25] border border-[#A374]/30 rounded-full">
               September 2026
             </span>
           </div>
@@ -48,7 +48,7 @@ export default function CalendarPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="bg-[#FFFDF8] border border-[#DDD4C5] p-1 rounded-xl flex text-xs shadow-sm">
+          <div className="bg-[#FFFDF8] border border-[#D4C9B9] p-1 rounded-xl flex text-xs shadow-sm">
             <button
               onClick={() => setViewMode('MONTH')}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
@@ -78,15 +78,15 @@ export default function CalendarPage() {
       </div>
 
       {/* Calendar Grid Container */}
-      <div className="rounded-2xl border border-[#DDD4C5] bg-[#FFFDF8] p-4 sm:p-6 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-        <div className="flex items-center justify-between pb-4 border-b border-[#DDD4C5] mb-4">
+      <div className="rounded-2xl border border-[#D4C9B9] bg-[#FFFDF8] p-4 sm:p-6 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#D4C9B9] mb-4">
           <div className="flex items-center gap-3">
             <h2 className="text-lg font-serif font-bold text-[#29251F]">September 2026</h2>
             <div className="flex items-center gap-1">
-              <button className="p-1 rounded-lg hover:bg-[#F4F0E7] text-[#625B51] hover:text-[#29251F] transition-colors">
+              <button className="p-1 rounded-lg hover:bg-[#E8E1D5] text-[#625B51] hover:text-[#29251F] transition-colors">
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <button className="p-1 rounded-lg hover:bg-[#F4F0E7] text-[#625B51] hover:text-[#29251F] transition-colors">
+              <button className="p-1 rounded-lg hover:bg-[#E8E1D5] text-[#625B51] hover:text-[#29251F] transition-colors">
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -96,7 +96,7 @@ export default function CalendarPage() {
             <span className="flex items-center gap-1.5 text-[#A87932] font-medium">
               <span className="w-2 h-2 rounded-full bg-[#A87932]" /> Site Visits
             </span>
-            <span className="flex items-center gap-1.5 text-[#7A5720] font-medium">
+            <span className="flex items-center gap-1.5 text-[#805B25] font-medium">
               <span className="w-2 h-2 rounded-full bg-[#A374]" /> Follow-ups
             </span>
             <span className="flex items-center gap-1.5 text-[#2F6B52] font-medium">
@@ -106,7 +106,7 @@ export default function CalendarPage() {
         </div>
 
         {/* Days of week header */}
-        <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-[#625B51] uppercase tracking-wider pb-2 border-b border-[#DDD4C5]">
+        <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-[#625B51] uppercase tracking-wider pb-2 border-b border-[#D4C9B9]">
           <div>Mon</div>
           <div>Tue</div>
           <div>Wed</div>
@@ -128,7 +128,7 @@ export default function CalendarPage() {
                 className={`min-h-[100px] p-2 rounded-xl border flex flex-col justify-between transition-colors ${
                   isToday
                     ? 'bg-[#A374]/10 border-[#A374] shadow-sm'
-                    : 'bg-white border-[#DDD4C5] hover:border-[#A374]'
+                    : 'bg-white border-[#D4C9B9] hover:border-[#A374]'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -140,7 +140,7 @@ export default function CalendarPage() {
                     {day}
                   </span>
                   {isToday && (
-                    <span className="text-[9px] font-extrabold text-[#7A5720] uppercase">
+                    <span className="text-[9px] font-extrabold text-[#805B25] uppercase">
                       Today
                     </span>
                   )}
@@ -159,7 +159,7 @@ export default function CalendarPage() {
                   {fus.map((f) => (
                     <div
                       key={f.id}
-                      className="px-1.5 py-0.5 rounded bg-[#A374]/15 border border-[#A374]/30 text-[#7A5720] text-[10px] truncate font-medium"
+                      className="px-1.5 py-0.5 rounded bg-[#A374]/15 border border-[#A374]/30 text-[#805B25] text-[10px] truncate font-medium"
                       title={f.notes}
                     >
                       📞 {f.leadName}

@@ -149,7 +149,7 @@ export default function LeadsPage() {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#F4F0E7] text-[#29251F]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#E8E1D5] text-[#29251F]">
       {/* Header & Main Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -157,7 +157,7 @@ export default function LeadsPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-[#29251F] tracking-tight font-serif">
               Lead Management
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-[#A374]/20 text-[#7A5720] border border-[#A374]/40 rounded-full">
+            <span className="px-2.5 py-0.5 text-xs font-bold bg-[#A374]/20 text-[#805B25] border border-[#A374]/40 rounded-full">
               {filteredLeads.length} Leads
             </span>
           </div>
@@ -197,7 +197,7 @@ export default function LeadsPage() {
       </div>
 
       {/* Filter & View Switcher Bar */}
-      <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] aurum-card-shadow flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] aurum-card-shadow flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Search */}
         <div className="relative w-full md:w-80">
           <Search className="w-4 h-4 text-[#625B51] absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -206,7 +206,7 @@ export default function LeadsPage() {
             placeholder="Search leads by name, phone, property..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-[#F4F0E7] border border-[#DDD4C5] rounded-xl text-xs text-[#29251F] placeholder:text-[#625B51]/60 outline-none focus:border-[#A374]"
+            className="w-full pl-9 pr-4 py-2 bg-[#E8E1D5] border border-[#D4C9B9] rounded-xl text-xs text-[#29251F] placeholder:text-[#625B51]/60 outline-none focus:border-[#A374]"
           />
         </div>
 
@@ -215,7 +215,7 @@ export default function LeadsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-[#F4F0E7] border border-[#DDD4C5] rounded-xl px-3 py-2 text-xs text-[#29251F] font-semibold outline-none focus:border-[#A374]"
+            className="bg-[#E8E1D5] border border-[#D4C9B9] rounded-xl px-3 py-2 text-xs text-[#29251F] font-semibold outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Statuses</option>
             <option value="NEW">New Lead</option>
@@ -230,7 +230,7 @@ export default function LeadsPage() {
           <select
             value={sourceFilter}
             onChange={(e) => setSourceFilter(e.target.value)}
-            className="bg-[#F4F0E7] border border-[#DDD4C5] rounded-xl px-3 py-2 text-xs text-[#29251F] font-semibold outline-none focus:border-[#A374]"
+            className="bg-[#E8E1D5] border border-[#D4C9B9] rounded-xl px-3 py-2 text-xs text-[#29251F] font-semibold outline-none focus:border-[#A374]"
           >
             <option value="ALL">All Sources</option>
             <option value="WHATSAPP">WhatsApp</option>
@@ -243,7 +243,7 @@ export default function LeadsPage() {
           </select>
 
           {/* View Mode Toggle */}
-          <div className="bg-[#F4F0E7] border border-[#DDD4C5] p-1 rounded-xl flex items-center gap-1 ml-auto">
+          <div className="bg-[#E8E1D5] border border-[#D4C9B9] p-1 rounded-xl flex items-center gap-1 ml-auto">
             <button
               onClick={() => setViewMode('table')}
               className={`p-1.5 rounded-lg transition-colors ${
@@ -279,11 +279,11 @@ export default function LeadsPage() {
         />
       ) : viewMode === 'table' ? (
         /* TABLE VIEW */
-        <div className="rounded-2xl border border-[#DDD4C5] bg-[#FFFDF8] overflow-hidden aurum-card-shadow">
+        <div className="rounded-2xl border border-[#D4C9B9] bg-[#FFFDF8] overflow-hidden aurum-card-shadow">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="bg-[#F4F0E7] border-b border-[#DDD4C5] text-[#625B51] font-bold">
+                <tr className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51] font-bold">
                   <th className="p-4">Customer</th>
                   <th className="p-4">Source</th>
                   <th className="p-4">Status</th>
@@ -294,15 +294,15 @@ export default function LeadsPage() {
                   <th className="p-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#DDD4C5]/60">
+              <tbody className="divide-y divide-[#D4C9B9]/60">
                 {filteredLeads.map((lead) => (
                   <tr
                     key={lead.id}
                     onClick={() => openDetail(lead)}
-                    className="hover:bg-[#ECE6DA]/40 cursor-pointer transition-colors group"
+                    className="hover:bg-[#F1ECE3]/40 cursor-pointer transition-colors group"
                   >
                     <td className="p-4">
-                      <div className="font-bold text-[#29251F] text-sm group-hover:text-[#7A5720] transition-colors">
+                      <div className="font-bold text-[#29251F] text-sm group-hover:text-[#805B25] transition-colors">
                         {lead.name}
                       </div>
                       <div className="text-[11px] text-[#625B51] flex items-center gap-2 mt-0.5 font-medium">
@@ -311,7 +311,7 @@ export default function LeadsPage() {
                       </div>
                     </td>
                     <td className="p-4">
-                      <span className="px-2 py-0.5 text-[10px] font-semibold bg-[#F4F0E7] text-[#625B51] rounded border border-[#DDD4C5]">
+                      <span className="px-2 py-0.5 text-[10px] font-semibold bg-[#E8E1D5] text-[#625B51] rounded border border-[#D4C9B9]">
                         {lead.source}
                       </span>
                     </td>
@@ -321,13 +321,13 @@ export default function LeadsPage() {
                     <td className="p-4 font-semibold text-[#29251F]">
                       {lead.interestedPropertyName || 'General Portfolio'}
                     </td>
-                    <td className="p-4 font-bold text-[#7A5720] font-mono">
+                    <td className="p-4 font-bold text-[#805B25] font-mono">
                       {lead.budgetMaxINR ? formatINR(lead.budgetMaxINR, true) : 'Flexible'}
                     </td>
                     <td className="p-4">
                       <div className="flex items-center gap-1.5">
                         <span className="font-extrabold text-[#3D7258]">{lead.score}%</span>
-                        <div className="w-12 h-1.5 bg-[#ECE6DA] rounded-full overflow-hidden">
+                        <div className="w-12 h-1.5 bg-[#F1ECE3] rounded-full overflow-hidden">
                           <div
                             className="h-full bg-[#3D7258] rounded-full"
                             style={{ width: `${lead.score}%` }}
@@ -351,7 +351,7 @@ export default function LeadsPage() {
                         </a>
                         <a
                           href={`tel:${lead.phone}`}
-                          className="p-1.5 rounded-lg bg-[#F4F0E7] hover:bg-[#ECE6DA] text-[#29251F] border border-[#DDD4C5] transition-colors"
+                          className="p-1.5 rounded-lg bg-[#E8E1D5] hover:bg-[#F1ECE3] text-[#29251F] border border-[#D4C9B9] transition-colors"
                           title="Call Lead"
                         >
                           <Phone className="w-3.5 h-3.5" />
@@ -378,7 +378,7 @@ export default function LeadsPage() {
             <div
               key={lead.id}
               onClick={() => openDetail(lead)}
-              className="p-5 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374] cursor-pointer aurum-card-shadow hover:shadow-md transition-all space-y-3 flex flex-col justify-between"
+              className="p-5 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] hover:border-[#A374] cursor-pointer aurum-card-shadow hover:shadow-md transition-all space-y-3 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
@@ -386,15 +386,15 @@ export default function LeadsPage() {
                   <PriorityBadge priority={lead.priority} />
                 </div>
 
-                <h3 className="text-base font-bold text-[#29251F] hover:text-[#7A5720] transition-colors">
+                <h3 className="text-base font-bold text-[#29251F] hover:text-[#805B25] transition-colors">
                   {lead.name}
                 </h3>
                 <p className="text-xs text-[#625B51] mt-0.5 font-medium">{lead.phone}</p>
 
-                <div className="mt-3 p-3 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] text-xs space-y-1">
+                <div className="mt-3 p-3 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] text-xs space-y-1">
                   <div className="flex justify-between">
                     <span className="text-[#625B51]">Budget:</span>
-                    <span className="font-bold text-[#7A5720] font-mono">
+                    <span className="font-bold text-[#805B25] font-mono">
                       {lead.budgetMaxINR ? formatINR(lead.budgetMaxINR, true) : 'Flexible'}
                     </span>
                   </div>
@@ -407,7 +407,7 @@ export default function LeadsPage() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#DDD4C5] flex items-center justify-between text-xs">
+              <div className="pt-3 border-t border-[#D4C9B9] flex items-center justify-between text-xs">
                 <span className="text-[#625B51]">Score: <strong className="text-[#3D7258]">{lead.score}%</strong></span>
                 <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                   <a
@@ -420,7 +420,7 @@ export default function LeadsPage() {
                   </a>
                   <a
                     href={`tel:${lead.phone}`}
-                    className="p-1.5 rounded-lg bg-[#F4F0E7] text-[#29251F] border border-[#DDD4C5] hover:bg-[#ECE6DA]"
+                    className="p-1.5 rounded-lg bg-[#E8E1D5] text-[#29251F] border border-[#D4C9B9] hover:bg-[#F1ECE3]"
                   >
                     <Phone className="w-3.5 h-3.5" />
                   </a>
@@ -461,7 +461,7 @@ export default function LeadsPage() {
               </a>
               <a
                 href={`tel:${selectedLead.phone}`}
-                className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-[#FFFDF8] hover:bg-[#ECE6DA] text-[#29251F] font-bold text-xs border border-[#DDD4C5]"
+                className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-[#FFFDF8] hover:bg-[#F1ECE3] text-[#29251F] font-bold text-xs border border-[#D4C9B9]"
               >
                 <Phone className="w-4 h-4 text-[#A87932]" />
                 Call Phone
@@ -480,8 +480,8 @@ export default function LeadsPage() {
             </div>
 
             {/* Core Details */}
-            <div className="p-4 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] space-y-3">
-              <h4 className="font-bold text-[#7A5720] text-xs uppercase tracking-wider">
+            <div className="p-4 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] space-y-3">
+              <h4 className="font-bold text-[#805B25] text-xs uppercase tracking-wider">
                 Contact & Profile Information
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
@@ -499,7 +499,7 @@ export default function LeadsPage() {
                 </div>
                 <div>
                   <span className="text-[#625B51] block">Target Budget</span>
-                  <span className="text-[#7A5720] font-bold font-mono">
+                  <span className="text-[#805B25] font-bold font-mono">
                     {selectedLead.budgetMaxINR ? formatINR(selectedLead.budgetMaxINR) : 'Flexible'}
                   </span>
                 </div>
@@ -515,8 +515,8 @@ export default function LeadsPage() {
             </div>
 
             {/* Interested Property */}
-            <div className="p-4 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] space-y-2">
-              <h4 className="font-bold text-[#7A5720] text-xs uppercase tracking-wider">
+            <div className="p-4 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] space-y-2">
+              <h4 className="font-bold text-[#805B25] text-xs uppercase tracking-wider">
                 Property Interest
               </h4>
               <p className="text-sm font-bold text-[#29251F]">
@@ -525,11 +525,11 @@ export default function LeadsPage() {
             </div>
 
             {/* Notes & Activity */}
-            <div className="p-4 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] space-y-2">
-              <h4 className="font-bold text-[#7A5720] text-xs uppercase tracking-wider">
+            <div className="p-4 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] space-y-2">
+              <h4 className="font-bold text-[#805B25] text-xs uppercase tracking-wider">
                 Consultant Notes
               </h4>
-              <p className="text-xs text-[#625B51] leading-relaxed bg-[#FFFDF8] p-3 rounded-lg border border-[#DDD4C5]">
+              <p className="text-xs text-[#625B51] leading-relaxed bg-[#FFFDF8] p-3 rounded-lg border border-[#D4C9B9]">
                 {selectedLead.notes || 'No custom notes logged yet.'}
               </p>
             </div>
@@ -537,7 +537,7 @@ export default function LeadsPage() {
             {/* Realty AI Conversion Score */}
             <div className="p-4 rounded-xl bg-[#FFFDF8] border border-[#A374]/50 aurum-card-shadow space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#7A5720] flex items-center gap-1.5">
+                <span className="text-xs font-bold text-[#805B25] flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" /> Realty AI Score
                 </span>
                 <span className="text-lg font-extrabold text-[#3D7258]">{selectedLead.score}%</span>
@@ -669,7 +669,7 @@ export default function LeadsPage() {
             onChange={(e) => setNewLeadForm({ ...newLeadForm, notes: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D4C9B9]">
             <Button
               type="button"
               variant="secondary"
@@ -695,8 +695,8 @@ export default function LeadsPage() {
         description="Upload your lead spreadsheet to automatically parse names, phone numbers, and budgets."
       >
         <div className="space-y-4 text-xs sm:text-sm">
-          <label className="border-2 border-dashed border-[#DDD4C5] rounded-2xl p-8 text-center bg-[#F4F0E7] hover:border-[#A374] transition-colors cursor-pointer block">
-            <Upload className="w-8 h-8 text-[#7A5720] mx-auto mb-2" />
+          <label className="border-2 border-dashed border-[#D4C9B9] rounded-2xl p-8 text-center bg-[#E8E1D5] hover:border-[#A374] transition-colors cursor-pointer block">
+            <Upload className="w-8 h-8 text-[#805B25] mx-auto mb-2" />
             <p className="font-bold text-[#29251F]">Click to select or drop your .csv lead spreadsheet</p>
             <p className="text-[#625B51] text-xs mt-1">Supports UTF-8 CSV exports with Name, Phone, Email, Budget columns</p>
             <input
@@ -742,12 +742,12 @@ export default function LeadsPage() {
             />
           </label>
 
-          <div className="p-3.5 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] text-xs text-[#29251F]">
-            <p className="font-bold text-[#7A5720] mb-1">CSV Format Guidance:</p>
+          <div className="p-3.5 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] text-xs text-[#29251F]">
+            <p className="font-bold text-[#805B25] mb-1">CSV Format Guidance:</p>
             <p className="text-[#625B51]">Columns: <code className="bg-white px-1 py-0.5 rounded border text-[#29251F]">Name, Phone, Email, Budget, Location</code></p>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#DDD4C5]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D4C9B9]">
             <Button
               variant="secondary"
               size="sm"

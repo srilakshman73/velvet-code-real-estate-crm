@@ -78,7 +78,7 @@ export default function ReportsPage() {
               <BarChart3 className="w-6 h-6 text-[#A374]" />
               Executive Analytics & Reports
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#805B25] border border-[#A374]/30 rounded-full">
               Real-Time Metrics
             </span>
           </div>
@@ -88,7 +88,7 @@ export default function ReportsPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="bg-[#FFFDF8] border border-[#DDD4C5] p-1 rounded-xl flex text-xs shadow-xs">
+          <div className="bg-[#FFFDF8] border border-[#D4C9B9] p-1 rounded-xl flex text-xs shadow-xs">
             {['Today', '7 Days', '30 Days', 'ThisMonth'].map((t) => (
               <button
                 key={t}
@@ -116,8 +116,8 @@ export default function ReportsPage() {
       {/* Conversion Funnel & Agent Leaderboard */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Conversion Funnel */}
-        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-          <div className="border-b border-[#DDD4C5] pb-3">
+        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+          <div className="border-b border-[#D4C9B9] pb-3">
             <h3 className="text-base font-serif font-bold text-[#29251F] tracking-tight">
               Lead Conversion Funnel
             </h3>
@@ -129,9 +129,9 @@ export default function ReportsPage() {
               <div key={idx} className="space-y-1">
                 <div className="flex justify-between text-xs font-semibold">
                   <span className="text-[#29251F]">{step.stage}</span>
-                  <span className="text-[#7A5720] font-mono">{step.count} leads</span>
+                  <span className="text-[#805B25] font-mono">{step.count} leads</span>
                 </div>
-                <div className="w-full h-3 bg-[#F4F0E7] rounded-full overflow-hidden border border-[#DDD4C5]/50">
+                <div className="w-full h-3 bg-[#E8E1D5] rounded-full overflow-hidden border border-[#D4C9B9]/50">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
@@ -146,8 +146,8 @@ export default function ReportsPage() {
         </div>
 
         {/* Agent Revenue Leaderboard */}
-        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
-          <div className="border-b border-[#DDD4C5] pb-3">
+        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] space-y-4 shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+          <div className="border-b border-[#D4C9B9] pb-3">
             <h3 className="text-base font-serif font-bold text-[#29251F] tracking-tight">
               Sales Consultant Revenue Contribution
             </h3>
@@ -163,7 +163,7 @@ export default function ReportsPage() {
                 <Tooltip
                   contentStyle={{
                     backgroundColor: '#FFFDF8',
-                    borderColor: '#DDD4C5',
+                    borderColor: '#D4C9B9',
                     borderRadius: '0.75rem',
                     fontSize: '12px',
                     color: '#29251F',

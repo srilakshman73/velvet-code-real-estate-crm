@@ -75,7 +75,7 @@ export default function RealtyAIPage() {
               <Sparkles className="w-6 h-6 text-[#A374]" />
               Realty AI Assistant Console
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#7A5720] border border-[#A374]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A374]/15 text-[#805B25] border border-[#A374]/30 rounded-full">
               Enterprise Intelligence
             </span>
           </div>
@@ -86,7 +86,7 @@ export default function RealtyAIPage() {
 
         {/* Quota & Reset */}
         <div className="flex items-center gap-4">
-          <div className="p-2.5 px-4 rounded-xl bg-[#FFFDF8] border border-[#DDD4C5] text-xs flex items-center gap-3 shadow-xs">
+          <div className="p-2.5 px-4 rounded-xl bg-[#FFFDF8] border border-[#D4C9B9] text-xs flex items-center gap-3 shadow-xs">
             <Zap className="w-4 h-4 text-[#A374]" />
             <div>
               <p className="text-[#625B51] text-[10px]">Monthly Quota</p>
@@ -110,9 +110,9 @@ export default function RealtyAIPage() {
       {/* Main AI Workspace */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Console: Chat Stream (8 Cols) */}
-        <div className="lg:col-span-8 rounded-2xl border border-[#DDD4C5] bg-[#FFFDF8] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col h-[680px] overflow-hidden">
+        <div className="lg:col-span-8 rounded-2xl border border-[#D4C9B9] bg-[#FFFDF8] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] flex flex-col h-[680px] overflow-hidden">
           {/* Security Policy Badge */}
-          <div className="p-3 border-b border-[#DDD4C5] bg-[#F4F0E7] flex items-center justify-between text-xs text-[#625B51]">
+          <div className="p-3 border-b border-[#D4C9B9] bg-[#E8E1D5] flex items-center justify-between text-xs text-[#625B51]">
             <span className="flex items-center gap-1.5 text-[#3D7258] font-medium">
               <Lock className="w-3.5 h-3.5" />
               Multi-tenant Isolated • Proprietary CRM Engine
@@ -128,7 +128,7 @@ export default function RealtyAIPage() {
                 className={`flex gap-3.5 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.role === 'assistant' && (
-                  <div className="w-8 h-8 rounded-xl bg-[#A374]/15 border border-[#A374]/30 text-[#7A5720] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-8 h-8 rounded-xl bg-[#A374]/15 border border-[#A374]/30 text-[#805B25] flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Bot className="w-4 h-4" />
                   </div>
                 )}
@@ -137,7 +137,7 @@ export default function RealtyAIPage() {
                   className={`max-w-[85%] p-4 rounded-2xl leading-relaxed whitespace-pre-wrap ${
                     msg.role === 'user'
                       ? 'bg-[#A374] text-white font-medium rounded-tr-none shadow-sm'
-                      : 'bg-[#F4F0E7] text-[#29251F] border border-[#DDD4C5] rounded-tl-none shadow-xs'
+                      : 'bg-[#E8E1D5] text-[#29251F] border border-[#D4C9B9] rounded-tl-none shadow-xs'
                   }`}
                 >
                   <p>{msg.content}</p>
@@ -145,7 +145,7 @@ export default function RealtyAIPage() {
                   {/* Action Draft Preview */}
                   {msg.actionDraft && msg.role === 'assistant' && (
                     <div className="mt-4 p-4 rounded-xl bg-white border border-[#A374] text-[#29251F] space-y-2 shadow-sm">
-                      <div className="flex items-center justify-between text-xs font-bold text-[#7A5720] uppercase tracking-wider font-serif">
+                      <div className="flex items-center justify-between text-xs font-bold text-[#805B25] uppercase tracking-wider font-serif">
                         <span className="flex items-center gap-1.5">
                           <MessageSquare className="w-4 h-4 text-[#3D7258]" />
                           Prepared Action Draft
@@ -166,7 +166,7 @@ export default function RealtyAIPage() {
                       )}
 
                       {msg.actionDraft.messageText && (
-                        <p className="text-xs italic text-[#29251F] bg-[#F4F0E7] p-3 rounded-lg border border-[#DDD4C5]">
+                        <p className="text-xs italic text-[#29251F] bg-[#E8E1D5] p-3 rounded-lg border border-[#D4C9B9]">
                           "{msg.actionDraft.messageText}"
                         </p>
                       )}
@@ -192,7 +192,7 @@ export default function RealtyAIPage() {
                 </div>
 
                 {msg.role === 'user' && (
-                  <div className="w-8 h-8 rounded-xl bg-[#29251F] border border-[#DDD4C5] text-[#FFFDF8] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-8 h-8 rounded-xl bg-[#29251F] border border-[#D4C9B9] text-[#FFFDF8] flex items-center justify-center flex-shrink-0 mt-0.5">
                     <UserIcon className="w-4 h-4" />
                   </div>
                 )}
@@ -202,7 +202,7 @@ export default function RealtyAIPage() {
           </div>
 
           {/* Quick Prompts Bar */}
-          <div className="px-4 py-2 bg-[#F4F0E7] border-t border-[#DDD4C5] overflow-x-auto flex gap-2 no-scrollbar">
+          <div className="px-4 py-2 bg-[#E8E1D5] border-t border-[#D4C9B9] overflow-x-auto flex gap-2 no-scrollbar">
             {samplePrompts.map((p, idx) => (
               <button
                 key={idx}
@@ -210,7 +210,7 @@ export default function RealtyAIPage() {
                   setInputVal(p.query);
                   sendAIMessage(p.query);
                 }}
-                className="px-3 py-1.5 text-xs bg-white hover:bg-[#A374]/15 text-[#29251F] hover:text-[#7A5720] border border-[#DDD4C5] rounded-full whitespace-nowrap transition-colors shadow-2xs"
+                className="px-3 py-1.5 text-xs bg-white hover:bg-[#A374]/15 text-[#29251F] hover:text-[#805B25] border border-[#D4C9B9] rounded-full whitespace-nowrap transition-colors shadow-2xs"
               >
                 {p.label}
               </button>
@@ -220,14 +220,14 @@ export default function RealtyAIPage() {
           {/* Input Form */}
           <form
             onSubmit={handleSend}
-            className="p-3.5 bg-white border-t border-[#DDD4C5] flex items-center gap-2.5"
+            className="p-3.5 bg-white border-t border-[#D4C9B9] flex items-center gap-2.5"
           >
             <input
               type="text"
               placeholder="Ask Realty AI to analyze leads, summarize deals, or draft messages..."
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
-              className="flex-1 bg-[#F4F0E7]/50 border border-[#DDD4C5] rounded-xl px-4 py-2.5 text-xs sm:text-sm text-[#29251F] placeholder:text-[#625B51] outline-none focus:border-[#A374]"
+              className="flex-1 bg-[#E8E1D5]/50 border border-[#D4C9B9] rounded-xl px-4 py-2.5 text-xs sm:text-sm text-[#29251F] placeholder:text-[#625B51] outline-none focus:border-[#A374]"
             />
             <Button type="submit" variant="gold" size="md" className="font-bold px-5">
               <Send className="w-4 h-4" />
@@ -237,13 +237,13 @@ export default function RealtyAIPage() {
 
         {/* Right Sidebar: Quick AI CRM Insights (4 Cols) */}
         <div className="lg:col-span-4 space-y-4">
-          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-4">
-            <h3 className="text-sm font-serif font-bold text-[#7A5720] uppercase tracking-wider">
+          <div className="p-6 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] space-y-4">
+            <h3 className="text-sm font-serif font-bold text-[#805B25] uppercase tracking-wider">
               Live AI CRM Intelligence
             </h3>
 
             <div className="space-y-3 text-xs">
-              <div className="p-3.5 rounded-xl bg-white border border-[#DDD4C5] space-y-1 shadow-2xs">
+              <div className="p-3.5 rounded-xl bg-white border border-[#D4C9B9] space-y-1 shadow-2xs">
                 <span className="font-bold text-[#29251F] flex items-center gap-1.5">
                   <TrendingUp className="w-3.5 h-3.5 text-[#3D7258]" /> High Intent Pipeline
                 </span>
@@ -252,7 +252,7 @@ export default function RealtyAIPage() {
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white border border-[#DDD4C5] space-y-1 shadow-2xs">
+              <div className="p-3.5 rounded-xl bg-white border border-[#D4C9B9] space-y-1 shadow-2xs">
                 <span className="font-bold text-[#29251F] flex items-center gap-1.5">
                   <Building className="w-3.5 h-3.5 text-[#A374]" /> Hot Property Demand
                 </span>
@@ -261,7 +261,7 @@ export default function RealtyAIPage() {
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white border border-[#DDD4C5] space-y-1 shadow-2xs">
+              <div className="p-3.5 rounded-xl bg-white border border-[#D4C9B9] space-y-1 shadow-2xs">
                 <span className="font-bold text-[#29251F] flex items-center gap-1.5">
                   <Users className="w-3.5 h-3.5 text-[#B8893C]" /> Agent Velocity
                 </span>

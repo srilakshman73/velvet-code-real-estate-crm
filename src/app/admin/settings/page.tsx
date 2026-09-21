@@ -72,7 +72,7 @@ export default function AdminPlatformSettingsPage() {
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* Brand & Legal Entity Card */}
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-serif font-bold text-[#29251F]">SaaS Provider Entity & Support Channel</h2>
             <VelvetCodeLogo variant="horizontal" size="sm" />
@@ -113,7 +113,7 @@ export default function AdminPlatformSettingsPage() {
         </Card>
 
         {/* Global API Gateway Keys */}
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <h2 className="text-lg font-serif font-bold text-[#29251F] mb-1">Global Gateway Credentials & Secrets</h2>
           <p className="text-xs text-[#625B51] mb-6">
             Platform-wide master credentials for Indian payment processing and AI inference orchestration.
@@ -150,17 +150,17 @@ export default function AdminPlatformSettingsPage() {
         </Card>
 
         {/* System Operations & Maintenance */}
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <h2 className="text-lg font-serif font-bold text-[#29251F] mb-1">System Operations & Trial Policies</h2>
           <p className="text-xs text-[#625B51] mb-6">
             Manage platform operational mode and tenant onboarding trial terms.
           </p>
 
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 rounded-xl bg-white border border-[#DDD4C5]">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-white border border-[#D4C9B9]">
               <div>
                 <div className="text-sm font-semibold text-[#29251F] flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-[#7A5720]" />
+                  <AlertTriangle className="w-4 h-4 text-[#805B25]" />
                   Scheduled Maintenance Mode
                 </div>
                 <div className="text-xs text-[#625B51]">
@@ -171,7 +171,7 @@ export default function AdminPlatformSettingsPage() {
                 type="checkbox"
                 checked={platformConfig.maintenanceMode}
                 onChange={(e) => setPlatformConfig({ ...platformConfig, maintenanceMode: e.target.checked })}
-                className="w-4 h-4 rounded text-[#A374] focus:ring-[#A374] bg-white border-[#DDD4C5]"
+                className="w-4 h-4 rounded text-[#A374] focus:ring-[#A374] bg-white border-[#D4C9B9]"
               />
             </div>
 

@@ -90,12 +90,12 @@ export default function SolutionsPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4F0E7] text-[#29251F]">
+    <div className="min-h-screen flex flex-col bg-[#E8E1D5] text-[#29251F]">
       <PublicHeader />
       <main className="flex-1">
         {/* Hero */}
         <section className="py-20 text-center max-w-4xl mx-auto px-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5720] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#805B25] bg-[#A374]/15 px-3.5 py-1 rounded-full border border-[#A374]/30">
             Tailored Industry Solutions
           </span>
           <h1 className="text-4xl sm:text-6xl font-bold text-[#29251F] mt-4 tracking-tight font-serif">
@@ -114,15 +114,15 @@ export default function SolutionsPage() {
               <div
                 key={sol.id}
                 id={sol.id}
-                className="p-8 sm:p-10 rounded-2xl bg-[#FFFDF8] border border-[#DDD4C5] hover:border-[#A374] transition-all aurum-card-shadow space-y-6"
+                className="p-8 sm:p-10 rounded-2xl bg-[#FFFDF8] border border-[#D4C9B9] hover:border-[#A374] transition-all aurum-card-shadow space-y-6"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD4C5] pb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D4C9B9] pb-6">
                   <div className="flex items-center gap-4">
-                    <div className="p-3.5 rounded-xl bg-[#F4F0E7] text-[#7A5720] border border-[#DDD4C5]">
+                    <div className="p-3.5 rounded-xl bg-[#E8E1D5] text-[#805B25] border border-[#D4C9B9]">
                       <Icon className="w-7 h-7" />
                     </div>
                     <div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A5720]">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#805B25]">
                         {sol.tag}
                       </span>
                       <h2 className="text-2xl font-bold text-[#29251F] mt-0.5 font-serif">{sol.title}</h2>

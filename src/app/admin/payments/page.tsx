@@ -78,7 +78,7 @@ export default function AdminPaymentsPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Gross Inflow (MTD)</span>
           <div className="text-2xl font-serif font-bold text-[#29251F] mt-2">₹0</div>
           <div className="text-xs text-[#3D7258] mt-1 flex items-center gap-1 font-semibold">
@@ -86,13 +86,13 @@ export default function AdminPaymentsPage() {
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Total GST Collected (18%)</span>
-          <div className="text-2xl font-serif font-bold text-[#7A5720] mt-2">₹0</div>
+          <div className="text-2xl font-serif font-bold text-[#805B25] mt-2">₹0</div>
           <div className="text-xs text-[#625B51] mt-1">Ready for GSTR-1 e-filing</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+        <Card orientation="vertical" className="bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
           <span className="text-xs font-semibold text-[#625B51] uppercase tracking-wider font-serif">Settled to ICICI Current A/C</span>
           <div className="text-2xl font-serif font-bold text-[#3D7258] mt-2">T+1 Daily Cycle</div>
           <div className="text-xs text-[#625B51] mt-1">Automatic Razorpay nodal transfer</div>
@@ -112,7 +112,7 @@ export default function AdminPaymentsPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="bg-white border border-[#DDD4C5] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
+          className="bg-white border border-[#D4C9B9] rounded-lg px-3 py-2 text-xs text-[#29251F] focus:outline-none focus:border-[#A374]"
         >
           <option value="ALL">All Statuses</option>
           <option value="CAPTURED">Captured (Success)</option>
@@ -122,10 +122,10 @@ export default function AdminPaymentsPage() {
       </div>
 
       {/* Table */}
-      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
+      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)]">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#F4F0E7] border-b border-[#DDD4C5] text-[#625B51]">
+            <thead className="bg-[#E8E1D5] border-b border-[#D4C9B9] text-[#625B51]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Payment ID & Org</th>
                 <th className="py-3 px-4 font-semibold">Plan Item</th>
@@ -137,18 +137,18 @@ export default function AdminPaymentsPage() {
                 <th className="py-3 px-4 font-semibold text-right">Receipt</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD4C5]/60">
+            <tbody className="divide-y divide-[#D4C9B9]/60">
               {filteredPayments.length === 0 ? (
                 <tr>
                   <td colSpan={8} className="py-12 text-center text-[#625B51]">
-                    <Receipt className="w-8 h-8 text-[#DDD4C5] mx-auto mb-2" />
+                    <Receipt className="w-8 h-8 text-[#D4C9B9] mx-auto mb-2" />
                     <p className="font-serif font-bold text-sm text-[#29251F]">No payment transactions yet</p>
                     <p className="text-xs">Real customer subscription payments and GST invoices will be recorded here.</p>
                   </td>
                 </tr>
               ) : (
                 filteredPayments.map((p) => (
-                  <tr key={p.id} className="hover:bg-[#F4F0E7]/60 transition-colors">
+                  <tr key={p.id} className="hover:bg-[#E8E1D5]/60 transition-colors">
                     <td className="py-3 px-4 font-medium text-[#29251F]">
                       <div>
                         <div className="text-sm font-serif font-bold text-[#29251F]">{p.organizationName}</div>

@@ -38,7 +38,7 @@ export function NotificationDrawer({ isOpen, onClose }: NotificationDrawerProps)
       case 'LEAD':
         return <Trophy className="w-4 h-4 text-[#A374]" />;
       case 'AI':
-        return <Sparkles className="w-4 h-4 text-[#7A5720]" />;
+        return <Sparkles className="w-4 h-4 text-[#805B25]" />;
       case 'BILLING':
         return <CreditCard className="w-4 h-4 text-[#8B4A4A]" />;
       default:
@@ -55,18 +55,18 @@ export function NotificationDrawer({ isOpen, onClose }: NotificationDrawerProps)
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-[#FFFDF8] border-l border-[#DDD4C5] shadow-2xl flex flex-col text-[#29251F]">
+        <div className="w-screen max-w-md bg-[#FFFDF8] border-l border-[#D4C9B9] shadow-2xl flex flex-col text-[#29251F]">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 sm:p-5 border-b border-[#DDD4C5] bg-[#F8F5EE]/70">
+          <div className="flex items-center justify-between p-4 sm:p-5 border-b border-[#D4C9B9] bg-[#F1ECE3]/70">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-[#A374]/15 border border-[#A374]/30 text-[#7A5720]">
+              <div className="p-2 rounded-xl bg-[#A374]/15 border border-[#A374]/30 text-[#805B25]">
                 <Bell className="w-4 h-4" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-[#29251F] tracking-tight">
                   Notifications
                 </h3>
-                <p className="text-xs text-[#857C6E]">
+                <p className="text-xs text-[#81786A]">
                   {unreadCount > 0 ? `${unreadCount} unread alert${unreadCount > 1 ? 's' : ''}` : 'All caught up!'}
                 </p>
               </div>
@@ -77,7 +77,7 @@ export function NotificationDrawer({ isOpen, onClose }: NotificationDrawerProps)
                 <button
                   onClick={markAllNotificationsRead}
                   title="Mark all as read"
-                  className="p-1.5 rounded-lg text-[#625B51] hover:text-[#29251F] hover:bg-[#ECE6DA] transition-colors text-xs flex items-center gap-1"
+                  className="p-1.5 rounded-lg text-[#625B51] hover:text-[#29251F] hover:bg-[#F1ECE3] transition-colors text-xs flex items-center gap-1"
                 >
                   <CheckCheck className="w-4 h-4 text-[#A374]" />
                   <span className="hidden sm:inline font-semibold">Mark read</span>
@@ -85,7 +85,7 @@ export function NotificationDrawer({ isOpen, onClose }: NotificationDrawerProps)
               )}
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-[#625B51] hover:text-[#29251F] hover:bg-[#ECE6DA] transition-colors"
+                className="p-1.5 rounded-lg text-[#625B51] hover:text-[#29251F] hover:bg-[#F1ECE3] transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -107,12 +107,12 @@ export function NotificationDrawer({ isOpen, onClose }: NotificationDrawerProps)
                   onClick={() => markNotificationRead(n.id)}
                   className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
                     n.isRead
-                      ? 'bg-[#F4F0E7]/50 border-[#DDD4C5]/60 opacity-80 hover:opacity-100 hover:bg-[#ECE6DA]'
+                      ? 'bg-[#E8E1D5]/50 border-[#D4C9B9]/60 opacity-80 hover:opacity-100 hover:bg-[#F1ECE3]'
                       : 'bg-[#FFFDF8] border-[#A374]/60 shadow-xs hover:border-[#A374]'
                   }`}
                 >
                   <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] flex-shrink-0 mt-0.5">
+                    <div className="p-2 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] flex-shrink-0 mt-0.5">
                       {getIcon(n.type)}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -128,7 +128,7 @@ export function NotificationDrawer({ isOpen, onClose }: NotificationDrawerProps)
                         {n.message}
                       </p>
                       {n.link && (
-                        <div className="mt-2 flex items-center gap-1 text-[11px] font-bold text-[#7A5720] hover:text-[#7A5720]">
+                        <div className="mt-2 flex items-center gap-1 text-[11px] font-bold text-[#805B25] hover:text-[#805B25]">
                           <Link href={n.link} onClick={onClose} className="flex items-center gap-1">
                             View details <ArrowRight className="w-3 h-3" />
                           </Link>
@@ -142,7 +142,7 @@ export function NotificationDrawer({ isOpen, onClose }: NotificationDrawerProps)
           </div>
 
           {/* Footer */}
-          <div className="p-4 border-t border-[#DDD4C5] bg-[#F8F5EE]">
+          <div className="p-4 border-t border-[#D4C9B9] bg-[#F1ECE3]">
             <Button
               variant="outline"
               size="sm"

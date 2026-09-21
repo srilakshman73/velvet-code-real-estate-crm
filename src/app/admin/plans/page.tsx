@@ -59,7 +59,7 @@ export default function AdminPlansPage() {
             <Card
               key={plan.tier}
               orientation="vertical"
-              className={`relative flex flex-col justify-between bg-[#FFFDF8] border-[#DDD4C5] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] ${
+              className={`relative flex flex-col justify-between bg-[#FFFDF8] border-[#D4C9B9] shadow-[0_4px_20px_-4px_rgba(21,21,21,0.05)] ${
                 isPopular ? 'border-[#A374] shadow-[0_10px_30px_-5px_rgba(163,116,36,0.15)] ring-1 ring-[#A374]/30' : ''
               }`}
             >
@@ -81,7 +81,7 @@ export default function AdminPlansPage() {
                 </div>
 
                 {/* Pricing Block */}
-                <div className="p-4 rounded-xl bg-[#F4F0E7] border border-[#DDD4C5] mb-6 space-y-2">
+                <div className="p-4 rounded-xl bg-[#E8E1D5] border border-[#D4C9B9] mb-6 space-y-2">
                   <div className="flex items-baseline gap-1">
                     <span className="text-2xl font-bold font-serif text-[#29251F]">{formatINR(plan.priceMonthlyINR)}</span>
                     <span className="text-xs text-[#625B51]">/ month</span>
@@ -93,14 +93,14 @@ export default function AdminPlansPage() {
 
                 {/* Resource Limits List */}
                 <div className="space-y-3 text-xs mb-6">
-                  <div className="flex items-center justify-between py-1.5 border-b border-[#DDD4C5]/60">
+                  <div className="flex items-center justify-between py-1.5 border-b border-[#D4C9B9]/60">
                     <span className="text-[#625B51] flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-[#625B51]" /> Max User Seats:
                     </span>
                     <span className="font-bold text-[#29251F]">{plan.maxUsers} seat(s)</span>
                   </div>
 
-                  <div className="flex items-center justify-between py-1.5 border-b border-[#DDD4C5]/60">
+                  <div className="flex items-center justify-between py-1.5 border-b border-[#D4C9B9]/60">
                     <span className="text-[#625B51] flex items-center gap-1.5">
                       <Building className="w-3.5 h-3.5 text-[#625B51]" /> Max Properties:
                     </span>
@@ -109,16 +109,16 @@ export default function AdminPlansPage() {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between py-1.5 border-b border-[#DDD4C5]/60">
+                  <div className="flex items-center justify-between py-1.5 border-b border-[#D4C9B9]/60">
                     <span className="text-[#625B51] flex items-center gap-1.5">
                       <Bot className="w-3.5 h-3.5 text-[#A374]" /> Monthly AI Inferences:
                     </span>
-                    <span className="font-bold text-[#7A5720]">
+                    <span className="font-bold text-[#805B25]">
                       {plan.monthlyAIQuota === -1 ? 'Unlimited' : `${plan.monthlyAIQuota.toLocaleString()} queries`}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between py-1.5 border-b border-[#DDD4C5]/60">
+                  <div className="flex items-center justify-between py-1.5 border-b border-[#D4C9B9]/60">
                     <span className="text-[#625B51] flex items-center gap-1.5">
                       <MessageSquare className="w-3.5 h-3.5 text-[#3D7258]" /> WhatsApp Integration:
                     </span>
@@ -127,11 +127,11 @@ export default function AdminPlansPage() {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between py-1.5 border-b border-[#DDD4C5]/60">
+                  <div className="flex items-center justify-between py-1.5 border-b border-[#D4C9B9]/60">
                     <span className="text-[#625B51] flex items-center gap-1.5">
                       <Sliders className="w-3.5 h-3.5 text-[#A374]" /> Custom Automations:
                     </span>
-                    <span className={`font-semibold ${plan.hasAutomation ? 'text-[#7A5720]' : 'text-[#625B51]'}`}>
+                    <span className={`font-semibold ${plan.hasAutomation ? 'text-[#805B25]' : 'text-[#625B51]'}`}>
                       {plan.hasAutomation ? 'Enabled ✓' : 'Disabled'}
                     </span>
                   </div>
@@ -149,7 +149,7 @@ export default function AdminPlansPage() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#DDD4C5]">
+              <div className="pt-4 border-t border-[#D4C9B9]">
                 <Button
                   variant="outline"
                   className="w-full"
