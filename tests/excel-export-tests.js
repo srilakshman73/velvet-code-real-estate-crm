@@ -97,7 +97,7 @@ try {
   runTest(
     1,
     'Export with Zero Leads (Clean Empty State)',
-    infoZero.sheetnames.length === 3 && infoZero.sheetnames[0] === 'All Leads',
+    infoZero.sheetnames.length === 4 && infoZero.sheetnames[0] === 'All Leads' && infoZero.sheetnames.includes('Instructions'),
     `Sheets created: ${JSON.stringify(infoZero.sheetnames)} | Lead rows: ${infoZero.lead_rows}`
   );
 
@@ -135,7 +135,7 @@ try {
   runTest(
     2,
     'Export with Single Lead & Full Metadata',
-    infoOne.sheetnames.length === 3 && infoOne.lead_rows === 1 && infoOne.row_5_values[1] === 'Anirudh Raghavan',
+    infoOne.sheetnames.length === 4 && infoOne.lead_rows === 1 && infoOne.row_5_values[1] === 'Anirudh Raghavan',
     `Lead '${infoOne.row_5_values[1]}' present in row 5 with budget ₹${infoOne.row_5_values[4]}`
   );
 

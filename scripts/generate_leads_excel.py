@@ -592,7 +592,103 @@ def generate_leads_workbook(payload_data, output_path):
     ws_strat.column_dimensions['F'].width = 32
     ws_strat.column_dimensions['G'].width = 24
     
-    ws_strat.freeze_panes = 'A5'
+    # -------------------------------------------------------------
+    # SHEET 4: "Instructions"
+    # -------------------------------------------------------------
+    ws_inst = wb.create_sheet(title="Instructions")
+    
+    # Header
+    ws_inst.merge_cells('A1:E1')
+    ws_inst['A1'] = f"{org_name.upper()} — CRM EXCEL WORKBOOK USER GUIDE & FIELD DICTIONARY"
+    ws_inst['A1'].font = font_title
+    ws_inst['A1'].alignment = align_left
+    
+    ws_inst.merge_cells('A2:E2')
+    ws_inst['A2'] = "Comprehensive guide to interacting with workbook sheets, formulas, custom fields, and data protection rules."
+    ws_inst['A2'].font = font_subtitle
+    ws_inst['A2'].alignment = align_left
+
+    inst_sections = [
+        (
+            "1. WORKBOOK OVERVIEW & STRUCTURE",
+            [
+                ("Sheet: All Leads", "Contains exhaustive records for all leads matching your export selection. Equipped with Excel AutoFilters, frozen headers, and INR currency formatting."),
+                ("Sheet: Lead Dashboard", "Executive summary displaying real-time calculated KPIs, pipeline valuation, stage distributions, and native Microsoft Excel visual charts."),
+                ("Sheet: Lead Strategy", "Operational sales playbook detailing recommended actions, SLA response timelines, communication channels, and advancement milestones per stage."),
+                ("Sheet: Instructions", "Reference guide explaining workbook features, field dictionaries, and multi-tenant security guarantees.")
+            ]
+        ),
+        (
+            "2. DATA DICTIONARY & FIELD SPECIFICATIONS",
+            [
+                ("Max Budget (INR)", "Maximum purchasing budget specified by buyer. Formatted as Indian Rupees (INR) with normalized numeric values (leading zeros stripped)."),
+                ("Lead Source", "Acquisition channel. Supports standard presets (Website, WhatsApp, Direct Call) as well as custom user-defined sources."),
+                ("Lead Status", "Current sales pipeline stage. Supports standard stages (New Lead, Contacted, Qualified, Site Visit, Negotiation, Won, Lost) and custom statuses."),
+                ("Lead Score", "Proprietary algorithmic qualification score (1-100) evaluating buyer engagement and purchase readiness."),
+                ("Assigned Agent", "Licensed consultant assigned to manage this relationship within your organization."),
+                ("Lead Photo / Media", "Indicates whether the buyer has an uploaded authentic profile/id image or base64 asset.")
+            ]
+        ),
+        (
+            "3. BEST PRACTICES & INTERACTIVITY",
+            [
+                ("Filtering & Sorting", "Click the dropdown arrow in any header cell in 'All Leads' to filter by Status, Source, Agent, or sort by Budget."),
+                ("Chart Refresh", "Charts in 'Lead Dashboard' dynamically reference the underlying summary tables. Any updates to counts immediately update chart visuals."),
+                ("Security Notice", "This document contains confidential business intelligence. Strictly scoped to your organization. Do not share externally.")
+            ]
+        )
+    ]
+
+    inst_row = 4
+    for sec_title, items in inst_sections:
+        ws_inst.cell(row=inst_row, column=1, value=sec_title).font = font_section
+        ws_inst.cell(row=inst_row, column=1).fill = fill_cream_header
+        ws_inst.merge_cells(start_row=inst_row, start_column=1, end_row=inst_row, end_column=5)
+        ws_inst.row_dimensions[inst_row].height = 24
+        inst_row += 1
+
+        # Table Header
+        ws_inst.cell(row=inst_row, column=1, value="Topic / Field Name").font = font_header
+        ws_inst.cell(row=inst_row, column=1).fill = fill_gold_header
+        ws_inst.cell(row=inst_row, column=1).border = header_border
+
+        ws_inst.merge_cells(start_row=inst_row, start_column=2, end_row=inst_row, end_column=5)
+        ws_inst.cell(row=inst_row, column=2, value="Description & Operational Guidance").font = font_header
+        ws_inst.cell(row=inst_row, column=2).fill = fill_gold_header
+        ws_inst.cell(row=inst_row, column=2).border = header_border
+        for c in range(3, 6):
+            ws_inst.cell(row=inst_row, column=c).border = header_border
+        ws_inst.row_dimensions[inst_row].height = 22
+        inst_row += 1
+
+        for idx, (f_name, f_desc) in enumerate(items):
+            row_fill = fill_cream_row_even if idx % 2 == 0 else fill_cream_row_odd
+            
+            c1 = ws_inst.cell(row=inst_row, column=1, value=f_name)
+            c1.font = font_data_bold
+            c1.fill = row_fill
+            c1.border = thin_gold_border
+            c1.alignment = Alignment(horizontal='left', vertical='center')
+
+            ws_inst.merge_cells(start_row=inst_row, start_column=2, end_row=inst_row, end_column=5)
+            c2 = ws_inst.cell(row=inst_row, column=2, value=f_desc)
+            c2.font = font_data
+            c2.fill = row_fill
+            c2.border = thin_gold_border
+            c2.alignment = Alignment(horizontal='left', vertical='center', wrap_text=True)
+            for c in range(3, 6):
+                ws_inst.cell(row=inst_row, column=c).border = thin_gold_border
+                
+            ws_inst.row_dimensions[inst_row].height = 32
+            inst_row += 1
+            
+        inst_row += 1
+
+    ws_inst.column_dimensions['A'].width = 28
+    ws_inst.column_dimensions['B'].width = 25
+    ws_inst.column_dimensions['C'].width = 25
+    ws_inst.column_dimensions['D'].width = 25
+    ws_inst.column_dimensions['E'].width = 25
 
     # Save Workbook
     wb.save(output_path)

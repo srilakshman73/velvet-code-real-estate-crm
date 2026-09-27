@@ -202,7 +202,7 @@ export default function LeadsPage() {
       // Read binary blob and trigger browser download
       const blob = await response.blob();
       const contentDisposition = response.headers.get('Content-Disposition');
-      let filename = `Velvet_Code_Leads_${new Date().toISOString().split('T')[0]}.xlsx`;
+      let filename = 'Velvet_Code_Real_Estate_Leads.xlsx';
 
       if (contentDisposition) {
         const match = contentDisposition.match(/filename="?([^"]+)"?/);
@@ -221,7 +221,7 @@ export default function LeadsPage() {
       document.body.removeChild(a);
 
       const count = targetIds ? targetIds.length : filteredLeads.length;
-      setExportSuccessMsg(`Successfully generated Excel workbook with ${count} leads across 3 sheets!`);
+      setExportSuccessMsg(`Successfully generated Excel workbook (${filename}) with ${count} leads across 4 sheets!`);
       setTimeout(() => setExportSuccessMsg(null), 5000);
     } catch (err: any) {
       alert(`Excel Export Failed: ${err.message}`);

@@ -117,12 +117,7 @@ async function handleExport(request: NextRequest) {
     // Read the generated binary Excel workbook
     const xlsxBuffer = fs.readFileSync(tempXlsxPath);
 
-    // Safe filename
-    const safeOrgName = (orgRecord.name || 'VelvetCode')
-      .replace(/[^a-zA-Z0-9_-]/g, '_')
-      .substring(0, 30);
-    const dateStamp = now.toISOString().split('T')[0];
-    const filename = `Velvet_Code_Leads_${safeOrgName}_${dateStamp}.xlsx`;
+    const filename = `Velvet_Code_Real_Estate_Leads.xlsx`;
 
     return new NextResponse(xlsxBuffer, {
       status: 200,
