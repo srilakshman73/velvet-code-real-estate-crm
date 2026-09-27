@@ -23,6 +23,8 @@ import {
   NotificationItem,
   ActivityLogItem,
   AIConversationMessage,
+  Payment,
+  Invoice,
 } from '@/types';
 import {
   SAAS_PLANS,
@@ -42,6 +44,8 @@ import {
   INITIAL_DOCUMENTS,
   INITIAL_NOTIFICATIONS,
   INITIAL_ACTIVITY_LOGS,
+  INITIAL_PAYMENTS,
+  INITIAL_INVOICES,
 } from './mock-data';
 import { processRealtyAIQuery } from './ai-service';
 import { buildWhatsAppUrl } from './utils';
@@ -64,9 +68,13 @@ interface CRMStoreContextType {
 
   // Subscription & Billing
   subscription: Subscription;
+  setSubscription: React.Dispatch<React.SetStateAction<Subscription>>;
   currentPlanLimits: PlanLimits;
   upgradePlan: (tier: SubscriptionTier, billingCycle?: 'monthly' | 'annual') => boolean;
   cancelSubscription: () => void;
+  payments: Payment[];
+  invoices: Invoice[];
+  fetchBillingData: () => Promise<void>;
 
   // Limits Checkers
   checkLimit: (resource: 'leads' | 'properties' | 'users' | 'ai' | 'whatsapp') => {
@@ -168,8 +176,34 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   const [users, setUsers] = useState<User[]>(INITIAL_USERS);
   const [currentUser, setCurrentUser] = useState<User>(INITIAL_USERS[0]); // Default to Sri Lakshman (Owner)
 
-  // Subscription State
+  // Subscription & Billing State
   const [subscription, setSubscription] = useState<Subscription>(INITIAL_SUBSCRIPTION);
+  const [payments, setPayments] = useState<Payment[]>(INITIAL_PAYMENTS);
+  const [invoices, setInvoices] = useState<Invoice[]>(INITIAL_INVOICES);
+
+  const fetchBillingData = async () => {
+    try {
+      const res = await fetch('/api/billing/subscription');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.subscription) {
+          setSubscription(data.subscription);
+        }
+        if (Array.isArray(data.payments)) {
+          setPayments(data.payments);
+        }
+        if (Array.isArray(data.invoices)) {
+          setInvoices(data.invoices);
+        }
+      }
+    } catch {
+      // Offline fallback
+    }
+  };
+
+  useEffect(() => {
+    fetchBillingData();
+  }, [currentOrg.id]);
 
   // Entities
   const [leads, setLeads] = useState<Lead[]>(INITIAL_LEADS);
@@ -841,9 +875,13 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
         exitSupportMode,
         hasAdminAccess,
         subscription,
+        setSubscription,
         currentPlanLimits,
         upgradePlan,
         cancelSubscription,
+        payments,
+        invoices,
+        fetchBillingData,
         checkLimit,
         leads,
         addLead,

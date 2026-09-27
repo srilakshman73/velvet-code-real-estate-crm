@@ -73,20 +73,71 @@ export async function POST(request: NextRequest) {
       ? body.organizationId
       : session.organizationId;
 
+    // Server-side Plan Limits Enforcement
+    if (!session.isOwner) {
+      const planLimits = serverDB.getOrgPlanLimits(effectiveOrgId);
+      const currentLeads = serverDB.getLeads().filter((l) => l.organizationId === effectiveOrgId);
+      if (planLimits.maxLeads !== -1 && currentLeads.length >= planLimits.maxLeads) {
+        return NextResponse.json(
+          {
+            error: `Lead limit reached for your ${planLimits.name} plan (${planLimits.maxLeads} leads). Please upgrade your subscription to add more leads.`,
+            code: 'PLAN_LIMIT_EXCEEDED',
+            currentCount: currentLeads.length,
+            limit: planLimits.maxLeads,
+          },
+          { status: 403 }
+        );
+      }
+    }
+
+    // Data validation
+    const parsedBudgetMax = body.budgetMaxINR !== undefined && body.budgetMaxINR !== null && body.budgetMaxINR !== ''
+      ? Math.max(0, parseInt(String(body.budgetMaxINR).replace(/\D/g, ''), 10))
+      : undefined;
+
+    const parsedBudgetMin = body.budgetMinINR !== undefined && body.budgetMinINR !== null && body.budgetMinINR !== ''
+      ? Math.max(0, parseInt(String(body.budgetMinINR).replace(/\D/g, ''), 10))
+      : undefined;
+
+    // Relational integrity checks
+    let assignedName: string | undefined = undefined;
+    if (body.assignedToId) {
+      const orgUsers = serverDB.getUsers().filter((u) => u.organizationId === effectiveOrgId);
+      const matchedUser = orgUsers.find((u) => u.id === body.assignedToId);
+      if (matchedUser) {
+        assignedName = matchedUser.name;
+      }
+    }
+
+    let interestedPropName: string | undefined = undefined;
+    if (body.interestedPropertyId) {
+      const orgProps = serverDB.getProperties().filter((p) => p.organizationId === effectiveOrgId);
+      const matchedProp = orgProps.find((p) => p.id === body.interestedPropertyId);
+      if (matchedProp) {
+        interestedPropName = matchedProp.title;
+      }
+    }
+
     const newLead: Lead = {
       id: `lead-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
       organizationId: effectiveOrgId,
-      name: body.name,
-      phone: body.phone,
-      email: body.email || '',
-      source: body.source || 'WEBSITE',
-      status: body.status || 'NEW',
+      name: String(body.name).trim(),
+      phone: String(body.phone).trim(),
+      email: body.email ? String(body.email).trim() : '',
+      source: body.source ? String(body.source).trim() : 'WEBSITE',
+      status: body.status ? String(body.status).trim() : 'NEW',
       priority: body.priority || 'MEDIUM',
-      score: body.score || 65,
-      budgetMinINR: body.budgetMinINR ? Number(body.budgetMinINR) : 5000000,
-      budgetMaxINR: body.budgetMaxINR ? Number(body.budgetMaxINR) : 12000000,
-      preferredLocation: body.preferredLocation || 'Chennai',
-      preferredType: body.preferredType || 'APARTMENT',
+      score: body.score ? Number(body.score) : Math.floor(Math.random() * 30) + 65,
+      budgetMinINR: isNaN(Number(parsedBudgetMin)) ? undefined : parsedBudgetMin,
+      budgetMaxINR: isNaN(Number(parsedBudgetMax)) ? undefined : parsedBudgetMax,
+      preferredLocation: body.preferredLocation ? String(body.preferredLocation).trim() : undefined,
+      preferredType: body.preferredType || undefined,
+      interestedPropertyId: body.interestedPropertyId || undefined,
+      interestedPropertyName: interestedPropName || body.interestedPropertyName || undefined,
+      assignedToId: body.assignedToId || undefined,
+      assignedToName: assignedName || body.assignedToName || undefined,
+      notes: body.notes ? String(body.notes).trim() : undefined,
+      imageUrl: body.imageUrl || undefined,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };

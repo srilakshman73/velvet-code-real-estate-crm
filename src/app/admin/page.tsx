@@ -52,9 +52,9 @@ const MRR_HISTORY = [
 ];
 
 const TIER_DISTRIBUTION = [
-  { name: 'Starter (₹499)', value: 0, color: '#D8C7A5' },
-  { name: 'Professional (₹1,499)', value: 1, color: '#A37432' },
-  { name: 'Business (₹3,999)', value: 0, color: '#E5D1A8' },
+  { name: 'Starter (₹1,999)', value: 0, color: '#D8C7A5' },
+  { name: 'Professional (₹5,999)', value: 1, color: '#A37432' },
+  { name: 'Business (₹9,999)', value: 0, color: '#E5D1A8' },
 ];
 
 export default function AdminDashboardPage() {

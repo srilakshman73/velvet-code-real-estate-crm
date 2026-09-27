@@ -29,7 +29,7 @@ export default function SolutionsPage() {
       icon: User,
       desc: 'Close more listings without drowning in administrative follow-ups. Manage client requirements, store inventory on your phone, and automate WhatsApp updates effortlessly.',
       benefits: [
-        'Single-user Starter plan at just ₹499/month',
+        'Single-user Starter plan at just ₹1,999/month',
         'Mobile-first responsive CRM with WhatsApp click-to-chat',
         'Automated follow-up reminders so you never forget a client',
         'Realty AI assistant to draft personalized buyer messages',

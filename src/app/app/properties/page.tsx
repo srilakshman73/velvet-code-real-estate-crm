@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { useCRMStore } from '@/lib/store';
 import { Property, PropertyType, PropertyStatus } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { Input, Select, Textarea } from '@/components/ui/Input';
+import { ImageUpload } from '@/components/ui/ImageUpload';
 import { Modal, Drawer } from '@/components/ui/Modal';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { formatINR, formatINRPricePerSqFt } from '@/lib/utils';
@@ -13,25 +13,57 @@ import {
   Building2,
   PlusCircle,
   Search,
-  Filter,
   LayoutGrid,
   List,
   MapPin,
   Bed,
   Bath,
   Maximize2,
-  Compass,
   CheckCircle2,
   Trash2,
   Edit,
-  DollarSign,
-  Users,
-  CalendarCheck,
-  Download,
+  Phone,
+  User,
 } from 'lucide-react';
 
+const PROPERTY_TYPE_OPTIONS = [
+  { value: 'APARTMENT', label: 'Apartment / Flat' },
+  { value: 'VILLA', label: 'Luxury Villa' },
+  { value: 'PENTHOUSE', label: 'Penthouse' },
+  { value: 'COMMERCIAL', label: 'Commercial Suite' },
+  { value: 'DUPLEX', label: 'Duplex' },
+];
+
+const PROPERTY_STATUS_OPTIONS = [
+  { value: 'AVAILABLE', label: 'Available' },
+  { value: 'RESERVED', label: 'Reserved' },
+  { value: 'SOLD', label: 'Sold' },
+  { value: 'RENTED', label: 'Rented' },
+];
+
+const FURNISHING_OPTIONS = [
+  { value: 'Unfurnished', label: 'Unfurnished' },
+  { value: 'Semi-Furnished', label: 'Semi-Furnished' },
+  { value: 'Fully Furnished', label: 'Fully Furnished' },
+];
+
+const FACING_OPTIONS = [
+  { value: 'North', label: 'North' },
+  { value: 'East', label: 'East' },
+  { value: 'West', label: 'West' },
+  { value: 'South', label: 'South' },
+  { value: 'North-East', label: 'North-East' },
+  { value: 'North-West', label: 'North-West' },
+];
+
+function normalizeIntegerInput(raw: string): string {
+  const digitsOnly = raw.replace(/\D/g, '');
+  if (!digitsOnly) return '';
+  return digitsOnly.replace(/^0+(?=\d)/, '');
+}
+
 export default function PropertiesPage() {
-  const { properties, addProperty, updateProperty, deleteProperty, users, leads, siteVisits } = useCRMStore();
+  const { properties, addProperty, updateProperty, deleteProperty, users } = useCRMStore();
 
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
@@ -39,30 +71,76 @@ export default function PropertiesPage() {
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const [newPropForm, setNewPropForm] = useState({
+  // Form state for creating a property
+  const [newPropForm, setNewPropForm] = useState<{
+    title: string;
+    description: string;
+    propertyType: PropertyType;
+    status: PropertyStatus;
+    priceINR: string;
+    areaSqFt: string;
+    bedrooms: number;
+    bathrooms: number;
+    furnishing: 'Unfurnished' | 'Semi-Furnished' | 'Fully Furnished';
+    facing: 'North' | 'East' | 'West' | 'South' | 'North-East' | 'North-West';
+    address: string;
+    locality: string;
+    city: string;
+    state: string;
+    ownerName: string;
+    ownerPhone: string;
+    featuredImageUrl: string;
+    amenitiesInput: string;
+    assignedAgentId: string;
+  }>({
     title: '',
     description: '',
-    propertyType: 'APARTMENT' as PropertyType,
-    status: 'AVAILABLE' as PropertyStatus,
-    priceINR: 12500000,
-    areaSqFt: 1650,
+    propertyType: 'APARTMENT',
+    status: 'AVAILABLE',
+    priceINR: '12500000',
+    areaSqFt: '1650',
     bedrooms: 3,
     bathrooms: 3,
-    furnishing: 'Fully Furnished' as const,
-    facing: 'North-East' as const,
-    address: 'Tower A, Floor 12, Main Road',
-    locality: 'OMR Expressway',
+    furnishing: 'Fully Furnished',
+    facing: 'North-East',
+    address: '',
+    locality: '',
     city: 'Chennai',
     state: 'Tamil Nadu',
-    ownerName: 'V. Sundaram Properties',
-    ownerPhone: '+91 98400 44332',
-    featuredImageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
-    amenities: ['Swimming Pool', 'Clubhouse & Gym', '2 Covered Car Parks', '24/7 Power Backup'],
-    assignedAgentId: 'usr-admin-01',
+    ownerName: '',
+    ownerPhone: '',
+    featuredImageUrl: '',
+    amenitiesInput: 'Swimming Pool, Clubhouse & Gym, Covered Parking, 24/7 Power Backup',
+    assignedAgentId: users[0]?.id || '',
   });
+
+  // Form state for editing a property
+  const [editPropForm, setEditPropForm] = useState<{
+    id: string;
+    title: string;
+    description: string;
+    propertyType: PropertyType;
+    status: PropertyStatus;
+    priceINR: string;
+    areaSqFt: string;
+    bedrooms: number;
+    bathrooms: number;
+    furnishing: 'Unfurnished' | 'Semi-Furnished' | 'Fully Furnished';
+    facing: 'North' | 'East' | 'West' | 'South' | 'North-East' | 'North-West';
+    address: string;
+    locality: string;
+    city: string;
+    state: string;
+    ownerName: string;
+    ownerPhone: string;
+    featuredImageUrl: string;
+    amenitiesInput: string;
+    assignedAgentId: string;
+  } | null>(null);
 
   const [propertyToDelete, setPropertyToDelete] = useState<Property | null>(null);
 
@@ -93,26 +171,34 @@ export default function PropertiesPage() {
     e.preventDefault();
     const assigned = users.find((u) => u.id === newPropForm.assignedAgentId);
 
+    const parsedAmenities = newPropForm.amenitiesInput
+      .split(',')
+      .map((a) => a.trim())
+      .filter((a) => a.length > 0);
+
+    const priceNum = parseInt(newPropForm.priceINR, 10) || 0;
+    const areaNum = parseInt(newPropForm.areaSqFt, 10) || 0;
+
     const res = addProperty({
       title: newPropForm.title,
       description: newPropForm.description,
       propertyType: newPropForm.propertyType,
       status: newPropForm.status,
-      priceINR: Number(newPropForm.priceINR),
-      areaSqFt: Number(newPropForm.areaSqFt),
+      priceINR: priceNum,
+      areaSqFt: areaNum,
       bedrooms: Number(newPropForm.bedrooms),
       bathrooms: Number(newPropForm.bathrooms),
       furnishing: newPropForm.furnishing,
       facing: newPropForm.facing,
-      address: newPropForm.address,
+      address: newPropForm.address || newPropForm.locality,
       locality: newPropForm.locality,
       city: newPropForm.city,
       state: newPropForm.state,
       ownerName: newPropForm.ownerName,
       ownerPhone: newPropForm.ownerPhone,
-      featuredImageUrl: newPropForm.featuredImageUrl,
-      images: [newPropForm.featuredImageUrl],
-      amenities: newPropForm.amenities,
+      featuredImageUrl: newPropForm.featuredImageUrl || undefined,
+      images: newPropForm.featuredImageUrl ? [newPropForm.featuredImageUrl] : [],
+      amenities: parsedAmenities.length > 0 ? parsedAmenities : ['Security', 'Water Supply'],
       assignedAgentId: newPropForm.assignedAgentId,
       assignedAgentName: assigned ? assigned.name : undefined,
     });
@@ -122,12 +208,156 @@ export default function PropertiesPage() {
       return;
     }
 
+    // Reset form
+    setNewPropForm({
+      title: '',
+      description: '',
+      propertyType: 'APARTMENT',
+      status: 'AVAILABLE',
+      priceINR: '',
+      areaSqFt: '',
+      bedrooms: 3,
+      bathrooms: 3,
+      furnishing: 'Fully Furnished',
+      facing: 'North-East',
+      address: '',
+      locality: '',
+      city: 'Chennai',
+      state: 'Tamil Nadu',
+      ownerName: '',
+      ownerPhone: '',
+      featuredImageUrl: '',
+      amenitiesInput: '',
+      assignedAgentId: users[0]?.id || '',
+    });
+
     setIsAddModalOpen(false);
+  };
+
+  const handleOpenEdit = (prop: Property) => {
+    setEditPropForm({
+      id: prop.id,
+      title: prop.title,
+      description: prop.description || '',
+      propertyType: prop.propertyType,
+      status: prop.status,
+      priceINR: prop.priceINR ? String(prop.priceINR) : '',
+      areaSqFt: prop.areaSqFt ? String(prop.areaSqFt) : '',
+      bedrooms: prop.bedrooms || 3,
+      bathrooms: prop.bathrooms || 3,
+      furnishing: prop.furnishing || 'Fully Furnished',
+      facing: prop.facing || 'North-East',
+      address: prop.address || '',
+      locality: prop.locality || '',
+      city: prop.city || '',
+      state: prop.state || '',
+      ownerName: prop.ownerName || '',
+      ownerPhone: prop.ownerPhone || '',
+      featuredImageUrl: prop.featuredImageUrl || (prop.images && prop.images[0]) || '',
+      amenitiesInput: prop.amenities ? prop.amenities.join(', ') : '',
+      assignedAgentId: prop.assignedAgentId || users[0]?.id || '',
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateProperty = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editPropForm) return;
+
+    const assigned = users.find((u) => u.id === editPropForm.assignedAgentId);
+    const parsedAmenities = editPropForm.amenitiesInput
+      .split(',')
+      .map((a) => a.trim())
+      .filter((a) => a.length > 0);
+
+    const priceNum = parseInt(editPropForm.priceINR, 10) || 0;
+    const areaNum = parseInt(editPropForm.areaSqFt, 10) || 0;
+
+    updateProperty(editPropForm.id, {
+      title: editPropForm.title,
+      description: editPropForm.description,
+      propertyType: editPropForm.propertyType,
+      status: editPropForm.status,
+      priceINR: priceNum,
+      areaSqFt: areaNum,
+      bedrooms: Number(editPropForm.bedrooms),
+      bathrooms: Number(editPropForm.bathrooms),
+      furnishing: editPropForm.furnishing,
+      facing: editPropForm.facing,
+      address: editPropForm.address || editPropForm.locality,
+      locality: editPropForm.locality,
+      city: editPropForm.city,
+      state: editPropForm.state,
+      ownerName: editPropForm.ownerName,
+      ownerPhone: editPropForm.ownerPhone,
+      featuredImageUrl: editPropForm.featuredImageUrl || undefined,
+      images: editPropForm.featuredImageUrl ? [editPropForm.featuredImageUrl] : [],
+      amenities: parsedAmenities,
+      assignedAgentId: editPropForm.assignedAgentId,
+      assignedAgentName: assigned ? assigned.name : undefined,
+    });
+
+    if (selectedProperty?.id === editPropForm.id) {
+      setSelectedProperty({
+        ...selectedProperty,
+        title: editPropForm.title,
+        description: editPropForm.description,
+        propertyType: editPropForm.propertyType,
+        status: editPropForm.status,
+        priceINR: priceNum,
+        areaSqFt: areaNum,
+        bedrooms: Number(editPropForm.bedrooms),
+        bathrooms: Number(editPropForm.bathrooms),
+        furnishing: editPropForm.furnishing,
+        facing: editPropForm.facing,
+        address: editPropForm.address || editPropForm.locality,
+        locality: editPropForm.locality,
+        city: editPropForm.city,
+        state: editPropForm.state,
+        ownerName: editPropForm.ownerName,
+        ownerPhone: editPropForm.ownerPhone,
+        featuredImageUrl: editPropForm.featuredImageUrl || undefined,
+        images: editPropForm.featuredImageUrl ? [editPropForm.featuredImageUrl] : [],
+        amenities: parsedAmenities,
+        assignedAgentId: editPropForm.assignedAgentId,
+        assignedAgentName: assigned ? assigned.name : undefined,
+      });
+    }
+
+    setIsEditModalOpen(false);
+    setEditPropForm(null);
   };
 
   const openDetail = (prop: Property) => {
     setSelectedProperty(prop);
     setIsDrawerOpen(true);
+  };
+
+  // Helper to render property cover or luxury neutral placeholder
+  const renderPropertyImage = (prop: Property, className = 'h-48') => {
+    const imageUrl = prop.featuredImageUrl || (prop.images && prop.images[0]);
+    if (imageUrl) {
+      return (
+        <img
+          src={imageUrl}
+          alt={prop.title}
+          className={`w-full ${className} object-cover group-hover:scale-105 transition-transform duration-500`}
+        />
+      );
+    }
+    return (
+      <div className={`w-full ${className} bg-gradient-to-br from-[#EFE6D5] via-[#E4D5BE] to-[#D8C7A5] flex flex-col items-center justify-center text-[#7A5520] gap-2 select-none border-b border-[#D8C7A5]`}>
+        <div className="w-12 h-12 rounded-xl bg-[#FFF9F0]/80 border border-[#A37432]/30 flex items-center justify-center shadow-sm">
+          <Building2 className="w-6 h-6 text-[#A37432]" />
+        </div>
+        <div className="text-center px-4">
+          <span className="text-[11px] font-serif font-bold uppercase tracking-wider text-[#7A5520] block">
+            No Image Available
+          </span>
+          <span className="text-[9px] text-[#8A7A63]">Upload photo in property details</span>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -144,7 +374,7 @@ export default function PropertiesPage() {
             </span>
           </div>
           <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
-            Manage your high-end real estate portfolio, visual galleries, and unit availability.
+            Manage your high-end real estate portfolio, authentic photo galleries, and unit availability.
           </p>
         </div>
 
@@ -203,6 +433,7 @@ export default function PropertiesPage() {
               className={`p-1.5 rounded-lg transition-colors ${
                 viewMode === 'grid' ? 'bg-[#A37432] text-white shadow-sm' : 'text-[#6A5A44] hover:text-[#2C241A]'
               }`}
+              title="Grid View"
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
@@ -211,6 +442,7 @@ export default function PropertiesPage() {
               className={`p-1.5 rounded-lg transition-colors ${
                 viewMode === 'table' ? 'bg-[#A37432] text-white shadow-sm' : 'text-[#6A5A44] hover:text-[#2C241A]'
               }`}
+              title="Table View"
             >
               <List className="w-4 h-4" />
             </button>
@@ -235,13 +467,9 @@ export default function PropertiesPage() {
               onClick={() => openDetail(prop)}
               className="rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] overflow-hidden hover:border-[#A37432] cursor-pointer shadow-[0_8px_24px_rgba(120,90,40,0.08)] hover:shadow-[0_10px_30px_rgba(163,116,50,0.15)] transition-all flex flex-col justify-between group"
             >
-              {/* Featured Image */}
+              {/* Featured Image or Clean Neutral Placeholder */}
               <div className="relative h-48 w-full bg-[#E9DFC8] overflow-hidden">
-                <img
-                  src={prop.featuredImageUrl || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'}
-                  alt={prop.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                {renderPropertyImage(prop, 'h-48')}
                 <div className="absolute top-3 left-3 flex gap-2">
                   <span
                     className={`px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md shadow-sm border ${
@@ -265,9 +493,21 @@ export default function PropertiesPage() {
 
               {/* Body */}
               <div className="p-5 space-y-3">
-                <h3 className="text-base font-serif font-bold text-[#2C241A] group-hover:text-[#7A5520] transition-colors line-clamp-1">
-                  {prop.title}
-                </h3>
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="text-base font-serif font-bold text-[#2C241A] group-hover:text-[#7A5520] transition-colors line-clamp-1">
+                    {prop.title}
+                  </h3>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenEdit(prop);
+                    }}
+                    className="p-1 text-[#6A5A44] hover:text-[#A37432] rounded-lg hover:bg-[#A37432]/10 transition-colors"
+                    title="Edit Property"
+                  >
+                    <Edit className="w-3.5 h-3.5" />
+                  </button>
+                </div>
 
                 <p className="text-xs text-[#6A5A44] flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-[#A37432] flex-shrink-0" />
@@ -279,13 +519,13 @@ export default function PropertiesPage() {
                     <Maximize2 className="w-3.5 h-3.5 text-[#6A5A44]" />
                     <span>{prop.areaSqFt} sq.ft</span>
                   </div>
-                  {prop.bedrooms && (
+                  {prop.bedrooms !== undefined && (
                     <div className="flex items-center gap-1">
                       <Bed className="w-3.5 h-3.5 text-[#6A5A44]" />
                       <span>{prop.bedrooms} BHK</span>
                     </div>
                   )}
-                  {prop.bathrooms && (
+                  {prop.bathrooms !== undefined && (
                     <div className="flex items-center gap-1">
                       <Bath className="w-3.5 h-3.5 text-[#6A5A44]" />
                       <span>{prop.bathrooms} Bath</span>
@@ -296,7 +536,7 @@ export default function PropertiesPage() {
                 <div className="flex items-center justify-between text-xs text-[#6A5A44] pt-1">
                   <span>Rate: {formatINRPricePerSqFt(prop.priceINR, prop.areaSqFt)}</span>
                   <span className="text-[#7A5520] font-semibold">
-                    {prop.interestedLeadsCount || 12} Inquiries
+                    {prop.interestedLeadsCount || 0} Inquiries
                   </span>
                 </div>
               </div>
@@ -327,7 +567,23 @@ export default function PropertiesPage() {
                   className="hover:bg-[#F7EEDC] cursor-pointer transition-colors"
                 >
                   <td className="p-4 font-serif font-bold text-[#2C241A] hover:text-[#7A5520]">
-                    {prop.title}
+                    <div className="flex items-center gap-3">
+                      {prop.featuredImageUrl || (prop.images && prop.images[0]) ? (
+                        <img
+                          src={prop.featuredImageUrl || prop.images[0]}
+                          alt={prop.title}
+                          className="w-9 h-9 rounded-lg object-cover border border-[#D8C7A5]"
+                        />
+                      ) : (
+                        <div className="w-9 h-9 rounded-lg bg-[#EFE6D5] border border-[#D8C7A5] flex items-center justify-center text-[#A37432]">
+                          <Building2 className="w-4 h-4" />
+                        </div>
+                      )}
+                      <div>
+                        <div className="font-serif font-bold text-[#2C241A]">{prop.title}</div>
+                        <div className="text-[10px] text-[#8A7A63] font-sans">{prop.furnishing || 'Standard'}</div>
+                      </div>
+                    </div>
                   </td>
                   <td className="p-4 text-[#6A5A44]">{prop.propertyType}</td>
                   <td className="p-4 text-[#6A5A44]">{prop.locality}, {prop.city}</td>
@@ -350,13 +606,22 @@ export default function PropertiesPage() {
                   </td>
                   <td className="p-4 text-[#6A5A44]">{prop.assignedAgentName || 'Velvet Code'}</td>
                   <td className="p-4 text-right" onClick={(e) => e.stopPropagation()}>
-                    <button
-                      onClick={() => setPropertyToDelete(prop)}
-                      className="p-1.5 text-[#6A5A44] hover:text-[#8B4A4A] rounded-lg hover:bg-[#8B4A4A]/10 transition-colors"
-                      title="Delete Property"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
+                    <div className="flex items-center justify-end gap-1">
+                      <button
+                        onClick={() => handleOpenEdit(prop)}
+                        className="p-1.5 text-[#6A5A44] hover:text-[#A37432] rounded-lg hover:bg-[#A37432]/10 transition-colors"
+                        title="Edit Property"
+                      >
+                        <Edit className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => setPropertyToDelete(prop)}
+                        className="p-1.5 text-[#6A5A44] hover:text-[#8B4A4A] rounded-lg hover:bg-[#8B4A4A]/10 transition-colors"
+                        title="Delete Property"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -375,12 +640,22 @@ export default function PropertiesPage() {
           size="lg"
         >
           <div className="space-y-6 text-xs sm:text-sm">
-            <div className="relative h-56 w-full rounded-xl overflow-hidden border border-[#D8C7A5]">
-              <img
-                src={selectedProperty.featuredImageUrl}
-                alt={selectedProperty.title}
-                className="w-full h-full object-cover"
-              />
+            {/* Cover Image or Neutral Placeholder */}
+            <div className="relative h-60 w-full rounded-xl overflow-hidden border border-[#D8C7A5] bg-[#E9DFC8]">
+              {selectedProperty.featuredImageUrl || (selectedProperty.images && selectedProperty.images[0]) ? (
+                <img
+                  src={selectedProperty.featuredImageUrl || selectedProperty.images[0]}
+                  alt={selectedProperty.title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-[#EFE6D5] via-[#E4D5BE] to-[#D8C7A5] flex flex-col items-center justify-center text-[#7A5520] gap-2 select-none">
+                  <Building2 className="w-10 h-10 text-[#A37432]" />
+                  <span className="text-xs font-serif font-bold uppercase tracking-wider text-[#7A5520]">
+                    No Photo Uploaded
+                  </span>
+                </div>
+              )}
               <div className="absolute top-3 right-3 px-3 py-1 rounded-lg bg-[#2C241A]/90 backdrop-blur-md text-[#FFF9F0] font-bold font-mono border border-[#A37432]/30">
                 {formatINR(selectedProperty.priceINR)}
               </div>
@@ -420,12 +695,32 @@ export default function PropertiesPage() {
               </div>
             </div>
 
+            {selectedProperty.ownerName && (
+              <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
+                <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs font-serif">
+                  Property Ownership Contact
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  <div className="flex items-center gap-1.5 text-[#2C241A]">
+                    <User className="w-3.5 h-3.5 text-[#A37432]" />
+                    <span>{selectedProperty.ownerName}</span>
+                  </div>
+                  {selectedProperty.ownerPhone && (
+                    <div className="flex items-center gap-1.5 text-[#2C241A]">
+                      <Phone className="w-3.5 h-3.5 text-[#A37432]" />
+                      <span>{selectedProperty.ownerPhone}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
               <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs font-serif">
                 Amenities & Features
               </h4>
               <div className="flex flex-wrap gap-2 pt-1">
-                {selectedProperty.amenities.map((a, i) => (
+                {selectedProperty.amenities?.map((a, i) => (
                   <span
                     key={i}
                     className="px-2.5 py-1 text-xs bg-[#F4EAD7] border border-[#D8C7A5] rounded-lg text-[#2C241A] flex items-center gap-1.5"
@@ -442,18 +737,28 @@ export default function PropertiesPage() {
                 Description & Highlights
               </h4>
               <p className="text-xs text-[#2C241A] leading-relaxed bg-[#F4EAD7] p-3 rounded-lg border border-[#D8C7A5]">
-                {selectedProperty.description}
+                {selectedProperty.description || 'No description provided.'}
               </p>
             </div>
 
-            <div className="pt-4 border-t border-[#D8C7A5] flex justify-end">
+            <div className="pt-4 border-t border-[#D8C7A5] flex items-center justify-between">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  handleOpenEdit(selectedProperty);
+                }}
+                leftIcon={<Edit className="w-4 h-4" />}
+              >
+                Edit Specifications
+              </Button>
               <Button
                 variant="danger"
                 size="sm"
                 onClick={() => setPropertyToDelete(selectedProperty)}
                 icon={<Trash2 className="w-4 h-4" />}
               >
-                Delete Property Listing
+                Delete Listing
               </Button>
             </div>
           </div>
@@ -465,9 +770,19 @@ export default function PropertiesPage() {
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         title="Add Real Estate Property"
-        description="List a new residential or commercial property in your CRM inventory."
+        description="List a new residential or commercial property with authentic images in your CRM inventory."
       >
         <form onSubmit={handleCreateProperty} className="space-y-4 text-xs sm:text-sm">
+          {/* Property Image Upload */}
+          <div className="p-3 bg-[#F4EAD7] rounded-xl border border-[#D8C7A5]">
+            <ImageUpload
+              label="Primary Property Cover Photo (JPG, JPEG, PNG, WebP)"
+              value={newPropForm.featuredImageUrl}
+              onChange={(val) => setNewPropForm({ ...newPropForm, featuredImageUrl: val || '' })}
+              placeholderText="Upload high-resolution property exterior or showroom photo"
+            />
+          </div>
+
           <Input
             label="Property Title *"
             required
@@ -483,27 +798,74 @@ export default function PropertiesPage() {
               onChange={(e) =>
                 setNewPropForm({ ...newPropForm, propertyType: e.target.value as PropertyType })
               }
-              options={[
-                { value: 'APARTMENT', label: 'Apartment' },
-                { value: 'VILLA', label: 'Villa' },
-                { value: 'PENTHOUSE', label: 'Penthouse' },
-                { value: 'COMMERCIAL', label: 'Commercial' },
-                { value: 'DUPLEX', label: 'Duplex' },
-              ]}
+              options={PROPERTY_TYPE_OPTIONS}
             />
             <Input
               label="Price (INR) *"
-              type="number"
+              type="text"
               required
+              placeholder="e.g. 12500000"
               value={newPropForm.priceINR}
-              onChange={(e) => setNewPropForm({ ...newPropForm, priceINR: Number(e.target.value) })}
+              onChange={(e) =>
+                setNewPropForm({
+                  ...newPropForm,
+                  priceINR: normalizeIntegerInput(e.target.value),
+                })
+              }
             />
             <Input
               label="Area (Sq.Ft) *"
-              type="number"
+              type="text"
               required
+              placeholder="e.g. 1650"
               value={newPropForm.areaSqFt}
-              onChange={(e) => setNewPropForm({ ...newPropForm, areaSqFt: Number(e.target.value) })}
+              onChange={(e) =>
+                setNewPropForm({
+                  ...newPropForm,
+                  areaSqFt: normalizeIntegerInput(e.target.value),
+                })
+              }
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <Input
+              label="Bedrooms (BHK)"
+              type="number"
+              min={0}
+              max={20}
+              value={newPropForm.bedrooms}
+              onChange={(e) => setNewPropForm({ ...newPropForm, bedrooms: Number(e.target.value) })}
+            />
+            <Input
+              label="Bathrooms"
+              type="number"
+              min={0}
+              max={20}
+              value={newPropForm.bathrooms}
+              onChange={(e) => setNewPropForm({ ...newPropForm, bathrooms: Number(e.target.value) })}
+            />
+            <Select
+              label="Furnishing"
+              value={newPropForm.furnishing}
+              onChange={(e) =>
+                setNewPropForm({
+                  ...newPropForm,
+                  furnishing: e.target.value as 'Unfurnished' | 'Semi-Furnished' | 'Fully Furnished',
+                })
+              }
+              options={FURNISHING_OPTIONS}
+            />
+            <Select
+              label="Facing Direction"
+              value={newPropForm.facing}
+              onChange={(e) =>
+                setNewPropForm({
+                  ...newPropForm,
+                  facing: e.target.value as 'North' | 'East' | 'West' | 'South' | 'North-East' | 'North-West',
+                })
+              }
+              options={FACING_OPTIONS}
             />
           </div>
 
@@ -511,22 +873,55 @@ export default function PropertiesPage() {
             <Input
               label="Locality / Area *"
               required
-              placeholder="e.g. OMR / Whitefield"
+              placeholder="e.g. OMR / Whitefield / Jubilee Hills"
               value={newPropForm.locality}
               onChange={(e) => setNewPropForm({ ...newPropForm, locality: e.target.value })}
             />
             <Input
               label="City *"
               required
-              placeholder="e.g. Chennai / Bangalore"
+              placeholder="e.g. Chennai / Bengaluru / Hyderabad"
               value={newPropForm.city}
               onChange={(e) => setNewPropForm({ ...newPropForm, city: e.target.value })}
             />
           </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Input
+              label="Owner / Builder Name"
+              placeholder="e.g. V. Sundaram Properties"
+              value={newPropForm.ownerName}
+              onChange={(e) => setNewPropForm({ ...newPropForm, ownerName: e.target.value })}
+            />
+            <Input
+              label="Owner / Builder Phone"
+              placeholder="e.g. +91 98400 44332"
+              value={newPropForm.ownerPhone}
+              onChange={(e) => setNewPropForm({ ...newPropForm, ownerPhone: e.target.value })}
+            />
+          </div>
+
+          <Input
+            label="Amenities (Comma-separated)"
+            placeholder="e.g. Swimming Pool, Gym, Covered Parking, 24/7 Power Backup"
+            value={newPropForm.amenitiesInput}
+            onChange={(e) => setNewPropForm({ ...newPropForm, amenitiesInput: e.target.value })}
+          />
+
+          <Select
+            label="Assigned Real Estate Consultant *"
+            value={newPropForm.assignedAgentId}
+            onChange={(e) => setNewPropForm({ ...newPropForm, assignedAgentId: e.target.value })}
+            options={users.map((u) => ({
+              value: u.id,
+              label: `${u.name} (${u.role})`,
+            }))}
+          />
+
           <Textarea
             label="Property Description"
             rows={3}
+            placeholder="Detailed architectural specifications, carpet area breakdown, view orientation..."
             value={newPropForm.description}
             onChange={(e) => setNewPropForm({ ...newPropForm, description: e.target.value })}
           />
@@ -546,6 +941,182 @@ export default function PropertiesPage() {
           </div>
         </form>
       </Modal>
+
+      {/* Edit Property Modal */}
+      {isEditModalOpen && editPropForm && (
+        <Modal
+          isOpen={isEditModalOpen}
+          onClose={() => {
+            setIsEditModalOpen(false);
+            setEditPropForm(null);
+          }}
+          title="Edit Property Listing"
+          description="Update property specifications, pricing, and uploaded imagery."
+        >
+          <form onSubmit={handleUpdateProperty} className="space-y-4 text-xs sm:text-sm">
+            {/* Property Image Upload */}
+            <div className="p-3 bg-[#F4EAD7] rounded-xl border border-[#D8C7A5]">
+              <ImageUpload
+                label="Primary Property Cover Photo (JPG, JPEG, PNG, WebP)"
+                value={editPropForm.featuredImageUrl}
+                onChange={(val) => setEditPropForm({ ...editPropForm, featuredImageUrl: val || '' })}
+                placeholderText="Upload high-resolution property exterior or showroom photo"
+              />
+            </div>
+
+            <Input
+              label="Property Title *"
+              required
+              value={editPropForm.title}
+              onChange={(e) => setEditPropForm({ ...editPropForm, title: e.target.value })}
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <Select
+                label="Property Type"
+                value={editPropForm.propertyType}
+                onChange={(e) =>
+                  setEditPropForm({ ...editPropForm, propertyType: e.target.value as PropertyType })
+                }
+                options={PROPERTY_TYPE_OPTIONS}
+              />
+              <Input
+                label="Price (INR) *"
+                type="text"
+                required
+                value={editPropForm.priceINR}
+                onChange={(e) =>
+                  setEditPropForm({
+                    ...editPropForm,
+                    priceINR: normalizeIntegerInput(e.target.value),
+                  })
+                }
+              />
+              <Input
+                label="Area (Sq.Ft) *"
+                type="text"
+                required
+                value={editPropForm.areaSqFt}
+                onChange={(e) =>
+                  setEditPropForm({
+                    ...editPropForm,
+                    areaSqFt: normalizeIntegerInput(e.target.value),
+                  })
+                }
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+              <Input
+                label="Bedrooms (BHK)"
+                type="number"
+                min={0}
+                max={20}
+                value={editPropForm.bedrooms}
+                onChange={(e) => setEditPropForm({ ...editPropForm, bedrooms: Number(e.target.value) })}
+              />
+              <Input
+                label="Bathrooms"
+                type="number"
+                min={0}
+                max={20}
+                value={editPropForm.bathrooms}
+                onChange={(e) => setEditPropForm({ ...editPropForm, bathrooms: Number(e.target.value) })}
+              />
+              <Select
+                label="Furnishing"
+                value={editPropForm.furnishing}
+                onChange={(e) =>
+                  setEditPropForm({
+                    ...editPropForm,
+                    furnishing: e.target.value as 'Unfurnished' | 'Semi-Furnished' | 'Fully Furnished',
+                  })
+                }
+                options={FURNISHING_OPTIONS}
+              />
+              <Select
+                label="Facing Direction"
+                value={editPropForm.facing}
+                onChange={(e) =>
+                  setEditPropForm({
+                    ...editPropForm,
+                    facing: e.target.value as 'North' | 'East' | 'West' | 'South' | 'North-East' | 'North-West',
+                  })
+                }
+                options={FACING_OPTIONS}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Input
+                label="Locality / Area *"
+                required
+                value={editPropForm.locality}
+                onChange={(e) => setEditPropForm({ ...editPropForm, locality: e.target.value })}
+              />
+              <Input
+                label="City *"
+                required
+                value={editPropForm.city}
+                onChange={(e) => setEditPropForm({ ...editPropForm, city: e.target.value })}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Input
+                label="Owner / Builder Name"
+                value={editPropForm.ownerName}
+                onChange={(e) => setEditPropForm({ ...editPropForm, ownerName: e.target.value })}
+              />
+              <Input
+                label="Owner / Builder Phone"
+                value={editPropForm.ownerPhone}
+                onChange={(e) => setEditPropForm({ ...editPropForm, ownerPhone: e.target.value })}
+              />
+            </div>
+
+            <Input
+              label="Amenities (Comma-separated)"
+              value={editPropForm.amenitiesInput}
+              onChange={(e) => setEditPropForm({ ...editPropForm, amenitiesInput: e.target.value })}
+            />
+
+            <Select
+              label="Assigned Real Estate Consultant *"
+              value={editPropForm.assignedAgentId}
+              onChange={(e) => setEditPropForm({ ...editPropForm, assignedAgentId: e.target.value })}
+              options={users.map((u) => ({
+                value: u.id,
+                label: `${u.name} (${u.role})`,
+              }))}
+            />
+
+            <Textarea
+              label="Property Description"
+              rows={3}
+              value={editPropForm.description}
+              onChange={(e) => setEditPropForm({ ...editPropForm, description: e.target.value })}
+            />
+
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
+              <Button
+                type="button"
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  setIsEditModalOpen(false);
+                  setEditPropForm(null);
+                }}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" variant="gold" size="md" className="font-bold">
+                Save Changes
+              </Button>
+            </div>
+          </form>
+        </Modal>
+      )}
 
       {/* Confirmation Modal for Property Deletion */}
       {propertyToDelete && (

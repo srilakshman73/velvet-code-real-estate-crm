@@ -51,8 +51,15 @@ export default function LoginPage() {
       }
 
       setIsLoading(false);
-      // Route based on role returned securely by the server
-      router.push(data.redirectTo || (data.user?.role === 'OWNER' ? '/admin/dashboard' : '/app/dashboard'));
+      const urlParams = new URLSearchParams(window.location.search);
+      const planParam = urlParams.get('plan');
+
+      if (data.user?.role !== 'OWNER' && planParam) {
+        router.push(`/app/billing?checkout=${encodeURIComponent(planParam)}`);
+      } else {
+        // Route based on role returned securely by the server
+        router.push(data.redirectTo || (data.user?.role === 'OWNER' ? '/admin/dashboard' : '/app/dashboard'));
+      }
     } catch {
       setErrorMessage('Network error connecting to authentication server');
       setIsLoading(false);

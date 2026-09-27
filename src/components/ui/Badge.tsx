@@ -62,8 +62,8 @@ export function Badge({
   );
 }
 
-export function LeadStatusBadge({ status }: { status: LeadStatus }) {
-  const config: Record<LeadStatus, { label: string; variant: BadgeProps['variant'] }> = {
+export function LeadStatusBadge({ status }: { status: LeadStatus | string }) {
+  const config: Record<string, { label: string; variant: BadgeProps['variant'] }> = {
     NEW: { label: 'New Lead', variant: 'neutral' },
     CONTACTED: { label: 'Contacted', variant: 'neutral' },
     QUALIFIED: { label: 'Qualified', variant: 'gold' },

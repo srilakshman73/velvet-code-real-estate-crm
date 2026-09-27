@@ -57,7 +57,13 @@ export default function RegisterPage() {
       if (data.user) setCurrentUser(data.user);
 
       setIsLoading(false);
-      router.push('/onboarding');
+      const urlParams = new URLSearchParams(window.location.search);
+      const planParam = urlParams.get('plan');
+      if (planParam) {
+        router.push(`/app/billing?checkout=${encodeURIComponent(planParam)}`);
+      } else {
+        router.push('/onboarding');
+      }
     } catch {
       // Fallback
       const newOrg = {
@@ -83,7 +89,13 @@ export default function RegisterPage() {
       setCurrentOrg(newOrg);
       setCurrentUser(newUser);
       setIsLoading(false);
-      router.push('/onboarding');
+      const urlParams = new URLSearchParams(window.location.search);
+      const planParam = urlParams.get('plan');
+      if (planParam) {
+        router.push(`/app/billing?checkout=${encodeURIComponent(planParam)}`);
+      } else {
+        router.push('/onboarding');
+      }
     }
   };
 

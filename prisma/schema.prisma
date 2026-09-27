@@ -177,6 +177,7 @@ model Organization {
   aiUsages          AIUsage[]
   activityLogs      ActivityLog[]
   invoices          Invoice[]
+  payments          Payment[]
   integrations      IntegrationConfig[]
 
   @@index([slug])
@@ -226,14 +227,16 @@ model Membership {
 model Subscription {
   id                   String             @id @default(cuid())
   organizationId       String             @unique
+  userId               String?
+  planId               String?
   tier                 SubscriptionTier   @default(STARTER)
   status               SubscriptionStatus @default(TRIALING)
-  priceMonthlyINR      Int                @default(499)
+  priceMonthlyINR      Int                @default(1999)
   billingCycle         String             @default("monthly") // monthly | annual
   currentPeriodStart   DateTime           @default(now())
   currentPeriodEnd     DateTime
   cancelAtPeriodEnd    Boolean            @default(false)
-  razorpaySubscriptionId String?
+  razorpaySubscriptionId String?          @unique
   razorpayCustomerId   String?
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
@@ -245,11 +248,37 @@ model Subscription {
   monthlyAIQuota       Int                @default(100)
 
   organization         Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  payments             Payment[]
+}
+
+model Payment {
+  id                   String             @id @default(cuid())
+  organizationId       String
+  userId               String?
+  subscriptionId       String?
+  razorpayPaymentId    String             @unique
+  razorpayOrderId      String?
+  razorpaySignature    String?
+  amount               Int                // in INR
+  currency             String             @default("INR")
+  status               String             // CAPTURED | FAILED | REFUNDED | PENDING
+  paymentMethod        String             @default("UPI / Card / NetBanking")
+  createdAt            DateTime           @default(now())
+
+  organization         Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  subscription         Subscription?      @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  invoices             Invoice[]
+
+  @@index([organizationId])
+  @@index([razorpayPaymentId])
 }
 
 model Invoice {
   id                   String       @id @default(cuid())
   organizationId       String
+  userId               String?
+  subscriptionId       String?
+  paymentId            String?
   invoiceNumber        String       @unique
   amountINR            Int
   taxINR               Int          @default(0)
@@ -263,7 +292,10 @@ model Invoice {
   createdAt            DateTime     @default(now())
 
   organization         Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  payment              Payment?     @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+
   @@index([organizationId])
+  @@index([invoiceNumber])
 }
 
 // ==========================================
@@ -286,6 +318,7 @@ model Lead {
   assignedToId      String?
   nextFollowUpAt    DateTime?
   notes             String?
+  imageUrl          String?
   score             Int           @default(50)
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt

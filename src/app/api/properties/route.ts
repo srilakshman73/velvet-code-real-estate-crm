@@ -75,6 +75,23 @@ export async function POST(request: NextRequest) {
       ? body.organizationId
       : session.organizationId;
 
+    // Server-side Plan Limits Enforcement
+    if (!session.isOwner) {
+      const planLimits = serverDB.getOrgPlanLimits(effectiveOrgId);
+      const currentProperties = serverDB.getProperties().filter((p) => p.organizationId === effectiveOrgId);
+      if (planLimits.maxProperties !== -1 && currentProperties.length >= planLimits.maxProperties) {
+        return NextResponse.json(
+          {
+            error: `Property inventory limit reached for your ${planLimits.name} plan (${planLimits.maxProperties} properties). Please upgrade to Professional or Business for unlimited property listings.`,
+            code: 'PLAN_LIMIT_EXCEEDED',
+            currentCount: currentProperties.length,
+            limit: planLimits.maxProperties,
+          },
+          { status: 403 }
+        );
+      }
+    }
+
     const newProperty: Property = {
       id: `prop-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
       organizationId: effectiveOrgId,
@@ -92,9 +109,9 @@ export async function POST(request: NextRequest) {
       city: body.city || 'Chennai',
       state: body.state || 'Tamil Nadu',
       pincode: body.pincode || '600040',
-      featuredImageUrl: body.featuredImageUrl || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&auto=format&fit=crop&q=80',
+      featuredImageUrl: body.featuredImageUrl || (Array.isArray(body.images) && body.images.length > 0 ? body.images[0] : undefined),
       amenities: body.amenities || ['Power Backup', 'Security', 'Lift'],
-      images: body.images || ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&auto=format&fit=crop&q=80'],
+      images: Array.isArray(body.images) && body.images.length > 0 ? body.images : (body.featuredImageUrl ? [body.featuredImageUrl] : []),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };

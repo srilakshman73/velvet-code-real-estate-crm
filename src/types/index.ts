@@ -62,6 +62,8 @@ export interface PlanLimits {
 export interface Subscription {
   id: string;
   organizationId: string;
+  userId?: string;
+  planId?: string;
   tier: SubscriptionTier;
   status: SubscriptionStatus;
   priceMonthlyINR: number;
@@ -70,6 +72,9 @@ export interface Subscription {
   currentPeriodEnd: string;
   cancelAtPeriodEnd: boolean;
   razorpaySubscriptionId?: string;
+  razorpayCustomerId?: string;
+  createdAt?: string;
+  updatedAt?: string;
   usage: {
     usersCount: number;
     leadsCount: number;
@@ -78,9 +83,28 @@ export interface Subscription {
   };
 }
 
+export interface Payment {
+  id: string;
+  organizationId: string;
+  userId?: string;
+  subscriptionId?: string;
+  razorpayPaymentId: string;
+  razorpayOrderId?: string;
+  razorpaySignature?: string;
+  amount: number; // in INR
+  currency: string;
+  status: 'CAPTURED' | 'FAILED' | 'REFUNDED' | 'PENDING';
+  paymentMethod: string;
+  planTier?: SubscriptionTier;
+  createdAt: string;
+}
+
 export interface Invoice {
   id: string;
   organizationId: string;
+  userId?: string;
+  subscriptionId?: string;
+  paymentId?: string;
   invoiceNumber: string;
   amountINR: number;
   taxINR: number;
@@ -88,6 +112,7 @@ export interface Invoice {
   status: 'paid' | 'pending' | 'failed';
   pdfUrl?: string;
   paymentMethod: string;
+  razorpayPaymentId?: string;
   billingPeriodStart: string;
   billingPeriodEnd: string;
   createdAt: string;
@@ -135,8 +160,8 @@ export interface Lead {
   name: string;
   phone: string;
   email?: string;
-  source: LeadSource;
-  status: LeadStatus;
+  source: LeadSource | string;
+  status: LeadStatus | string;
   priority: LeadPriority;
   budgetMinINR?: number;
   budgetMaxINR?: number;
@@ -149,6 +174,7 @@ export interface Lead {
   nextFollowUpAt?: string;
   score: number; // 0-100 conversion probability score
   notes?: string;
+  imageUrl?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -191,7 +217,7 @@ export interface Property {
   ownerName?: string;
   ownerPhone?: string;
   amenities: string[];
-  featuredImageUrl: string;
+  featuredImageUrl?: string;
   images: string[];
   assignedAgentId?: string;
   assignedAgentName?: string;
@@ -333,7 +359,7 @@ export interface WhatsAppConversation {
   customerPhone: string;
   customerName: string;
   leadId?: string;
-  leadStatus?: LeadStatus;
+  leadStatus?: LeadStatus | string;
   interestedProperty?: string;
   budget?: string;
   lastMessageText: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Receipt,
   Search,
@@ -11,6 +11,7 @@ import {
   ExternalLink,
   Shield,
   ArrowUpRight,
+  RefreshCw,
 } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -27,24 +28,46 @@ interface PaymentLog {
   gstINR: number;
   totalINR: number;
   paymentMethod: string;
-  status: 'CAPTURED' | 'REFUNDED' | 'FAILED';
+  status: 'CAPTURED' | 'REFUNDED' | 'FAILED' | 'PENDING';
   date: string;
 }
 
-const MOCK_PAYMENTS: PaymentLog[] = [];
-
 export default function AdminPaymentsPage() {
-  const [payments, setPayments] = useState<PaymentLog[]>(MOCK_PAYMENTS);
+  const [payments, setPayments] = useState<PaymentLog[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
 
+  const fetchPayments = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/api/admin/payments');
+      if (res.ok) {
+        const data = await res.json();
+        setPayments(data.data || []);
+      }
+    } catch (err) {
+      console.error('Failed to fetch payments:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPayments();
+  }, []);
+
   const filteredPayments = payments.filter((p) => {
     const matchesSearch =
-      p.organizationName.toLowerCase().includes(search.toLowerCase()) ||
-      p.razorpayPaymentId.toLowerCase().includes(search.toLowerCase());
+      (p.organizationName && p.organizationName.toLowerCase().includes(search.toLowerCase())) ||
+      (p.razorpayPaymentId && p.razorpayPaymentId.toLowerCase().includes(search.toLowerCase()));
     const matchesStatus = statusFilter === 'ALL' || p.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
+
+  const capturedPayments = payments.filter((p) => p.status === 'CAPTURED');
+  const grossInflow = capturedPayments.reduce((acc, p) => acc + (p.totalINR || 0), 0);
+  const totalGST = capturedPayments.reduce((acc, p) => acc + (p.gstINR || 0), 0);
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
@@ -59,10 +82,23 @@ export default function AdminPaymentsPage() {
           <Button
             variant="outline"
             size="sm"
+            onClick={fetchPayments}
+            icon={<RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />}
+          >
+            Refresh
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
             icon={<Download className="w-4 h-4" />}
             onClick={() => {
               const headers = 'ID,RazorpayID,Organization,Plan,BaseAmount,GST,Total,Method,Status,Date\n';
-              const rows = payments.map((p) => `"${p.id}","${p.razorpayPaymentId}","${p.organizationName}","${p.planTier}",${p.amountINR},${p.gstINR},${p.totalINR},"${p.paymentMethod}","${p.status}","${p.date}"`).join('\n');
+              const rows = payments
+                .map(
+                  (p) =>
+                    `"${p.id}","${p.razorpayPaymentId}","${p.organizationName}","${p.planTier}",${p.amountINR},${p.gstINR},${p.totalINR},"${p.paymentMethod}","${p.status}","${p.date}"`
+                )
+                .join('\n');
               const blob = new Blob([headers + rows], { type: 'text/csv' });
               const url = URL.createObjectURL(blob);
               const a = document.createElement('a');
@@ -79,23 +115,23 @@ export default function AdminPaymentsPage() {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Gross Inflow (MTD)</span>
-          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">₹0</div>
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Gross Platform Inflow</span>
+          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">₹{grossInflow.toLocaleString('en-IN')}</div>
           <div className="text-xs text-[#547A61] mt-1 flex items-center gap-1 font-semibold">
-            <ArrowUpRight className="w-3.5 h-3.5" /> 100% gateway uptime
+            <ArrowUpRight className="w-3.5 h-3.5" /> Razorpay Test Gateway Active
           </div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Total GST Collected (18%)</span>
-          <div className="text-2xl font-serif font-bold text-[#7A5520] mt-2">₹0</div>
-          <div className="text-xs text-[#6A5A44] mt-1">Ready for GSTR-1 e-filing</div>
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Total GST Accounted (18%)</span>
+          <div className="text-2xl font-serif font-bold text-[#7A5520] mt-2">₹{totalGST.toLocaleString('en-IN')}</div>
+          <div className="text-xs text-[#6A5A44] mt-1">Ready for GSTR-1 e-filing audit</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Settled to ICICI Current A/C</span>
-          <div className="text-2xl font-serif font-bold text-[#547A61] mt-2">T+1 Daily Cycle</div>
-          <div className="text-xs text-[#6A5A44] mt-1">Automatic Razorpay nodal transfer</div>
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Captured Transactions</span>
+          <div className="text-2xl font-serif font-bold text-[#547A61] mt-2">{capturedPayments.length} Paid</div>
+          <div className="text-xs text-[#6A5A44] mt-1">{payments.filter((p) => p.status === 'FAILED').length} failed payment attempts</div>
         </Card>
       </div>
 
@@ -134,7 +170,7 @@ export default function AdminPaymentsPage() {
                 <th className="py-3 px-4 font-semibold">Total Paid</th>
                 <th className="py-3 px-4 font-semibold">Method</th>
                 <th className="py-3 px-4 font-semibold">Status</th>
-                <th className="py-3 px-4 font-semibold text-right">Receipt</th>
+                <th className="py-3 px-4 font-semibold text-right">Date</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#D8C7A5]/60">
@@ -142,7 +178,7 @@ export default function AdminPaymentsPage() {
                 <tr>
                   <td colSpan={8} className="py-12 text-center text-[#6A5A44]">
                     <Receipt className="w-8 h-8 text-[#D8C7A5] mx-auto mb-2" />
-                    <p className="font-serif font-bold text-sm text-[#2C241A]">No payment transactions yet</p>
+                    <p className="font-serif font-bold text-sm text-[#2C241A]">No payments yet</p>
                     <p className="text-xs">Real customer subscription payments and GST invoices will be recorded here.</p>
                   </td>
                 </tr>
@@ -159,13 +195,13 @@ export default function AdminPaymentsPage() {
                       {p.planTier}
                     </td>
                     <td className="py-3 px-4 font-mono text-[#6A5A44]">
-                      ₹{p.amountINR.toLocaleString()}
+                      ₹{p.amountINR.toLocaleString('en-IN')}
                     </td>
                     <td className="py-3 px-4 font-mono text-[#6A5A44]">
-                      ₹{p.gstINR.toLocaleString()}
+                      ₹{p.gstINR.toLocaleString('en-IN')}
                     </td>
                     <td className="py-3 px-4 font-mono font-bold text-[#2C241A]">
-                      ₹{p.totalINR.toLocaleString()}
+                      ₹{p.totalINR.toLocaleString('en-IN')}
                     </td>
                     <td className="py-3 px-4 text-[#6A5A44]">
                       {p.paymentMethod}
@@ -175,10 +211,8 @@ export default function AdminPaymentsPage() {
                         {p.status}
                       </Badge>
                     </td>
-                    <td className="py-3 px-4 text-right">
-                      <Button variant="ghost" size="xs" icon={<Download className="w-3.5 h-3.5" />}>
-                        PDF
-                      </Button>
+                    <td className="py-3 px-4 text-right text-[#6A5A44]">
+                      {p.date}
                     </td>
                   </tr>
                 ))

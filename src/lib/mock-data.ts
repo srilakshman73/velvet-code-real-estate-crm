@@ -18,6 +18,7 @@ import {
   ActivityLogItem,
   SaaSAdminOverview,
   Invoice,
+  Payment,
 } from '@/types';
 
 // ==========================================
@@ -28,8 +29,8 @@ export const SAAS_PLANS: PlanLimits[] = [
   {
     tier: 'STARTER',
     name: 'Starter',
-    priceMonthlyINR: 499,
-    priceAnnualINR: 4790,
+    priceMonthlyINR: 1999,
+    priceAnnualINR: 19190,
     maxUsers: 1,
     maxLeads: 100,
     maxProperties: 25,
@@ -52,8 +53,8 @@ export const SAAS_PLANS: PlanLimits[] = [
   {
     tier: 'PROFESSIONAL',
     name: 'Professional',
-    priceMonthlyINR: 1499,
-    priceAnnualINR: 14390,
+    priceMonthlyINR: 5999,
+    priceAnnualINR: 57590,
     maxUsers: 5,
     maxLeads: 1000,
     maxProperties: -1, // Unlimited
@@ -79,8 +80,8 @@ export const SAAS_PLANS: PlanLimits[] = [
   {
     tier: 'BUSINESS',
     name: 'Business',
-    priceMonthlyINR: 3999,
-    priceAnnualINR: 38390,
+    priceMonthlyINR: 9999,
+    priceAnnualINR: 95990,
     maxUsers: 15,
     maxLeads: -1, // Unlimited
     maxProperties: -1, // Unlimited
@@ -144,20 +145,19 @@ export const INITIAL_USERS: User[] = [
 ];
 
 // ==========================================
-// INITIAL SUBSCRIPTION
+// INITIAL SUBSCRIPTION (Clean Workspace Baseline)
 // ==========================================
 
 export const INITIAL_SUBSCRIPTION: Subscription = {
   id: 'sub-apex-01',
   organizationId: 'org-apex-01',
-  tier: 'PROFESSIONAL',
-  status: 'ACTIVE',
-  priceMonthlyINR: 1499,
+  tier: 'STARTER',
+  status: 'TRIALING',
+  priceMonthlyINR: 1999,
   billingCycle: 'monthly',
-  currentPeriodStart: '2026-09-01T00:00:00Z',
-  currentPeriodEnd: '2026-10-01T00:00:00Z',
+  currentPeriodStart: new Date().toISOString(),
+  currentPeriodEnd: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
   cancelAtPeriodEnd: false,
-  razorpaySubscriptionId: 'sub_rzp_apex_998127',
   usage: {
     usersCount: 1,
     leadsCount: 0,
@@ -295,6 +295,7 @@ export const INITIAL_DOCUMENTS: DocumentRecord[] = [];
 export const INITIAL_NOTIFICATIONS: NotificationItem[] = [];
 export const INITIAL_ACTIVITY_LOGS: ActivityLogItem[] = [];
 export const INITIAL_INVOICES: Invoice[] = [];
+export const INITIAL_PAYMENTS: Payment[] = [];
 
 // ==========================================
 // SAAS ADMIN MASTER OVERVIEW METRICS

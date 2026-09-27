@@ -350,13 +350,13 @@ export function PricingSection() {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-[#D8C7A5]">
-                  <Link href="/register">
+                  <Link href={`/register?plan=${plan.tier}`}>
                     <Button
                       variant={isPopular ? 'gold' : 'secondary'}
                       size="md"
                       className="w-full font-bold"
                     >
-                      Get Started
+                      Get Started with {plan.name}
                     </Button>
                   </Link>
                   <p className="text-[10px] text-center text-[#8A7A63] mt-2">

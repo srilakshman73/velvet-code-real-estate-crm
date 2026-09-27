@@ -60,13 +60,13 @@ export default function PricingPage() {
                 <tr className="border-b border-[#D8C7A5] bg-[#F4EAD7]">
                   <th className="p-4 sm:p-5 font-bold text-[#2C241A]">Feature</th>
                   <th className="p-4 sm:p-5 font-bold text-[#6A5A44] text-center w-1/4">
-                    Starter (₹499/mo)
+                    Starter (₹1,999/mo)
                   </th>
                   <th className="p-4 sm:p-5 font-bold text-[#7A5520] text-center w-1/4 bg-[#A37432]/10">
-                    Professional (₹1,499/mo)
+                    Professional (₹5,999/mo)
                   </th>
                   <th className="p-4 sm:p-5 font-bold text-[#2C241A] text-center w-1/4">
-                    Business (₹3,999/mo)
+                    Business (₹9,999/mo)
                   </th>
                 </tr>
               </thead>
