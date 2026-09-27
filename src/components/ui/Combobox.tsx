@@ -143,6 +143,14 @@ export function Combobox({
           value={inputValue}
           onChange={handleInputChange}
           onFocus={() => setIsOpen(true)}
+          onBlur={() => {
+            if (allowCustom && inputValue.trim()) {
+              const matched = normalizedOptions.find(
+                (opt) => opt.label.toLowerCase() === inputValue.trim().toLowerCase()
+              );
+              onChange(matched ? matched.value : inputValue.trim());
+            }
+          }}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           disabled={disabled}
