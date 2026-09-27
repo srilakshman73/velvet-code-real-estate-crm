@@ -52,6 +52,13 @@ const PREDEFINED_LEAD_STATUSES = [
   { value: 'LOST', label: 'Lost' },
 ];
 
+const PREDEFINED_LEAD_PRIORITIES = [
+  { value: 'LOW', label: 'Low' },
+  { value: 'MEDIUM', label: 'Medium' },
+  { value: 'HIGH', label: 'High' },
+  { value: 'URGENT', label: 'Urgent' },
+];
+
 /**
  * Normalizes numeric input to strip leading zeros while typing
  * 025 -> 25, 0025 -> 25, 00025000 -> 25000, empty -> empty
@@ -1041,14 +1048,24 @@ export default function LeadsPage() {
             </Select>
           </div>
 
-          <Input
-            label="Preferred City / Area"
-            placeholder="e.g. OMR Expressway, Chennai"
-            value={newLeadForm.preferredLocation}
-            onChange={(e) =>
-              setNewLeadForm({ ...newLeadForm, preferredLocation: e.target.value })
-            }
-          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Input
+              label="Preferred City / Area"
+              placeholder="e.g. OMR Expressway, Chennai"
+              value={newLeadForm.preferredLocation}
+              onChange={(e) =>
+                setNewLeadForm({ ...newLeadForm, preferredLocation: e.target.value })
+              }
+            />
+            <Combobox
+              label="Lead Priority"
+              value={newLeadForm.priority}
+              onChange={(val) => setNewLeadForm({ ...newLeadForm, priority: val as LeadPriority })}
+              options={PREDEFINED_LEAD_PRIORITIES}
+              placeholder="Select priority..."
+              allowCustom={false}
+            />
+          </div>
 
           {/* Lead Photo / Property Image Upload Field */}
           <ImageUpload
@@ -1186,13 +1203,23 @@ export default function LeadsPage() {
             </Select>
           </div>
 
-          <Input
-            label="Preferred City / Area"
-            value={editLeadForm.preferredLocation}
-            onChange={(e) =>
-              setEditLeadForm({ ...editLeadForm, preferredLocation: e.target.value })
-            }
-          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Input
+              label="Preferred City / Area"
+              value={editLeadForm.preferredLocation}
+              onChange={(e) =>
+                setEditLeadForm({ ...editLeadForm, preferredLocation: e.target.value })
+              }
+            />
+            <Combobox
+              label="Lead Priority"
+              value={editLeadForm.priority}
+              onChange={(val) => setEditLeadForm({ ...editLeadForm, priority: val as LeadPriority })}
+              options={PREDEFINED_LEAD_PRIORITIES}
+              placeholder="Select priority..."
+              allowCustom={false}
+            />
+          </div>
 
           {/* Lead Photo / Property Image Upload Field */}
           <ImageUpload
