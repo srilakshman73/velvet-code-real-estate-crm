@@ -187,3 +187,9 @@ export async function PUT(request: NextRequest, context: RouteContext) {
     );
   }
 }
+
+// PATCH /api/leads/[id]
+export async function PATCH(request: NextRequest, context: RouteContext) {
+  return PUT(request, context);
+}
+
