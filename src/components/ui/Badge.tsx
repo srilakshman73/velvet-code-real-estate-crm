@@ -5,9 +5,9 @@ import { LeadStatus, LeadPriority, DealStage, SiteVisitStatus, TaskPriority } fr
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?:
     | 'gold'
+    | 'rose'
     | 'emerald'
     | 'amber'
-    | 'rose'
     | 'zinc'
     | 'charcoal'
     | 'outline'
@@ -33,18 +33,18 @@ export function Badge({
   };
 
   const variantClasses: Record<string, string> = {
-    gold: 'bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/35',
-    emerald: 'bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30',
-    success: 'bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30',
-    charcoal: 'bg-[#2C241A]/10 text-[#2C241A] border border-[#2C241A]/20',
-    amber: 'bg-[#A87932]/15 text-[#8A5612] border border-[#A87932]/30',
-    warning: 'bg-[#A87932]/15 text-[#8A5612] border border-[#A87932]/30',
-    rose: 'bg-[#8B4A4A]/15 text-[#8B4A4A] border border-[#8B4A4A]/30',
-    error: 'bg-[#8B4A4A]/15 text-[#8B4A4A] border border-[#8B4A4A]/30',
-    zinc: 'bg-[#F4EAD7] text-[#6A5A44] border border-[#D8C7A5]',
-    neutral: 'bg-[#F4EAD7] text-[#6A5A44] border border-[#D8C7A5]',
-    info: 'bg-[#D8C7A5]/25 text-[#7A5520] border border-[#D8C7A5]/40',
-    outline: 'bg-transparent text-[#6A5A44] border border-[#D8C7A5]',
+    gold: 'bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/35',
+    rose: 'bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/35',
+    emerald: 'bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30',
+    success: 'bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30',
+    charcoal: 'bg-[#3A2930]/10 text-[#3A2930] border border-[#3A2930]/20',
+    amber: 'bg-[#C07D38]/15 text-[#9E6020] border border-[#C07D38]/30',
+    warning: 'bg-[#C07D38]/15 text-[#9E6020] border border-[#C07D38]/30',
+    error: 'bg-[#A84355]/15 text-[#A84355] border border-[#A84355]/30',
+    zinc: 'bg-[#FFF5F7] text-[#765D66] border border-[#EBCBD4]',
+    neutral: 'bg-[#FFF5F7] text-[#765D66] border border-[#EBCBD4]',
+    info: 'bg-[#F8DDE5] text-[#8C455C] border border-[#EBCBD4]',
+    outline: 'bg-transparent text-[#765D66] border border-[#EBCBD4]',
   };
 
   return (
@@ -66,11 +66,11 @@ export function LeadStatusBadge({ status }: { status: LeadStatus | string }) {
   const config: Record<string, { label: string; variant: BadgeProps['variant'] }> = {
     NEW: { label: 'New Lead', variant: 'neutral' },
     CONTACTED: { label: 'Contacted', variant: 'neutral' },
-    QUALIFIED: { label: 'Qualified', variant: 'gold' },
+    QUALIFIED: { label: 'Qualified', variant: 'rose' },
     SITE_VISIT: { label: 'Site Visit', variant: 'amber' },
-    NEGOTIATION: { label: 'Negotiation', variant: 'gold' },
+    NEGOTIATION: { label: 'Negotiation', variant: 'rose' },
     WON: { label: 'Won', variant: 'emerald' },
-    LOST: { label: 'Lost', variant: 'rose' },
+    LOST: { label: 'Lost', variant: 'error' },
   };
 
   const item = config[status] || { label: status, variant: 'neutral' };
@@ -80,9 +80,9 @@ export function LeadStatusBadge({ status }: { status: LeadStatus | string }) {
 export function PriorityBadge({ priority }: { priority: LeadPriority | TaskPriority }) {
   const config: Record<LeadPriority, { label: string; variant: BadgeProps['variant'] }> = {
     LOW: { label: 'Low', variant: 'neutral' },
-    MEDIUM: { label: 'Medium', variant: 'gold' },
+    MEDIUM: { label: 'Medium', variant: 'rose' },
     HIGH: { label: 'High', variant: 'amber' },
-    URGENT: { label: 'Urgent', variant: 'rose' },
+    URGENT: { label: 'Urgent', variant: 'error' },
   };
 
   const item = config[priority] || { label: priority, variant: 'neutral' };
@@ -92,12 +92,12 @@ export function PriorityBadge({ priority }: { priority: LeadPriority | TaskPrior
 export function DealStageBadge({ stage }: { stage: DealStage }) {
   const config: Record<DealStage, { label: string; variant: BadgeProps['variant'] }> = {
     NEW_LEAD: { label: 'New Lead', variant: 'neutral' },
-    QUALIFIED: { label: 'Qualified', variant: 'gold' },
+    QUALIFIED: { label: 'Qualified', variant: 'rose' },
     SITE_VISIT: { label: 'Site Visit', variant: 'amber' },
-    NEGOTIATION: { label: 'Negotiation', variant: 'gold' },
+    NEGOTIATION: { label: 'Negotiation', variant: 'rose' },
     DOCUMENTATION: { label: 'Documentation', variant: 'charcoal' },
-    CLOSED_WON: { label: 'Closed Won 🎉', variant: 'emerald' },
-    CLOSED_LOST: { label: 'Closed Lost', variant: 'rose' },
+    CLOSED_WON: { label: 'Closed Won ✨', variant: 'emerald' },
+    CLOSED_LOST: { label: 'Closed Lost', variant: 'error' },
   };
 
   const item = config[stage] || { label: stage, variant: 'neutral' };
@@ -106,10 +106,10 @@ export function DealStageBadge({ stage }: { stage: DealStage }) {
 
 export function SiteVisitStatusBadge({ status }: { status: SiteVisitStatus }) {
   const config: Record<SiteVisitStatus, { label: string; variant: BadgeProps['variant'] }> = {
-    SCHEDULED: { label: 'Scheduled', variant: 'gold' },
+    SCHEDULED: { label: 'Scheduled', variant: 'rose' },
     CONFIRMED: { label: 'Confirmed', variant: 'emerald' },
     COMPLETED: { label: 'Completed', variant: 'emerald' },
-    CANCELLED: { label: 'Cancelled', variant: 'rose' },
+    CANCELLED: { label: 'Cancelled', variant: 'error' },
     RESCHEDULED: { label: 'Rescheduled', variant: 'amber' },
   };
 

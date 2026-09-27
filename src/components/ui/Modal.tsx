@@ -46,40 +46,41 @@ export function Modal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[#2C241A]/25 backdrop-blur-xs transition-opacity animate-in fade-in"
+        className="fixed inset-0 bg-[#2A1820]/35 backdrop-blur-xs transition-opacity animate-in fade-in"
         onClick={onClose}
       />
 
       {/* Modal Content */}
       <div
         className={cn(
-          'relative w-full bg-[#FFF9F0] border border-[#D8C7A5] rounded-2xl shadow-2xl z-10 overflow-hidden text-[#2C241A] animate-in zoom-in-95 duration-150',
+          'relative w-full max-w-[96vw] sm:max-w-lg bg-[#FFF9FA] border border-[#EBCBD4] rounded-2xl shadow-2xl z-10 overflow-hidden text-[#3A2930] animate-in zoom-in-95 duration-150 my-auto flex flex-col',
           maxWidthMap[maxWidth]
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between p-5 border-b border-[#D8C7A5] bg-[#F4EAD7]/80">
-          <div>
+        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-[#EBCBD4] bg-[#FFF5F7] sticky top-0 z-20">
+          <div className="min-w-0 pr-3">
             {typeof title === 'string' ? (
-              <h2 className="text-lg font-bold text-[#2C241A] tracking-tight">{title}</h2>
+              <h2 className="text-base sm:text-lg font-bold text-[#3A2930] tracking-tight truncate">{title}</h2>
             ) : (
               title
             )}
-            {description && <p className="text-xs text-[#6A5A44] mt-1">{description}</p>}
+            {description && <p className="text-xs text-[#765D66] mt-0.5">{description}</p>}
           </div>
           <button
             onClick={onClose}
-            className="text-[#8A7A63] hover:text-[#2C241A] p-1.5 rounded-lg hover:bg-[#E9DFC8] transition-colors"
+            className="text-[#9B828C] hover:text-[#3A2930] p-2 rounded-xl hover:bg-[#F8DDE5] transition-colors min-h-[38px] min-w-[38px] flex items-center justify-center flex-shrink-0"
+            aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="p-5 sm:p-6 max-h-[80vh] overflow-y-auto">{children}</div>
+        <div className="p-4 sm:p-6 max-h-[82vh] sm:max-h-[80vh] overflow-y-auto overflow-x-hidden">{children}</div>
       </div>
     </div>
   );
@@ -128,37 +129,38 @@ export function Drawer({
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[#2C241A]/25 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-[#2A1820]/35 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-4 sm:pl-10">
         <div
           className={cn(
-            'w-screen bg-[#FFF9F0] border-l border-[#D8C7A5] shadow-2xl flex flex-col text-[#2C241A]',
+            'w-screen max-w-full bg-[#FFF9FA] border-l border-[#EBCBD4] shadow-2xl flex flex-col text-[#3A2930]',
             sizeMap[size]
           )}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-5 border-b border-[#D8C7A5] bg-[#F4EAD7]/80">
-            <div>
+          <div className="flex items-center justify-between p-4 sm:p-5 border-b border-[#EBCBD4] bg-[#FFF5F7]">
+            <div className="min-w-0 pr-3">
               {typeof title === 'string' ? (
-                <h3 className="text-base font-bold text-[#2C241A] tracking-tight">{title}</h3>
+                <h3 className="text-base font-bold text-[#3A2930] tracking-tight truncate">{title}</h3>
               ) : (
                 title
               )}
-              {subtitle && <p className="text-xs text-[#6A5A44] mt-0.5">{subtitle}</p>}
+              {subtitle && <p className="text-xs text-[#765D66] mt-0.5">{subtitle}</p>}
             </div>
             <button
               onClick={onClose}
-              className="text-[#8A7A63] hover:text-[#2C241A] p-1.5 rounded-lg hover:bg-[#E9DFC8] transition-colors"
+              className="text-[#9B828C] hover:text-[#3A2930] p-2 rounded-xl hover:bg-[#F8DDE5] transition-colors min-h-[38px] min-w-[38px] flex items-center justify-center flex-shrink-0"
+              aria-label="Close drawer"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Drawer Body */}
-          <div className="flex-1 overflow-y-auto p-5 sm:p-6">{children}</div>
+          {/* Body */}
+          <div className="flex-1 p-4 sm:p-6 overflow-y-auto overflow-x-hidden">{children}</div>
         </div>
       </div>
     </div>

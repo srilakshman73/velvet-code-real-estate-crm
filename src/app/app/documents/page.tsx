@@ -52,20 +52,20 @@ export default function DocumentsPage() {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#FCECEF] text-[#3A2930]">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
-              <FileText className="w-6 h-6 text-[#A37432]" />
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#3A2930] tracking-tight flex items-center gap-2">
+              <FileText className="w-6 h-6 text-[#B86B84]" />
               Document Vault & Legal KYC
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30 rounded-full">
               {documents.length} Encrypted Files
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
+          <p className="text-xs sm:text-sm text-[#765D66] mt-1">
             Store property brochures, floor plans, buyer PAN/KYC cards, and draft sale agreements.
           </p>
         </div>
@@ -81,15 +81,15 @@ export default function DocumentsPage() {
       </div>
 
       {/* Filter Bar */}
-      <div className="p-4 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-4 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] shadow-[0_8px_24px_rgba(120,90,40,0.08)] flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-[#6A5A44] absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#765D66] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search documents by name or property..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-[#F4EAD7] border border-[#D8C7A5] rounded-xl text-xs text-[#2C241A] placeholder:text-[#8A7A63] outline-none focus:border-[#A37432]"
+            className="w-full pl-9 pr-4 py-2 bg-[#FFF5F7] border border-[#EBCBD4] rounded-xl text-xs text-[#3A2930] placeholder:text-[#9B828C] outline-none focus:border-[#B86B84]"
           />
         </div>
 
@@ -100,8 +100,8 @@ export default function DocumentsPage() {
               onClick={() => setFilter(cat)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 filter === cat
-                  ? 'bg-[#A37432] text-white shadow-xs'
-                  : 'bg-[#F4EAD7] text-[#6A5A44] hover:text-[#2C241A] border border-[#D8C7A5]'
+                  ? 'bg-[#B86B84] text-white shadow-xs'
+                  : 'bg-[#FFF5F7] text-[#765D66] hover:text-[#3A2930] border border-[#EBCBD4]'
               }`}
             >
               {cat === 'ALL' ? 'All Files' : cat.replace('_', ' ')}
@@ -124,32 +124,32 @@ export default function DocumentsPage() {
           {filteredDocs.map((doc) => (
             <div
               key={doc.id}
-              className="p-5 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#A37432] shadow-[0_8px_24px_rgba(120,90,40,0.08)] transition-all space-y-3 flex flex-col justify-between"
+              className="p-5 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] hover:border-[#B86B84] shadow-[0_8px_24px_rgba(120,90,40,0.08)] transition-all space-y-3 flex flex-col justify-between"
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#F4EAD7] text-[#7A5520] rounded border border-[#D8C7A5]">
+                  <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#FFF5F7] text-[#8C455C] rounded border border-[#EBCBD4]">
                     {doc.category}
                   </span>
-                  <span className="text-xs text-[#6A5A44] font-mono">{doc.fileSizeMB} MB • {doc.fileType}</span>
+                  <span className="text-xs text-[#765D66] font-mono">{doc.fileSizeMB} MB â€¢ {doc.fileType}</span>
                 </div>
 
-                <h3 className="text-sm font-serif font-bold text-[#2C241A] line-clamp-1">{doc.title}</h3>
+                <h3 className="text-sm font-serif font-bold text-[#3A2930] line-clamp-1">{doc.title}</h3>
                 {doc.relatedName && (
-                  <p className="text-xs text-[#6A5A44] truncate">Related: {doc.relatedName}</p>
+                  <p className="text-xs text-[#765D66] truncate">Related: {doc.relatedName}</p>
                 )}
               </div>
 
-              <div className="pt-3 border-t border-[#D8C7A5] flex items-center justify-between text-xs">
+              <div className="pt-3 border-t border-[#EBCBD4] flex items-center justify-between text-xs">
                 <button
                   onClick={() => alert(`Downloading ${doc.title}...`)}
-                  className="text-[#7A5520] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
+                  className="text-[#8C455C] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" /> Download PDF
                 </button>
                 <button
                   onClick={() => deleteDocument(doc.id)}
-                  className="text-[#6A5A44] hover:text-[#8B3D3D] p-1 transition-colors cursor-pointer"
+                  className="text-[#765D66] hover:text-[#8B3D3D] p-1 transition-colors cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -195,7 +195,7 @@ export default function DocumentsPage() {
             onChange={(e) => setNewDocForm({ ...newDocForm, relatedName: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
             <Button
               type="button"
               variant="secondary"
@@ -213,3 +213,4 @@ export default function DocumentsPage() {
     </div>
   );
 }
+

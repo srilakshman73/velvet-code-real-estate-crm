@@ -44,12 +44,12 @@ export default function ReportsPage() {
   const closedWonCount = deals.filter((d) => d.stage === 'CLOSED_WON').length;
 
   const leadConversionFunnel = [
-    { stage: 'Total Inquiries', count: totalInquiries, fill: '#6A5A44' },
-    { stage: 'Contacted', count: contactedLeads, fill: '#C39A5B' },
+    { stage: 'Total Inquiries', count: totalInquiries, fill: '#765D66' },
+    { stage: 'Contacted', count: contactedLeads, fill: '#D98FA5' },
     { stage: 'Qualified Buyers', count: qualifiedLeads, fill: '#B8893C' },
-    { stage: 'Site Visits Scheduled', count: siteVisitsCount, fill: '#A37432' },
-    { stage: 'Negotiation', count: inNegotiationCount, fill: '#7A5520' },
-    { stage: 'Closed Won 🏆', count: closedWonCount, fill: '#547A61' },
+    { stage: 'Site Visits Scheduled', count: siteVisitsCount, fill: '#B86B84' },
+    { stage: 'Negotiation', count: inNegotiationCount, fill: '#8C455C' },
+    { stage: 'Closed Won ðŸ†', count: closedWonCount, fill: '#4A7C59' },
   ];
 
   const maxFunnelCount = Math.max(...leadConversionFunnel.map((s) => s.count), 1);
@@ -69,32 +69,32 @@ export default function ReportsPage() {
   });
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#FCECEF] text-[#3A2930]">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
-              <BarChart3 className="w-6 h-6 text-[#A37432]" />
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#3A2930] tracking-tight flex items-center gap-2">
+              <BarChart3 className="w-6 h-6 text-[#B86B84]" />
               Executive Analytics & Reports
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30 rounded-full">
               Real-Time Metrics
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
+          <p className="text-xs sm:text-sm text-[#765D66] mt-1">
             Conversion funnels, agent revenue leaderboards, and marketing channel ROI.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="bg-[#FFF9F0] border border-[#D8C7A5] p-1 rounded-xl flex text-xs shadow-xs">
+          <div className="bg-[#FFF9FA] border border-[#EBCBD4] p-1 rounded-xl flex text-xs shadow-xs">
             {['Today', '7 Days', '30 Days', 'ThisMonth'].map((t) => (
               <button
                 key={t}
                 onClick={() => setFilter(t)}
                 className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
-                  filter === t ? 'bg-[#A37432] text-white font-semibold shadow-xs' : 'text-[#6A5A44] hover:text-[#2C241A]'
+                  filter === t ? 'bg-[#B86B84] text-white font-semibold shadow-xs' : 'text-[#765D66] hover:text-[#3A2930]'
                 }`}
               >
                 {t === 'ThisMonth' ? 'This Month' : t}
@@ -116,22 +116,22 @@ export default function ReportsPage() {
       {/* Conversion Funnel & Agent Leaderboard */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Conversion Funnel */}
-        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-4 shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
-          <div className="border-b border-[#D8C7A5] pb-3">
-            <h3 className="text-base font-serif font-bold text-[#2C241A] tracking-tight">
+        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-4 shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
+          <div className="border-b border-[#EBCBD4] pb-3">
+            <h3 className="text-base font-serif font-bold text-[#3A2930] tracking-tight">
               Lead Conversion Funnel
             </h3>
-            <p className="text-xs text-[#6A5A44]">Visitor inquiry to Closed Won transaction velocity</p>
+            <p className="text-xs text-[#765D66]">Visitor inquiry to Closed Won transaction velocity</p>
           </div>
 
           <div className="space-y-3 pt-2">
             {leadConversionFunnel.map((step, idx) => (
               <div key={idx} className="space-y-1">
                 <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-[#2C241A]">{step.stage}</span>
-                  <span className="text-[#7A5520] font-mono">{step.count} leads</span>
+                  <span className="text-[#3A2930]">{step.stage}</span>
+                  <span className="text-[#8C455C] font-mono">{step.count} leads</span>
                 </div>
-                <div className="w-full h-3 bg-[#F4EAD7] rounded-full overflow-hidden border border-[#D8C7A5]">
+                <div className="w-full h-3 bg-[#FFF5F7] rounded-full overflow-hidden border border-[#EBCBD4]">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
@@ -146,32 +146,32 @@ export default function ReportsPage() {
         </div>
 
         {/* Agent Revenue Leaderboard */}
-        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-4 shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
-          <div className="border-b border-[#D8C7A5] pb-3">
-            <h3 className="text-base font-serif font-bold text-[#2C241A] tracking-tight">
+        <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-4 shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
+          <div className="border-b border-[#EBCBD4] pb-3">
+            <h3 className="text-base font-serif font-bold text-[#3A2930] tracking-tight">
               Sales Consultant Revenue Contribution
             </h3>
-            <p className="text-xs text-[#6A5A44]">Closed commission vs active pipeline in Lakhs INR</p>
+            <p className="text-xs text-[#765D66]">Closed commission vs active pipeline in Lakhs INR</p>
           </div>
 
           <div className="h-64 w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={agentPerformance} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" stroke="#DDD0B8" horizontal={false} />
-                <XAxis type="number" stroke="#6A5A44" fontSize={11} tickFormatter={(v) => `₹${v}L`} />
-                <YAxis dataKey="name" type="category" stroke="#2C241A" fontSize={11} width={130} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#F2DAE1" horizontal={false} />
+                <XAxis type="number" stroke="#765D66" fontSize={11} tickFormatter={(v) => `â‚¹${v}L`} />
+                <YAxis dataKey="name" type="category" stroke="#3A2930" fontSize={11} width={130} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#FFF9F0',
-                    borderColor: '#D8C7A5',
+                    backgroundColor: '#FFF9FA',
+                    borderColor: '#EBCBD4',
                     borderRadius: '0.75rem',
                     fontSize: '12px',
-                    color: '#2C241A',
+                    color: '#3A2930',
                     boxShadow: '0 8px 24px rgba(120,90,40,0.12)',
                   }}
-                  formatter={(val: any) => [`₹${val} Lakhs`, 'Contribution']}
+                  formatter={(val: any) => [`â‚¹${val} Lakhs`, 'Contribution']}
                 />
-                <Bar dataKey="revenue" fill="#A37432" radius={[0, 6, 6, 0]} />
+                <Bar dataKey="revenue" fill="#B86B84" radius={[0, 6, 6, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -180,3 +180,4 @@ export default function ReportsPage() {
     </div>
   );
 }
+

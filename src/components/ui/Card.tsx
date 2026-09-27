@@ -2,23 +2,44 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'glass' | 'gold-border' | 'interactive';
-  orientation?: 'vertical' | 'horizontal';
+  variant?: 'default' | 'gold' | 'glass' | 'interactive' | 'flat' | 'dark' | 'rose';
+  padded?: boolean;
+  orientation?: string;
 }
 
-export function Card({ className, variant = 'default', orientation, children, ...props }: CardProps) {
+export function Card({
+  className,
+  variant = 'default',
+  padded = true,
+  orientation,
+  children,
+  ...props
+}: CardProps) {
   const variantClasses = {
-    default: 'bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow',
-    glass: 'bg-[#FFF9F0]/90 backdrop-blur-md border border-[#D8C7A5] shadow-xs',
-    'gold-border':
-      'bg-[#FFF9F0] border border-[#A37432]/60 shadow-[0_4px_20px_-4px_rgba(163,116,50,0.12)]',
+    default:
+      'bg-[#FFF9FA] border border-[#EBCBD4] shadow-[0_4px_20px_rgba(184,107,132,0.06)] rounded-2xl text-[#3A2930]',
+    rose:
+      'bg-[#FFF9FA] border border-[#D98FA5]/50 shadow-[0_4px_24px_rgba(184,107,132,0.1)] rounded-2xl text-[#3A2930]',
+    gold:
+      'bg-[#FFF9FA] border border-[#D98FA5]/50 shadow-[0_4px_24px_rgba(184,107,132,0.1)] rounded-2xl text-[#3A2930]',
+    glass:
+      'bg-[#FFF9FA]/85 backdrop-blur-md border border-[#EBCBD4]/80 shadow-[0_8px_32px_rgba(184,107,132,0.08)] rounded-2xl text-[#3A2930]',
     interactive:
-      'bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#A37432] hover:shadow-[0_10px_28px_-4px_rgba(163,116,50,0.14)] transition-all duration-200 cursor-pointer',
+      'bg-[#FFF9FA] border border-[#EBCBD4] hover:border-[#D98FA5] hover:shadow-[0_8px_30px_rgba(184,107,132,0.12)] transition-all duration-200 cursor-pointer rounded-2xl text-[#3A2930]',
+    flat:
+      'bg-[#FFF5F7] border border-[#EBCBD4] rounded-2xl text-[#3A2930]',
+    dark:
+      'bg-[#2A1820] border border-[#422633] text-[#FFF9FA] shadow-xl rounded-2xl',
   };
 
   return (
     <div
-      className={cn('rounded-2xl p-5 sm:p-6 text-[#2C241A]', variantClasses[variant], className)}
+      className={cn(
+        'transition-colors',
+        variantClasses[variant],
+        padded && 'p-5 sm:p-6',
+        className
+      )}
       {...props}
     >
       {children}
@@ -32,7 +53,10 @@ export function CardHeader({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('flex items-center justify-between pb-4 mb-4 border-b border-[#D8C7A5]', className)} {...props}>
+    <div
+      className={cn('flex items-center justify-between pb-4 border-b border-[#EBCBD4]/60 mb-4', className)}
+      {...props}
+    >
       {children}
     </div>
   );
@@ -45,7 +69,7 @@ export function CardTitle({
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn('text-base font-bold text-[#2C241A] tracking-tight flex items-center gap-2', className)}
+      className={cn('text-base sm:text-lg font-bold text-[#3A2930] tracking-tight flex items-center gap-2', className)}
       {...props}
     >
       {children}
@@ -59,7 +83,7 @@ export function CardDescription({
   ...props
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn('text-xs text-[#6A5A44] mt-1', className)} {...props}>
+    <p className={cn('text-xs sm:text-sm text-[#765D66] mt-1', className)} {...props}>
       {children}
     </p>
   );

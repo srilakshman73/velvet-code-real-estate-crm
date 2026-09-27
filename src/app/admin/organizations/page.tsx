@@ -128,8 +128,8 @@ export default function AdminOrganizationsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Organizations & Tenants</h1>
-          <p className="text-sm text-[#6A5A44] mt-1">
+          <h1 className="text-3xl font-serif font-bold text-[#3A2930] tracking-tight">Organizations & Tenants</h1>
+          <p className="text-sm text-[#765D66] mt-1">
             Manage multi-tenant brokerages, isolated database partitions, subscription tiers, and tenant lifecycle.
           </p>
         </div>
@@ -155,8 +155,8 @@ export default function AdminOrganizationsPage() {
       </div>
 
       {feedbackMessage && (
-        <div className="p-3 bg-[#A37432]/15 border border-[#A37432]/30 rounded-xl text-xs text-[#7A5520] flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-[#7A5520] flex-shrink-0" />
+        <div className="p-3 bg-[#B86B84]/15 border border-[#B86B84]/30 rounded-xl text-xs text-[#8C455C] flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-[#8C455C] flex-shrink-0" />
           <span>{feedbackMessage}</span>
         </div>
       )}
@@ -168,14 +168,14 @@ export default function AdminOrganizationsPage() {
             placeholder="Search organizations by name, city, or email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            icon={<Search className="w-4 h-4 text-[#6A5A44]" />}
+            icon={<Search className="w-4 h-4 text-[#765D66]" />}
           />
         </div>
         <div className="flex items-center gap-3">
           <select
             value={tierFilter}
             onChange={(e) => setTierFilter(e.target.value)}
-            className="bg-[#FFF9F0] border border-[#D8C7A5] rounded-lg px-3 py-2 text-xs text-[#2C241A] focus:outline-none focus:border-[#A37432]"
+            className="bg-[#FFF9FA] border border-[#EBCBD4] rounded-lg px-3 py-2 text-xs text-[#3A2930] focus:outline-none focus:border-[#B86B84]"
           >
             <option value="ALL">All Tiers</option>
             <option value="STARTER">Starter Tier</option>
@@ -186,7 +186,7 @@ export default function AdminOrganizationsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-[#FFF9F0] border border-[#D8C7A5] rounded-lg px-3 py-2 text-xs text-[#2C241A] focus:outline-none focus:border-[#A37432]"
+            className="bg-[#FFF9FA] border border-[#EBCBD4] rounded-lg px-3 py-2 text-xs text-[#3A2930] focus:outline-none focus:border-[#B86B84]"
           >
             <option value="ALL">All Statuses</option>
             <option value="ACTIVE">Active</option>
@@ -197,10 +197,10 @@ export default function AdminOrganizationsPage() {
       </div>
 
       {/* Tenants Table */}
-      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#F4EAD7] border-b border-[#D8C7A5] text-[#6A5A44]">
+            <thead className="bg-[#FFF5F7] border-b border-[#EBCBD4] text-[#765D66]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Organization & ID</th>
                 <th className="py-3 px-4 font-semibold">Location</th>
@@ -211,40 +211,40 @@ export default function AdminOrganizationsPage() {
                 <th className="py-3 px-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#D8C7A5]/60">
+            <tbody className="divide-y divide-[#EBCBD4]/60">
               {filteredTenants.map((org) => (
                 <tr key={org.id} className="hover:bg-[#F7EEDC] transition-colors">
-                  <td className="py-3 px-4 font-medium text-[#2C241A]">
+                  <td className="py-3 px-4 font-medium text-[#3A2930]">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#A37432]/15 border border-[#A37432]/30 text-[#7A5520] font-serif flex items-center justify-center font-bold text-xs">
+                      <div className="w-8 h-8 rounded-lg bg-[#B86B84]/15 border border-[#B86B84]/30 text-[#8C455C] font-serif flex items-center justify-center font-bold text-xs">
                         {org.name.charAt(0)}
                       </div>
                       <div>
-                        <div className="text-sm font-serif font-bold text-[#2C241A]">{org.name}</div>
-                        <div className="text-[11px] text-[#6A5A44] font-mono">{org.id} &bull; {org.businessType}</div>
+                        <div className="text-sm font-serif font-bold text-[#3A2930]">{org.name}</div>
+                        <div className="text-[11px] text-[#765D66] font-mono">{org.id} &bull; {org.businessType}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-[#6A5A44]">
+                  <td className="py-3 px-4 text-[#765D66]">
                     <div>{org.city}, {org.state}</div>
-                    <div className="text-[10px] text-[#8A7A63]">{org.email}</div>
+                    <div className="text-[10px] text-[#9B828C]">{org.email}</div>
                   </td>
                   <td className="py-3 px-4">
                     <Badge variant={org.tier === 'BUSINESS' ? 'gold' : org.tier === 'PROFESSIONAL' ? 'info' : 'neutral'}>
                       {org.tier}
                     </Badge>
                   </td>
-                  <td className="py-3 px-4 text-[#6A5A44]">
+                  <td className="py-3 px-4 text-[#765D66]">
                     <div className="flex items-center gap-2 font-mono">
                       <span>{org.usersCount} agents</span>
-                      <span className="text-[#D8C7A5]">&bull;</span>
+                      <span className="text-[#EBCBD4]">&bull;</span>
                       <span>{org.leadsCount} leads</span>
-                      <span className="text-[#D8C7A5]">&bull;</span>
+                      <span className="text-[#EBCBD4]">&bull;</span>
                       <span>{org.propertiesCount} props</span>
                     </div>
                   </td>
-                  <td className="py-3 px-4 font-mono font-semibold text-[#547A61]">
-                    ₹{org.mrrINR.toLocaleString()}/mo
+                  <td className="py-3 px-4 font-mono font-semibold text-[#4A7C59]">
+                    â‚¹{org.mrrINR.toLocaleString()}/mo
                   </td>
                   <td className="py-3 px-4">
                     <Badge variant={org.status === 'ACTIVE' ? 'success' : org.status === 'PAST_DUE' ? 'warning' : 'error'}>
@@ -258,7 +258,7 @@ export default function AdminOrganizationsPage() {
                         size="xs"
                         onClick={() => handleImpersonate(org)}
                         title="Enter Tenant Workspace in Support Mode"
-                        icon={<UserCheck className="w-3.5 h-3.5 text-[#7A5520]" />}
+                        icon={<UserCheck className="w-3.5 h-3.5 text-[#8C455C]" />}
                       >
                         Enter CRM
                       </Button>
@@ -266,7 +266,7 @@ export default function AdminOrganizationsPage() {
                         variant="ghost"
                         size="xs"
                         onClick={() => handleToggleStatus(org.id)}
-                        className={org.status === 'ACTIVE' ? 'text-[#7A5520] hover:text-[#8A5E25]' : 'text-[#547A61]'}
+                        className={org.status === 'ACTIVE' ? 'text-[#8C455C] hover:text-[#9E546C]' : 'text-[#4A7C59]'}
                       >
                         {org.status === 'ACTIVE' ? 'Suspend' : 'Activate'}
                       </Button>
@@ -274,7 +274,7 @@ export default function AdminOrganizationsPage() {
                         variant="ghost"
                         size="xs"
                         onClick={() => setOrgToDelete(org)}
-                        className="text-[#8B4A4A] hover:text-[#701E2B] hover:bg-[#8B4A4A]/10"
+                        className="text-[#A84355] hover:text-[#701E2B] hover:bg-[#A84355]/10"
                         title="Delete Organization"
                         icon={<Trash2 className="w-3.5 h-3.5" />}
                       >
@@ -297,14 +297,14 @@ export default function AdminOrganizationsPage() {
           title="Confirm Organization Deletion"
         >
           <div className="space-y-4">
-            <div className="flex items-start gap-3 p-3 bg-[#8B4A4A]/10 border border-[#8B4A4A]/20 rounded-xl text-[#8B4A4A] text-xs">
-              <AlertTriangle className="w-5 h-5 flex-shrink-0 text-[#8B4A4A] mt-0.5" />
+            <div className="flex items-start gap-3 p-3 bg-[#A84355]/10 border border-[#A84355]/20 rounded-xl text-[#A84355] text-xs">
+              <AlertTriangle className="w-5 h-5 flex-shrink-0 text-[#A84355] mt-0.5" />
               <div>
-                <p className="font-bold text-[#8B4A4A]">Destructive Platform Action</p>
-                <p className="mt-1 text-[#2C241A]">
-                  Are you sure you want to permanently delete organization <strong className="text-[#8B4A4A]">{orgToDelete.name}</strong> ({orgToDelete.id})?
+                <p className="font-bold text-[#A84355]">Destructive Platform Action</p>
+                <p className="mt-1 text-[#3A2930]">
+                  Are you sure you want to permanently delete organization <strong className="text-[#A84355]">{orgToDelete.name}</strong> ({orgToDelete.id})?
                 </p>
-                <p className="mt-1 text-[#6A5A44]">
+                <p className="mt-1 text-[#765D66]">
                   This will immediately terminate all active tenant users, {orgToDelete.leadsCount} leads, {orgToDelete.propertiesCount} properties, and associated subscriptions.
                 </p>
               </div>
@@ -334,3 +334,4 @@ export default function AdminOrganizationsPage() {
     </div>
   );
 }
+

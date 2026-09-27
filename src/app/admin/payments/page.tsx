@@ -73,8 +73,8 @@ export default function AdminPaymentsPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Payment Receipts & GST Ledger</h1>
-          <p className="text-sm text-[#6A5A44] mt-1">
+          <h1 className="text-3xl font-serif font-bold text-[#3A2930] tracking-tight">Payment Receipts & GST Ledger</h1>
+          <p className="text-sm text-[#765D66] mt-1">
             Real-time Razorpay payment transactions, automatic tax invoices, and monthly GST audit logs.
           </p>
         </div>
@@ -114,24 +114,24 @@ export default function AdminPaymentsPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Gross Platform Inflow</span>
-          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">₹{grossInflow.toLocaleString('en-IN')}</div>
-          <div className="text-xs text-[#547A61] mt-1 flex items-center gap-1 font-semibold">
+        <Card orientation="vertical" className="bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
+          <span className="text-xs font-semibold text-[#765D66] uppercase tracking-wider font-serif">Gross Platform Inflow</span>
+          <div className="text-2xl font-serif font-bold text-[#3A2930] mt-2">â‚¹{grossInflow.toLocaleString('en-IN')}</div>
+          <div className="text-xs text-[#4A7C59] mt-1 flex items-center gap-1 font-semibold">
             <ArrowUpRight className="w-3.5 h-3.5" /> Razorpay Test Gateway Active
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Total GST Accounted (18%)</span>
-          <div className="text-2xl font-serif font-bold text-[#7A5520] mt-2">₹{totalGST.toLocaleString('en-IN')}</div>
-          <div className="text-xs text-[#6A5A44] mt-1">Ready for GSTR-1 e-filing audit</div>
+        <Card orientation="vertical" className="bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
+          <span className="text-xs font-semibold text-[#765D66] uppercase tracking-wider font-serif">Total GST Accounted (18%)</span>
+          <div className="text-2xl font-serif font-bold text-[#8C455C] mt-2">â‚¹{totalGST.toLocaleString('en-IN')}</div>
+          <div className="text-xs text-[#765D66] mt-1">Ready for GSTR-1 e-filing audit</div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Captured Transactions</span>
-          <div className="text-2xl font-serif font-bold text-[#547A61] mt-2">{capturedPayments.length} Paid</div>
-          <div className="text-xs text-[#6A5A44] mt-1">{payments.filter((p) => p.status === 'FAILED').length} failed payment attempts</div>
+        <Card orientation="vertical" className="bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
+          <span className="text-xs font-semibold text-[#765D66] uppercase tracking-wider font-serif">Captured Transactions</span>
+          <div className="text-2xl font-serif font-bold text-[#4A7C59] mt-2">{capturedPayments.length} Paid</div>
+          <div className="text-xs text-[#765D66] mt-1">{payments.filter((p) => p.status === 'FAILED').length} failed payment attempts</div>
         </Card>
       </div>
 
@@ -142,13 +142,13 @@ export default function AdminPaymentsPage() {
             placeholder="Search by Razorpay Payment ID or Tenant Name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            icon={<Search className="w-4 h-4 text-[#6A5A44]" />}
+            icon={<Search className="w-4 h-4 text-[#765D66]" />}
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="bg-[#FFF9F0] border border-[#D8C7A5] rounded-lg px-3 py-2 text-xs text-[#2C241A] focus:outline-none focus:border-[#A37432]"
+          className="bg-[#FFF9FA] border border-[#EBCBD4] rounded-lg px-3 py-2 text-xs text-[#3A2930] focus:outline-none focus:border-[#B86B84]"
         >
           <option value="ALL">All Statuses</option>
           <option value="CAPTURED">Captured (Success)</option>
@@ -158,10 +158,10 @@ export default function AdminPaymentsPage() {
       </div>
 
       {/* Table */}
-      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#F4EAD7] border-b border-[#D8C7A5] text-[#6A5A44]">
+            <thead className="bg-[#FFF5F7] border-b border-[#EBCBD4] text-[#765D66]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Payment ID & Org</th>
                 <th className="py-3 px-4 font-semibold">Plan Item</th>
@@ -173,37 +173,37 @@ export default function AdminPaymentsPage() {
                 <th className="py-3 px-4 font-semibold text-right">Date</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#D8C7A5]/60">
+            <tbody className="divide-y divide-[#EBCBD4]/60">
               {filteredPayments.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-12 text-center text-[#6A5A44]">
-                    <Receipt className="w-8 h-8 text-[#D8C7A5] mx-auto mb-2" />
-                    <p className="font-serif font-bold text-sm text-[#2C241A]">No payments yet</p>
+                  <td colSpan={8} className="py-12 text-center text-[#765D66]">
+                    <Receipt className="w-8 h-8 text-[#EBCBD4] mx-auto mb-2" />
+                    <p className="font-serif font-bold text-sm text-[#3A2930]">No payments yet</p>
                     <p className="text-xs">Real customer subscription payments and GST invoices will be recorded here.</p>
                   </td>
                 </tr>
               ) : (
                 filteredPayments.map((p) => (
                   <tr key={p.id} className="hover:bg-[#F7EEDC] transition-colors">
-                    <td className="py-3 px-4 font-medium text-[#2C241A]">
+                    <td className="py-3 px-4 font-medium text-[#3A2930]">
                       <div>
-                        <div className="text-sm font-serif font-bold text-[#2C241A]">{p.organizationName}</div>
-                        <div className="text-[10px] text-[#6A5A44] font-mono">{p.razorpayPaymentId}</div>
+                        <div className="text-sm font-serif font-bold text-[#3A2930]">{p.organizationName}</div>
+                        <div className="text-[10px] text-[#765D66] font-mono">{p.razorpayPaymentId}</div>
                       </div>
                     </td>
-                    <td className="py-3 px-4 text-[#6A5A44] font-medium">
+                    <td className="py-3 px-4 text-[#765D66] font-medium">
                       {p.planTier}
                     </td>
-                    <td className="py-3 px-4 font-mono text-[#6A5A44]">
-                      ₹{p.amountINR.toLocaleString('en-IN')}
+                    <td className="py-3 px-4 font-mono text-[#765D66]">
+                      â‚¹{p.amountINR.toLocaleString('en-IN')}
                     </td>
-                    <td className="py-3 px-4 font-mono text-[#6A5A44]">
-                      ₹{p.gstINR.toLocaleString('en-IN')}
+                    <td className="py-3 px-4 font-mono text-[#765D66]">
+                      â‚¹{p.gstINR.toLocaleString('en-IN')}
                     </td>
-                    <td className="py-3 px-4 font-mono font-bold text-[#2C241A]">
-                      ₹{p.totalINR.toLocaleString('en-IN')}
+                    <td className="py-3 px-4 font-mono font-bold text-[#3A2930]">
+                      â‚¹{p.totalINR.toLocaleString('en-IN')}
                     </td>
-                    <td className="py-3 px-4 text-[#6A5A44]">
+                    <td className="py-3 px-4 text-[#765D66]">
                       {p.paymentMethod}
                     </td>
                     <td className="py-3 px-4">
@@ -211,7 +211,7 @@ export default function AdminPaymentsPage() {
                         {p.status}
                       </Badge>
                     </td>
-                    <td className="py-3 px-4 text-right text-[#6A5A44]">
+                    <td className="py-3 px-4 text-right text-[#765D66]">
                       {p.date}
                     </td>
                   </tr>
@@ -224,3 +224,4 @@ export default function AdminPaymentsPage() {
     </div>
   );
 }
+

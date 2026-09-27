@@ -33,13 +33,13 @@ export default function FollowUpsPage() {
   });
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#FCECEF] text-[#3A2930]">
       {/* Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#3A2930] tracking-tight">
           Client Follow-up Engine
         </h1>
-        <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
+        <p className="text-xs sm:text-sm text-[#765D66] mt-1">
           Proactive customer touchpoint tracker to maintain deal momentum across calls, WhatsApp, and meetings.
         </p>
       </div>
@@ -50,72 +50,72 @@ export default function FollowUpsPage() {
           onClick={() => setActiveTab('OVERDUE')}
           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
             activeTab === 'OVERDUE'
-              ? 'bg-[#8B4A4A]/15 border-[#8B4A4A] text-[#2C241A] shadow-md'
-              : 'bg-[#FFF9F0] border-[#D8C7A5] text-[#6A5A44] hover:border-[#8B4A4A]'
+              ? 'bg-[#A84355]/15 border-[#A84355] text-[#3A2930] shadow-md'
+              : 'bg-[#FFF9FA] border-[#EBCBD4] text-[#765D66] hover:border-[#A84355]'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#8B4A4A]">Overdue</span>
-            <AlertTriangle className="w-4 h-4 text-[#8B4A4A]" />
+            <span className="text-xs font-bold uppercase tracking-wider text-[#A84355]">Overdue</span>
+            <AlertTriangle className="w-4 h-4 text-[#A84355]" />
           </div>
-          <p className="text-2xl sm:text-3xl font-extrabold text-[#8B4A4A] mt-2 font-mono">
+          <p className="text-2xl sm:text-3xl font-extrabold text-[#A84355] mt-2 font-mono">
             {overdueCount}
           </p>
-          <p className="text-[11px] text-[#6A5A44] mt-1">Needs immediate recall</p>
+          <p className="text-[11px] text-[#765D66] mt-1">Needs immediate recall</p>
         </div>
 
         <div
           onClick={() => setActiveTab('DUE_TODAY')}
           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
             activeTab === 'DUE_TODAY'
-              ? 'bg-[#A37432]/15 border-[#A37432] text-[#2C241A] shadow-md'
-              : 'bg-[#FFF9F0] border-[#D8C7A5] text-[#6A5A44] hover:border-[#A37432]'
+              ? 'bg-[#B86B84]/15 border-[#B86B84] text-[#3A2930] shadow-md'
+              : 'bg-[#FFF9FA] border-[#EBCBD4] text-[#765D66] hover:border-[#B86B84]'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#7A5520]">Due Today</span>
-            <Clock className="w-4 h-4 text-[#7A5520]" />
+            <span className="text-xs font-bold uppercase tracking-wider text-[#8C455C]">Due Today</span>
+            <Clock className="w-4 h-4 text-[#8C455C]" />
           </div>
-          <p className="text-2xl sm:text-3xl font-extrabold text-[#7A5520] mt-2 font-mono">
+          <p className="text-2xl sm:text-3xl font-extrabold text-[#8C455C] mt-2 font-mono">
             {dueTodayCount}
           </p>
-          <p className="text-[11px] text-[#6A5A44] mt-1">Scheduled before 7 PM</p>
+          <p className="text-[11px] text-[#765D66] mt-1">Scheduled before 7 PM</p>
         </div>
 
         <div
           onClick={() => setActiveTab('UPCOMING')}
           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
             activeTab === 'UPCOMING'
-              ? 'bg-[#C39A5B]/20 border-[#A37432] text-[#2C241A] shadow-md'
-              : 'bg-[#FFF9F0] border-[#D8C7A5] text-[#6A5A44] hover:border-[#A37432]'
+              ? 'bg-[#D98FA5]/20 border-[#B86B84] text-[#3A2930] shadow-md'
+              : 'bg-[#FFF9FA] border-[#EBCBD4] text-[#765D66] hover:border-[#B86B84]'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#C39A5B]">Upcoming</span>
-            <CalendarCheck className="w-4 h-4 text-[#C39A5B]" />
+            <span className="text-xs font-bold uppercase tracking-wider text-[#D98FA5]">Upcoming</span>
+            <CalendarCheck className="w-4 h-4 text-[#D98FA5]" />
           </div>
-          <p className="text-2xl sm:text-3xl font-extrabold text-[#2C241A] mt-2 font-mono">
+          <p className="text-2xl sm:text-3xl font-extrabold text-[#3A2930] mt-2 font-mono">
             {upcomingCount}
           </p>
-          <p className="text-[11px] text-[#6A5A44] mt-1">Next 7 days</p>
+          <p className="text-[11px] text-[#765D66] mt-1">Next 7 days</p>
         </div>
 
         <div
           onClick={() => setActiveTab('COMPLETED')}
           className={`p-4 rounded-2xl border cursor-pointer transition-all ${
             activeTab === 'COMPLETED'
-              ? 'bg-[#547A61]/15 border-[#547A61] text-[#2C241A] shadow-md'
-              : 'bg-[#FFF9F0] border-[#D8C7A5] text-[#6A5A44] hover:border-[#547A61]'
+              ? 'bg-[#4A7C59]/15 border-[#4A7C59] text-[#3A2930] shadow-md'
+              : 'bg-[#FFF9FA] border-[#EBCBD4] text-[#765D66] hover:border-[#4A7C59]'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#547A61]">Completed</span>
-            <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
+            <span className="text-xs font-bold uppercase tracking-wider text-[#4A7C59]">Completed</span>
+            <CheckCircle2 className="w-4 h-4 text-[#4A7C59]" />
           </div>
-          <p className="text-2xl sm:text-3xl font-extrabold text-[#547A61] mt-2 font-mono">
+          <p className="text-2xl sm:text-3xl font-extrabold text-[#4A7C59] mt-2 font-mono">
             {followUps.filter((f) => f.status === 'COMPLETED').length}
           </p>
-          <p className="text-[11px] text-[#6A5A44] mt-1">Successfully connected</p>
+          <p className="text-[11px] text-[#765D66] mt-1">Successfully connected</p>
         </div>
       </div>
 
@@ -124,19 +124,19 @@ export default function FollowUpsPage() {
         {filtered.map((fu) => (
           <div
             key={fu.id}
-            className="p-5 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_4px_16px_rgba(120,90,40,0.06)] hover:border-[#A37432] transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+            className="p-5 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] shadow-[0_4px_16px_rgba(120,90,40,0.06)] hover:border-[#B86B84] transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
           >
             <div className="space-y-1.5 min-w-0">
               <div className="flex items-center gap-2.5">
-                <span className="text-base font-serif font-bold text-[#2C241A]">{fu.leadName}</span>
-                <span className="px-2 py-0.5 text-[10px] font-bold bg-[#F4EAD7] border border-[#D8C7A5] text-[#6A5A44] rounded">
+                <span className="text-base font-serif font-bold text-[#3A2930]">{fu.leadName}</span>
+                <span className="px-2 py-0.5 text-[10px] font-bold bg-[#FFF5F7] border border-[#EBCBD4] text-[#765D66] rounded">
                   {fu.type}
                 </span>
-                <span className="text-xs text-[#6A5A44]">{fu.customerPhone}</span>
+                <span className="text-xs text-[#765D66]">{fu.customerPhone}</span>
               </div>
 
-              <p className="text-xs text-[#2C241A]">
-                <strong className="text-[#7A5520] font-serif">{fu.propertyName}</strong> — {fu.notes}
+              <p className="text-xs text-[#3A2930]">
+                <strong className="text-[#8C455C] font-serif">{fu.propertyName}</strong> â€” {fu.notes}
               </p>
             </div>
 
@@ -144,9 +144,9 @@ export default function FollowUpsPage() {
               {/* Direct Tappable Call */}
               <a
                 href={`tel:${fu.customerPhone}`}
-                className="px-3 py-1.5 rounded-xl bg-[#F4EAD7] hover:bg-[#E9DFC8] text-[#2C241A] border border-[#D8C7A5] text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                className="px-3 py-1.5 rounded-xl bg-[#FFF5F7] hover:bg-[#FCECEF] text-[#3A2930] border border-[#EBCBD4] text-xs font-semibold flex items-center gap-1.5 transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 text-[#C39A5B]" />
+                <Phone className="w-3.5 h-3.5 text-[#D98FA5]" />
                 <span>Call Phone</span>
               </a>
 
@@ -155,7 +155,7 @@ export default function FollowUpsPage() {
                 href={buildWhatsAppUrl(fu.customerPhone, `Hello ${fu.leadName}, following up regarding ${fu.propertyName || 'your inquiry'}.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1.5 rounded-xl bg-[#547A61] hover:bg-[#43644e] text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-colors"
+                className="px-3 py-1.5 rounded-xl bg-[#4A7C59] hover:bg-[#43644e] text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-colors"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
                 <span>WhatsApp</span>
@@ -186,3 +186,4 @@ export default function FollowUpsPage() {
     </div>
   );
 }
+

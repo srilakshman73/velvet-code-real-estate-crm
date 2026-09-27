@@ -24,18 +24,18 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#E9DFC8] text-[#2C241A]">
+    <div className="min-h-screen flex flex-col bg-[#FCECEF] text-[#3A2930]">
       <PublicHeader />
       <main className="flex-1">
         {/* Header */}
         <section className="py-20 text-center max-w-4xl mx-auto px-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8C455C] bg-[#B86B84]/15 px-3.5 py-1 rounded-full border border-[#B86B84]/30">
             Simple & Predictable Pricing
           </span>
-          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#3A2930] mt-4 tracking-tight font-serif">
             Choose the Perfect Plan for Your Real Estate Business
           </h1>
-          <p className="text-lg text-[#6A5A44] mt-4 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-[#765D66] mt-4 leading-relaxed max-w-2xl mx-auto">
             Scale your listings, leads, and agent team without hidden fees. Upgrade or cancel anytime.
           </p>
         </section>
@@ -44,64 +44,64 @@ export default function PricingPage() {
         <PricingSection />
 
         {/* Detailed Feature Matrix Table */}
-        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-[#D8C7A5]">
+        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-[#EBCBD4]">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#3A2930] tracking-tight font-serif">
               Compare Plan Features
             </h2>
-            <p className="text-sm text-[#6A5A44] mt-2">
+            <p className="text-sm text-[#765D66] mt-2">
               Detailed technical breakdown of all Velvet Code SaaS subscriptions.
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] aurum-card-shadow">
+          <div className="overflow-x-auto rounded-2xl border border-[#EBCBD4] bg-[#FFF9FA] aurum-card-shadow">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
-                <tr className="border-b border-[#D8C7A5] bg-[#F4EAD7]">
-                  <th className="p-4 sm:p-5 font-bold text-[#2C241A]">Feature</th>
-                  <th className="p-4 sm:p-5 font-bold text-[#6A5A44] text-center w-1/4">
-                    Starter (₹1,999/mo)
+                <tr className="border-b border-[#EBCBD4] bg-[#FFF5F7]">
+                  <th className="p-4 sm:p-5 font-bold text-[#3A2930]">Feature</th>
+                  <th className="p-4 sm:p-5 font-bold text-[#765D66] text-center w-1/4">
+                    Starter (â‚¹1,999/mo)
                   </th>
-                  <th className="p-4 sm:p-5 font-bold text-[#7A5520] text-center w-1/4 bg-[#A37432]/10">
-                    Professional (₹5,999/mo)
+                  <th className="p-4 sm:p-5 font-bold text-[#8C455C] text-center w-1/4 bg-[#B86B84]/10">
+                    Professional (â‚¹5,999/mo)
                   </th>
-                  <th className="p-4 sm:p-5 font-bold text-[#2C241A] text-center w-1/4">
-                    Business (₹9,999/mo)
+                  <th className="p-4 sm:p-5 font-bold text-[#3A2930] text-center w-1/4">
+                    Business (â‚¹9,999/mo)
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#D8C7A5]/60">
+              <tbody className="divide-y divide-[#EBCBD4]/60">
                 {comparisonFeatures.map((row, i) => (
                   <tr key={i} className="hover:bg-[#F7EEDC] transition-colors">
-                    <td className="p-4 sm:p-5 font-bold text-[#2C241A]">{row.name}</td>
-                    <td className="p-4 sm:p-5 text-center text-[#6A5A44] font-medium">
+                    <td className="p-4 sm:p-5 font-bold text-[#3A2930]">{row.name}</td>
+                    <td className="p-4 sm:p-5 text-center text-[#765D66] font-medium">
                       {typeof row.starter === 'boolean' ? (
                         row.starter ? (
-                          <Check className="w-4 h-4 text-[#547A61] mx-auto" />
+                          <Check className="w-4 h-4 text-[#4A7C59] mx-auto" />
                         ) : (
-                          <XIcon className="w-4 h-4 text-[#D8C7A5] mx-auto" />
+                          <XIcon className="w-4 h-4 text-[#EBCBD4] mx-auto" />
                         )
                       ) : (
                         row.starter
                       )}
                     </td>
-                    <td className="p-4 sm:p-5 text-center font-bold text-[#7A5520] bg-[#A37432]/5">
+                    <td className="p-4 sm:p-5 text-center font-bold text-[#8C455C] bg-[#B86B84]/5">
                       {typeof row.pro === 'boolean' ? (
                         row.pro ? (
-                          <Check className="w-4 h-4 text-[#7A5520] mx-auto" />
+                          <Check className="w-4 h-4 text-[#8C455C] mx-auto" />
                         ) : (
-                          <XIcon className="w-4 h-4 text-[#D8C7A5] mx-auto" />
+                          <XIcon className="w-4 h-4 text-[#EBCBD4] mx-auto" />
                         )
                       ) : (
                         row.pro
                       )}
                     </td>
-                    <td className="p-4 sm:p-5 text-center font-bold text-[#2C241A]">
+                    <td className="p-4 sm:p-5 text-center font-bold text-[#3A2930]">
                       {typeof row.biz === 'boolean' ? (
                         row.biz ? (
-                          <Check className="w-4 h-4 text-[#547A61] mx-auto" />
+                          <Check className="w-4 h-4 text-[#4A7C59] mx-auto" />
                         ) : (
-                          <XIcon className="w-4 h-4 text-[#D8C7A5] mx-auto" />
+                          <XIcon className="w-4 h-4 text-[#EBCBD4] mx-auto" />
                         )
                       ) : (
                         row.biz
@@ -121,3 +121,4 @@ export default function PricingPage() {
     </div>
   );
 }
+

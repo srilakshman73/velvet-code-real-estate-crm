@@ -22,25 +22,25 @@ import {
 // ==========================================
 export function TrustedTechSection() {
   const stats = [
-    { value: '₹450+ Cr', label: 'Property Inventory Managed' },
+    { value: 'â‚¹450+ Cr', label: 'Property Inventory Managed' },
     { value: '84,000+', label: 'Real Estate Leads Processed' },
     { value: '1,240+', label: 'Active Real Estate Agencies' },
     { value: '99.9%', label: 'Cloud Infrastructure SLA' },
   ];
 
   return (
-    <section className="py-16 border-y border-[#D8C7A5] bg-[#F4EAD7]/70">
+    <section className="py-16 border-y border-[#EBCBD4] bg-[#FFF5F7]/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-xs font-bold uppercase tracking-widest text-[#6A5A44] mb-10">
+        <p className="text-center text-xs font-bold uppercase tracking-widest text-[#765D66] mb-10">
           Engineered for High-Performance Real Estate Sales Teams Across India
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {stats.map((s, i) => (
             <div key={i} className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-extrabold text-[#2C241A] font-serif">
+              <div className="text-3xl sm:text-4xl font-extrabold text-[#3A2930] font-serif">
                 {s.value}
               </div>
-              <p className="text-xs sm:text-sm text-[#6A5A44] font-medium">{s.label}</p>
+              <p className="text-xs sm:text-sm text-[#765D66] font-medium">{s.label}</p>
             </div>
           ))}
         </div>
@@ -99,16 +99,16 @@ export function CoreModulesShowcase() {
   ];
 
   return (
-    <section className="py-24 bg-[#E9DFC8]">
+    <section className="py-24 bg-[#FCECEF]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8C455C] bg-[#B86B84]/15 px-3.5 py-1 rounded-full border border-[#B86B84]/30">
             Comprehensive CRM Modules
           </span>
-          <h2 className="text-3xl sm:text-5xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h2 className="text-3xl sm:text-5xl font-bold text-[#3A2930] mt-4 tracking-tight font-serif">
             Every Tool You Need to Scale Your Real Estate Agency
           </h2>
-          <p className="text-base text-[#6A5A44] mt-4 leading-relaxed">
+          <p className="text-base text-[#765D66] mt-4 leading-relaxed">
             Built from the ground up for agents, brokers, builders, and property consultants.
           </p>
         </div>
@@ -119,25 +119,25 @@ export function CoreModulesShowcase() {
             return (
               <div
                 key={i}
-                className="group relative rounded-2xl p-7 bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#A37432] aurum-card-hover aurum-card-shadow flex flex-col justify-between"
+                className="group relative rounded-2xl p-7 bg-[#FFF9FA] border border-[#EBCBD4] hover:border-[#B86B84] aurum-card-hover aurum-card-shadow flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] text-[#7A5520] group-hover:scale-105 group-hover:border-[#A37432]/50 transition-all">
+                    <div className="p-3 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] text-[#8C455C] group-hover:scale-105 group-hover:border-[#B86B84]/50 transition-all">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6A5A44] bg-[#F4EAD7] px-2.5 py-1 rounded-md border border-[#D8C7A5]">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#765D66] bg-[#FFF5F7] px-2.5 py-1 rounded-md border border-[#EBCBD4]">
                       {f.tag}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-[#2C241A] mb-2 group-hover:text-[#7A5520] transition-colors">
+                  <h3 className="text-lg font-bold text-[#3A2930] mb-2 group-hover:text-[#8C455C] transition-colors">
                     {f.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#6A5A44] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#765D66] leading-relaxed">
                     {f.description}
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-[#D8C7A5]/80 flex items-center text-xs font-bold text-[#7A5520] group-hover:text-[#8A5E25]">
+                <div className="mt-6 pt-4 border-t border-[#EBCBD4]/80 flex items-center text-xs font-bold text-[#8C455C] group-hover:text-[#9E546C]">
                   <span>Explore module</span>
                   <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -155,33 +155,33 @@ export function CoreModulesShowcase() {
 // ==========================================
 export function WhatsAppAndAIShowcase() {
   return (
-    <section className="py-24 border-t border-[#D8C7A5] bg-[#F4EAD7]/50">
+    <section className="py-24 border-t border-[#EBCBD4] bg-[#FFF5F7]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column: Official WhatsApp */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#547A61]/10 border border-[#547A61]/30 text-[#547A61] text-xs font-bold">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#4A7C59]/10 border border-[#4A7C59]/30 text-[#4A7C59] text-xs font-bold">
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Official WhatsApp Business Architecture</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight font-serif">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#3A2930] tracking-tight font-serif">
               Connect With Buyers on India's #1 Messaging App
             </h2>
-            <p className="text-sm text-[#6A5A44] leading-relaxed">
+            <p className="text-sm text-[#765D66] leading-relaxed">
               Real estate deals happen on WhatsApp. Velvet Code gives you a complete 3-column WhatsApp CRM inbox with instant lead capture, automated site visit confirmations, and template broadcasts.
             </p>
 
-            <ul className="space-y-3 text-xs sm:text-sm text-[#2C241A]">
+            <ul className="space-y-3 text-xs sm:text-sm text-[#3A2930]">
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#547A61] flex-shrink-0" />
-                <span>Zero message delay — Instant automated response upon inquiry submission</span>
+                <CheckCircle2 className="w-4 h-4 text-[#4A7C59] flex-shrink-0" />
+                <span>Zero message delay â€” Instant automated response upon inquiry submission</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#547A61] flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#4A7C59] flex-shrink-0" />
                 <span>Pre-approved templates with dynamic customer and property variables</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#547A61] flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#4A7C59] flex-shrink-0" />
                 <span>Official click-to-chat integration with <strong>+91 63833 95915</strong></span>
               </li>
             </ul>
@@ -191,7 +191,7 @@ export function WhatsAppAndAIShowcase() {
                 href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#547A61] hover:bg-[#3D7258] text-[#FFF9F0] font-bold text-xs shadow-md transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#4A7C59] hover:bg-[#3D7258] text-[#FFF9FA] font-bold text-xs shadow-md transition-all"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Test Live WhatsApp Channel (+91 63833 95915)</span>
@@ -200,42 +200,42 @@ export function WhatsAppAndAIShowcase() {
           </div>
 
           {/* Right Column: Realty AI Card */}
-          <div className="rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] p-6 aurum-card-shadow relative overflow-hidden">
-            <div className="flex items-center justify-between pb-4 border-b border-[#D8C7A5]">
+          <div className="rounded-2xl border border-[#EBCBD4] bg-[#FFF9FA] p-6 aurum-card-shadow relative overflow-hidden">
+            <div className="flex items-center justify-between pb-4 border-b border-[#EBCBD4]">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-[#A37432]/20 text-[#7A5520]">
+                <div className="p-2 rounded-xl bg-[#B86B84]/20 text-[#8C455C]">
                   <Sparkles className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-[#2C241A]">Realty AI in Action</h3>
-                  <p className="text-[11px] text-[#8A7A63]">Contextual CRM Intelligence Engine</p>
+                  <h3 className="text-sm font-bold text-[#3A2930]">Realty AI in Action</h3>
+                  <p className="text-[11px] text-[#9B828C]">Contextual CRM Intelligence Engine</p>
                 </div>
               </div>
-              <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A37432]/20 text-[#7A5520] border border-[#A37432]/40 rounded">
+              <span className="px-2 py-0.5 text-[10px] font-bold bg-[#B86B84]/20 text-[#8C455C] border border-[#B86B84]/40 rounded">
                 Strict Org Isolation
               </span>
             </div>
 
             <div className="py-4 space-y-3 text-xs">
-              <div className="p-3.5 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] text-[#2C241A]">
-                <span className="font-bold text-[#7A5520]">Agent Prompt:</span> "Which leads are most likely to convert this week?"
+              <div className="p-3.5 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] text-[#3A2930]">
+                <span className="font-bold text-[#8C455C]">Agent Prompt:</span> "Which leads are most likely to convert this week?"
               </div>
-              <div className="p-3.5 rounded-xl bg-[#FFF9F0] border border-[#A37432]/40 text-[#2C241A] space-y-2">
-                <span className="font-bold text-[#547A61] flex items-center gap-1">
+              <div className="p-3.5 rounded-xl bg-[#FFF9FA] border border-[#B86B84]/40 text-[#3A2930] space-y-2">
+                <span className="font-bold text-[#4A7C59] flex items-center gap-1">
                   <Sparkles className="w-3.5 h-3.5" /> Realty AI Output:
                 </span>
-                <p className="text-xs leading-relaxed text-[#6A5A44]">
-                  "1. <strong className="text-[#2C241A]">Luxury Villa Inquiry</strong> (92% Conversion Score) — Budget ₹2.50 Cr match. Verified buyer profile.<br/>
-                  2. <strong className="text-[#2C241A]">Commercial IT Hub Lead</strong> (88% Conversion Score) — Site visit scheduled for tomorrow.<br/>
+                <p className="text-xs leading-relaxed text-[#765D66]">
+                  "1. <strong className="text-[#3A2930]">Luxury Villa Inquiry</strong> (92% Conversion Score) â€” Budget â‚¹2.50 Cr match. Verified buyer profile.<br/>
+                  2. <strong className="text-[#3A2930]">Commercial IT Hub Lead</strong> (88% Conversion Score) â€” Site visit scheduled for tomorrow.<br/>
                   <em>Drafted personalized WhatsApp follow-up ready for agent review.</em>"
                 </p>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-[#D8C7A5] flex items-center justify-between text-xs text-[#8A7A63]">
+            <div className="pt-2 border-t border-[#EBCBD4] flex items-center justify-between text-xs text-[#9B828C]">
               <span>Security Rule: Never sends without agent review.</span>
-              <Link href="/app/ai" className="text-[#7A5520] font-bold hover:underline">
-                Try Realty AI ↗
+              <Link href="/app/ai" className="text-[#8C455C] font-bold hover:underline">
+                Try Realty AI â†—
               </Link>
             </div>
           </div>
@@ -252,37 +252,37 @@ export function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="py-24 bg-[#E9DFC8] border-t border-[#D8C7A5]">
+    <section id="pricing" className="py-24 bg-[#FCECEF] border-t border-[#EBCBD4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8C455C] bg-[#B86B84]/15 px-3.5 py-1 rounded-full border border-[#B86B84]/30">
             Transparent SaaS Pricing
           </span>
-          <h2 className="text-3xl sm:text-5xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h2 className="text-3xl sm:text-5xl font-bold text-[#3A2930] mt-4 tracking-tight font-serif">
             Plans Built for Solopreneurs to Enterprise Agencies
           </h2>
-          <p className="text-base text-[#6A5A44] mt-4 leading-relaxed">
+          <p className="text-base text-[#765D66] mt-4 leading-relaxed">
             All plans include multi-tenant organization isolation and 14-day risk-free trial.
           </p>
 
           {/* Monthly / Annual Toggle */}
           <div className="mt-8 flex items-center justify-center gap-4">
-            <span className={`text-xs font-bold ${!isAnnual ? 'text-[#2C241A]' : 'text-[#6A5A44]'}`}>
+            <span className={`text-xs font-bold ${!isAnnual ? 'text-[#3A2930]' : 'text-[#765D66]'}`}>
               Monthly Billing
             </span>
             <button
               onClick={() => setIsAnnual(!isAnnual)}
-              className="relative w-12 h-6 rounded-full bg-[#D8C7A5] p-1 border border-[#A37432]/40 transition-colors"
+              className="relative w-12 h-6 rounded-full bg-[#EBCBD4] p-1 border border-[#B86B84]/40 transition-colors"
             >
               <div
-                className={`w-4 h-4 rounded-full bg-[#A37432] transition-transform ${
+                className={`w-4 h-4 rounded-full bg-[#B86B84] transition-transform ${
                   isAnnual ? 'translate-x-6' : 'translate-x-0'
                 }`}
               />
             </button>
-            <span className={`text-xs font-bold flex items-center gap-1.5 ${isAnnual ? 'text-[#2C241A]' : 'text-[#6A5A44]'}`}>
+            <span className={`text-xs font-bold flex items-center gap-1.5 ${isAnnual ? 'text-[#3A2930]' : 'text-[#765D66]'}`}>
               Annual Billing
-              <span className="px-2 py-0.5 text-[10px] font-bold bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30 rounded-full">
+              <span className="px-2 py-0.5 text-[10px] font-bold bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30 rounded-full">
                 Save 20%
               </span>
             </span>
@@ -302,46 +302,46 @@ export function PricingSection() {
                 key={plan.tier}
                 className={`relative rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 aurum-card-shadow ${
                   isPopular
-                    ? 'bg-[#FFF9F0] border-2 border-[#A37432] scale-105 shadow-xl'
-                    : 'bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#A37432]/60'
+                    ? 'bg-[#FFF9FA] border-2 border-[#B86B84] scale-105 shadow-xl'
+                    : 'bg-[#FFF9FA] border border-[#EBCBD4] hover:border-[#B86B84]/60'
                 }`}
               >
                 {isPopular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#A37432] text-[#FFF9F0] text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#B86B84] text-[#FFF9FA] text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
                     Most Popular Choice
                   </div>
                 )}
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-bold text-[#2C241A]">{plan.name}</h3>
-                    <span className="text-xs font-semibold text-[#8A7A63]">
+                    <h3 className="text-xl font-bold text-[#3A2930]">{plan.name}</h3>
+                    <span className="text-xs font-semibold text-[#9B828C]">
                       {plan.maxUsers} {plan.maxUsers === 1 ? 'User' : 'Users'}
                     </span>
                   </div>
 
                   <div className="mt-4 mb-6">
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-extrabold text-[#2C241A] font-sans">
-                        ₹{price.toLocaleString('en-IN')}
+                      <span className="text-4xl font-extrabold text-[#3A2930] font-sans">
+                        â‚¹{price.toLocaleString('en-IN')}
                       </span>
-                      <span className="text-xs text-[#8A7A63] font-medium">/month</span>
+                      <span className="text-xs text-[#9B828C] font-medium">/month</span>
                     </div>
                     {isAnnual && (
-                      <p className="text-[11px] text-[#547A61] font-bold mt-1">
-                        Billed annually (₹{plan.priceAnnualINR.toLocaleString('en-IN')}/yr)
+                      <p className="text-[11px] text-[#4A7C59] font-bold mt-1">
+                        Billed annually (â‚¹{plan.priceAnnualINR.toLocaleString('en-IN')}/yr)
                       </p>
                     )}
                   </div>
 
-                  <div className="pt-4 border-t border-[#D8C7A5] space-y-3">
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#8A7A63]">
+                  <div className="pt-4 border-t border-[#EBCBD4] space-y-3">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#9B828C]">
                       Plan Includes:
                     </p>
-                    <ul className="space-y-2.5 text-xs text-[#2C241A]">
+                    <ul className="space-y-2.5 text-xs text-[#3A2930]">
                       {plan.features.map((feat, idx) => (
                         <li key={idx} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-[#7A5520] flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-[#8C455C] flex-shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -349,7 +349,7 @@ export function PricingSection() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-[#D8C7A5]">
+                <div className="mt-8 pt-6 border-t border-[#EBCBD4]">
                   <Link href={`/register?plan=${plan.tier}`}>
                     <Button
                       variant={isPopular ? 'gold' : 'secondary'}
@@ -359,8 +359,8 @@ export function PricingSection() {
                       Get Started with {plan.name}
                     </Button>
                   </Link>
-                  <p className="text-[10px] text-center text-[#8A7A63] mt-2">
-                    14-day trial • Cancel anytime
+                  <p className="text-[10px] text-center text-[#9B828C] mt-2">
+                    14-day trial â€¢ Cancel anytime
                   </p>
                 </div>
               </div>
@@ -382,7 +382,7 @@ export function TestimonialsSection() {
         'Velvet Code transformed our OMR luxury sales operations. Our site visit conversion rate jumped by 42% after enabling the automated WhatsApp reminders and lead scoring.',
       author: 'Suresh Narayanan',
       role: 'Managing Director, Apex Realty Chennai',
-      properties: '₹85 Cr Portfolio',
+      properties: 'â‚¹85 Cr Portfolio',
     },
     {
       quote:
@@ -401,13 +401,13 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-24 border-t border-[#D8C7A5] bg-[#F4EAD7]/50">
+    <section className="py-24 border-t border-[#EBCBD4] bg-[#FFF5F7]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8C455C] bg-[#B86B84]/15 px-3.5 py-1 rounded-full border border-[#B86B84]/30">
             Real Estate Leadership
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#3A2930] mt-4 tracking-tight font-serif">
             Trusted by Top Real Estate Agencies & Builders
           </h2>
         </div>
@@ -416,17 +416,17 @@ export function TestimonialsSection() {
           {reviews.map((r, i) => (
             <div
               key={i}
-              className="p-7 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow flex flex-col justify-between space-y-6"
+              className="p-7 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] aurum-card-shadow flex flex-col justify-between space-y-6"
             >
-              <p className="text-xs sm:text-sm text-[#2C241A] leading-relaxed italic">
+              <p className="text-xs sm:text-sm text-[#3A2930] leading-relaxed italic">
                 "{r.quote}"
               </p>
-              <div className="pt-4 border-t border-[#D8C7A5] flex items-center justify-between">
+              <div className="pt-4 border-t border-[#EBCBD4] flex items-center justify-between">
                 <div>
-                  <h4 className="text-sm font-bold text-[#2C241A]">{r.author}</h4>
-                  <p className="text-[11px] text-[#8A7A63]">{r.role}</p>
+                  <h4 className="text-sm font-bold text-[#3A2930]">{r.author}</h4>
+                  <p className="text-[11px] text-[#9B828C]">{r.role}</p>
                 </div>
-                <span className="text-[10px] font-bold text-[#7A5520] bg-[#A37432]/15 px-2.5 py-1 rounded-md border border-[#A37432]/30">
+                <span className="text-[10px] font-bold text-[#8C455C] bg-[#B86B84]/15 px-2.5 py-1 rounded-md border border-[#B86B84]/30">
                   {r.properties}
                 </span>
               </div>
@@ -447,7 +447,7 @@ export function FAQSection() {
   const faqs = [
     {
       q: 'How does the official WhatsApp CRM integration work?',
-      a: 'Velvet Code provides a built-in 3-column WhatsApp inbox that integrates with official WhatsApp Cloud API and click-to-chat channels (such as +91 63833 95915). You can send templates, share property brochures, and log all chat history directly under the customer’s CRM profile.',
+      a: 'Velvet Code provides a built-in 3-column WhatsApp inbox that integrates with official WhatsApp Cloud API and click-to-chat channels (such as +91 63833 95915). You can send templates, share property brochures, and log all chat history directly under the customerâ€™s CRM profile.',
     },
     {
       q: 'Is my real estate agency data completely isolated from other organizations?',
@@ -468,13 +468,13 @@ export function FAQSection() {
   ];
 
   return (
-    <section className="py-24 border-t border-[#D8C7A5] bg-[#E9DFC8]">
+    <section className="py-24 border-t border-[#EBCBD4] bg-[#FCECEF]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#8C455C] bg-[#B86B84]/15 px-3.5 py-1 rounded-full border border-[#B86B84]/30">
             Frequently Asked Questions
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#3A2930] mt-4 tracking-tight font-serif">
             Everything You Need to Know About Velvet Code CRM
           </h2>
         </div>
@@ -485,21 +485,21 @@ export function FAQSection() {
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] overflow-hidden aurum-card-shadow transition-colors"
+                className="rounded-2xl border border-[#EBCBD4] bg-[#FFF9FA] overflow-hidden aurum-card-shadow transition-colors"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-bold text-[#2C241A] hover:text-[#7A5520]"
+                  className="w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-bold text-[#3A2930] hover:text-[#8C455C]"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
-                    className={`w-4 h-4 text-[#A37432] transition-transform ${
+                    className={`w-4 h-4 text-[#B86B84] transition-transform ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-[#6A5A44] leading-relaxed border-t border-[#D8C7A5]/60 pt-3">
+                  <div className="px-5 pb-5 text-xs sm:text-sm text-[#765D66] leading-relaxed border-t border-[#EBCBD4]/60 pt-3">
                     {faq.a}
                   </div>
                 )}
@@ -517,14 +517,14 @@ export function FAQSection() {
 // ==========================================
 export function FinalCTASection() {
   return (
-    <section className="py-24 border-t border-[#D8C7A5] bg-[#F4EAD7] relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#A37432]/15 blur-[130px] rounded-full pointer-events-none" />
+    <section className="py-24 border-t border-[#EBCBD4] bg-[#FFF5F7] relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#B86B84]/15 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-        <h2 className="text-3xl sm:text-5xl font-bold text-[#2C241A] tracking-tight leading-tight font-serif">
+        <h2 className="text-3xl sm:text-5xl font-bold text-[#3A2930] tracking-tight leading-tight font-serif">
           Ready to Modernize Your Real Estate Sales Engine?
         </h2>
-        <p className="text-base sm:text-lg text-[#6A5A44] max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg text-[#765D66] max-w-2xl mx-auto leading-relaxed">
           Join leading real estate agencies, brokers, and developers managing their leads, properties, and deals on Velvet Code.
         </p>
 
@@ -543,7 +543,7 @@ export function FinalCTASection() {
             href={buildWhatsAppUrl('916383395915', 'Hello, I would like to know more about your Real Estate CRM.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#547A61] hover:bg-[#3D7258] text-[#FFF9F0] font-bold text-base shadow-md transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#4A7C59] hover:bg-[#3D7258] text-[#FFF9FA] font-bold text-base shadow-md transition-all"
           >
             <MessageSquare className="w-5 h-5" />
             <span>Chat on WhatsApp: +91 63833 95915</span>
@@ -553,3 +553,4 @@ export function FinalCTASection() {
     </section>
   );
 }
+

@@ -94,16 +94,16 @@ export default function AdminUsersPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Platform Users Directory</h1>
-          <p className="text-sm text-[#6A5A44] mt-1">
+          <h1 className="text-3xl font-serif font-bold text-[#3A2930] tracking-tight">Platform Users Directory</h1>
+          <p className="text-sm text-[#765D66] mt-1">
             Browse and administer registered real estate agents, managers, and tenant owners across India.
           </p>
         </div>
       </div>
 
       {feedbackMessage && (
-        <div className="p-3 bg-[#A37432]/15 border border-[#A37432]/30 rounded-xl text-xs text-[#7A5520] flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-[#7A5520] flex-shrink-0" />
+        <div className="p-3 bg-[#B86B84]/15 border border-[#B86B84]/30 rounded-xl text-xs text-[#8C455C] flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-[#8C455C] flex-shrink-0" />
           <span>{feedbackMessage}</span>
         </div>
       )}
@@ -115,13 +115,13 @@ export default function AdminUsersPage() {
             placeholder="Search by agent name, email, or brokerage organization..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            icon={<Search className="w-4 h-4 text-[#6A5A44]" />}
+            icon={<Search className="w-4 h-4 text-[#765D66]" />}
           />
         </div>
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="bg-[#FFF9F0] border border-[#D8C7A5] rounded-lg px-3 py-2 text-xs text-[#2C241A] focus:outline-none focus:border-[#A37432]"
+          className="bg-[#FFF9FA] border border-[#EBCBD4] rounded-lg px-3 py-2 text-xs text-[#3A2930] focus:outline-none focus:border-[#B86B84]"
         >
           <option value="ALL">All Roles</option>
           <option value="SUPER_ADMIN">Super Admin</option>
@@ -132,10 +132,10 @@ export default function AdminUsersPage() {
       </div>
 
       {/* Users Table */}
-      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+      <Card orientation="vertical" className="p-0 overflow-hidden bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#F4EAD7] border-b border-[#D8C7A5] text-[#6A5A44]">
+            <thead className="bg-[#FFF5F7] border-b border-[#EBCBD4] text-[#765D66]">
               <tr>
                 <th className="py-3 px-4 font-semibold">User Profile</th>
                 <th className="py-3 px-4 font-semibold">Organization</th>
@@ -146,41 +146,41 @@ export default function AdminUsersPage() {
                 <th className="py-3 px-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#D8C7A5]/60">
+            <tbody className="divide-y divide-[#EBCBD4]/60">
               {filteredUsers.map((user) => (
                 <tr key={user.id} className="hover:bg-[#F7EEDC] transition-colors">
-                  <td className="py-3 px-4 font-medium text-[#2C241A]">
+                  <td className="py-3 px-4 font-medium text-[#3A2930]">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-[#A37432]/15 border border-[#A37432]/30 text-[#7A5520] font-serif flex items-center justify-center font-bold text-xs">
+                      <div className="w-8 h-8 rounded-full bg-[#B86B84]/15 border border-[#B86B84]/30 text-[#8C455C] font-serif flex items-center justify-center font-bold text-xs">
                         {user.name.charAt(0)}
                       </div>
                       <div>
-                        <div className="text-sm font-serif font-bold text-[#2C241A] flex items-center gap-1.5">
+                        <div className="text-sm font-serif font-bold text-[#3A2930] flex items-center gap-1.5">
                           {user.name}
                           {user.isSuperAdmin && (
                             <span title="Master Platform Owner">
-                              <Shield className="w-3.5 h-3.5 text-[#A37432]" />
+                              <Shield className="w-3.5 h-3.5 text-[#B86B84]" />
                             </span>
                           )}
                         </div>
-                        <div className="text-[10px] text-[#8A7A63] font-mono">{user.id}</div>
+                        <div className="text-[10px] text-[#9B828C] font-mono">{user.id}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-[#6A5A44]">
-                    <div className="font-semibold text-[#2C241A]">{user.organizationName}</div>
-                    <div className="text-[10px] text-[#8A7A63] font-mono">{user.organizationId}</div>
+                  <td className="py-3 px-4 text-[#765D66]">
+                    <div className="font-semibold text-[#3A2930]">{user.organizationName}</div>
+                    <div className="text-[10px] text-[#9B828C] font-mono">{user.organizationId}</div>
                   </td>
                   <td className="py-3 px-4">
                     <Badge variant={user.role === 'SUPER_ADMIN' ? 'gold' : user.role === 'OWNER' ? 'info' : 'neutral'}>
                       {user.role}
                     </Badge>
                   </td>
-                  <td className="py-3 px-4 text-[#6A5A44]">
+                  <td className="py-3 px-4 text-[#765D66]">
                     <div>{user.email}</div>
-                    <div className="text-[10px] text-[#8A7A63]">{user.phone}</div>
+                    <div className="text-[10px] text-[#9B828C]">{user.phone}</div>
                   </td>
-                  <td className="py-3 px-4 text-[#6A5A44]">
+                  <td className="py-3 px-4 text-[#765D66]">
                     {user.lastActive}
                   </td>
                   <td className="py-3 px-4">
@@ -194,7 +194,7 @@ export default function AdminUsersPage() {
                         variant="ghost"
                         size="xs"
                         onClick={() => setUserToDelete(user)}
-                        className="text-[#8B4A4A] hover:text-[#701E2B] hover:bg-[#8B4A4A]/10"
+                        className="text-[#A84355] hover:text-[#701E2B] hover:bg-[#A84355]/10"
                         icon={<Trash2 className="w-3.5 h-3.5" />}
                       >
                         Delete
@@ -216,12 +216,12 @@ export default function AdminUsersPage() {
           title="Confirm User Deletion"
         >
           <div className="space-y-4">
-            <div className="flex items-start gap-3 p-3 bg-[#8B4A4A]/10 border border-[#8B4A4A]/20 rounded-xl text-[#8B4A4A] text-xs">
-              <AlertTriangle className="w-5 h-5 flex-shrink-0 text-[#8B4A4A] mt-0.5" />
+            <div className="flex items-start gap-3 p-3 bg-[#A84355]/10 border border-[#A84355]/20 rounded-xl text-[#A84355] text-xs">
+              <AlertTriangle className="w-5 h-5 flex-shrink-0 text-[#A84355] mt-0.5" />
               <div>
-                <p className="font-bold text-[#8B4A4A]">Destructive Platform Owner Action</p>
-                <p className="mt-1 text-[#2C241A]">
-                  Are you sure you want to permanently delete user <strong className="text-[#8B4A4A]">{userToDelete.name}</strong> ({userToDelete.email}) belonging to <strong className="text-[#2C241A]">{userToDelete.organizationName}</strong>?
+                <p className="font-bold text-[#A84355]">Destructive Platform Owner Action</p>
+                <p className="mt-1 text-[#3A2930]">
+                  Are you sure you want to permanently delete user <strong className="text-[#A84355]">{userToDelete.name}</strong> ({userToDelete.email}) belonging to <strong className="text-[#3A2930]">{userToDelete.organizationName}</strong>?
                 </p>
               </div>
             </div>
@@ -250,3 +250,4 @@ export default function AdminUsersPage() {
     </div>
   );
 }
+

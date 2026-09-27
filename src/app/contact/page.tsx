@@ -30,18 +30,18 @@ export default function ContactPage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#E9DFC8] text-[#2C241A]">
+    <div className="min-h-screen flex flex-col bg-[#FCECEF] text-[#3A2930]">
       <PublicHeader />
       <main className="flex-1 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#8C455C] bg-[#B86B84]/15 px-3.5 py-1 rounded-full border border-[#B86B84]/30">
               Get in Touch
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+            <h1 className="text-4xl sm:text-5xl font-bold text-[#3A2930] mt-4 tracking-tight font-serif">
               Contact Velvet Code Specialists
             </h1>
-            <p className="text-base text-[#6A5A44] mt-3 leading-relaxed">
+            <p className="text-base text-[#765D66] mt-3 leading-relaxed">
               Have questions about multi-tenant workspace setups, WhatsApp API integrations, or enterprise plans? We are here to help.
             </p>
           </div>
@@ -50,18 +50,18 @@ export default function ContactPage() {
             {/* Left Info Column */}
             <div className="lg:col-span-5 space-y-6">
               {/* WhatsApp Highlight Box */}
-              <div className="p-7 rounded-2xl bg-[#FFF9F0] border border-[#547A61]/40 aurum-card-shadow space-y-4">
+              <div className="p-7 rounded-2xl bg-[#FFF9FA] border border-[#4A7C59]/40 aurum-card-shadow space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-xl bg-[#547A61]/15 text-[#547A61]">
+                  <div className="p-3 rounded-xl bg-[#4A7C59]/15 text-[#4A7C59]">
                     <MessageSquare className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-[#2C241A]">Instant WhatsApp Support</h3>
-                    <p className="text-xs text-[#6A5A44]">Available Monday–Saturday, 9 AM–7 PM IST</p>
+                    <h3 className="text-base font-bold text-[#3A2930]">Instant WhatsApp Support</h3>
+                    <p className="text-xs text-[#765D66]">Available Mondayâ€“Saturday, 9 AMâ€“7 PM IST</p>
                   </div>
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#6A5A44] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#765D66] leading-relaxed">
                   Chat directly with our real estate technology architects on our official WhatsApp business number.
                 </p>
 
@@ -69,7 +69,7 @@ export default function ContactPage() {
                   href={officialWhatsAppUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-4 rounded-xl bg-[#547A61] hover:bg-[#3D7258] text-white font-bold text-sm shadow-md transition-all group"
+                  className="flex items-center justify-between p-4 rounded-xl bg-[#4A7C59] hover:bg-[#3D7258] text-white font-bold text-sm shadow-md transition-all group"
                 >
                   <div className="flex items-center gap-2.5">
                     <MessageSquare className="w-5 h-5 fill-current" />
@@ -80,18 +80,18 @@ export default function ContactPage() {
               </div>
 
               {/* Direct Details */}
-              <div className="p-7 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow space-y-5 text-sm">
-                <h3 className="text-base font-bold text-[#2C241A]">Office Contact Information</h3>
+              <div className="p-7 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] aurum-card-shadow space-y-5 text-sm">
+                <h3 className="text-base font-bold text-[#3A2930]">Office Contact Information</h3>
 
                 <div className="space-y-4 text-xs sm:text-sm">
                   <div className="flex items-start gap-3">
-                    <Phone className="w-4 h-4 text-[#7A5520] mt-0.5" />
+                    <Phone className="w-4 h-4 text-[#8C455C] mt-0.5" />
                     <div>
-                      <p className="font-bold text-[#2C241A]">Phone / WhatsApp Contact</p>
+                      <p className="font-bold text-[#3A2930]">Phone / WhatsApp Contact</p>
                       <div className="space-y-1 mt-0.5">
                         <div>
-                          <a href={officialWhatsAppUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#7A5520] text-[#6A5A44] font-medium">
-                            +91 63833 95915 <span className="text-[11px] text-[#547A61] font-bold">(Primary WhatsApp)</span>
+                          <a href={officialWhatsAppUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#8C455C] text-[#765D66] font-medium">
+                            +91 63833 95915 <span className="text-[11px] text-[#4A7C59] font-bold">(Primary WhatsApp)</span>
                           </a>
                         </div>
                       </div>
@@ -99,21 +99,21 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Mail className="w-4 h-4 text-[#7A5520] mt-0.5" />
+                    <Mail className="w-4 h-4 text-[#8C455C] mt-0.5" />
                     <div>
-                      <p className="font-bold text-[#2C241A]">Email Inquiries</p>
-                      <a href="mailto:solutions@velvetcode.tech" className="hover:text-[#7A5520] text-[#6A5A44]">
+                      <p className="font-bold text-[#3A2930]">Email Inquiries</p>
+                      <a href="mailto:solutions@velvetcode.tech" className="hover:text-[#8C455C] text-[#765D66]">
                         solutions@velvetcode.tech
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-4 h-4 text-[#7A5520] mt-0.5" />
+                    <MapPin className="w-4 h-4 text-[#8C455C] mt-0.5" />
                     <div>
-                      <p className="font-bold text-[#2C241A]">Presence & Hubs</p>
-                      <p className="text-[#6A5A44]">
-                        Chennai • Bangalore • Mumbai, India
+                      <p className="font-bold text-[#3A2930]">Presence & Hubs</p>
+                      <p className="text-[#765D66]">
+                        Chennai â€¢ Bangalore â€¢ Mumbai, India
                       </p>
                     </div>
                   </div>
@@ -123,16 +123,16 @@ export default function ContactPage() {
 
             {/* Right Form Column */}
             <div className="lg:col-span-7">
-              <div className="p-8 sm:p-10 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow">
+              <div className="p-8 sm:p-10 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] aurum-card-shadow">
                 {submitted ? (
                   <div className="text-center py-12 space-y-4">
-                    <div className="w-14 h-14 bg-[#547A61]/15 text-[#547A61] rounded-full flex items-center justify-center mx-auto border border-[#547A61]/30">
+                    <div className="w-14 h-14 bg-[#4A7C59]/15 text-[#4A7C59] rounded-full flex items-center justify-center mx-auto border border-[#4A7C59]/30">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h3 className="text-2xl font-bold text-[#2C241A]">Thank You for Contacting Us!</h3>
-                    <p className="text-sm text-[#6A5A44] max-w-md mx-auto leading-relaxed">
+                    <h3 className="text-2xl font-bold text-[#3A2930]">Thank You for Contacting Us!</h3>
+                    <p className="text-sm text-[#765D66] max-w-md mx-auto leading-relaxed">
                       Our real estate technology consultant will reach out via phone/WhatsApp at{' '}
-                      <strong className="text-[#7A5520]">{formData.phone || '+91 63833 95915'}</strong> within 2 hours.
+                      <strong className="text-[#8C455C]">{formData.phone || '+91 63833 95915'}</strong> within 2 hours.
                     </p>
                     <Button
                       variant="outline"
@@ -145,7 +145,7 @@ export default function ContactPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <h3 className="text-xl font-bold text-[#2C241A] mb-4 font-serif">
+                    <h3 className="text-xl font-bold text-[#3A2930] mb-4 font-serif">
                       Request an Enterprise Consultation
                     </h3>
 
@@ -212,3 +212,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

@@ -106,17 +106,17 @@ export function ImageUpload({
   return (
     <div className={cn('w-full', className)}>
       {label && (
-        <label className="block text-xs font-bold text-[#2C241A] mb-1.5">
+        <label className="block text-xs font-bold text-[#3A2930] mb-1.5">
           {label}
         </label>
       )}
 
       {value ? (
         /* Image Preview Box */
-        <div className="relative rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] overflow-hidden p-3 space-y-3 shadow-2xs">
+        <div className="relative rounded-2xl border border-[#EBCBD4] bg-[#FFF9FA] overflow-hidden p-3 space-y-3 shadow-2xs">
           <div
             className={cn(
-              'relative w-full bg-[#E9DFC8] rounded-xl overflow-hidden flex items-center justify-center border border-[#D8C7A5]/60',
+              'relative w-full bg-[#FCECEF] rounded-xl overflow-hidden flex items-center justify-center border border-[#EBCBD4]/60',
               aspectRatio === 'video' ? 'h-48' : aspectRatio === 'square' ? 'h-40 w-40 mx-auto' : 'h-44'
             )}
           >
@@ -128,8 +128,8 @@ export function ImageUpload({
           </div>
 
           <div className="flex items-center justify-between pt-1">
-            <div className="flex items-center gap-1.5 text-xs text-[#547A61] font-semibold">
-              <ImageIcon className="w-4 h-4 text-[#547A61]" />
+            <div className="flex items-center gap-1.5 text-xs text-[#4A7C59] font-semibold">
+              <ImageIcon className="w-4 h-4 text-[#4A7C59]" />
               <span>Image attached</span>
             </div>
 
@@ -165,16 +165,16 @@ export function ImageUpload({
           className={cn(
             'border-2 border-dashed rounded-2xl p-5 text-center cursor-pointer transition-all',
             isDragging
-              ? 'border-[#A37432] bg-[#A37432]/10 scale-[0.99]'
-              : 'border-[#D8C7A5] bg-[#FFF9F0] hover:border-[#A37432] hover:bg-[#F4EAD7]/50',
-            error && 'border-[#8B4A4A]'
+              ? 'border-[#B86B84] bg-[#B86B84]/10 scale-[0.99]'
+              : 'border-[#EBCBD4] bg-[#FFF9FA] hover:border-[#B86B84] hover:bg-[#FFF5F7]/50',
+            error && 'border-[#A84355]'
           )}
         >
-          <div className="w-10 h-10 rounded-full bg-[#F4EAD7] border border-[#D8C7A5] flex items-center justify-center mx-auto mb-2 text-[#7A5520]">
+          <div className="w-10 h-10 rounded-full bg-[#FFF5F7] border border-[#EBCBD4] flex items-center justify-center mx-auto mb-2 text-[#8C455C]">
             <Upload className="w-5 h-5" />
           </div>
-          <p className="text-xs font-bold text-[#2C241A]">{placeholderText}</p>
-          <p className="text-[11px] text-[#6A5A44] mt-1">{helperText}</p>
+          <p className="text-xs font-bold text-[#3A2930]">{placeholderText}</p>
+          <p className="text-[11px] text-[#765D66] mt-1">{helperText}</p>
         </div>
       )}
 
@@ -187,7 +187,7 @@ export function ImageUpload({
       />
 
       {error && (
-        <div className="flex items-center gap-1.5 text-xs text-[#8B4A4A] font-medium mt-1.5">
+        <div className="flex items-center gap-1.5 text-xs text-[#A84355] font-medium mt-1.5">
           <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
           <span>{error}</span>
         </div>
@@ -195,3 +195,4 @@ export function ImageUpload({
     </div>
   );
 }
+

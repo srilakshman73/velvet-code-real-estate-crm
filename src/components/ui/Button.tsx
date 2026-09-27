@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'gold' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'emerald' | 'subtle';
+  variant?: 'gold' | 'rose' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'emerald' | 'subtle';
   size?: 'xs' | 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -15,7 +15,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
-      variant = 'gold',
+      variant = 'primary',
       size = 'md',
       isLoading = false,
       leftIcon,
@@ -28,30 +28,30 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const effectiveLeftIcon = leftIcon || icon;
-    const effectiveVariant = variant === 'primary' ? 'gold' : variant;
+    const effectiveVariant = variant === 'gold' || variant === 'rose' ? 'primary' : variant;
 
     const sizeClasses = {
-      xs: 'px-2.5 py-1 text-xs rounded-lg gap-1.5',
-      sm: 'px-3.5 py-1.5 text-xs font-semibold rounded-lg gap-2',
-      md: 'px-4.5 py-2 text-sm font-semibold rounded-xl gap-2',
-      lg: 'px-6 py-3 text-base font-semibold rounded-xl gap-2.5',
+      xs: 'px-2.5 py-1 text-xs rounded-lg gap-1.5 min-h-[32px]',
+      sm: 'px-3.5 py-1.5 text-xs font-semibold rounded-lg gap-2 min-h-[36px]',
+      md: 'px-4.5 py-2.5 text-sm font-semibold rounded-xl gap-2 min-h-[44px]',
+      lg: 'px-6 py-3.5 text-base font-semibold rounded-xl gap-2.5 min-h-[48px]',
     };
 
     const variantClasses = {
-      gold: 'bg-[#A37432] hover:bg-[#8A5E25] active:bg-[#7A5520] text-[#FFF9F0] font-bold border border-[#A37432]/60 shadow-[0_4px_16px_-2px_rgba(163,116,50,0.22)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,50,0.30)] transition-all duration-200',
-      primary: 'bg-[#A37432] hover:bg-[#8A5E25] active:bg-[#7A5520] text-[#FFF9F0] font-bold border border-[#A37432]/60 shadow-[0_4px_16px_-2px_rgba(163,116,50,0.22)] hover:shadow-[0_6px_20px_-2px_rgba(163,116,50,0.30)] transition-all duration-200',
+      primary:
+        'bg-[#B86B84] hover:bg-[#9E546C] active:bg-[#8C455C] text-[#FFF9FA] font-bold border border-[#B86B84]/60 shadow-[0_4px_16px_-2px_rgba(184,107,132,0.30)] hover:shadow-[0_6px_20px_-2px_rgba(184,107,132,0.40)] transition-all duration-200',
       secondary:
-        'bg-[#F5EAD3] hover:bg-[#E9DFC8] text-[#4A3922] hover:text-[#2C241A] border border-[#CDB78F] shadow-2xs active:scale-[0.99] transition-all',
+        'bg-[#F8DDE5] hover:bg-[#F2DAE1] text-[#3A2930] hover:text-[#201519] border border-[#EBCBD4] shadow-2xs active:scale-[0.99] transition-all',
       subtle:
-        'bg-[#EFE2C8] hover:bg-[#D8C7A5] text-[#2C241A] border border-[#D8C7A5] transition-all',
+        'bg-[#FFF0F3] hover:bg-[#F8DDE5] text-[#3A2930] border border-[#EBCBD4] transition-all',
       outline:
-        'bg-transparent hover:bg-[#A37432]/10 text-[#7A5520] border border-[#A37432]/60 hover:border-[#8A5E25] active:scale-[0.99] transition-all',
+        'bg-transparent hover:bg-[#B86B84]/10 text-[#B86B84] border border-[#B86B84]/60 hover:border-[#9E546C] active:scale-[0.99] transition-all',
       ghost:
-        'bg-transparent hover:bg-[#F4EAD7] text-[#8A7A63] hover:text-[#2C241A] transition-colors',
+        'bg-transparent hover:bg-[#FFF5F7] text-[#765D66] hover:text-[#3A2930] transition-colors',
       danger:
-        'bg-[#8B4A4A] hover:bg-[#723636] text-white shadow-xs transition-all',
+        'bg-[#A84355] hover:bg-[#8C3343] text-white shadow-xs transition-all',
       emerald:
-        'bg-[#547A61] hover:bg-[#3D7258] text-white shadow-sm font-medium transition-all',
+        'bg-[#4A7C59] hover:bg-[#3B6648] text-white shadow-sm font-medium transition-all',
     };
 
     return (
@@ -59,7 +59,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={disabled || isLoading}
         className={cn(
-          'inline-flex items-center justify-center select-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none transition-all outline-none focus-visible:ring-2 focus-visible:ring-[#A37432] focus-visible:ring-offset-2 focus-visible:ring-offset-[#E9DFC8]',
+          'inline-flex items-center justify-center select-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none transition-all outline-none focus-visible:ring-2 focus-visible:ring-[#B86B84] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FCECEF]',
           sizeClasses[size],
           variantClasses[effectiveVariant],
           className

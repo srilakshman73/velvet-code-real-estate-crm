@@ -68,19 +68,19 @@ export default function TasksPage() {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#FCECEF] text-[#3A2930]">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#3A2930] tracking-tight">
               Task Management
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30 rounded-full">
               {tasks.filter((t) => t.status !== 'COMPLETED').length} Pending
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
+          <p className="text-xs sm:text-sm text-[#765D66] mt-1">
             Assign sales tasks, client follow-ups, and property documentation milestones.
           </p>
         </div>
@@ -96,7 +96,7 @@ export default function TasksPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#D8C7A5] pb-3">
+      <div className="flex items-center gap-2 border-b border-[#EBCBD4] pb-3">
         {[
           { id: 'ALL', label: 'All Tasks' },
           { id: 'PENDING', label: 'Pending Action' },
@@ -107,8 +107,8 @@ export default function TasksPage() {
             onClick={() => setFilter(tab.id as any)}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               filter === tab.id
-                ? 'bg-[#A37432] text-white shadow-sm'
-                : 'bg-[#FFF9F0] text-[#6A5A44] hover:text-[#2C241A] border border-[#D8C7A5]'
+                ? 'bg-[#B86B84] text-white shadow-sm'
+                : 'bg-[#FFF9FA] text-[#765D66] hover:text-[#3A2930] border border-[#EBCBD4]'
             }`}
           >
             {tab.label}
@@ -134,8 +134,8 @@ export default function TasksPage() {
                 key={t.id}
                 className={`p-4 sm:p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                   isCompleted
-                    ? 'bg-[#F4EAD7]/70 border-[#D8C7A5]/60 opacity-65'
-                    : 'bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_4px_16px_rgba(120,90,40,0.06)] hover:border-[#A37432]'
+                    ? 'bg-[#FFF5F7]/70 border-[#EBCBD4]/60 opacity-65'
+                    : 'bg-[#FFF9FA] border-[#EBCBD4] shadow-[0_4px_16px_rgba(120,90,40,0.06)] hover:border-[#B86B84]'
                 }`}
               >
                 <div className="flex items-start gap-3.5 min-w-0">
@@ -145,8 +145,8 @@ export default function TasksPage() {
                     }
                     className={`mt-1 w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${
                       isCompleted
-                        ? 'bg-[#547A61] border-[#547A61] text-white'
-                        : 'border-[#D8C7A5] bg-[#FFF9F0] hover:border-[#A37432]'
+                        ? 'bg-[#4A7C59] border-[#4A7C59] text-white'
+                        : 'border-[#EBCBD4] bg-[#FFF9FA] hover:border-[#B86B84]'
                     }`}
                   >
                     {isCompleted && <CheckCircle2 className="w-4 h-4" />}
@@ -156,7 +156,7 @@ export default function TasksPage() {
                     <div className="flex flex-wrap items-center gap-2">
                       <h4
                         className={`text-sm font-bold ${
-                          isCompleted ? 'line-through text-[#8A7A63]' : 'text-[#2C241A] font-serif'
+                          isCompleted ? 'line-through text-[#9B828C]' : 'text-[#3A2930] font-serif'
                         }`}
                       >
                         {t.title}
@@ -165,12 +165,12 @@ export default function TasksPage() {
                     </div>
 
                     {t.description && (
-                      <p className="text-xs text-[#6A5A44]">{t.description}</p>
+                      <p className="text-xs text-[#765D66]">{t.description}</p>
                     )}
 
-                    <div className="flex flex-wrap items-center gap-4 text-[11px] text-[#6A5A44] pt-1">
+                    <div className="flex flex-wrap items-center gap-4 text-[11px] text-[#765D66] pt-1">
                       <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5 text-[#A37432]" /> Due: {t.dueDate}
+                        <Calendar className="w-3.5 h-3.5 text-[#B86B84]" /> Due: {t.dueDate}
                       </span>
                       <span>Assigned: {t.assignedUserName}</span>
                       {t.leadName && <span>Buyer: {t.leadName}</span>}
@@ -181,7 +181,7 @@ export default function TasksPage() {
                 <div className="flex items-center gap-2 flex-shrink-0 self-end sm:self-center">
                   <button
                     onClick={() => deleteTask(t.id)}
-                    className="p-1.5 text-[#6A5A44] hover:text-[#8B4A4A] rounded-lg hover:bg-[#8B4A4A]/10 transition-colors"
+                    className="p-1.5 text-[#765D66] hover:text-[#A84355] rounded-lg hover:bg-[#A84355]/10 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -269,7 +269,7 @@ export default function TasksPage() {
             onChange={(e) => setNewTaskForm({ ...newTaskForm, description: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
             <Button
               type="button"
               variant="secondary"
@@ -287,3 +287,4 @@ export default function TasksPage() {
     </div>
   );
 }
+

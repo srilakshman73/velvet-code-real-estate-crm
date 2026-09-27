@@ -52,9 +52,9 @@ const MRR_HISTORY = [
 ];
 
 const TIER_DISTRIBUTION = [
-  { name: 'Starter (₹1,999)', value: 0, color: '#D8C7A5' },
-  { name: 'Professional (₹5,999)', value: 1, color: '#A37432' },
-  { name: 'Business (₹9,999)', value: 0, color: '#E5D1A8' },
+  { name: 'Starter (â‚¹1,999)', value: 0, color: '#EBCBD4' },
+  { name: 'Professional (â‚¹5,999)', value: 1, color: '#B86B84' },
+  { name: 'Business (â‚¹9,999)', value: 0, color: '#F8DDE5' },
 ];
 
 export default function AdminDashboardPage() {
@@ -66,10 +66,10 @@ export default function AdminDashboardPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">SaaS Master Control</h1>
+            <h1 className="text-3xl font-serif font-bold text-[#3A2930] tracking-tight">SaaS Master Control</h1>
             <Badge variant="gold">Root Admin</Badge>
           </div>
-          <p className="text-sm text-[#6A5A44] mt-1">
+          <p className="text-sm text-[#765D66] mt-1">
             Global metrics, tenant health, financial throughput, and multi-tenant infrastructure status.
           </p>
         </div>
@@ -89,62 +89,62 @@ export default function AdminDashboardPage() {
 
       {/* Top 4 Primary SaaS Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Monthly Recurring Revenue</span>
-            <div className="p-2 rounded-lg bg-[#547A61]/10 text-[#547A61] border border-[#547A61]/20">
+            <span className="text-xs font-semibold text-[#765D66] uppercase tracking-wider font-serif">Monthly Recurring Revenue</span>
+            <div className="p-2 rounded-lg bg-[#4A7C59]/10 text-[#4A7C59] border border-[#4A7C59]/20">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-serif font-bold text-[#2C241A]">{formatINR(stats.monthlyRecurringRevenueINR)}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#547A61] font-semibold">
+            <div className="text-2xl font-serif font-bold text-[#3A2930]">{formatINR(stats.monthlyRecurringRevenueINR)}</div>
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#4A7C59] font-semibold">
               <ArrowUpRight className="w-3.5 h-3.5" />
               <span>Starting Platform Baseline</span>
             </div>
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Active Organizations</span>
-            <div className="p-2 rounded-lg bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30">
+            <span className="text-xs font-semibold text-[#765D66] uppercase tracking-wider font-serif">Active Organizations</span>
+            <div className="p-2 rounded-lg bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30">
               <Building className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-serif font-bold text-[#2C241A]">{stats.totalOrganizations.toLocaleString()}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#7A5520] font-semibold">
+            <div className="text-2xl font-serif font-bold text-[#3A2930]">{stats.totalOrganizations.toLocaleString()}</div>
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#8C455C] font-semibold">
               <span>+{stats.newCustomersThisMonth} registered tenant</span>
             </div>
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Total Active Agents</span>
-            <div className="p-2 rounded-lg bg-[#2C241A]/10 text-[#2C241A] border border-[#D8C7A5]">
+            <span className="text-xs font-semibold text-[#765D66] uppercase tracking-wider font-serif">Total Active Agents</span>
+            <div className="p-2 rounded-lg bg-[#3A2930]/10 text-[#3A2930] border border-[#EBCBD4]">
               <Users className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-serif font-bold text-[#2C241A]">{stats.totalActiveUsers.toLocaleString()}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#8A7A63]">
+            <div className="text-2xl font-serif font-bold text-[#3A2930]">{stats.totalActiveUsers.toLocaleString()}</div>
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#9B828C]">
               <span>Master platform owner active</span>
             </div>
           </div>
         </Card>
 
-        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+        <Card orientation="vertical" className="bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Revenue Churn Rate</span>
-            <div className="p-2 rounded-lg bg-[#A87932]/10 text-[#A87932] border border-[#A87932]/25">
+            <span className="text-xs font-semibold text-[#765D66] uppercase tracking-wider font-serif">Revenue Churn Rate</span>
+            <div className="p-2 rounded-lg bg-[#C07D38]/10 text-[#C07D38] border border-[#C07D38]/25">
               <Activity className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-serif font-bold text-[#2C241A]">{stats.churnRatePercent}%</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#547A61] font-semibold">
+            <div className="text-2xl font-serif font-bold text-[#3A2930]">{stats.churnRatePercent}%</div>
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-[#4A7C59] font-semibold">
               <ArrowDownRight className="w-3.5 h-3.5" />
               <span>-0.4% lower than SaaS benchmark</span>
             </div>
@@ -153,33 +153,33 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Secondary Metrics Bar */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] text-xs shadow-2xs">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] text-xs shadow-2xs">
         <div>
-          <span className="text-[#8A7A63]">Total Leads Managed:</span>
-          <div className="text-base font-bold text-[#2C241A] font-mono mt-0.5">{stats.totalLeadsManaged.toLocaleString()}</div>
+          <span className="text-[#9B828C]">Total Leads Managed:</span>
+          <div className="text-base font-bold text-[#3A2930] font-mono mt-0.5">{stats.totalLeadsManaged.toLocaleString()}</div>
         </div>
         <div>
-          <span className="text-[#8A7A63]">Properties Inventory:</span>
-          <div className="text-base font-bold text-[#2C241A] font-mono mt-0.5">{stats.totalPropertiesListed.toLocaleString()} units</div>
+          <span className="text-[#9B828C]">Properties Inventory:</span>
+          <div className="text-base font-bold text-[#3A2930] font-mono mt-0.5">{stats.totalPropertiesListed.toLocaleString()} units</div>
         </div>
         <div>
-          <span className="text-[#8A7A63]">Realty AI Inferences:</span>
-          <div className="text-base font-bold text-[#7A5520] font-mono mt-0.5">{stats.aiRequestsProcessed.toLocaleString()}</div>
+          <span className="text-[#9B828C]">Realty AI Inferences:</span>
+          <div className="text-base font-bold text-[#8C455C] font-mono mt-0.5">{stats.aiRequestsProcessed.toLocaleString()}</div>
         </div>
         <div>
-          <span className="text-[#8A7A63]">WhatsApp Messages:</span>
-          <div className="text-base font-bold text-[#547A61] font-mono mt-0.5">{stats.whatsappMessagesSent.toLocaleString()}</div>
+          <span className="text-[#9B828C]">WhatsApp Messages:</span>
+          <div className="text-base font-bold text-[#4A7C59] font-mono mt-0.5">{stats.whatsappMessagesSent.toLocaleString()}</div>
         </div>
       </div>
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* MRR Growth Chart */}
-        <Card orientation="vertical" className="lg:col-span-2 bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+        <Card orientation="vertical" className="lg:col-span-2 bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-base font-serif font-bold text-[#2C241A]">MRR Growth Trajectory (INR)</h2>
-              <p className="text-xs text-[#8A7A63]">Last 6 months revenue performance across subscription plans</p>
+              <h2 className="text-base font-serif font-bold text-[#3A2930]">MRR Growth Trajectory (INR)</h2>
+              <p className="text-xs text-[#9B828C]">Last 6 months revenue performance across subscription plans</p>
             </div>
             <Badge variant="success">+72.2% H1 Growth</Badge>
           </div>
@@ -188,23 +188,23 @@ export default function AdminDashboardPage() {
               <AreaChart data={MRR_HISTORY}>
                 <defs>
                   <linearGradient id="adminMrrGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#A37432" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#A37432" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#B86B84" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#B86B84" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#DDD0B8" />
-                <XAxis dataKey="month" stroke="#8A7A63" fontSize={11} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#F2DAE1" />
+                <XAxis dataKey="month" stroke="#9B828C" fontSize={11} />
                 <YAxis
-                  stroke="#8A7A63"
+                  stroke="#9B828C"
                   fontSize={11}
-                  tickFormatter={(val) => `₹${(val / 100000).toFixed(1)}L`}
+                  tickFormatter={(val) => `â‚¹${(val / 100000).toFixed(1)}L`}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#FFF9F0',
-                    borderColor: '#D8C7A5',
+                    backgroundColor: '#FFF9FA',
+                    borderColor: '#EBCBD4',
                     borderRadius: '8px',
-                    color: '#2C241A',
+                    color: '#3A2930',
                     fontSize: '12px',
                     boxShadow: '0 8px 24px rgba(120,90,40,0.08)',
                   }}
@@ -213,7 +213,7 @@ export default function AdminDashboardPage() {
                 <Area
                   type="monotone"
                   dataKey="mrr"
-                  stroke="#A37432"
+                  stroke="#B86B84"
                   strokeWidth={2}
                   fillOpacity={1}
                   fill="url(#adminMrrGrad)"
@@ -224,9 +224,9 @@ export default function AdminDashboardPage() {
         </Card>
 
         {/* Plan Tier Distribution */}
-        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <h2 className="text-base font-serif font-bold text-[#2C241A] mb-1">Paid Tier Distribution</h2>
-          <p className="text-xs text-[#8A7A63] mb-4">864 Active Paying Tenants</p>
+        <Card orientation="vertical" className="bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
+          <h2 className="text-base font-serif font-bold text-[#3A2930] mb-1">Paid Tier Distribution</h2>
+          <p className="text-xs text-[#9B828C] mb-4">864 Active Paying Tenants</p>
           <div className="h-48 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -245,10 +245,10 @@ export default function AdminDashboardPage() {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#FFF9F0',
-                    borderColor: '#D8C7A5',
+                    backgroundColor: '#FFF9FA',
+                    borderColor: '#EBCBD4',
                     borderRadius: '8px',
-                    color: '#2C241A',
+                    color: '#3A2930',
                     fontSize: '12px',
                     boxShadow: '0 8px 24px rgba(120,90,40,0.08)',
                   }}
@@ -256,14 +256,14 @@ export default function AdminDashboardPage() {
               </PieChart>
             </ResponsiveContainer>
           </div>
-          <div className="space-y-2 mt-2 pt-2 border-t border-[#D8C7A5] text-xs">
+          <div className="space-y-2 mt-2 pt-2 border-t border-[#EBCBD4] text-xs">
             {TIER_DISTRIBUTION.map((tier, idx) => (
               <div key={idx} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: tier.color }} />
-                  <span className="text-[#6A5A44]">{tier.name}</span>
+                  <span className="text-[#765D66]">{tier.name}</span>
                 </div>
-                <span className="font-mono text-[#2C241A] font-bold">{tier.value}</span>
+                <span className="font-mono text-[#3A2930] font-bold">{tier.value}</span>
               </div>
             ))}
           </div>
@@ -273,13 +273,13 @@ export default function AdminDashboardPage() {
       {/* System Infrastructure Health & Recent Organizations */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Tenants Table */}
-        <Card orientation="vertical" className="lg:col-span-2 bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
+        <Card orientation="vertical" className="lg:col-span-2 bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-base font-serif font-bold text-[#2C241A]">Recent Tenant Registrations</h2>
-              <p className="text-xs text-[#8A7A63]">Newly onboarded real estate brokerages and consultants</p>
+              <h2 className="text-base font-serif font-bold text-[#3A2930]">Recent Tenant Registrations</h2>
+              <p className="text-xs text-[#9B828C]">Newly onboarded real estate brokerages and consultants</p>
             </div>
-            <Link href="/admin/organizations" className="text-xs text-[#7A5520] hover:underline font-semibold">
+            <Link href="/admin/organizations" className="text-xs text-[#8C455C] hover:underline font-semibold">
               View All 1,248 &rarr;
             </Link>
           </div>
@@ -287,7 +287,7 @@ export default function AdminDashboardPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-[#D8C7A5] text-[#8A7A63] bg-[#F4EAD7]">
+                <tr className="border-b border-[#EBCBD4] text-[#9B828C] bg-[#FFF5F7]">
                   <th className="p-3 font-semibold">Organization</th>
                   <th className="p-3 font-semibold">City</th>
                   <th className="p-3 font-semibold">Plan</th>
@@ -295,21 +295,21 @@ export default function AdminDashboardPage() {
                   <th className="p-3 font-semibold text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#D8C7A5]/60">
+              <tbody className="divide-y divide-[#EBCBD4]/60">
                 {INITIAL_ORGANIZATIONS.map((org) => (
                   <tr key={org.id} className="hover:bg-[#F7EEDC] transition-colors">
-                    <td className="p-3 font-medium text-[#2C241A]">
+                    <td className="p-3 font-medium text-[#3A2930]">
                       <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded bg-[#A37432]/15 text-[#7A5520] font-serif flex items-center justify-center font-bold text-[10px] border border-[#A37432]/30">
+                        <div className="w-6 h-6 rounded bg-[#B86B84]/15 text-[#8C455C] font-serif flex items-center justify-center font-bold text-[10px] border border-[#B86B84]/30">
                           {org.name.charAt(0)}
                         </div>
                         <div>
-                          <div className="font-serif font-bold text-[#2C241A]">{org.name}</div>
-                          <div className="text-[10px] text-[#8A7A63]">{org.businessType}</div>
+                          <div className="font-serif font-bold text-[#3A2930]">{org.name}</div>
+                          <div className="text-[10px] text-[#9B828C]">{org.businessType}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="p-3 text-[#6A5A44]">{org.city || 'Chennai'}</td>
+                    <td className="p-3 text-[#765D66]">{org.city || 'Chennai'}</td>
                     <td className="p-3">
                       <Badge variant="gold">PROFESSIONAL</Badge>
                     </td>
@@ -331,48 +331,48 @@ export default function AdminDashboardPage() {
         </Card>
 
         {/* Global SaaS Infrastructure Health */}
-        <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <h2 className="text-base font-serif font-bold text-[#2C241A] mb-1">Infrastructure Status</h2>
-          <p className="text-xs text-[#8A7A63] mb-4">Multi-Tenant Services SLA 99.98%</p>
+        <Card orientation="vertical" className="bg-[#FFF9FA] border-[#EBCBD4] shadow-2xs">
+          <h2 className="text-base font-serif font-bold text-[#3A2930] mb-1">Infrastructure Status</h2>
+          <p className="text-xs text-[#9B828C] mb-4">Multi-Tenant Services SLA 99.98%</p>
 
           <div className="space-y-3.5 text-xs">
-            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFF9F0] border border-[#D8C7A5]">
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFF9FA] border border-[#EBCBD4]">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
-                <span className="text-[#2C241A] font-medium">PostgreSQL Multi-Tenant DB</span>
+                <CheckCircle2 className="w-4 h-4 text-[#4A7C59]" />
+                <span className="text-[#3A2930] font-medium">PostgreSQL Multi-Tenant DB</span>
               </div>
-              <span className="text-[#547A61] font-mono font-bold">14ms ping</span>
+              <span className="text-[#4A7C59] font-mono font-bold">14ms ping</span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFF9F0] border border-[#D8C7A5]">
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFF9FA] border border-[#EBCBD4]">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
-                <span className="text-[#2C241A] font-medium">Meta WhatsApp Cloud Gateway</span>
+                <CheckCircle2 className="w-4 h-4 text-[#4A7C59]" />
+                <span className="text-[#3A2930] font-medium">Meta WhatsApp Cloud Gateway</span>
               </div>
-              <span className="text-[#547A61] font-mono font-bold">100% Up</span>
+              <span className="text-[#4A7C59] font-mono font-bold">100% Up</span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFF9F0] border border-[#D8C7A5]">
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFF9FA] border border-[#EBCBD4]">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
-                <span className="text-[#2C241A] font-medium">Google Gemini 1.5 Pro AI API</span>
+                <CheckCircle2 className="w-4 h-4 text-[#4A7C59]" />
+                <span className="text-[#3A2930] font-medium">Google Gemini 1.5 Pro AI API</span>
               </div>
-              <span className="text-[#547A61] font-mono font-bold">240ms Latency</span>
+              <span className="text-[#4A7C59] font-mono font-bold">240ms Latency</span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFF9F0] border border-[#D8C7A5]">
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#FFF9FA] border border-[#EBCBD4]">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
-                <span className="text-[#2C241A] font-medium">Razorpay Webhooks Listener</span>
+                <CheckCircle2 className="w-4 h-4 text-[#4A7C59]" />
+                <span className="text-[#3A2930] font-medium">Razorpay Webhooks Listener</span>
               </div>
-              <span className="text-[#547A61] font-mono font-bold">0 queued</span>
+              <span className="text-[#4A7C59] font-mono font-bold">0 queued</span>
             </div>
           </div>
 
-          <div className="pt-4 mt-4 border-t border-[#D8C7A5]">
-            <div className="flex items-center justify-between text-xs text-[#8A7A63]">
+          <div className="pt-4 mt-4 border-t border-[#EBCBD4]">
+            <div className="flex items-center justify-between text-xs text-[#9B828C]">
               <span>Platform Version:</span>
-              <span className="font-mono text-[#7A5520] font-bold">v2.4.0-production</span>
+              <span className="font-mono text-[#8C455C] font-bold">v2.4.0-production</span>
             </div>
           </div>
         </Card>
@@ -380,3 +380,4 @@ export default function AdminDashboardPage() {
     </div>
   );
 }
+

@@ -16,116 +16,123 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const effectiveLeftIcon = leftIcon || icon;
 
     return (
-      <div className="w-full">
+      <div className="w-full space-y-1.5">
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-bold text-[#2C241A] mb-1.5">
+          <label htmlFor={inputId} className="block text-xs sm:text-sm font-semibold text-[#3A2930]">
             {label}
           </label>
         )}
         <div className="relative flex items-center">
           {effectiveLeftIcon && (
-            <div className="absolute left-3 text-[#8A7A63] pointer-events-none flex items-center">
+            <div className="absolute left-3 text-[#9B828C] pointer-events-none flex items-center">
               {effectiveLeftIcon}
             </div>
           )}
           <input
-            id={inputId}
             ref={ref}
+            id={inputId}
             className={cn(
-              'w-full bg-[#FFF9F0] border border-[#D8C7A5] rounded-xl px-3.5 py-2 text-sm text-[#2C241A] placeholder:text-[#8A7A63] transition-colors focus:border-[#A37432] focus:ring-1 focus:ring-[#A37432]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed shadow-2xs',
-              effectiveLeftIcon && 'pl-9',
-              rightIcon && 'pr-9',
-              error && 'border-[#8B4A4A] focus:border-[#8B4A4A] focus:ring-[#8B4A4A]/20',
+              'w-full min-h-[44px] bg-[#FFFFFF] border border-[#EBCBD4] rounded-xl px-3.5 py-2 text-sm text-[#3A2930] placeholder:text-[#9B828C] outline-none transition-all duration-150',
+              'focus:border-[#B86B84] focus:ring-2 focus:ring-[#B86B84]/20 focus:bg-[#FFFFFF]',
+              effectiveLeftIcon && 'pl-10',
+              rightIcon && 'pr-10',
+              error && 'border-[#A84355] focus:border-[#A84355] focus:ring-[#A84355]/20',
               className
             )}
             {...props}
           />
           {rightIcon && (
-            <div className="absolute right-3 text-[#8A7A63] flex items-center">
+            <div className="absolute right-3 text-[#9B828C] pointer-events-none flex items-center">
               {rightIcon}
             </div>
           )}
         </div>
-        {error && <p className="text-xs text-[#8B4A4A] font-medium mt-1">{error}</p>}
-        {!error && helperText && <p className="text-xs text-[#8A7A63] mt-1">{helperText}</p>}
+        {error && <p className="text-xs text-[#A84355] font-medium">{error}</p>}
+        {helperText && !error && <p className="text-xs text-[#765D66]">{helperText}</p>}
       </div>
     );
   }
 );
+
 Input.displayName = 'Input';
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
+  helperText?: string;
 }
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, label, error, id, rows = 3, ...props }, ref) => {
-    const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
+  ({ className, label, error, helperText, id, ...props }, ref) => {
+    const textareaId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
 
     return (
-      <div className="w-full">
+      <div className="w-full space-y-1.5">
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-bold text-[#2C241A] mb-1.5">
+          <label htmlFor={textareaId} className="block text-xs sm:text-sm font-semibold text-[#3A2930]">
             {label}
           </label>
         )}
         <textarea
-          id={inputId}
           ref={ref}
-          rows={rows}
+          id={textareaId}
           className={cn(
-            'w-full bg-[#FFF9F0] border border-[#D8C7A5] rounded-xl px-3.5 py-2 text-sm text-[#2C241A] placeholder:text-[#8A7A63] transition-colors focus:border-[#A37432] focus:ring-1 focus:ring-[#A37432]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed resize-y shadow-2xs',
-            error && 'border-[#8B4A4A] focus:border-[#8B4A4A] focus:ring-[#8B4A4A]/20',
+            'w-full min-h-[90px] bg-[#FFFFFF] border border-[#EBCBD4] rounded-xl p-3 text-sm text-[#3A2930] placeholder:text-[#9B828C] outline-none transition-all duration-150 resize-y',
+            'focus:border-[#B86B84] focus:ring-2 focus:ring-[#B86B84]/20 focus:bg-[#FFFFFF]',
+            error && 'border-[#A84355] focus:border-[#A84355] focus:ring-[#A84355]/20',
             className
           )}
           {...props}
         />
-        {error && <p className="text-xs text-[#8B4A4A] font-medium mt-1">{error}</p>}
+        {error && <p className="text-xs text-[#A84355] font-medium">{error}</p>}
+        {helperText && !error && <p className="text-xs text-[#765D66]">{helperText}</p>}
       </div>
     );
   }
 );
+
 Textarea.displayName = 'Textarea';
 
 export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   error?: string;
-  options?: { value: string; label: string }[];
+  options?: { label: string; value: string | number }[];
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, label, error, id, options, children, ...props }, ref) => {
-    const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
+  ({ className, label, error, options, children, id, ...props }, ref) => {
+    const selectId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
 
     return (
-      <div className="w-full">
+      <div className="w-full space-y-1.5">
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-bold text-[#2C241A] mb-1.5">
+          <label htmlFor={selectId} className="block text-xs sm:text-sm font-semibold text-[#3A2930]">
             {label}
           </label>
         )}
         <select
-          id={inputId}
           ref={ref}
+          id={selectId}
           className={cn(
-            'w-full bg-[#FFF9F0] border border-[#D8C7A5] rounded-xl px-3.5 py-2 text-sm text-[#2C241A] placeholder:text-[#8A7A63] transition-colors focus:border-[#A37432] focus:ring-1 focus:ring-[#A37432]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed shadow-2xs',
-            error && 'border-[#8B4A4A] focus:border-[#8B4A4A] focus:ring-[#8B4A4A]/20',
+            'w-full min-h-[44px] bg-[#FFFFFF] border border-[#EBCBD4] rounded-xl px-3.5 py-2 text-sm text-[#3A2930] outline-none transition-all duration-150',
+            'focus:border-[#B86B84] focus:ring-2 focus:ring-[#B86B84]/20',
+            error && 'border-[#A84355]',
             className
           )}
           {...props}
         >
           {options
             ? options.map((opt) => (
-                <option key={opt.value} value={opt.value} className="bg-[#FFF9F0] text-[#2C241A]">
+                <option key={opt.value} value={opt.value} className="bg-[#FFF9FA] text-[#3A2930]">
                   {opt.label}
                 </option>
               ))
             : children}
         </select>
-        {error && <p className="text-xs text-[#8B4A4A] font-medium mt-1">{error}</p>}
+        {error && <p className="text-xs text-[#A84355] font-medium">{error}</p>}
       </div>
     );
   }
 );
+
 Select.displayName = 'Select';

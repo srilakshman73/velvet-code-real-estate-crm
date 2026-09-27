@@ -130,8 +130,8 @@ export function Combobox({
   return (
     <div ref={containerRef} className={cn('relative w-full', className)}>
       {label && (
-        <label htmlFor={inputId} className="block text-xs font-bold text-[#2C241A] mb-1.5">
-          {label} {required && <span className="text-[#8B4A4A]">*</span>}
+        <label htmlFor={inputId} className="block text-xs font-bold text-[#3A2930] mb-1.5">
+          {label} {required && <span className="text-[#A84355]">*</span>}
         </label>
       )}
 
@@ -156,8 +156,8 @@ export function Combobox({
           disabled={disabled}
           autoComplete="off"
           className={cn(
-            'w-full bg-[#FFF9F0] border border-[#D8C7A5] rounded-xl pl-3.5 pr-9 py-2 text-sm text-[#2C241A] placeholder:text-[#8A7A63] transition-colors focus:border-[#A37432] focus:ring-1 focus:ring-[#A37432]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed shadow-2xs',
-            error && 'border-[#8B4A4A] focus:border-[#8B4A4A] focus:ring-[#8B4A4A]/20'
+            'w-full bg-[#FFF9FA] border border-[#EBCBD4] rounded-xl pl-3.5 pr-9 py-2 text-sm text-[#3A2930] placeholder:text-[#9B828C] transition-colors focus:border-[#B86B84] focus:ring-1 focus:ring-[#B86B84]/30 outline-none disabled:opacity-50 disabled:cursor-not-allowed shadow-2xs',
+            error && 'border-[#A84355] focus:border-[#A84355] focus:ring-[#A84355]/20'
           )}
         />
 
@@ -169,22 +169,22 @@ export function Combobox({
               if (!isOpen) inputRef.current?.focus();
             }
           }}
-          className="absolute right-2.5 p-1 text-[#8A7A63] hover:text-[#2C241A] transition-colors cursor-pointer"
+          className="absolute right-2.5 p-1 text-[#9B828C] hover:text-[#3A2930] transition-colors cursor-pointer"
           tabIndex={-1}
           aria-label="Toggle options"
         >
           <ChevronDown
-            className={cn('w-4 h-4 transition-transform duration-200', isOpen && 'rotate-180 text-[#A37432]')}
+            className={cn('w-4 h-4 transition-transform duration-200', isOpen && 'rotate-180 text-[#B86B84]')}
           />
         </button>
       </div>
 
-      {error && <p className="text-xs text-[#8B4A4A] font-medium mt-1">{error}</p>}
-      {!error && helperText && <p className="text-xs text-[#8A7A63] mt-1">{helperText}</p>}
+      {error && <p className="text-xs text-[#A84355] font-medium mt-1">{error}</p>}
+      {!error && helperText && <p className="text-xs text-[#9B828C] mt-1">{helperText}</p>}
 
       {/* Dropdown Menu */}
       {isOpen && !disabled && (
-        <div className="absolute z-50 w-full mt-1.5 bg-[#FFF9F0] border border-[#D8C7A5] rounded-xl shadow-[0_10px_25px_rgba(120,90,40,0.15)] max-h-60 overflow-y-auto divide-y divide-[#D8C7A5]/40 animate-in fade-in-50 zoom-in-95 duration-100">
+        <div className="absolute z-50 w-full mt-1.5 bg-[#FFF9FA] border border-[#EBCBD4] rounded-xl shadow-[0_10px_25px_rgba(120,90,40,0.15)] max-h-60 overflow-y-auto divide-y divide-[#EBCBD4]/40 animate-in fade-in-50 zoom-in-95 duration-100">
           {/* Filtered Predefined Options */}
           {filteredOptions.length > 0 ? (
             <div className="p-1">
@@ -199,19 +199,19 @@ export function Combobox({
                     className={cn(
                       'w-full text-left px-3 py-2 text-xs sm:text-sm rounded-lg flex items-center justify-between transition-colors cursor-pointer',
                       isSelected
-                        ? 'bg-[#A37432]/15 text-[#7A5520] font-bold'
-                        : 'text-[#2C241A] hover:bg-[#F4EAD7]'
+                        ? 'bg-[#B86B84]/15 text-[#8C455C] font-bold'
+                        : 'text-[#3A2930] hover:bg-[#FFF5F7]'
                     )}
                   >
                     <span>{opt.label}</span>
-                    {isSelected && <Check className="w-4 h-4 text-[#7A5520]" />}
+                    {isSelected && <Check className="w-4 h-4 text-[#8C455C]" />}
                   </button>
                 );
               })}
             </div>
           ) : (
             !showCustomOption && (
-              <div className="p-3 text-center text-xs text-[#8A7A63]">
+              <div className="p-3 text-center text-xs text-[#9B828C]">
                 No matching options found.
               </div>
             )
@@ -219,15 +219,15 @@ export function Combobox({
 
           {/* Custom option prompt */}
           {showCustomOption && (
-            <div className="p-1 bg-[#F4EAD7]/60">
+            <div className="p-1 bg-[#FFF5F7]/60">
               <button
                 type="button"
                 onClick={handleSelectCustom}
-                className="w-full text-left px-3 py-2 text-xs sm:text-sm rounded-lg flex items-center gap-2 text-[#7A5520] hover:bg-[#A37432]/20 font-bold transition-colors cursor-pointer"
+                className="w-full text-left px-3 py-2 text-xs sm:text-sm rounded-lg flex items-center gap-2 text-[#8C455C] hover:bg-[#B86B84]/20 font-bold transition-colors cursor-pointer"
               >
-                <Plus className="w-4 h-4 text-[#A37432]" />
+                <Plus className="w-4 h-4 text-[#B86B84]" />
                 <span>
-                  Use custom: <strong className="text-[#2C241A]">"{inputValue.trim()}"</strong>
+                  Use custom: <strong className="text-[#3A2930]">"{inputValue.trim()}"</strong>
                 </span>
               </button>
             </div>
@@ -237,3 +237,4 @@ export function Combobox({
     </div>
   );
 }
+
