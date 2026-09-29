@@ -170,9 +170,10 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       updatedAt: new Date().toISOString(),
     };
 
-    const index = allLeads.findIndex((l) => l.id === id);
-    if (index >= 0) {
-      allLeads[index] = updatedLead;
+    const saved = serverDB.updateLead(id, updatedLead, session.isOwner ? undefined : session.organizationId);
+    if (!saved) {
+      const index = allLeads.findIndex((l) => l.id === id);
+      if (index >= 0) allLeads[index] = updatedLead;
     }
 
     return NextResponse.json({

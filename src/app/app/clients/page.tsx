@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useCRMStore } from '@/lib/store';
-import { Client } from '@/types';
+import { Client, AppointmentType, AppointmentStatus } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { Input, Select, Textarea } from '@/components/ui/Input';
 import { Modal, Drawer } from '@/components/ui/Modal';
@@ -19,10 +19,14 @@ import {
   FileText,
   CalendarCheck,
   Sparkles,
+  Clock,
+  MapPin,
+  Trash2,
+  Calendar,
 } from 'lucide-react';
 
 export default function ClientsPage() {
-  const { clients, addClient, updateClient, deals, siteVisits } = useCRMStore();
+  const { clients, addClient, updateClient, deals, siteVisits, appointments, addAppointment, deleteAppointment, properties, users } = useCRMStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
@@ -37,6 +41,75 @@ export default function ClientsPage() {
     requirements: 'Luxury residential villas & commercial office suites.',
     notes: 'Long-term client relationship.',
   });
+
+  // Client Appointment Scheduling State
+  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
+  const [isSchedulingAppointment, setIsSchedulingAppointment] = useState(false);
+  const [clientAppointmentForm, setClientAppointmentForm] = useState({
+    title: '',
+    appointmentType: 'MEETING' as AppointmentType,
+    date: '2026-09-15',
+    time: '11:00',
+    durationMinutes: 60,
+    propertyId: '',
+    assignedUserId: '',
+    location: '',
+    reminderMinutes: 15,
+    notes: '',
+  });
+
+  const handleOpenScheduleForClient = (client: Client) => {
+    setClientAppointmentForm({
+      title: `Portfolio Review / Consultation with ${client.name}`,
+      appointmentType: 'MEETING',
+      date: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+      time: '11:00',
+      durationMinutes: 60,
+      propertyId: properties[0]?.id || '',
+      assignedUserId: users[0]?.id || '',
+      location: client.preferredLocation || 'Corporate Headquarters',
+      reminderMinutes: 15,
+      notes: `Discussion regarding investment requirements (${client.requirements || 'Villas & commercial suites'})`,
+    });
+    setIsAppointmentModalOpen(true);
+  };
+
+  const handleCreateAppointmentForClient = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedClient) return;
+    setIsSchedulingAppointment(true);
+
+    try {
+      const startIso = `${clientAppointmentForm.date}T${clientAppointmentForm.time}:00`;
+      const startDate = new Date(startIso);
+      const endDate = new Date(startDate.getTime() + clientAppointmentForm.durationMinutes * 60000);
+      const prop = properties.find((p) => p.id === clientAppointmentForm.propertyId);
+      const user = users.find((u) => u.id === clientAppointmentForm.assignedUserId);
+
+      await addAppointment({
+        clientId: selectedClient.id,
+        clientName: selectedClient.name,
+        propertyId: clientAppointmentForm.propertyId || undefined,
+        propertyTitle: prop?.title,
+        assignedUserId: clientAppointmentForm.assignedUserId || users[0]?.id,
+        assignedUserName: user?.name || users[0]?.name,
+        title: clientAppointmentForm.title,
+        description: clientAppointmentForm.notes,
+        appointmentType: clientAppointmentForm.appointmentType,
+        startAt: startDate.toISOString(),
+        endAt: endDate.toISOString(),
+        location: clientAppointmentForm.location,
+        status: 'SCHEDULED',
+        reminderMinutes: Number(clientAppointmentForm.reminderMinutes),
+      });
+
+      setIsAppointmentModalOpen(false);
+    } catch (err: any) {
+      alert(`Failed to schedule appointment: ${err.message}`);
+    } finally {
+      setIsSchedulingAppointment(false);
+    }
+  };
 
   const filteredClients = clients.filter(
     (c) =>
@@ -242,6 +315,86 @@ export default function ClientsPage() {
                 {selectedClient.notes || 'VIP Customer with verified funds.'}
               </p>
             </div>
+
+            {/* Scheduled Appointments & Engagements */}
+            <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="font-bold text-[#8C455C] font-serif uppercase tracking-wider text-xs flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5" /> Scheduled Engagements
+                </h4>
+                <Button
+                  variant="gold"
+                  size="xs"
+                  onClick={() => handleOpenScheduleForClient(selectedClient)}
+                  leftIcon={<PlusCircle className="w-3 h-3" />}
+                >
+                  Schedule
+                </Button>
+              </div>
+
+              {appointments.filter((a) => a.clientId === selectedClient.id).length === 0 ? (
+                <p className="text-xs text-[#765D66] italic bg-[#FFF9FA] p-3 rounded-lg border border-[#EBCBD4]">
+                  No upcoming meetings or viewings scheduled with this client. Click &quot;Schedule&quot; to book an appointment.
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {appointments
+                    .filter((a) => a.clientId === selectedClient.id)
+                    .map((apt) => (
+                      <div
+                        key={apt.id}
+                        className="p-2.5 rounded-lg bg-[#FFF9FA] border border-[#EBCBD4] text-xs space-y-1.5"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-[#3A2930]">{apt.title}</span>
+                          <span
+                            className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                              apt.status === 'COMPLETED'
+                                ? 'bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30'
+                                : apt.status === 'CANCELLED'
+                                ? 'bg-[#A84355]/15 text-[#A84355] border border-[#A84355]/30'
+                                : 'bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30'
+                            }`}
+                          >
+                            {apt.status}
+                          </span>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-3 text-[11px] text-[#765D66]">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3 text-[#B86B84]" />
+                            {new Date(apt.startAt).toLocaleString('en-IN', {
+                              dateStyle: 'medium',
+                              timeStyle: 'short',
+                            })}
+                          </span>
+                          {apt.location && (
+                            <span className="flex items-center gap-1 truncate max-w-[160px]">
+                              <MapPin className="w-3 h-3 text-[#B86B84]" />
+                              {apt.location}
+                            </span>
+                          )}
+                        </div>
+                        {apt.description && (
+                          <p className="text-[11px] text-[#765D66] italic">{apt.description}</p>
+                        )}
+                        <div className="flex justify-end pt-1">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (confirm('Delete this scheduled engagement?')) {
+                                deleteAppointment(apt.id);
+                              }
+                            }}
+                            className="text-[10px] text-[#A84355] hover:underline flex items-center gap-0.5 cursor-pointer"
+                          >
+                            <Trash2 className="w-2.5 h-2.5" /> Remove
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
           </div>
         </Drawer>
       )}
@@ -323,6 +476,170 @@ export default function ClientsPage() {
           </div>
         </form>
       </Modal>
+
+      {/* SCHEDULE APPOINTMENT FOR CLIENT MODAL */}
+      {selectedClient && (
+        <Modal
+          isOpen={isAppointmentModalOpen}
+          onClose={() => setIsAppointmentModalOpen(false)}
+          title={`Schedule Engagement for ${selectedClient.name}`}
+          description="Book a portfolio review, property viewing, or private consultation."
+        >
+          <form onSubmit={handleCreateAppointmentForClient} className="space-y-4 text-xs sm:text-sm">
+            <Input
+              label="Engagement Title *"
+              required
+              value={clientAppointmentForm.title}
+              onChange={(e) =>
+                setClientAppointmentForm({ ...clientAppointmentForm, title: e.target.value })
+              }
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Select
+                label="Appointment Type"
+                value={clientAppointmentForm.appointmentType}
+                onChange={(e) =>
+                  setClientAppointmentForm({
+                    ...clientAppointmentForm,
+                    appointmentType: e.target.value as AppointmentType,
+                  })
+                }
+              >
+                <option value="MEETING">In-Person Consultation</option>
+                <option value="SITE_VISIT">Site Visit / Tour</option>
+                <option value="PROPERTY_VISIT">Private Viewing</option>
+                <option value="CALL">Phone / WhatsApp Call</option>
+                <option value="PROPERTY_DISCUSSION">Contract Negotiation</option>
+                <option value="OTHER">Other Engagement</option>
+              </Select>
+
+              <Select
+                label="Reminder Alert"
+                value={String(clientAppointmentForm.reminderMinutes)}
+                onChange={(e) =>
+                  setClientAppointmentForm({
+                    ...clientAppointmentForm,
+                    reminderMinutes: Number(e.target.value),
+                  })
+                }
+              >
+                <option value="5">5 minutes before</option>
+                <option value="10">10 minutes before</option>
+                <option value="15">15 minutes before</option>
+                <option value="30">30 minutes before</option>
+                <option value="60">1 hour before</option>
+                <option value="1440">1 day before</option>
+              </Select>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <Input
+                label="Date *"
+                type="date"
+                required
+                value={clientAppointmentForm.date}
+                onChange={(e) =>
+                  setClientAppointmentForm({ ...clientAppointmentForm, date: e.target.value })
+                }
+              />
+              <Input
+                label="Start Time *"
+                type="time"
+                required
+                value={clientAppointmentForm.time}
+                onChange={(e) =>
+                  setClientAppointmentForm({ ...clientAppointmentForm, time: e.target.value })
+                }
+              />
+              <Input
+                label="Duration (Minutes)"
+                type="number"
+                min={15}
+                max={480}
+                step={15}
+                value={clientAppointmentForm.durationMinutes}
+                onChange={(e) =>
+                  setClientAppointmentForm({
+                    ...clientAppointmentForm,
+                    durationMinutes: Number(e.target.value),
+                  })
+                }
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Select
+                label="Associated Property"
+                value={clientAppointmentForm.propertyId}
+                onChange={(e) =>
+                  setClientAppointmentForm({ ...clientAppointmentForm, propertyId: e.target.value })
+                }
+              >
+                <option value="">Select property...</option>
+                {properties.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.title} ({p.locality})
+                  </option>
+                ))}
+              </Select>
+
+              <Select
+                label="Assigned Consultant"
+                value={clientAppointmentForm.assignedUserId}
+                onChange={(e) =>
+                  setClientAppointmentForm({ ...clientAppointmentForm, assignedUserId: e.target.value })
+                }
+              >
+                {users.map((u) => (
+                  <option key={u.id} value={u.id}>
+                    {u.name} ({u.role})
+                  </option>
+                ))}
+              </Select>
+            </div>
+
+            <Input
+              label="Location / Meeting Venue"
+              placeholder="e.g. VIP Lounge / Developer Office / Site"
+              value={clientAppointmentForm.location}
+              onChange={(e) =>
+                setClientAppointmentForm({ ...clientAppointmentForm, location: e.target.value })
+              }
+            />
+
+            <Textarea
+              label="Meeting Objectives & Discussion Points"
+              rows={3}
+              placeholder="Investor preferences, portfolio diversification review..."
+              value={clientAppointmentForm.notes}
+              onChange={(e) =>
+                setClientAppointmentForm({ ...clientAppointmentForm, notes: e.target.value })
+              }
+            />
+
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
+              <Button
+                type="button"
+                variant="secondary"
+                size="sm"
+                onClick={() => setIsAppointmentModalOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                variant="gold"
+                size="md"
+                className="font-bold"
+                disabled={isSchedulingAppointment}
+              >
+                {isSchedulingAppointment ? 'Scheduling...' : 'Confirm Appointment'}
+              </Button>
+            </div>
+          </form>
+        </Modal>
+      )}
     </div>
   );
 }

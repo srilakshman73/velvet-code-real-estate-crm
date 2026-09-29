@@ -19,6 +19,8 @@ import {
   SaaSAdminOverview,
   Invoice,
   Payment,
+  Appointment,
+  StorageAsset,
 } from '@/types';
 
 // ==========================================
@@ -35,6 +37,7 @@ export const SAAS_PLANS: PlanLimits[] = [
     maxLeads: 100,
     maxProperties: 25,
     monthlyAIQuota: 100,
+    storageLimitBytes: 1 * 1024 * 1024 * 1024, // 1 GB
     hasWhatsAppCRM: false,
     hasAutomation: false,
     hasAdvancedReports: false,
@@ -44,6 +47,7 @@ export const SAAS_PLANS: PlanLimits[] = [
       '1 User Seat',
       'Up to 100 Active Leads',
       'Up to 25 Listed Properties',
+      '1 GB Cloud Object Storage',
       'Basic CRM & Contact Management',
       'Standard Activity Reports',
       'Realty AI (100 Queries/mo)',
@@ -59,6 +63,7 @@ export const SAAS_PLANS: PlanLimits[] = [
     maxLeads: 1000,
     maxProperties: -1, // Unlimited
     monthlyAIQuota: 1000,
+    storageLimitBytes: 5 * 1024 * 1024 * 1024, // 5 GB
     hasWhatsAppCRM: true,
     hasAutomation: true,
     hasAdvancedReports: true,
@@ -68,6 +73,7 @@ export const SAAS_PLANS: PlanLimits[] = [
       '5 User Seats',
       'Up to 1,000 Active Leads',
       'Unlimited Properties Inventory',
+      '5 GB Cloud Object Storage',
       'Interactive Deal Pipeline & Kanban',
       'Site Visit GPS Check-ins & Tracker',
       'Integrated WhatsApp CRM & Inbox',
@@ -86,6 +92,7 @@ export const SAAS_PLANS: PlanLimits[] = [
     maxLeads: -1, // Unlimited
     maxProperties: -1, // Unlimited
     monthlyAIQuota: 5000,
+    storageLimitBytes: 25 * 1024 * 1024 * 1024, // 25 GB
     hasWhatsAppCRM: true,
     hasAutomation: true,
     hasAdvancedReports: true,
@@ -95,6 +102,7 @@ export const SAAS_PLANS: PlanLimits[] = [
       '15 User Seats (Expandable)',
       'Unlimited Leads & Contacts',
       'Unlimited Properties Inventory',
+      '25 GB Cloud Object Storage',
       'Multi-Stage Deal Pipeline Automation',
       'Full WhatsApp Business Automation Engine',
       'Advanced Realty AI Analytics & Drafting',
@@ -296,6 +304,8 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [];
 export const INITIAL_ACTIVITY_LOGS: ActivityLogItem[] = [];
 export const INITIAL_INVOICES: Invoice[] = [];
 export const INITIAL_PAYMENTS: Payment[] = [];
+export const INITIAL_APPOINTMENTS: Appointment[] = [];
+export const INITIAL_STORAGE_ASSETS: StorageAsset[] = [];
 
 // ==========================================
 // SAAS ADMIN MASTER OVERVIEW METRICS

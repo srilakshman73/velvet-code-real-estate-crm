@@ -8,6 +8,7 @@ import { useCRMStore } from '@/lib/store';
 import { GlobalSearchModal } from './GlobalSearchModal';
 import { NotificationDrawer } from './NotificationDrawer';
 import { RealtyAIFloatingWidget } from './RealtyAIFloatingWidget';
+import { AppointmentReminderPopup } from './AppointmentReminderPopup';
 import { Button } from '@/components/ui/Button';
 import { getInitials } from '@/lib/utils';
 import {
@@ -160,6 +161,7 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
       <GlobalSearchModal />
       <NotificationDrawer isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />
       <RealtyAIFloatingWidget />
+      <AppointmentReminderPopup />
 
       <div className="flex-1 flex overflow-hidden">
         {/* ========================================== */}

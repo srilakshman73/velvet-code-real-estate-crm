@@ -171,9 +171,10 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       updatedAt: new Date().toISOString(),
     };
 
-    const index = allProps.findIndex((p) => p.id === id);
-    if (index >= 0) {
-      allProps[index] = updatedProp;
+    const saved = serverDB.updateProperty(id, updatedProp, session.isOwner ? undefined : session.organizationId);
+    if (!saved) {
+      const index = allProps.findIndex((p) => p.id === id);
+      if (index >= 0) allProps[index] = updatedProp;
     }
 
     return NextResponse.json({

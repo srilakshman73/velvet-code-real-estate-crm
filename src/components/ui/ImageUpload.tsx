@@ -1,14 +1,15 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Upload, X, Image as ImageIcon, RefreshCw, AlertCircle } from 'lucide-react';
+import { Upload, X, Image as ImageIcon, RefreshCw, AlertCircle, CloudCheck, Sparkles } from 'lucide-react';
 import { Button } from './Button';
 
 export interface ImageUploadProps {
   label?: string;
-  value?: string;
-  onChange: (dataUrl: string | undefined) => void;
+  value?: string; // Stored URL or preview data URL
+  onChange: (value: string | undefined) => void;
+  onFileSelect?: (file: File | null) => void;
   maxSizeMB?: number;
   allowedTypes?: string[];
   helperText?: string;
@@ -22,9 +23,10 @@ export function ImageUpload({
   label,
   value,
   onChange,
-  maxSizeMB = 5,
+  onFileSelect,
+  maxSizeMB = 10,
   allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
-  helperText = 'Upload JPG, JPEG, or PNG (Max 5MB)',
+  helperText = 'Upload JPG, JPEG, PNG, or WebP (Max 10MB)',
   error: externalError,
   className,
   aspectRatio = 'auto',
@@ -32,9 +34,14 @@ export function ImageUpload({
 }: ImageUploadProps) {
   const [internalError, setInternalError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+  const [isPendingSave, setIsPendingSave] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const error = externalError || internalError;
+
+  // Detect whether image is newly picked locally (pending save) or existing persistent URL
+  const isCloudStored = Boolean(value && !value.startsWith('blob:') && !value.startsWith('data:'));
 
   const processFile = (file: File) => {
     setInternalError(null);
@@ -54,17 +61,17 @@ export function ImageUpload({
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const result = e.target?.result as string;
-      if (result) {
-        onChange(result);
-      }
-    };
-    reader.onerror = () => {
-      setInternalError('Failed to read image file. Please try another image.');
-    };
-    reader.readAsDataURL(file);
+    setSelectedFileName(file.name);
+    setIsPendingSave(true);
+
+    // Provide the raw file to the parent component for persistent upload upon Save
+    if (onFileSelect) {
+      onFileSelect(file);
+    }
+
+    // Generate local preview URL
+    const previewUrl = URL.createObjectURL(file);
+    onChange(previewUrl);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +79,6 @@ export function ImageUpload({
     if (file) {
       processFile(file);
     }
-    // Reset file input value so same file can be re-selected if needed
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -100,14 +106,24 @@ export function ImageUpload({
   const handleRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
     onChange(undefined);
+    if (onFileSelect) {
+      onFileSelect(null);
+    }
+    setSelectedFileName(null);
+    setIsPendingSave(false);
     setInternalError(null);
   };
 
   return (
     <div className={cn('w-full', className)}>
       {label && (
-        <label className="block text-xs font-bold text-[#3A2930] mb-1.5">
-          {label}
+        <label className="block text-xs font-bold text-[#3A2930] mb-1.5 flex items-center justify-between">
+          <span>{label}</span>
+          {isPendingSave && (
+            <span className="text-[10px] text-[#C07D38] font-semibold bg-[#C07D38]/10 px-2 py-0.5 rounded-full">
+              Preview (Uploads on Save)
+            </span>
+          )}
         </label>
       )}
 
@@ -122,15 +138,24 @@ export function ImageUpload({
           >
             <img
               src={value}
-              alt="Uploaded preview"
+              alt="Preview"
               className="w-full h-full object-cover"
             />
           </div>
 
           <div className="flex items-center justify-between pt-1">
-            <div className="flex items-center gap-1.5 text-xs text-[#4A7C59] font-semibold">
-              <ImageIcon className="w-4 h-4 text-[#4A7C59]" />
-              <span>Image attached</span>
+            <div className="flex items-center gap-1.5 text-xs font-semibold">
+              {isCloudStored ? (
+                <span className="flex items-center gap-1 text-[#4A7C59]">
+                  <CloudCheck className="w-4 h-4 text-[#4A7C59]" />
+                  <span>Cloud Stored</span>
+                </span>
+              ) : (
+                <span className="flex items-center gap-1 text-[#B86B84]">
+                  <ImageIcon className="w-4 h-4 text-[#B86B84]" />
+                  <span className="truncate max-w-[150px]">{selectedFileName || 'Local Preview'}</span>
+                </span>
+              )}
             </div>
 
             <div className="flex items-center gap-2">
@@ -195,4 +220,3 @@ export function ImageUpload({
     </div>
   );
 }
-

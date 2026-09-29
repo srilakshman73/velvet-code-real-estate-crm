@@ -51,6 +51,7 @@ export interface PlanLimits {
   maxLeads: number; // -1 for unlimited
   maxProperties: number; // -1 for unlimited
   monthlyAIQuota: number; // number of requests
+  storageLimitBytes: number; // storage limit in bytes (e.g. 1GB, 5GB, 25GB)
   hasWhatsAppCRM: boolean;
   hasAutomation: boolean;
   hasAdvancedReports: boolean;
@@ -80,6 +81,7 @@ export interface Subscription {
     leadsCount: number;
     propertiesCount: number;
     aiRequestsUsed: number;
+    storageUsedBytes?: number;
   };
 }
 
@@ -341,6 +343,85 @@ export interface CalendarEvent {
   relatedType?: string;
 }
 
+// CRM Appointments & Scheduling
+export type AppointmentType =
+  | 'CLIENT_APPOINTMENT'
+  | 'LEAD_FOLLOW_UP'
+  | 'PROPERTY_VISIT'
+  | 'SITE_VISIT'
+  | 'MEETING'
+  | 'CALL'
+  | 'PROPERTY_DISCUSSION'
+  | 'OTHER';
+
+export type AppointmentStatus =
+  | 'SCHEDULED'
+  | 'CONFIRMED'
+  | 'COMPLETED'
+  | 'CANCELLED'
+  | 'RESCHEDULED';
+
+export interface Appointment {
+  id: string;
+  organizationId: string;
+  createdBy?: string;
+  leadId?: string;
+  leadName?: string;
+  clientId?: string;
+  clientName?: string;
+  propertyId?: string;
+  propertyTitle?: string;
+  assignedUserId?: string;
+  assignedUserName?: string;
+  title: string;
+  description?: string;
+  appointmentType: AppointmentType;
+  startAt: string; // ISO string
+  endAt: string; // ISO string
+  location?: string;
+  status: AppointmentStatus;
+  reminderMinutes: number; // 5, 10, 15, 30, 60, 1440
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Cloud Storage & Asset Records
+export type StorageEntityType =
+  | 'LEAD_IMAGE'
+  | 'PROPERTY_IMAGE'
+  | 'PROPERTY_DOCUMENT'
+  | 'CLIENT_DOCUMENT'
+  | 'CRM_DOCUMENT'
+  | 'INVOICE'
+  | 'OTHER';
+
+export interface StorageAsset {
+  id: string;
+  organizationId: string;
+  uploadedBy?: string;
+  fileName: string;
+  originalFileName: string;
+  mimeType: string;
+  fileSize: number; // in bytes
+  storageKey: string;
+  storageUrl: string;
+  entityType: StorageEntityType;
+  entityId?: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
+export interface StorageUsage {
+  usedBytes: number;
+  limitBytes: number;
+  availableBytes: number;
+  usagePercent: number;
+  fileCount: number;
+  tier: SubscriptionTier;
+  planName: string;
+}
+
 // WhatsApp CRM
 export interface WhatsAppMessage {
   id: string;
@@ -426,11 +507,23 @@ export interface DocumentRecord {
 export interface NotificationItem {
   id: string;
   organizationId: string;
+  userId?: string;
   title: string;
   message: string;
-  type: 'LEAD' | 'WHATSAPP' | 'VISIT' | 'TASK' | 'BILLING' | 'AI';
+  type: 'LEAD' | 'WHATSAPP' | 'VISIT' | 'TASK' | 'BILLING' | 'AI' | 'APPOINTMENT';
   isRead: boolean;
   link?: string;
+  relatedEntityType?: string;
+  relatedEntityId?: string;
+  metadata?: {
+    clientName?: string;
+    leadName?: string;
+    propertyTitle?: string;
+    time?: string;
+    location?: string;
+    appointmentId?: string;
+  };
+  readAt?: string;
   createdAt: string;
 }
 

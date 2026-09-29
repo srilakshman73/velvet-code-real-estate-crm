@@ -63,7 +63,7 @@ function normalizeIntegerInput(raw: string): string {
 }
 
 export default function PropertiesPage() {
-  const { properties, addProperty, updateProperty, deleteProperty, users } = useCRMStore();
+  const { properties, addProperty, updateProperty, deleteProperty, users, uploadFileToStorage } = useCRMStore();
 
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
@@ -74,6 +74,11 @@ export default function PropertiesPage() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isSavingProperty, setIsSavingProperty] = useState(false);
+
+  // Local File selection states for permanent cloud upload upon Save (UPLOAD != SAVE)
+  const [newPropImageFile, setNewPropImageFile] = useState<File | null>(null);
+  const [editPropImageFile, setEditPropImageFile] = useState<File | null>(null);
 
   // Form state for creating a property
   const [newPropForm, setNewPropForm] = useState<{
@@ -167,74 +172,95 @@ export default function PropertiesPage() {
     return matchesSearch && matchesType && matchesStatus;
   });
 
-  const handleCreateProperty = (e: React.FormEvent) => {
+  const handleCreateProperty = async (e: React.FormEvent) => {
     e.preventDefault();
-    const assigned = users.find((u) => u.id === newPropForm.assignedAgentId);
+    setIsSavingProperty(true);
 
-    const parsedAmenities = newPropForm.amenitiesInput
-      .split(',')
-      .map((a) => a.trim())
-      .filter((a) => a.length > 0);
+    try {
+      const assigned = users.find((u) => u.id === newPropForm.assignedAgentId);
 
-    const priceNum = parseInt(newPropForm.priceINR, 10) || 0;
-    const areaNum = parseInt(newPropForm.areaSqFt, 10) || 0;
+      const parsedAmenities = newPropForm.amenitiesInput
+        .split(',')
+        .map((a) => a.trim())
+        .filter((a) => a.length > 0);
 
-    const res = addProperty({
-      title: newPropForm.title,
-      description: newPropForm.description,
-      propertyType: newPropForm.propertyType,
-      status: newPropForm.status,
-      priceINR: priceNum,
-      areaSqFt: areaNum,
-      bedrooms: Number(newPropForm.bedrooms),
-      bathrooms: Number(newPropForm.bathrooms),
-      furnishing: newPropForm.furnishing,
-      facing: newPropForm.facing,
-      address: newPropForm.address || newPropForm.locality,
-      locality: newPropForm.locality,
-      city: newPropForm.city,
-      state: newPropForm.state,
-      ownerName: newPropForm.ownerName,
-      ownerPhone: newPropForm.ownerPhone,
-      featuredImageUrl: newPropForm.featuredImageUrl || undefined,
-      images: newPropForm.featuredImageUrl ? [newPropForm.featuredImageUrl] : [],
-      amenities: parsedAmenities.length > 0 ? parsedAmenities : ['Security', 'Water Supply'],
-      assignedAgentId: newPropForm.assignedAgentId,
-      assignedAgentName: assigned ? assigned.name : undefined,
-    });
+      const priceNum = parseInt(newPropForm.priceINR, 10) || 0;
+      const areaNum = parseInt(newPropForm.areaSqFt, 10) || 0;
 
-    if (!res.success) {
-      alert(res.error);
-      return;
+      // Upload file to cloud storage only upon clicking Save (UPLOAD != SAVE)
+      let permanentImageUrl = newPropForm.featuredImageUrl || undefined;
+      if (newPropImageFile) {
+        const uploadRes = await uploadFileToStorage(newPropImageFile, 'PROPERTY_IMAGE');
+        if (!uploadRes.success) {
+          alert(`Image Upload Error: ${uploadRes.error}`);
+          setIsSavingProperty(false);
+          return;
+        }
+        permanentImageUrl = uploadRes.asset?.storageUrl;
+      }
+
+      const res = await addProperty({
+        title: newPropForm.title,
+        description: newPropForm.description,
+        propertyType: newPropForm.propertyType,
+        status: newPropForm.status,
+        priceINR: priceNum,
+        areaSqFt: areaNum,
+        bedrooms: Number(newPropForm.bedrooms),
+        bathrooms: Number(newPropForm.bathrooms),
+        furnishing: newPropForm.furnishing,
+        facing: newPropForm.facing,
+        address: newPropForm.address || newPropForm.locality,
+        locality: newPropForm.locality,
+        city: newPropForm.city,
+        state: newPropForm.state,
+        ownerName: newPropForm.ownerName,
+        ownerPhone: newPropForm.ownerPhone,
+        featuredImageUrl: permanentImageUrl,
+        images: permanentImageUrl ? [permanentImageUrl] : [],
+        amenities: parsedAmenities.length > 0 ? parsedAmenities : ['Security', 'Water Supply'],
+        assignedAgentId: newPropForm.assignedAgentId,
+        assignedAgentName: assigned ? assigned.name : undefined,
+      });
+
+      if (!res.success) {
+        alert(res.error);
+        return;
+      }
+
+      // Reset form and file state
+      setNewPropForm({
+        title: '',
+        description: '',
+        propertyType: 'APARTMENT',
+        status: 'AVAILABLE',
+        priceINR: '',
+        areaSqFt: '',
+        bedrooms: 3,
+        bathrooms: 3,
+        furnishing: 'Fully Furnished',
+        facing: 'North-East',
+        address: '',
+        locality: '',
+        city: 'Chennai',
+        state: 'Tamil Nadu',
+        ownerName: '',
+        ownerPhone: '',
+        featuredImageUrl: '',
+        amenitiesInput: '',
+        assignedAgentId: users[0]?.id || '',
+      });
+      setNewPropImageFile(null);
+      setIsAddModalOpen(false);
+    } catch (err: any) {
+      alert(`Failed to list property: ${err.message}`);
+    } finally {
+      setIsSavingProperty(false);
     }
-
-    // Reset form
-    setNewPropForm({
-      title: '',
-      description: '',
-      propertyType: 'APARTMENT',
-      status: 'AVAILABLE',
-      priceINR: '',
-      areaSqFt: '',
-      bedrooms: 3,
-      bathrooms: 3,
-      furnishing: 'Fully Furnished',
-      facing: 'North-East',
-      address: '',
-      locality: '',
-      city: 'Chennai',
-      state: 'Tamil Nadu',
-      ownerName: '',
-      ownerPhone: '',
-      featuredImageUrl: '',
-      amenitiesInput: '',
-      assignedAgentId: users[0]?.id || '',
-    });
-
-    setIsAddModalOpen(false);
   };
 
   const handleOpenEdit = (prop: Property) => {
+    setEditPropImageFile(null);
     setEditPropForm({
       id: prop.id,
       title: prop.title,
@@ -260,46 +286,34 @@ export default function PropertiesPage() {
     setIsEditModalOpen(true);
   };
 
-  const handleUpdateProperty = (e: React.FormEvent) => {
+  const handleUpdateProperty = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editPropForm) return;
+    setIsSavingProperty(true);
 
-    const assigned = users.find((u) => u.id === editPropForm.assignedAgentId);
-    const parsedAmenities = editPropForm.amenitiesInput
-      .split(',')
-      .map((a) => a.trim())
-      .filter((a) => a.length > 0);
+    try {
+      const assigned = users.find((u) => u.id === editPropForm.assignedAgentId);
+      const parsedAmenities = editPropForm.amenitiesInput
+        .split(',')
+        .map((a) => a.trim())
+        .filter((a) => a.length > 0);
 
-    const priceNum = parseInt(editPropForm.priceINR, 10) || 0;
-    const areaNum = parseInt(editPropForm.areaSqFt, 10) || 0;
+      const priceNum = parseInt(editPropForm.priceINR, 10) || 0;
+      const areaNum = parseInt(editPropForm.areaSqFt, 10) || 0;
 
-    updateProperty(editPropForm.id, {
-      title: editPropForm.title,
-      description: editPropForm.description,
-      propertyType: editPropForm.propertyType,
-      status: editPropForm.status,
-      priceINR: priceNum,
-      areaSqFt: areaNum,
-      bedrooms: Number(editPropForm.bedrooms),
-      bathrooms: Number(editPropForm.bathrooms),
-      furnishing: editPropForm.furnishing,
-      facing: editPropForm.facing,
-      address: editPropForm.address || editPropForm.locality,
-      locality: editPropForm.locality,
-      city: editPropForm.city,
-      state: editPropForm.state,
-      ownerName: editPropForm.ownerName,
-      ownerPhone: editPropForm.ownerPhone,
-      featuredImageUrl: editPropForm.featuredImageUrl || undefined,
-      images: editPropForm.featuredImageUrl ? [editPropForm.featuredImageUrl] : [],
-      amenities: parsedAmenities,
-      assignedAgentId: editPropForm.assignedAgentId,
-      assignedAgentName: assigned ? assigned.name : undefined,
-    });
+      // Upload replacement file if new image was picked
+      let permanentImageUrl = editPropForm.featuredImageUrl || undefined;
+      if (editPropImageFile) {
+        const uploadRes = await uploadFileToStorage(editPropImageFile, 'PROPERTY_IMAGE', editPropForm.id);
+        if (!uploadRes.success) {
+          alert(`Image Upload Error: ${uploadRes.error}`);
+          setIsSavingProperty(false);
+          return;
+        }
+        permanentImageUrl = uploadRes.asset?.storageUrl;
+      }
 
-    if (selectedProperty?.id === editPropForm.id) {
-      setSelectedProperty({
-        ...selectedProperty,
+      await updateProperty(editPropForm.id, {
         title: editPropForm.title,
         description: editPropForm.description,
         propertyType: editPropForm.propertyType,
@@ -316,16 +330,48 @@ export default function PropertiesPage() {
         state: editPropForm.state,
         ownerName: editPropForm.ownerName,
         ownerPhone: editPropForm.ownerPhone,
-        featuredImageUrl: editPropForm.featuredImageUrl || undefined,
-        images: editPropForm.featuredImageUrl ? [editPropForm.featuredImageUrl] : [],
+        featuredImageUrl: permanentImageUrl,
+        images: permanentImageUrl ? [permanentImageUrl] : [],
         amenities: parsedAmenities,
         assignedAgentId: editPropForm.assignedAgentId,
         assignedAgentName: assigned ? assigned.name : undefined,
       });
-    }
 
-    setIsEditModalOpen(false);
-    setEditPropForm(null);
+      if (selectedProperty?.id === editPropForm.id) {
+        setSelectedProperty({
+          ...selectedProperty,
+          title: editPropForm.title,
+          description: editPropForm.description,
+          propertyType: editPropForm.propertyType,
+          status: editPropForm.status,
+          priceINR: priceNum,
+          areaSqFt: areaNum,
+          bedrooms: Number(editPropForm.bedrooms),
+          bathrooms: Number(editPropForm.bathrooms),
+          furnishing: editPropForm.furnishing,
+          facing: editPropForm.facing,
+          address: editPropForm.address || editPropForm.locality,
+          locality: editPropForm.locality,
+          city: editPropForm.city,
+          state: editPropForm.state,
+          ownerName: editPropForm.ownerName,
+          ownerPhone: editPropForm.ownerPhone,
+          featuredImageUrl: permanentImageUrl,
+          images: permanentImageUrl ? [permanentImageUrl] : [],
+          amenities: parsedAmenities,
+          assignedAgentId: editPropForm.assignedAgentId,
+          assignedAgentName: assigned ? assigned.name : undefined,
+        });
+      }
+
+      setEditPropImageFile(null);
+      setIsEditModalOpen(false);
+      setEditPropForm(null);
+    } catch (err: any) {
+      alert(`Failed to update property: ${err.message}`);
+    } finally {
+      setIsSavingProperty(false);
+    }
   };
 
   const openDetail = (prop: Property) => {
@@ -656,6 +702,11 @@ export default function PropertiesPage() {
                   </span>
                 </div>
               )}
+              {Boolean((selectedProperty.featuredImageUrl || selectedProperty.images?.[0])?.startsWith('/api/storage/')) && (
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-[#4A7C59]/90 backdrop-blur-md text-white font-bold text-[10px] flex items-center gap-1 shadow-sm">
+                  <CheckCircle2 className="w-3 h-3" /> Cloud Stored &amp; Encrypted
+                </div>
+              )}
               <div className="absolute top-3 right-3 px-3 py-1 rounded-lg bg-[#3A2930]/90 backdrop-blur-md text-[#FFF9FA] font-bold font-mono border border-[#B86B84]/30">
                 {formatINR(selectedProperty.priceINR)}
               </div>
@@ -779,7 +830,9 @@ export default function PropertiesPage() {
               label="Primary Property Cover Photo (JPG, JPEG, PNG, WebP)"
               value={newPropForm.featuredImageUrl}
               onChange={(val) => setNewPropForm({ ...newPropForm, featuredImageUrl: val || '' })}
-              placeholderText="Upload high-resolution property exterior or showroom photo"
+              onFileSelect={(file) => setNewPropImageFile(file)}
+              placeholderText="Click or drop high-resolution property exterior or showroom photo (Max 10MB)"
+              helperText="Upload JPG, JPEG, PNG, or WebP photo (Max 10MB). Image is permanently saved upon clicking 'List Property'."
             />
           </div>
 
@@ -931,12 +984,22 @@ export default function PropertiesPage() {
               type="button"
               variant="secondary"
               size="sm"
-              onClick={() => setIsAddModalOpen(false)}
+              onClick={() => {
+                setNewPropImageFile(null);
+                setNewPropForm({ ...newPropForm, featuredImageUrl: '' });
+                setIsAddModalOpen(false);
+              }}
             >
               Cancel
             </Button>
-            <Button type="submit" variant="gold" size="md" className="font-bold">
-              List Property
+            <Button
+              type="submit"
+              variant="gold"
+              size="md"
+              className="font-bold"
+              disabled={isSavingProperty}
+            >
+              {isSavingProperty ? 'Listing Property...' : 'List Property'}
             </Button>
           </div>
         </form>
@@ -960,7 +1023,9 @@ export default function PropertiesPage() {
                 label="Primary Property Cover Photo (JPG, JPEG, PNG, WebP)"
                 value={editPropForm.featuredImageUrl}
                 onChange={(val) => setEditPropForm({ ...editPropForm, featuredImageUrl: val || '' })}
-                placeholderText="Upload high-resolution property exterior or showroom photo"
+                onFileSelect={(file) => setEditPropImageFile(file)}
+                placeholderText="Click or drop high-resolution property exterior or showroom photo (Max 10MB)"
+                helperText="Upload JPG, JPEG, PNG, or WebP photo (Max 10MB). Image is permanently saved upon clicking 'Update Property'."
               />
             </div>
 
@@ -1104,14 +1169,21 @@ export default function PropertiesPage() {
                 variant="secondary"
                 size="sm"
                 onClick={() => {
+                  setEditPropImageFile(null);
                   setIsEditModalOpen(false);
                   setEditPropForm(null);
                 }}
               >
                 Cancel
               </Button>
-              <Button type="submit" variant="gold" size="md" className="font-bold">
-                Save Changes
+              <Button
+                type="submit"
+                variant="gold"
+                size="md"
+                className="font-bold"
+                disabled={isSavingProperty}
+              >
+                {isSavingProperty ? 'Updating Listing...' : 'Update Property'}
               </Button>
             </div>
           </form>

@@ -24,17 +24,19 @@ import {
   Send,
   Database,
   Lock,
+  HardDrive,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Input } from '@/components/ui/Input';
 import { buildWhatsAppUrl } from '@/lib/utils';
+import Link from 'next/link';
 
 export default function SettingsPage() {
-  const { currentOrg, currentUser, currentPlanLimits } = useCRM();
+  const { currentOrg, currentUser, currentPlanLimits, subscription } = useCRM();
 
-  const [activeTab, setActiveTab] = useState<'general' | 'whatsapp' | 'ai' | 'notifications' | 'security' | 'integrations'>('general');
+  const [activeTab, setActiveTab] = useState<'general' | 'whatsapp' | 'ai' | 'notifications' | 'security' | 'integrations' | 'storage'>('general');
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   // Agency General Settings
@@ -138,6 +140,7 @@ export default function SettingsPage() {
       <div className="flex items-center gap-2 border-b border-[#EBCBD4] overflow-x-auto pb-px scrollbar-none">
         {[
           { id: 'general', label: 'Agency Profile', icon: Building },
+          { id: 'storage', label: 'Cloud Storage & Quota', icon: HardDrive },
           { id: 'whatsapp', label: 'WhatsApp Cloud API', icon: MessageSquare },
           { id: 'ai', label: 'Realty AI Engine', icon: Sparkles },
           { id: 'notifications', label: 'Notifications', icon: Bell },
@@ -580,6 +583,85 @@ export default function SettingsPage() {
           })}
         </div>
       )}
+
+      {/* 7. CLOUD STORAGE & QUOTA TAB */}
+      {activeTab === 'storage' && (() => {
+        const usedStorageBytes = subscription?.usage?.storageUsedBytes || 0;
+        const storageLimitBytes = currentPlanLimits?.storageLimitBytes || (1024 * 1024 * 1024);
+        const usedMB = (usedStorageBytes / (1024 * 1024)).toFixed(1);
+        const limitGB = (storageLimitBytes / (1024 * 1024 * 1024)).toFixed(0);
+        const storagePercent = Math.min((usedStorageBytes / storageLimitBytes) * 100, 100);
+
+        return (
+          <div className="space-y-6">
+            <Card orientation="vertical">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EBCBD4] pb-4 mb-4">
+                <div>
+                  <h2 className="text-lg font-serif font-bold text-[#3A2930] flex items-center gap-2">
+                    <HardDrive className="w-5 h-5 text-[#B86B84]" />
+                    Persistent Cloud Object Storage &amp; Plan Quota
+                  </h2>
+                  <p className="text-xs text-[#765D66] mt-0.5">
+                    Multi-tenant isolated cloud storage for property photos, lead KYC documents, floor plans, and contracts.
+                  </p>
+                </div>
+                <Link href="/app/billing">
+                  <Button variant="gold" size="sm">
+                    Manage Plan in Billing
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-1">
+                  <span className="text-xs font-semibold text-[#765D66]">Storage Used</span>
+                  <p className="text-2xl font-serif font-extrabold text-[#3A2930]">{usedMB} MB</p>
+                  <p className="text-[10px] text-[#765D66]">Across images and PDF vault documents</p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-1">
+                  <span className="text-xs font-semibold text-[#765D66]">Plan Allocation</span>
+                  <p className="text-2xl font-serif font-extrabold text-[#8C455C]">{limitGB} GB</p>
+                  <p className="text-[10px] text-[#765D66]">Tier: {currentPlanLimits?.name} Plan</p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-1">
+                  <span className="text-xs font-semibold text-[#765D66]">Quota Utilization</span>
+                  <p className="text-2xl font-serif font-extrabold text-[#4A7C59]">{storagePercent.toFixed(1)}%</p>
+                  <div className="w-full h-2 bg-[#FCECEF] rounded-full overflow-hidden border border-[#EBCBD4] mt-2">
+                    <div
+                      className={`h-full rounded-full transition-all ${
+                        storagePercent >= 90 ? 'bg-[#A84355]' : 'bg-[#4A7C59]'
+                      }`}
+                      style={{ width: `${Math.max(storagePercent, 2)}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#8C455C] flex items-center gap-1.5">
+                  <Shield className="w-4 h-4 text-[#4A7C59]" /> Customer Protection &amp; Zero Data Loss Guarantee
+                </h4>
+                <ul className="text-xs text-[#765D66] space-y-2">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#4A7C59] shrink-0" />
+                    <span><strong>Permanent Storage Persistence:</strong> Uploaded assets survive browser refresh, logout, session expiration, and device restarts.</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#4A7C59] shrink-0" />
+                    <span><strong>No Deletions on Downgrade:</strong> If you switch to a plan with lower storage, no files will ever be deleted. Uploads are simply paused until usage is under the tier quota.</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#4A7C59] shrink-0" />
+                    <span><strong>Multi-Tenant Isolation:</strong> Storage objects are strictly indexed and scoped to your organization workspace (<code>{currentOrg.id}</code>).</span>
+                  </li>
+                </ul>
+              </div>
+            </Card>
+          </div>
+        );
+      })()}
     </div>
   );
 }

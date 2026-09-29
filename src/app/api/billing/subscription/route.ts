@@ -48,6 +48,8 @@ export async function GET(request: NextRequest) {
     const payments = serverDB.getPayments(session.organizationId);
     const invoices = serverDB.getInvoices(session.organizationId);
 
+    const storageUsage = serverDB.getStorageUsage(session.organizationId);
+
     return NextResponse.json({
       success: true,
       subscription: {
@@ -57,9 +59,11 @@ export async function GET(request: NextRequest) {
           leadsCount: orgLeads.length,
           propertiesCount: orgProps.length,
           aiRequestsUsed: subscription.usage?.aiRequestsUsed || 0,
+          storageUsedBytes: storageUsage.usedBytes,
         },
       },
       planLimits,
+      storageUsage,
       payments,
       invoices,
     });
@@ -69,5 +73,38 @@ export async function GET(request: NextRequest) {
       { error: 'Failed to fetch billing information.' },
       { status: 500 }
     );
+  }
+}
+
+// PUT /api/billing/subscription — Plan Upgrade & Downgrade handler
+export async function PUT(request: NextRequest) {
+  try {
+    const session = await getServerSession(request);
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const body = await request.json();
+    const { tier, billingCycle } = body;
+
+    if (!tier || !['STARTER', 'PROFESSIONAL', 'BUSINESS'].includes(tier)) {
+      return NextResponse.json({ error: 'Invalid subscription tier' }, { status: 400 });
+    }
+
+    const result = serverDB.updateSubscriptionTier(
+      session.organizationId,
+      tier,
+      billingCycle || 'monthly'
+    );
+
+    return NextResponse.json({
+      success: true,
+      message: `Plan successfully changed to ${result.planLimits.name}.`,
+      data: result.subscription,
+      planLimits: result.planLimits,
+      warning: result.warning,
+    });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

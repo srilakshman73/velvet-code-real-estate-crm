@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useCRMStore } from '@/lib/store';
-import { Lead, LeadStatus, LeadPriority, LeadSource } from '@/types';
+import { Lead, LeadStatus, LeadPriority, LeadSource, AppointmentType, AppointmentStatus } from '@/types';
 import { LeadStatusBadge, PriorityBadge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Input, Select, Textarea } from '@/components/ui/Input';
@@ -30,6 +30,9 @@ import {
   Loader2,
   CheckCircle2,
   X,
+  Calendar,
+  Clock,
+  MapPin,
 } from 'lucide-react';
 
 const PREDEFINED_LEAD_SOURCES = [
@@ -79,6 +82,10 @@ export default function LeadsPage() {
     properties,
     users,
     currentOrg,
+    appointments,
+    addAppointment,
+    deleteAppointment,
+    uploadFileToStorage,
   } = useCRMStore();
 
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
@@ -98,6 +105,25 @@ export default function LeadsPage() {
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isSavingLead, setIsSavingLead] = useState(false);
+
+  // Appointment scheduling for lead
+  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
+  const [isSchedulingAppointment, setIsSchedulingAppointment] = useState(false);
+  const [leadAppointmentForm, setLeadAppointmentForm] = useState({
+    title: '',
+    appointmentType: 'SITE_VISIT' as AppointmentType,
+    date: '2026-09-15',
+    time: '10:00',
+    durationMinutes: 60,
+    location: '',
+    reminderMinutes: 15,
+    notes: '',
+  });
+
+  // Local File selection states for permanent cloud upload upon Save
+  const [newLeadImageFile, setNewLeadImageFile] = useState<File | null>(null);
+  const [editLeadImageFile, setEditLeadImageFile] = useState<File | null>(null);
 
   // New Lead Form State
   const [newLeadForm, setNewLeadForm] = useState({
@@ -237,58 +263,82 @@ export default function LeadsPage() {
     }
   };
 
-  const handleCreateLead = (e: React.FormEvent) => {
+  const handleCreateLead = async (e: React.FormEvent) => {
     e.preventDefault();
-    const assigned = users.find((u) => u.id === newLeadForm.assignedToId);
-    const prop = properties.find((p) => p.id === newLeadForm.interestedPropertyId);
+    setIsSavingLead(true);
 
-    const budgetVal = newLeadForm.budgetMaxRaw
-      ? Math.max(0, parseInt(newLeadForm.budgetMaxRaw, 10))
-      : undefined;
+    try {
+      const assigned = users.find((u) => u.id === newLeadForm.assignedToId);
+      const prop = properties.find((p) => p.id === newLeadForm.interestedPropertyId);
 
-    const res = addLead({
-      name: newLeadForm.name.trim(),
-      phone: newLeadForm.phone.trim(),
-      email: newLeadForm.email.trim() || undefined,
-      source: newLeadForm.source.trim() || 'Website Ingestion',
-      status: newLeadForm.status.trim() || 'NEW',
-      priority: newLeadForm.priority,
-      budgetMaxINR: budgetVal,
-      budgetMinINR: budgetVal ? Math.round(budgetVal * 0.7) : undefined,
-      preferredLocation: newLeadForm.preferredLocation.trim() || undefined,
-      interestedPropertyId: newLeadForm.interestedPropertyId || undefined,
-      interestedPropertyName: prop ? prop.title : undefined,
-      assignedToId: newLeadForm.assignedToId || undefined,
-      assignedToName: assigned ? assigned.name : undefined,
-      notes: newLeadForm.notes.trim() || undefined,
-      imageUrl: newLeadForm.imageUrl,
-    });
+      const budgetVal = newLeadForm.budgetMaxRaw
+        ? Math.max(0, parseInt(newLeadForm.budgetMaxRaw, 10))
+        : undefined;
 
-    if (!res.success) {
-      alert(res.error);
-      return;
+      // 1. Upload image to persistent cloud storage if user selected a file
+      let permanentImageUrl = newLeadForm.imageUrl;
+      if (newLeadImageFile) {
+        const uploadRes = await uploadFileToStorage(newLeadImageFile, 'LEAD_IMAGE');
+        if (!uploadRes.success) {
+          alert(`Image Upload Error: ${uploadRes.error}`);
+          setIsSavingLead(false);
+          return;
+        }
+        permanentImageUrl = uploadRes.asset?.storageUrl;
+      }
+
+      // 2. Persist lead record with permanent cloud storage reference
+      const res = await addLead({
+        name: newLeadForm.name.trim(),
+        phone: newLeadForm.phone.trim(),
+        email: newLeadForm.email.trim() || undefined,
+        source: newLeadForm.source.trim() || 'Website Ingestion',
+        status: newLeadForm.status.trim() || 'NEW',
+        priority: newLeadForm.priority,
+        budgetMaxINR: budgetVal,
+        budgetMinINR: budgetVal ? Math.round(budgetVal * 0.7) : undefined,
+        preferredLocation: newLeadForm.preferredLocation.trim() || undefined,
+        interestedPropertyId: newLeadForm.interestedPropertyId || undefined,
+        interestedPropertyName: prop ? prop.title : undefined,
+        assignedToId: newLeadForm.assignedToId || undefined,
+        assignedToName: assigned ? assigned.name : undefined,
+        notes: newLeadForm.notes.trim() || undefined,
+        imageUrl: permanentImageUrl,
+      });
+
+      if (!res.success) {
+        alert(res.error);
+        setIsSavingLead(false);
+        return;
+      }
+
+      // 3. Reset Form & File state
+      setNewLeadImageFile(null);
+      setNewLeadForm({
+        name: '',
+        phone: '',
+        email: '',
+        source: 'Website Ingestion',
+        status: 'NEW',
+        priority: 'MEDIUM',
+        budgetMaxRaw: '',
+        preferredLocation: '',
+        interestedPropertyId: '',
+        assignedToId: users[0]?.id || 'usr-admin-01',
+        notes: '',
+        imageUrl: undefined,
+      });
+
+      setIsAddModalOpen(false);
+    } catch (err: any) {
+      alert(`Failed to save lead: ${err.message}`);
+    } finally {
+      setIsSavingLead(false);
     }
-
-    // Reset Form
-    setNewLeadForm({
-      name: '',
-      phone: '',
-      email: '',
-      source: 'Website Ingestion',
-      status: 'NEW',
-      priority: 'MEDIUM',
-      budgetMaxRaw: '',
-      preferredLocation: '',
-      interestedPropertyId: '',
-      assignedToId: users[0]?.id || 'usr-admin-01',
-      notes: '',
-      imageUrl: undefined,
-    });
-
-    setIsAddModalOpen(false);
   };
 
   const handleOpenEdit = (lead: Lead) => {
+    setEditLeadImageFile(null);
     setEditLeadForm({
       id: lead.id,
       name: lead.name,
@@ -307,46 +357,114 @@ export default function LeadsPage() {
     setIsEditModalOpen(true);
   };
 
-  const handleSaveEditLead = (e: React.FormEvent) => {
+  const handleSaveEditLead = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editLeadForm.id) return;
+    setIsSavingLead(true);
 
-    const assigned = users.find((u) => u.id === editLeadForm.assignedToId);
-    const prop = properties.find((p) => p.id === editLeadForm.interestedPropertyId);
+    try {
+      const assigned = users.find((u) => u.id === editLeadForm.assignedToId);
+      const prop = properties.find((p) => p.id === editLeadForm.interestedPropertyId);
 
-    const budgetVal = editLeadForm.budgetMaxRaw
-      ? Math.max(0, parseInt(editLeadForm.budgetMaxRaw, 10))
-      : undefined;
+      const budgetVal = editLeadForm.budgetMaxRaw
+        ? Math.max(0, parseInt(editLeadForm.budgetMaxRaw, 10))
+        : undefined;
 
-    const updates: Partial<Lead> = {
-      name: editLeadForm.name.trim(),
-      phone: editLeadForm.phone.trim(),
-      email: editLeadForm.email.trim() || undefined,
-      source: editLeadForm.source.trim() || 'Website Ingestion',
-      status: editLeadForm.status.trim() || 'NEW',
-      priority: editLeadForm.priority,
-      budgetMaxINR: budgetVal,
-      preferredLocation: editLeadForm.preferredLocation.trim() || undefined,
-      interestedPropertyId: editLeadForm.interestedPropertyId || undefined,
-      interestedPropertyName: prop ? prop.title : undefined,
-      assignedToId: editLeadForm.assignedToId || undefined,
-      assignedToName: assigned ? assigned.name : undefined,
-      notes: editLeadForm.notes.trim() || undefined,
-      imageUrl: editLeadForm.imageUrl,
-    };
+      // Upload replacement file if new image was picked
+      let permanentImageUrl = editLeadForm.imageUrl;
+      if (editLeadImageFile) {
+        const uploadRes = await uploadFileToStorage(editLeadImageFile, 'LEAD_IMAGE', editLeadForm.id);
+        if (!uploadRes.success) {
+          alert(`Image Upload Error: ${uploadRes.error}`);
+          setIsSavingLead(false);
+          return;
+        }
+        permanentImageUrl = uploadRes.asset?.storageUrl;
+      }
 
-    updateLead(editLeadForm.id, updates);
+      const updates: Partial<Lead> = {
+        name: editLeadForm.name.trim(),
+        phone: editLeadForm.phone.trim(),
+        email: editLeadForm.email.trim() || undefined,
+        source: editLeadForm.source.trim() || 'Website Ingestion',
+        status: editLeadForm.status.trim() || 'NEW',
+        priority: editLeadForm.priority,
+        budgetMaxINR: budgetVal,
+        preferredLocation: editLeadForm.preferredLocation.trim() || undefined,
+        interestedPropertyId: editLeadForm.interestedPropertyId || undefined,
+        interestedPropertyName: prop ? prop.title : undefined,
+        assignedToId: editLeadForm.assignedToId || undefined,
+        assignedToName: assigned ? assigned.name : undefined,
+        notes: editLeadForm.notes.trim() || undefined,
+        imageUrl: permanentImageUrl,
+      };
 
-    if (selectedLead && selectedLead.id === editLeadForm.id) {
-      setSelectedLead({ ...selectedLead, ...updates });
+      await updateLead(editLeadForm.id, updates);
+
+      if (selectedLead && selectedLead.id === editLeadForm.id) {
+        setSelectedLead({ ...selectedLead, ...updates });
+      }
+
+      setEditLeadImageFile(null);
+      setIsEditModalOpen(false);
+    } catch (err: any) {
+      alert(`Failed to update lead: ${err.message}`);
+    } finally {
+      setIsSavingLead(false);
     }
-
-    setIsEditModalOpen(false);
   };
 
   const openDetail = (lead: Lead) => {
     setSelectedLead(lead);
     setIsDrawerOpen(true);
+  };
+
+  const handleOpenScheduleForLead = (lead: Lead) => {
+    setLeadAppointmentForm({
+      title: `Site Visit / Consultation with ${lead.name}`,
+      appointmentType: 'SITE_VISIT',
+      date: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+      time: '11:00',
+      durationMinutes: 60,
+      location: lead.preferredLocation || 'Main Office',
+      reminderMinutes: 15,
+      notes: `Consultation regarding ${lead.interestedPropertyName || 'portfolio properties'}`,
+    });
+    setIsAppointmentModalOpen(true);
+  };
+
+  const handleCreateAppointmentForLead = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedLead) return;
+    setIsSchedulingAppointment(true);
+    try {
+      const startIso = `${leadAppointmentForm.date}T${leadAppointmentForm.time}:00`;
+      const startDate = new Date(startIso);
+      const endDate = new Date(startDate.getTime() + leadAppointmentForm.durationMinutes * 60000);
+
+      await addAppointment({
+        leadId: selectedLead.id,
+        leadName: selectedLead.name,
+        propertyId: selectedLead.interestedPropertyId,
+        propertyTitle: selectedLead.interestedPropertyName,
+        assignedUserId: selectedLead.assignedToId || users[0]?.id,
+        assignedUserName: selectedLead.assignedToName || users[0]?.name,
+        title: leadAppointmentForm.title,
+        description: leadAppointmentForm.notes,
+        appointmentType: leadAppointmentForm.appointmentType,
+        startAt: startDate.toISOString(),
+        endAt: endDate.toISOString(),
+        location: leadAppointmentForm.location,
+        status: 'SCHEDULED',
+        reminderMinutes: Number(leadAppointmentForm.reminderMinutes),
+      });
+
+      setIsAppointmentModalOpen(false);
+    } catch (err: any) {
+      alert(`Failed to schedule appointment: ${err.message}`);
+    } finally {
+      setIsSchedulingAppointment(false);
+    }
   };
 
   // Helper for lead initial badge
@@ -938,6 +1056,86 @@ export default function LeadsPage() {
                 Based on verified budget, fast response rate, and site visit engagement history.
               </p>
             </div>
+
+            {/* Scheduled Appointments & Follow-ups */}
+            <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="font-bold text-[#8C455C] text-xs uppercase tracking-wider flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5" /> Scheduled Appointments & Visits
+                </h4>
+                <Button
+                  variant="gold"
+                  size="xs"
+                  onClick={() => handleOpenScheduleForLead(selectedLead)}
+                  leftIcon={<PlusCircle className="w-3 h-3" />}
+                >
+                  Schedule
+                </Button>
+              </div>
+
+              {appointments.filter((a) => a.leadId === selectedLead.id).length === 0 ? (
+                <p className="text-xs text-[#765D66] italic bg-[#FFF9FA] p-3 rounded-lg border border-[#EBCBD4]">
+                  No upcoming appointments scheduled for this lead. Click &quot;Schedule&quot; above to book a site visit or consultation.
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {appointments
+                    .filter((a) => a.leadId === selectedLead.id)
+                    .map((apt) => (
+                      <div
+                        key={apt.id}
+                        className="p-2.5 rounded-lg bg-[#FFF9FA] border border-[#EBCBD4] text-xs space-y-1.5"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-[#3A2930]">{apt.title}</span>
+                          <span
+                            className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                              apt.status === 'COMPLETED'
+                                ? 'bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30'
+                                : apt.status === 'CANCELLED'
+                                ? 'bg-[#A84355]/15 text-[#A84355] border border-[#A84355]/30'
+                                : 'bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30'
+                            }`}
+                          >
+                            {apt.status}
+                          </span>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-3 text-[11px] text-[#765D66]">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3 text-[#B86B84]" />
+                            {new Date(apt.startAt).toLocaleString('en-IN', {
+                              dateStyle: 'medium',
+                              timeStyle: 'short',
+                            })}
+                          </span>
+                          {apt.location && (
+                            <span className="flex items-center gap-1 truncate max-w-[160px]">
+                              <MapPin className="w-3 h-3 text-[#B86B84]" />
+                              {apt.location}
+                            </span>
+                          )}
+                        </div>
+                        {apt.description && (
+                          <p className="text-[11px] text-[#765D66] italic">{apt.description}</p>
+                        )}
+                        <div className="flex justify-end pt-1">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (confirm('Delete this scheduled appointment?')) {
+                                deleteAppointment(apt.id);
+                              }
+                            }}
+                            className="text-[10px] text-[#A84355] hover:underline flex items-center gap-0.5 cursor-pointer"
+                          >
+                            <Trash2 className="w-2.5 h-2.5" /> Remove
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
           </div>
         </Drawer>
       )}
@@ -1072,8 +1270,9 @@ export default function LeadsPage() {
             label="Lead / Property Image"
             value={newLeadForm.imageUrl}
             onChange={(img) => setNewLeadForm({ ...newLeadForm, imageUrl: img })}
+            onFileSelect={(file) => setNewLeadImageFile(file)}
             placeholderText="Click or drop lead/property photo to attach (JPG, JPEG, PNG)"
-            helperText="Upload JPG, JPEG, or PNG photo (Max 5MB)"
+            helperText="Upload JPG, JPEG, or PNG photo (Max 10MB)"
           />
 
           <Textarea
@@ -1089,12 +1288,21 @@ export default function LeadsPage() {
               type="button"
               variant="secondary"
               size="sm"
-              onClick={() => setIsAddModalOpen(false)}
+              onClick={() => {
+                setNewLeadImageFile(null);
+                setIsAddModalOpen(false);
+              }}
             >
               Cancel
             </Button>
-            <Button type="submit" variant="gold" size="md" className="font-bold">
-              Save Lead
+            <Button
+              type="submit"
+              variant="gold"
+              size="md"
+              className="font-bold"
+              disabled={isSavingLead}
+            >
+              {isSavingLead ? 'Saving to Cloud...' : 'Save Lead'}
             </Button>
           </div>
         </form>
@@ -1226,8 +1434,9 @@ export default function LeadsPage() {
             label="Lead / Property Image"
             value={editLeadForm.imageUrl}
             onChange={(img) => setEditLeadForm({ ...editLeadForm, imageUrl: img })}
+            onFileSelect={(file) => setEditLeadImageFile(file)}
             placeholderText="Click or drop lead/property photo to attach (JPG, JPEG, PNG)"
-            helperText="Upload JPG, JPEG, or PNG photo (Max 5MB)"
+            helperText="Upload JPG, JPEG, or PNG photo (Max 10MB)"
           />
 
           <Textarea
@@ -1242,12 +1451,21 @@ export default function LeadsPage() {
               type="button"
               variant="secondary"
               size="sm"
-              onClick={() => setIsEditModalOpen(false)}
+              onClick={() => {
+                setEditLeadImageFile(null);
+                setIsEditModalOpen(false);
+              }}
             >
               Cancel
             </Button>
-            <Button type="submit" variant="gold" size="md" className="font-bold">
-              Update Lead
+            <Button
+              type="submit"
+              variant="gold"
+              size="md"
+              className="font-bold"
+              disabled={isSavingLead}
+            >
+              {isSavingLead ? 'Saving Changes...' : 'Update Lead'}
             </Button>
           </div>
         </form>
@@ -1325,6 +1543,139 @@ export default function LeadsPage() {
           </div>
         </div>
       </Modal>
+
+      {/* SCHEDULE APPOINTMENT FOR LEAD MODAL */}
+      {selectedLead && (
+        <Modal
+          isOpen={isAppointmentModalOpen}
+          onClose={() => setIsAppointmentModalOpen(false)}
+          title={`Schedule Appointment for ${selectedLead.name}`}
+          description="Book a property viewing, site visit, phone call, or consultation."
+        >
+          <form onSubmit={handleCreateAppointmentForLead} className="space-y-4 text-xs sm:text-sm">
+            <Input
+              label="Appointment Title *"
+              required
+              value={leadAppointmentForm.title}
+              onChange={(e) =>
+                setLeadAppointmentForm({ ...leadAppointmentForm, title: e.target.value })
+              }
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Select
+                label="Appointment Type"
+                value={leadAppointmentForm.appointmentType}
+                onChange={(e) =>
+                  setLeadAppointmentForm({
+                    ...leadAppointmentForm,
+                    appointmentType: e.target.value as AppointmentType,
+                  })
+                }
+              >
+                <option value="SITE_VISIT">Site Visit</option>
+                <option value="PROPERTY_VISIT">Property Viewing</option>
+                <option value="MEETING">In-Person Meeting</option>
+                <option value="CALL">Phone / WhatsApp Call</option>
+                <option value="PROPERTY_DISCUSSION">Property Discussion</option>
+                <option value="OTHER">Other Engagement</option>
+              </Select>
+
+              <Select
+                label="Reminder Alert"
+                value={String(leadAppointmentForm.reminderMinutes)}
+                onChange={(e) =>
+                  setLeadAppointmentForm({
+                    ...leadAppointmentForm,
+                    reminderMinutes: Number(e.target.value),
+                  })
+                }
+              >
+                <option value="5">5 minutes before</option>
+                <option value="10">10 minutes before</option>
+                <option value="15">15 minutes before</option>
+                <option value="30">30 minutes before</option>
+                <option value="60">1 hour before</option>
+                <option value="1440">1 day before</option>
+              </Select>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <Input
+                label="Date *"
+                type="date"
+                required
+                value={leadAppointmentForm.date}
+                onChange={(e) =>
+                  setLeadAppointmentForm({ ...leadAppointmentForm, date: e.target.value })
+                }
+              />
+              <Input
+                label="Start Time *"
+                type="time"
+                required
+                value={leadAppointmentForm.time}
+                onChange={(e) =>
+                  setLeadAppointmentForm({ ...leadAppointmentForm, time: e.target.value })
+                }
+              />
+              <Input
+                label="Duration (Minutes)"
+                type="number"
+                min={15}
+                max={480}
+                step={15}
+                value={leadAppointmentForm.durationMinutes}
+                onChange={(e) =>
+                  setLeadAppointmentForm({
+                    ...leadAppointmentForm,
+                    durationMinutes: Number(e.target.value),
+                  })
+                }
+              />
+            </div>
+
+            <Input
+              label="Location / Venue"
+              placeholder="e.g. Site Office, Emerald Heights, OMR, Chennai"
+              value={leadAppointmentForm.location}
+              onChange={(e) =>
+                setLeadAppointmentForm({ ...leadAppointmentForm, location: e.target.value })
+              }
+            />
+
+            <Textarea
+              label="Notes & Agenda"
+              rows={3}
+              placeholder="Specific buyer requirements to highlight, documents to bring..."
+              value={leadAppointmentForm.notes}
+              onChange={(e) =>
+                setLeadAppointmentForm({ ...leadAppointmentForm, notes: e.target.value })
+              }
+            />
+
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
+              <Button
+                type="button"
+                variant="secondary"
+                size="sm"
+                onClick={() => setIsAppointmentModalOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                variant="gold"
+                size="md"
+                className="font-bold"
+                disabled={isSchedulingAppointment}
+              >
+                {isSchedulingAppointment ? 'Scheduling...' : 'Save & Set Reminder'}
+              </Button>
+            </div>
+          </form>
+        </Modal>
+      )}
     </div>
   );
 }

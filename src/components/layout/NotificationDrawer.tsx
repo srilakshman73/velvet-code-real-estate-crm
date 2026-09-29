@@ -41,6 +41,8 @@ export function NotificationDrawer({ isOpen, onClose }: NotificationDrawerProps)
         return <Sparkles className="w-4 h-4 text-[#8C455C]" />;
       case 'BILLING':
         return <CreditCard className="w-4 h-4 text-[#A84355]" />;
+      case 'APPOINTMENT':
+        return <CalendarCheck className="w-4 h-4 text-[#8C455C]" />;
       default:
         return <Bell className="w-4 h-4 text-[#B86B84]" />;
     }

@@ -21,6 +21,7 @@ import {
   ExternalLink,
   Ban,
   ArrowUpRight,
+  HardDrive,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -35,6 +36,7 @@ export default function BillingPage() {
     subscription,
     currentPlanLimits,
     cancelSubscription,
+    upgradePlan,
     payments,
     invoices,
     fetchBillingData,
@@ -48,6 +50,7 @@ export default function BillingPage() {
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const [selectedTier, setSelectedTier] = useState<SubscriptionTier>(subscription.tier);
   const [isProcessingCheckout, setIsProcessingCheckout] = useState(false);
+  const [isInstantSwitching, setIsInstantSwitching] = useState(false);
   const [isCanceling, setIsCanceling] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [statusFeedback, setStatusFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -245,6 +248,49 @@ export default function BillingPage() {
       })
     : 'Current';
 
+  const usedStorageBytes = subscription.usage?.storageUsedBytes || 0;
+  const storageLimitBytes = currentPlanLimits.storageLimitBytes || (1024 * 1024 * 1024);
+  const usedMB = (usedStorageBytes / (1024 * 1024)).toFixed(1);
+  const limitGB = (storageLimitBytes / (1024 * 1024 * 1024)).toFixed(0);
+  const storagePercent = Math.min((usedStorageBytes / storageLimitBytes) * 100, 100);
+
+  const handleInstantPlanSwitch = async (tier: SubscriptionTier) => {
+    setIsInstantSwitching(true);
+    setStatusFeedback(null);
+    try {
+      const success = await upgradePlan(tier);
+      if (success) {
+        await fetchBillingData();
+        setIsUpgradeModalOpen(false);
+        setStatusFeedback({
+          type: 'success',
+          message: `Workspace plan successfully updated to ${tier}! Quotas have adjusted automatically.`,
+        });
+        try {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+          });
+        } catch {
+          // ignore
+        }
+      } else {
+        setStatusFeedback({
+          type: 'error',
+          message: 'Failed to switch plan on server. Please try again.',
+        });
+      }
+    } catch (err: any) {
+      setStatusFeedback({
+        type: 'error',
+        message: err.message || 'Error communicating with billing server.',
+      });
+    } finally {
+      setIsInstantSwitching(false);
+    }
+  };
+
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#FCECEF] text-[#3A2930]">
       {/* Header */}
@@ -371,7 +417,7 @@ export default function BillingPage() {
         </div>
 
         {/* Real-time Usage Progress Bars */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-2">
           {/* 1. Users */}
           <div className="space-y-2 p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
@@ -456,6 +502,29 @@ export default function BillingPage() {
               />
             </div>
             <p className="text-[10px] text-[#765D66]">Resets monthly</p>
+          </div>
+
+          {/* 5. Persistent Cloud Storage */}
+          <div className="space-y-2 p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] shadow-2xs">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-[#765D66] flex items-center gap-1">
+                <HardDrive className="w-3.5 h-3.5 text-[#B86B84]" /> Storage:
+              </span>
+              <span className="text-[#3A2930] font-mono font-bold">
+                {usedMB} MB / {limitGB} GB
+              </span>
+            </div>
+            <div className="w-full h-2 bg-[#FCECEF] rounded-full overflow-hidden border border-[#EBCBD4]">
+              <div
+                className={`h-full rounded-full transition-all ${
+                  storagePercent >= 90 ? 'bg-[#A84355]' : 'bg-[#4A7C59]'
+                }`}
+                style={{ width: `${Math.max(storagePercent, 2)}%` }}
+              />
+            </div>
+            <p className="text-[10px] text-[#765D66]">
+              {storagePercent.toFixed(1)}% utilized &bull; No data loss
+            </p>
           </div>
         </div>
       </div>
@@ -634,25 +703,67 @@ export default function BillingPage() {
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#B86B84]" />
                         <span>{plan.monthlyAIQuota} AI Queries</span>
                       </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B86B84]" />
+                        <span className="font-semibold">{plan.storageLimitBytes ? `${(plan.storageLimitBytes / (1024 * 1024 * 1024)).toFixed(0)} GB` : '1 GB'} Cloud Storage</span>
+                      </li>
                     </ul>
                   </div>
 
-                  <Button
-                    variant={isSelected ? 'gold' : 'secondary'}
-                    size="sm"
-                    disabled={isProcessingCheckout}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleInitiateRazorpaySubscription(plan.tier);
-                    }}
-                    className="w-full font-bold shadow-xs"
-                  >
-                    {isCurrent ? 'Renew / Manage' : `Subscribe with Razorpay`}
-                  </Button>
+                  <div className="space-y-2">
+                    <Button
+                      variant={isSelected ? 'gold' : 'secondary'}
+                      size="sm"
+                      disabled={isProcessingCheckout || isInstantSwitching}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleInitiateRazorpaySubscription(plan.tier);
+                      }}
+                      className="w-full font-bold shadow-xs"
+                    >
+                      {isCurrent ? 'Renew / Manage' : `Subscribe with Razorpay`}
+                    </Button>
+                    {!isCurrent && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="xs"
+                        disabled={isProcessingCheckout || isInstantSwitching}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleInstantPlanSwitch(plan.tier);
+                        }}
+                        className="w-full text-xs text-[#8C455C] border-[#B86B84]/30 hover:bg-[#B86B84]/10 cursor-pointer"
+                      >
+                        {isInstantSwitching && selectedTier === plan.tier ? 'Switching...' : 'Instant Switch (Test Mode)'}
+                      </Button>
+                    )}
+                  </div>
                 </div>
               );
             })}
           </div>
+
+          {/* Downgrade Storage Quota Notice with Zero Data Loss Guarantee */}
+          {(() => {
+            const targetPlan = SAAS_PLANS.find((p) => p.tier === selectedTier);
+            if (targetPlan && targetPlan.storageLimitBytes && targetPlan.storageLimitBytes < usedStorageBytes) {
+              const targetGB = (targetPlan.storageLimitBytes / (1024 * 1024 * 1024)).toFixed(0);
+              return (
+                <div className="p-3.5 bg-[#A84355]/10 border border-[#A84355]/30 rounded-xl text-xs text-[#A84355] flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <div className="space-y-1">
+                    <p className="font-bold">Plan Downgrade Storage Quota Notice (Zero Data Loss Guarantee):</p>
+                    <p className="text-[#3A2930] leading-relaxed">
+                      Your organization currently uses <strong>{usedMB} MB</strong>, which exceeds the <strong>{targetGB} GB</strong> limit of the {targetPlan.name} plan.
+                      Per our customer protection policy, <strong>no files will ever be deleted</strong> upon downgrading. However, uploading new images and documents will be restricted until your storage usage is brought within the {targetGB} GB quota or your subscription is upgraded.
+                    </p>
+                  </div>
+                </div>
+              );
+            }
+            return null;
+          })()}
 
           <div className="flex items-center justify-between pt-4 border-t border-[#EBCBD4] text-xs text-[#9B828C]">
             <span className="flex items-center gap-1 text-[#4A7C59] font-semibold">

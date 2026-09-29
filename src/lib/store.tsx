@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import {
   Organization,
   User,
@@ -25,6 +25,10 @@ import {
   AIConversationMessage,
   Payment,
   Invoice,
+  Appointment,
+  StorageAsset,
+  StorageEntityType,
+  StorageUsage,
 } from '@/types';
 import {
   SAAS_PLANS,
@@ -46,6 +50,7 @@ import {
   INITIAL_ACTIVITY_LOGS,
   INITIAL_PAYMENTS,
   INITIAL_INVOICES,
+  INITIAL_APPOINTMENTS,
 } from './mock-data';
 import { processRealtyAIQuery } from './ai-service';
 import { buildWhatsAppUrl } from './utils';
@@ -70,41 +75,64 @@ interface CRMStoreContextType {
   subscription: Subscription;
   setSubscription: React.Dispatch<React.SetStateAction<Subscription>>;
   currentPlanLimits: PlanLimits;
-  upgradePlan: (tier: SubscriptionTier, billingCycle?: 'monthly' | 'annual') => boolean;
+  upgradePlan: (tier: SubscriptionTier, billingCycle?: 'monthly' | 'annual') => Promise<boolean>;
   cancelSubscription: () => void;
   payments: Payment[];
   invoices: Invoice[];
   fetchBillingData: () => Promise<void>;
 
+  // Storage Quota & File Asset Management
+  storageUsage: StorageUsage | null;
+  fetchStorageUsage: () => Promise<void>;
+  uploadFileToStorage: (
+    file: File,
+    entityType: StorageEntityType,
+    entityId?: string
+  ) => Promise<{ success: boolean; asset?: StorageAsset; error?: string }>;
+  deleteFileFromStorage: (assetId: string) => Promise<{ success: boolean; error?: string }>;
+
   // Limits Checkers
-  checkLimit: (resource: 'leads' | 'properties' | 'users' | 'ai' | 'whatsapp') => {
+  checkLimit: (resource: 'leads' | 'properties' | 'users' | 'ai' | 'whatsapp' | 'storage', extraBytes?: number) => {
     allowed: boolean;
     reason?: string;
   };
 
   // Leads
   leads: Lead[];
-  addLead: (lead: Omit<Lead, 'id' | 'organizationId' | 'createdAt' | 'updatedAt' | 'score'>) => {
+  addLead: (lead: Omit<Lead, 'id' | 'organizationId' | 'createdAt' | 'updatedAt' | 'score'>) => Promise<{
     success: boolean;
+    data?: Lead;
     error?: string;
-  };
-  updateLead: (id: string, updates: Partial<Lead>) => void;
-  deleteLead: (id: string) => void;
+  }>;
+  updateLead: (id: string, updates: Partial<Lead>) => Promise<void>;
+  deleteLead: (id: string) => Promise<void>;
   importLeads: (newLeads: Partial<Lead>[]) => number;
 
   // Clients
   clients: Client[];
-  addClient: (client: Omit<Client, 'id' | 'organizationId' | 'createdAt' | 'updatedAt' | 'totalDealsCount' | 'totalDealsValueINR'>) => void;
-  updateClient: (id: string, updates: Partial<Client>) => void;
+  addClient: (client: Omit<Client, 'id' | 'organizationId' | 'createdAt' | 'updatedAt' | 'totalDealsCount' | 'totalDealsValueINR'>) => Promise<void>;
+  updateClient: (id: string, updates: Partial<Client>) => Promise<void>;
+  deleteClient: (id: string) => Promise<void>;
 
   // Properties
   properties: Property[];
-  addProperty: (prop: Omit<Property, 'id' | 'organizationId' | 'createdAt' | 'updatedAt'>) => {
+  addProperty: (prop: Omit<Property, 'id' | 'organizationId' | 'createdAt' | 'updatedAt'>) => Promise<{
     success: boolean;
+    data?: Property;
     error?: string;
-  };
-  updateProperty: (id: string, updates: Partial<Property>) => void;
-  deleteProperty: (id: string) => void;
+  }>;
+  updateProperty: (id: string, updates: Partial<Property>) => Promise<void>;
+  deleteProperty: (id: string) => Promise<void>;
+
+  // Appointments (CRM Calendar)
+  appointments: Appointment[];
+  addAppointment: (apt: Omit<Appointment, 'id' | 'organizationId' | 'createdAt' | 'updatedAt'>) => Promise<{
+    success: boolean;
+    data?: Appointment;
+    error?: string;
+  }>;
+  updateAppointment: (id: string, updates: Partial<Appointment>) => Promise<void>;
+  deleteAppointment: (id: string) => Promise<void>;
 
   // Deals & Pipeline
   deals: Deal[];
@@ -142,19 +170,20 @@ interface CRMStoreContextType {
 
   // Realty AI
   aiMessages: AIConversationMessage[];
-  sendAIMessage: (text: string) => void;
+  sendAIMessage: (text: string) => Promise<void>;
   executeAIAction: (messageId: string) => void;
   clearAIChat: () => void;
 
   // Documents & Vault
   documents: DocumentRecord[];
-  addDocument: (doc: Omit<DocumentRecord, 'id' | 'organizationId' | 'createdAt'>) => void;
-  deleteDocument: (id: string) => void;
+  addDocument: (doc: Omit<DocumentRecord, 'id' | 'organizationId' | 'createdAt'>) => Promise<void>;
+  deleteDocument: (id: string) => Promise<void>;
 
   // Notifications
   notifications: NotificationItem[];
-  markNotificationRead: (id: string) => void;
-  markAllNotificationsRead: () => void;
+  markNotificationRead: (id: string) => Promise<void>;
+  markAllNotificationsRead: () => Promise<void>;
+  dismissNotification: (id: string) => Promise<void>;
 
   // Activity Logs
   activityLogs: ActivityLogItem[];
@@ -171,44 +200,22 @@ const CRMStoreContext = createContext<CRMStoreContextType | null>(null);
 
 export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   // Organizations and Users
-  const [organizations, setOrganizations] = useState<Organization[]>(INITIAL_ORGANIZATIONS);
+  const [organizations] = useState<Organization[]>(INITIAL_ORGANIZATIONS);
   const [currentOrg, setCurrentOrg] = useState<Organization>(INITIAL_ORGANIZATIONS[0]);
-  const [users, setUsers] = useState<User[]>(INITIAL_USERS);
-  const [currentUser, setCurrentUser] = useState<User>(INITIAL_USERS[0]); // Default to Sri Lakshman (Owner)
+  const [users] = useState<User[]>(INITIAL_USERS);
+  const [currentUser, setCurrentUser] = useState<User>(INITIAL_USERS[0]);
 
   // Subscription & Billing State
   const [subscription, setSubscription] = useState<Subscription>(INITIAL_SUBSCRIPTION);
   const [payments, setPayments] = useState<Payment[]>(INITIAL_PAYMENTS);
   const [invoices, setInvoices] = useState<Invoice[]>(INITIAL_INVOICES);
-
-  const fetchBillingData = async () => {
-    try {
-      const res = await fetch('/api/billing/subscription');
-      if (res.ok) {
-        const data = await res.json();
-        if (data.subscription) {
-          setSubscription(data.subscription);
-        }
-        if (Array.isArray(data.payments)) {
-          setPayments(data.payments);
-        }
-        if (Array.isArray(data.invoices)) {
-          setInvoices(data.invoices);
-        }
-      }
-    } catch {
-      // Offline fallback
-    }
-  };
-
-  useEffect(() => {
-    fetchBillingData();
-  }, [currentOrg.id]);
+  const [storageUsage, setStorageUsage] = useState<StorageUsage | null>(null);
 
   // Entities
   const [leads, setLeads] = useState<Lead[]>(INITIAL_LEADS);
   const [clients, setClients] = useState<Client[]>(INITIAL_CLIENTS);
   const [properties, setProperties] = useState<Property[]>(INITIAL_PROPERTIES);
+  const [appointments, setAppointments] = useState<Appointment[]>(INITIAL_APPOINTMENTS);
   const [deals, setDeals] = useState<Deal[]>(INITIAL_DEALS);
   const [siteVisits, setSiteVisits] = useState<SiteVisit[]>(INITIAL_SITE_VISITS);
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
@@ -249,15 +256,155 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   const exitSupportMode = () => {
     setIsOwnerSupportMode(false);
     setSupportOrg(null);
+    setCurrentOrg(organizations[0]);
   };
 
   const hasAdminAccess = () => {
     return currentUser.role === 'OWNER';
   };
 
+  // Helper to persist state to browser localStorage for instant load on refresh
+  const saveToLocalCache = (key: string, data: any) => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(`velvet_${key}_${currentOrg.id}`, JSON.stringify(data));
+      } catch (e) {
+        // quota exceeded or disabled
+      }
+    }
+  };
+
+  // Fetch billing data
+  const fetchBillingData = useCallback(async () => {
+    try {
+      const res = await fetch('/api/billing/subscription');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.subscription) {
+          setSubscription(data.subscription);
+        }
+        if (Array.isArray(data.payments)) {
+          setPayments(data.payments);
+        }
+        if (Array.isArray(data.invoices)) {
+          setInvoices(data.invoices);
+        }
+        if (data.storageUsage) {
+          setStorageUsage(data.storageUsage);
+        }
+      }
+    } catch {
+      // Offline fallback
+    }
+  }, []);
+
+  // Fetch storage usage
+  const fetchStorageUsage = useCallback(async () => {
+    try {
+      const res = await fetch('/api/storage/usage');
+      if (res.ok) {
+        const json = await res.json();
+        if (json.data) {
+          setStorageUsage(json.data);
+        }
+      }
+    } catch {}
+  }, []);
+
+  // Hydrate from localStorage first, then fetch live data from server APIs
+  useEffect(() => {
+    const orgId = currentOrg.id;
+
+    // 1. Instant local cache hydration
+    if (typeof window !== 'undefined') {
+      try {
+        const cachedLeads = localStorage.getItem(`velvet_leads_${orgId}`);
+        if (cachedLeads) setLeads(JSON.parse(cachedLeads));
+
+        const cachedProps = localStorage.getItem(`velvet_properties_${orgId}`);
+        if (cachedProps) setProperties(JSON.parse(cachedProps));
+
+        const cachedClients = localStorage.getItem(`velvet_clients_${orgId}`);
+        if (cachedClients) setClients(JSON.parse(cachedClients));
+
+        const cachedApts = localStorage.getItem(`velvet_appointments_${orgId}`);
+        if (cachedApts) setAppointments(JSON.parse(cachedApts));
+
+        const cachedNotifs = localStorage.getItem(`velvet_notifications_${orgId}`);
+        if (cachedNotifs) setNotifications(JSON.parse(cachedNotifs));
+
+        const cachedDocs = localStorage.getItem(`velvet_documents_${orgId}`);
+        if (cachedDocs) setDocuments(JSON.parse(cachedDocs));
+      } catch (e) {}
+    }
+
+    // 2. Fetch live data from server APIs
+    const syncServerData = async () => {
+      try {
+        const [leadsRes, propsRes, clientsRes, aptsRes, notifsRes, docsRes] = await Promise.all([
+          fetch('/api/leads'),
+          fetch('/api/properties'),
+          fetch('/api/clients'),
+          fetch('/api/appointments'),
+          fetch('/api/notifications'),
+          fetch('/api/documents'),
+        ]);
+
+        if (leadsRes.ok) {
+          const json = await leadsRes.json();
+          if (Array.isArray(json.data)) {
+            setLeads(json.data);
+            saveToLocalCache('leads', json.data);
+          }
+        }
+        if (propsRes.ok) {
+          const json = await propsRes.json();
+          if (Array.isArray(json.data)) {
+            setProperties(json.data);
+            saveToLocalCache('properties', json.data);
+          }
+        }
+        if (clientsRes.ok) {
+          const json = await clientsRes.json();
+          if (Array.isArray(json.data)) {
+            setClients(json.data);
+            saveToLocalCache('clients', json.data);
+          }
+        }
+        if (aptsRes.ok) {
+          const json = await aptsRes.json();
+          if (Array.isArray(json.data)) {
+            setAppointments(json.data);
+            saveToLocalCache('appointments', json.data);
+          }
+        }
+        if (notifsRes.ok) {
+          const json = await notifsRes.json();
+          if (Array.isArray(json.data)) {
+            setNotifications(json.data);
+            saveToLocalCache('notifications', json.data);
+          }
+        }
+        if (docsRes.ok) {
+          const json = await docsRes.json();
+          if (Array.isArray(json.data)) {
+            setDocuments(json.data);
+            saveToLocalCache('documents', json.data);
+          }
+        }
+      } catch (err) {
+        // Network error / offline
+      }
+    };
+
+    syncServerData();
+    fetchBillingData();
+    fetchStorageUsage();
+  }, [currentOrg.id, fetchBillingData, fetchStorageUsage]);
+
   // Current Plan Limits Helper
   const currentPlanLimits =
-    SAAS_PLANS.find((p) => p.tier === subscription.tier) || SAAS_PLANS[1];
+    SAAS_PLANS.find((p) => p.tier === subscription.tier) || SAAS_PLANS[0];
 
   // Helper to log audit activity
   const logActivity = (
@@ -282,7 +429,10 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   };
 
   // Limit Enforcement
-  const checkLimit = (resource: 'leads' | 'properties' | 'users' | 'ai' | 'whatsapp') => {
+  const checkLimit = (
+    resource: 'leads' | 'properties' | 'users' | 'ai' | 'whatsapp' | 'storage',
+    extraBytes: number = 0
+  ) => {
     if (resource === 'leads') {
       if (currentPlanLimits.maxLeads !== -1 && leads.length >= currentPlanLimits.maxLeads) {
         return {
@@ -323,84 +473,145 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
         };
       }
     }
+    if (resource === 'storage') {
+      const currentUsed = storageUsage?.usedBytes || 0;
+      const limit = currentPlanLimits.storageLimitBytes || 1073741824;
+      if (limit !== -1 && currentUsed + extraBytes > limit) {
+        return {
+          allowed: false,
+          reason: `Storage limit reached for your ${currentPlanLimits.name} plan. Please delete files or upgrade your plan.`,
+        };
+      }
+    }
     return { allowed: true };
+  };
+
+  // ==========================================
+  // CLOUD STORAGE ACTIONS
+  // ==========================================
+  const uploadFileToStorage = async (
+    file: File,
+    entityType: StorageEntityType,
+    entityId?: string
+  ): Promise<{ success: boolean; asset?: StorageAsset; error?: string }> => {
+    // Client-side quick check
+    const quotaCheck = checkLimit('storage', file.size);
+    if (!quotaCheck.allowed) {
+      return { success: false, error: quotaCheck.reason };
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('entityType', entityType);
+      if (entityId) formData.append('entityId', entityId);
+
+      const res = await fetch('/api/storage/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || 'Upload failed' };
+      }
+
+      await fetchStorageUsage();
+      return { success: true, asset: data.asset };
+    } catch (err: any) {
+      return { success: false, error: err.message || 'Network upload error' };
+    }
+  };
+
+  const deleteFileFromStorage = async (assetId: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const res = await fetch(`/api/storage/${assetId}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || 'Failed to delete file' };
+      }
+      await fetchStorageUsage();
+      return { success: true };
+    } catch (err: any) {
+      return { success: false, error: err.message };
+    }
   };
 
   // ==========================================
   // LEADS ACTIONS
   // ==========================================
-  const addLead = (leadData: Omit<Lead, 'id' | 'organizationId' | 'createdAt' | 'updatedAt' | 'score'>) => {
+  const addLead = async (leadData: Omit<Lead, 'id' | 'organizationId' | 'createdAt' | 'updatedAt' | 'score'>) => {
     const limitCheck = checkLimit('leads');
     if (!limitCheck.allowed) {
       return { success: false, error: limitCheck.reason };
     }
 
-    const newLead: Lead = {
-      ...leadData,
-      id: `lead-${Date.now()}`,
-      organizationId: currentOrg.id,
-      score: Math.floor(Math.random() * 30) + 65, // Initial AI score
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadData),
+      });
 
-    setLeads((prev) => [newLead, ...prev]);
-    setSubscription((prev) => ({
-      ...prev,
-      usage: { ...prev.usage, leadsCount: prev.usage.leadsCount + 1 },
-    }));
+      const json = await res.json();
 
-    logActivity('CREATE_LEAD', 'Lead', newLead.id, newLead.name, `Added new lead via ${newLead.source}`);
+      if (!res.ok) {
+        return { success: false, error: json.error || 'Failed to save lead' };
+      }
 
-    // Trigger WhatsApp welcome automation if active
-    const welcomeAuto = automations.find((a) => a.triggerEvent === 'LEAD_CREATED' && a.isActive);
-    if (welcomeAuto) {
-      // Auto-create conversation
-      const newConv: WhatsAppConversation = {
-        id: `conv-${Date.now()}`,
-        organizationId: currentOrg.id,
-        customerName: newLead.name,
-        customerPhone: newLead.phone,
-        leadId: newLead.id,
-        leadStatus: newLead.status,
-        interestedProperty: newLead.interestedPropertyName,
-        budget: newLead.budgetMaxINR ? `₹${(newLead.budgetMaxINR / 100000).toFixed(1)}L` : undefined,
-        lastMessageText: `Hello ${newLead.name}, thank you for your interest. Our property consultant will contact you shortly.`,
-        lastMessageAt: new Date().toISOString(),
-        unreadCount: 0,
-        messages: [
-          {
-            id: `msg-${Date.now()}`,
-            conversationId: `conv-${Date.now()}`,
-            direction: 'OUTBOUND',
-            status: 'SENT',
-            body: `Hello ${newLead.name}, thank you for your interest in ${newLead.interestedPropertyName || 'our properties'}. Our consultant will contact you shortly.`,
-            createdAt: new Date().toISOString(),
-          },
-        ],
-      };
-      setConversations((prev) => [newConv, ...prev]);
-      setAutomations((prev) =>
-        prev.map((a) => (a.id === welcomeAuto.id ? { ...a, executionCount: a.executionCount + 1 } : a))
-      );
+      const newLead: Lead = json.data;
+      setLeads((prev) => {
+        const next = [newLead, ...prev];
+        saveToLocalCache('leads', next);
+        return next;
+      });
+
+      setSubscription((prev) => ({
+        ...prev,
+        usage: { ...prev.usage, leadsCount: prev.usage.leadsCount + 1 },
+      }));
+
+      logActivity('CREATE_LEAD', 'Lead', newLead.id, newLead.name, `Added new lead via ${newLead.source}`);
+
+      return { success: true, data: newLead };
+    } catch (err: any) {
+      return { success: false, error: err.message };
     }
-
-    return { success: true };
   };
 
-  const updateLead = (id: string, updates: Partial<Lead>) => {
-    setLeads((prev) =>
-      prev.map((l) => (l.id === id ? { ...l, ...updates, updatedAt: new Date().toISOString() } : l))
-    );
+  const updateLead = async (id: string, updates: Partial<Lead>) => {
+    setLeads((prev) => {
+      const next = prev.map((l) => (l.id === id ? { ...l, ...updates, updatedAt: new Date().toISOString() } : l));
+      saveToLocalCache('leads', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/leads/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+    } catch {}
+
     const target = leads.find((l) => l.id === id);
     if (target) {
       logActivity('UPDATE_LEAD', 'Lead', id, target.name, `Updated lead properties`);
     }
   };
 
-  const deleteLead = (id: string) => {
+  const deleteLead = async (id: string) => {
     const target = leads.find((l) => l.id === id);
-    setLeads((prev) => prev.filter((l) => l.id !== id));
+    setLeads((prev) => {
+      const next = prev.filter((l) => l.id !== id);
+      saveToLocalCache('leads', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/leads/${id}`, { method: 'DELETE' });
+    } catch {}
+
     if (target) {
       logActivity('DELETE_LEAD', 'Lead', id, target.name, `Deleted lead record`);
     }
@@ -427,7 +638,11 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
       updatedAt: new Date().toISOString(),
     }));
 
-    setLeads((prev) => [...imported, ...prev]);
+    setLeads((prev) => {
+      const next = [...imported, ...prev];
+      saveToLocalCache('leads', next);
+      return next;
+    });
     logActivity('IMPORT_LEADS', 'Lead', 'bulk', 'Multiple Leads', `Imported ${imported.length} leads via CSV/Excel`);
     return imported.length;
   };
@@ -435,67 +650,212 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   // ==========================================
   // CLIENTS ACTIONS
   // ==========================================
-  const addClient = (clientData: Omit<Client, 'id' | 'organizationId' | 'createdAt' | 'updatedAt' | 'totalDealsCount' | 'totalDealsValueINR'>) => {
-    const newClient: Client = {
-      ...clientData,
-      id: `client-${Date.now()}`,
-      organizationId: currentOrg.id,
-      totalDealsCount: 0,
-      totalDealsValueINR: 0,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    setClients((prev) => [newClient, ...prev]);
-    logActivity('CREATE_CLIENT', 'Lead', newClient.id, newClient.name, 'Added active converted client');
+  const addClient = async (
+    clientData: Omit<Client, 'id' | 'organizationId' | 'createdAt' | 'updatedAt' | 'totalDealsCount' | 'totalDealsValueINR'>
+  ) => {
+    try {
+      const res = await fetch('/api/clients', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(clientData),
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        setClients((prev) => {
+          const next = [json.data, ...prev];
+          saveToLocalCache('clients', next);
+          return next;
+        });
+        logActivity('CREATE_CLIENT', 'Lead', json.data.id, json.data.name, 'Added active converted client');
+      }
+    } catch {}
   };
 
-  const updateClient = (id: string, updates: Partial<Client>) => {
-    setClients((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, ...updates, updatedAt: new Date().toISOString() } : c))
-    );
+  const updateClient = async (id: string, updates: Partial<Client>) => {
+    setClients((prev) => {
+      const next = prev.map((c) => (c.id === id ? { ...c, ...updates, updatedAt: new Date().toISOString() } : c));
+      saveToLocalCache('clients', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/clients/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+    } catch {}
+  };
+
+  const deleteClient = async (id: string) => {
+    setClients((prev) => {
+      const next = prev.filter((c) => c.id !== id);
+      saveToLocalCache('clients', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/clients/${id}`, { method: 'DELETE' });
+    } catch {}
   };
 
   // ==========================================
   // PROPERTIES ACTIONS
   // ==========================================
-  const addProperty = (propData: Omit<Property, 'id' | 'organizationId' | 'createdAt' | 'updatedAt'>) => {
+  const addProperty = async (propData: Omit<Property, 'id' | 'organizationId' | 'createdAt' | 'updatedAt'>) => {
     const limitCheck = checkLimit('properties');
     if (!limitCheck.allowed) {
       return { success: false, error: limitCheck.reason };
     }
 
-    const newProp: Property = {
-      ...propData,
-      id: `prop-${Date.now()}`,
-      organizationId: currentOrg.id,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    setProperties((prev) => [newProp, ...prev]);
-    setSubscription((prev) => ({
-      ...prev,
-      usage: { ...prev.usage, propertiesCount: prev.usage.propertiesCount + 1 },
-    }));
-    logActivity('CREATE_PROPERTY', 'Property', newProp.id, newProp.title, `Listed new property for ${newProp.city}`);
-    return { success: true };
+    try {
+      const res = await fetch('/api/properties', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(propData),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        return { success: false, error: json.error || 'Failed to save property' };
+      }
+
+      const newProp: Property = json.data;
+      setProperties((prev) => {
+        const next = [newProp, ...prev];
+        saveToLocalCache('properties', next);
+        return next;
+      });
+
+      setSubscription((prev) => ({
+        ...prev,
+        usage: { ...prev.usage, propertiesCount: prev.usage.propertiesCount + 1 },
+      }));
+
+      logActivity('CREATE_PROPERTY', 'Property', newProp.id, newProp.title, `Listed new property for ${newProp.city}`);
+      return { success: true, data: newProp };
+    } catch (err: any) {
+      return { success: false, error: err.message };
+    }
   };
 
-  const updateProperty = (id: string, updates: Partial<Property>) => {
-    setProperties((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, ...updates, updatedAt: new Date().toISOString() } : p))
-    );
+  const updateProperty = async (id: string, updates: Partial<Property>) => {
+    setProperties((prev) => {
+      const next = prev.map((p) => (p.id === id ? { ...p, ...updates, updatedAt: new Date().toISOString() } : p));
+      saveToLocalCache('properties', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/properties/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+    } catch {}
+
     const target = properties.find((p) => p.id === id);
     if (target) {
       logActivity('UPDATE_PROPERTY', 'Property', id, target.title, `Updated property specifications`);
     }
   };
 
-  const deleteProperty = (id: string) => {
+  const deleteProperty = async (id: string) => {
     const target = properties.find((p) => p.id === id);
-    setProperties((prev) => prev.filter((p) => p.id !== id));
+    setProperties((prev) => {
+      const next = prev.filter((p) => p.id !== id);
+      saveToLocalCache('properties', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/properties/${id}`, { method: 'DELETE' });
+    } catch {}
+
     if (target) {
       logActivity('DELETE_PROPERTY', 'Property', id, target.title, `Removed property from inventory`);
     }
+  };
+
+  // ==========================================
+  // APPOINTMENTS ACTIONS (CRM CALENDAR)
+  // ==========================================
+  const addAppointment = async (
+    aptData: Omit<Appointment, 'id' | 'organizationId' | 'createdAt' | 'updatedAt'>
+  ): Promise<{ success: boolean; data?: Appointment; error?: string }> => {
+    try {
+      const res = await fetch('/api/appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(aptData),
+      });
+
+      const json = await res.json();
+      if (!res.ok) {
+        return { success: false, error: json.error || 'Failed to create appointment' };
+      }
+
+      const newApt: Appointment = json.data;
+      setAppointments((prev) => {
+        const next = [newApt, ...prev];
+        saveToLocalCache('appointments', next);
+        return next;
+      });
+
+      // Refetch notifications because appointment generates reminder notification
+      try {
+        const notifRes = await fetch('/api/notifications');
+        if (notifRes.ok) {
+          const notifJson = await notifRes.json();
+          if (Array.isArray(notifJson.data)) {
+            setNotifications(notifJson.data);
+            saveToLocalCache('notifications', notifJson.data);
+          }
+        }
+      } catch {}
+
+      logActivity(
+        'SCHEDULE_APPOINTMENT',
+        'SiteVisit',
+        newApt.id,
+        newApt.title,
+        `Scheduled appointment on ${new Date(newApt.startAt).toLocaleDateString()}`
+      );
+
+      return { success: true, data: newApt };
+    } catch (err: any) {
+      return { success: false, error: err.message };
+    }
+  };
+
+  const updateAppointment = async (id: string, updates: Partial<Appointment>) => {
+    setAppointments((prev) => {
+      const next = prev.map((a) => (a.id === id ? { ...a, ...updates, updatedAt: new Date().toISOString() } : a));
+      saveToLocalCache('appointments', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/appointments/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+    } catch {}
+  };
+
+  const deleteAppointment = async (id: string) => {
+    setAppointments((prev) => {
+      const next = prev.filter((a) => a.id !== id);
+      saveToLocalCache('appointments', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
+    } catch {}
   };
 
   // ==========================================
@@ -530,23 +890,6 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
         return d;
       })
     );
-    const target = deals.find((d) => d.id === id);
-    if (target) {
-      logActivity('UPDATE_DEAL_STAGE', 'Deal', id, target.title, `Moved deal stage to ${stage}`);
-      if (stage === 'CLOSED_WON') {
-        const notif: NotificationItem = {
-          id: `notif-${Date.now()}`,
-          organizationId: currentOrg.id,
-          title: 'Deal Won Celebration! 🏆',
-          message: `${target.title} closed successfully!`,
-          type: 'LEAD',
-          isRead: false,
-          link: '/app/deals',
-          createdAt: new Date().toISOString(),
-        };
-        setNotifications((prev) => [notif, ...prev]);
-      }
-    }
   };
 
   const updateDeal = (id: string, updates: Partial<Deal>) => {
@@ -570,15 +913,7 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
       createdAt: new Date().toISOString(),
     };
     setSiteVisits((prev) => [newVisit, ...prev]);
-    logActivity('SCHEDULE_VISIT', 'SiteVisit', newVisit.id, newVisit.propertyName, `Scheduled visit for ${newVisit.leadName || 'Client'} on ${newVisit.visitDate}`);
-
-    // Site visit automated WhatsApp
-    const auto = automations.find((a) => a.triggerEvent === 'VISIT_SCHEDULED' && a.isActive);
-    if (auto && newVisit.customerPhone) {
-      setAutomations((prev) =>
-        prev.map((a) => (a.id === auto.id ? { ...a, executionCount: a.executionCount + 1 } : a))
-      );
-    }
+    logActivity('SCHEDULE_VISIT', 'SiteVisit', newVisit.id, newVisit.propertyName, `Scheduled visit for ${newVisit.leadName || 'Client'}`);
   };
 
   const updateSiteVisit = (id: string, updates: Partial<SiteVisit>) => {
@@ -593,24 +928,16 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
         v.id === id ? { ...v, status: 'CONFIRMED', checkInAt: new Date().toISOString() } : v
       )
     );
-    logActivity('CHECKIN_VISIT', 'SiteVisit', id, 'Site Visit', 'Agent checked in at site venue');
   };
 
   const checkOutVisit = (id: string, rating: number, feedback: string) => {
     setSiteVisits((prev) =>
       prev.map((v) =>
         v.id === id
-          ? {
-              ...v,
-              status: 'COMPLETED',
-              checkOutAt: new Date().toISOString(),
-              rating,
-              feedback,
-            }
+          ? { ...v, status: 'COMPLETED', checkOutAt: new Date().toISOString(), rating, feedback }
           : v
       )
     );
-    logActivity('COMPLETED_VISIT', 'SiteVisit', id, 'Site Visit', `Logged completion with ${rating}★ feedback`);
   };
 
   // ==========================================
@@ -624,7 +951,6 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
       createdAt: new Date().toISOString(),
     };
     setTasks((prev) => [newTask, ...prev]);
-    logActivity('CREATE_TASK', 'Task', newTask.id, newTask.title, 'Assigned new task');
   };
 
   const updateTaskStatus = (id: string, status: Task['status']) => {
@@ -685,17 +1011,6 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
         return c;
       })
     );
-
-    const targetConv = conversations.find((c) => c.id === conversationId);
-    if (targetConv) {
-      logActivity(
-        'SEND_WHATSAPP',
-        'WhatsApp',
-        conversationId,
-        targetConv.customerName,
-        `Sent WhatsApp message: "${body.substring(0, 40)}..."`
-      );
-    }
   };
 
   const addTemplate = (templateData: Omit<WhatsAppTemplate, 'id' | 'organizationId'>) => {
@@ -716,7 +1031,7 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   // ==========================================
   // REALTY AI ASSISTANT ACTIONS
   // ==========================================
-  const sendAIMessage = (text: string) => {
+  const sendAIMessage = async (text: string) => {
     const userMsg: AIConversationMessage = {
       id: `ai-user-${Date.now()}`,
       role: 'user',
@@ -724,16 +1039,35 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
       timestamp: new Date().toISOString(),
     };
 
-    // Store user message immediately
     setAIMessages((prev) => [...prev, userMsg]);
 
-    // Track AI Usage quota
-    setSubscription((prev) => ({
-      ...prev,
-      usage: { ...prev.usage, aiRequestsUsed: prev.usage.aiRequestsUsed + 1 },
-    }));
+    // Enforce server-side AI query quota
+    try {
+      const quotaRes = await fetch('/api/ai/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tokens: 50 }),
+      });
 
-    // Process intelligence
+      if (!quotaRes.ok) {
+        const errJson = await quotaRes.json();
+        const errorMsg: AIConversationMessage = {
+          id: `ai-err-${Date.now()}`,
+          role: 'assistant',
+          content: `⚠️ **AI Query Quota Reached**: ${errJson.error || 'Please upgrade your plan to continue using Realty AI.'}`,
+          timestamp: new Date().toISOString(),
+        };
+        setAIMessages((prev) => [...prev, errorMsg]);
+        return;
+      }
+
+      const quotaData = await quotaRes.json();
+      setSubscription((prev) => ({
+        ...prev,
+        usage: { ...prev.usage, aiRequestsUsed: quotaData.used },
+      }));
+    } catch {}
+
     setTimeout(() => {
       const response = processRealtyAIQuery(text, {
         leads,
@@ -762,7 +1096,6 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
       prev.map((m) => {
         if (m.id === messageId && m.actionDraft) {
           if (m.actionDraft.type === 'WHATSAPP_MESSAGE' && m.actionDraft.recipientPhone) {
-            // Open real WhatsApp with pre-filled message URL
             const url = buildWhatsAppUrl(m.actionDraft.recipientPhone, m.actionDraft.messageText);
             if (typeof window !== 'undefined') {
               window.open(url, '_blank');
@@ -793,64 +1126,120 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   // ==========================================
   // DOCUMENTS VAULT ACTIONS
   // ==========================================
-  const addDocument = (docData: Omit<DocumentRecord, 'id' | 'organizationId' | 'createdAt'>) => {
-    const newDoc: DocumentRecord = {
-      ...docData,
-      id: `doc-${Date.now()}`,
-      organizationId: currentOrg.id,
-      createdAt: new Date().toISOString(),
-    };
-    setDocuments((prev) => [newDoc, ...prev]);
-    logActivity('UPLOAD_DOCUMENT', 'Property', newDoc.id, newDoc.title, `Uploaded document (${newDoc.category})`);
+  const addDocument = async (docData: Omit<DocumentRecord, 'id' | 'organizationId' | 'createdAt'>) => {
+    try {
+      const res = await fetch('/api/documents', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(docData),
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        setDocuments((prev) => {
+          const next = [json.data, ...prev];
+          saveToLocalCache('documents', next);
+          return next;
+        });
+        logActivity('UPLOAD_DOCUMENT', 'Property', json.data.id, json.data.title, `Uploaded document (${json.data.category})`);
+      }
+    } catch {}
   };
 
-  const deleteDocument = (id: string) => {
-    setDocuments((prev) => prev.filter((d) => d.id !== id));
+  const deleteDocument = async (id: string) => {
+    setDocuments((prev) => {
+      const next = prev.filter((d) => d.id !== id);
+      saveToLocalCache('documents', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/documents/${id}`, { method: 'DELETE' });
+    } catch {}
   };
 
   // ==========================================
   // NOTIFICATIONS ACTIONS
   // ==========================================
-  const markNotificationRead = (id: string) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, isRead: true } : n))
-    );
+  const markNotificationRead = async (id: string) => {
+    setNotifications((prev) => {
+      const next = prev.map((n) => (n.id === id ? { ...n, isRead: true } : n));
+      saveToLocalCache('notifications', next);
+      return next;
+    });
+
+    try {
+      await fetch('/api/notifications', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+    } catch {}
   };
 
-  const markAllNotificationsRead = () => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+  const markAllNotificationsRead = async () => {
+    setNotifications((prev) => {
+      const next = prev.map((n) => ({ ...n, isRead: true }));
+      saveToLocalCache('notifications', next);
+      return next;
+    });
+
+    try {
+      await fetch('/api/notifications', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ markAll: true }),
+      });
+    } catch {}
+  };
+
+  const dismissNotification = async (id: string) => {
+    setNotifications((prev) => {
+      const next = prev.filter((n) => n.id !== id);
+      saveToLocalCache('notifications', next);
+      return next;
+    });
+
+    try {
+      await fetch(`/api/notifications?id=${id}`, { method: 'DELETE' });
+    } catch {}
   };
 
   // ==========================================
   // BILLING & SUBSCRIPTIONS
   // ==========================================
-  const upgradePlan = (tier: SubscriptionTier, billingCycle: 'monthly' | 'annual' = 'monthly') => {
-    const targetPlan = SAAS_PLANS.find((p) => p.tier === tier);
-    if (!targetPlan) return false;
+  const upgradePlan = async (tier: SubscriptionTier, billingCycle: 'monthly' | 'annual' = 'monthly') => {
+    try {
+      const res = await fetch('/api/billing/subscription', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier, billingCycle }),
+      });
 
-    setSubscription((prev) => ({
-      ...prev,
-      tier,
-      billingCycle,
-      priceMonthlyINR: targetPlan.priceMonthlyINR,
-      status: 'ACTIVE',
-      currentPeriodStart: new Date().toISOString(),
-      currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-    }));
+      const json = await res.json();
+      if (!res.ok) return false;
 
-    const notif: NotificationItem = {
-      id: `notif-upgrade-${Date.now()}`,
-      organizationId: currentOrg.id,
-      title: `Plan Upgraded to ${targetPlan.name}! 🚀`,
-      message: `Your workspace has been upgraded to the ${targetPlan.name} tier with expanded limits.`,
-      type: 'BILLING',
-      isRead: false,
-      link: '/app/billing',
-      createdAt: new Date().toISOString(),
-    };
-    setNotifications((prev) => [notif, ...prev]);
-    logActivity('UPGRADE_PLAN', 'Lead', currentOrg.id, targetPlan.name, `Upgraded workspace plan to ${targetPlan.name}`);
-    return true;
+      setSubscription(json.data);
+      await fetchStorageUsage();
+
+      const targetPlan = SAAS_PLANS.find((p) => p.tier === tier) || SAAS_PLANS[0];
+
+      const notif: NotificationItem = {
+        id: `notif-upgrade-${Date.now()}`,
+        organizationId: currentOrg.id,
+        title: `Plan Upgraded to ${targetPlan.name}! 🚀`,
+        message: `Your workspace has been upgraded to ${targetPlan.name} with storage limit of ${(targetPlan.storageLimitBytes / (1024 * 1024 * 1024)).toFixed(0)} GB.`,
+        type: 'BILLING',
+        isRead: false,
+        link: '/app/billing',
+        createdAt: new Date().toISOString(),
+      };
+      setNotifications((prev) => [notif, ...prev]);
+
+      return true;
+    } catch {
+      return false;
+    }
   };
 
   const cancelSubscription = () => {
@@ -882,6 +1271,10 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
         payments,
         invoices,
         fetchBillingData,
+        storageUsage,
+        fetchStorageUsage,
+        uploadFileToStorage,
+        deleteFileFromStorage,
         checkLimit,
         leads,
         addLead,
@@ -891,10 +1284,15 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
         clients,
         addClient,
         updateClient,
+        deleteClient,
         properties,
         addProperty,
         updateProperty,
         deleteProperty,
+        appointments,
+        addAppointment,
+        updateAppointment,
+        deleteAppointment,
         deals,
         addDeal,
         updateDealStage,
@@ -930,6 +1328,7 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
         notifications,
         markNotificationRead,
         markAllNotificationsRead,
+        dismissNotification,
         activityLogs,
         logActivity,
         searchQuery,
