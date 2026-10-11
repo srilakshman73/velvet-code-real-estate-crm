@@ -37,20 +37,20 @@ export async function POST(request: NextRequest) {
       customerEmail: session.email,
     });
 
-    // Update or create pending tenant subscription state in serverDB
+    // Update or create tenant subscription state in serverDB (preserving active status until verified)
     const existingSub = serverDB.getSubscription(session.organizationId);
     serverDB.upsertSubscription({
       id: existingSub?.id || `sub-${Date.now().toString(36)}`,
       organizationId: session.organizationId,
       userId: session.userId,
       planId: subscriptionResult.planId,
-      tier: requestedTier,
-      status: existingSub?.status === 'ACTIVE' ? 'ACTIVE' : 'TRIALING',
-      priceMonthlyINR: planConfig.amountINR,
-      billingCycle: 'monthly',
+      tier: existingSub ? existingSub.tier : 'STARTER',
+      status: existingSub ? existingSub.status : 'TRIALING',
+      priceMonthlyINR: existingSub ? existingSub.priceMonthlyINR : AUTHORITATIVE_PLANS.STARTER.amountINR,
+      billingCycle: existingSub?.billingCycle || 'monthly',
       currentPeriodStart: existingSub?.currentPeriodStart || new Date().toISOString(),
-      currentPeriodEnd: existingSub?.currentPeriodEnd || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-      cancelAtPeriodEnd: false,
+      currentPeriodEnd: existingSub?.currentPeriodEnd || new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+      cancelAtPeriodEnd: existingSub?.cancelAtPeriodEnd || false,
       razorpaySubscriptionId: subscriptionResult.subscriptionId,
       usage: existingSub?.usage || {
         usersCount: 1,
@@ -75,8 +75,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Create subscription error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to initiate Razorpay subscription.';
     return NextResponse.json(
-      { error: 'Failed to initiate Razorpay subscription.' },
+      { error: errorMessage },
       { status: 500 }
     );
   }

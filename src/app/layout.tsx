@@ -3,7 +3,6 @@ import { Playfair_Display, Manrope } from 'next/font/google';
 import './globals.css';
 import { CRMStoreProvider } from '@/lib/store';
 import { FloatingWhatsAppButton } from '@/components/layout/FloatingWhatsAppButton';
-import { DecorativeHeartBackground } from '@/components/layout/DecorativeHeartBackground';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
   title: 'Velvet Code — Real Estate CRM & Property Operations',
   applicationName: 'Velvet Code Real Estate CRM',
   description:
-    'A luxury Light Rose-inspired platform for managing real estate leads, properties, clients, deals pipeline, site visits, and WhatsApp CRM with Realty AI.',
+    'A luxury Champagne Gold-inspired platform for managing real estate leads, properties, clients, deals pipeline, site visits, and WhatsApp CRM with Realty AI.',
   keywords: [
     'Real Estate CRM',
     'Luxury PropTech SaaS',
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
     'Realty AI',
     'Property Management Software India',
     'Real Estate Pipeline Management',
-    'Light Rose Real Estate CRM',
+    'Gold Luxury Real Estate CRM',
   ],
   authors: [{ name: 'Velvet Code' }],
   icons: {
@@ -62,9 +61,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${manrope.variable} h-full bg-[#FCECEF] text-[#3A2930]`}>
-      <body className="min-h-full flex flex-col font-sans antialiased bg-[#FCECEF] text-[#3A2930] selection:bg-[#B86B84]/20 selection:text-[#3A2930] relative">
-        <DecorativeHeartBackground />
+    <html lang="en" className={`${playfair.variable} ${manrope.variable} h-full bg-[#E9DFC8] text-[#2C241A]`}>
+      <body className="min-h-full flex flex-col font-sans antialiased bg-[#E9DFC8] text-[#2C241A] selection:bg-[#A37432]/20 selection:text-[#2C241A] relative">
         <CRMStoreProvider>
           <div className="relative z-10 flex flex-col min-h-full flex-1">
             {children}

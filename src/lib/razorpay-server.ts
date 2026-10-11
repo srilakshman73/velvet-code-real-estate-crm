@@ -61,6 +61,12 @@ export const AUTHORITATIVE_PLANS: Record<SubscriptionTier, AuthoritativePlanConf
   },
 };
 
+export const DEFAULT_RAZORPAY_PLAN_IDS: Record<SubscriptionTier, string> = {
+  STARTER: 'plan_TmTRbhyJaA79AW',
+  PROFESSIONAL: 'plan_TmTT05HGnKjDq3',
+  BUSINESS: 'plan_TmTTrXM6JxkG6k',
+};
+
 /**
  * Returns server-side Razorpay credentials.
  * Never expose RAZORPAY_KEY_SECRET to client bundles.
@@ -69,9 +75,9 @@ export function getRazorpayCredentials() {
   const keyId =
     process.env.RAZORPAY_KEY_ID ||
     process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ||
-    'rzp_test_TfMkcLbwnde9mE';
-  const keySecret = process.env.RAZORPAY_KEY_SECRET || 'QoYK6rPTA44lE3xk8L99OLvJ';
-  const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET || '';
+    'rzp_test_TfOz0NdbxVaGbx';
+  const keySecret = process.env.RAZORPAY_KEY_SECRET || 'FZepi0Iq38BdVrY2agtk55Uf';
+  const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET || 'velvet_webhook_secret_test_2026';
 
   return {
     keyId: keyId.trim(),
@@ -84,19 +90,11 @@ function getAuthHeader(keyId: string, keySecret: string) {
   return `Basic ${Buffer.from(`${keyId}:${keySecret}`).toString('base64')}`;
 }
 
-// In-memory cache for created plan IDs during server lifecycle
-const dynamicPlanCache: Record<SubscriptionTier, string> = {
-  STARTER: '',
-  PROFESSIONAL: '',
-  BUSINESS: '',
-};
-
 /**
  * Resolves the Razorpay Plan ID for a given tier.
  * Priority:
  * 1. Environment variable (e.g. RAZORPAY_STARTER_PLAN_ID)
- * 2. In-memory dynamic plan cache
- * 3. Dynamic plan creation via Razorpay Plans API
+ * 2. Default existing Plan IDs (Starter: plan_TmTRbhyJaA79AW, Pro: plan_TmTT05HGnKjDq3, Biz: plan_TmTTrXM6JxkG6k)
  */
 export async function getOrCreateRazorpayPlanId(tier: SubscriptionTier): Promise<string> {
   const envMap: Record<SubscriptionTier, string | undefined> = {
@@ -110,52 +108,7 @@ export async function getOrCreateRazorpayPlanId(tier: SubscriptionTier): Promise
     return envPlanId;
   }
 
-  if (dynamicPlanCache[tier]) {
-    return dynamicPlanCache[tier];
-  }
-
-  const { keyId, keySecret } = getRazorpayCredentials();
-  const planConfig = AUTHORITATIVE_PLANS[tier];
-
-  try {
-    const response = await fetch('https://api.razorpay.com/v1/plans', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: getAuthHeader(keyId, keySecret),
-      },
-      body: JSON.stringify({
-        period: planConfig.period,
-        interval: planConfig.interval,
-        item: {
-          name: `Velvet Code ${planConfig.name}`,
-          amount: planConfig.amountPaise,
-          currency: 'INR',
-          description: planConfig.description,
-        },
-        notes: {
-          platform: 'Velvet Code CRM',
-          tier,
-        },
-      }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      if (data.id) {
-        dynamicPlanCache[tier] = data.id;
-        return data.id;
-      }
-    } else {
-      const errorText = await response.text();
-      console.warn(`Razorpay plan creation API returned non-200 for ${tier}: ${errorText}. Please configure RAZORPAY_${tier}_PLAN_ID in environment variables.`);
-    }
-  } catch (err) {
-    console.warn(`Razorpay plan API network check for ${tier}:`, err);
-  }
-
-  // Do not invent fake plan IDs. Return empty string if not configured.
-  return '';
+  return DEFAULT_RAZORPAY_PLAN_IDS[tier] || '';
 }
 
 /**
@@ -177,50 +130,42 @@ export async function createRazorpaySubscription(params: {
   const planConfig = AUTHORITATIVE_PLANS[params.tier];
   const planId = await getOrCreateRazorpayPlanId(params.tier);
 
-  try {
-    const response = await fetch('https://api.razorpay.com/v1/subscriptions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: getAuthHeader(keyId, keySecret),
-      },
-      body: JSON.stringify({
-        plan_id: planId,
-        total_count: 120, // 10-year monthly subscription
-        quantity: 1,
-        customer_notify: 1,
-        notes: {
-          organizationId: params.organizationId,
-          organizationName: params.organizationName,
-          tier: params.tier,
-        },
-      }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      return {
-        subscriptionId: data.id,
-        planId: data.plan_id || planId,
-        amountINR: planConfig.amountINR,
-        keyId,
-      };
-    } else {
-      const errorData = await response.json().catch(() => ({}));
-      console.warn('Razorpay Subscriptions API responded with non-200:', errorData);
-    }
-  } catch (err) {
-    console.error('Razorpay subscription creation request failed:', err);
+  if (!planId) {
+    throw new Error(`Razorpay Plan ID not configured for tier: ${params.tier}`);
   }
 
-  // Fallback dynamic test subscription identifier for simulated test environments
-  const fallbackSubId = `sub_test_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`;
-  return {
-    subscriptionId: fallbackSubId,
-    planId,
-    amountINR: planConfig.amountINR,
-    keyId,
-  };
+  const response = await fetch('https://api.razorpay.com/v1/subscriptions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getAuthHeader(keyId, keySecret),
+    },
+    body: JSON.stringify({
+      plan_id: planId,
+      total_count: 120, // 10-year monthly subscription
+      quantity: 1,
+      customer_notify: 1,
+      notes: {
+        organizationId: params.organizationId,
+        organizationName: params.organizationName,
+        tier: params.tier,
+      },
+    }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    return {
+      subscriptionId: data.id,
+      planId: data.plan_id || planId,
+      amountINR: planConfig.amountINR,
+      keyId,
+    };
+  }
+
+  const errorData = await response.json().catch(() => ({}));
+  const errorDesc = errorData.error?.description || response.statusText;
+  throw new Error(`Razorpay subscription creation failed: ${errorDesc}`);
 }
 
 /**
@@ -242,7 +187,48 @@ export function verifySubscriptionSignature(params: {
     .update(`${params.razorpayPaymentId}|${params.razorpaySubscriptionId}`)
     .digest('hex');
 
-  return generatedSignature === params.razorpaySignature;
+  try {
+    return crypto.timingSafeEqual(
+      Buffer.from(generatedSignature, 'utf-8'),
+      Buffer.from(params.razorpaySignature, 'utf-8')
+    );
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Resolves subscription tier enum from a Razorpay Plan ID.
+ */
+export function getTierFromPlanId(planId: string): SubscriptionTier {
+  const starterId = process.env.RAZORPAY_STARTER_PLAN_ID?.trim() || DEFAULT_RAZORPAY_PLAN_IDS.STARTER;
+  const proId = process.env.RAZORPAY_PROFESSIONAL_PLAN_ID?.trim() || DEFAULT_RAZORPAY_PLAN_IDS.PROFESSIONAL;
+  const bizId = process.env.RAZORPAY_BUSINESS_PLAN_ID?.trim() || DEFAULT_RAZORPAY_PLAN_IDS.BUSINESS;
+
+  if (planId === starterId) return 'STARTER';
+  if (planId === proId) return 'PROFESSIONAL';
+  if (planId === bizId) return 'BUSINESS';
+  return 'STARTER';
+}
+
+/**
+ * Fetches subscription details from Razorpay API.
+ */
+export async function fetchRazorpaySubscription(subscriptionId: string): Promise<any | null> {
+  const { keyId, keySecret } = getRazorpayCredentials();
+  try {
+    const response = await fetch(`https://api.razorpay.com/v1/subscriptions/${subscriptionId}`, {
+      headers: {
+        Authorization: getAuthHeader(keyId, keySecret),
+      },
+    });
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch {
+    // Non-fatal if offline/mock environment
+  }
+  return null;
 }
 
 /**
@@ -251,9 +237,9 @@ export function verifySubscriptionSignature(params: {
 export function verifyWebhookSignature(rawBody: string, signature: string | null): boolean {
   const { webhookSecret } = getRazorpayCredentials();
 
-  // If webhook secret is not set yet in test mode, allow webhook testing
   if (!webhookSecret) {
-    return true;
+    console.warn('RAZORPAY_WEBHOOK_SECRET is not configured.');
+    return false;
   }
 
   if (!signature) {
@@ -265,7 +251,14 @@ export function verifyWebhookSignature(rawBody: string, signature: string | null
     .update(rawBody)
     .digest('hex');
 
-  return expectedSignature === signature;
+  try {
+    return crypto.timingSafeEqual(
+      Buffer.from(expectedSignature, 'utf-8'),
+      Buffer.from(signature, 'utf-8')
+    );
+  } catch {
+    return false;
+  }
 }
 
 /**

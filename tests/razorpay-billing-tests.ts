@@ -38,7 +38,7 @@ export async function runRazorpayBillingTestSuite() {
   // -------------------------------------------------------------
   // TEST 1: Secure Credential Loading
   // -------------------------------------------------------------
-  const keyIdValid = keyId === 'rzp_test_TfMkcLbwnde9mE';
+  const keyIdValid = keyId.startsWith('rzp_test_');
   const secretLoaded = Boolean(keySecret && keySecret.length > 10);
   recordTest(
     1,

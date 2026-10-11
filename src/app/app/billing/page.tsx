@@ -50,7 +50,6 @@ export default function BillingPage() {
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const [selectedTier, setSelectedTier] = useState<SubscriptionTier>(subscription.tier);
   const [isProcessingCheckout, setIsProcessingCheckout] = useState(false);
-  const [isInstantSwitching, setIsInstantSwitching] = useState(false);
   const [isCanceling, setIsCanceling] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [statusFeedback, setStatusFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -144,7 +143,7 @@ export default function BillingPage() {
                   particleCount: 120,
                   spread: 80,
                   origin: { y: 0.6 },
-                  colors: ['#B86B84', '#4A7C59', '#3A2930', '#D98FA5'],
+                  colors: ['#A37432', '#547A61', '#2C241A', '#C39A5B'],
                 });
               } catch {
                 // ignore
@@ -174,7 +173,7 @@ export default function BillingPage() {
           tier,
         },
         theme: {
-          color: '#B86B84', // Velvet Code Gold luxury theme
+          color: '#A37432', // Velvet Code Gold luxury theme
         },
         modal: {
           ondismiss: function () {
@@ -254,66 +253,29 @@ export default function BillingPage() {
   const limitGB = (storageLimitBytes / (1024 * 1024 * 1024)).toFixed(0);
   const storagePercent = Math.min((usedStorageBytes / storageLimitBytes) * 100, 100);
 
-  const handleInstantPlanSwitch = async (tier: SubscriptionTier) => {
-    setIsInstantSwitching(true);
-    setStatusFeedback(null);
-    try {
-      const success = await upgradePlan(tier);
-      if (success) {
-        await fetchBillingData();
-        setIsUpgradeModalOpen(false);
-        setStatusFeedback({
-          type: 'success',
-          message: `Workspace plan successfully updated to ${tier}! Quotas have adjusted automatically.`,
-        });
-        try {
-          confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 },
-          });
-        } catch {
-          // ignore
-        }
-      } else {
-        setStatusFeedback({
-          type: 'error',
-          message: 'Failed to switch plan on server. Please try again.',
-        });
-      }
-    } catch (err: any) {
-      setStatusFeedback({
-        type: 'error',
-        message: err.message || 'Error communicating with billing server.',
-      });
-    } finally {
-      setIsInstantSwitching(false);
-    }
-  };
-
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#FCECEF] text-[#3A2930]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#3A2930] tracking-tight flex items-center gap-2">
-              <CreditCard className="w-6 h-6 text-[#B86B84]" />
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+              <CreditCard className="w-6 h-6 text-[#A37432]" />
               Subscription & Workspace Billing
             </h1>
             <span
               className={`px-3 py-1 text-xs font-semibold rounded-full border ${
                 subscription.status === 'ACTIVE'
-                  ? 'bg-[#4A7C59]/15 text-[#4A7C59] border-[#4A7C59]/30'
+                  ? 'bg-[#547A61]/15 text-[#547A61] border-[#547A61]/30'
                   : subscription.status === 'TRIALING'
-                  ? 'bg-[#B86B84]/15 text-[#8C455C] border-[#B86B84]/30'
-                  : 'bg-[#A84355]/15 text-[#A84355] border-[#A84355]/30'
+                  ? 'bg-[#A37432]/15 text-[#7A5520] border-[#A37432]/30'
+                  : 'bg-[#8B4A4A]/15 text-[#8B4A4A] border-[#8B4A4A]/30'
               }`}
             >
               Status: {subscription.status}
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#765D66] mt-1">
+          <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
             Manage your real estate SaaS plan tier, usage quotas, Razorpay subscription, and tax invoices.
           </p>
         </div>
@@ -342,8 +304,8 @@ export default function BillingPage() {
         <div
           className={`p-4 rounded-xl border text-xs flex items-center justify-between gap-2 ${
             statusFeedback.type === 'success'
-              ? 'bg-[#4A7C59]/15 border-[#4A7C59]/30 text-[#4A7C59]'
-              : 'bg-[#A84355]/15 border-[#A84355]/30 text-[#A84355]'
+              ? 'bg-[#547A61]/15 border-[#547A61]/30 text-[#547A61]'
+              : 'bg-[#8B4A4A]/15 border-[#8B4A4A]/30 text-[#8B4A4A]'
           }`}
         >
           <div className="flex items-center gap-2">
@@ -364,32 +326,32 @@ export default function BillingPage() {
       )}
 
       {/* Current Plan Overview Card */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EBCBD4] pb-6">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D8C7A5] pb-6">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#8C455C] font-serif">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#7A5520] font-serif">
                 Active SaaS Plan
               </span>
               {subscription.cancelAtPeriodEnd && (
-                <span className="px-2 py-0.5 text-[10px] font-bold bg-[#A84355]/15 text-[#A84355] border border-[#A84355]/30 rounded">
+                <span className="px-2 py-0.5 text-[10px] font-bold bg-[#8B4A4A]/15 text-[#8B4A4A] border border-[#8B4A4A]/30 rounded">
                   Cancels on renewal
                 </span>
               )}
             </div>
-            <h2 className="text-3xl font-serif font-bold text-[#3A2930] mt-1">
+            <h2 className="text-3xl font-serif font-bold text-[#2C241A] mt-1">
               {currentPlanLimits.name} Plan
             </h2>
-            <p className="text-sm text-[#765D66] mt-1 flex flex-wrap items-center gap-2">
-              <span>â‚¹{subscription.priceMonthlyINR.toLocaleString('en-IN')}/month</span>
+            <p className="text-sm text-[#6A5A44] mt-1 flex flex-wrap items-center gap-2">
+              <span>₹{subscription.priceMonthlyINR.toLocaleString('en-IN')}/month</span>
               <span>&bull;</span>
-              <span>Billing Period: {formattedPeriodStart} â€“ {formattedPeriodEnd}</span>
+              <span>Billing Period: {formattedPeriodStart} – {formattedPeriodEnd}</span>
               <span>&bull;</span>
               <span>Next Renewal: {formattedPeriodEnd}</span>
             </p>
             {subscription.razorpaySubscriptionId && (
-              <p className="text-xs font-mono text-[#9B828C] mt-2">
-                Razorpay Subscription ID: <span className="text-[#3A2930] font-bold">{subscription.razorpaySubscriptionId}</span>
+              <p className="text-xs font-mono text-[#8A7A63] mt-2">
+                Razorpay Subscription ID: <span className="text-[#2C241A] font-bold">{subscription.razorpaySubscriptionId}</span>
               </p>
             )}
           </div>
@@ -400,7 +362,7 @@ export default function BillingPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => setIsCancelModalOpen(true)}
-                className="text-[#A84355] border-[#A84355]/30 hover:bg-[#A84355]/10"
+                className="text-[#8B4A4A] border-[#8B4A4A]/30 hover:bg-[#8B4A4A]/10"
               >
                 Cancel Subscription
               </Button>
@@ -419,33 +381,33 @@ export default function BillingPage() {
         {/* Real-time Usage Progress Bars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-2">
           {/* 1. Users */}
-          <div className="space-y-2 p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-[#765D66]">Agent Seats:</span>
-              <span className="text-[#3A2930] font-mono">
+              <span className="text-[#6A5A44]">Agent Seats:</span>
+              <span className="text-[#2C241A] font-mono">
                 {users.length} / {currentPlanLimits.maxUsers}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#FCECEF] rounded-full overflow-hidden border border-[#EBCBD4]">
+            <div className="w-full h-2 bg-[#E9DFC8] rounded-full overflow-hidden border border-[#D8C7A5]">
               <div
-                className="h-full bg-[#B86B84] rounded-full transition-all"
+                className="h-full bg-[#A37432] rounded-full transition-all"
                 style={{ width: `${Math.min((users.length / currentPlanLimits.maxUsers) * 100, 100)}%` }}
               />
             </div>
-            <p className="text-[10px] text-[#765D66]">Enforced server-side</p>
+            <p className="text-[10px] text-[#6A5A44]">Enforced server-side</p>
           </div>
 
           {/* 2. Leads */}
-          <div className="space-y-2 p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-[#765D66]">Lead Capacity:</span>
-              <span className="text-[#3A2930] font-mono">
+              <span className="text-[#6A5A44]">Lead Capacity:</span>
+              <span className="text-[#2C241A] font-mono">
                 {leads.length} / {currentPlanLimits.maxLeads === -1 ? 'Unlimited' : currentPlanLimits.maxLeads}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#FCECEF] rounded-full overflow-hidden border border-[#EBCBD4]">
+            <div className="w-full h-2 bg-[#E9DFC8] rounded-full overflow-hidden border border-[#D8C7A5]">
               <div
-                className="h-full bg-[#4A7C59] rounded-full transition-all"
+                className="h-full bg-[#547A61] rounded-full transition-all"
                 style={{
                   width: `${
                     currentPlanLimits.maxLeads === -1
@@ -455,21 +417,21 @@ export default function BillingPage() {
                 }}
               />
             </div>
-            <p className="text-[10px] text-[#765D66]">Active buyer contacts</p>
+            <p className="text-[10px] text-[#6A5A44]">Active buyer contacts</p>
           </div>
 
           {/* 3. Properties */}
-          <div className="space-y-2 p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-[#765D66]">Property Listings:</span>
-              <span className="text-[#3A2930] font-mono">
+              <span className="text-[#6A5A44]">Property Listings:</span>
+              <span className="text-[#2C241A] font-mono">
                 {properties.length} /{' '}
                 {currentPlanLimits.maxProperties === -1 ? 'Unlimited' : currentPlanLimits.maxProperties}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#FCECEF] rounded-full overflow-hidden border border-[#EBCBD4]">
+            <div className="w-full h-2 bg-[#E9DFC8] rounded-full overflow-hidden border border-[#D8C7A5]">
               <div
-                className="h-full bg-[#D98FA5] rounded-full transition-all"
+                className="h-full bg-[#C39A5B] rounded-full transition-all"
                 style={{
                   width: `${
                     currentPlanLimits.maxProperties === -1
@@ -479,20 +441,20 @@ export default function BillingPage() {
                 }}
               />
             </div>
-            <p className="text-[10px] text-[#765D66]">Active inventory listings</p>
+            <p className="text-[10px] text-[#6A5A44]">Active inventory listings</p>
           </div>
 
           {/* 4. AI Inferences */}
-          <div className="space-y-2 p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-[#765D66]">Realty AI Quota:</span>
-              <span className="text-[#8C455C] font-mono">
+              <span className="text-[#6A5A44]">Realty AI Quota:</span>
+              <span className="text-[#7A5520] font-mono">
                 {subscription.usage?.aiRequestsUsed || 0} / {currentPlanLimits.monthlyAIQuota}
               </span>
             </div>
-            <div className="w-full h-2 bg-[#FCECEF] rounded-full overflow-hidden border border-[#EBCBD4]">
+            <div className="w-full h-2 bg-[#E9DFC8] rounded-full overflow-hidden border border-[#D8C7A5]">
               <div
-                className="h-full bg-[#B86B84] rounded-full transition-all"
+                className="h-full bg-[#A37432] rounded-full transition-all"
                 style={{
                   width: `${Math.min(
                     ((subscription.usage?.aiRequestsUsed || 0) / currentPlanLimits.monthlyAIQuota) * 100,
@@ -501,28 +463,28 @@ export default function BillingPage() {
                 }}
               />
             </div>
-            <p className="text-[10px] text-[#765D66]">Resets monthly</p>
+            <p className="text-[10px] text-[#6A5A44]">Resets monthly</p>
           </div>
 
           {/* 5. Persistent Cloud Storage */}
-          <div className="space-y-2 p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] shadow-2xs">
+          <div className="space-y-2 p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] shadow-2xs">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-[#765D66] flex items-center gap-1">
-                <HardDrive className="w-3.5 h-3.5 text-[#B86B84]" /> Storage:
+              <span className="text-[#6A5A44] flex items-center gap-1">
+                <HardDrive className="w-3.5 h-3.5 text-[#A37432]" /> Storage:
               </span>
-              <span className="text-[#3A2930] font-mono font-bold">
+              <span className="text-[#2C241A] font-mono font-bold">
                 {usedMB} MB / {limitGB} GB
               </span>
             </div>
-            <div className="w-full h-2 bg-[#FCECEF] rounded-full overflow-hidden border border-[#EBCBD4]">
+            <div className="w-full h-2 bg-[#E9DFC8] rounded-full overflow-hidden border border-[#D8C7A5]">
               <div
                 className={`h-full rounded-full transition-all ${
-                  storagePercent >= 90 ? 'bg-[#A84355]' : 'bg-[#4A7C59]'
+                  storagePercent >= 90 ? 'bg-[#8B4A4A]' : 'bg-[#547A61]'
                 }`}
                 style={{ width: `${Math.max(storagePercent, 2)}%` }}
               />
             </div>
-            <p className="text-[10px] text-[#765D66]">
+            <p className="text-[10px] text-[#6A5A44]">
               {storagePercent.toFixed(1)}% utilized &bull; No data loss
             </p>
           </div>
@@ -533,14 +495,14 @@ export default function BillingPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Payment History */}
         <div className="space-y-4">
-          <h3 className="text-lg font-serif font-bold text-[#3A2930] tracking-tight flex items-center gap-2">
-            <CreditCard className="w-5 h-5 text-[#B86B84]" />
+          <h3 className="text-lg font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+            <CreditCard className="w-5 h-5 text-[#A37432]" />
             Payment History
           </h3>
 
-          <div className="rounded-2xl border border-[#EBCBD4] bg-[#FFF9FA] overflow-hidden shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
+          <div className="rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] overflow-hidden shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#FFF5F7] border-b border-[#EBCBD4] text-[#3A2930] font-semibold">
+              <thead className="bg-[#F4EAD7] border-b border-[#D8C7A5] text-[#2C241A] font-semibold">
                 <tr>
                   <th className="p-3.5">Payment ID</th>
                   <th className="p-3.5">Amount</th>
@@ -549,33 +511,33 @@ export default function BillingPage() {
                   <th className="p-3.5 text-right">Date</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#EBCBD4]/60">
+              <tbody className="divide-y divide-[#D8C7A5]/60">
                 {payments.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-10 text-center text-[#765D66]">
-                      <Receipt className="w-7 h-7 text-[#EBCBD4] mx-auto mb-2" />
-                      <p className="font-serif font-bold text-sm text-[#3A2930]">No payments yet</p>
+                    <td colSpan={5} className="py-10 text-center text-[#6A5A44]">
+                      <Receipt className="w-7 h-7 text-[#D8C7A5] mx-auto mb-2" />
+                      <p className="font-serif font-bold text-sm text-[#2C241A]">No payments yet</p>
                       <p className="text-xs mt-0.5">Your Razorpay subscription transaction receipts will be logged here.</p>
                     </td>
                   </tr>
                 ) : (
                   payments.map((p) => (
                     <tr key={p.id} className="hover:bg-[#F7EEDC] transition-colors">
-                      <td className="p-3.5 font-mono font-bold text-[#3A2930]">{p.razorpayPaymentId}</td>
-                      <td className="p-3.5 font-mono font-bold text-[#8C455C]">â‚¹{p.amount.toLocaleString('en-IN')}</td>
-                      <td className="p-3.5 text-[#765D66]">{p.paymentMethod}</td>
+                      <td className="p-3.5 font-mono font-bold text-[#2C241A]">{p.razorpayPaymentId}</td>
+                      <td className="p-3.5 font-mono font-bold text-[#7A5520]">₹{p.amount.toLocaleString('en-IN')}</td>
+                      <td className="p-3.5 text-[#6A5A44]">{p.paymentMethod}</td>
                       <td className="p-3.5">
                         <span
                           className={`px-2 py-0.5 text-[10px] font-bold rounded border ${
                             p.status === 'CAPTURED'
-                              ? 'bg-[#4A7C59]/15 text-[#4A7C59] border-[#4A7C59]/30'
-                              : 'bg-[#A84355]/15 text-[#A84355] border-[#A84355]/30'
+                              ? 'bg-[#547A61]/15 text-[#547A61] border-[#547A61]/30'
+                              : 'bg-[#8B4A4A]/15 text-[#8B4A4A] border-[#8B4A4A]/30'
                           }`}
                         >
                           {p.status}
                         </span>
                       </td>
-                      <td className="p-3.5 text-right text-[#765D66]">
+                      <td className="p-3.5 text-right text-[#6A5A44]">
                         {p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-IN') : 'Recent'}
                       </td>
                     </tr>
@@ -588,14 +550,14 @@ export default function BillingPage() {
 
         {/* GST Tax Invoices */}
         <div className="space-y-4">
-          <h3 className="text-lg font-serif font-bold text-[#3A2930] tracking-tight flex items-center gap-2">
-            <Receipt className="w-5 h-5 text-[#B86B84]" />
+          <h3 className="text-lg font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+            <Receipt className="w-5 h-5 text-[#A37432]" />
             GST Tax Invoices
           </h3>
 
-          <div className="rounded-2xl border border-[#EBCBD4] bg-[#FFF9FA] overflow-hidden shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
+          <div className="rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] overflow-hidden shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#FFF5F7] border-b border-[#EBCBD4] text-[#3A2930] font-semibold">
+              <thead className="bg-[#F4EAD7] border-b border-[#D8C7A5] text-[#2C241A] font-semibold">
                 <tr>
                   <th className="p-3.5">Invoice #</th>
                   <th className="p-3.5">Total Paid</th>
@@ -603,29 +565,29 @@ export default function BillingPage() {
                   <th className="p-3.5 text-right">Download</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#EBCBD4]/60">
+              <tbody className="divide-y divide-[#D8C7A5]/60">
                 {invoices.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="py-10 text-center text-[#765D66]">
-                      <Receipt className="w-7 h-7 text-[#EBCBD4] mx-auto mb-2" />
-                      <p className="font-serif font-bold text-sm text-[#3A2930]">No invoices yet</p>
+                    <td colSpan={4} className="py-10 text-center text-[#6A5A44]">
+                      <Receipt className="w-7 h-7 text-[#D8C7A5] mx-auto mb-2" />
+                      <p className="font-serif font-bold text-sm text-[#2C241A]">No invoices yet</p>
                       <p className="text-xs mt-0.5">Official GST invoices will be generated upon payment confirmation.</p>
                     </td>
                   </tr>
                 ) : (
                   invoices.map((inv) => (
                     <tr key={inv.id} className="hover:bg-[#F7EEDC] transition-colors">
-                      <td className="p-3.5 font-mono font-bold text-[#3A2930]">{inv.invoiceNumber}</td>
-                      <td className="p-3.5 font-mono font-bold text-[#8C455C]">â‚¹{inv.totalINR.toLocaleString('en-IN')}</td>
+                      <td className="p-3.5 font-mono font-bold text-[#2C241A]">{inv.invoiceNumber}</td>
+                      <td className="p-3.5 font-mono font-bold text-[#7A5520]">₹{inv.totalINR.toLocaleString('en-IN')}</td>
                       <td className="p-3.5">
-                        <span className="px-2 py-0.5 text-[10px] font-bold bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30 rounded">
+                        <span className="px-2 py-0.5 text-[10px] font-bold bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30 rounded">
                           {inv.status.toUpperCase()}
                         </span>
                       </td>
                       <td className="p-3.5 text-right">
                         <button
                           onClick={() => alert(`Downloading official Tax Invoice ${inv.invoiceNumber}...`)}
-                          className="text-[#8C455C] hover:underline font-semibold inline-flex items-center gap-1 cursor-pointer"
+                          className="text-[#7A5520] hover:underline font-semibold inline-flex items-center gap-1 cursor-pointer"
                         >
                           <Download className="w-3.5 h-3.5" /> PDF
                         </button>
@@ -660,51 +622,51 @@ export default function BillingPage() {
                   onClick={() => setSelectedTier(plan.tier)}
                   className={`p-5 rounded-2xl border flex flex-col justify-between space-y-4 cursor-pointer transition-all relative ${
                     isSelected
-                      ? 'bg-[#B86B84]/10 border-[#B86B84] shadow-md ring-2 ring-[#B86B84]/40'
-                      : 'bg-[#FFF9FA] border-[#EBCBD4] hover:border-[#B86B84]/60'
+                      ? 'bg-[#A37432]/10 border-[#A37432] shadow-md ring-2 ring-[#A37432]/40'
+                      : 'bg-[#FFF9F0] border-[#D8C7A5] hover:border-[#A37432]/60'
                   }`}
                 >
                   {isPopular && (
-                    <span className="absolute -top-2.5 right-4 px-2 py-0.5 text-[9px] font-bold bg-[#B86B84] text-white rounded-full">
+                    <span className="absolute -top-2.5 right-4 px-2 py-0.5 text-[9px] font-bold bg-[#A37432] text-white rounded-full">
                       Most Popular
                     </span>
                   )}
 
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <h4 className="font-serif font-bold text-[#3A2930] text-base">{plan.name}</h4>
+                      <h4 className="font-serif font-bold text-[#2C241A] text-base">{plan.name}</h4>
                       {isCurrent && (
-                        <span className="px-2 py-0.5 text-[9px] font-bold bg-[#4A7C59] text-white rounded">
+                        <span className="px-2 py-0.5 text-[9px] font-bold bg-[#547A61] text-white rounded">
                           Current Plan
                         </span>
                       )}
                     </div>
                     <div className="mt-2">
-                      <span className="text-2xl font-serif font-extrabold text-[#3A2930]">
-                        â‚¹{plan.priceMonthlyINR.toLocaleString('en-IN')}
+                      <span className="text-2xl font-serif font-extrabold text-[#2C241A]">
+                        ₹{plan.priceMonthlyINR.toLocaleString('en-IN')}
                       </span>
-                      <span className="text-xs text-[#9B828C]"> / month</span>
+                      <span className="text-xs text-[#8A7A63]"> / month</span>
                     </div>
 
-                    <ul className="mt-4 space-y-2 text-xs text-[#765D66]">
+                    <ul className="mt-4 space-y-2 text-xs text-[#6A5A44]">
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B86B84]" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#A37432]" />
                         <span>{plan.maxUsers} User Seat(s)</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B86B84]" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#A37432]" />
                         <span>{plan.maxLeads === -1 ? 'Unlimited' : plan.maxLeads} Leads</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B86B84]" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#A37432]" />
                         <span>{plan.maxProperties === -1 ? 'Unlimited' : plan.maxProperties} Properties</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B86B84]" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#A37432]" />
                         <span>{plan.monthlyAIQuota} AI Queries</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B86B84]" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#A37432]" />
                         <span className="font-semibold">{plan.storageLimitBytes ? `${(plan.storageLimitBytes / (1024 * 1024 * 1024)).toFixed(0)} GB` : '1 GB'} Cloud Storage</span>
                       </li>
                     </ul>
@@ -714,7 +676,7 @@ export default function BillingPage() {
                     <Button
                       variant={isSelected ? 'gold' : 'secondary'}
                       size="sm"
-                      disabled={isProcessingCheckout || isInstantSwitching}
+                      disabled={isProcessingCheckout}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleInitiateRazorpaySubscription(plan.tier);
@@ -723,21 +685,6 @@ export default function BillingPage() {
                     >
                       {isCurrent ? 'Renew / Manage' : `Subscribe with Razorpay`}
                     </Button>
-                    {!isCurrent && (
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="xs"
-                        disabled={isProcessingCheckout || isInstantSwitching}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleInstantPlanSwitch(plan.tier);
-                        }}
-                        className="w-full text-xs text-[#8C455C] border-[#B86B84]/30 hover:bg-[#B86B84]/10 cursor-pointer"
-                      >
-                        {isInstantSwitching && selectedTier === plan.tier ? 'Switching...' : 'Instant Switch (Test Mode)'}
-                      </Button>
-                    )}
                   </div>
                 </div>
               );
@@ -750,11 +697,11 @@ export default function BillingPage() {
             if (targetPlan && targetPlan.storageLimitBytes && targetPlan.storageLimitBytes < usedStorageBytes) {
               const targetGB = (targetPlan.storageLimitBytes / (1024 * 1024 * 1024)).toFixed(0);
               return (
-                <div className="p-3.5 bg-[#A84355]/10 border border-[#A84355]/30 rounded-xl text-xs text-[#A84355] flex items-start gap-2.5">
+                <div className="p-3.5 bg-[#8B4A4A]/10 border border-[#8B4A4A]/30 rounded-xl text-xs text-[#8B4A4A] flex items-start gap-2.5">
                   <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                   <div className="space-y-1">
                     <p className="font-bold">Plan Downgrade Storage Quota Notice (Zero Data Loss Guarantee):</p>
-                    <p className="text-[#3A2930] leading-relaxed">
+                    <p className="text-[#2C241A] leading-relaxed">
                       Your organization currently uses <strong>{usedMB} MB</strong>, which exceeds the <strong>{targetGB} GB</strong> limit of the {targetPlan.name} plan.
                       Per our customer protection policy, <strong>no files will ever be deleted</strong> upon downgrading. However, uploading new images and documents will be restricted until your storage usage is brought within the {targetGB} GB quota or your subscription is upgraded.
                     </p>
@@ -765,8 +712,8 @@ export default function BillingPage() {
             return null;
           })()}
 
-          <div className="flex items-center justify-between pt-4 border-t border-[#EBCBD4] text-xs text-[#9B828C]">
-            <span className="flex items-center gap-1 text-[#4A7C59] font-semibold">
+          <div className="flex items-center justify-between pt-4 border-t border-[#D8C7A5] text-xs text-[#8A7A63]">
+            <span className="flex items-center gap-1 text-[#547A61] font-semibold">
               <ShieldCheck className="w-4 h-4" /> Razorpay Test Mode Secured
             </span>
             <span>No live charges will be incurred.</span>
@@ -781,9 +728,9 @@ export default function BillingPage() {
         title="Cancel SaaS Subscription"
       >
         <div className="space-y-4 text-xs">
-          <div className="p-3 bg-[#A84355]/10 border border-[#A84355]/20 rounded-xl text-[#A84355]">
+          <div className="p-3 bg-[#8B4A4A]/10 border border-[#8B4A4A]/20 rounded-xl text-[#8B4A4A]">
             <p className="font-bold">Are you sure you want to cancel your workspace subscription?</p>
-            <p className="mt-1 text-[#3A2930]">
+            <p className="mt-1 text-[#2C241A]">
               Your workspace will remain fully functional until the end of your billing cycle on{' '}
               <strong>{formattedPeriodEnd}</strong>. After this date, your workspace limits will downgrade to the free tier.
             </p>

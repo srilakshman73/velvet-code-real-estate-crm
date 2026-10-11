@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { serverDB } from '@/lib/server-db';
 
 export async function POST(request: Request) {
   try {
@@ -31,7 +32,7 @@ export async function POST(request: Request) {
       id: newOrgId,
       name: agencyName,
       slug: agencyName.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-      businessType: 'AGENCY',
+      businessType: 'AGENCY' as const,
       phone: phone || '+91 63833 95915',
       email: trimmedEmail,
       city: city || 'Chennai',
@@ -46,11 +47,32 @@ export async function POST(request: Request) {
       name: fullName,
       email: trimmedEmail,
       phone: phone || '+91 63833 95915',
-      role: 'ADMIN',
+      role: 'ADMIN' as const,
       organizationId: newOrgId,
-      organizationName: agencyName,
       isSuperAdmin: false,
     };
+
+    // Persist to serverDB
+    serverDB.addOrganization(newOrg);
+    serverDB.addUser(newUser);
+    serverDB.upsertSubscription({
+      id: `sub-${newOrgId}`,
+      organizationId: newOrgId,
+      userId: newUserId,
+      tier: 'STARTER',
+      status: 'TRIALING',
+      priceMonthlyINR: 1999,
+      billingCycle: 'monthly',
+      currentPeriodStart: new Date().toISOString(),
+      currentPeriodEnd: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+      cancelAtPeriodEnd: false,
+      usage: {
+        usersCount: 1,
+        leadsCount: 0,
+        propertiesCount: 0,
+        aiRequestsUsed: 0,
+      },
+    });
 
     const response = NextResponse.json({
       success: true,

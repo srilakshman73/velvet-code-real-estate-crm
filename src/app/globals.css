@@ -2,65 +2,61 @@
 
 @layer base {
   :root {
-    /* Velvet Code Light Rose Theme */
-    --rose-bg: #FCECEF;
-    --rose-bg-secondary: #FFF5F7;
-    --rose-header: #FFF5F7;
-    --rose-sidebar: #F8DDE5;
-    --rose-card: #FFF9FA;
-    --rose-surface: #FFF9FA;
-    --rose-surface-pure: #FFFFFF;
-    
-    --rose-primary: #D98FA5;
-    --rose-dark: #B86B84;
-    --rose-dark-hover: #9E546C;
-    --rose-light: #F8DDE5;
-    --rose-soft: #FFF0F3;
-    
-    --rose-text: #3A2930;
-    --rose-text-secondary: #765D66;
-    --rose-text-muted: #9B828C;
-    
-    --rose-border: #EBCBD4;
-    --rose-border-header: #EBCBD4;
-    --rose-border-card: #EBCBD4;
-    --rose-border-light: #F2DAE1;
-    --rose-border-rose: #D98FA5;
-    
-    --rose-success: #4A7C59;
-    --rose-warning: #C07D38;
-    --rose-danger: #A84355;
-
-    /* Legacy aurum variable aliases mapped to Light Rose */
-    --aurum-gold: #B86B84;
-    --aurum-gold-hover: #9E546C;
-    --aurum-gold-dark: #8C455C;
-    --aurum-gold-light: #D98FA5;
-    --aurum-gold-soft: #FFF0F3;
-    --aurum-gold-cream: #F8DDE5;
-    --aurum-bg: #FCECEF;
-    --aurum-bg-secondary: #FFF5F7;
-    --aurum-header: #FFF5F7;
-    --aurum-sidebar: #F8DDE5;
-    --aurum-card: #FFF9FA;
-    --aurum-surface: #FFF9FA;
+    /* Velvet Code Champagne Gold Luxury Theme */
+    --aurum-gold: #A37432;
+    --aurum-gold-hover: #8A5E25;
+    --aurum-gold-dark: #7A5520;
+    --aurum-gold-light: #C39A5B;
+    --aurum-gold-soft: #F5EAD3;
+    --aurum-gold-cream: #E5D1A8;
+    --aurum-bg: #E9DFC8;
+    --aurum-bg-secondary: #F4EAD7;
+    --aurum-header: #F4EAD7;
+    --aurum-sidebar: #D8C7A5;
+    --aurum-card: #FFF9F0;
+    --aurum-surface: #FFF9F0;
     --aurum-surface-pure: #FFFFFF;
-    --aurum-text: #3A2930;
-    --aurum-text-secondary: #765D66;
-    --aurum-text-muted: #9B828C;
-    --aurum-border: #EBCBD4;
-    --aurum-border-header: #EBCBD4;
-    --aurum-card-border: #EBCBD4;
-    --aurum-border-light: #F2DAE1;
-    --aurum-border-gold: #D98FA5;
-    --aurum-success: #4A7C59;
-    --aurum-warning: #C07D38;
-    --aurum-danger: #A84355;
+    --aurum-text: #2C241A;
+    --aurum-text-secondary: #6A5A44;
+    --aurum-text-muted: #8A7A63;
+    --aurum-border: #D8C7A5;
+    --aurum-border-header: #D6C4A0;
+    --aurum-card-border: #D8C7A5;
+    --aurum-border-light: #DDD0B8;
+    --aurum-border-gold: #C39A5B;
+    --aurum-success: #547A61;
+    --aurum-warning: #A87932;
+    --aurum-danger: #8B4A4A;
+
+    /* Backward compatibility aliases */
+    --rose-bg: #E9DFC8;
+    --rose-bg-secondary: #F4EAD7;
+    --rose-header: #F4EAD7;
+    --rose-sidebar: #D8C7A5;
+    --rose-card: #FFF9F0;
+    --rose-surface: #FFF9F0;
+    --rose-surface-pure: #FFFFFF;
+    --rose-primary: #A37432;
+    --rose-dark: #8A5E25;
+    --rose-dark-hover: #7A5520;
+    --rose-light: #C39A5B;
+    --rose-soft: #F5EAD3;
+    --rose-text: #2C241A;
+    --rose-text-secondary: #6A5A44;
+    --rose-text-muted: #8A7A63;
+    --rose-border: #D8C7A5;
+    --rose-border-header: #D6C4A0;
+    --rose-border-card: #D8C7A5;
+    --rose-border-light: #DDD0B8;
+    --rose-border-rose: #C39A5B;
+    --rose-success: #547A61;
+    --rose-warning: #A87932;
+    --rose-danger: #8B4A4A;
   }
 
   body {
-    background-color: #FCECEF;
-    color: #3A2930;
+    background-color: #E9DFC8;
+    color: #2C241A;
     font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
     position: relative;
@@ -71,86 +67,65 @@
     font-family: var(--font-serif), 'Playfair Display', Georgia, serif;
   }
 
-  /* Custom Luxury Rose Scrollbars */
+  /* Custom Luxury Gold Scrollbars */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #FCECEF;
+    background: #E9DFC8;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #EBCBD4;
+    background: #D8C7A5;
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #D98FA5;
+    background: #A37432;
   }
 }
 
-/* Subtle Heart Background Pattern */
-.heart-bg-decoration {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-  background-image: 
-    radial-gradient(circle at 15% 15%, rgba(217, 143, 165, 0.07) 0%, transparent 25%),
-    radial-gradient(circle at 85% 25%, rgba(184, 107, 132, 0.06) 0%, transparent 30%),
-    radial-gradient(circle at 50% 80%, rgba(217, 143, 165, 0.05) 0%, transparent 35%);
+/* Dark mode / dark panel scrollbar override */
+.dark-scrollbar::-webkit-scrollbar-track {
+  background: #1F1D19;
+}
+.dark-scrollbar::-webkit-scrollbar-thumb {
+  background: #2D2A24;
+}
+.dark-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #A37432;
 }
 
-.heart-shape {
-  position: absolute;
-  pointer-events: none;
-  user-select: none;
-  color: #B86B84;
-  opacity: 0.06;
-  transition: transform 0.5s ease;
-  line-height: 1;
-}
-
-@media (max-width: 768px) {
-  .heart-shape.desktop-only {
-    display: none;
-  }
-  .heart-shape {
-    opacity: 0.04;
-  }
-}
-
-/* Rose Text Gradient */
-.rose-gradient-text, .gold-gradient-text {
-  background: linear-gradient(135deg, #8C455C 0%, #B86B84 40%, #D98FA5 70%, #B86B84 100%);
+/* Aurum Champagne Gold Text Gradient */
+.gold-gradient-text, .rose-gradient-text {
+  background: linear-gradient(135deg, #7A5520 0%, #A37432 40%, #C39A5B 70%, #A37432 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.rose-gradient-text-light, .gold-gradient-text-light {
-  background: linear-gradient(135deg, #FFF9FA 0%, #FFF0F3 40%, #D98FA5 80%, #F8DDE5 100%);
+.gold-gradient-text-light, .rose-gradient-text-light {
+  background: linear-gradient(135deg, #FFF9F0 0%, #F5EAD3 40%, #C39A5B 80%, #D8C7A5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.rose-border-glow, .gold-border-glow {
-  box-shadow: 0 4px 20px -4px rgba(184, 107, 132, 0.15);
+.gold-border-glow, .rose-border-glow {
+  box-shadow: 0 4px 20px -4px rgba(163, 116, 50, 0.15);
 }
 
-.rose-card-shadow, .aurum-card-shadow {
-  box-shadow: 0 8px 24px rgba(184, 107, 132, 0.07);
+.aurum-card-shadow, .rose-card-shadow {
+  box-shadow: 0 8px 24px rgba(120, 90, 40, 0.08);
 }
 
-.rose-card-hover, .aurum-card-hover {
+.aurum-card-hover, .rose-card-hover {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.rose-card-hover:hover, .aurum-card-hover:hover {
+.aurum-card-hover:hover, .rose-card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -4px rgba(184, 107, 132, 0.14), 0 2px 6px 0 rgba(184, 107, 132, 0.08);
-  border-color: #D98FA5;
+  box-shadow: 0 12px 30px -4px rgba(163, 116, 50, 0.14), 0 2px 6px 0 rgba(120, 90, 40, 0.08);
+  border-color: #C39A5B;
 }
 
 .no-scrollbar::-webkit-scrollbar {

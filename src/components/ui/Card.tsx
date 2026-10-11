@@ -17,19 +17,19 @@ export function Card({
 }: CardProps) {
   const variantClasses = {
     default:
-      'bg-[#FFF9FA] border border-[#EBCBD4] shadow-[0_4px_20px_rgba(184,107,132,0.06)] rounded-2xl text-[#3A2930]',
+      'bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_4px_20px_rgba(163, 116, 50,0.06)] rounded-2xl text-[#2C241A]',
     rose:
-      'bg-[#FFF9FA] border border-[#D98FA5]/50 shadow-[0_4px_24px_rgba(184,107,132,0.1)] rounded-2xl text-[#3A2930]',
+      'bg-[#FFF9F0] border border-[#C39A5B]/50 shadow-[0_4px_24px_rgba(163, 116, 50,0.1)] rounded-2xl text-[#2C241A]',
     gold:
-      'bg-[#FFF9FA] border border-[#D98FA5]/50 shadow-[0_4px_24px_rgba(184,107,132,0.1)] rounded-2xl text-[#3A2930]',
+      'bg-[#FFF9F0] border border-[#C39A5B]/50 shadow-[0_4px_24px_rgba(163, 116, 50,0.1)] rounded-2xl text-[#2C241A]',
     glass:
-      'bg-[#FFF9FA]/85 backdrop-blur-md border border-[#EBCBD4]/80 shadow-[0_8px_32px_rgba(184,107,132,0.08)] rounded-2xl text-[#3A2930]',
+      'bg-[#FFF9F0]/85 backdrop-blur-md border border-[#D8C7A5]/80 shadow-[0_8px_32px_rgba(163, 116, 50,0.08)] rounded-2xl text-[#2C241A]',
     interactive:
-      'bg-[#FFF9FA] border border-[#EBCBD4] hover:border-[#D98FA5] hover:shadow-[0_8px_30px_rgba(184,107,132,0.12)] transition-all duration-200 cursor-pointer rounded-2xl text-[#3A2930]',
+      'bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#C39A5B] hover:shadow-[0_8px_30px_rgba(163, 116, 50,0.12)] transition-all duration-200 cursor-pointer rounded-2xl text-[#2C241A]',
     flat:
-      'bg-[#FFF5F7] border border-[#EBCBD4] rounded-2xl text-[#3A2930]',
+      'bg-[#F4EAD7] border border-[#D8C7A5] rounded-2xl text-[#2C241A]',
     dark:
-      'bg-[#2A1820] border border-[#422633] text-[#FFF9FA] shadow-xl rounded-2xl',
+      'bg-[#1F1D19] border border-[#2D2A24] text-[#FFF9F0] shadow-xl rounded-2xl',
   };
 
   return (
@@ -54,7 +54,7 @@ export function CardHeader({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('flex items-center justify-between pb-4 border-b border-[#EBCBD4]/60 mb-4', className)}
+      className={cn('flex items-center justify-between pb-4 border-b border-[#D8C7A5]/60 mb-4', className)}
       {...props}
     >
       {children}
@@ -69,7 +69,7 @@ export function CardTitle({
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn('text-base sm:text-lg font-bold text-[#3A2930] tracking-tight flex items-center gap-2', className)}
+      className={cn('text-base sm:text-lg font-bold text-[#2C241A] tracking-tight flex items-center gap-2', className)}
       {...props}
     >
       {children}
@@ -83,7 +83,7 @@ export function CardDescription({
   ...props
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn('text-xs sm:text-sm text-[#765D66] mt-1', className)} {...props}>
+    <p className={cn('text-xs sm:text-sm text-[#6A5A44] mt-1', className)} {...props}>
       {children}
     </p>
   );

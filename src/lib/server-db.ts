@@ -124,7 +124,33 @@ function initDB(): VelvetDBSchema {
 export const serverDB = {
   // Organizations
   getOrganizations: () => initDB().organizations,
+  addOrganization: (org: Organization) => {
+    const db = initDB();
+    const existingIndex = db.organizations.findIndex((o) => o.id === org.id);
+    if (existingIndex >= 0) {
+      db.organizations[existingIndex] = { ...db.organizations[existingIndex], ...org };
+      saveDBToDisk(db);
+      return db.organizations[existingIndex];
+    }
+    db.organizations.push(org);
+    saveDBToDisk(db);
+    return org;
+  },
+
+  // Users
   getUsers: () => initDB().users,
+  addUser: (user: User) => {
+    const db = initDB();
+    const existingIndex = db.users.findIndex((u) => u.id === user.id);
+    if (existingIndex >= 0) {
+      db.users[existingIndex] = { ...db.users[existingIndex], ...user };
+      saveDBToDisk(db);
+      return db.users[existingIndex];
+    }
+    db.users.push(user);
+    saveDBToDisk(db);
+    return user;
+  },
 
   // Properties
   getProperties: (orgId?: string) => {

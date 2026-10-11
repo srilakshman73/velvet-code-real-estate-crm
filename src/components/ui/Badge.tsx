@@ -33,18 +33,18 @@ export function Badge({
   };
 
   const variantClasses: Record<string, string> = {
-    gold: 'bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/35',
-    rose: 'bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/35',
-    emerald: 'bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30',
-    success: 'bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30',
-    charcoal: 'bg-[#3A2930]/10 text-[#3A2930] border border-[#3A2930]/20',
+    gold: 'bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/35',
+    rose: 'bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/35',
+    emerald: 'bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30',
+    success: 'bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30',
+    charcoal: 'bg-[#2C241A]/10 text-[#2C241A] border border-[#2C241A]/20',
     amber: 'bg-[#C07D38]/15 text-[#9E6020] border border-[#C07D38]/30',
     warning: 'bg-[#C07D38]/15 text-[#9E6020] border border-[#C07D38]/30',
-    error: 'bg-[#A84355]/15 text-[#A84355] border border-[#A84355]/30',
-    zinc: 'bg-[#FFF5F7] text-[#765D66] border border-[#EBCBD4]',
-    neutral: 'bg-[#FFF5F7] text-[#765D66] border border-[#EBCBD4]',
-    info: 'bg-[#F8DDE5] text-[#8C455C] border border-[#EBCBD4]',
-    outline: 'bg-transparent text-[#765D66] border border-[#EBCBD4]',
+    error: 'bg-[#8B4A4A]/15 text-[#8B4A4A] border border-[#8B4A4A]/30',
+    zinc: 'bg-[#F4EAD7] text-[#6A5A44] border border-[#D8C7A5]',
+    neutral: 'bg-[#F4EAD7] text-[#6A5A44] border border-[#D8C7A5]',
+    info: 'bg-[#D8C7A5] text-[#7A5520] border border-[#D8C7A5]',
+    outline: 'bg-transparent text-[#6A5A44] border border-[#D8C7A5]',
   };
 
   return (

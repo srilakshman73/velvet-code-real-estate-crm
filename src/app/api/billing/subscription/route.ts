@@ -84,6 +84,17 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Security rule: Customer plans must be activated via verified Razorpay checkout
+    if (!session.isOwner && session.role !== 'OWNER') {
+      return NextResponse.json(
+        {
+          error:
+            'Direct plan activation is restricted. Subscriptions must be authorized via Razorpay Checkout and verified with signature validation.',
+        },
+        { status: 403 }
+      );
+    }
+
     const body = await request.json();
     const { tier, billingCycle } = body;
 

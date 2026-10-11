@@ -147,19 +147,19 @@ export default function ClientsPage() {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#FCECEF] text-[#3A2930]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#3A2930] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
               Converted Clients
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30 rounded-full">
+            <span className="px-2.5 py-0.5 text-xs font-bold bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30 rounded-full">
               {filteredClients.length} Active Clients
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#765D66] mt-1">
+          <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
             Manage your active buyers, repeat real estate investors, and high-net-worth customer portfolios.
           </p>
         </div>
@@ -175,15 +175,15 @@ export default function ClientsPage() {
       </div>
 
       {/* Search Bar */}
-      <div className="p-4 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] shadow-[0_8px_24px_rgba(120,90,40,0.08)] flex items-center justify-between">
+      <div className="p-4 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] flex items-center justify-between">
         <div className="relative w-full max-w-md">
-          <Search className="w-4 h-4 text-[#9B828C] absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#8A7A63] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search clients by name, phone, email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-[#FFF5F7] border border-[#EBCBD4] rounded-xl text-xs text-[#3A2930] placeholder:text-[#9B828C] outline-none focus:border-[#B86B84]"
+            className="w-full pl-9 pr-4 py-2 bg-[#F4EAD7] border border-[#D8C7A5] rounded-xl text-xs text-[#2C241A] placeholder:text-[#8A7A63] outline-none focus:border-[#A37432]"
           />
         </div>
       </div>
@@ -203,57 +203,57 @@ export default function ClientsPage() {
             <div
               key={client.id}
               onClick={() => openDetail(client)}
-              className="p-6 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] hover:border-[#B86B84] cursor-pointer shadow-[0_8px_24px_rgba(120,90,40,0.08)] hover:shadow-[0_8px_24px_rgba(163,116,50,0.15)] transition-all space-y-4 flex flex-col justify-between group"
+              className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#A37432] cursor-pointer shadow-[0_8px_24px_rgba(120,90,40,0.08)] hover:shadow-[0_8px_24px_rgba(163,116,50,0.15)] transition-all space-y-4 flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30 rounded-md">
+                  <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30 rounded-md">
                     Verified Buyer
                   </span>
-                  <span className="text-xs text-[#765D66]">
+                  <span className="text-xs text-[#6A5A44]">
                     {client.totalDealsCount} Closed Deal{client.totalDealsCount > 1 ? 's' : ''}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-serif font-bold text-[#3A2930] mt-3 group-hover:text-[#8C455C] transition-colors">
+                <h3 className="text-lg font-serif font-bold text-[#2C241A] mt-3 group-hover:text-[#7A5520] transition-colors">
                   {client.name}
                 </h3>
-                <p className="text-xs text-[#765D66] mt-0.5 font-medium">{client.phone}</p>
+                <p className="text-xs text-[#6A5A44] mt-0.5 font-medium">{client.phone}</p>
 
-                <div className="mt-4 p-3 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-1.5 text-xs">
+                <div className="mt-4 p-3 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-1.5 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#765D66]">Lifetime Transactions:</span>
-                    <span className="font-bold text-[#8C455C] font-mono">
-                      {client.totalDealsValueINR ? formatINR(client.totalDealsValueINR, true) : 'â‚¹5.20 Cr'}
+                    <span className="text-[#6A5A44]">Lifetime Transactions:</span>
+                    <span className="font-bold text-[#7A5520] font-mono">
+                      {client.totalDealsValueINR ? formatINR(client.totalDealsValueINR, true) : '₹5.20 Cr'}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#765D66]">Preferred Hub:</span>
-                    <span className="text-[#3A2930] truncate max-w-[180px] font-medium">
+                    <span className="text-[#6A5A44]">Preferred Hub:</span>
+                    <span className="text-[#2C241A] truncate max-w-[180px] font-medium">
                       {client.preferredLocation || 'South India Metros'}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#EBCBD4] flex items-center justify-between text-xs" onClick={(e) => e.stopPropagation()}>
-                <span className="text-[#765D66] font-serif font-semibold">VIP Investor</span>
+              <div className="pt-3 border-t border-[#D8C7A5] flex items-center justify-between text-xs" onClick={(e) => e.stopPropagation()}>
+                <span className="text-[#6A5A44] font-serif font-semibold">VIP Investor</span>
                 <div className="flex items-center gap-2">
                   <a
                     href={buildWhatsAppUrl(client.phone, `Hello ${client.name}, connecting from Velvet Code.`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-[#4A7C59]/10 text-[#4A7C59] hover:bg-[#4A7C59]/20 border border-[#4A7C59]/30 transition-colors"
+                    className="p-2 rounded-lg bg-[#547A61]/10 text-[#547A61] hover:bg-[#547A61]/20 border border-[#547A61]/30 transition-colors"
                     title="WhatsApp Client"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                   </a>
                   <a
                     href={`tel:${client.phone}`}
-                    className="p-2 rounded-lg bg-[#FFF5F7] border border-[#EBCBD4] text-[#3A2930] hover:bg-[#FCECEF] transition-colors"
+                    className="p-2 rounded-lg bg-[#F4EAD7] border border-[#D8C7A5] text-[#2C241A] hover:bg-[#E9DFC8] transition-colors"
                     title="Call Client"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[#765D66]" />
+                    <Phone className="w-3.5 h-3.5 text-[#6A5A44]" />
                   </a>
                 </div>
               </div>
@@ -268,58 +268,58 @@ export default function ClientsPage() {
           isOpen={isDrawerOpen}
           onClose={() => setIsDrawerOpen(false)}
           title={selectedClient.name}
-          subtitle={`Client ID: ${selectedClient.id} â€¢ Converted Customer Profile`}
+          subtitle={`Client ID: ${selectedClient.id} • Converted Customer Profile`}
           size="lg"
         >
           <div className="space-y-6 text-xs sm:text-sm">
-            <div className="p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-3">
-              <h4 className="font-bold text-[#8C455C] font-serif uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-3">
+              <h4 className="font-bold text-[#7A5520] font-serif uppercase tracking-wider text-xs">
                 Contact & Investment Profile
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div>
-                  <span className="text-[#765D66] block">Phone</span>
-                  <span className="text-[#3A2930] font-semibold">{selectedClient.phone}</span>
+                  <span className="text-[#6A5A44] block">Phone</span>
+                  <span className="text-[#2C241A] font-semibold">{selectedClient.phone}</span>
                 </div>
                 <div>
-                  <span className="text-[#765D66] block">Email</span>
-                  <span className="text-[#3A2930]">{selectedClient.email || 'N/A'}</span>
+                  <span className="text-[#6A5A44] block">Email</span>
+                  <span className="text-[#2C241A]">{selectedClient.email || 'N/A'}</span>
                 </div>
                 <div>
-                  <span className="text-[#765D66] block">Target Budget</span>
-                  <span className="text-[#8C455C] font-bold font-mono">
-                    {selectedClient.budgetINR ? formatINR(selectedClient.budgetINR) : 'â‚¹5.0 Cr+'}
+                  <span className="text-[#6A5A44] block">Target Budget</span>
+                  <span className="text-[#7A5520] font-bold font-mono">
+                    {selectedClient.budgetINR ? formatINR(selectedClient.budgetINR) : '₹5.0 Cr+'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[#765D66] block">Preferred Area</span>
-                  <span className="text-[#3A2930]">{selectedClient.preferredLocation}</span>
+                  <span className="text-[#6A5A44] block">Preferred Area</span>
+                  <span className="text-[#2C241A]">{selectedClient.preferredLocation}</span>
                 </div>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-2">
-              <h4 className="font-bold text-[#8C455C] font-serif uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
+              <h4 className="font-bold text-[#7A5520] font-serif uppercase tracking-wider text-xs">
                 Portfolio Requirements
               </h4>
-              <p className="text-xs text-[#3A2930] bg-[#FFF5F7] p-3 rounded-lg border border-[#EBCBD4]">
+              <p className="text-xs text-[#2C241A] bg-[#F4EAD7] p-3 rounded-lg border border-[#D8C7A5]">
                 {selectedClient.requirements || 'Looking for beachside vacation homes and high ROI rental suites.'}
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-2">
-              <h4 className="font-bold text-[#8C455C] font-serif uppercase tracking-wider text-xs">
+            <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
+              <h4 className="font-bold text-[#7A5520] font-serif uppercase tracking-wider text-xs">
                 Client History & Notes
               </h4>
-              <p className="text-xs text-[#3A2930] bg-[#FFF5F7] p-3 rounded-lg border border-[#EBCBD4]">
+              <p className="text-xs text-[#2C241A] bg-[#F4EAD7] p-3 rounded-lg border border-[#D8C7A5]">
                 {selectedClient.notes || 'VIP Customer with verified funds.'}
               </p>
             </div>
 
             {/* Scheduled Appointments & Engagements */}
-            <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-3">
+            <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-3">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-[#8C455C] font-serif uppercase tracking-wider text-xs flex items-center gap-1.5">
+                <h4 className="font-bold text-[#7A5520] font-serif uppercase tracking-wider text-xs flex items-center gap-1.5">
                   <Calendar className="w-3.5 h-3.5" /> Scheduled Engagements
                 </h4>
                 <Button
@@ -333,7 +333,7 @@ export default function ClientsPage() {
               </div>
 
               {appointments.filter((a) => a.clientId === selectedClient.id).length === 0 ? (
-                <p className="text-xs text-[#765D66] italic bg-[#FFF9FA] p-3 rounded-lg border border-[#EBCBD4]">
+                <p className="text-xs text-[#6A5A44] italic bg-[#FFF9F0] p-3 rounded-lg border border-[#D8C7A5]">
                   No upcoming meetings or viewings scheduled with this client. Click &quot;Schedule&quot; to book an appointment.
                 </p>
               ) : (
@@ -343,25 +343,25 @@ export default function ClientsPage() {
                     .map((apt) => (
                       <div
                         key={apt.id}
-                        className="p-2.5 rounded-lg bg-[#FFF9FA] border border-[#EBCBD4] text-xs space-y-1.5"
+                        className="p-2.5 rounded-lg bg-[#FFF9F0] border border-[#D8C7A5] text-xs space-y-1.5"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-[#3A2930]">{apt.title}</span>
+                          <span className="font-bold text-[#2C241A]">{apt.title}</span>
                           <span
                             className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                               apt.status === 'COMPLETED'
-                                ? 'bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30'
+                                ? 'bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30'
                                 : apt.status === 'CANCELLED'
-                                ? 'bg-[#A84355]/15 text-[#A84355] border border-[#A84355]/30'
-                                : 'bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30'
+                                ? 'bg-[#8B4A4A]/15 text-[#8B4A4A] border border-[#8B4A4A]/30'
+                                : 'bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30'
                             }`}
                           >
                             {apt.status}
                           </span>
                         </div>
-                        <div className="flex flex-wrap items-center gap-3 text-[11px] text-[#765D66]">
+                        <div className="flex flex-wrap items-center gap-3 text-[11px] text-[#6A5A44]">
                           <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3 text-[#B86B84]" />
+                            <Clock className="w-3 h-3 text-[#A37432]" />
                             {new Date(apt.startAt).toLocaleString('en-IN', {
                               dateStyle: 'medium',
                               timeStyle: 'short',
@@ -369,13 +369,13 @@ export default function ClientsPage() {
                           </span>
                           {apt.location && (
                             <span className="flex items-center gap-1 truncate max-w-[160px]">
-                              <MapPin className="w-3 h-3 text-[#B86B84]" />
+                              <MapPin className="w-3 h-3 text-[#A37432]" />
                               {apt.location}
                             </span>
                           )}
                         </div>
                         {apt.description && (
-                          <p className="text-[11px] text-[#765D66] italic">{apt.description}</p>
+                          <p className="text-[11px] text-[#6A5A44] italic">{apt.description}</p>
                         )}
                         <div className="flex justify-end pt-1">
                           <button
@@ -385,7 +385,7 @@ export default function ClientsPage() {
                                 deleteAppointment(apt.id);
                               }
                             }}
-                            className="text-[10px] text-[#A84355] hover:underline flex items-center gap-0.5 cursor-pointer"
+                            className="text-[10px] text-[#8B4A4A] hover:underline flex items-center gap-0.5 cursor-pointer"
                           >
                             <Trash2 className="w-2.5 h-2.5" /> Remove
                           </button>
@@ -461,7 +461,7 @@ export default function ClientsPage() {
             }
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
             <Button
               type="button"
               variant="secondary"
@@ -618,7 +618,7 @@ export default function ClientsPage() {
               }
             />
 
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
               <Button
                 type="button"
                 variant="secondary"

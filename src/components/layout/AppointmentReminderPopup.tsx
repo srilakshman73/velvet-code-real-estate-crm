@@ -87,18 +87,18 @@ export function AppointmentReminderPopup() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full animate-in slide-in-from-bottom-5 duration-300">
-      <div className="bg-[#FFF9FA] border-2 border-[#B86B84] rounded-2xl shadow-2xl p-5 text-[#3A2930] space-y-4">
+      <div className="bg-[#FFF9F0] border-2 border-[#A37432] rounded-2xl shadow-2xl p-5 text-[#2C241A] space-y-4">
         {/* Header */}
-        <div className="flex items-center justify-between pb-2 border-b border-[#EBCBD4]">
-          <div className="flex items-center gap-2 text-[#8C455C]">
-            <div className="p-1.5 rounded-lg bg-[#B86B84]/15 animate-pulse">
-              <BellRing className="w-4 h-4 text-[#8C455C]" />
+        <div className="flex items-center justify-between pb-2 border-b border-[#D8C7A5]">
+          <div className="flex items-center gap-2 text-[#7A5520]">
+            <div className="p-1.5 rounded-lg bg-[#A37432]/15 animate-pulse">
+              <BellRing className="w-4 h-4 text-[#7A5520]" />
             </div>
-            <h4 className="text-sm font-serif font-bold text-[#3A2930]">Upcoming Appointment</h4>
+            <h4 className="text-sm font-serif font-bold text-[#2C241A]">Upcoming Appointment</h4>
           </div>
           <button
             onClick={handleDismiss}
-            className="p-1 rounded-lg hover:bg-[#FCECEF] text-[#765D66] hover:text-[#3A2930] transition-colors"
+            className="p-1 rounded-lg hover:bg-[#E9DFC8] text-[#6A5A44] hover:text-[#2C241A] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -107,33 +107,33 @@ export function AppointmentReminderPopup() {
         {/* Details Grid */}
         <div className="space-y-2 text-xs">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-[#765D66] w-16">Client:</span>
-            <span className="font-bold text-[#3A2930] flex items-center gap-1">
-              <User className="w-3.5 h-3.5 text-[#B86B84]" />
+            <span className="font-semibold text-[#6A5A44] w-16">Client:</span>
+            <span className="font-bold text-[#2C241A] flex items-center gap-1">
+              <User className="w-3.5 h-3.5 text-[#A37432]" />
               {activeReminder.clientName}
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-[#765D66] w-16">Property:</span>
-            <span className="font-bold text-[#3A2930] flex items-center gap-1 truncate">
-              <Building className="w-3.5 h-3.5 text-[#B86B84]" />
+            <span className="font-semibold text-[#6A5A44] w-16">Property:</span>
+            <span className="font-bold text-[#2C241A] flex items-center gap-1 truncate">
+              <Building className="w-3.5 h-3.5 text-[#A37432]" />
               {activeReminder.propertyTitle}
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-[#765D66] w-16">Time:</span>
-            <span className="font-bold text-[#3A2930] flex items-center gap-1 text-[#4A7C59]">
-              <Clock className="w-3.5 h-3.5 text-[#4A7C59]" />
+            <span className="font-semibold text-[#6A5A44] w-16">Time:</span>
+            <span className="font-bold text-[#2C241A] flex items-center gap-1 text-[#547A61]">
+              <Clock className="w-3.5 h-3.5 text-[#547A61]" />
               {activeReminder.time}
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-[#765D66] w-16">Location:</span>
-            <span className="font-medium text-[#3A2930] flex items-center gap-1 truncate">
-              <MapPin className="w-3.5 h-3.5 text-[#B86B84]" />
+            <span className="font-semibold text-[#6A5A44] w-16">Location:</span>
+            <span className="font-medium text-[#2C241A] flex items-center gap-1 truncate">
+              <MapPin className="w-3.5 h-3.5 text-[#A37432]" />
               {activeReminder.location}
             </span>
           </div>

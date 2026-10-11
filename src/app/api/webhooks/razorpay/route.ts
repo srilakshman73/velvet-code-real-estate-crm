@@ -3,6 +3,7 @@ import { serverDB } from '@/lib/server-db';
 import {
   verifyWebhookSignature,
   AUTHORITATIVE_PLANS,
+  getTierFromPlanId,
 } from '@/lib/razorpay-server';
 import { Payment, Invoice, SubscriptionTier } from '@/types';
 
@@ -47,11 +48,14 @@ export async function POST(request: NextRequest) {
 
     // 3. Process events
     switch (event) {
+      case 'subscription.authenticated':
       case 'subscription.activated':
       case 'subscription.charged': {
         const rzpSubId = subscriptionEntity?.id;
         const orgId = subscriptionEntity?.notes?.organizationId;
-        const tier = (subscriptionEntity?.notes?.tier || 'PROFESSIONAL').toUpperCase() as SubscriptionTier;
+        const tier = subscriptionEntity?.plan_id
+          ? getTierFromPlanId(subscriptionEntity.plan_id)
+          : ((subscriptionEntity?.notes?.tier || 'PROFESSIONAL').toUpperCase() as SubscriptionTier);
         const planConfig = AUTHORITATIVE_PLANS[tier] || AUTHORITATIVE_PLANS.PROFESSIONAL;
 
         if (rzpSubId || orgId) {
@@ -73,7 +77,7 @@ export async function POST(request: NextRequest) {
             serverDB.upsertSubscription({
               id: existingSub?.id || `sub-${Date.now().toString(36)}`,
               organizationId: existingSub?.organizationId || orgId,
-              tier: existingSub?.tier || tier,
+              tier: tier,
               status: 'ACTIVE',
               priceMonthlyINR: planConfig.amountINR,
               billingCycle: 'monthly',
@@ -160,26 +164,30 @@ export async function POST(request: NextRequest) {
           };
           serverDB.addPayment(paymentRecord);
 
-          // Generate corresponding Invoice
-          const baseAmount = Math.round(amountINR / 1.18);
-          const gstAmount = amountINR - baseAmount;
-          const invoiceRecord: Invoice = {
-            id: `inv-${Date.now().toString(36)}`,
-            organizationId: orgId,
-            subscriptionId: rzpSubId,
-            paymentId: paymentRecord.id,
-            invoiceNumber: `INV-${new Date().getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`,
-            amountINR: baseAmount,
-            taxINR: gstAmount,
-            totalINR: amountINR,
-            status: 'paid',
-            paymentMethod: paymentEntity.method || 'Razorpay AutoPay',
-            razorpayPaymentId: paymentId,
-            billingPeriodStart: new Date().toISOString(),
-            billingPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-            createdAt: new Date().toISOString(),
-          };
-          serverDB.addInvoice(invoiceRecord);
+          // Generate corresponding Invoice (deduplicated by paymentId)
+          const existingInvoices = serverDB.getInvoices(orgId);
+          let invoiceRecord = existingInvoices.find((i) => i.razorpayPaymentId === paymentId);
+          if (!invoiceRecord) {
+            const baseAmount = Math.round(amountINR / 1.18);
+            const gstAmount = amountINR - baseAmount;
+            invoiceRecord = {
+              id: `inv-${Date.now().toString(36)}`,
+              organizationId: orgId,
+              subscriptionId: rzpSubId,
+              paymentId: paymentRecord.id,
+              invoiceNumber: `INV-${new Date().getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`,
+              amountINR: baseAmount,
+              taxINR: gstAmount,
+              totalINR: amountINR,
+              status: 'paid',
+              paymentMethod: paymentEntity.method || 'Razorpay AutoPay',
+              razorpayPaymentId: paymentId,
+              billingPeriodStart: new Date().toISOString(),
+              billingPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+              createdAt: new Date().toISOString(),
+            };
+            serverDB.addInvoice(invoiceRecord);
+          }
         }
         break;
       }

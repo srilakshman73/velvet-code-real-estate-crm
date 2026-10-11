@@ -4,6 +4,8 @@ import { serverDB } from '@/lib/server-db';
 import {
   verifySubscriptionSignature,
   AUTHORITATIVE_PLANS,
+  fetchRazorpaySubscription,
+  getTierFromPlanId,
 } from '@/lib/razorpay-server';
 import { SubscriptionTier, Payment, Invoice, Subscription } from '@/types';
 
@@ -66,11 +68,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 2. Authoritative Plan resolution
-    const validatedTier = (tier && ['STARTER', 'PROFESSIONAL', 'BUSINESS'].includes(tier.toUpperCase())
-      ? tier.toUpperCase()
-      : 'PROFESSIONAL') as SubscriptionTier;
+    // 2. Authoritative Plan resolution & strict Multi-tenant verification
+    let resolvedTier: SubscriptionTier | undefined = undefined;
 
+    // Check directly with Razorpay Subscriptions API for ground truth
+    const rzpSub = await fetchRazorpaySubscription(razorpay_subscription_id);
+    if (rzpSub) {
+      // Strict multi-tenant isolation: verify subscription was issued for this tenant
+      if (rzpSub.notes?.organizationId && rzpSub.notes.organizationId !== session.organizationId) {
+        return NextResponse.json(
+          { error: 'Forbidden: Subscription belongs to a different organization.' },
+          { status: 403 }
+        );
+      }
+      if (rzpSub.plan_id) {
+        resolvedTier = getTierFromPlanId(rzpSub.plan_id);
+      }
+    }
+
+    // Fallback tier resolution if offline/mock environment
+    if (!resolvedTier) {
+      resolvedTier = (tier && ['STARTER', 'PROFESSIONAL', 'BUSINESS'].includes(tier.toUpperCase())
+        ? tier.toUpperCase()
+        : 'STARTER') as SubscriptionTier;
+    }
+
+    const validatedTier = resolvedTier;
     const planConfig = AUTHORITATIVE_PLANS[validatedTier];
     const now = new Date();
     const periodEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days
@@ -115,27 +138,31 @@ export async function POST(request: NextRequest) {
     };
     serverDB.addPayment(paymentRecord);
 
-    // 5. Generate official GST Tax Invoice
+    // 5. Generate official GST Tax Invoice (deduplicated by razorpayPaymentId)
     const baseAmount = Math.round(planConfig.amountINR / 1.18);
     const gstAmount = planConfig.amountINR - baseAmount;
-    const invoiceRecord: Invoice = {
-      id: `inv-${Date.now().toString(36)}`,
-      organizationId: session.organizationId,
-      userId: session.userId,
-      subscriptionId: razorpay_subscription_id,
-      paymentId: paymentRecord.id,
-      invoiceNumber: `INV-${now.getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`,
-      amountINR: baseAmount,
-      taxINR: gstAmount,
-      totalINR: planConfig.amountINR,
-      status: 'paid',
-      paymentMethod: 'Razorpay AutoPay',
-      razorpayPaymentId: razorpay_payment_id,
-      billingPeriodStart: now.toISOString(),
-      billingPeriodEnd: periodEnd.toISOString(),
-      createdAt: now.toISOString(),
-    };
-    serverDB.addInvoice(invoiceRecord);
+    const existingInvoices = serverDB.getInvoices(session.organizationId);
+    let invoiceRecord = existingInvoices.find((i) => i.razorpayPaymentId === razorpay_payment_id);
+    if (!invoiceRecord) {
+      invoiceRecord = {
+        id: `inv-${Date.now().toString(36)}`,
+        organizationId: session.organizationId,
+        userId: session.userId,
+        subscriptionId: razorpay_subscription_id,
+        paymentId: paymentRecord.id,
+        invoiceNumber: `INV-${now.getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`,
+        amountINR: baseAmount,
+        taxINR: gstAmount,
+        totalINR: planConfig.amountINR,
+        status: 'paid',
+        paymentMethod: payment_method || 'Razorpay AutoPay',
+        razorpayPaymentId: razorpay_payment_id,
+        billingPeriodStart: now.toISOString(),
+        billingPeriodEnd: periodEnd.toISOString(),
+        createdAt: now.toISOString(),
+      };
+      serverDB.addInvoice(invoiceRecord);
+    }
 
     return NextResponse.json({
       success: true,

@@ -291,32 +291,32 @@ export default function CalendarPage() {
   const getAppointmentTypeBadge = (type: AppointmentType) => {
     switch (type) {
       case 'SITE_VISIT':
-        return { label: 'Site Visit', bg: 'bg-[#B86B84]/15', text: 'text-[#8C455C]', border: 'border-[#B86B84]/30' };
+        return { label: 'Site Visit', bg: 'bg-[#A37432]/15', text: 'text-[#7A5520]', border: 'border-[#A37432]/30' };
       case 'PROPERTY_VISIT':
-        return { label: 'Viewing', bg: 'bg-[#4A7C59]/15', text: 'text-[#4A7C59]', border: 'border-[#4A7C59]/30' };
+        return { label: 'Viewing', bg: 'bg-[#547A61]/15', text: 'text-[#547A61]', border: 'border-[#547A61]/30' };
       case 'MEETING':
         return { label: 'Meeting', bg: 'bg-[#6B5B95]/15', text: 'text-[#6B5B95]', border: 'border-[#6B5B95]/30' };
       case 'CALL':
-        return { label: 'Phone Call', bg: 'bg-[#D98FA5]/25', text: 'text-[#8C455C]', border: 'border-[#D98FA5]/40' };
+        return { label: 'Phone Call', bg: 'bg-[#C39A5B]/25', text: 'text-[#7A5520]', border: 'border-[#C39A5B]/40' };
       default:
-        return { label: 'Consultation', bg: 'bg-[#B86B84]/10', text: 'text-[#8C455C]', border: 'border-[#B86B84]/20' };
+        return { label: 'Consultation', bg: 'bg-[#A37432]/10', text: 'text-[#7A5520]', border: 'border-[#A37432]/20' };
     }
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#FCECEF] text-[#3A2930]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#3A2930] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
               Real Estate Activity &amp; Appointment Calendar
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30 rounded-full">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
               {appointments.length} Appointments Scheduled
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#765D66] mt-1">
+          <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
             Manage site viewings, buyer consultations, client video calls, and property negotiation schedules.
           </p>
         </div>
@@ -335,13 +335,13 @@ export default function CalendarPage() {
             Schedule Appointment
           </Button>
 
-          <div className="bg-[#FFF9FA] border border-[#EBCBD4] p-1 rounded-xl flex text-xs shadow-xs">
+          <div className="bg-[#FFF9F0] border border-[#D8C7A5] p-1 rounded-xl flex text-xs shadow-xs">
             <button
               onClick={() => setViewMode('MONTH')}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
                 viewMode === 'MONTH'
-                  ? 'bg-[#B86B84] text-white font-semibold shadow-xs'
-                  : 'text-[#765D66] hover:text-[#3A2930]'
+                  ? 'bg-[#A37432] text-white font-semibold shadow-xs'
+                  : 'text-[#6A5A44] hover:text-[#2C241A]'
               }`}
             >
               Month
@@ -350,8 +350,8 @@ export default function CalendarPage() {
               onClick={() => setViewMode('WEEK')}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
                 viewMode === 'WEEK'
-                  ? 'bg-[#B86B84] text-white font-semibold shadow-xs'
-                  : 'text-[#765D66] hover:text-[#3A2930]'
+                  ? 'bg-[#A37432] text-white font-semibold shadow-xs'
+                  : 'text-[#6A5A44] hover:text-[#2C241A]'
               }`}
             >
               Week
@@ -360,8 +360,8 @@ export default function CalendarPage() {
               onClick={() => setViewMode('DAY')}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
                 viewMode === 'DAY'
-                  ? 'bg-[#B86B84] text-white font-semibold shadow-xs'
-                  : 'text-[#765D66] hover:text-[#3A2930]'
+                  ? 'bg-[#A37432] text-white font-semibold shadow-xs'
+                  : 'text-[#6A5A44] hover:text-[#2C241A]'
               }`}
             >
               Day
@@ -371,21 +371,21 @@ export default function CalendarPage() {
       </div>
 
       {/* Calendar Controls & View Header */}
-      <div className="rounded-2xl border border-[#EBCBD4] bg-[#FFF9FA] p-4 sm:p-6 shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#EBCBD4]">
+      <div className="rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] p-4 sm:p-6 shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#D8C7A5]">
           <div className="flex items-center gap-3">
-            <h2 className="text-xl font-serif font-bold text-[#3A2930]">{monthName}</h2>
+            <h2 className="text-xl font-serif font-bold text-[#2C241A]">{monthName}</h2>
             <div className="flex items-center gap-1">
               <button
                 onClick={handlePrevMonth}
-                className="p-1.5 rounded-lg hover:bg-[#FFF5F7] text-[#765D66] hover:text-[#3A2930] transition-colors border border-[#EBCBD4] cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-[#F4EAD7] text-[#6A5A44] hover:text-[#2C241A] transition-colors border border-[#D8C7A5] cursor-pointer"
                 title="Previous Month"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={handleNextMonth}
-                className="p-1.5 rounded-lg hover:bg-[#FFF5F7] text-[#765D66] hover:text-[#3A2930] transition-colors border border-[#EBCBD4] cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-[#F4EAD7] text-[#6A5A44] hover:text-[#2C241A] transition-colors border border-[#D8C7A5] cursor-pointer"
                 title="Next Month"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -397,14 +397,14 @@ export default function CalendarPage() {
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-xs">
-            <span className="flex items-center gap-1.5 text-[#8C455C] font-medium">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#B86B84]" /> Appointments
+            <span className="flex items-center gap-1.5 text-[#7A5520] font-medium">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#A37432]" /> Appointments
             </span>
-            <span className="flex items-center gap-1.5 text-[#D98FA5] font-medium">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#D98FA5]" /> Site Visits
+            <span className="flex items-center gap-1.5 text-[#C39A5B] font-medium">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C39A5B]" /> Site Visits
             </span>
-            <span className="flex items-center gap-1.5 text-[#4A7C59] font-medium">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#4A7C59]" /> Tasks
+            <span className="flex items-center gap-1.5 text-[#547A61] font-medium">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#547A61]" /> Tasks
             </span>
           </div>
         </div>
@@ -413,7 +413,7 @@ export default function CalendarPage() {
         {viewMode === 'MONTH' && (
           <div>
             {/* Days of week header */}
-            <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-[#765D66] uppercase tracking-wider pb-2 border-b border-[#EBCBD4]">
+            <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-[#6A5A44] uppercase tracking-wider pb-2 border-b border-[#D8C7A5]">
               <div>Mon</div>
               <div>Tue</div>
               <div>Wed</div>
@@ -451,16 +451,16 @@ export default function CalendarPage() {
                     onClick={() => isCurrentMonthDay && setCurrentDate(dayDate)}
                     className={`min-h-[110px] p-2 rounded-xl border flex flex-col justify-between transition-all ${
                       isSelected
-                        ? 'bg-[#B86B84]/15 border-[#B86B84] shadow-sm ring-1 ring-[#B86B84]'
+                        ? 'bg-[#A37432]/15 border-[#A37432] shadow-sm ring-1 ring-[#A37432]'
                         : isCurrentMonthDay
-                        ? 'bg-[#FFF9FA] border-[#EBCBD4] hover:border-[#B86B84]/60'
-                        : 'bg-[#FFF9FA]/40 border-[#EBCBD4]/40 opacity-40'
+                        ? 'bg-[#FFF9F0] border-[#D8C7A5] hover:border-[#A37432]/60'
+                        : 'bg-[#FFF9F0]/40 border-[#D8C7A5]/40 opacity-40'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <span
                         className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${
-                          isSelected ? 'bg-[#B86B84] text-white font-extrabold' : 'text-[#3A2930]'
+                          isSelected ? 'bg-[#A37432] text-white font-extrabold' : 'text-[#2C241A]'
                         }`}
                       >
                         {dayDisplay}
@@ -472,7 +472,7 @@ export default function CalendarPage() {
                             e.stopPropagation();
                             openScheduleForDay(dayStr);
                           }}
-                          className="text-[#9B828C] hover:text-[#8C455C] p-0.5 rounded transition-colors"
+                          className="text-[#8A7A63] hover:text-[#7A5520] p-0.5 rounded transition-colors"
                           title="Schedule on this day"
                         >
                           <PlusCircle className="w-3.5 h-3.5" />
@@ -489,7 +489,7 @@ export default function CalendarPage() {
                             e.stopPropagation();
                             handleOpenDetail(apt);
                           }}
-                          className="px-1.5 py-0.5 rounded bg-[#B86B84]/20 border border-[#B86B84]/40 text-[#8C455C] text-[10px] truncate font-bold cursor-pointer hover:bg-[#B86B84]/30 transition-colors flex items-center gap-1"
+                          className="px-1.5 py-0.5 rounded bg-[#A37432]/20 border border-[#A37432]/40 text-[#7A5520] text-[10px] truncate font-bold cursor-pointer hover:bg-[#A37432]/30 transition-colors flex items-center gap-1"
                           title={`${apt.title} (${apt.status})`}
                         >
                           <CalendarCheck className="w-2.5 h-2.5 shrink-0" />
@@ -501,7 +501,7 @@ export default function CalendarPage() {
                       {visits.map((v) => (
                         <div
                           key={v.id}
-                          className="px-1.5 py-0.5 rounded bg-[#D98FA5]/15 border border-[#D98FA5]/30 text-[#8C455C] text-[10px] truncate font-medium flex items-center gap-1"
+                          className="px-1.5 py-0.5 rounded bg-[#C39A5B]/15 border border-[#C39A5B]/30 text-[#7A5520] text-[10px] truncate font-medium flex items-center gap-1"
                           title={v.propertyName}
                         >
                           <Compass className="w-2.5 h-2.5 shrink-0" />
@@ -513,7 +513,7 @@ export default function CalendarPage() {
                       {tks.map((t) => (
                         <div
                           key={t.id}
-                          className="px-1.5 py-0.5 rounded bg-[#4A7C59]/10 border border-[#4A7C59]/20 text-[#4A7C59] text-[10px] truncate font-medium flex items-center gap-1"
+                          className="px-1.5 py-0.5 rounded bg-[#547A61]/10 border border-[#547A61]/20 text-[#547A61] text-[10px] truncate font-medium flex items-center gap-1"
                           title={t.title}
                         >
                           <CheckCircle2 className="w-2.5 h-2.5 shrink-0" />
@@ -522,7 +522,7 @@ export default function CalendarPage() {
                       ))}
                     </div>
 
-                    <div className="text-[9px] text-[#765D66] text-right font-medium">
+                    <div className="text-[9px] text-[#6A5A44] text-right font-medium">
                       {apts.length + visits.length + fus.length + tks.length > 0 &&
                         `${apts.length + visits.length + fus.length + tks.length} events`}
                     </div>
@@ -553,16 +553,16 @@ export default function CalendarPage() {
                     onClick={() => setCurrentDate(weekDay)}
                     className={`p-3 rounded-2xl border flex flex-col justify-between space-y-3 min-h-[350px] transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-[#B86B84]/15 border-[#B86B84] shadow-md ring-1 ring-[#B86B84]'
-                        : 'bg-[#FFF9FA] border-[#EBCBD4] hover:border-[#B86B84]/60'
+                        ? 'bg-[#A37432]/15 border-[#A37432] shadow-md ring-1 ring-[#A37432]'
+                        : 'bg-[#FFF9F0] border-[#D8C7A5] hover:border-[#A37432]/60'
                     }`}
                   >
-                    <div className="flex items-center justify-between border-b border-[#EBCBD4] pb-2">
+                    <div className="flex items-center justify-between border-b border-[#D8C7A5] pb-2">
                       <div>
-                        <p className="text-[10px] font-bold uppercase text-[#765D66]">
+                        <p className="text-[10px] font-bold uppercase text-[#6A5A44]">
                           {weekDay.toLocaleDateString('default', { weekday: 'short' })}
                         </p>
-                        <p className="text-base font-bold font-serif text-[#3A2930]">
+                        <p className="text-base font-bold font-serif text-[#2C241A]">
                           {weekDay.getDate()}
                         </p>
                       </div>
@@ -571,7 +571,7 @@ export default function CalendarPage() {
                           e.stopPropagation();
                           openScheduleForDay(dayStr);
                         }}
-                        className="text-[#8C455C] hover:bg-[#B86B84]/20 p-1 rounded-md"
+                        className="text-[#7A5520] hover:bg-[#A37432]/20 p-1 rounded-md"
                         title="Add appointment"
                       >
                         <PlusCircle className="w-4 h-4" />
@@ -580,7 +580,7 @@ export default function CalendarPage() {
 
                     <div className="space-y-2 flex-1 overflow-y-auto">
                       {apts.length === 0 && visits.length === 0 && tks.length === 0 ? (
-                        <p className="text-[11px] text-[#9B828C] italic text-center py-4">
+                        <p className="text-[11px] text-[#8A7A63] italic text-center py-4">
                           No events
                         </p>
                       ) : (
@@ -592,16 +592,16 @@ export default function CalendarPage() {
                                 e.stopPropagation();
                                 handleOpenDetail(a);
                               }}
-                              className="p-2 rounded-xl bg-[#FFF5F7] border border-[#B86B84]/40 hover:bg-[#B86B84]/15 transition-colors space-y-1"
+                              className="p-2 rounded-xl bg-[#F4EAD7] border border-[#A37432]/40 hover:bg-[#A37432]/15 transition-colors space-y-1"
                             >
-                              <div className="flex items-center justify-between text-[10px] font-bold text-[#8C455C]">
+                              <div className="flex items-center justify-between text-[10px] font-bold text-[#7A5520]">
                                 <span>{new Date(a.startAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                 <span>{a.appointmentType}</span>
                               </div>
-                              <p className="text-xs font-bold text-[#3A2930] line-clamp-1">{a.title}</p>
+                              <p className="text-xs font-bold text-[#2C241A] line-clamp-1">{a.title}</p>
                               {a.location && (
-                                <p className="text-[10px] text-[#765D66] truncate flex items-center gap-1">
-                                  <MapPin className="w-3 h-3 text-[#B86B84]" /> {a.location}
+                                <p className="text-[10px] text-[#6A5A44] truncate flex items-center gap-1">
+                                  <MapPin className="w-3 h-3 text-[#A37432]" /> {a.location}
                                 </p>
                               )}
                             </div>
@@ -610,7 +610,7 @@ export default function CalendarPage() {
                           {visits.map((v) => (
                             <div
                               key={v.id}
-                              className="p-2 rounded-xl bg-[#D98FA5]/15 border border-[#D98FA5]/30 space-y-0.5 text-xs text-[#8C455C]"
+                              className="p-2 rounded-xl bg-[#C39A5B]/15 border border-[#C39A5B]/30 space-y-0.5 text-xs text-[#7A5520]"
                             >
                               <span className="text-[10px] font-bold">Site Visit: {v.timeSlot}</span>
                               <p className="font-semibold line-clamp-1">{v.propertyName}</p>
@@ -629,12 +629,12 @@ export default function CalendarPage() {
         {/* 3. DAY VIEW */}
         {viewMode === 'DAY' && (
           <div className="space-y-6">
-            <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#8C455C]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#7A5520]">
                   Day Schedule
                 </span>
-                <h3 className="text-xl font-serif font-bold text-[#3A2930] mt-0.5">
+                <h3 className="text-xl font-serif font-bold text-[#2C241A] mt-0.5">
                   {currentDate.toLocaleDateString('default', {
                     weekday: 'long',
                     day: 'numeric',
@@ -664,9 +664,9 @@ export default function CalendarPage() {
 
               if (apts.length === 0 && visits.length === 0 && tks.length === 0) {
                 return (
-                  <div className="p-12 text-center text-[#765D66] bg-[#FFF5F7] rounded-2xl border border-[#EBCBD4] space-y-3">
-                    <CalendarCheck className="w-10 h-10 text-[#B86B84] mx-auto" />
-                    <h4 className="font-serif font-bold text-base text-[#3A2930]">
+                  <div className="p-12 text-center text-[#6A5A44] bg-[#F4EAD7] rounded-2xl border border-[#D8C7A5] space-y-3">
+                    <CalendarCheck className="w-10 h-10 text-[#A37432] mx-auto" />
+                    <h4 className="font-serif font-bold text-base text-[#2C241A]">
                       No events scheduled for this day
                     </h4>
                     <p className="text-xs max-w-sm mx-auto">
@@ -684,7 +684,7 @@ export default function CalendarPage() {
                       <div
                         key={a.id}
                         onClick={() => handleOpenDetail(a)}
-                        className="p-5 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] hover:border-[#B86B84] shadow-xs cursor-pointer transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
+                        className="p-5 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#A37432] shadow-xs cursor-pointer transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
                       >
                         <div className="space-y-1.5">
                           <div className="flex items-center gap-2">
@@ -693,39 +693,39 @@ export default function CalendarPage() {
                             </span>
                             <span className={`px-2 py-0.5 text-[10px] font-bold rounded ${
                               a.status === 'COMPLETED'
-                                ? 'bg-[#4A7C59]/15 text-[#4A7C59]'
+                                ? 'bg-[#547A61]/15 text-[#547A61]'
                                 : a.status === 'CANCELLED'
-                                ? 'bg-[#A84355]/15 text-[#A84355]'
-                                : 'bg-[#B86B84]/15 text-[#8C455C]'
+                                ? 'bg-[#8B4A4A]/15 text-[#8B4A4A]'
+                                : 'bg-[#A37432]/15 text-[#7A5520]'
                             }`}>
                               {a.status}
                             </span>
                           </div>
 
-                          <h4 className="text-base font-bold font-serif text-[#3A2930] group-hover:text-[#8C455C] transition-colors">
+                          <h4 className="text-base font-bold font-serif text-[#2C241A] group-hover:text-[#7A5520] transition-colors">
                             {a.title}
                           </h4>
 
-                          <div className="flex flex-wrap items-center gap-4 text-xs text-[#765D66]">
+                          <div className="flex flex-wrap items-center gap-4 text-xs text-[#6A5A44]">
                             <span className="flex items-center gap-1 font-mono">
-                              <Clock className="w-3.5 h-3.5 text-[#B86B84]" />
+                              <Clock className="w-3.5 h-3.5 text-[#A37432]" />
                               {new Date(a.startAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(a.endAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                             </span>
                             {a.leadName && (
-                              <span className="flex items-center gap-1 font-medium text-[#3A2930]">
-                                <User className="w-3.5 h-3.5 text-[#B86B84]" />
+                              <span className="flex items-center gap-1 font-medium text-[#2C241A]">
+                                <User className="w-3.5 h-3.5 text-[#A37432]" />
                                 Lead: {a.leadName}
                               </span>
                             )}
                             {a.clientName && (
-                              <span className="flex items-center gap-1 font-medium text-[#3A2930]">
-                                <User className="w-3.5 h-3.5 text-[#4A7C59]" />
+                              <span className="flex items-center gap-1 font-medium text-[#2C241A]">
+                                <User className="w-3.5 h-3.5 text-[#547A61]" />
                                 Client: {a.clientName}
                               </span>
                             )}
                             {a.location && (
                               <span className="flex items-center gap-1">
-                                <MapPin className="w-3.5 h-3.5 text-[#B86B84]" />
+                                <MapPin className="w-3.5 h-3.5 text-[#A37432]" />
                                 {a.location}
                               </span>
                             )}
@@ -933,7 +933,7 @@ export default function CalendarPage() {
             }
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
             <Button
               type="button"
               variant="secondary"
@@ -969,40 +969,40 @@ export default function CalendarPage() {
         >
           <div className="space-y-6 text-xs sm:text-sm">
             {/* Status & Quick Change */}
-            <div className="p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-3">
+            <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#765D66] uppercase tracking-wider">
+                <span className="text-xs font-bold text-[#6A5A44] uppercase tracking-wider">
                   Current Status
                 </span>
                 <span
                   className={`px-2.5 py-1 rounded text-xs font-bold ${
                     selectedAppointment.status === 'COMPLETED'
-                      ? 'bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30'
+                      ? 'bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30'
                       : selectedAppointment.status === 'CANCELLED'
-                      ? 'bg-[#A84355]/15 text-[#A84355] border border-[#A84355]/30'
-                      : 'bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30'
+                      ? 'bg-[#8B4A4A]/15 text-[#8B4A4A] border border-[#8B4A4A]/30'
+                      : 'bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30'
                   }`}
                 >
                   {selectedAppointment.status}
                 </span>
               </div>
 
-              <div className="flex flex-wrap gap-2 pt-2 border-t border-[#EBCBD4]">
+              <div className="flex flex-wrap gap-2 pt-2 border-t border-[#D8C7A5]">
                 <button
                   onClick={() => handleUpdateStatus(selectedAppointment.id, 'CONFIRMED')}
-                  className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#4A7C59]/10 text-[#4A7C59] hover:bg-[#4A7C59]/20 transition-colors"
+                  className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#547A61]/10 text-[#547A61] hover:bg-[#547A61]/20 transition-colors"
                 >
                   Mark Confirmed
                 </button>
                 <button
                   onClick={() => handleUpdateStatus(selectedAppointment.id, 'COMPLETED')}
-                  className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#4A7C59] text-white hover:opacity-90 transition-opacity"
+                  className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#547A61] text-white hover:opacity-90 transition-opacity"
                 >
                   Mark Completed
                 </button>
                 <button
                   onClick={() => handleUpdateStatus(selectedAppointment.id, 'CANCELLED')}
-                  className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#A84355]/10 text-[#A84355] hover:bg-[#A84355]/20 transition-colors"
+                  className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#8B4A4A]/10 text-[#8B4A4A] hover:bg-[#8B4A4A]/20 transition-colors"
                 >
                   Mark Cancelled
                 </button>
@@ -1010,11 +1010,11 @@ export default function CalendarPage() {
             </div>
 
             {/* Date & Time */}
-            <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-2">
-              <h4 className="font-bold text-[#8C455C] text-xs uppercase tracking-wider flex items-center gap-1.5">
+            <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-2">
+              <h4 className="font-bold text-[#7A5520] text-xs uppercase tracking-wider flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5" /> Date &amp; Timing
               </h4>
-              <p className="text-sm font-bold text-[#3A2930]">
+              <p className="text-sm font-bold text-[#2C241A]">
                 {new Date(selectedAppointment.startAt).toLocaleDateString('default', {
                   weekday: 'long',
                   year: 'numeric',
@@ -1022,53 +1022,53 @@ export default function CalendarPage() {
                   day: 'numeric',
                 })}
               </p>
-              <p className="text-xs text-[#765D66] font-mono">
+              <p className="text-xs text-[#6A5A44] font-mono">
                 {new Date(selectedAppointment.startAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} -{' '}
                 {new Date(selectedAppointment.endAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </p>
-              <p className="text-[11px] text-[#8C455C] pt-1">
+              <p className="text-[11px] text-[#7A5520] pt-1">
                 Reminder notification scheduled {selectedAppointment.reminderMinutes || 15} minutes before.
               </p>
             </div>
 
             {/* Location */}
             {selectedAppointment.location && (
-              <div className="p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-1.5">
-                <h4 className="font-bold text-[#8C455C] text-xs uppercase tracking-wider flex items-center gap-1.5">
+              <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-1.5">
+                <h4 className="font-bold text-[#7A5520] text-xs uppercase tracking-wider flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5" /> Location / Venue
                 </h4>
-                <p className="text-xs text-[#3A2930] font-medium">{selectedAppointment.location}</p>
+                <p className="text-xs text-[#2C241A] font-medium">{selectedAppointment.location}</p>
               </div>
             )}
 
             {/* Associated Entities */}
-            <div className="p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-3">
-              <h4 className="font-bold text-[#8C455C] text-xs uppercase tracking-wider">
+            <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-3">
+              <h4 className="font-bold text-[#7A5520] text-xs uppercase tracking-wider">
                 Associated CRM Contacts &amp; Units
               </h4>
               <div className="space-y-2 text-xs">
                 {selectedAppointment.leadName && (
-                  <div className="flex justify-between border-b border-[#EBCBD4] pb-1.5">
-                    <span className="text-[#765D66]">Lead:</span>
-                    <span className="font-bold text-[#3A2930]">{selectedAppointment.leadName}</span>
+                  <div className="flex justify-between border-b border-[#D8C7A5] pb-1.5">
+                    <span className="text-[#6A5A44]">Lead:</span>
+                    <span className="font-bold text-[#2C241A]">{selectedAppointment.leadName}</span>
                   </div>
                 )}
                 {selectedAppointment.clientName && (
-                  <div className="flex justify-between border-b border-[#EBCBD4] pb-1.5">
-                    <span className="text-[#765D66]">Client:</span>
-                    <span className="font-bold text-[#3A2930]">{selectedAppointment.clientName}</span>
+                  <div className="flex justify-between border-b border-[#D8C7A5] pb-1.5">
+                    <span className="text-[#6A5A44]">Client:</span>
+                    <span className="font-bold text-[#2C241A]">{selectedAppointment.clientName}</span>
                   </div>
                 )}
                 {selectedAppointment.propertyTitle && (
-                  <div className="flex justify-between border-b border-[#EBCBD4] pb-1.5">
-                    <span className="text-[#765D66]">Property:</span>
-                    <span className="font-bold text-[#3A2930]">{selectedAppointment.propertyTitle}</span>
+                  <div className="flex justify-between border-b border-[#D8C7A5] pb-1.5">
+                    <span className="text-[#6A5A44]">Property:</span>
+                    <span className="font-bold text-[#2C241A]">{selectedAppointment.propertyTitle}</span>
                   </div>
                 )}
                 {selectedAppointment.assignedUserName && (
                   <div className="flex justify-between">
-                    <span className="text-[#765D66]">Assigned Agent:</span>
-                    <span className="font-bold text-[#3A2930]">{selectedAppointment.assignedUserName}</span>
+                    <span className="text-[#6A5A44]">Assigned Agent:</span>
+                    <span className="font-bold text-[#2C241A]">{selectedAppointment.assignedUserName}</span>
                   </div>
                 )}
               </div>
@@ -1076,18 +1076,18 @@ export default function CalendarPage() {
 
             {/* Notes */}
             {selectedAppointment.description && (
-              <div className="p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] space-y-1.5">
-                <h4 className="font-bold text-[#8C455C] text-xs uppercase tracking-wider">
+              <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-1.5">
+                <h4 className="font-bold text-[#7A5520] text-xs uppercase tracking-wider">
                   Notes &amp; Agenda
                 </h4>
-                <p className="text-xs text-[#765D66] bg-[#FFF5F7] p-3 rounded-lg border border-[#EBCBD4] leading-relaxed">
+                <p className="text-xs text-[#6A5A44] bg-[#F4EAD7] p-3 rounded-lg border border-[#D8C7A5] leading-relaxed">
                   {selectedAppointment.description}
                 </p>
               </div>
             )}
 
             {/* Actions */}
-            <div className="pt-4 border-t border-[#EBCBD4] flex items-center justify-between">
+            <div className="pt-4 border-t border-[#D8C7A5] flex items-center justify-between">
               <Button
                 variant="secondary"
                 size="sm"

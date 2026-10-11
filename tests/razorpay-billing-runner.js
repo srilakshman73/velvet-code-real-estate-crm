@@ -21,8 +21,8 @@ function runRazorpayBillingAudit() {
   // -------------------------------------------------------------
   // TEST 1: Secure Credential Loading
   // -------------------------------------------------------------
-  const keyId = process.env.RAZORPAY_KEY_ID || 'rzp_test_TfMkcLbwnde9mE';
-  const keySecret = process.env.RAZORPAY_KEY_SECRET || 'QoYK6rPTA44lE3xk8L99OLvJ';
+  const keyId = process.env.RAZORPAY_KEY_ID || 'rzp_test_TfOz0NdbxVaGbx';
+  const keySecret = process.env.RAZORPAY_KEY_SECRET || 'FZepi0Iq38BdVrY2agtk55Uf';
   const isKeyValid = keyId.startsWith('rzp_test_');
   const isSecretProtected = Boolean(keySecret && keySecret.length >= 20);
 

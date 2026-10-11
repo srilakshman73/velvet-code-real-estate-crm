@@ -5,8 +5,19 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const inrCurrencyFormatter = new Intl.NumberFormat('en-IN', {
+  style: 'currency',
+  currency: 'INR',
+  maximumFractionDigits: 0,
+});
+
+export const inrNumberFormatter = new Intl.NumberFormat('en-IN', {
+  maximumFractionDigits: 0,
+});
+
 /**
- * Format Indian Rupee (INR) into clean compact real estate notation (Lakhs, Crores, or Thousands)
+ * Format Indian Rupee (INR) into clean formatted string with ₹ symbol.
+ * Uses Intl.NumberFormat('en-IN') for standard Indian numbering system.
  */
 export function formatINR(amount: number, compact: boolean = false): string {
   if (amount === undefined || amount === null || isNaN(amount)) return '₹0';
@@ -24,19 +35,9 @@ export function formatINR(amount: number, compact: boolean = false): string {
       const k = amount / 1000;
       return `₹${k % 1 === 0 ? k.toFixed(0) : k.toFixed(1)}k`;
     }
-    return `₹${amount}`;
   }
 
-  // Standard Indian comma separator notation (e.g. 1,25,00,000)
-  const numStr = Math.round(amount).toString();
-  const lastThree = numStr.substring(numStr.length - 3);
-  const otherNumbers = numStr.substring(0, numStr.length - 3);
-  const formatted =
-    otherNumbers !== ''
-      ? otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree
-      : lastThree;
-
-  return `₹${formatted}`;
+  return inrCurrencyFormatter.format(Math.round(amount));
 }
 
 export function formatINRPricePerSqFt(price: number, areaSqFt: number): string {

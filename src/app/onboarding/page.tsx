@@ -24,7 +24,7 @@ import confetti from 'canvas-confetti';
 
 export default function OnboardingPage() {
   const router = useRouter();
-  const { currentOrg, setCurrentOrg, upgradePlan } = useCRMStore();
+  const { currentOrg, setCurrentOrg } = useCRMStore();
   const [step, setStep] = useState(1);
 
   const [onboardingData, setOnboardingData] = useState({
@@ -62,57 +62,59 @@ export default function OnboardingPage() {
       businessType: onboardingData.businessType,
     });
 
-    upgradePlan(onboardingData.selectedPlan);
-
     // Fire celebration confetti
     try {
       confetti({
         particleCount: 120,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ['#B86B84', '#D98FA5', '#4A7C59', '#3A2930'],
+        colors: ['#A37432', '#C39A5B', '#547A61', '#2C241A'],
       });
     } catch {
       // ignore
     }
 
     setTimeout(() => {
-      router.push('/app');
+      if (onboardingData.selectedPlan && onboardingData.selectedPlan !== 'STARTER') {
+        router.push(`/app/billing?checkout=${encodeURIComponent(onboardingData.selectedPlan)}`);
+      } else {
+        router.push('/app');
+      }
     }, 900);
   };
 
   return (
-    <div className="min-h-screen bg-[#FCECEF] text-[#3A2930] flex flex-col justify-between p-4 sm:p-8">
+    <div className="min-h-screen bg-[#E9DFC8] text-[#2C241A] flex flex-col justify-between p-4 sm:p-8">
       {/* Header */}
       <div className="max-w-3xl mx-auto w-full flex items-center justify-between py-4">
         <VelvetCodeLogo size="md" theme="light" />
-        <span className="text-xs text-[#765D66] font-semibold">
-          Step <strong className="text-[#8C455C]">{step}</strong> of 5
+        <span className="text-xs text-[#6A5A44] font-semibold">
+          Step <strong className="text-[#7A5520]">{step}</strong> of 5
         </span>
       </div>
 
       {/* Progress Bar */}
       <div className="max-w-3xl mx-auto w-full my-4">
-        <div className="w-full h-1.5 bg-[#EBCBD4] rounded-full overflow-hidden">
+        <div className="w-full h-1.5 bg-[#D8C7A5] rounded-full overflow-hidden">
           <div
-            className="h-full bg-[#B86B84] rounded-full transition-all duration-300"
+            className="h-full bg-[#A37432] rounded-full transition-all duration-300"
             style={{ width: `${(step / 5) * 100}%` }}
           />
         </div>
       </div>
 
       {/* Main Content Box */}
-      <div className="max-w-2xl mx-auto w-full bg-[#FFF9FA] border border-[#EBCBD4] rounded-2xl p-6 sm:p-10 aurum-card-shadow my-auto space-y-6 animate-in fade-in">
+      <div className="max-w-2xl mx-auto w-full bg-[#FFF9F0] border border-[#D8C7A5] rounded-2xl p-6 sm:p-10 aurum-card-shadow my-auto space-y-6 animate-in fade-in">
         {/* STEP 1: BUSINESS PROFILE */}
         {step === 1 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#FCECEF] text-[#8C455C] border border-[#EBCBD4]">
+              <div className="p-2.5 rounded-xl bg-[#E9DFC8] text-[#7A5520] border border-[#D8C7A5]">
                 <Building className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#3A2930] font-serif">Business Information</h2>
-                <p className="text-xs text-[#765D66]">
+                <h2 className="text-xl font-bold text-[#2C241A] font-serif">Business Information</h2>
+                <p className="text-xs text-[#6A5A44]">
                   Configure your primary real estate office and regulatory details.
                 </p>
               </div>
@@ -161,12 +163,12 @@ export default function OnboardingPage() {
         {step === 2 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#FCECEF] text-[#8C455C] border border-[#EBCBD4]">
+              <div className="p-2.5 rounded-xl bg-[#E9DFC8] text-[#7A5520] border border-[#D8C7A5]">
                 <Building className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#3A2930] font-serif">Select Your Business Model</h2>
-                <p className="text-xs text-[#765D66]">
+                <h2 className="text-xl font-bold text-[#2C241A] font-serif">Select Your Business Model</h2>
+                <p className="text-xs text-[#6A5A44]">
                   This customizes your pipeline stages and default property types.
                 </p>
               </div>
@@ -187,12 +189,12 @@ export default function OnboardingPage() {
                   }
                   className={`p-4 rounded-xl border cursor-pointer transition-all ${
                     onboardingData.businessType === item.id
-                      ? 'bg-[#B86B84]/15 border-[#B86B84] text-[#3A2930] shadow-sm'
-                      : 'bg-[#FFF9FA] border-[#EBCBD4] text-[#765D66] hover:border-[#B86B84]/60'
+                      ? 'bg-[#A37432]/15 border-[#A37432] text-[#2C241A] shadow-sm'
+                      : 'bg-[#FFF9F0] border-[#D8C7A5] text-[#6A5A44] hover:border-[#A37432]/60'
                   }`}
                 >
-                  <p className="text-sm font-bold text-[#3A2930]">{item.title}</p>
-                  <p className="text-xs text-[#765D66] mt-1">{item.desc}</p>
+                  <p className="text-sm font-bold text-[#2C241A]">{item.title}</p>
+                  <p className="text-xs text-[#6A5A44] mt-1">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -203,12 +205,12 @@ export default function OnboardingPage() {
         {step === 3 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#FCECEF] text-[#8C455C] border border-[#EBCBD4]">
+              <div className="p-2.5 rounded-xl bg-[#E9DFC8] text-[#7A5520] border border-[#D8C7A5]">
                 <Users2 className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#3A2930] font-serif">How Large is Your Sales Team?</h2>
-                <p className="text-xs text-[#765D66]">
+                <h2 className="text-xl font-bold text-[#2C241A] font-serif">How Large is Your Sales Team?</h2>
+                <p className="text-xs text-[#6A5A44]">
                   We will configure your initial agent seats and lead distribution rules.
                 </p>
               </div>
@@ -221,8 +223,8 @@ export default function OnboardingPage() {
                   onClick={() => setOnboardingData({ ...onboardingData, teamSize: sz })}
                   className={`p-4 rounded-xl border text-center cursor-pointer transition-all ${
                     onboardingData.teamSize === sz
-                      ? 'bg-[#B86B84]/15 border-[#B86B84] text-[#3A2930] font-bold shadow-sm'
-                      : 'bg-[#FFF9FA] border-[#EBCBD4] text-[#765D66] hover:border-[#B86B84]/60'
+                      ? 'bg-[#A37432]/15 border-[#A37432] text-[#2C241A] font-bold shadow-sm'
+                      : 'bg-[#FFF9F0] border-[#D8C7A5] text-[#6A5A44] hover:border-[#A37432]/60'
                   }`}
                 >
                   <p className="text-sm font-semibold">{sz}</p>
@@ -236,28 +238,28 @@ export default function OnboardingPage() {
         {step === 4 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#FCECEF] text-[#8C455C] border border-[#EBCBD4]">
+              <div className="p-2.5 rounded-xl bg-[#E9DFC8] text-[#7A5520] border border-[#D8C7A5]">
                 <Sliders className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#3A2930] font-serif">CRM & Automation Preferences</h2>
-                <p className="text-xs text-[#765D66]">
+                <h2 className="text-xl font-bold text-[#2C241A] font-serif">CRM & Automation Preferences</h2>
+                <p className="text-xs text-[#6A5A44]">
                   Enable intelligent channels to accelerate your daily workflow.
                 </p>
               </div>
             </div>
 
             <div className="space-y-3 pt-2">
-              <label className="flex items-center justify-between p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] cursor-pointer hover:border-[#B86B84]/60 transition-colors">
+              <label className="flex items-center justify-between p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] cursor-pointer hover:border-[#A37432]/60 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-[#4A7C59]/15 text-[#4A7C59]">
+                  <div className="p-2 rounded-lg bg-[#547A61]/15 text-[#547A61]">
                     <MessageSquare className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-[#3A2930]">
+                    <p className="text-sm font-bold text-[#2C241A]">
                       Enable WhatsApp Cloud CRM & Automations
                     </p>
-                    <p className="text-xs text-[#765D66]">
+                    <p className="text-xs text-[#6A5A44]">
                       Send instant confirmation and reminders on site visits.
                     </p>
                   </div>
@@ -268,20 +270,20 @@ export default function OnboardingPage() {
                   onChange={(e) =>
                     setOnboardingData({ ...onboardingData, enableWhatsApp: e.target.checked })
                   }
-                  className="rounded text-[#B86B84] w-4 h-4 focus:ring-[#B86B84]"
+                  className="rounded text-[#A37432] w-4 h-4 focus:ring-[#A37432]"
                 />
               </label>
 
-              <label className="flex items-center justify-between p-4 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] cursor-pointer hover:border-[#B86B84]/60 transition-colors">
+              <label className="flex items-center justify-between p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] cursor-pointer hover:border-[#A37432]/60 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-[#B86B84]/20 text-[#8C455C]">
+                  <div className="p-2 rounded-lg bg-[#A37432]/20 text-[#7A5520]">
                     <Sparkles className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-[#3A2930]">
+                    <p className="text-sm font-bold text-[#2C241A]">
                       Enable Realty AI Assistant
                     </p>
-                    <p className="text-xs text-[#765D66]">
+                    <p className="text-xs text-[#6A5A44]">
                       Auto-score leads and draft personalized follow-ups.
                     </p>
                   </div>
@@ -292,7 +294,7 @@ export default function OnboardingPage() {
                   onChange={(e) =>
                     setOnboardingData({ ...onboardingData, enableAI: e.target.checked })
                   }
-                  className="rounded text-[#B86B84] w-4 h-4 focus:ring-[#B86B84]"
+                  className="rounded text-[#A37432] w-4 h-4 focus:ring-[#A37432]"
                 />
               </label>
             </div>
@@ -303,12 +305,12 @@ export default function OnboardingPage() {
         {step === 5 && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#FCECEF] text-[#8C455C] border border-[#EBCBD4]">
+              <div className="p-2.5 rounded-xl bg-[#E9DFC8] text-[#7A5520] border border-[#D8C7A5]">
                 <CreditCard className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#3A2930] font-serif">Select Your Initial Plan</h2>
-                <p className="text-xs text-[#765D66]">
+                <h2 className="text-xl font-bold text-[#2C241A] font-serif">Select Your Initial Plan</h2>
+                <p className="text-xs text-[#6A5A44]">
                   Included in your 14-day free trial. No charge today.
                 </p>
               </div>
@@ -325,22 +327,22 @@ export default function OnboardingPage() {
                     }
                     className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
                       isSelected
-                        ? 'bg-[#B86B84]/15 border-[#B86B84] text-[#3A2930] shadow-sm'
-                        : 'bg-[#FFF9FA] border-[#EBCBD4] text-[#765D66] hover:border-[#B86B84]/60'
+                        ? 'bg-[#A37432]/15 border-[#A37432] text-[#2C241A] shadow-sm'
+                        : 'bg-[#FFF9F0] border-[#D8C7A5] text-[#6A5A44] hover:border-[#A37432]/60'
                     }`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-bold text-[#3A2930]">{p.name}</span>
+                        <span className="text-sm font-bold text-[#2C241A]">{p.name}</span>
                         {isSelected && (
-                          <CheckCircle2 className="w-4 h-4 text-[#8C455C]" />
+                          <CheckCircle2 className="w-4 h-4 text-[#7A5520]" />
                         )}
                       </div>
-                      <p className="text-base font-extrabold text-[#3A2930] font-sans">
-                        â‚¹{p.priceMonthlyINR}/mo
+                      <p className="text-base font-extrabold text-[#2C241A] font-sans">
+                        ₹{p.priceMonthlyINR}/mo
                       </p>
-                      <p className="text-[10px] text-[#765D66] mt-1 font-medium">
-                        {p.maxUsers} Users â€¢ {p.maxLeads === -1 ? 'âˆž' : p.maxLeads} Leads
+                      <p className="text-[10px] text-[#6A5A44] mt-1 font-medium">
+                        {p.maxUsers} Users • {p.maxLeads === -1 ? '∞' : p.maxLeads} Leads
                       </p>
                     </div>
                   </div>
@@ -351,7 +353,7 @@ export default function OnboardingPage() {
         )}
 
         {/* Navigation Actions */}
-        <div className="flex items-center justify-between pt-6 border-t border-[#EBCBD4]">
+        <div className="flex items-center justify-between pt-6 border-t border-[#D8C7A5]">
           {step > 1 ? (
             <Button
               type="button"
@@ -365,7 +367,7 @@ export default function OnboardingPage() {
           ) : (
             <button
               onClick={finishOnboarding}
-              className="text-xs text-[#765D66] hover:text-[#3A2930] underline font-semibold"
+              className="text-xs text-[#6A5A44] hover:text-[#2C241A] underline font-semibold"
             >
               Skip Setup (Use Defaults)
             </button>
@@ -385,8 +387,8 @@ export default function OnboardingPage() {
       </div>
 
       {/* Footer */}
-      <div className="max-w-3xl mx-auto w-full text-center py-4 text-xs text-[#765D66] font-medium">
-        Velvet Code Real Estate CRM â€¢ 14-Day Full Access Trial
+      <div className="max-w-3xl mx-auto w-full text-center py-4 text-xs text-[#6A5A44] font-medium">
+        Velvet Code Real Estate CRM • 14-Day Full Access Trial
       </div>
     </div>
   );

@@ -481,19 +481,19 @@ export default function LeadsPage() {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#FCECEF] text-[#3A2930]">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
       {/* Header & Main Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#3A2930] tracking-tight font-serif">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
               Lead Management
             </h1>
-            <span className="px-2.5 py-0.5 text-xs font-bold bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30 rounded-full">
+            <span className="px-2.5 py-0.5 text-xs font-bold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
               {filteredLeads.length} Leads
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-[#765D66] mt-1">
+          <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
             Capture, score, qualify, and convert buyer inquiries across all channels.
           </p>
         </div>
@@ -507,9 +507,9 @@ export default function LeadsPage() {
             disabled={isExporting}
             leftIcon={
               isExporting ? (
-                <Loader2 className="w-3.5 h-3.5 animate-spin text-[#8C455C]" />
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-[#7A5520]" />
               ) : (
-                <FileSpreadsheet className="w-3.5 h-3.5 text-[#4A7C59]" />
+                <FileSpreadsheet className="w-3.5 h-3.5 text-[#547A61]" />
               )
             }
           >
@@ -538,12 +538,12 @@ export default function LeadsPage() {
 
       {/* Success Notification */}
       {exportSuccessMsg && (
-        <div className="p-3.5 rounded-xl bg-[#4A7C59]/15 border border-[#4A7C59]/30 text-xs text-[#4A7C59] flex items-center justify-between animate-fade-in">
+        <div className="p-3.5 rounded-xl bg-[#547A61]/15 border border-[#547A61]/30 text-xs text-[#547A61] flex items-center justify-between animate-fade-in">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-[#4A7C59]" />
+            <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
             <span className="font-semibold">{exportSuccessMsg}</span>
           </div>
-          <button onClick={() => setExportSuccessMsg(null)} className="text-[#4A7C59] hover:text-[#3A2930]">
+          <button onClick={() => setExportSuccessMsg(null)} className="text-[#547A61] hover:text-[#2C241A]">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -551,9 +551,9 @@ export default function LeadsPage() {
 
       {/* Multi-Select Floating Action Bar */}
       {selectedLeadIds.length > 0 && (
-        <div className="p-3.5 rounded-xl bg-[#3A2930] text-[#FFF9FA] border border-[#B86B84] shadow-lg flex flex-col sm:flex-row items-center justify-between gap-3 animate-slide-down">
+        <div className="p-3.5 rounded-xl bg-[#2C241A] text-[#FFF9F0] border border-[#A37432] shadow-lg flex flex-col sm:flex-row items-center justify-between gap-3 animate-slide-down">
           <div className="flex items-center gap-3 text-xs">
-            <span className="px-2.5 py-0.5 rounded-md bg-[#B86B84] text-white font-mono font-bold">
+            <span className="px-2.5 py-0.5 rounded-md bg-[#A37432] text-white font-mono font-bold">
               {selectedLeadIds.length} Selected
             </span>
             <span>Leads chosen for export</span>
@@ -587,16 +587,16 @@ export default function LeadsPage() {
       )}
 
       {/* Filter & View Switcher Bar */}
-      <div className="p-4 rounded-2xl bg-[#FFF9FA] border border-[#EBCBD4] shadow-[0_8px_24px_rgba(120,90,40,0.08)] flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="p-4 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Search */}
         <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-[#9B828C] absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#8A7A63] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search leads by name, phone, source, property..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-[#FFF5F7] border border-[#EBCBD4] rounded-xl text-xs text-[#3A2930] placeholder:text-[#9B828C] outline-none focus:border-[#B86B84]"
+            className="w-full pl-9 pr-4 py-2 bg-[#F4EAD7] border border-[#D8C7A5] rounded-xl text-xs text-[#2C241A] placeholder:text-[#8A7A63] outline-none focus:border-[#A37432]"
           />
         </div>
 
@@ -605,7 +605,7 @@ export default function LeadsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-[#FFF5F7] border border-[#EBCBD4] rounded-xl px-3 py-2 text-xs text-[#3A2930] font-semibold outline-none focus:border-[#B86B84]"
+            className="bg-[#F4EAD7] border border-[#D8C7A5] rounded-xl px-3 py-2 text-xs text-[#2C241A] font-semibold outline-none focus:border-[#A37432]"
           >
             <option value="ALL">All Statuses</option>
             {allKnownStatuses.map((st) => {
@@ -621,7 +621,7 @@ export default function LeadsPage() {
           <select
             value={sourceFilter}
             onChange={(e) => setSourceFilter(e.target.value)}
-            className="bg-[#FFF5F7] border border-[#EBCBD4] rounded-xl px-3 py-2 text-xs text-[#3A2930] font-semibold outline-none focus:border-[#B86B84]"
+            className="bg-[#F4EAD7] border border-[#D8C7A5] rounded-xl px-3 py-2 text-xs text-[#2C241A] font-semibold outline-none focus:border-[#A37432]"
           >
             <option value="ALL">All Sources</option>
             {allKnownSources.map((src) => (
@@ -634,7 +634,7 @@ export default function LeadsPage() {
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="bg-[#FFF5F7] border border-[#EBCBD4] rounded-xl px-3 py-2 text-xs text-[#3A2930] font-semibold outline-none focus:border-[#B86B84]"
+            className="bg-[#F4EAD7] border border-[#D8C7A5] rounded-xl px-3 py-2 text-xs text-[#2C241A] font-semibold outline-none focus:border-[#A37432]"
           >
             <option value="ALL">All Priorities</option>
             <option value="URGENT">Urgent Priority</option>
@@ -644,11 +644,11 @@ export default function LeadsPage() {
           </select>
 
           {/* View Switcher */}
-          <div className="bg-[#FFF5F7] border border-[#EBCBD4] p-1 rounded-xl flex items-center gap-1 ml-auto">
+          <div className="bg-[#F4EAD7] border border-[#D8C7A5] p-1 rounded-xl flex items-center gap-1 ml-auto">
             <button
               onClick={() => setViewMode('table')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'table' ? 'bg-[#B86B84] text-white shadow-sm' : 'text-[#765D66] hover:text-[#3A2930]'
+                viewMode === 'table' ? 'bg-[#A37432] text-white shadow-sm' : 'text-[#6A5A44] hover:text-[#2C241A]'
               }`}
               title="Table View"
             >
@@ -657,7 +657,7 @@ export default function LeadsPage() {
             <button
               onClick={() => setViewMode('cards')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'cards' ? 'bg-[#B86B84] text-white shadow-sm' : 'text-[#765D66] hover:text-[#3A2930]'
+                viewMode === 'cards' ? 'bg-[#A37432] text-white shadow-sm' : 'text-[#6A5A44] hover:text-[#2C241A]'
               }`}
               title="Card Grid View"
             >
@@ -678,19 +678,19 @@ export default function LeadsPage() {
         />
       ) : viewMode === 'table' ? (
         /* TABLE VIEW */
-        <div className="rounded-2xl border border-[#EBCBD4] bg-[#FFF9FA] overflow-hidden shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
+        <div className="rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] overflow-hidden shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="bg-[#FFF5F7] border-b border-[#EBCBD4] text-[#765D66] font-semibold">
+                <tr className="bg-[#F4EAD7] border-b border-[#D8C7A5] text-[#6A5A44] font-semibold">
                   <th className="p-4 w-10">
                     <button
                       onClick={handleSelectAllFiltered}
-                      className="text-[#8C455C] hover:text-[#3A2930] transition-colors"
+                      className="text-[#7A5520] hover:text-[#2C241A] transition-colors"
                       title="Select / Deselect All"
                     >
                       {selectedLeadIds.length === filteredLeads.length && filteredLeads.length > 0 ? (
-                        <CheckSquare className="w-4 h-4 text-[#B86B84]" />
+                        <CheckSquare className="w-4 h-4 text-[#A37432]" />
                       ) : (
                         <Square className="w-4 h-4" />
                       )}
@@ -707,20 +707,20 @@ export default function LeadsPage() {
                   <th className="p-4 text-right">Quick Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#EBCBD4]/60">
+              <tbody className="divide-y divide-[#D8C7A5]/60">
                 {filteredLeads.map((lead) => (
                   <tr
                     key={lead.id}
                     onClick={() => openDetail(lead)}
                     className={`hover:bg-[#F7EEDC] cursor-pointer transition-colors ${
-                      selectedLeadIds.includes(lead.id) ? 'bg-[#B86B84]/10' : ''
+                      selectedLeadIds.includes(lead.id) ? 'bg-[#A37432]/10' : ''
                     }`}
                   >
                     <td className="p-4" onClick={(e) => handleToggleSelectLead(lead.id, e)}>
                       {selectedLeadIds.includes(lead.id) ? (
-                        <CheckSquare className="w-4 h-4 text-[#B86B84]" />
+                        <CheckSquare className="w-4 h-4 text-[#A37432]" />
                       ) : (
-                        <Square className="w-4 h-4 text-[#9B828C]" />
+                        <Square className="w-4 h-4 text-[#8A7A63]" />
                       )}
                     </td>
                     <td className="p-4">
@@ -729,76 +729,76 @@ export default function LeadsPage() {
                           <img
                             src={lead.imageUrl}
                             alt={lead.name}
-                            className="w-8 h-8 rounded-lg object-cover border border-[#EBCBD4] flex-shrink-0"
+                            className="w-8 h-8 rounded-lg object-cover border border-[#D8C7A5] flex-shrink-0"
                           />
                         ) : (
-                          <div className="w-8 h-8 rounded-lg bg-[#FFF5F7] border border-[#EBCBD4] text-[#8C455C] font-bold text-xs flex items-center justify-center flex-shrink-0">
+                          <div className="w-8 h-8 rounded-lg bg-[#F4EAD7] border border-[#D8C7A5] text-[#7A5520] font-bold text-xs flex items-center justify-center flex-shrink-0">
                             {getLeadInitials(lead.name)}
                           </div>
                         )}
                         <div>
-                          <div className="font-bold text-[#3A2930] hover:text-[#8C455C]">{lead.name}</div>
-                          <div className="text-[10px] text-[#9B828C]">{lead.preferredLocation || 'Tamil Nadu'}</div>
+                          <div className="font-bold text-[#2C241A] hover:text-[#7A5520]">{lead.name}</div>
+                          <div className="text-[10px] text-[#8A7A63]">{lead.preferredLocation || 'Tamil Nadu'}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="p-4 font-mono text-[#3A2930]">{lead.phone}</td>
+                    <td className="p-4 font-mono text-[#2C241A]">{lead.phone}</td>
                     <td className="p-4">
-                      <span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FFF5F7] text-[#765D66] rounded border border-[#EBCBD4]">
+                      <span className="px-2 py-0.5 text-[10px] font-semibold bg-[#F4EAD7] text-[#6A5A44] rounded border border-[#D8C7A5]">
                         {lead.source}
                       </span>
                     </td>
                     <td className="p-4">
                       <LeadStatusBadge status={lead.status} />
                     </td>
-                    <td className="p-4 font-semibold text-[#3A2930]">
+                    <td className="p-4 font-semibold text-[#2C241A]">
                       {lead.interestedPropertyName || 'General Portfolio'}
                     </td>
-                    <td className="p-4 font-bold text-[#8C455C] font-mono">
+                    <td className="p-4 font-bold text-[#7A5520] font-mono">
                       {lead.budgetMaxINR ? formatINR(lead.budgetMaxINR, true) : 'Flexible'}
                     </td>
                     <td className="p-4">
                       <div className="flex items-center gap-1.5">
-                        <span className="font-extrabold text-[#4A7C59]">{lead.score}%</span>
-                        <div className="w-12 h-1.5 bg-[#FFF5F7] rounded-full overflow-hidden">
+                        <span className="font-extrabold text-[#547A61]">{lead.score}%</span>
+                        <div className="w-12 h-1.5 bg-[#F4EAD7] rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-[#4A7C59] rounded-full"
+                            className="h-full bg-[#547A61] rounded-full"
                             style={{ width: `${lead.score}%` }}
                           />
                         </div>
                       </div>
                     </td>
-                    <td className="p-4 text-[#765D66] font-medium">
+                    <td className="p-4 text-[#6A5A44] font-medium">
                       {lead.assignedToName || 'Unassigned'}
                     </td>
                     <td className="p-4 text-right" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center justify-end gap-1.5">
                         <button
                           onClick={() => handleOpenEdit(lead)}
-                          className="p-1.5 rounded-lg bg-[#FFF5F7] hover:bg-[#FCECEF] text-[#3A2930] border border-[#EBCBD4] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg bg-[#F4EAD7] hover:bg-[#E9DFC8] text-[#2C241A] border border-[#D8C7A5] transition-colors cursor-pointer"
                           title="Edit Lead"
                         >
-                          <Edit2 className="w-3.5 h-3.5 text-[#8C455C]" />
+                          <Edit2 className="w-3.5 h-3.5 text-[#7A5520]" />
                         </button>
                         <a
                           href={buildWhatsAppUrl(lead.phone, `Hello ${lead.name}, connecting regarding ${lead.interestedPropertyName || 'your inquiry'}.`)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 rounded-lg bg-[#4A7C59]/10 hover:bg-[#4A7C59]/20 text-[#4A7C59] border border-[#4A7C59]/30 transition-colors"
+                          className="p-1.5 rounded-lg bg-[#547A61]/10 hover:bg-[#547A61]/20 text-[#547A61] border border-[#547A61]/30 transition-colors"
                           title="Open WhatsApp"
                         >
                           <MessageSquare className="w-3.5 h-3.5" />
                         </a>
                         <a
                           href={`tel:${lead.phone}`}
-                          className="p-1.5 rounded-lg bg-[#FFF5F7] hover:bg-[#FCECEF] text-[#3A2930] border border-[#EBCBD4] transition-colors"
+                          className="p-1.5 rounded-lg bg-[#F4EAD7] hover:bg-[#E9DFC8] text-[#2C241A] border border-[#D8C7A5] transition-colors"
                           title="Call Lead"
                         >
                           <Phone className="w-3.5 h-3.5" />
                         </a>
                         <button
                           onClick={() => deleteLead(lead.id)}
-                          className="p-1.5 rounded-lg text-[#765D66] hover:text-[#A84355] hover:bg-[#A84355]/10 transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#6A5A44] hover:text-[#8B4A4A] hover:bg-[#8B4A4A]/10 transition-colors cursor-pointer"
                           title="Delete Lead"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -818,8 +818,8 @@ export default function LeadsPage() {
             <div
               key={lead.id}
               onClick={() => openDetail(lead)}
-              className={`p-5 rounded-2xl bg-[#FFF9FA] border hover:border-[#B86B84] cursor-pointer shadow-[0_8px_24px_rgba(120,90,40,0.08)] hover:shadow-md transition-all space-y-3 flex flex-col justify-between ${
-                selectedLeadIds.includes(lead.id) ? 'border-[#B86B84] ring-2 ring-[#B86B84]/20' : 'border-[#EBCBD4]'
+              className={`p-5 rounded-2xl bg-[#FFF9F0] border hover:border-[#A37432] cursor-pointer shadow-[0_8px_24px_rgba(120,90,40,0.08)] hover:shadow-md transition-all space-y-3 flex flex-col justify-between ${
+                selectedLeadIds.includes(lead.id) ? 'border-[#A37432] ring-2 ring-[#A37432]/20' : 'border-[#D8C7A5]'
               }`}
             >
               <div>
@@ -827,16 +827,16 @@ export default function LeadsPage() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={(e) => handleToggleSelectLead(lead.id, e)}
-                      className="text-[#8C455C]"
+                      className="text-[#7A5520]"
                     >
                       {selectedLeadIds.includes(lead.id) ? (
-                        <CheckSquare className="w-4 h-4 text-[#B86B84]" />
+                        <CheckSquare className="w-4 h-4 text-[#A37432]" />
                       ) : (
-                        <Square className="w-4 h-4 text-[#9B828C]" />
+                        <Square className="w-4 h-4 text-[#8A7A63]" />
                       )}
                     </button>
                     <LeadStatusBadge status={lead.status} />
-                    <span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FFF5F7] text-[#765D66] rounded border border-[#EBCBD4]">
+                    <span className="px-2 py-0.5 text-[10px] font-semibold bg-[#F4EAD7] text-[#6A5A44] rounded border border-[#D8C7A5]">
                       {lead.source}
                     </span>
                   </div>
@@ -848,43 +848,43 @@ export default function LeadsPage() {
                     <img
                       src={lead.imageUrl}
                       alt={lead.name}
-                      className="w-12 h-12 rounded-xl object-cover border border-[#EBCBD4] flex-shrink-0 shadow-2xs"
+                      className="w-12 h-12 rounded-xl object-cover border border-[#D8C7A5] flex-shrink-0 shadow-2xs"
                     />
                   ) : (
-                    <div className="w-12 h-12 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] text-[#8C455C] font-bold text-sm flex items-center justify-center flex-shrink-0 shadow-2xs">
+                    <div className="w-12 h-12 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] text-[#7A5520] font-bold text-sm flex items-center justify-center flex-shrink-0 shadow-2xs">
                       {getLeadInitials(lead.name)}
                     </div>
                   )}
                   <div>
-                    <h3 className="text-base font-bold text-[#3A2930] hover:text-[#8C455C] transition-colors">
+                    <h3 className="text-base font-bold text-[#2C241A] hover:text-[#7A5520] transition-colors">
                       {lead.name}
                     </h3>
-                    <p className="text-xs text-[#765D66] mt-0.5 font-medium">{lead.phone}</p>
+                    <p className="text-xs text-[#6A5A44] mt-0.5 font-medium">{lead.phone}</p>
                   </div>
                 </div>
 
-                <div className="mt-3 p-3 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] text-xs space-y-1">
+                <div className="mt-3 p-3 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] text-xs space-y-1">
                   <div className="flex justify-between">
-                    <span className="text-[#765D66]">Budget:</span>
-                    <span className="font-bold text-[#8C455C] font-mono">
+                    <span className="text-[#6A5A44]">Budget:</span>
+                    <span className="font-bold text-[#7A5520] font-mono">
                       {lead.budgetMaxINR ? formatINR(lead.budgetMaxINR, true) : 'Flexible'}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#765D66]">Property:</span>
-                    <span className="text-[#3A2930] font-semibold truncate max-w-[160px]">
+                    <span className="text-[#6A5A44]">Property:</span>
+                    <span className="text-[#2C241A] font-semibold truncate max-w-[160px]">
                       {lead.interestedPropertyName || 'General Portfolio'}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#EBCBD4] flex items-center justify-between text-xs">
-                <span className="text-[#765D66]">Score: <strong className="text-[#4A7C59]">{lead.score}%</strong></span>
+              <div className="pt-3 border-t border-[#D8C7A5] flex items-center justify-between text-xs">
+                <span className="text-[#6A5A44]">Score: <strong className="text-[#547A61]">{lead.score}%</strong></span>
                 <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                   <button
                     onClick={() => handleOpenEdit(lead)}
-                    className="p-1.5 rounded-lg bg-[#FFF5F7] text-[#8C455C] border border-[#EBCBD4] hover:bg-[#FCECEF] cursor-pointer"
+                    className="p-1.5 rounded-lg bg-[#F4EAD7] text-[#7A5520] border border-[#D8C7A5] hover:bg-[#E9DFC8] cursor-pointer"
                     title="Edit Lead"
                   >
                     <Edit2 className="w-3.5 h-3.5" />
@@ -893,13 +893,13 @@ export default function LeadsPage() {
                     href={buildWhatsAppUrl(lead.phone, `Hello ${lead.name}, regarding your real estate inquiry.`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-1.5 rounded-lg bg-[#4A7C59]/10 text-[#4A7C59] hover:bg-[#4A7C59]/20"
+                    className="p-1.5 rounded-lg bg-[#547A61]/10 text-[#547A61] hover:bg-[#547A61]/20"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                   </a>
                   <a
                     href={`tel:${lead.phone}`}
-                    className="p-1.5 rounded-lg bg-[#FFF5F7] text-[#3A2930] border border-[#EBCBD4] hover:bg-[#FCECEF]"
+                    className="p-1.5 rounded-lg bg-[#F4EAD7] text-[#2C241A] border border-[#D8C7A5] hover:bg-[#E9DFC8]"
                   >
                     <Phone className="w-3.5 h-3.5" />
                   </a>
@@ -917,17 +917,17 @@ export default function LeadsPage() {
           onClose={() => setIsDrawerOpen(false)}
           title={
             <div className="flex items-center gap-2.5">
-              <span className="text-lg font-bold text-[#3A2930]">{selectedLead.name}</span>
+              <span className="text-lg font-bold text-[#2C241A]">{selectedLead.name}</span>
               <LeadStatusBadge status={selectedLead.status} />
             </div>
           }
-          subtitle={`Lead ID: ${selectedLead.id} â€¢ Conversion Probability: ${selectedLead.score}%`}
+          subtitle={`Lead ID: ${selectedLead.id} • Conversion Probability: ${selectedLead.score}%`}
           size="lg"
         >
           <div className="space-y-6 text-xs sm:text-sm">
             {/* Lead Image Display */}
             {selectedLead.imageUrl ? (
-              <div className="relative h-52 w-full rounded-2xl overflow-hidden border border-[#EBCBD4] bg-[#FCECEF] shadow-2xs">
+              <div className="relative h-52 w-full rounded-2xl overflow-hidden border border-[#D8C7A5] bg-[#E9DFC8] shadow-2xs">
                 <img
                   src={selectedLead.imageUrl}
                   alt={selectedLead.name}
@@ -935,13 +935,13 @@ export default function LeadsPage() {
                 />
               </div>
             ) : (
-              <div className="p-4 rounded-2xl bg-[#FFF5F7] border border-[#EBCBD4] flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-[#FFF9FA] border border-[#EBCBD4] text-[#8C455C] font-bold text-base flex items-center justify-center shadow-2xs">
+              <div className="p-4 rounded-2xl bg-[#F4EAD7] border border-[#D8C7A5] flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] text-[#7A5520] font-bold text-base flex items-center justify-center shadow-2xs">
                   {getLeadInitials(selectedLead.name)}
                 </div>
                 <div>
-                  <h4 className="font-bold text-[#3A2930] text-sm">{selectedLead.name}</h4>
-                  <p className="text-xs text-[#765D66]">No custom lead photo attached yet.</p>
+                  <h4 className="font-bold text-[#2C241A] text-sm">{selectedLead.name}</h4>
+                  <p className="text-xs text-[#6A5A44]">No custom lead photo attached yet.</p>
                 </div>
               </div>
             )}
@@ -952,16 +952,16 @@ export default function LeadsPage() {
                 href={buildWhatsAppUrl(selectedLead.phone, `Hello ${selectedLead.name}, connecting from Velvet Code.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-[#4A7C59] hover:bg-[#43644e] text-white font-bold text-xs shadow-sm"
+                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-[#547A61] hover:bg-[#43644e] text-white font-bold text-xs shadow-sm"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
                 WhatsApp
               </a>
               <a
                 href={`tel:${selectedLead.phone}`}
-                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-[#FFF9FA] hover:bg-[#FFF5F7] text-[#3A2930] font-bold text-xs border border-[#EBCBD4]"
+                className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-[#FFF9F0] hover:bg-[#F4EAD7] text-[#2C241A] font-bold text-xs border border-[#D8C7A5]"
               >
-                <Phone className="w-3.5 h-3.5 text-[#D98FA5]" />
+                <Phone className="w-3.5 h-3.5 text-[#C39A5B]" />
                 Call Phone
               </a>
               <Button
@@ -986,81 +986,81 @@ export default function LeadsPage() {
             </div>
 
             {/* Core Details */}
-            <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-3">
-              <h4 className="font-bold text-[#8C455C] text-xs uppercase tracking-wider">
+            <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-3">
+              <h4 className="font-bold text-[#7A5520] text-xs uppercase tracking-wider">
                 Contact & Profile Information
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div>
-                  <span className="text-[#765D66] block">Phone Number</span>
-                  <span className="text-[#3A2930] font-bold">{selectedLead.phone}</span>
+                  <span className="text-[#6A5A44] block">Phone Number</span>
+                  <span className="text-[#2C241A] font-bold">{selectedLead.phone}</span>
                 </div>
                 <div>
-                  <span className="text-[#765D66] block">Email Address</span>
-                  <span className="text-[#3A2930]">{selectedLead.email || 'N/A'}</span>
+                  <span className="text-[#6A5A44] block">Email Address</span>
+                  <span className="text-[#2C241A]">{selectedLead.email || 'N/A'}</span>
                 </div>
                 <div>
-                  <span className="text-[#765D66] block">Lead Source</span>
-                  <span className="text-[#3A2930] font-bold">{selectedLead.source}</span>
+                  <span className="text-[#6A5A44] block">Lead Source</span>
+                  <span className="text-[#2C241A] font-bold">{selectedLead.source}</span>
                 </div>
                 <div>
-                  <span className="text-[#765D66] block">Status</span>
-                  <span className="text-[#3A2930] font-bold">{selectedLead.status}</span>
+                  <span className="text-[#6A5A44] block">Status</span>
+                  <span className="text-[#2C241A] font-bold">{selectedLead.status}</span>
                 </div>
                 <div>
-                  <span className="text-[#765D66] block">Target Budget</span>
-                  <span className="text-[#8C455C] font-bold font-mono">
+                  <span className="text-[#6A5A44] block">Target Budget</span>
+                  <span className="text-[#7A5520] font-bold font-mono">
                     {selectedLead.budgetMaxINR ? formatINR(selectedLead.budgetMaxINR) : 'Flexible'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[#765D66] block">Preferred City / Area</span>
-                  <span className="text-[#3A2930] font-medium">{selectedLead.preferredLocation || 'Chennai Metros'}</span>
+                  <span className="text-[#6A5A44] block">Preferred City / Area</span>
+                  <span className="text-[#2C241A] font-medium">{selectedLead.preferredLocation || 'Chennai Metros'}</span>
                 </div>
                 <div>
-                  <span className="text-[#765D66] block">Assigned Consultant</span>
-                  <span className="text-[#3A2930] font-medium">{selectedLead.assignedToName || 'Sri Lakshman (OWNER)'}</span>
+                  <span className="text-[#6A5A44] block">Assigned Consultant</span>
+                  <span className="text-[#2C241A] font-medium">{selectedLead.assignedToName || 'Sri Lakshman (OWNER)'}</span>
                 </div>
               </div>
             </div>
 
             {/* Interested Property */}
-            <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-2">
-              <h4 className="font-bold text-[#8C455C] text-xs uppercase tracking-wider">
+            <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-2">
+              <h4 className="font-bold text-[#7A5520] text-xs uppercase tracking-wider">
                 Property Interest
               </h4>
-              <p className="text-sm font-bold text-[#3A2930]">
+              <p className="text-sm font-bold text-[#2C241A]">
                 {selectedLead.interestedPropertyName || 'General Portfolio'}
               </p>
             </div>
 
             {/* Notes & Activity */}
-            <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-2">
-              <h4 className="font-bold text-[#8C455C] text-xs uppercase tracking-wider">
+            <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-2">
+              <h4 className="font-bold text-[#7A5520] text-xs uppercase tracking-wider">
                 Consultant Notes
               </h4>
-              <p className="text-xs text-[#765D66] leading-relaxed bg-[#FFF9FA] p-3 rounded-lg border border-[#EBCBD4]">
+              <p className="text-xs text-[#6A5A44] leading-relaxed bg-[#FFF9F0] p-3 rounded-lg border border-[#D8C7A5]">
                 {selectedLead.notes || 'No custom notes logged yet.'}
               </p>
             </div>
 
             {/* Realty AI Conversion Score */}
-            <div className="p-4 rounded-xl bg-[#FFF9FA] border border-[#B86B84]/50 shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-2">
+            <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#A37432]/50 shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#8C455C] flex items-center gap-1.5">
+                <span className="text-xs font-bold text-[#7A5520] flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" /> Realty AI Score
                 </span>
-                <span className="text-lg font-extrabold text-[#4A7C59]">{selectedLead.score}%</span>
+                <span className="text-lg font-extrabold text-[#547A61]">{selectedLead.score}%</span>
               </div>
-              <p className="text-xs text-[#765D66]">
+              <p className="text-xs text-[#6A5A44]">
                 Based on verified budget, fast response rate, and site visit engagement history.
               </p>
             </div>
 
             {/* Scheduled Appointments & Follow-ups */}
-            <div className="p-4 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] space-y-3">
+            <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-3">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-[#8C455C] text-xs uppercase tracking-wider flex items-center gap-1.5">
+                <h4 className="font-bold text-[#7A5520] text-xs uppercase tracking-wider flex items-center gap-1.5">
                   <Calendar className="w-3.5 h-3.5" /> Scheduled Appointments & Visits
                 </h4>
                 <Button
@@ -1074,7 +1074,7 @@ export default function LeadsPage() {
               </div>
 
               {appointments.filter((a) => a.leadId === selectedLead.id).length === 0 ? (
-                <p className="text-xs text-[#765D66] italic bg-[#FFF9FA] p-3 rounded-lg border border-[#EBCBD4]">
+                <p className="text-xs text-[#6A5A44] italic bg-[#FFF9F0] p-3 rounded-lg border border-[#D8C7A5]">
                   No upcoming appointments scheduled for this lead. Click &quot;Schedule&quot; above to book a site visit or consultation.
                 </p>
               ) : (
@@ -1084,25 +1084,25 @@ export default function LeadsPage() {
                     .map((apt) => (
                       <div
                         key={apt.id}
-                        className="p-2.5 rounded-lg bg-[#FFF9FA] border border-[#EBCBD4] text-xs space-y-1.5"
+                        className="p-2.5 rounded-lg bg-[#FFF9F0] border border-[#D8C7A5] text-xs space-y-1.5"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-[#3A2930]">{apt.title}</span>
+                          <span className="font-bold text-[#2C241A]">{apt.title}</span>
                           <span
                             className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                               apt.status === 'COMPLETED'
-                                ? 'bg-[#4A7C59]/15 text-[#4A7C59] border border-[#4A7C59]/30'
+                                ? 'bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30'
                                 : apt.status === 'CANCELLED'
-                                ? 'bg-[#A84355]/15 text-[#A84355] border border-[#A84355]/30'
-                                : 'bg-[#B86B84]/15 text-[#8C455C] border border-[#B86B84]/30'
+                                ? 'bg-[#8B4A4A]/15 text-[#8B4A4A] border border-[#8B4A4A]/30'
+                                : 'bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30'
                             }`}
                           >
                             {apt.status}
                           </span>
                         </div>
-                        <div className="flex flex-wrap items-center gap-3 text-[11px] text-[#765D66]">
+                        <div className="flex flex-wrap items-center gap-3 text-[11px] text-[#6A5A44]">
                           <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3 text-[#B86B84]" />
+                            <Clock className="w-3 h-3 text-[#A37432]" />
                             {new Date(apt.startAt).toLocaleString('en-IN', {
                               dateStyle: 'medium',
                               timeStyle: 'short',
@@ -1110,13 +1110,13 @@ export default function LeadsPage() {
                           </span>
                           {apt.location && (
                             <span className="flex items-center gap-1 truncate max-w-[160px]">
-                              <MapPin className="w-3 h-3 text-[#B86B84]" />
+                              <MapPin className="w-3 h-3 text-[#A37432]" />
                               {apt.location}
                             </span>
                           )}
                         </div>
                         {apt.description && (
-                          <p className="text-[11px] text-[#765D66] italic">{apt.description}</p>
+                          <p className="text-[11px] text-[#6A5A44] italic">{apt.description}</p>
                         )}
                         <div className="flex justify-end pt-1">
                           <button
@@ -1126,7 +1126,7 @@ export default function LeadsPage() {
                                 deleteAppointment(apt.id);
                               }
                             }}
-                            className="text-[10px] text-[#A84355] hover:underline flex items-center gap-0.5 cursor-pointer"
+                            className="text-[10px] text-[#8B4A4A] hover:underline flex items-center gap-0.5 cursor-pointer"
                           >
                             <Trash2 className="w-2.5 h-2.5" /> Remove
                           </button>
@@ -1283,7 +1283,7 @@ export default function LeadsPage() {
             onChange={(e) => setNewLeadForm({ ...newLeadForm, notes: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
             <Button
               type="button"
               variant="secondary"
@@ -1446,7 +1446,7 @@ export default function LeadsPage() {
             onChange={(e) => setEditLeadForm({ ...editLeadForm, notes: e.target.value })}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
             <Button
               type="button"
               variant="secondary"
@@ -1479,10 +1479,10 @@ export default function LeadsPage() {
         description="Upload your lead spreadsheet to automatically parse names, phone numbers, and budgets."
       >
         <div className="space-y-4 text-xs sm:text-sm">
-          <label className="border-2 border-dashed border-[#EBCBD4] rounded-2xl p-8 text-center bg-[#FFF5F7] hover:border-[#B86B84] transition-colors cursor-pointer block">
-            <Upload className="w-8 h-8 text-[#8C455C] mx-auto mb-2" />
-            <p className="font-bold text-[#3A2930]">Click to select or drop your .csv lead spreadsheet</p>
-            <p className="text-[#765D66] text-xs mt-1">Supports UTF-8 CSV exports with Name, Phone, Email, Budget columns</p>
+          <label className="border-2 border-dashed border-[#D8C7A5] rounded-2xl p-8 text-center bg-[#F4EAD7] hover:border-[#A37432] transition-colors cursor-pointer block">
+            <Upload className="w-8 h-8 text-[#7A5520] mx-auto mb-2" />
+            <p className="font-bold text-[#2C241A]">Click to select or drop your .csv lead spreadsheet</p>
+            <p className="text-[#6A5A44] text-xs mt-1">Supports UTF-8 CSV exports with Name, Phone, Email, Budget columns</p>
             <input
               type="file"
               accept=".csv"
@@ -1527,12 +1527,12 @@ export default function LeadsPage() {
             />
           </label>
 
-          <div className="p-3.5 rounded-xl bg-[#FFF5F7] border border-[#EBCBD4] text-xs text-[#3A2930]">
-            <p className="font-bold text-[#8C455C] mb-1">CSV Format Guidance:</p>
-            <p className="text-[#765D66]">Columns: <code className="bg-[#FFF9FA] px-1 py-0.5 rounded border border-[#EBCBD4] text-[#3A2930]">Name, Phone, Email, Budget, Source</code></p>
+          <div className="p-3.5 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] text-xs text-[#2C241A]">
+            <p className="font-bold text-[#7A5520] mb-1">CSV Format Guidance:</p>
+            <p className="text-[#6A5A44]">Columns: <code className="bg-[#FFF9F0] px-1 py-0.5 rounded border border-[#D8C7A5] text-[#2C241A]">Name, Phone, Email, Budget, Source</code></p>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
             <Button
               variant="secondary"
               size="sm"
@@ -1654,7 +1654,7 @@ export default function LeadsPage() {
               }
             />
 
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#EBCBD4]">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#D8C7A5]">
               <Button
                 type="button"
                 variant="secondary"
