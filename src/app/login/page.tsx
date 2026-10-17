@@ -18,7 +18,7 @@ import {
 
 export default function LoginPage() {
   const router = useRouter();
-  const { setCurrentUser } = useCRMStore();
+  const { setCurrentUser, setCurrentOrg } = useCRMStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -46,6 +46,9 @@ export default function LoginPage() {
       }
 
       // Update client-side store
+      if (data.organization) {
+        setCurrentOrg(data.organization);
+      }
       if (data.user) {
         setCurrentUser(data.user);
       }

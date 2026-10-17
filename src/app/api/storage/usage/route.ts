@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const usage = cloudStorage.getUsage(session.organizationId);
+    const usage = await cloudStorage.getUsage(session.organizationId);
 
     return NextResponse.json({
       success: true,

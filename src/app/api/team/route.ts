@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const orgUsers = serverDB.getUsers().filter((u) => u.organizationId === session.organizationId);
+    const orgUsers = await serverDB.getUsers(session.organizationId);
     return NextResponse.json({ success: true, data: orgUsers });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch team members' }, { status: 500 });
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     // Server-side seat limit enforcement
     if (!session.isOwner) {
       const planLimits = serverDB.getOrgPlanLimits(session.organizationId);
-      const currentUsers = serverDB.getUsers().filter((u) => u.organizationId === session.organizationId);
+      const currentUsers = await serverDB.getUsers(session.organizationId);
       if (currentUsers.length >= planLimits.maxUsers) {
         return NextResponse.json(
           {
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
       isSuperAdmin: false,
     };
 
-    serverDB.addUser(newUser);
+    await serverDB.addUser(newUser);
 
     return NextResponse.json({
       success: true,

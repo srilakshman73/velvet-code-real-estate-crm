@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from '@/lib/auth-server';
+import { serverDB } from '@/lib/server-db';
 
 export async function GET(request: NextRequest) {
   try {
@@ -12,9 +13,26 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const org = await serverDB.getOrganizationById(session.organizationId);
+
     return NextResponse.json({
       authenticated: true,
-      user: session,
+      user: {
+        id: session.userId,
+        name: session.name,
+        email: session.email,
+        role: session.role,
+        organizationId: session.organizationId,
+        isSuperAdmin: session.isSuperAdmin,
+      },
+      organization: org || {
+        id: session.organizationId,
+        name: session.organizationName,
+        slug: session.organizationName.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+        country: 'India',
+        businessType: 'AGENCY',
+        createdAt: new Date().toISOString(),
+      },
     });
   } catch (error) {
     return NextResponse.json(

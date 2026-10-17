@@ -39,7 +39,7 @@ export default function AdminPlatformSettingsPage() {
     metaAppSecret: '••••••••••••••••••••••••••••••••',
     maintenanceMode: false,
     globalAnnouncementText: '',
-    trialPeriodDays: '14',
+    trialPeriodDays: '7',
   });
 
   const handleSave = (e: React.FormEvent) => {

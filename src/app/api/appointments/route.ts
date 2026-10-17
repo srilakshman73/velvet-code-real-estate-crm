@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
+import { verifyCustomerAccess } from '@/lib/subscription-gate';
 import { Appointment } from '@/types';
 
 // GET /api/appointments
@@ -9,6 +10,18 @@ export async function GET(request: NextRequest) {
     const session = await getServerSession(request);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized: Authentication required' }, { status: 401 });
+    }
+
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to access appointments.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
     }
 
     const searchParams = request.nextUrl.searchParams;
@@ -21,7 +34,7 @@ export async function GET(request: NextRequest) {
       ? searchParams.get('organizationId')!
       : session.organizationId;
 
-    const appointments = serverDB.getAppointments(requestedOrg, {
+    const appointments = await serverDB.getAppointments(requestedOrg, {
       clientId,
       leadId,
       propertyId,
@@ -47,6 +60,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized: Authentication required' }, { status: 401 });
     }
 
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to schedule appointments.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
+    }
+
     const body = await request.json();
 
     if (!body.title || !body.startAt) {
@@ -60,28 +85,28 @@ export async function POST(request: NextRequest) {
       ? body.organizationId
       : session.organizationId;
 
-    // Resolve relational names
     let clientName = body.clientName;
     if (body.clientId && !clientName) {
-      const client = serverDB.getClientById(body.clientId, effectiveOrgId);
+      const client = await serverDB.getClientById(body.clientId, effectiveOrgId);
       if (client) clientName = client.name;
     }
 
     let leadName = body.leadName;
     if (body.leadId && !leadName) {
-      const lead = serverDB.getLeadById(body.leadId, effectiveOrgId);
+      const lead = await serverDB.getLeadById(body.leadId, effectiveOrgId);
       if (lead) leadName = lead.name;
     }
 
     let propTitle = body.propertyTitle;
     if (body.propertyId && !propTitle) {
-      const prop = serverDB.getPropertyById(body.propertyId, effectiveOrgId);
+      const prop = (await serverDB.getProperties(effectiveOrgId)).find((p) => p.id === body.propertyId);
       if (prop) propTitle = prop.title;
     }
 
     let agentName = body.assignedUserName;
     if (body.assignedUserId && !agentName) {
-      const user = serverDB.getUsers().find((u) => u.id === body.assignedUserId);
+      const users = await serverDB.getUsers(effectiveOrgId);
+      const user = users.find((u) => u.id === body.assignedUserId);
       if (user) agentName = user.name;
     }
 
@@ -98,28 +123,31 @@ export async function POST(request: NextRequest) {
       assignedUserId: body.assignedUserId || session.userId,
       assignedUserName: agentName || session.name,
       title: String(body.title).trim(),
-      description: body.description ? String(body.description).trim() : undefined,
-      appointmentType: body.appointmentType || 'CLIENT_APPOINTMENT',
-      startAt: new Date(body.startAt).toISOString(),
-      endAt: body.endAt ? new Date(body.endAt).toISOString() : new Date(new Date(body.startAt).getTime() + 60 * 60 * 1000).toISOString(),
-      location: body.location ? String(body.location).trim() : undefined,
+      description: body.description ? String(body.description).trim() : (body.notes ? String(body.notes).trim() : undefined),
+      appointmentType: body.appointmentType || 'SITE_VISIT',
       status: body.status || 'SCHEDULED',
-      reminderMinutes: Number(body.reminderMinutes) || 15,
+      startAt: body.startAt,
+      endAt: body.endAt || new Date(new Date(body.startAt).getTime() + (body.durationMinutes || 60) * 60000).toISOString(),
+      location: body.location ? String(body.location).trim() : undefined,
+      reminderMinutes: body.reminderMinutes || 15,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
 
-    serverDB.addAppointment(newAppointment);
+    await serverDB.addAppointment(newAppointment);
 
     return NextResponse.json(
       {
         success: true,
-        message: 'Appointment successfully created and persisted.',
+        message: 'Appointment scheduled and saved to database',
         data: newAppointment,
       },
       { status: 201 }
     );
   } catch (error: any) {
-    return NextResponse.json({ error: error.message || 'Failed to create appointment' }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || 'Failed to schedule appointment' },
+      { status: 500 }
+    );
   }
 }

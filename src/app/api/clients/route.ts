@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
+import { verifyCustomerAccess } from '@/lib/subscription-gate';
 import { Client } from '@/types';
 
 // GET /api/clients
@@ -11,8 +12,20 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const orgId = session.isOwner ? request.nextUrl.searchParams.get('organizationId') || session.organizationId : session.organizationId;
-    const clients = serverDB.getClients(orgId);
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to access clients.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
+    }
+
+    const orgId = session.isOwner ? request.nextUrl.searchParams.get('organizationId') || undefined : session.organizationId;
+    const clients = await serverDB.getClients(orgId);
 
     return NextResponse.json({
       success: true,
@@ -30,6 +43,18 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(request);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to add clients.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
     }
 
     const body = await request.json();
@@ -58,10 +83,10 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date().toISOString(),
     };
 
-    serverDB.addClient(newClient);
+    await serverDB.addClient(newClient);
 
     return NextResponse.json(
-      { success: true, message: 'Client created successfully', data: newClient },
+      { success: true, message: 'Client created successfully in database', data: newClient },
       { status: 201 }
     );
   } catch (error: any) {

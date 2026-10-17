@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession, canDeleteRecord } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
+import { cloudStorage } from '@/lib/storage-server';
 
 interface RouteContext {
   params: Promise<{ id: string }>;
@@ -19,7 +20,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const allProps = serverDB.getProperties();
+    const allProps = await serverDB.getProperties(session.isOwner ? undefined : session.organizationId);
     const property = allProps.find((p) => p.id === id);
 
     if (!property) {
@@ -29,7 +30,6 @@ export async function GET(request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Tenant isolation check
     if (!session.isOwner && session.role !== 'OWNER' && property.organizationId !== session.organizationId) {
       return NextResponse.json(
         {
@@ -65,7 +65,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const allProps = serverDB.getProperties();
+    const allProps = await serverDB.getProperties(session.isOwner ? undefined : session.organizationId);
     const property = allProps.find((p) => p.id === id);
 
     if (!property) {
@@ -75,7 +75,6 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Security check: Delete permissions & Tenant boundary validation
     const authCheck = canDeleteRecord(session, property.organizationId);
     if (!authCheck.allowed) {
       return NextResponse.json(
@@ -87,8 +86,18 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Execute deletion
-    const deleted = serverDB.deleteProperty(id);
+    // Safely delete associated cloud storage assets for this property
+    try {
+      const assets = await serverDB.getStorageAssets(property.organizationId);
+      const propAssets = assets.filter((a) => a.entityId === id || (property.featuredImageUrl && a.storageUrl === property.featuredImageUrl));
+      for (const asset of propAssets) {
+        await cloudStorage.deleteFile(asset.id, property.organizationId);
+      }
+    } catch (assetErr) {
+      console.warn('Non-fatal cleanup of property assets:', assetErr);
+    }
+
+    const deleted = await serverDB.deleteProperty(id, session.isOwner ? undefined : session.organizationId);
 
     if (!deleted) {
       return NextResponse.json(
@@ -99,7 +108,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
 
     return NextResponse.json({
       success: true,
-      message: `Property '${property.title}' (${property.id}) successfully deleted.`,
+      message: `Property '${property.title}' successfully deleted.`,
     });
   } catch (error) {
     return NextResponse.json(
@@ -122,7 +131,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const allProps = serverDB.getProperties();
+    const allProps = await serverDB.getProperties(session.isOwner ? undefined : session.organizationId);
     const property = allProps.find((p) => p.id === id);
 
     if (!property) {
@@ -146,11 +155,10 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
     const updatedProp = {
       ...property,
-      title: body.title !== undefined ? String(body.title).trim() : property.title,
-      description: body.description !== undefined ? body.description : property.description,
-      propertyType: body.propertyType || property.propertyType,
-      status: body.status || property.status,
+      title: body.title !== undefined ? body.title : property.title,
       priceINR: body.priceINR !== undefined ? Number(body.priceINR) : property.priceINR,
+      status: body.status !== undefined ? body.status : property.status,
+      propertyType: body.propertyType !== undefined ? body.propertyType : property.propertyType,
       areaSqFt: body.areaSqFt !== undefined ? Number(body.areaSqFt) : property.areaSqFt,
       bedrooms: body.bedrooms !== undefined ? Number(body.bedrooms) : property.bedrooms,
       bathrooms: body.bathrooms !== undefined ? Number(body.bathrooms) : property.bathrooms,
@@ -161,26 +169,18 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       city: body.city !== undefined ? body.city : property.city,
       state: body.state !== undefined ? body.state : property.state,
       pincode: body.pincode !== undefined ? body.pincode : property.pincode,
-      ownerName: body.ownerName !== undefined ? body.ownerName : property.ownerName,
-      ownerPhone: body.ownerPhone !== undefined ? body.ownerPhone : property.ownerPhone,
-      amenities: body.amenities !== undefined ? body.amenities : property.amenities,
       featuredImageUrl: body.featuredImageUrl !== undefined ? body.featuredImageUrl : property.featuredImageUrl,
       images: Array.isArray(body.images) ? body.images : property.images,
-      assignedAgentId: body.assignedAgentId !== undefined ? body.assignedAgentId : property.assignedAgentId,
-      assignedAgentName: body.assignedAgentName !== undefined ? body.assignedAgentName : property.assignedAgentName,
+      amenities: Array.isArray(body.amenities) ? body.amenities : property.amenities,
       updatedAt: new Date().toISOString(),
     };
 
-    const saved = serverDB.updateProperty(id, updatedProp, session.isOwner ? undefined : session.organizationId);
-    if (!saved) {
-      const index = allProps.findIndex((p) => p.id === id);
-      if (index >= 0) allProps[index] = updatedProp;
-    }
+    const saved = await serverDB.updateProperty(id, updatedProp, session.isOwner ? undefined : session.organizationId);
 
     return NextResponse.json({
       success: true,
-      message: 'Property updated successfully',
-      data: updatedProp,
+      message: 'Property updated successfully in database',
+      data: saved || updatedProp,
     });
   } catch (error) {
     return NextResponse.json(
@@ -188,4 +188,9 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       { status: 500 }
     );
   }
+}
+
+// PATCH /api/properties/[id]
+export async function PATCH(request: NextRequest, context: RouteContext) {
+  return PUT(request, context);
 }

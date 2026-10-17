@@ -12,8 +12,8 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const payments = serverDB.getPayments();
-    const organizations = serverDB.getOrganizations();
+    const payments = await serverDB.getPayments();
+    const organizations = await serverDB.getOrganizations();
 
     const extendedPayments = payments.map((p) => {
       const org = organizations.find((o) => o.id === p.organizationId);

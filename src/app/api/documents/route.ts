@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
+import { verifyCustomerAccess } from '@/lib/subscription-gate';
 import { DocumentRecord } from '@/types';
 
 // GET /api/documents
@@ -11,8 +12,20 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const orgId = session.isOwner ? request.nextUrl.searchParams.get('organizationId') || session.organizationId : session.organizationId;
-    const documents = serverDB.getDocuments(orgId);
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to access documents.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
+    }
+
+    const orgId = session.isOwner ? request.nextUrl.searchParams.get('organizationId') || undefined : session.organizationId;
+    const documents = await serverDB.getDocuments(orgId);
 
     return NextResponse.json({
       success: true,
@@ -30,6 +43,18 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(request);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to add documents.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
     }
 
     const body = await request.json();
@@ -53,10 +78,10 @@ export async function POST(request: NextRequest) {
       createdAt: new Date().toISOString(),
     };
 
-    serverDB.addDocument(newDoc);
+    await serverDB.addDocument(newDoc);
 
     return NextResponse.json(
-      { success: true, message: 'Document registered successfully', data: newDoc },
+      { success: true, message: 'Document registered successfully in database', data: newDoc },
       { status: 201 }
     );
   } catch (error: any) {

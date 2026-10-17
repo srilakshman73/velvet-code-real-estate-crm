@@ -111,9 +111,9 @@ export async function runSecurityTestSuite() {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
-  serverDB.addProperty(propA);
+  await serverDB.addProperty(propA);
 
-  const orgAProps = serverDB.getProperties().filter((p) => p.organizationId === sessionUserA.organizationId);
+  const orgAProps = (await serverDB.getProperties()).filter((p) => p.organizationId === sessionUserA.organizationId);
   const userACanSee = orgAProps.some((p) => p.id === propA.id);
   recordTest(
     4,
@@ -137,7 +137,7 @@ export async function runSecurityTestSuite() {
     isSuperAdmin: false,
   };
 
-  const orgBProps = serverDB.getProperties().filter((p) => p.organizationId === sessionUserB.organizationId);
+  const orgBProps = (await serverDB.getProperties()).filter((p) => p.organizationId === sessionUserB.organizationId);
   const userBCanSeePropA = orgBProps.some((p) => p.id === propA.id);
   recordTest(
     5,
@@ -212,7 +212,7 @@ export async function runSecurityTestSuite() {
     isOwner: true,
     isSuperAdmin: true,
   };
-  const allPlatformProps = serverDB.getProperties();
+  const allPlatformProps = await serverDB.getProperties();
   const ownerCanSeeAll = ownerSession.isOwner && allPlatformProps.length >= 1;
   recordTest(
     10,
@@ -225,7 +225,7 @@ export async function runSecurityTestSuite() {
   // TEST 11: Owner deletes a customer / organization with confirmation
   // -------------------------------------------------------------
   const tempOrgId = `org-temp-to-delete-${Date.now()}`;
-  serverDB.getOrganizations().push({
+  await serverDB.addOrganization({
     id: tempOrgId,
     name: 'Temporary Brokerage',
     slug: 'temp-brokerage',
@@ -233,8 +233,8 @@ export async function runSecurityTestSuite() {
     businessType: 'BROKER',
     createdAt: new Date().toISOString(),
   });
-  const ownerDeleteSuccess = serverDB.deleteOrganization(tempOrgId);
-  const tempOrgStillExists = serverDB.getOrganizations().some((o) => o.id === tempOrgId);
+  const ownerDeleteSuccess = await serverDB.deleteOrganization(tempOrgId);
+  const tempOrgStillExists = (await serverDB.getOrganizations()).some((o) => o.id === tempOrgId);
   recordTest(
     11,
     'Owner Platform Deletion with Cascade',

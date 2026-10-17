@@ -164,7 +164,7 @@ export const INITIAL_SUBSCRIPTION: Subscription = {
   priceMonthlyINR: 1999,
   billingCycle: 'monthly',
   currentPeriodStart: new Date().toISOString(),
-  currentPeriodEnd: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+  currentPeriodEnd: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   cancelAtPeriodEnd: false,
   usage: {
     usersCount: 1,

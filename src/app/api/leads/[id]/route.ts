@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession, canDeleteRecord } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
+import { cloudStorage } from '@/lib/storage-server';
 
 interface RouteContext {
   params: Promise<{ id: string }>;
@@ -19,8 +20,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const allLeads = serverDB.getLeads();
-    const lead = allLeads.find((l) => l.id === id);
+    const lead = await serverDB.getLeadById(id, session.isOwner ? undefined : session.organizationId);
 
     if (!lead) {
       return NextResponse.json(
@@ -64,8 +64,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const allLeads = serverDB.getLeads();
-    const lead = allLeads.find((l) => l.id === id);
+    const lead = await serverDB.getLeadById(id, session.isOwner ? undefined : session.organizationId);
 
     if (!lead) {
       return NextResponse.json(
@@ -85,10 +84,21 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const deleted = serverDB.deleteLead(id);
+    // Safely delete associated cloud storage assets for this lead
+    try {
+      const assets = await serverDB.getStorageAssets(lead.organizationId);
+      const leadAssets = assets.filter((a) => a.entityId === id || (lead.imageUrl && a.storageUrl === lead.imageUrl));
+      for (const asset of leadAssets) {
+        await cloudStorage.deleteFile(asset.id, lead.organizationId);
+      }
+    } catch (assetErr) {
+      console.warn('Non-fatal cleanup of lead assets:', assetErr);
+    }
+
+    const deleted = await serverDB.deleteLead(id, session.isOwner ? undefined : session.organizationId);
     if (!deleted) {
       return NextResponse.json(
-        { error: 'Failed to delete lead' },
+        { error: 'Failed to delete lead from database' },
         { status: 500 }
       );
     }
@@ -118,8 +128,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const allLeads = serverDB.getLeads();
-    const lead = allLeads.find((l) => l.id === id);
+    const lead = await serverDB.getLeadById(id, session.isOwner ? undefined : session.organizationId);
 
     if (!lead) {
       return NextResponse.json(
@@ -170,16 +179,12 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       updatedAt: new Date().toISOString(),
     };
 
-    const saved = serverDB.updateLead(id, updatedLead, session.isOwner ? undefined : session.organizationId);
-    if (!saved) {
-      const index = allLeads.findIndex((l) => l.id === id);
-      if (index >= 0) allLeads[index] = updatedLead;
-    }
+    const saved = await serverDB.updateLead(id, updatedLead, session.isOwner ? undefined : session.organizationId);
 
     return NextResponse.json({
       success: true,
-      message: 'Lead updated successfully',
-      data: updatedLead,
+      message: 'Lead updated successfully in persistent database',
+      data: saved || updatedLead,
     });
   } catch (error) {
     return NextResponse.json(
@@ -193,4 +198,3 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 export async function PATCH(request: NextRequest, context: RouteContext) {
   return PUT(request, context);
 }
-

@@ -14,10 +14,10 @@ export async function GET(request: NextRequest) {
     }
 
     // Retrieve subscription for this tenant
-    let subscription = serverDB.getSubscription(session.organizationId);
+    let subscription = await serverDB.getSubscription(session.organizationId);
     if (!subscription) {
       // Default to trial starter if not yet initialized
-      subscription = serverDB.upsertSubscription({
+      subscription = await serverDB.upsertSubscription({
         id: `sub-${session.organizationId}`,
         organizationId: session.organizationId,
         userId: session.userId,
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
         priceMonthlyINR: 1999,
         billingCycle: 'monthly',
         currentPeriodStart: new Date().toISOString(),
-        currentPeriodEnd: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+        currentPeriodEnd: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
         cancelAtPeriodEnd: false,
         usage: {
           usersCount: 1,
@@ -37,18 +37,17 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // Calculate real live usage for this tenant
-    const orgLeads = serverDB.getLeads().filter((l) => l.organizationId === session.organizationId);
-    const orgProps = serverDB.getProperties().filter((p) => p.organizationId === session.organizationId);
-    const orgUsers = serverDB.getUsers().filter((u) => u.organizationId === session.organizationId);
+    // Calculate real live usage for this tenant from database
+    const orgLeads = await serverDB.getLeads(session.organizationId);
+    const orgProps = await serverDB.getProperties(session.organizationId);
+    const orgUsers = await serverDB.getUsers(session.organizationId);
 
     const planLimits = AUTHORITATIVE_PLANS[subscription.tier] || AUTHORITATIVE_PLANS.STARTER;
 
     // Retrieve tenant's isolated payment history and invoices
-    const payments = serverDB.getPayments(session.organizationId);
-    const invoices = serverDB.getInvoices(session.organizationId);
-
-    const storageUsage = serverDB.getStorageUsage(session.organizationId);
+    const payments = await serverDB.getPayments(session.organizationId);
+    const invoices = await serverDB.getInvoices(session.organizationId);
+    const storageUsage = await serverDB.getStorageUsage(session.organizationId);
 
     return NextResponse.json({
       success: true,
@@ -102,7 +101,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid subscription tier' }, { status: 400 });
     }
 
-    const result = serverDB.updateSubscriptionTier(
+    const result = await serverDB.updateSubscriptionTier(
       session.organizationId,
       tier,
       billingCycle || 'monthly'

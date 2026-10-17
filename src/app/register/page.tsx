@@ -64,38 +64,9 @@ export default function RegisterPage() {
       } else {
         router.push('/onboarding');
       }
-    } catch {
-      // Fallback
-      const newOrg = {
-        id: `org-reg-${Date.now()}`,
-        name: formData.agencyName || 'My Real Estate Agency',
-        slug: (formData.agencyName || 'agency').toLowerCase().replace(/\s+/g, '-'),
-        phone: formData.phone || '+91 63833 95915',
-        email: formData.email,
-        country: 'India',
-        businessType: formData.businessType,
-        createdAt: new Date().toISOString(),
-      };
-
-      const newUser = {
-        id: `usr-reg-${Date.now()}`,
-        name: formData.fullName || 'Agency Principal',
-        email: formData.email,
-        phone: formData.phone,
-        role: 'ADMIN' as const,
-        organizationId: newOrg.id,
-      };
-
-      setCurrentOrg(newOrg);
-      setCurrentUser(newUser);
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Network error connecting to registration server. Please try again.');
       setIsLoading(false);
-      const urlParams = new URLSearchParams(window.location.search);
-      const planParam = urlParams.get('plan');
-      if (planParam) {
-        router.push(`/app/billing?checkout=${encodeURIComponent(planParam)}`);
-      } else {
-        router.push('/onboarding');
-      }
     }
   };
 
@@ -123,7 +94,7 @@ export default function RegisterPage() {
           <div className="pt-4 space-y-3 text-xs text-[#2C241A]">
             <div className="flex items-center gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-[#547A61]" />
-              <span>Full 14-day free trial on all features</span>
+              <span>Full 7-day free trial on all features</span>
             </div>
             <div className="flex items-center gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-[#547A61]" />

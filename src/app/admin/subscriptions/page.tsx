@@ -189,7 +189,7 @@ export default function AdminSubscriptionsPage() {
                     <td className="py-3 px-4 text-[#6A5A44]">
                       {sub.currentPeriodEnd
                         ? new Date(sub.currentPeriodEnd).toLocaleDateString('en-IN')
-                        : '14-day trial'}
+                        : '7-day trial'}
                     </td>
                     <td className="py-3 px-4">
                       <Badge

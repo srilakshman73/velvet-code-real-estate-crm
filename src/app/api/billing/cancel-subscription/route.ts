@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const currentSub = serverDB.getSubscription(session.organizationId);
+    const currentSub = await serverDB.getSubscription(session.organizationId);
     if (!currentSub) {
       return NextResponse.json(
         { error: 'No active subscription found for this workspace.' },
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Update database state
-    const updatedSub = serverDB.upsertSubscription({
+    const updatedSub = await serverDB.upsertSubscription({
       ...currentSub,
       cancelAtPeriodEnd: true,
     });

@@ -15,7 +15,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const appointment = serverDB.getAppointmentById(id);
+    const appointment = await serverDB.getAppointmentById(id, session.isOwner ? undefined : session.organizationId);
     if (!appointment) {
       return NextResponse.json({ error: 'Appointment not found' }, { status: 404 });
     }
@@ -39,7 +39,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const appointment = serverDB.getAppointmentById(id);
+    const appointment = await serverDB.getAppointmentById(id, session.isOwner ? undefined : session.organizationId);
     if (!appointment) {
       return NextResponse.json({ error: 'Appointment not found' }, { status: 404 });
     }
@@ -50,7 +50,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
     const body = await request.json();
 
-    const updated = serverDB.updateAppointment(
+    const updated = await serverDB.updateAppointment(
       id,
       {
         title: body.title !== undefined ? String(body.title).trim() : appointment.title,
@@ -75,7 +75,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
     return NextResponse.json({
       success: true,
-      message: 'Appointment successfully updated.',
+      message: 'Appointment successfully updated in database.',
       data: updated,
     });
   } catch (error: any) {
@@ -92,7 +92,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const appointment = serverDB.getAppointmentById(id);
+    const appointment = await serverDB.getAppointmentById(id, session.isOwner ? undefined : session.organizationId);
     if (!appointment) {
       return NextResponse.json({ error: 'Appointment not found' }, { status: 404 });
     }
@@ -102,12 +102,9 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: authCheck.reason || 'Forbidden' }, { status: 403 });
     }
 
-    serverDB.deleteAppointment(id, session.isOwner ? undefined : session.organizationId);
+    await serverDB.deleteAppointment(id, session.isOwner ? undefined : session.organizationId);
 
-    return NextResponse.json({
-      success: true,
-      message: 'Appointment deleted successfully.',
-    });
+    return NextResponse.json({ success: true, message: 'Appointment deleted successfully' });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

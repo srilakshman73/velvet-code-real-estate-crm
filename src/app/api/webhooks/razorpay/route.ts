@@ -60,9 +60,9 @@ export async function POST(request: NextRequest) {
 
         if (rzpSubId || orgId) {
           const existingSub = rzpSubId
-            ? serverDB.getSubscriptionByRazorpayId(rzpSubId)
+            ? await serverDB.getSubscriptionByRazorpayId(rzpSubId)
             : orgId
-            ? serverDB.getSubscription(orgId)
+            ? await serverDB.getSubscription(orgId)
             : undefined;
 
           if (existingSub || orgId) {
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
               ? new Date(subscriptionEntity.current_end * 1000).toISOString()
               : new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString();
 
-            serverDB.upsertSubscription({
+            await serverDB.upsertSubscription({
               id: existingSub?.id || `sub-${Date.now().toString(36)}`,
               organizationId: existingSub?.organizationId || orgId,
               tier: tier,
@@ -100,9 +100,9 @@ export async function POST(request: NextRequest) {
       case 'subscription.pending': {
         const rzpSubId = subscriptionEntity?.id;
         if (rzpSubId) {
-          const sub = serverDB.getSubscriptionByRazorpayId(rzpSubId);
+          const sub = await serverDB.getSubscriptionByRazorpayId(rzpSubId);
           if (sub) {
-            serverDB.upsertSubscription({
+            await serverDB.upsertSubscription({
               ...sub,
               status: 'PAST_DUE',
             });
@@ -114,9 +114,9 @@ export async function POST(request: NextRequest) {
       case 'subscription.halted': {
         const rzpSubId = subscriptionEntity?.id;
         if (rzpSubId) {
-          const sub = serverDB.getSubscriptionByRazorpayId(rzpSubId);
+          const sub = await serverDB.getSubscriptionByRazorpayId(rzpSubId);
           if (sub) {
-            serverDB.upsertSubscription({
+            await serverDB.upsertSubscription({
               ...sub,
               status: 'UNPAID',
             });
@@ -128,9 +128,9 @@ export async function POST(request: NextRequest) {
       case 'subscription.cancelled': {
         const rzpSubId = subscriptionEntity?.id;
         if (rzpSubId) {
-          const sub = serverDB.getSubscriptionByRazorpayId(rzpSubId);
+          const sub = await serverDB.getSubscriptionByRazorpayId(rzpSubId);
           if (sub) {
-            serverDB.upsertSubscription({
+            await serverDB.upsertSubscription({
               ...sub,
               status: 'CANCELED',
               cancelAtPeriodEnd: true,
@@ -144,9 +144,10 @@ export async function POST(request: NextRequest) {
         if (paymentEntity) {
           const paymentId = paymentEntity.id;
           const rzpSubId = paymentEntity.subscription_id || paymentEntity.notes?.subscriptionId;
+          const matchedSub = rzpSubId ? await serverDB.getSubscriptionByRazorpayId(rzpSubId) : undefined;
           const orgId =
             paymentEntity.notes?.organizationId ||
-            (rzpSubId ? serverDB.getSubscriptionByRazorpayId(rzpSubId)?.organizationId : undefined) ||
+            matchedSub?.organizationId ||
             'org-apex-01';
           const amountINR = Math.round((paymentEntity.amount || 0) / 100);
 
@@ -162,10 +163,10 @@ export async function POST(request: NextRequest) {
             paymentMethod: paymentEntity.method ? paymentEntity.method.toUpperCase() : 'UPI / Card',
             createdAt: new Date().toISOString(),
           };
-          serverDB.addPayment(paymentRecord);
+          await serverDB.addPayment(paymentRecord);
 
           // Generate corresponding Invoice (deduplicated by paymentId)
-          const existingInvoices = serverDB.getInvoices(orgId);
+          const existingInvoices = await serverDB.getInvoices(orgId);
           let invoiceRecord = existingInvoices.find((i) => i.razorpayPaymentId === paymentId);
           if (!invoiceRecord) {
             const baseAmount = Math.round(amountINR / 1.18);
@@ -186,7 +187,7 @@ export async function POST(request: NextRequest) {
               billingPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
               createdAt: new Date().toISOString(),
             };
-            serverDB.addInvoice(invoiceRecord);
+            await serverDB.addInvoice(invoiceRecord);
           }
         }
         break;
@@ -196,9 +197,10 @@ export async function POST(request: NextRequest) {
         if (paymentEntity) {
           const paymentId = paymentEntity.id;
           const rzpSubId = paymentEntity.subscription_id || paymentEntity.notes?.subscriptionId;
+          const matchedSub = rzpSubId ? await serverDB.getSubscriptionByRazorpayId(rzpSubId) : undefined;
           const orgId =
             paymentEntity.notes?.organizationId ||
-            (rzpSubId ? serverDB.getSubscriptionByRazorpayId(rzpSubId)?.organizationId : undefined) ||
+            matchedSub?.organizationId ||
             'org-apex-01';
 
           const failedPayment: Payment = {
@@ -213,7 +215,7 @@ export async function POST(request: NextRequest) {
             paymentMethod: paymentEntity.method || 'Razorpay Gateway',
             createdAt: new Date().toISOString(),
           };
-          serverDB.addPayment(failedPayment);
+          await serverDB.addPayment(failedPayment);
         }
         break;
       }

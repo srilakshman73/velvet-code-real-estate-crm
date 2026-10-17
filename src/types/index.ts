@@ -24,6 +24,7 @@ export interface User {
   role: Role;
   organizationId: string;
   isSuperAdmin?: boolean;
+  passwordHash?: string;
 }
 
 export interface Organization {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from '@/lib/auth-server';
+import { getServerSession, getOwnerEmail } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
 
 interface RouteContext {
@@ -30,7 +30,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const allUsers = serverDB.getUsers();
+    const allUsers = await serverDB.getUsers();
     const targetUser = allUsers.find((u) => u.id === id);
 
     if (!targetUser) {
@@ -40,15 +40,15 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Prevent Owner from deleting self
-    if (targetUser.role === 'OWNER' || targetUser.email.toLowerCase() === 'srilakshman73@gmail.com') {
+    const ownerEmail = getOwnerEmail();
+    if (targetUser.role === 'OWNER' || targetUser.email.toLowerCase() === ownerEmail) {
       return NextResponse.json(
         { error: 'Forbidden: Cannot delete master platform owner account.' },
         { status: 400 }
       );
     }
 
-    const deleted = serverDB.deleteUser(id);
+    const deleted = await serverDB.deleteUser(id);
     if (!deleted) {
       return NextResponse.json(
         { error: 'Failed to delete user' },

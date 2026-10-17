@@ -165,11 +165,11 @@ export async function runRazorpayBillingTestSuite() {
     billingPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
     createdAt: new Date().toISOString(),
   };
-  serverDB.addInvoice(invoiceA);
+  await serverDB.addInvoice(invoiceA);
 
-  const subInDb = serverDB.getSubscription(tenantOrgA);
-  const paymentsInDb = serverDB.getPayments(tenantOrgA);
-  const invoicesInDb = serverDB.getInvoices(tenantOrgA);
+  const subInDb = await serverDB.getSubscription(tenantOrgA);
+  const paymentsInDb = await serverDB.getPayments(tenantOrgA);
+  const invoicesInDb = await serverDB.getInvoices(tenantOrgA);
 
   const activationPassed =
     subInDb?.status === 'ACTIVE' &&
@@ -188,8 +188,8 @@ export async function runRazorpayBillingTestSuite() {
   // TEST 6: Multi-Tenant Billing Isolation
   // -------------------------------------------------------------
   const tenantOrgB = 'org-tenant-beta-02';
-  const orgBPayments = serverDB.getPayments(tenantOrgB);
-  const orgBInvoices = serverDB.getInvoices(tenantOrgB);
+  const orgBPayments = await serverDB.getPayments(tenantOrgB);
+  const orgBInvoices = await serverDB.getInvoices(tenantOrgB);
 
   const isolationPassed =
     !orgBPayments.some((p) => p.organizationId === tenantOrgA) &&
@@ -205,8 +205,8 @@ export async function runRazorpayBillingTestSuite() {
   // -------------------------------------------------------------
   // TEST 7: Platform Owner Global Subscriptions & Payments Visibility
   // -------------------------------------------------------------
-  const allPlatformPayments = serverDB.getPayments();
-  const allPlatformSubs = serverDB.getSubscriptions();
+  const allPlatformPayments = await serverDB.getPayments();
+  const allPlatformSubs = await serverDB.getSubscriptions();
 
   const ownerVisibilityPassed =
     allPlatformPayments.length >= 1 &&
@@ -325,8 +325,8 @@ export async function runRazorpayBillingTestSuite() {
   // TEST 11: Zero Fake/Demo Billing Data Audit
   // -------------------------------------------------------------
   const cleanFreshOrg = 'org-fresh-zero-data-99';
-  const cleanPayments = serverDB.getPayments(cleanFreshOrg);
-  const cleanInvoices = serverDB.getInvoices(cleanFreshOrg);
+  const cleanPayments = await serverDB.getPayments(cleanFreshOrg);
+  const cleanInvoices = await serverDB.getInvoices(cleanFreshOrg);
 
   const zeroDemoDataPassed = cleanPayments.length === 0 && cleanInvoices.length === 0;
 

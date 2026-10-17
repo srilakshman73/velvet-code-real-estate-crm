@@ -30,7 +30,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const allOrgs = serverDB.getOrganizations();
+    const allOrgs = await serverDB.getOrganizations();
     const targetOrg = allOrgs.find((o) => o.id === id);
 
     if (!targetOrg) {
@@ -48,7 +48,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const deleted = serverDB.deleteOrganization(id);
+    const deleted = await serverDB.deleteOrganization(id);
     if (!deleted) {
       return NextResponse.json(
         { error: 'Failed to delete organization' },

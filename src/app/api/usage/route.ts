@@ -11,11 +11,11 @@ export async function GET(request: NextRequest) {
 
     const orgId = session.organizationId;
     const planLimits = serverDB.getOrgPlanLimits(orgId);
-    const storageUsage = serverDB.getStorageUsage(orgId);
+    const storageUsage = await serverDB.getStorageUsage(orgId);
 
-    const leadsCount = serverDB.getLeads(orgId).length;
-    const propertiesCount = serverDB.getProperties(orgId).length;
-    const usersCount = serverDB.getUsers().filter((u) => u.organizationId === orgId).length;
+    const leadsCount = (await serverDB.getLeads(orgId)).length;
+    const propertiesCount = (await serverDB.getProperties(orgId)).length;
+    const usersCount = (await serverDB.getUsers(orgId)).length;
     const aiUsed = serverDB.getAIUsageCount(orgId);
 
     return NextResponse.json({

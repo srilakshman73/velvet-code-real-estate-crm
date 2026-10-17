@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession, canDeleteRecord } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
+import { cloudStorage } from '@/lib/storage-server';
 
 interface RouteContext {
   params: Promise<{ id: string }>;
@@ -15,7 +16,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const docs = serverDB.getDocuments();
+    const docs = await serverDB.getDocuments();
     const doc = docs.find((d) => d.id === id);
     if (!doc) {
       return NextResponse.json({ error: 'Document not found' }, { status: 404 });
@@ -26,7 +27,15 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: authCheck.reason || 'Forbidden' }, { status: 403 });
     }
 
-    serverDB.deleteDocument(id, session.isOwner ? undefined : session.organizationId);
+    const storageKey = (doc as any).storageKey;
+    if (storageKey) {
+      const asset = await serverDB.getStorageAssetByKey(storageKey);
+      if (asset) {
+        await cloudStorage.deleteFile(asset.id, doc.organizationId);
+      }
+    }
+
+    await serverDB.deleteDocument(id, session.isOwner ? undefined : session.organizationId);
 
     return NextResponse.json({ success: true, message: 'Document deleted successfully' });
   } catch (error: any) {

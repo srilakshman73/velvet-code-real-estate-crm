@@ -38,8 +38,8 @@ export async function POST(request: NextRequest) {
     });
 
     // Update or create tenant subscription state in serverDB (preserving active status until verified)
-    const existingSub = serverDB.getSubscription(session.organizationId);
-    serverDB.upsertSubscription({
+    const existingSub = await serverDB.getSubscription(session.organizationId);
+    await serverDB.upsertSubscription({
       id: existingSub?.id || `sub-${Date.now().toString(36)}`,
       organizationId: session.organizationId,
       userId: session.userId,
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       priceMonthlyINR: existingSub ? existingSub.priceMonthlyINR : AUTHORITATIVE_PLANS.STARTER.amountINR,
       billingCycle: existingSub?.billingCycle || 'monthly',
       currentPeriodStart: existingSub?.currentPeriodStart || new Date().toISOString(),
-      currentPeriodEnd: existingSub?.currentPeriodEnd || new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+      currentPeriodEnd: existingSub?.currentPeriodEnd || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
       cancelAtPeriodEnd: existingSub?.cancelAtPeriodEnd || false,
       razorpaySubscriptionId: subscriptionResult.subscriptionId,
       usage: existingSub?.usage || {

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
+import { verifyCustomerAccess } from '@/lib/subscription-gate';
 import { Lead } from '@/types';
 
 // GET /api/leads
@@ -14,26 +15,32 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const allLeads = serverDB.getLeads();
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to access CRM leads.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
+    }
 
     // Master Owner can view all leads or filter by organization
     if (session.isOwner || session.role === 'OWNER') {
       const searchParams = request.nextUrl.searchParams;
       const orgFilter = searchParams.get('organization_id');
-      const filtered = orgFilter
-        ? allLeads.filter((l) => l.organizationId === orgFilter)
-        : allLeads;
+      const leads = await serverDB.getLeads(orgFilter || undefined);
       return NextResponse.json({
         success: true,
-        count: filtered.length,
-        data: filtered,
+        count: leads.length,
+        data: leads,
       });
     }
 
     // Customer: Strictly filter by session organizationId
-    const customerLeads = allLeads.filter(
-      (l) => l.organizationId === session.organizationId
-    );
+    const customerLeads = await serverDB.getLeads(session.organizationId);
 
     return NextResponse.json({
       success: true,
@@ -59,6 +66,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to add leads.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
+    }
+
     const body = await request.json();
 
     if (!body.name || !body.phone) {
@@ -76,7 +95,7 @@ export async function POST(request: NextRequest) {
     // Server-side Plan Limits Enforcement
     if (!session.isOwner) {
       const planLimits = serverDB.getOrgPlanLimits(effectiveOrgId);
-      const currentLeads = serverDB.getLeads().filter((l) => l.organizationId === effectiveOrgId);
+      const currentLeads = await serverDB.getLeads(effectiveOrgId);
       if (planLimits.maxLeads !== -1 && currentLeads.length >= planLimits.maxLeads) {
         return NextResponse.json(
           {
@@ -102,7 +121,7 @@ export async function POST(request: NextRequest) {
     // Relational integrity checks
     let assignedName: string | undefined = undefined;
     if (body.assignedToId) {
-      const orgUsers = serverDB.getUsers().filter((u) => u.organizationId === effectiveOrgId);
+      const orgUsers = await serverDB.getUsers(effectiveOrgId);
       const matchedUser = orgUsers.find((u) => u.id === body.assignedToId);
       if (matchedUser) {
         assignedName = matchedUser.name;
@@ -111,7 +130,7 @@ export async function POST(request: NextRequest) {
 
     let interestedPropName: string | undefined = undefined;
     if (body.interestedPropertyId) {
-      const orgProps = serverDB.getProperties().filter((p) => p.organizationId === effectiveOrgId);
+      const orgProps = await serverDB.getProperties(effectiveOrgId);
       const matchedProp = orgProps.find((p) => p.id === body.interestedPropertyId);
       if (matchedProp) {
         interestedPropName = matchedProp.title;
@@ -142,19 +161,20 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date().toISOString(),
     };
 
-    serverDB.addLead(newLead);
+    // Await commit to persistent database
+    await serverDB.addLead(newLead);
 
     return NextResponse.json(
       {
         success: true,
-        message: 'Lead created successfully',
+        message: 'Lead created successfully and committed to persistent database',
         data: newLead,
       },
       { status: 201 }
     );
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
-      { error: 'Failed to create lead' },
+      { error: error?.message || 'Failed to create lead in database' },
       { status: 500 }
     );
   }

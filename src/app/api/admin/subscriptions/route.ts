@@ -12,9 +12,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const subscriptions = serverDB.getSubscriptions();
-    const organizations = serverDB.getOrganizations();
-    const users = serverDB.getUsers();
+    const subscriptions = await serverDB.getSubscriptions();
+    const organizations = await serverDB.getOrganizations();
+    const users = await serverDB.getUsers();
 
     const extendedSubs = subscriptions.map((sub) => {
       const org = organizations.find((o) => o.id === sub.organizationId);

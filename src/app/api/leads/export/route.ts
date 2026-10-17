@@ -29,7 +29,7 @@ async function handleExport(request: NextRequest) {
 
     // Determine target organization
     const effectiveOrgId = session.organizationId;
-    const orgRecord = serverDB.getOrganizations().find((o) => o.id === effectiveOrgId) || {
+    const orgRecord = (await serverDB.getOrganizations()).find((o) => o.id === effectiveOrgId) || {
       name: session.organizationName || 'Velvet Code Real Estate CRM',
     };
 
@@ -54,7 +54,7 @@ async function handleExport(request: NextRequest) {
     }
 
     // Fetch tenant-isolated leads strictly
-    const allOrgLeads = serverDB.getLeads().filter((l) => l.organizationId === effectiveOrgId);
+    const allOrgLeads = await serverDB.getLeads(effectiveOrgId);
 
     // Apply ID filtering if specific leads were selected
     const finalLeads = requestedIds

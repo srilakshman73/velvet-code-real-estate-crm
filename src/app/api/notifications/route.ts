@@ -11,8 +11,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const orgId = session.isOwner ? request.nextUrl.searchParams.get('organizationId') || session.organizationId : session.organizationId;
-    const notifications = serverDB.getNotifications(orgId, session.userId);
+    const orgId = session.isOwner ? request.nextUrl.searchParams.get('organizationId') || undefined : session.organizationId;
+    const notifications = await serverDB.getNotifications(orgId || session.organizationId, session.userId);
     const unreadCount = notifications.filter((n) => !n.isRead).length;
 
     return NextResponse.json({
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
       createdAt: new Date().toISOString(),
     };
 
-    serverDB.addNotification(notif);
+    await serverDB.addNotification(notif);
 
     return NextResponse.json({ success: true, data: notif }, { status: 201 });
   } catch (error: any) {
@@ -72,12 +72,12 @@ export async function PATCH(request: NextRequest) {
 
     const body = await request.json();
     if (body.markAll) {
-      serverDB.markAllNotificationsRead(session.organizationId);
+      await serverDB.markAllNotificationsRead(session.organizationId);
       return NextResponse.json({ success: true, message: 'All notifications marked as read' });
     }
 
     if (body.id) {
-      const ok = serverDB.markNotificationRead(body.id, session.organizationId);
+      const ok = await serverDB.markNotificationRead(body.id, session.organizationId);
       return NextResponse.json({ success: ok });
     }
 
@@ -100,7 +100,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Notification ID required' }, { status: 400 });
     }
 
-    serverDB.deleteNotification(id, session.isOwner ? undefined : session.organizationId);
+    await serverDB.deleteNotification(id, session.isOwner ? undefined : session.organizationId);
     return NextResponse.json({ success: true, message: 'Notification dismissed' });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

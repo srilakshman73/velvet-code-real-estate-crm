@@ -15,7 +15,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const client = serverDB.getClientById(id);
+    const client = await serverDB.getClientById(id, session.isOwner ? undefined : session.organizationId);
     if (!client) {
       return NextResponse.json({ error: 'Client not found' }, { status: 404 });
     }
@@ -39,7 +39,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const client = serverDB.getClientById(id);
+    const client = await serverDB.getClientById(id, session.isOwner ? undefined : session.organizationId);
     if (!client) {
       return NextResponse.json({ error: 'Client not found' }, { status: 404 });
     }
@@ -50,7 +50,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
     const body = await request.json();
 
-    const updated = serverDB.updateClient(
+    const updated = await serverDB.updateClient(
       id,
       {
         name: body.name !== undefined ? String(body.name).trim() : client.name,
@@ -80,7 +80,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const client = serverDB.getClientById(id);
+    const client = await serverDB.getClientById(id, session.isOwner ? undefined : session.organizationId);
     if (!client) {
       return NextResponse.json({ error: 'Client not found' }, { status: 404 });
     }
@@ -90,7 +90,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: authCheck.reason || 'Forbidden' }, { status: 403 });
     }
 
-    serverDB.deleteClient(id, session.isOwner ? undefined : session.organizationId);
+    await serverDB.deleteClient(id, session.isOwner ? undefined : session.organizationId);
 
     return NextResponse.json({ success: true, message: 'Client deleted successfully' });
   } catch (error: any) {

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
+import { verifyCustomerAccess } from '@/lib/subscription-gate';
 import { Property } from '@/types';
 
 // GET /api/properties
@@ -14,26 +15,30 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const allProps = serverDB.getProperties();
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to access properties.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
+    }
 
-    // Master Owner can view all platform properties or filter by query param
     if (session.isOwner || session.role === 'OWNER') {
       const searchParams = request.nextUrl.searchParams;
       const orgFilter = searchParams.get('organization_id');
-      const filtered = orgFilter
-        ? allProps.filter((p) => p.organizationId === orgFilter)
-        : allProps;
+      const properties = await serverDB.getProperties(orgFilter || undefined);
       return NextResponse.json({
         success: true,
-        count: filtered.length,
-        data: filtered,
+        count: properties.length,
+        data: properties,
       });
     }
 
-    // Customer: Strictly filter by authenticated session's organizationId
-    const customerProps = allProps.filter(
-      (p) => p.organizationId === session.organizationId
-    );
+    const customerProps = await serverDB.getProperties(session.organizationId);
 
     return NextResponse.json({
       success: true,
@@ -59,6 +64,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to add properties.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
+      );
+    }
+
     const body = await request.json();
 
     if (!body.title || !body.priceINR) {
@@ -68,17 +85,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // CRITICAL MULTI-TENANT SECURITY:
-    // For customers, ALWAYS derive organizationId from the authenticated session.
-    // NEVER trust body.organization_id sent from the client.
     const effectiveOrgId = (session.isOwner && body.organizationId)
       ? body.organizationId
       : session.organizationId;
 
-    // Server-side Plan Limits Enforcement
     if (!session.isOwner) {
       const planLimits = serverDB.getOrgPlanLimits(effectiveOrgId);
-      const currentProperties = serverDB.getProperties().filter((p) => p.organizationId === effectiveOrgId);
+      const currentProperties = await serverDB.getProperties(effectiveOrgId);
       if (planLimits.maxProperties !== -1 && currentProperties.length >= planLimits.maxProperties) {
         return NextResponse.json(
           {
@@ -116,12 +129,12 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date().toISOString(),
     };
 
-    serverDB.addProperty(newProperty);
+    await serverDB.addProperty(newProperty);
 
     return NextResponse.json(
       {
         success: true,
-        message: 'Property created successfully',
+        message: 'Property created successfully and persisted to database',
         data: newProperty,
       },
       { status: 201 }

@@ -42,11 +42,16 @@ import {
   Zap,
 } from 'lucide-react';
 
+import { CustomerAccessResult } from '@/lib/subscription-gate';
+import { AuthenticatedSession } from '@/lib/auth-server';
+
 interface CRMAppShellProps {
   children: React.ReactNode;
+  serverAccess?: CustomerAccessResult;
+  serverSession?: AuthenticatedSession;
 }
 
-export function CRMAppShell({ children }: CRMAppShellProps) {
+export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShellProps) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -67,7 +72,12 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
     currentPlanLimits,
     notifications,
     setIsSearchOpen,
+    signOut,
   } = useCRMStore();
+
+  const isOwner = Boolean(serverSession?.isOwner || currentUser.role === 'OWNER');
+  const isBillingRoute = pathname.startsWith('/app/billing');
+  const isPaywalled = Boolean(serverAccess && !serverAccess.allowed && !isOwner && !isBillingRoute);
 
   const unreadNotifs = notifications.filter((n) => !n.isRead).length;
 
@@ -432,38 +442,41 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
 
                 {/* User Switcher Dropdown */}
                 {isUserDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-56 bg-[#FFF9F0] border border-[#D8C7A5] rounded-xl shadow-2xl p-2 z-50 animate-in fade-in">
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-[#FFF9F0] border border-[#D8C7A5] rounded-xl shadow-2xl p-2 z-50 animate-in fade-in">
                     <div className="px-3 py-2 border-b border-[#D8C7A5] mb-1">
                       <p className="text-xs font-bold text-[#2C241A]">{currentUser.name}</p>
                       <p className="text-[11px] text-[#6A5A44] truncate">{currentUser.email}</p>
-                      <span className="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-bold uppercase bg-[#A37432]/15 text-[#7A5520] rounded">
-                        {currentUser.role}
-                      </span>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="inline-block px-1.5 py-0.5 text-[9px] font-bold uppercase bg-[#A37432]/15 text-[#7A5520] rounded">
+                          {currentUser.role}
+                        </span>
+                        <span className="text-[10px] text-[#8A7A63] truncate">
+                          {currentOrg.name}
+                        </span>
+                      </div>
                     </div>
 
-                    <p className="text-[10px] font-bold text-[#8A7A63] uppercase tracking-wider px-2 py-1 font-serif">
-                      Switch Role Context
-                    </p>
-                    {users.map((u) => (
-                      <div
-                        key={u.id}
-                        onClick={() => {
-                          setCurrentUser(u);
-                          setIsUserDropdownOpen(false);
-                        }}
-                        className={`flex items-center justify-between p-2 rounded-lg cursor-pointer text-xs ${
-                          u.id === currentUser.id
-                            ? 'bg-[#F5EAD3] text-[#7A5520] font-bold'
-                            : 'hover:bg-[#F4EAD7] text-[#2C241A]'
-                        }`}
+                    <div className="py-1 space-y-0.5">
+                      <Link
+                        href="/app/billing"
+                        onClick={() => setIsUserDropdownOpen(false)}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs text-[#2C241A] hover:bg-[#F4EAD7] font-medium"
                       >
-                        <span>{u.name}</span>
-                        <span className="text-[10px] text-[#8A7A63]">{u.role}</span>
-                      </div>
-                    ))}
+                        <CreditCard className="w-3.5 h-3.5 text-[#7A5520]" />
+                        Billing & Subscriptions
+                      </Link>
+                      <Link
+                        href="/app/settings"
+                        onClick={() => setIsUserDropdownOpen(false)}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs text-[#2C241A] hover:bg-[#F4EAD7] font-medium"
+                      >
+                        <Settings className="w-3.5 h-3.5 text-[#7A5520]" />
+                        Workspace Settings
+                      </Link>
+                    </div>
 
                     <div className="mt-2 pt-2 border-t border-[#D8C7A5] space-y-1">
-                      {currentUser.role === 'OWNER' && (
+                      {isOwner && (
                         <Link
                           href="/admin"
                           onClick={() => setIsUserDropdownOpen(false)}
@@ -473,20 +486,41 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
                           SaaS Master Admin Panel
                         </Link>
                       )}
-                      <Link
-                        href="/login"
-                        onClick={() => setIsUserDropdownOpen(false)}
-                        className="flex items-center gap-2 p-2 rounded-lg text-xs text-[#8B4A4A] hover:bg-[#8B4A4A]/10 font-bold"
+                      <button
+                        onClick={async () => {
+                          setIsUserDropdownOpen(false);
+                          await signOut();
+                        }}
+                        className="w-full flex items-center gap-2 p-2 rounded-lg text-xs text-[#8B4A4A] hover:bg-[#8B4A4A]/10 font-bold cursor-pointer text-left"
                       >
                         <LogOut className="w-3.5 h-3.5" />
                         Sign Out
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 )}
               </div>
             </div>
           </header>
+
+          {/* 7-Day Free Trial Banner */}
+          {serverAccess?.status === 'TRIALING' && (
+            <div className="bg-[#A37432]/10 border-b border-[#A37432]/30 px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#7A5520] z-20">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded bg-[#A37432] text-[#FFF9F0] font-bold text-[10px] uppercase">
+                  7-Day Free Trial
+                </span>
+                <span>
+                  You have <strong className="text-[#2C241A]">{serverAccess.daysRemaining ?? 7} day(s)</strong> remaining in your full-featured trial.
+                </span>
+              </div>
+              <Link href="/app/billing">
+                <span className="px-3 py-1 bg-[#A37432] hover:bg-[#8A5E25] text-[#FFF9F0] font-bold rounded-lg transition-colors cursor-pointer text-xs shadow-2xs">
+                  Upgrade Plan &rarr;
+                </span>
+              </Link>
+            </div>
+          )}
 
           {/* Owner Support Mode Persistent Banner */}
           {isOwnerSupportMode && (
@@ -512,7 +546,110 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
 
           {/* Scrollable Page Body */}
           <main className="flex-1 overflow-y-auto pb-20 md:pb-8">
-            {children}
+            {isPaywalled ? (
+              <div className="min-h-[75vh] flex items-center justify-center p-4 sm:p-8">
+                <div className="max-w-3xl w-full bg-[#FFF9F0] border-2 border-[#D8C7A5] rounded-3xl p-6 sm:p-10 shadow-2xl text-center">
+                  <div className="w-14 h-14 rounded-2xl bg-[#A37432]/15 text-[#7A5520] flex items-center justify-center mx-auto mb-4 border border-[#A37432]/30 shadow-inner">
+                    <CreditCard className="w-7 h-7" />
+                  </div>
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#A37432]/15 text-[#7A5520] mb-3">
+                    Subscription Required
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] font-serif mb-2">
+                    Unlock Velvet Code Real Estate CRM
+                  </h2>
+                  <p className="text-sm text-[#6A5A44] max-w-xl mx-auto mb-8">
+                    Your 7-day free trial has expired or payment is required to access your CRM workspace.
+                    All your saved leads, clients, properties, and uploaded cloud documents remain permanently stored in your organization database.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left mb-8">
+                    {/* Starter */}
+                    <div className="p-5 rounded-2xl border border-[#D8C7A5] bg-[#F4EAD7]/50 flex flex-col justify-between">
+                      <div>
+                        <div className="text-xs font-bold uppercase text-[#8A7A63] tracking-wider mb-1 font-serif">Starter</div>
+                        <p className="text-2xl font-bold text-[#7A5520]">₹1,999<span className="text-xs font-normal text-[#6A5A44]">/mo</span></p>
+                        <p className="text-[11px] text-[#6A5A44] mt-1 mb-4">Solo agents and boutique consultants</p>
+                        <ul className="text-xs text-[#2C241A] space-y-2">
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> 1 User Seat</li>
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> 100 Active Leads</li>
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> 25 Properties</li>
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> Cloud Storage</li>
+                        </ul>
+                      </div>
+                      <Link
+                        href="/app/billing?checkout=STARTER"
+                        className="mt-5 block w-full text-center py-2.5 px-3 rounded-xl bg-[#FFF9F0] border border-[#A37432] text-[#7A5520] font-bold text-xs hover:bg-[#A37432] hover:text-[#FFF9F0] transition-colors"
+                      >
+                        Activate Starter
+                      </Link>
+                    </div>
+
+                    {/* Professional */}
+                    <div className="p-5 rounded-2xl border-2 border-[#A37432] bg-[#FFF9F0] flex flex-col justify-between shadow-lg relative">
+                      <span className="absolute -top-3 right-4 bg-[#A37432] text-[#FFF9F0] text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                        Recommended
+                      </span>
+                      <div>
+                        <div className="text-xs font-bold uppercase text-[#7A5520] tracking-wider mb-1 font-serif">Professional</div>
+                        <p className="text-2xl font-bold text-[#7A5520]">₹5,999<span className="text-xs font-normal text-[#6A5A44]">/mo</span></p>
+                        <p className="text-[11px] text-[#6A5A44] mt-1 mb-4">Growing brokerages and real estate teams</p>
+                        <ul className="text-xs text-[#2C241A] space-y-2">
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> 5 User Seats</li>
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> 1,000 Active Leads</li>
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> Unlimited Properties</li>
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> 1,000 AI Credits</li>
+                        </ul>
+                      </div>
+                      <Link
+                        href="/app/billing?checkout=PROFESSIONAL"
+                        className="mt-5 block w-full text-center py-2.5 px-3 rounded-xl bg-[#A37432] text-[#FFF9F0] font-bold text-xs hover:bg-[#8A5E25] transition-colors shadow-xs"
+                      >
+                        Activate Professional
+                      </Link>
+                    </div>
+
+                    {/* Business */}
+                    <div className="p-5 rounded-2xl border border-[#D8C7A5] bg-[#F4EAD7]/50 flex flex-col justify-between">
+                      <div>
+                        <div className="text-xs font-bold uppercase text-[#8A7A63] tracking-wider mb-1 font-serif">Business</div>
+                        <p className="text-2xl font-bold text-[#7A5520]">₹9,999<span className="text-xs font-normal text-[#6A5A44]">/mo</span></p>
+                        <p className="text-[11px] text-[#6A5A44] mt-1 mb-4">Established real estate firms and developers</p>
+                        <ul className="text-xs text-[#2C241A] space-y-2">
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> 15 User Seats</li>
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> Unlimited Leads</li>
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> Unlimited Properties</li>
+                          <li className="flex items-center gap-1.5"><span className="text-[#547A61] font-bold">✓</span> 5,000 AI Credits</li>
+                        </ul>
+                      </div>
+                      <Link
+                        href="/app/billing?checkout=BUSINESS"
+                        className="mt-5 block w-full text-center py-2.5 px-3 rounded-xl bg-[#FFF9F0] border border-[#A37432] text-[#7A5520] font-bold text-xs hover:bg-[#A37432] hover:text-[#FFF9F0] transition-colors"
+                      >
+                        Activate Business
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-center gap-4 text-xs">
+                    <Link href="/app/billing" className="text-[#7A5520] font-bold hover:underline">
+                      Go to Billing & Invoices &rarr;
+                    </Link>
+                    <span className="text-[#8A7A63]">•</span>
+                    <button
+                      onClick={async () => {
+                        await signOut();
+                      }}
+                      className="text-[#8B4A4A] font-bold hover:underline cursor-pointer"
+                    >
+                      Sign Out / Switch Account
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              children
+            )}
           </main>
         </div>
       </div>
@@ -599,20 +736,25 @@ export function CRMAppShell({ children }: CRMAppShellProps) {
             </div>
 
             <div className="pt-4 border-t border-[#D8C7A5] space-y-2">
-              <Link
-                href="/admin"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-xs font-bold text-[#7A5520] py-1"
+              {isOwner && (
+                <Link
+                  href="/admin"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-xs font-bold text-[#7A5520] py-1"
+                >
+                  Velvet Code SaaS Admin ↗
+                </Link>
+              )}
+              <button
+                onClick={async () => {
+                  setIsMobileMenuOpen(false);
+                  await signOut();
+                }}
+                className="w-full flex items-center gap-2 text-xs font-bold text-[#8B4A4A] py-1 cursor-pointer text-left"
               >
-                Velvet Code SaaS Admin ↗
-              </Link>
-              <Link
-                href="/login"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-xs font-bold text-[#8B4A4A] py-1"
-              >
+                <LogOut className="w-3.5 h-3.5" />
                 Sign Out
-              </Link>
+              </button>
             </div>
           </div>
         </div>

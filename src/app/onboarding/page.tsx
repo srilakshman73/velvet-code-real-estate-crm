@@ -311,7 +311,7 @@ export default function OnboardingPage() {
               <div>
                 <h2 className="text-xl font-bold text-[#2C241A] font-serif">Select Your Initial Plan</h2>
                 <p className="text-xs text-[#6A5A44]">
-                  Included in your 14-day free trial. No charge today.
+                  Included in your 7-day free trial. No charge today.
                 </p>
               </div>
             </div>
@@ -388,7 +388,7 @@ export default function OnboardingPage() {
 
       {/* Footer */}
       <div className="max-w-3xl mx-auto w-full text-center py-4 text-xs text-[#6A5A44] font-medium">
-        Velvet Code Real Estate CRM • 14-Day Full Access Trial
+        Velvet Code Real Estate CRM • 7-Day Full Access Trial
       </div>
     </div>
   );

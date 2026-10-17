@@ -16,7 +16,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const asset = serverDB.getStorageAssetById(id, session.isOwner ? undefined : session.organizationId);
+    const asset = await serverDB.getStorageAssetById(id, session.isOwner ? undefined : session.organizationId);
     if (!asset) {
       return NextResponse.json({ error: 'Storage asset not found' }, { status: 404 });
     }
@@ -36,7 +36,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const asset = serverDB.getStorageAssetById(id);
+    const asset = await serverDB.getStorageAssetById(id);
     if (!asset) {
       return NextResponse.json({ error: 'Storage asset not found' }, { status: 404 });
     }
@@ -72,7 +72,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const existingAsset = serverDB.getStorageAssetById(id);
+    const existingAsset = await serverDB.getStorageAssetById(id);
     if (!existingAsset) {
       return NextResponse.json({ error: 'Storage asset not found' }, { status: 404 });
     }
@@ -96,19 +96,17 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       buffer,
       fileName: file.name,
       mimeType: file.type || 'application/octet-stream',
+      entityType: existingAsset.entityType,
       entityId: existingAsset.entityId,
     });
 
     if (!replaceResult.success) {
-      return NextResponse.json(
-        { error: replaceResult.error, code: replaceResult.code },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: replaceResult.error || 'Failed to replace file' }, { status: 400 });
     }
 
     return NextResponse.json({
       success: true,
-      message: 'File successfully replaced.',
+      message: 'File successfully replaced in cloud storage',
       asset: replaceResult.asset,
     });
   } catch (error: any) {

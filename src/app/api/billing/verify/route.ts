@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
     const periodEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days
 
     // 3. Activate customer subscription in server database
-    const existingSub = serverDB.getSubscription(session.organizationId);
+    const existingSub = await serverDB.getSubscription(session.organizationId);
     const updatedSub: Subscription = {
       id: existingSub?.id || `sub-${Date.now().toString(36)}`,
       organizationId: session.organizationId,
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
         aiRequestsUsed: 0,
       },
     };
-    serverDB.upsertSubscription(updatedSub);
+    await serverDB.upsertSubscription(updatedSub);
 
     // 4. Record successful payment ledger item
     const paymentRecord: Payment = {
@@ -136,12 +136,12 @@ export async function POST(request: NextRequest) {
       planTier: validatedTier,
       createdAt: now.toISOString(),
     };
-    serverDB.addPayment(paymentRecord);
+    await serverDB.addPayment(paymentRecord);
 
     // 5. Generate official GST Tax Invoice (deduplicated by razorpayPaymentId)
     const baseAmount = Math.round(planConfig.amountINR / 1.18);
     const gstAmount = planConfig.amountINR - baseAmount;
-    const existingInvoices = serverDB.getInvoices(session.organizationId);
+    const existingInvoices = await serverDB.getInvoices(session.organizationId);
     let invoiceRecord = existingInvoices.find((i) => i.razorpayPaymentId === razorpay_payment_id);
     if (!invoiceRecord) {
       invoiceRecord = {
@@ -161,7 +161,7 @@ export async function POST(request: NextRequest) {
         billingPeriodEnd: periodEnd.toISOString(),
         createdAt: now.toISOString(),
       };
-      serverDB.addInvoice(invoiceRecord);
+      await serverDB.addInvoice(invoiceRecord);
     }
 
     return NextResponse.json({

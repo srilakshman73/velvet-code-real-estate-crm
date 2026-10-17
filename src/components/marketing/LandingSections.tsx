@@ -262,7 +262,7 @@ export function PricingSection() {
             Plans Built for Solopreneurs to Enterprise Agencies
           </h2>
           <p className="text-base text-[#6A5A44] mt-4 leading-relaxed">
-            All plans include multi-tenant organization isolation and 14-day risk-free trial.
+            All plans include multi-tenant organization isolation and 7-day risk-free trial.
           </p>
 
           {/* Monthly / Annual Toggle */}
@@ -360,7 +360,7 @@ export function PricingSection() {
                     </Button>
                   </Link>
                   <p className="text-[10px] text-center text-[#8A7A63] mt-2">
-                    14-day trial • Cancel anytime
+                    7-day trial • Cancel anytime
                   </p>
                 </div>
               </div>

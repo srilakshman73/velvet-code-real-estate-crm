@@ -44,7 +44,7 @@ export default function SettingsPage() {
     name: currentOrg.name || 'Velvet Code Realty',
     businessType: currentOrg.businessType || 'AGENCY',
     phone: currentOrg.phone || '+91 63833 95915',
-    email: currentOrg.email || 'srilakshman73@gmail.com',
+    email: currentOrg.email || currentUser.email || '',
     address: currentOrg.address || 'Capital Park Towers, Anna Salai',
     city: currentOrg.city || 'Chennai',
     state: currentOrg.state || 'Tamil Nadu',

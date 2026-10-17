@@ -32,25 +32,10 @@ import {
 } from '@/types';
 import {
   SAAS_PLANS,
-  INITIAL_ORGANIZATIONS,
-  INITIAL_USERS,
   INITIAL_SUBSCRIPTION,
-  INITIAL_LEADS,
-  INITIAL_PROPERTIES,
-  INITIAL_CLIENTS,
-  INITIAL_DEALS,
-  INITIAL_SITE_VISITS,
-  INITIAL_TASKS,
-  INITIAL_FOLLOW_UPS,
   INITIAL_WHATSAPP_CONVERSATIONS,
   INITIAL_WHATSAPP_TEMPLATES,
   INITIAL_AUTOMATIONS,
-  INITIAL_DOCUMENTS,
-  INITIAL_NOTIFICATIONS,
-  INITIAL_ACTIVITY_LOGS,
-  INITIAL_PAYMENTS,
-  INITIAL_INVOICES,
-  INITIAL_APPOINTMENTS,
 } from './mock-data';
 import { processRealtyAIQuery } from './ai-service';
 import { buildWhatsAppUrl } from './utils';
@@ -63,6 +48,8 @@ interface CRMStoreContextType {
   users: User[];
   currentUser: User;
   setCurrentUser: (user: User) => void;
+  signOut: () => Promise<void>;
+  isLoadingSession: boolean;
 
   // Owner Support Mode & Access Control
   isOwnerSupportMode: boolean;
@@ -196,37 +183,60 @@ interface CRMStoreContextType {
   setIsSearchOpen: (open: boolean) => void;
 }
 
+const DEFAULT_GUEST_USER: User = {
+  id: 'usr-guest',
+  name: 'User',
+  email: '',
+  role: 'AGENT',
+  organizationId: '',
+  phone: '',
+};
+
+const DEFAULT_GUEST_ORG: Organization = {
+  id: '',
+  name: 'Workspace',
+  slug: 'workspace',
+  businessType: 'BROKER',
+  city: '',
+  address: '',
+  phone: '',
+  email: '',
+  country: 'India',
+  createdAt: new Date().toISOString(),
+};
+
 const CRMStoreContext = createContext<CRMStoreContextType | null>(null);
 
 export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
-  // Organizations and Users
-  const [organizations] = useState<Organization[]>(INITIAL_ORGANIZATIONS);
-  const [currentOrg, setCurrentOrg] = useState<Organization>(INITIAL_ORGANIZATIONS[0]);
-  const [users] = useState<User[]>(INITIAL_USERS);
-  const [currentUser, setCurrentUser] = useState<User>(INITIAL_USERS[0]);
+  // Organizations and Users — Initialize with guest state to prevent owner profile leakage
+  const [organizations, setOrganizations] = useState<Organization[]>([]);
+  const [currentOrg, setCurrentOrg] = useState<Organization>(DEFAULT_GUEST_ORG);
+  const [users, setUsers] = useState<User[]>([]);
+  const [currentUser, setCurrentUser] = useState<User>(DEFAULT_GUEST_USER);
+  const [isLoadingSession, setIsLoadingSession] = useState<boolean>(true);
 
   // Subscription & Billing State
   const [subscription, setSubscription] = useState<Subscription>(INITIAL_SUBSCRIPTION);
-  const [payments, setPayments] = useState<Payment[]>(INITIAL_PAYMENTS);
-  const [invoices, setInvoices] = useState<Invoice[]>(INITIAL_INVOICES);
+  const [payments, setPayments] = useState<Payment[]>([]);
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [storageUsage, setStorageUsage] = useState<StorageUsage | null>(null);
 
-  // Entities
-  const [leads, setLeads] = useState<Lead[]>(INITIAL_LEADS);
-  const [clients, setClients] = useState<Client[]>(INITIAL_CLIENTS);
-  const [properties, setProperties] = useState<Property[]>(INITIAL_PROPERTIES);
-  const [appointments, setAppointments] = useState<Appointment[]>(INITIAL_APPOINTMENTS);
-  const [deals, setDeals] = useState<Deal[]>(INITIAL_DEALS);
-  const [siteVisits, setSiteVisits] = useState<SiteVisit[]>(INITIAL_SITE_VISITS);
-  const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
-  const [followUps, setFollowUps] = useState<FollowUpItem[]>(INITIAL_FOLLOW_UPS);
+  // Entities — clean state loaded from database per tenant
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [deals, setDeals] = useState<Deal[]>([]);
+  const [siteVisits, setSiteVisits] = useState<SiteVisit[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [followUps, setFollowUps] = useState<FollowUpItem[]>([]);
   const [conversations, setConversations] = useState<WhatsAppConversation[]>(INITIAL_WHATSAPP_CONVERSATIONS);
   const [activeConversationId, setActiveConversationId] = useState<string>('');
   const [templates, setTemplates] = useState<WhatsAppTemplate[]>(INITIAL_WHATSAPP_TEMPLATES);
   const [automations, setAutomations] = useState<AutomationRule[]>(INITIAL_AUTOMATIONS);
-  const [documents, setDocuments] = useState<DocumentRecord[]>(INITIAL_DOCUMENTS);
-  const [notifications, setNotifications] = useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
-  const [activityLogs, setActivityLogs] = useState<ActivityLogItem[]>(INITIAL_ACTIVITY_LOGS);
+  const [documents, setDocuments] = useState<DocumentRecord[]>([]);
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const [activityLogs, setActivityLogs] = useState<ActivityLogItem[]>([]);
 
   // Realty AI Messages
   const [aiMessages, setAIMessages] = useState<AIConversationMessage[]>([
@@ -234,7 +244,7 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
       id: 'msg-welcome',
       role: 'assistant',
       content:
-        'Hello Sri Lakshman! I am **Realty AI**, your intelligent real estate assistant. I have secure real-time access to your leads, properties, site visits, and deals.\n\nAsk me to analyze your leads, draft personalized WhatsApp messages, or check property inventory!',
+        "Hello! I am **Realty AI**, your intelligent real estate assistant. I have secure real-time access to your organization's leads, properties, site visits, and deals.\n\nAsk me to analyze your leads, draft personalized WhatsApp messages, or check property inventory!",
       timestamp: new Date().toISOString(),
     },
   ]);
@@ -256,11 +266,70 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   const exitSupportMode = () => {
     setIsOwnerSupportMode(false);
     setSupportOrg(null);
-    setCurrentOrg(organizations[0]);
+    if (organizations.length > 0) {
+      setCurrentOrg(organizations[0]);
+    }
   };
 
   const hasAdminAccess = () => {
     return currentUser.role === 'OWNER';
+  };
+
+  // Restore authenticated session from PostgreSQL on mount
+  useEffect(() => {
+    let isMounted = true;
+    async function restoreSession() {
+      try {
+        const res = await fetch('/api/auth/me');
+        if (res.ok) {
+          const session = await res.json();
+          if (session.authenticated && session.user && session.organization) {
+            if (isMounted) {
+              setCurrentUser(session.user);
+              setCurrentOrg(session.organization);
+              setOrganizations((prev) => {
+                if (!prev.some((o) => o.id === session.organization.id)) {
+                  return [session.organization, ...prev];
+                }
+                return prev;
+              });
+              setUsers((prev) => {
+                if (!prev.some((u) => u.id === session.user.id)) {
+                  return [session.user, ...prev];
+                }
+                return prev;
+              });
+            }
+          }
+        }
+      } catch (err) {
+        // Network offline / fallback
+      } finally {
+        if (isMounted) {
+          setIsLoadingSession(false);
+        }
+      }
+    }
+    restoreSession();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const signOut = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch {}
+    if (typeof window !== 'undefined') {
+      try {
+        Object.keys(localStorage).forEach((key) => {
+          if (key.startsWith('velvet_')) {
+            localStorage.removeItem(key);
+          }
+        });
+      } catch (e) {}
+      window.location.href = '/login';
+    }
   };
 
   // Helper to persist state to browser localStorage for instant load on refresh
@@ -314,6 +383,7 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   // Hydrate from localStorage first, then fetch live data from server APIs
   useEffect(() => {
     const orgId = currentOrg.id;
+    if (!orgId) return;
 
     // 1. Instant local cache hydration
     if (typeof window !== 'undefined') {
@@ -580,40 +650,55 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateLead = async (id: string, updates: Partial<Lead>) => {
-    setLeads((prev) => {
-      const next = prev.map((l) => (l.id === id ? { ...l, ...updates, updatedAt: new Date().toISOString() } : l));
-      saveToLocalCache('leads', next);
-      return next;
-    });
-
     try {
-      await fetch(`/api/leads/${id}`, {
+      const res = await fetch(`/api/leads/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
       });
-    } catch {}
 
-    const target = leads.find((l) => l.id === id);
-    if (target) {
-      logActivity('UPDATE_LEAD', 'Lead', id, target.name, `Updated lead properties`);
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to update lead in database');
+      }
+
+      const json = await res.json();
+      const updated: Lead = json.data;
+
+      setLeads((prev) => {
+        const next = prev.map((l) => (l.id === id ? { ...l, ...updated } : l));
+        saveToLocalCache('leads', next);
+        return next;
+      });
+
+      logActivity('UPDATE_LEAD', 'Lead', id, updated.name, `Updated lead properties`);
+    } catch (err) {
+      console.error('Failed to update lead:', err);
+      throw err;
     }
   };
 
   const deleteLead = async (id: string) => {
     const target = leads.find((l) => l.id === id);
-    setLeads((prev) => {
-      const next = prev.filter((l) => l.id !== id);
-      saveToLocalCache('leads', next);
-      return next;
-    });
-
     try {
-      await fetch(`/api/leads/${id}`, { method: 'DELETE' });
-    } catch {}
+      const res = await fetch(`/api/leads/${id}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to delete lead from database');
+      }
 
-    if (target) {
-      logActivity('DELETE_LEAD', 'Lead', id, target.name, `Deleted lead record`);
+      setLeads((prev) => {
+        const next = prev.filter((l) => l.id !== id);
+        saveToLocalCache('leads', next);
+        return next;
+      });
+
+      if (target) {
+        logActivity('DELETE_LEAD', 'Lead', id, target.name, `Deleted lead record`);
+      }
+    } catch (err) {
+      console.error('Failed to delete lead:', err);
+      throw err;
     }
   };
 
@@ -673,31 +758,49 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateClient = async (id: string, updates: Partial<Client>) => {
-    setClients((prev) => {
-      const next = prev.map((c) => (c.id === id ? { ...c, ...updates, updatedAt: new Date().toISOString() } : c));
-      saveToLocalCache('clients', next);
-      return next;
-    });
-
     try {
-      await fetch(`/api/clients/${id}`, {
+      const res = await fetch(`/api/clients/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
       });
-    } catch {}
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to update client in database');
+      }
+
+      const json = await res.json();
+      const updated: Client = json.data;
+
+      setClients((prev) => {
+        const next = prev.map((c) => (c.id === id ? { ...c, ...updated } : c));
+        saveToLocalCache('clients', next);
+        return next;
+      });
+    } catch (err) {
+      console.error('Failed to update client:', err);
+      throw err;
+    }
   };
 
   const deleteClient = async (id: string) => {
-    setClients((prev) => {
-      const next = prev.filter((c) => c.id !== id);
-      saveToLocalCache('clients', next);
-      return next;
-    });
-
     try {
-      await fetch(`/api/clients/${id}`, { method: 'DELETE' });
-    } catch {}
+      const res = await fetch(`/api/clients/${id}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to delete client from database');
+      }
+
+      setClients((prev) => {
+        const next = prev.filter((c) => c.id !== id);
+        saveToLocalCache('clients', next);
+        return next;
+      });
+    } catch (err) {
+      console.error('Failed to delete client:', err);
+      throw err;
+    }
   };
 
   // ==========================================
@@ -742,40 +845,55 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateProperty = async (id: string, updates: Partial<Property>) => {
-    setProperties((prev) => {
-      const next = prev.map((p) => (p.id === id ? { ...p, ...updates, updatedAt: new Date().toISOString() } : p));
-      saveToLocalCache('properties', next);
-      return next;
-    });
-
     try {
-      await fetch(`/api/properties/${id}`, {
+      const res = await fetch(`/api/properties/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
       });
-    } catch {}
 
-    const target = properties.find((p) => p.id === id);
-    if (target) {
-      logActivity('UPDATE_PROPERTY', 'Property', id, target.title, `Updated property specifications`);
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to update property in database');
+      }
+
+      const json = await res.json();
+      const updated: Property = json.data;
+
+      setProperties((prev) => {
+        const next = prev.map((p) => (p.id === id ? { ...p, ...updated } : p));
+        saveToLocalCache('properties', next);
+        return next;
+      });
+
+      logActivity('UPDATE_PROPERTY', 'Property', id, updated.title, `Updated property specifications`);
+    } catch (err) {
+      console.error('Failed to update property:', err);
+      throw err;
     }
   };
 
   const deleteProperty = async (id: string) => {
     const target = properties.find((p) => p.id === id);
-    setProperties((prev) => {
-      const next = prev.filter((p) => p.id !== id);
-      saveToLocalCache('properties', next);
-      return next;
-    });
-
     try {
-      await fetch(`/api/properties/${id}`, { method: 'DELETE' });
-    } catch {}
+      const res = await fetch(`/api/properties/${id}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to delete property from database');
+      }
 
-    if (target) {
-      logActivity('DELETE_PROPERTY', 'Property', id, target.title, `Removed property from inventory`);
+      setProperties((prev) => {
+        const next = prev.filter((p) => p.id !== id);
+        saveToLocalCache('properties', next);
+        return next;
+      });
+
+      if (target) {
+        logActivity('DELETE_PROPERTY', 'Property', id, target.title, `Removed property from inventory`);
+      }
+    } catch (err) {
+      console.error('Failed to delete property:', err);
+      throw err;
     }
   };
 
@@ -831,31 +949,49 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateAppointment = async (id: string, updates: Partial<Appointment>) => {
-    setAppointments((prev) => {
-      const next = prev.map((a) => (a.id === id ? { ...a, ...updates, updatedAt: new Date().toISOString() } : a));
-      saveToLocalCache('appointments', next);
-      return next;
-    });
-
     try {
-      await fetch(`/api/appointments/${id}`, {
+      const res = await fetch(`/api/appointments/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
       });
-    } catch {}
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to update appointment in database');
+      }
+
+      const json = await res.json();
+      const updated: Appointment = json.data;
+
+      setAppointments((prev) => {
+        const next = prev.map((a) => (a.id === id ? { ...a, ...updated } : a));
+        saveToLocalCache('appointments', next);
+        return next;
+      });
+    } catch (err) {
+      console.error('Failed to update appointment:', err);
+      throw err;
+    }
   };
 
   const deleteAppointment = async (id: string) => {
-    setAppointments((prev) => {
-      const next = prev.filter((a) => a.id !== id);
-      saveToLocalCache('appointments', next);
-      return next;
-    });
-
     try {
-      await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
-    } catch {}
+      const res = await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to delete appointment from database');
+      }
+
+      setAppointments((prev) => {
+        const next = prev.filter((a) => a.id !== id);
+        saveToLocalCache('appointments', next);
+        return next;
+      });
+    } catch (err) {
+      console.error('Failed to delete appointment:', err);
+      throw err;
+    }
   };
 
   // ==========================================
@@ -1258,6 +1394,8 @@ export function CRMStoreProvider({ children }: { children: React.ReactNode }) {
         users,
         currentUser,
         setCurrentUser,
+        signOut,
+        isLoadingSession,
         isOwnerSupportMode,
         supportOrg,
         enterSupportMode,

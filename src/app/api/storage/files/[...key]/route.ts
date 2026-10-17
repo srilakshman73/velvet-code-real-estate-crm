@@ -15,15 +15,21 @@ export async function GET(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Storage key required' }, { status: 400 });
     }
 
+    const asset = await serverDB.getStorageAssetByKey(fullKey);
+
+    // If file is stored on Vercel Blob or other CDN and not requesting download, redirect to CDN
+    const isDownload = request.nextUrl.searchParams.get('download') === 'true';
+    if (asset?.storageUrl && asset.storageUrl.startsWith('http') && !isDownload) {
+      return NextResponse.redirect(asset.storageUrl, 307);
+    }
+
     const fileData = await cloudStorage.getFile(fullKey);
 
     if (!fileData) {
       return NextResponse.json({ error: 'File not found in cloud storage' }, { status: 404 });
     }
 
-    const asset = serverDB.getStorageAssetByKey(fullKey);
     const fileName = asset?.originalFileName || asset?.fileName || 'download';
-    const isDownload = request.nextUrl.searchParams.get('download') === 'true';
 
     const headers = new Headers();
     headers.set('Content-Type', fileData.mimeType || 'application/octet-stream');
@@ -36,7 +42,6 @@ export async function GET(request: NextRequest, context: RouteContext) {
       headers.set('Content-Disposition', `inline; filename="${encodeURIComponent(fileName)}"`);
     }
 
-    // Convert Buffer to Uint8Array for Next.js BodyInit compatibility
     return new NextResponse(new Uint8Array(fileData.buffer), {
       status: 200,
       headers,

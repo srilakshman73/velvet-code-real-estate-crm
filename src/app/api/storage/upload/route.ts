@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from '@/lib/auth-server';
+import { verifyCustomerAccess } from '@/lib/subscription-gate';
 import { cloudStorage } from '@/lib/storage-server';
 import { StorageEntityType } from '@/types';
 
@@ -10,6 +11,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Unauthorized: Authentication required to upload files' },
         { status: 401 }
+      );
+    }
+
+    const access = await verifyCustomerAccess(session);
+    if (!access.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Payment Required: 7-day free trial expired or subscription required to upload files to cloud storage.',
+          code: 'PAYMENT_REQUIRED',
+          redirectUrl: '/app/billing',
+        },
+        { status: 402 }
       );
     }
 
