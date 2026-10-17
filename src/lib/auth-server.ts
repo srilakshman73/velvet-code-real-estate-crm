@@ -3,6 +3,8 @@ import { NextRequest } from 'next/server';
 import { serverDB } from './server-db';
 import { Role } from '@/types';
 
+import bcrypt from 'bcryptjs';
+
 export interface AuthenticatedSession {
   userId: string;
   name: string;
@@ -35,22 +37,30 @@ export function hashPassword(password: string): string {
 }
 
 /**
- * Timing-safe password verification preventing timing side-channel attacks.
+ * Timing-safe password verification supporting:
+ * 1. PBKDF2 SHA-512 (salt:hash format)
+ * 2. Bcrypt ($2a$, $2b$, $2y$ legacy formats)
+ * 3. Timing-safe plaintext fallback
  */
 export function verifyPassword(password: string, storedHash: string): boolean {
   if (!storedHash || !password) return false;
   try {
-    if (!storedHash.includes(':')) {
-      // Direct string comparison with timing-safe equal
-      const a = Buffer.from(password);
-      const b = Buffer.from(storedHash);
+    // 1. Bcrypt hash format ($2a$, $2b$, $2y$)
+    if (storedHash.startsWith('$2a$') || storedHash.startsWith('$2b$') || storedHash.startsWith('$2y$')) {
+      return bcrypt.compareSync(password, storedHash);
+    }
+    // 2. PBKDF2 format (salt:hash)
+    if (storedHash.includes(':')) {
+      const [salt, expectedHash] = storedHash.split(':');
+      const computedHash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
+      const a = Buffer.from(computedHash);
+      const b = Buffer.from(expectedHash);
       if (a.length !== b.length) return false;
       return crypto.timingSafeEqual(a, b);
     }
-    const [salt, expectedHash] = storedHash.split(':');
-    const computedHash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
-    const a = Buffer.from(computedHash);
-    const b = Buffer.from(expectedHash);
+    // 3. Fallback direct comparison (legacy plaintext)
+    const a = Buffer.from(password);
+    const b = Buffer.from(storedHash);
     if (a.length !== b.length) return false;
     return crypto.timingSafeEqual(a, b);
   } catch {

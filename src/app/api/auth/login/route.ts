@@ -99,8 +99,12 @@ export async function POST(request: Request) {
             { status: 401 }
           );
         }
+        // Seamlessly upgrade legacy bcrypt or plaintext hashes to PBKDF2 SHA-512
+        if (!dbUser.passwordHash.includes(':')) {
+          await serverDB.updateUserPassword(dbUser.email, hashPassword(password));
+        }
       } else if (password.length >= 6) {
-        // Upgrade legacy account to PBKDF2 hash
+        // Upgrade legacy account without hash to PBKDF2 hash
         await serverDB.updateUserPassword(dbUser.email, hashPassword(password));
       } else {
         return NextResponse.json(

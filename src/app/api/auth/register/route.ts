@@ -83,17 +83,15 @@ export async function POST(request: Request) {
       ? new Date(now + trialConfig.trialDays * 24 * 60 * 60 * 1000).toISOString()
       : new Date(now).toISOString();
 
-    // Commit organization, user, and subscription to persistent database
-    await serverDB.addOrganization(newOrg);
-    await serverDB.addUser(newUser);
-    await serverDB.upsertSubscription({
+    // Prepare initial 7-day trial subscription record
+    const initialSubscription = {
       id: `sub-${newOrgId}`,
       organizationId: newOrgId,
       userId: newUserId,
-      tier: 'STARTER',
+      tier: 'STARTER' as const,
       status,
       priceMonthlyINR: 1999,
-      billingCycle: 'monthly',
+      billingCycle: 'monthly' as const,
       currentPeriodStart: new Date(now).toISOString(),
       currentPeriodEnd: periodEnd,
       cancelAtPeriodEnd: false,
@@ -103,7 +101,10 @@ export async function POST(request: Request) {
         propertiesCount: 0,
         aiRequestsUsed: 0,
       },
-    });
+    };
+
+    // Commit organization, user, and subscription to persistent database atomically
+    await serverDB.registerCustomerWorkspace(newOrg, newUser, initialSubscription);
 
     const redirectTo = trialConfig.enabled ? '/app/dashboard' : '/app/billing?reason=payment_required';
 

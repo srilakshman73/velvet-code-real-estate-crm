@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@prisma/client": "^7.10.0",
+    "@types/bcryptjs": "^2.4.6",
     "@vercel/blob": "^2.8.2",
+    "bcryptjs": "^3.0.3",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "lucide-react": "^1.45.0",

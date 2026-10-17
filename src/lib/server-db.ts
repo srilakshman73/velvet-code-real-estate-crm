@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { put, head } from '@vercel/blob';
+import { put, head, get, list, del } from '@vercel/blob';
 import {
   INITIAL_ORGANIZATIONS,
   INITIAL_USERS,
@@ -62,6 +62,7 @@ declare global {
 }
 
 const CLOUD_MASTER_KEY = 'velvet_db_cloud_master.json';
+const STATE_PREFIX = 'velvet_state_';
 
 function getPersistenceFilePath(): string {
   try {
@@ -85,49 +86,64 @@ function saveDBToDisk(db: VelvetDBSchema) {
   try {
     const filePath = getPersistenceFilePath();
     fs.writeFileSync(filePath, JSON.stringify(db, null, 2), 'utf-8');
-  } catch (err) {
-    // Read-only filesystem fallback
-  }
+  } catch (err) {}
 
-  // Persist to Vercel Blob cloud storage asynchronously
-  const token = process.env.BLOB_READ_WRITE_TOKEN;
-  if (token && token.trim().length > 0) {
-    put(CLOUD_MASTER_KEY, JSON.stringify(db), {
-      access: 'public',
-      token,
-      addRandomSuffix: false,
-    }).catch(() => {
-      // Non-blocking background sync
-    });
-  }
+  // Non-blocking versioned background save
+  saveDBToDiskAndCloud(db).catch(() => {});
 }
 
-export async function saveDBToDiskAndCloud(db: VelvetDBSchema) {
+export async function saveDBToDiskAndCloud(db: VelvetDBSchema): Promise<void> {
+  // 1. Write local disk immediately
   try {
     const filePath = getPersistenceFilePath();
     fs.writeFileSync(filePath, JSON.stringify(db, null, 2), 'utf-8');
   } catch (err) {}
 
+  // 2. Write to Vercel Blob with versioned key for instant cache-free cross-lambda read consistency
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (token && token.trim().length > 0) {
     try {
-      await put(CLOUD_MASTER_KEY, JSON.stringify(db), {
+      const versionKey = `${STATE_PREFIX}${Date.now()}.json`;
+      await put(versionKey, JSON.stringify(db), {
         access: 'public',
         token,
         addRandomSuffix: false,
       });
+
+      // Update static master blob for external consumers/inspectors
+      put(CLOUD_MASTER_KEY, JSON.stringify(db), {
+        access: 'public',
+        token,
+        addRandomSuffix: false,
+        allowOverwrite: true,
+      }).catch(() => {});
+
+      global.__velvetLastCloudSync = Date.now();
+
+      // Prune old versions in background (retain latest 3 versions for redundancy)
+      list({ prefix: STATE_PREFIX, token }).then((res) => {
+        if (res.blobs && res.blobs.length > 3) {
+          const sorted = res.blobs.sort(
+            (a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
+          );
+          const toDelete = sorted.slice(3).map((b) => b.url);
+          if (toDelete.length > 0) {
+            del(toDelete, { token }).catch(() => {});
+          }
+        }
+      }).catch(() => {});
     } catch (err) {
       console.warn('Vercel Blob cloud DB backup warning:', err);
     }
   }
 }
 
-export async function ensureCloudSynced(): Promise<void> {
+export async function ensureCloudSynced(forceRefresh = false): Promise<void> {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token || token.trim().length === 0) return;
 
   const now = Date.now();
-  if (global.__velvetLastCloudSync && now - global.__velvetLastCloudSync < 5000) {
+  if (!forceRefresh && global.__velvetLastCloudSync && now - global.__velvetLastCloudSync < 3000) {
     return;
   }
 
@@ -137,90 +153,133 @@ export async function ensureCloudSynced(): Promise<void> {
 
   global.__velvetCloudSyncPromise = (async () => {
     try {
-      const storeId = process.env.BLOB_STORE_ID;
-      const cloudUrl = storeId
-        ? `https://${storeId.replace('store_', '')}.public.blob.vercel-storage.com/${CLOUD_MASTER_KEY}?t=${now}`
-        : null;
+      let cloudData: Partial<VelvetDBSchema> | null = null;
 
-      if (cloudUrl) {
-        const res = await fetch(cloudUrl, { cache: 'no-store' });
-        if (res.ok) {
-          const cloudData: Partial<VelvetDBSchema> = await res.json();
-          if (cloudData && typeof cloudData === 'object') {
-            const db = initMemoryDB();
-            if (cloudData.users && Array.isArray(cloudData.users)) {
-              for (const u of cloudData.users) {
-                const idx = db.users.findIndex(
-                  (x) => x.id === u.id || x.email.toLowerCase() === u.email.toLowerCase()
-                );
-                if (idx >= 0) db.users[idx] = { ...db.users[idx], ...u };
-                else db.users.push(u);
-              }
-            }
-            if (cloudData.organizations && Array.isArray(cloudData.organizations)) {
-              for (const o of cloudData.organizations) {
-                const idx = db.organizations.findIndex((x) => x.id === o.id);
-                if (idx >= 0) db.organizations[idx] = { ...db.organizations[idx], ...o };
-                else db.organizations.push(o);
-              }
-            }
-            if (cloudData.subscriptions && Array.isArray(cloudData.subscriptions)) {
-              for (const s of cloudData.subscriptions) {
-                const idx = db.subscriptions.findIndex(
-                  (x) => x.id === s.id || x.organizationId === s.organizationId
-                );
-                if (idx >= 0) db.subscriptions[idx] = { ...db.subscriptions[idx], ...s };
-                else db.subscriptions.push(s);
-              }
-            }
-            if (cloudData.leads && Array.isArray(cloudData.leads)) {
-              for (const l of cloudData.leads) {
-                const idx = db.leads.findIndex((x) => x.id === l.id);
-                if (idx >= 0) db.leads[idx] = { ...db.leads[idx], ...l };
-                else db.leads.push(l);
-              }
-            }
-            if (cloudData.properties && Array.isArray(cloudData.properties)) {
-              for (const p of cloudData.properties) {
-                const idx = db.properties.findIndex((x) => x.id === p.id);
-                if (idx >= 0) db.properties[idx] = { ...db.properties[idx], ...p };
-                else db.properties.push(p);
-              }
-            }
-            if (cloudData.clients && Array.isArray(cloudData.clients)) {
-              for (const c of cloudData.clients) {
-                const idx = db.clients.findIndex((x) => x.id === c.id);
-                if (idx >= 0) db.clients[idx] = { ...db.clients[idx], ...c };
-                else db.clients.push(c);
-              }
-            }
-            if (cloudData.appointments && Array.isArray(cloudData.appointments)) {
-              for (const a of cloudData.appointments) {
-                const idx = db.appointments.findIndex((x) => x.id === a.id);
-                if (idx >= 0) db.appointments[idx] = { ...db.appointments[idx], ...a };
-                else db.appointments.push(a);
-              }
-            }
-            if (cloudData.documents && Array.isArray(cloudData.documents)) {
-              for (const d of cloudData.documents) {
-                const idx = db.documents.findIndex((x) => x.id === d.id);
-                if (idx >= 0) db.documents[idx] = { ...db.documents[idx], ...d };
-                else db.documents.push(d);
-              }
-            }
-            if (cloudData.storageAssets && Array.isArray(cloudData.storageAssets)) {
-              for (const a of cloudData.storageAssets) {
-                const idx = db.storageAssets.findIndex((x) => x.id === a.id);
-                if (idx >= 0) db.storageAssets[idx] = { ...db.storageAssets[idx], ...a };
-                else db.storageAssets.push(a);
-              }
-            }
-            global.__velvetLastCloudSync = now;
+      // Method 1: Find the latest state blob via list() (100% cache-free direct REST API)
+      try {
+        const listRes = await list({ prefix: STATE_PREFIX, token });
+        if (listRes.blobs && listRes.blobs.length > 0) {
+          const sorted = listRes.blobs.sort(
+            (a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
+          );
+          const latest = sorted[0];
+          const fetchRes = await fetch(latest.url, { cache: 'no-store' });
+          if (fetchRes.ok) {
+            cloudData = await fetchRes.json();
+          }
+        }
+      } catch (listErr) {}
+
+      // Method 2: Fallback to static master key if no versioned state found
+      if (!cloudData) {
+        try {
+          const blobRes = await get(CLOUD_MASTER_KEY, { access: 'public', useCache: false, token });
+          if (blobRes && blobRes.statusCode === 200 && blobRes.stream) {
+            const text = await new Response(blobRes.stream).text();
+            cloudData = JSON.parse(text);
+          }
+        } catch {}
+      }
+
+      // Method 3: Fallback to direct URL fetch
+      if (!cloudData) {
+        const storeId = process.env.BLOB_STORE_ID;
+        const cloudUrl = storeId
+          ? `https://${storeId.replace('store_', '').toLowerCase()}.public.blob.vercel-storage.com/${CLOUD_MASTER_KEY}`
+          : null;
+        if (cloudUrl) {
+          const res = await fetch(cloudUrl, {
+            cache: 'no-store',
+            headers: { 'cache-control': 'no-cache, no-store, must-revalidate', pragma: 'no-cache' },
+          });
+          if (res.ok) {
+            cloudData = await res.json();
           }
         }
       }
-    } catch {}
-    finally {
+
+      if (cloudData && typeof cloudData === 'object') {
+        const db = initMemoryDB();
+        if (cloudData.users && Array.isArray(cloudData.users)) {
+          for (const u of cloudData.users) {
+            if (!u.email) continue;
+            const idx = db.users.findIndex(
+              (x) => (x.id && x.id === u.id) || (x.email && x.email.toLowerCase() === u.email.toLowerCase())
+            );
+            if (idx >= 0) {
+              db.users[idx] = {
+                ...db.users[idx],
+                ...u,
+                passwordHash: u.passwordHash || db.users[idx].passwordHash,
+              };
+            } else {
+              db.users.push(u);
+            }
+          }
+        }
+        if (cloudData.organizations && Array.isArray(cloudData.organizations)) {
+          for (const o of cloudData.organizations) {
+            const idx = db.organizations.findIndex((x) => x.id === o.id);
+            if (idx >= 0) db.organizations[idx] = { ...db.organizations[idx], ...o };
+            else db.organizations.push(o);
+          }
+        }
+        if (cloudData.subscriptions && Array.isArray(cloudData.subscriptions)) {
+          for (const s of cloudData.subscriptions) {
+            const idx = db.subscriptions.findIndex(
+              (x) => x.id === s.id || x.organizationId === s.organizationId
+            );
+            if (idx >= 0) db.subscriptions[idx] = { ...db.subscriptions[idx], ...s };
+            else db.subscriptions.push(s);
+          }
+        }
+        if (cloudData.leads && Array.isArray(cloudData.leads)) {
+          for (const l of cloudData.leads) {
+            const idx = db.leads.findIndex((x) => x.id === l.id);
+            if (idx >= 0) db.leads[idx] = { ...db.leads[idx], ...l };
+            else db.leads.push(l);
+          }
+        }
+        if (cloudData.properties && Array.isArray(cloudData.properties)) {
+          for (const p of cloudData.properties) {
+            const idx = db.properties.findIndex((x) => x.id === p.id);
+            if (idx >= 0) db.properties[idx] = { ...db.properties[idx], ...p };
+            else db.properties.push(p);
+          }
+        }
+        if (cloudData.clients && Array.isArray(cloudData.clients)) {
+          for (const c of cloudData.clients) {
+            const idx = db.clients.findIndex((x) => x.id === c.id);
+            if (idx >= 0) db.clients[idx] = { ...db.clients[idx], ...c };
+            else db.clients.push(c);
+          }
+        }
+        if (cloudData.appointments && Array.isArray(cloudData.appointments)) {
+          for (const a of cloudData.appointments) {
+            const idx = db.appointments.findIndex((x) => x.id === a.id);
+            if (idx >= 0) db.appointments[idx] = { ...db.appointments[idx], ...a };
+            else db.appointments.push(a);
+          }
+        }
+        if (cloudData.documents && Array.isArray(cloudData.documents)) {
+          for (const d of cloudData.documents) {
+            const idx = db.documents.findIndex((x) => x.id === d.id);
+            if (idx >= 0) db.documents[idx] = { ...db.documents[idx], ...d };
+            else db.documents.push(d);
+          }
+        }
+        if (cloudData.storageAssets && Array.isArray(cloudData.storageAssets)) {
+          for (const a of cloudData.storageAssets) {
+            const idx = db.storageAssets.findIndex((x) => x.id === a.id);
+            if (idx >= 0) db.storageAssets[idx] = { ...db.storageAssets[idx], ...a };
+            else db.storageAssets.push(a);
+          }
+        }
+        global.__velvetLastCloudSync = now;
+      }
+    } catch (syncErr) {
+      console.warn('ensureCloudSynced error:', syncErr);
+    } finally {
       global.__velvetCloudSyncPromise = undefined;
     }
   })();
@@ -326,7 +385,12 @@ export const serverDB = {
         console.error('PostgreSQL getOrganizationById error:', err);
       }
     }
-    const org = initMemoryDB().organizations.find((o) => o.id === id);
+    await ensureCloudSynced();
+    let org = initMemoryDB().organizations.find((o) => o.id === id);
+    if (!org) {
+      await ensureCloudSynced(true);
+      org = initMemoryDB().organizations.find((o) => o.id === id);
+    }
     return org || null;
   },
 
@@ -371,7 +435,7 @@ export const serverDB = {
     } else {
       db.organizations.push(org);
     }
-    saveDBToDisk(db);
+    await saveDBToDiskAndCloud(db);
     return org;
   },
 
@@ -390,8 +454,113 @@ export const serverDB = {
     const idx = db.organizations.findIndex((o) => o.id === id);
     if (idx === -1) return false;
     db.organizations.splice(idx, 1);
-    saveDBToDisk(db);
+    await saveDBToDiskAndCloud(db);
     return true;
+  },
+
+  /**
+   * Atomically registers a customer organization, admin user, and initial 7-day trial subscription.
+   * Commits to memory, local disk, and Vercel Blob cloud storage before resolving.
+   */
+  async registerCustomerWorkspace(
+    org: Organization,
+    user: User,
+    subscription: Subscription
+  ): Promise<{ organization: Organization; user: User; subscription: Subscription }> {
+    if (isPostgresConfigured()) {
+      await initPostgresSchema();
+      const pool = getPgPool()!;
+      const client = await pool.connect();
+      try {
+        await client.query('BEGIN');
+        await client.query(
+          `INSERT INTO organizations (id, name, slug, logo_url, phone, email, address, city, state, country, business_type, website, created_at, updated_at)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NOW(), NOW())
+           ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, email = EXCLUDED.email, updated_at = NOW()`,
+          [
+            org.id,
+            org.name,
+            org.slug || org.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+            org.logoUrl || null,
+            org.phone || null,
+            org.email || null,
+            org.address || null,
+            org.city || null,
+            org.state || null,
+            org.country || 'India',
+            org.businessType || 'AGENCY',
+            org.website || null,
+          ]
+        );
+        await client.query(
+          `INSERT INTO users (id, name, email, phone, avatar_url, role, organization_id, is_super_admin, password_hash, created_at, updated_at)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW())
+           ON CONFLICT (id) DO UPDATE SET
+             name = EXCLUDED.name,
+             email = EXCLUDED.email,
+             role = EXCLUDED.role,
+             password_hash = COALESCE(EXCLUDED.password_hash, users.password_hash),
+             updated_at = NOW()`,
+          [
+            user.id,
+            user.name,
+            user.email.toLowerCase(),
+            user.phone || null,
+            user.avatarUrl || null,
+            user.role || 'ADMIN',
+            user.organizationId,
+            user.isSuperAdmin || false,
+            user.passwordHash || null,
+          ]
+        );
+        await client.query(
+          `INSERT INTO subscriptions (id, organization_id, user_id, tier, status, price_monthly_inr, billing_cycle, current_period_start, current_period_end, cancel_at_period_end, usage_json, created_at, updated_at)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW(), NOW())
+           ON CONFLICT (organization_id) DO UPDATE SET
+             tier = EXCLUDED.tier,
+             status = EXCLUDED.status,
+             current_period_end = EXCLUDED.current_period_end,
+             updated_at = NOW()`,
+          [
+            subscription.id,
+            subscription.organizationId,
+            subscription.userId,
+            subscription.tier,
+            subscription.status,
+            subscription.priceMonthlyINR,
+            subscription.billingCycle,
+            subscription.currentPeriodStart,
+            subscription.currentPeriodEnd,
+            subscription.cancelAtPeriodEnd,
+            JSON.stringify(subscription.usage),
+          ]
+        );
+        await client.query('COMMIT');
+      } catch (err) {
+        await client.query('ROLLBACK');
+        console.error('PostgreSQL registerCustomerWorkspace error:', err);
+      } finally {
+        client.release();
+      }
+    }
+
+    const db = initMemoryDB();
+    const orgIdx = db.organizations.findIndex((o) => o.id === org.id);
+    if (orgIdx >= 0) db.organizations[orgIdx] = { ...db.organizations[orgIdx], ...org };
+    else db.organizations.push(org);
+
+    const userIdx = db.users.findIndex((u) => u.id === user.id || u.email.toLowerCase() === user.email.toLowerCase());
+    if (userIdx >= 0) db.users[userIdx] = { ...db.users[userIdx], ...user };
+    else db.users.push(user);
+
+    const subIdx = db.subscriptions.findIndex(
+      (s) => s.id === subscription.id || s.organizationId === subscription.organizationId
+    );
+    if (subIdx >= 0) db.subscriptions[subIdx] = { ...db.subscriptions[subIdx], ...subscription };
+    else db.subscriptions.push(subscription);
+
+    await saveDBToDiskAndCloud(db);
+    return { organization: org, user, subscription };
   },
 
   // ==========================================
@@ -455,7 +624,12 @@ export const serverDB = {
       }
     }
     await ensureCloudSynced();
-    const matched = initMemoryDB().users.find((u) => u.email.toLowerCase() === cleanEmail);
+    const db = initMemoryDB();
+    let matched = db.users.find((u) => u.email && u.email.toLowerCase() === cleanEmail);
+    if (!matched) {
+      await ensureCloudSynced(true);
+      matched = db.users.find((u) => u.email && u.email.toLowerCase() === cleanEmail);
+    }
     return matched || null;
   },
 
@@ -484,7 +658,12 @@ export const serverDB = {
         console.error('PostgreSQL getUserById error:', err);
       }
     }
-    const matched = initMemoryDB().users.find((u) => u.id === id);
+    await ensureCloudSynced();
+    let matched = initMemoryDB().users.find((u) => u.id === id);
+    if (!matched) {
+      await ensureCloudSynced(true);
+      matched = initMemoryDB().users.find((u) => u.id === id);
+    }
     return matched || null;
   },
 
@@ -527,7 +706,7 @@ export const serverDB = {
     } else {
       db.users.push(user);
     }
-    saveDBToDisk(db);
+    await saveDBToDiskAndCloud(db);
     return user;
   },
 
@@ -550,7 +729,7 @@ export const serverDB = {
     const idx = db.users.findIndex((u) => u.id === id && (!orgId || u.organizationId === orgId));
     if (idx === -1) return false;
     db.users.splice(idx, 1);
-    saveDBToDisk(db);
+    await saveDBToDiskAndCloud(db);
     return true;
   },
 
@@ -1692,7 +1871,7 @@ export const serverDB = {
     } else {
       db.subscriptions.push(sub);
     }
-    saveDBToDisk(db);
+    await saveDBToDiskAndCloud(db);
     return sub;
   },
 
