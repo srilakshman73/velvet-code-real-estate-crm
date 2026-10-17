@@ -81,7 +81,7 @@ export default function AdminSubscriptionsPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Tenant Subscriptions</h1>
+          <h1 className="text-3xl font-bold text-[#2C241A] tracking-tight">Tenant Subscriptions</h1>
           <p className="text-sm text-[#6A5A44] mt-1">
             Real-time tracking of Razorpay subscription contracts, renewals, and revenue run-rates.
           </p>
@@ -99,22 +99,22 @@ export default function AdminSubscriptionsPage() {
       {/* Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Annualized Run Rate (ARR)</span>
-          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">₹{(mrr * 12).toLocaleString('en-IN')}</div>
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">Annualized Run Rate (ARR)</span>
+          <div className="text-2xl font-bold text-[#2C241A] mt-2">₹{(mrr * 12).toLocaleString('en-IN')}</div>
           <div className="text-xs text-[#547A61] mt-1 flex items-center gap-1 font-semibold">
             <ArrowUpRight className="w-3.5 h-3.5" /> Live active run-rate
           </div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Active Paid Subscriptions</span>
-          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">{activeCount} Contract{activeCount === 1 ? '' : 's'}</div>
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">Active Paid Subscriptions</span>
+          <div className="text-2xl font-bold text-[#2C241A] mt-2">{activeCount} Contract{activeCount === 1 ? '' : 's'}</div>
           <div className="text-xs text-[#7A5520] mt-1 font-medium">{subs.length} total tenant subscriptions</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Monthly Recurring Revenue (MRR)</span>
-          <div className="text-2xl font-serif font-bold text-[#7A5520] mt-2">₹{mrr.toLocaleString('en-IN')} / mo</div>
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">Monthly Recurring Revenue (MRR)</span>
+          <div className="text-2xl font-bold text-[#7A5520] mt-2">₹{mrr.toLocaleString('en-IN')} / mo</div>
           <div className="text-xs text-[#8A7A63] mt-1 font-medium">Starter, Pro & Business tiers</div>
         </Card>
       </div>
@@ -160,7 +160,7 @@ export default function AdminSubscriptionsPage() {
                 <tr>
                   <td colSpan={6} className="py-12 text-center text-[#6A5A44]">
                     <Layers className="w-8 h-8 text-[#D8C7A5] mx-auto mb-2" />
-                    <p className="font-serif font-bold text-sm text-[#2C241A]">No active customer subscriptions</p>
+                    <p className="font-bold text-sm text-[#2C241A]">No active customer subscriptions</p>
                     <p className="text-xs">When customers subscribe in Razorpay, their live contract details will appear here.</p>
                   </td>
                 </tr>
@@ -169,7 +169,7 @@ export default function AdminSubscriptionsPage() {
                   <tr key={sub.id} className="hover:bg-[#F7EEDC] transition-colors">
                     <td className="py-3 px-4 font-medium text-[#2C241A]">
                       <div>
-                        <div className="text-sm font-serif font-bold text-[#2C241A]">{sub.organizationName}</div>
+                        <div className="text-sm font-bold text-[#2C241A]">{sub.organizationName}</div>
                         <div className="text-[11px] text-[#6A5A44]">{sub.customerEmail}</div>
                       </div>
                     </td>

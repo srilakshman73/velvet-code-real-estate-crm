@@ -73,7 +73,7 @@ export default function AdminPaymentsPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Payment Receipts & GST Ledger</h1>
+          <h1 className="text-3xl font-bold text-[#2C241A] tracking-tight">Payment Receipts & GST Ledger</h1>
           <p className="text-sm text-[#6A5A44] mt-1">
             Real-time Razorpay payment transactions, automatic tax invoices, and monthly GST audit logs.
           </p>
@@ -115,22 +115,22 @@ export default function AdminPaymentsPage() {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Gross Platform Inflow</span>
-          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">₹{grossInflow.toLocaleString('en-IN')}</div>
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">Gross Platform Inflow</span>
+          <div className="text-2xl font-bold text-[#2C241A] mt-2">₹{grossInflow.toLocaleString('en-IN')}</div>
           <div className="text-xs text-[#547A61] mt-1 flex items-center gap-1 font-semibold">
             <ArrowUpRight className="w-3.5 h-3.5" /> Razorpay Test Gateway Active
           </div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Total GST Accounted (18%)</span>
-          <div className="text-2xl font-serif font-bold text-[#7A5520] mt-2">₹{totalGST.toLocaleString('en-IN')}</div>
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">Total GST Accounted (18%)</span>
+          <div className="text-2xl font-bold text-[#7A5520] mt-2">₹{totalGST.toLocaleString('en-IN')}</div>
           <div className="text-xs text-[#6A5A44] mt-1">Ready for GSTR-1 e-filing audit</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-2xs">
-          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Captured Transactions</span>
-          <div className="text-2xl font-serif font-bold text-[#547A61] mt-2">{capturedPayments.length} Paid</div>
+          <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">Captured Transactions</span>
+          <div className="text-2xl font-bold text-[#547A61] mt-2">{capturedPayments.length} Paid</div>
           <div className="text-xs text-[#6A5A44] mt-1">{payments.filter((p) => p.status === 'FAILED').length} failed payment attempts</div>
         </Card>
       </div>
@@ -178,7 +178,7 @@ export default function AdminPaymentsPage() {
                 <tr>
                   <td colSpan={8} className="py-12 text-center text-[#6A5A44]">
                     <Receipt className="w-8 h-8 text-[#D8C7A5] mx-auto mb-2" />
-                    <p className="font-serif font-bold text-sm text-[#2C241A]">No payments yet</p>
+                    <p className="font-bold text-sm text-[#2C241A]">No payments yet</p>
                     <p className="text-xs">Real customer subscription payments and GST invoices will be recorded here.</p>
                   </td>
                 </tr>
@@ -187,7 +187,7 @@ export default function AdminPaymentsPage() {
                   <tr key={p.id} className="hover:bg-[#F7EEDC] transition-colors">
                     <td className="py-3 px-4 font-medium text-[#2C241A]">
                       <div>
-                        <div className="text-sm font-serif font-bold text-[#2C241A]">{p.organizationName}</div>
+                        <div className="text-sm font-bold text-[#2C241A]">{p.organizationName}</div>
                         <div className="text-[10px] text-[#6A5A44] font-mono">{p.razorpayPaymentId}</div>
                       </div>
                     </td>

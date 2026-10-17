@@ -80,10 +80,10 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10 space-y-6 max-w-lg">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30 font-serif">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Real Estate CRM SaaS
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight leading-tight font-serif">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight leading-tight">
             Run Your Real Estate Business From One Intelligent Workspace
           </h2>
           <p className="text-sm text-[#6A5A44] leading-relaxed">
@@ -107,7 +107,7 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10 pt-8 border-t border-[#D8C7A5] text-xs text-[#8A7A63] flex items-center justify-between">
-          <span>Â© 2026 Velvet Code. Technology & Digital Solutions.</span>
+          <span>&copy; 2026 Velvet Code. Technology & Digital Solutions.</span>
           <span className="flex items-center gap-1 text-[#547A61] font-semibold">
             <ShieldCheck className="w-4 h-4" /> 256-Bit SSL Encrypted
           </span>
@@ -123,7 +123,7 @@ export default function LoginPage() {
 
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Welcome back
             </h1>
             <p className="text-xs sm:text-sm text-[#8A7A63] mt-1">

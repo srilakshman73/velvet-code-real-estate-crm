@@ -71,7 +71,7 @@ export default function RealtyAIPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
               <Sparkles className="w-6 h-6 text-[#A37432]" />
               Realty AI Assistant Console
             </h1>
@@ -145,7 +145,7 @@ export default function RealtyAIPage() {
                   {/* Action Draft Preview */}
                   {msg.actionDraft && msg.role === 'assistant' && (
                     <div className="mt-4 p-4 rounded-xl bg-[#FFF9F0] border border-[#A37432] text-[#2C241A] space-y-2 shadow-sm">
-                      <div className="flex items-center justify-between text-xs font-bold text-[#7A5520] uppercase tracking-wider font-serif">
+                      <div className="flex items-center justify-between text-xs font-bold text-[#7A5520] uppercase tracking-wider">
                         <span className="flex items-center gap-1.5">
                           <MessageSquare className="w-4 h-4 text-[#547A61]" />
                           Prepared Action Draft
@@ -238,7 +238,7 @@ export default function RealtyAIPage() {
         {/* Right Sidebar: Quick AI CRM Insights (4 Cols) */}
         <div className="lg:col-span-4 space-y-4">
           <div className="p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4">
-            <h3 className="text-sm font-serif font-bold text-[#7A5520] uppercase tracking-wider">
+            <h3 className="text-sm font-bold text-[#7A5520] uppercase tracking-wider">
               Live AI CRM Intelligence
             </h3>
 

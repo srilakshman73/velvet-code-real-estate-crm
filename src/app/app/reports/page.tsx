@@ -74,7 +74,7 @@ export default function ReportsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
               <BarChart3 className="w-6 h-6 text-[#A37432]" />
               Executive Analytics & Reports
             </h1>
@@ -118,7 +118,7 @@ export default function ReportsPage() {
         {/* Conversion Funnel */}
         <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-4 shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="border-b border-[#D8C7A5] pb-3">
-            <h3 className="text-base font-serif font-bold text-[#2C241A] tracking-tight">
+            <h3 className="text-base font-bold text-[#2C241A] tracking-tight">
               Lead Conversion Funnel
             </h3>
             <p className="text-xs text-[#6A5A44]">Visitor inquiry to Closed Won transaction velocity</p>
@@ -148,7 +148,7 @@ export default function ReportsPage() {
         {/* Agent Revenue Leaderboard */}
         <div className="lg:col-span-6 p-6 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-4 shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="border-b border-[#D8C7A5] pb-3">
-            <h3 className="text-base font-serif font-bold text-[#2C241A] tracking-tight">
+            <h3 className="text-base font-bold text-[#2C241A] tracking-tight">
               Sales Consultant Revenue Contribution
             </h3>
             <p className="text-xs text-[#6A5A44]">Closed commission vs active pipeline in Lakhs INR</p>

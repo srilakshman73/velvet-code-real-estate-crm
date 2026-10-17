@@ -38,7 +38,7 @@ export default function WhatsAppAutomationPage() {
             <ArrowLeft className="w-3.5 h-3.5" /> Back to WhatsApp Inbox
           </Link>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
               <Zap className="w-6 h-6 text-[#A37432]" />
               WhatsApp Visual Automation Engine
             </h1>
@@ -77,7 +77,7 @@ export default function WhatsAppAutomationPage() {
               <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
                 {/* 1. TRIGGER */}
                 <div className="p-3 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] flex items-center gap-2 shadow-xs">
-                  <span className="text-[10px] font-bold uppercase text-[#7A5520] font-serif">Trigger:</span>
+                  <span className="text-[10px] font-bold uppercase text-[#7A5520]">Trigger:</span>
                   <strong className="text-[#2C241A]">{rule.triggerEvent}</strong>
                 </div>
 
@@ -85,7 +85,7 @@ export default function WhatsAppAutomationPage() {
 
                 {/* 2. CONDITION */}
                 <div className="p-3 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] flex items-center gap-2 shadow-xs">
-                  <span className="text-[10px] font-bold uppercase text-[#A37432] font-serif">Condition:</span>
+                  <span className="text-[10px] font-bold uppercase text-[#A37432]">Condition:</span>
                   <span className="text-[#2C241A]">Valid Phone & Verified Org</span>
                 </div>
 
@@ -93,7 +93,7 @@ export default function WhatsAppAutomationPage() {
 
                 {/* 3. ACTION */}
                 <div className="p-3 rounded-xl bg-[#FFF9F0] border border-[#547A61]/40 flex items-center gap-2 shadow-xs">
-                  <span className="text-[10px] font-bold uppercase text-[#547A61] font-serif">Action:</span>
+                  <span className="text-[10px] font-bold uppercase text-[#547A61]">Action:</span>
                   <strong className="text-[#547A61]">
                     {rule.actionType} ({rule.templateName || 'Direct Task'})
                   </strong>

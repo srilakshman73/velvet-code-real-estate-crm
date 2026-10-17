@@ -73,7 +73,7 @@ export default function TasksPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Task Management
             </h1>
             <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
@@ -156,7 +156,7 @@ export default function TasksPage() {
                     <div className="flex flex-wrap items-center gap-2">
                       <h4
                         className={`text-sm font-bold ${
-                          isCompleted ? 'line-through text-[#8A7A63]' : 'text-[#2C241A] font-serif'
+                          isCompleted ? 'line-through text-[#8A7A63]' : 'text-[#2C241A]'
                         }`}
                       >
                         {t.title}

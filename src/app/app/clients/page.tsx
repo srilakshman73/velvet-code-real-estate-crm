@@ -152,7 +152,7 @@ export default function ClientsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Converted Clients
             </h1>
             <span className="px-2.5 py-0.5 text-xs font-bold bg-[#547A61]/15 text-[#547A61] border border-[#547A61]/30 rounded-full">
@@ -215,7 +215,7 @@ export default function ClientsPage() {
                   </span>
                 </div>
 
-                <h3 className="text-lg font-serif font-bold text-[#2C241A] mt-3 group-hover:text-[#7A5520] transition-colors">
+                <h3 className="text-lg font-bold text-[#2C241A] mt-3 group-hover:text-[#7A5520] transition-colors">
                   {client.name}
                 </h3>
                 <p className="text-xs text-[#6A5A44] mt-0.5 font-medium">{client.phone}</p>
@@ -237,7 +237,7 @@ export default function ClientsPage() {
               </div>
 
               <div className="pt-3 border-t border-[#D8C7A5] flex items-center justify-between text-xs" onClick={(e) => e.stopPropagation()}>
-                <span className="text-[#6A5A44] font-serif font-semibold">VIP Investor</span>
+                <span className="text-[#6A5A44] font-semibold">VIP Investor</span>
                 <div className="flex items-center gap-2">
                   <a
                     href={buildWhatsAppUrl(client.phone, `Hello ${client.name}, connecting from Velvet Code.`)}
@@ -273,7 +273,7 @@ export default function ClientsPage() {
         >
           <div className="space-y-6 text-xs sm:text-sm">
             <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-3">
-              <h4 className="font-bold text-[#7A5520] font-serif uppercase tracking-wider text-xs">
+              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs">
                 Contact & Investment Profile
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
@@ -299,7 +299,7 @@ export default function ClientsPage() {
             </div>
 
             <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
-              <h4 className="font-bold text-[#7A5520] font-serif uppercase tracking-wider text-xs">
+              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs">
                 Portfolio Requirements
               </h4>
               <p className="text-xs text-[#2C241A] bg-[#F4EAD7] p-3 rounded-lg border border-[#D8C7A5]">
@@ -308,7 +308,7 @@ export default function ClientsPage() {
             </div>
 
             <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
-              <h4 className="font-bold text-[#7A5520] font-serif uppercase tracking-wider text-xs">
+              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs">
                 Client History & Notes
               </h4>
               <p className="text-xs text-[#2C241A] bg-[#F4EAD7] p-3 rounded-lg border border-[#D8C7A5]">
@@ -319,7 +319,7 @@ export default function ClientsPage() {
             {/* Scheduled Appointments & Engagements */}
             <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-3">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-[#7A5520] font-serif uppercase tracking-wider text-xs flex items-center gap-1.5">
+                <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs flex items-center gap-1.5">
                   <Calendar className="w-3.5 h-3.5" /> Scheduled Engagements
                 </h4>
                 <Button

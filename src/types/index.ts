@@ -25,6 +25,32 @@ export interface User {
   organizationId: string;
   isSuperAdmin?: boolean;
   passwordHash?: string;
+  createdAt?: string;
+  lastLoginAt?: string;
+  lastActiveAt?: string;
+}
+
+export interface OwnerMonitoringUser {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: Role;
+  organizationId: string;
+  organizationName: string;
+  registrationDate: string;
+  lastLoginAt: string;
+  lastActiveAt: string;
+  accountStatus: 'ACTIVE' | 'SUSPENDED';
+  trialStartDate: string;
+  trialEndDate: string;
+  isTrialActive: boolean;
+  trialDaysRemaining: number;
+  planTier: SubscriptionTier;
+  planName: string;
+  subscriptionStatus: SubscriptionStatus;
+  organizationMemberCount: number;
+  isOwner: boolean;
 }
 
 export interface Organization {

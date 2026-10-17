@@ -41,7 +41,7 @@ export default function AdminUsagePage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Platform Resource Telemetry</h1>
+          <h1 className="text-3xl font-bold text-[#2C241A] tracking-tight">Platform Resource Telemetry</h1>
           <p className="text-sm text-[#6A5A44] mt-1">
             Global compute metrics for Realty AI token consumption, WhatsApp Meta Cloud throughput, and PostgreSQL multi-tenant storage.
           </p>
@@ -53,37 +53,37 @@ export default function AdminUsagePage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">AI Inferences (MTD)</span>
+            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">AI Inferences (MTD)</span>
             <Sparkles className="w-4 h-4 text-[#A37432]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">0</div>
+          <div className="text-2xl font-bold text-[#2C241A] mt-2">0</div>
           <div className="text-xs text-[#7A5520] mt-1 font-medium">0 tokens processed</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">WhatsApp Messages Sent</span>
+            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">WhatsApp Messages Sent</span>
             <MessageSquare className="w-4 h-4 text-[#547A61]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">0</div>
+          <div className="text-2xl font-bold text-[#2C241A] mt-2">0</div>
           <div className="text-xs text-[#547A61] mt-1 font-medium">100% delivery reliability</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">PostgreSQL DB Size</span>
+            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">PostgreSQL DB Size</span>
             <Database className="w-4 h-4 text-[#C39A5B]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">24 MB</div>
+          <div className="text-2xl font-bold text-[#2C241A] mt-2">24 MB</div>
           <div className="text-xs text-[#7A5520] mt-1 font-medium">Isolated tenant schema ready</div>
         </Card>
 
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider font-serif">Average API Latency</span>
+            <span className="text-xs font-semibold text-[#6A5A44] uppercase tracking-wider">Average API Latency</span>
             <Zap className="w-4 h-4 text-[#A37432]" />
           </div>
-          <div className="text-2xl font-serif font-bold text-[#2C241A] mt-2">85 ms</div>
+          <div className="text-2xl font-bold text-[#2C241A] mt-2">85 ms</div>
           <div className="text-xs text-[#547A61] mt-1 font-medium">Optimal edge latency</div>
         </Card>
       </div>
@@ -92,7 +92,7 @@ export default function AdminUsagePage() {
       <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-base font-serif font-bold text-[#2C241A]">24-Hour Traffic Throughput</h2>
+            <h2 className="text-base font-bold text-[#2C241A]">24-Hour Traffic Throughput</h2>
             <p className="text-xs text-[#6A5A44]">Realty AI inferences & WhatsApp Cloud API events by time of day</p>
           </div>
           <div className="flex items-center gap-4 text-xs">
@@ -156,7 +156,7 @@ export default function AdminUsagePage() {
 
       {/* Top Consuming Tenants */}
       <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
-        <h2 className="text-base font-serif font-bold text-[#2C241A] mb-1">Top Resource Consuming Brokerages</h2>
+        <h2 className="text-base font-bold text-[#2C241A] mb-1">Top Resource Consuming Brokerages</h2>
         <p className="text-xs text-[#6A5A44] mb-4">Tenants with highest API traffic and token consumption this month</p>
 
         <div className="overflow-x-auto">
@@ -179,7 +179,7 @@ export default function AdminUsagePage() {
                 { name: 'Kovai Urban Lands', tier: 'PROFESSIONAL', ai: '8,400', wa: '21,000', storage: '410 MB', quota: '28%' },
               ].map((tenant, idx) => (
                 <tr key={idx} className="hover:bg-[#F7EEDC] transition-colors">
-                  <td className="py-3 px-4 font-medium font-serif text-[#2C241A]">{tenant.name}</td>
+                  <td className="py-3 px-4 font-medium text-[#2C241A]">{tenant.name}</td>
                   <td className="py-3 px-4">
                     <Badge variant={tenant.tier === 'BUSINESS' ? 'gold' : 'info'}>{tenant.tier}</Badge>
                   </td>

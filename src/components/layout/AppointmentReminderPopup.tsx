@@ -94,7 +94,7 @@ export function AppointmentReminderPopup() {
             <div className="p-1.5 rounded-lg bg-[#A37432]/15 animate-pulse">
               <BellRing className="w-4 h-4 text-[#7A5520]" />
             </div>
-            <h4 className="text-sm font-serif font-bold text-[#2C241A]">Upcoming Appointment</h4>
+            <h4 className="text-sm font-bold text-[#2C241A]">Upcoming Appointment</h4>
           </div>
           <button
             onClick={handleDismiss}

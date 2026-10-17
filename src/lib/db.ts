@@ -129,6 +129,10 @@ export async function initPostgresSchema(): Promise<boolean> {
         );
         CREATE INDEX IF NOT EXISTS idx_users_org ON users(organization_id);
         CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+
+        -- Safe schema migration for user login monitoring
+        ALTER TABLE users ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMPTZ;
+        ALTER TABLE users ADD COLUMN IF NOT EXISTS last_active_at TIMESTAMPTZ;
       `);
 
       // 3. Subscriptions

@@ -184,7 +184,7 @@ export function PublicFooter() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-[#24221E] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#D8C7A5]/60">
-          <p>Â© {new Date().getFullYear()} Velvet Code. All rights reserved. Technology & Digital Solutions</p>
+          <p>&copy; {new Date().getFullYear()} Velvet Code. All rights reserved. Technology & Digital Solutions</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 text-[#547A61] font-semibold">
               <ShieldCheck className="w-4 h-4" />

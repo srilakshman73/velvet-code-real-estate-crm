@@ -37,7 +37,7 @@ export function TrustedTechSection() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {stats.map((s, i) => (
             <div key={i} className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-extrabold text-[#2C241A] font-serif">
+              <div className="text-3xl sm:text-4xl font-extrabold text-[#2C241A] tracking-tight">
                 {s.value}
               </div>
               <p className="text-xs sm:text-sm text-[#6A5A44] font-medium">{s.label}</p>
@@ -105,7 +105,7 @@ export function CoreModulesShowcase() {
           <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Comprehensive CRM Modules
           </span>
-          <h2 className="text-3xl sm:text-5xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h2 className="text-3xl sm:text-5xl font-bold text-[#2C241A] mt-4 tracking-tight">
             Every Tool You Need to Scale Your Real Estate Agency
           </h2>
           <p className="text-base text-[#6A5A44] mt-4 leading-relaxed">
@@ -164,7 +164,7 @@ export function WhatsAppAndAIShowcase() {
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Official WhatsApp Business Architecture</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight font-serif">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight">
               Connect With Buyers on India's #1 Messaging App
             </h2>
             <p className="text-sm text-[#6A5A44] leading-relaxed">
@@ -258,7 +258,7 @@ export function PricingSection() {
           <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Transparent SaaS Pricing
           </span>
-          <h2 className="text-3xl sm:text-5xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h2 className="text-3xl sm:text-5xl font-bold text-[#2C241A] mt-4 tracking-tight">
             Plans Built for Solopreneurs to Enterprise Agencies
           </h2>
           <p className="text-base text-[#6A5A44] mt-4 leading-relaxed">
@@ -407,7 +407,7 @@ export function TestimonialsSection() {
           <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Real Estate Leadership
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] mt-4 tracking-tight">
             Trusted by Top Real Estate Agencies & Builders
           </h2>
         </div>
@@ -474,7 +474,7 @@ export function FAQSection() {
           <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Frequently Asked Questions
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] mt-4 tracking-tight">
             Everything You Need to Know About Velvet Code CRM
           </h2>
         </div>
@@ -521,7 +521,7 @@ export function FinalCTASection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#A37432]/15 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-        <h2 className="text-3xl sm:text-5xl font-bold text-[#2C241A] tracking-tight leading-tight font-serif">
+        <h2 className="text-3xl sm:text-5xl font-bold text-[#2C241A] tracking-tight leading-tight">
           Ready to Modernize Your Real Estate Sales Engine?
         </h2>
         <p className="text-base sm:text-lg text-[#6A5A44] max-w-2xl mx-auto leading-relaxed">

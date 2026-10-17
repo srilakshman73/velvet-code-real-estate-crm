@@ -36,7 +36,7 @@ export default function FollowUpsPage() {
     <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto bg-[#E9DFC8] text-[#2C241A]">
       {/* Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
           Client Follow-up Engine
         </h1>
         <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">
@@ -128,7 +128,7 @@ export default function FollowUpsPage() {
           >
             <div className="space-y-1.5 min-w-0">
               <div className="flex items-center gap-2.5">
-                <span className="text-base font-serif font-bold text-[#2C241A]">{fu.leadName}</span>
+                <span className="text-base font-bold text-[#2C241A]">{fu.leadName}</span>
                 <span className="px-2 py-0.5 text-[10px] font-bold bg-[#F4EAD7] border border-[#D8C7A5] text-[#6A5A44] rounded">
                   {fu.type}
                 </span>
@@ -136,7 +136,7 @@ export default function FollowUpsPage() {
               </div>
 
               <p className="text-xs text-[#2C241A]">
-                <strong className="text-[#7A5520] font-serif">{fu.propertyName}</strong> — {fu.notes}
+                <strong className="text-[#7A5520]">{fu.propertyName}</strong> — {fu.notes}
               </p>
             </div>
 

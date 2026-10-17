@@ -259,7 +259,7 @@ export default function BillingPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
               <CreditCard className="w-6 h-6 text-[#A37432]" />
               Subscription & Workspace Billing
             </h1>
@@ -330,7 +330,7 @@ export default function BillingPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D8C7A5] pb-6">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#7A5520] font-serif">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#7A5520]">
                 Active SaaS Plan
               </span>
               {subscription.cancelAtPeriodEnd && (
@@ -339,7 +339,7 @@ export default function BillingPage() {
                 </span>
               )}
             </div>
-            <h2 className="text-3xl font-serif font-bold text-[#2C241A] mt-1">
+            <h2 className="text-3xl font-bold text-[#2C241A] mt-1">
               {currentPlanLimits.name} Plan
             </h2>
             <p className="text-sm text-[#6A5A44] mt-1 flex flex-wrap items-center gap-2">
@@ -495,7 +495,7 @@ export default function BillingPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Payment History */}
         <div className="space-y-4">
-          <h3 className="text-lg font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+          <h3 className="text-lg font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
             <CreditCard className="w-5 h-5 text-[#A37432]" />
             Payment History
           </h3>
@@ -516,7 +516,7 @@ export default function BillingPage() {
                   <tr>
                     <td colSpan={5} className="py-10 text-center text-[#6A5A44]">
                       <Receipt className="w-7 h-7 text-[#D8C7A5] mx-auto mb-2" />
-                      <p className="font-serif font-bold text-sm text-[#2C241A]">No payments yet</p>
+                      <p className="font-bold text-sm text-[#2C241A]">No payments yet</p>
                       <p className="text-xs mt-0.5">Your Razorpay subscription transaction receipts will be logged here.</p>
                     </td>
                   </tr>
@@ -550,7 +550,7 @@ export default function BillingPage() {
 
         {/* GST Tax Invoices */}
         <div className="space-y-4">
-          <h3 className="text-lg font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+          <h3 className="text-lg font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
             <Receipt className="w-5 h-5 text-[#A37432]" />
             GST Tax Invoices
           </h3>
@@ -570,7 +570,7 @@ export default function BillingPage() {
                   <tr>
                     <td colSpan={4} className="py-10 text-center text-[#6A5A44]">
                       <Receipt className="w-7 h-7 text-[#D8C7A5] mx-auto mb-2" />
-                      <p className="font-serif font-bold text-sm text-[#2C241A]">No invoices yet</p>
+                      <p className="font-bold text-sm text-[#2C241A]">No invoices yet</p>
                       <p className="text-xs mt-0.5">Official GST invoices will be generated upon payment confirmation.</p>
                     </td>
                   </tr>
@@ -634,7 +634,7 @@ export default function BillingPage() {
 
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <h4 className="font-serif font-bold text-[#2C241A] text-base">{plan.name}</h4>
+                      <h4 className="font-bold text-[#2C241A] text-base">{plan.name}</h4>
                       {isCurrent && (
                         <span className="px-2 py-0.5 text-[9px] font-bold bg-[#547A61] text-white rounded">
                           Current Plan
@@ -642,7 +642,7 @@ export default function BillingPage() {
                       )}
                     </div>
                     <div className="mt-2">
-                      <span className="text-2xl font-serif font-extrabold text-[#2C241A]">
+                      <span className="text-2xl font-extrabold text-[#2C241A]">
                         ₹{plan.priceMonthlyINR.toLocaleString('en-IN')}
                       </span>
                       <span className="text-xs text-[#8A7A63]"> / month</span>

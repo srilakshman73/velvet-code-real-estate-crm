@@ -67,7 +67,7 @@ export default function FeaturesPage() {
           <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Platform Capabilities
           </span>
-          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight">
             The Complete Real Estate Tech Stack
           </h1>
           <p className="text-lg text-[#6A5A44] mt-4 leading-relaxed max-w-2xl mx-auto">
@@ -94,7 +94,7 @@ export default function FeaturesPage() {
                   <div className="p-3 rounded-xl bg-[#E9DFC8] text-[#7A5520] w-fit border border-[#D8C7A5]">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
                     {item.title}
                   </h2>
                   <p className="text-sm text-[#6A5A44] leading-relaxed">{item.desc}</p>

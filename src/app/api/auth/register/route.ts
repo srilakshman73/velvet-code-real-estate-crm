@@ -63,16 +63,21 @@ export async function POST(request: Request) {
     // Hash password securely with PBKDF2
     const passwordHash = hashPassword(password);
 
+    const regTimestamp = new Date().toISOString();
+
     // Create customer admin user (cannot be OWNER)
     const newUser = {
       id: newUserId,
       name: fullName.trim(),
       email: trimmedEmail,
-      phone: phone ? phone.trim() : '+91 63833 95915',
+      phone: phone && phone.trim().length > 0 ? phone.trim() : '+91 63833 95915',
       role: 'ADMIN' as const,
       organizationId: newOrgId,
       isSuperAdmin: false,
       passwordHash,
+      createdAt: regTimestamp,
+      lastLoginAt: regTimestamp,
+      lastActiveAt: regTimestamp,
     };
 
     // Determine 7-day trial policy from server configuration

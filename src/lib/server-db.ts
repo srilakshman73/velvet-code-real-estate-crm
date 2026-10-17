@@ -34,6 +34,8 @@ import {
   DocumentRecord,
   StorageUsage,
   SubscriptionTier,
+  SubscriptionStatus,
+  OwnerMonitoringUser,
 } from '@/types';
 import { getPgPool, initPostgresSchema, isPostgresConfigured } from './db';
 
@@ -586,6 +588,9 @@ export const serverDB = {
             role: r.role,
             organizationId: r.organization_id,
             isSuperAdmin: r.is_super_admin || false,
+            createdAt: r.created_at ? new Date(r.created_at).toISOString() : undefined,
+            lastLoginAt: r.last_login_at ? new Date(r.last_login_at).toISOString() : undefined,
+            lastActiveAt: r.last_active_at ? new Date(r.last_active_at).toISOString() : undefined,
           }));
         }
       } catch (err) {
@@ -616,6 +621,9 @@ export const serverDB = {
             organizationId: r.organization_id,
             isSuperAdmin: r.is_super_admin || false,
             passwordHash: r.password_hash || undefined,
+            createdAt: r.created_at ? new Date(r.created_at).toISOString() : undefined,
+            lastLoginAt: r.last_login_at ? new Date(r.last_login_at).toISOString() : undefined,
+            lastActiveAt: r.last_active_at ? new Date(r.last_active_at).toISOString() : undefined,
           };
         }
         return null;
@@ -651,6 +659,9 @@ export const serverDB = {
             organizationId: r.organization_id,
             isSuperAdmin: r.is_super_admin || false,
             passwordHash: r.password_hash || undefined,
+            createdAt: r.created_at ? new Date(r.created_at).toISOString() : undefined,
+            lastLoginAt: r.last_login_at ? new Date(r.last_login_at).toISOString() : undefined,
+            lastActiveAt: r.last_active_at ? new Date(r.last_active_at).toISOString() : undefined,
           };
         }
         return null;
@@ -2365,5 +2376,114 @@ export const serverDB = {
       return true;
     }
     return false;
+  },
+
+  async recordUserLogin(email: string): Promise<void> {
+    const cleanEmail = email.trim().toLowerCase();
+    const nowIso = new Date().toISOString();
+
+    if (isPostgresConfigured()) {
+      await initPostgresSchema();
+      const pool = getPgPool()!;
+      try {
+        await pool.query(
+          'UPDATE users SET last_login_at = NOW(), last_active_at = NOW(), updated_at = NOW() WHERE LOWER(email) = $1',
+          [cleanEmail]
+        );
+      } catch (err) {
+        console.error('PostgreSQL recordUserLogin error:', err);
+      }
+    }
+
+    const db = initMemoryDB();
+    const user = db.users.find((u) => u.email && u.email.toLowerCase() === cleanEmail);
+    if (user) {
+      user.lastLoginAt = nowIso;
+      user.lastActiveAt = nowIso;
+      await saveDBToDiskAndCloud(db);
+    }
+  },
+
+  async getRegisteredUsersForOwner(): Promise<OwnerMonitoringUser[]> {
+    await ensureCloudSynced(true);
+    const db = initMemoryDB();
+
+    let allUsers = [...db.users];
+    if (isPostgresConfigured()) {
+      try {
+        const pgUsers = await this.getUsers();
+        for (const pgu of pgUsers) {
+          const existingIdx = allUsers.findIndex(
+            (u) => (u.id && u.id === pgu.id) || (u.email && u.email.toLowerCase() === pgu.email.toLowerCase())
+          );
+          if (existingIdx >= 0) {
+            allUsers[existingIdx] = { ...allUsers[existingIdx], ...pgu };
+          } else {
+            allUsers.push(pgu);
+          }
+        }
+      } catch (err) {
+        console.error('getRegisteredUsersForOwner pgUsers error:', err);
+      }
+    }
+
+    const organizations = db.organizations;
+    const subscriptions = db.subscriptions;
+    const ownerEmail = (process.env.OWNER_EMAIL || 'srilakshman73@gmail.com').toLowerCase().trim();
+
+    const enrichedUsers: OwnerMonitoringUser[] = allUsers.map((user) => {
+      const org = organizations.find((o) => o.id === user.organizationId);
+      const sub = subscriptions.find((s) => s.organizationId === user.organizationId);
+
+      const isOwnerAccount = user.role === 'OWNER' || (user.email && user.email.toLowerCase() === ownerEmail);
+
+      const memberCount = allUsers.filter((u) => u.organizationId === user.organizationId).length || 1;
+
+      const subStatus: SubscriptionStatus = sub?.status || 'TRIALING';
+      const trialEndDate = sub?.currentPeriodEnd || '';
+      let isTrialActive = false;
+      let trialDaysRemaining = 0;
+
+      if (subStatus === 'TRIALING' && trialEndDate) {
+        const remainingMs = new Date(trialEndDate).getTime() - Date.now();
+        trialDaysRemaining = Math.max(0, Math.ceil(remainingMs / (1000 * 60 * 60 * 24)));
+        isTrialActive = remainingMs > 0;
+      }
+
+      const planTier: SubscriptionTier = sub?.tier || 'STARTER';
+      const planName = planTier === 'BUSINESS' ? 'Business' : planTier === 'PROFESSIONAL' ? 'Professional' : 'Starter';
+
+      const displayName = user.name && user.name.trim().length > 0 ? user.name.trim() : 'Not provided';
+      const displayPhone = user.phone && user.phone.trim().length > 0 ? user.phone.trim() : 'Not provided';
+      const displayOrgName = org?.name && org.name.trim().length > 0 ? org.name.trim() : 'Not provided';
+      const registrationDate = user.createdAt || org?.createdAt || 'Not provided';
+      const lastLoginAt = user.lastLoginAt || 'Never logged in';
+      const lastActiveAt = user.lastActiveAt || user.lastLoginAt || 'Not tracked';
+
+      return {
+        id: user.id,
+        name: displayName,
+        email: user.email.toLowerCase(),
+        phone: displayPhone,
+        role: user.role,
+        organizationId: user.organizationId,
+        organizationName: displayOrgName,
+        registrationDate,
+        lastLoginAt,
+        lastActiveAt,
+        accountStatus: 'ACTIVE',
+        trialStartDate: sub?.currentPeriodStart || org?.createdAt || registrationDate,
+        trialEndDate: trialEndDate || 'Not provided',
+        isTrialActive,
+        trialDaysRemaining,
+        planTier,
+        planName,
+        subscriptionStatus: subStatus,
+        organizationMemberCount: memberCount,
+        isOwner: Boolean(isOwnerAccount),
+      };
+    });
+
+    return enrichedUsers;
   },
 };

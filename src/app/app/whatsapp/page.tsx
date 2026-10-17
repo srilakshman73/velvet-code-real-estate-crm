@@ -106,7 +106,7 @@ export default function WhatsAppCRMPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
               <MessageSquare className="w-6 h-6 text-[#547A61]" />
               WhatsApp Cloud CRM
             </h1>
@@ -142,28 +142,28 @@ export default function WhatsAppCRMPage() {
       {/* 4 WhatsApp KPI Metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="p-4 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-1">
-          <p className="text-xs uppercase tracking-wider text-[#6A5A44] font-semibold font-serif">
+          <p className="text-xs uppercase tracking-wider text-[#6A5A44] font-semibold">
             Messages Sent
           </p>
           <p className="text-2xl font-bold text-[#2C241A] font-mono">{totalSent}</p>
           <p className="text-[11px] text-[#547A61] font-medium">100% Delivery Reliability</p>
         </div>
         <div className="p-4 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-1">
-          <p className="text-xs uppercase tracking-wider text-[#6A5A44] font-semibold font-serif">
+          <p className="text-xs uppercase tracking-wider text-[#6A5A44] font-semibold">
             Replies Received
           </p>
           <p className="text-2xl font-bold text-[#2C241A] font-mono">{totalReceived}</p>
           <p className="text-[11px] text-[#547A61] font-medium">Real-Time Ingestion</p>
         </div>
         <div className="p-4 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-1">
-          <p className="text-xs uppercase tracking-wider text-[#6A5A44] font-semibold font-serif">
+          <p className="text-xs uppercase tracking-wider text-[#6A5A44] font-semibold">
             Pending Replies
           </p>
           <p className="text-2xl font-bold text-[#7A5520] font-mono">{totalUnread}</p>
           <p className="text-[11px] text-[#6A5A44] font-medium">Unread Inquiries</p>
         </div>
         <div className="p-4 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-1">
-          <p className="text-xs uppercase tracking-wider text-[#6A5A44] font-semibold font-serif">
+          <p className="text-xs uppercase tracking-wider text-[#6A5A44] font-semibold">
             Active Chats
           </p>
           <p className="text-2xl font-bold text-[#547A61] font-mono">{conversations.length}</p>
@@ -196,7 +196,7 @@ export default function WhatsAppCRMPage() {
             {filteredConversations.length === 0 ? (
               <div className="p-8 text-center text-[#6A5A44] space-y-2">
                 <MessageSquare className="w-8 h-8 text-[#D8C7A5] mx-auto" />
-                <p className="font-serif font-bold text-sm text-[#2C241A]">No conversations yet</p>
+                <p className="font-bold text-sm text-[#2C241A]">No conversations yet</p>
                 <p className="text-xs">
                   When leads message your business WhatsApp (+91 63833 95915) or you start outreach, conversations will appear here.
                 </p>
@@ -215,7 +215,7 @@ export default function WhatsAppCRMPage() {
                     }`}
                   >
                     <div className="flex items-start justify-between gap-1 mb-1">
-                      <span className="font-serif font-bold text-[#2C241A] text-xs truncate">
+                      <span className="font-bold text-[#2C241A] text-xs truncate">
                         {conv.customerName}
                       </span>
                       <span className="text-[10px] text-[#6A5A44] flex-shrink-0">
@@ -252,7 +252,7 @@ export default function WhatsAppCRMPage() {
               <div className="p-3.5 border-b border-[#D8C7A5] bg-[#F4EAD7] flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-serif font-bold text-[#2C241A]">{activeConv.customerName}</h3>
+                    <h3 className="text-sm font-bold text-[#2C241A]">{activeConv.customerName}</h3>
                     {activeConv.leadStatus && (
                       <LeadStatusBadge status={activeConv.leadStatus} />
                     )}
@@ -330,7 +330,7 @@ export default function WhatsAppCRMPage() {
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-[#6A5A44] space-y-2">
               <MessageSquare className="w-10 h-10 text-[#D8C7A5]" />
-              <p className="font-serif font-bold text-sm text-[#2C241A]">No conversations yet</p>
+              <p className="font-bold text-sm text-[#2C241A]">No conversations yet</p>
               <p className="text-xs max-w-xs">
                 Select a contact from the inbox or start a conversation by connecting with your leads.
               </p>
@@ -343,10 +343,10 @@ export default function WhatsAppCRMPage() {
         {/* ========================================== */}
         <div className="lg:col-span-3 border-l border-[#D8C7A5] p-4 bg-[#F4EAD7] overflow-y-auto space-y-4 text-xs">
           <div className="pb-3 border-b border-[#D8C7A5]">
-            <h4 className="font-serif font-bold text-[#7A5520] uppercase tracking-wider text-[11px] mb-2">
+            <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-[11px] mb-2">
               Buyer CRM Context
             </h4>
-            <p className="font-serif font-bold text-[#2C241A] text-sm">{activeConv?.customerName || 'No contact selected'}</p>
+            <p className="font-bold text-[#2C241A] text-sm">{activeConv?.customerName || 'No contact selected'}</p>
             <p className="text-[#6A5A44]">{activeConv?.customerPhone || '+91 63833 95915'}</p>
           </div>
 
@@ -365,7 +365,7 @@ export default function WhatsAppCRMPage() {
 
           {/* 1-Click Property Share Tool */}
           <div className="space-y-2 p-3 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5]">
-            <p className="font-serif font-bold text-[#2C241A] text-[11px]">Instant Brochure Dispatch</p>
+            <p className="font-bold text-[#2C241A] text-[11px]">Instant Brochure Dispatch</p>
             <select
               value={selectedPropertyShare}
               onChange={(e) => setSelectedPropertyShare(e.target.value)}
@@ -425,7 +425,7 @@ export default function WhatsAppCRMPage() {
               className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#547A61] cursor-pointer transition-all space-y-2 group shadow-sm"
             >
               <div className="flex items-center justify-between">
-                <span className="font-serif font-bold text-[#2C241A] group-hover:text-[#547A61] transition-colors">
+                <span className="font-bold text-[#2C241A] group-hover:text-[#547A61] transition-colors">
                   {tpl.name}
                 </span>
                 <span className="text-[10px] font-bold text-[#547A61] uppercase bg-[#547A61]/10 px-2 py-0.5 rounded">

@@ -50,6 +50,9 @@ export async function POST(request: Request) {
         isSuperAdmin: true,
       };
 
+      // Record successful login event server-side
+      await serverDB.recordUserLogin(ownerEmail);
+
       const response = NextResponse.json({
         success: true,
         user: ownerUser,
@@ -150,6 +153,9 @@ export async function POST(request: Request) {
       const redirectTo = access.allowed
         ? '/app/dashboard'
         : (access.redirectUrl || '/app/billing?reason=trial_expired');
+
+      // Record successful login event server-side
+      await serverDB.recordUserLogin(dbUser.email);
 
       const response = NextResponse.json({
         success: true,

@@ -44,7 +44,7 @@ export default function AboutPage() {
           <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             About Velvet Code
           </span>
-          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight">
             Pioneering Intelligent PropTech Solutions
           </h1>
           <p className="text-lg text-[#6A5A44] mt-4 leading-relaxed max-w-2xl mx-auto">
@@ -61,13 +61,13 @@ export default function AboutPage() {
         <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="p-8 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow space-y-4">
-              <h2 className="text-2xl font-bold text-[#2C241A] tracking-tight font-serif">Our Mission</h2>
+              <h2 className="text-2xl font-bold text-[#2C241A] tracking-tight">Our Mission</h2>
               <p className="text-sm text-[#6A5A44] leading-relaxed">
                 To empower every real estate agent, broker, and builder with enterprise-class CRM technology that eliminates missed leads, automates client follow-ups over WhatsApp, and accelerates transaction closures.
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-[#FFF9F0] border border-[#D8C7A5] aurum-card-shadow space-y-4">
-              <h2 className="text-2xl font-bold text-[#2C241A] tracking-tight font-serif">Our Engineering Vision</h2>
+              <h2 className="text-2xl font-bold text-[#2C241A] tracking-tight">Our Engineering Vision</h2>
               <p className="text-sm text-[#6A5A44] leading-relaxed">
                 We believe the future of real estate CRM is deeply integrated with messaging apps and contextual AI. By combining seamless WhatsApp communication with intelligent lead scoring and pipeline management, we give agencies an unfair competitive edge.
               </p>
@@ -78,7 +78,7 @@ export default function AboutPage() {
         {/* Core Principles */}
         <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-[#D8C7A5]">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl font-bold text-[#2C241A] font-serif">Our Core Principles</h2>
+            <h2 className="text-3xl font-bold text-[#2C241A] tracking-tight">Our Core Principles</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((v, i) => {

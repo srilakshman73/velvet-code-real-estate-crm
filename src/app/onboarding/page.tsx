@@ -113,7 +113,7 @@ export default function OnboardingPage() {
                 <Building className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#2C241A] font-serif">Business Information</h2>
+                <h2 className="text-xl font-bold text-[#2C241A]">Business Information</h2>
                 <p className="text-xs text-[#6A5A44]">
                   Configure your primary real estate office and regulatory details.
                 </p>
@@ -167,7 +167,7 @@ export default function OnboardingPage() {
                 <Building className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#2C241A] font-serif">Select Your Business Model</h2>
+                <h2 className="text-xl font-bold text-[#2C241A]">Select Your Business Model</h2>
                 <p className="text-xs text-[#6A5A44]">
                   This customizes your pipeline stages and default property types.
                 </p>
@@ -209,7 +209,7 @@ export default function OnboardingPage() {
                 <Users2 className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#2C241A] font-serif">How Large is Your Sales Team?</h2>
+                <h2 className="text-xl font-bold text-[#2C241A]">How Large is Your Sales Team?</h2>
                 <p className="text-xs text-[#6A5A44]">
                   We will configure your initial agent seats and lead distribution rules.
                 </p>
@@ -242,7 +242,7 @@ export default function OnboardingPage() {
                 <Sliders className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#2C241A] font-serif">CRM & Automation Preferences</h2>
+                <h2 className="text-xl font-bold text-[#2C241A]">CRM & Automation Preferences</h2>
                 <p className="text-xs text-[#6A5A44]">
                   Enable intelligent channels to accelerate your daily workflow.
                 </p>
@@ -309,7 +309,7 @@ export default function OnboardingPage() {
                 <CreditCard className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#2C241A] font-serif">Select Your Initial Plan</h2>
+                <h2 className="text-xl font-bold text-[#2C241A]">Select Your Initial Plan</h2>
                 <p className="text-xs text-[#6A5A44]">
                   Included in your 7-day free trial. No charge today.
                 </p>

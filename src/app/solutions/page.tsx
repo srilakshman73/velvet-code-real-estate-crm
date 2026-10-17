@@ -98,7 +98,7 @@ export default function SolutionsPage() {
           <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Tailored Industry Solutions
           </span>
-          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight">
             Designed for Every Real Estate Business Model
           </h1>
           <p className="text-lg text-[#6A5A44] mt-4 leading-relaxed max-w-2xl mx-auto">
@@ -125,7 +125,7 @@ export default function SolutionsPage() {
                       <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A5520]">
                         {sol.tag}
                       </span>
-                      <h2 className="text-2xl font-bold text-[#2C241A] mt-0.5 font-serif">{sol.title}</h2>
+                      <h2 className="text-2xl font-bold text-[#2C241A] mt-0.5">{sol.title}</h2>
                     </div>
                   </div>
                   <Link href="/register">

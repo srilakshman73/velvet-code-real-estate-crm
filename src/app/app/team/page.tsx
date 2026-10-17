@@ -49,7 +49,7 @@ export default function TeamPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
               <Users2 className="w-6 h-6 text-[#A37432]" />
               Team & Role Management
             </h1>
@@ -89,11 +89,11 @@ export default function TeamPage() {
               <tr key={u.id} className="hover:bg-[#F7EEDC] transition-colors">
                 <td className="p-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#A37432]/15 text-[#7A5520] font-serif font-bold flex items-center justify-center flex-shrink-0 border border-[#A37432]/30">
+                    <div className="w-9 h-9 rounded-xl bg-[#A37432]/15 text-[#7A5520] font-bold flex items-center justify-center flex-shrink-0 border border-[#A37432]/30">
                       {getInitials(u.name)}
                     </div>
                     <div>
-                      <p className="font-serif font-bold text-[#2C241A] text-sm">{u.name}</p>
+                      <p className="font-bold text-[#2C241A] text-sm">{u.name}</p>
                       <p className="text-xs text-[#6A5A44]">{u.email}</p>
                     </div>
                   </div>

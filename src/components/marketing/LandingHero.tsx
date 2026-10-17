@@ -43,9 +43,9 @@ export function LandingHero() {
 
         {/* Hero Title & Subtitle */}
         <div className="text-center max-w-4xl mx-auto space-y-6">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#2C241A] leading-[1.12] font-serif">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#2C241A] leading-[1.12]">
             Run Your Real Estate Business From{' '}
-            <span className="gold-gradient-text italic font-serif">
+            <span className="gold-gradient-text font-bold">
               One Intelligent Workspace
             </span>
           </h1>

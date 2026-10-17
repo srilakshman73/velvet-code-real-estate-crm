@@ -113,7 +113,7 @@ export default function DealsPipelinePage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Sales Deals Pipeline
             </h1>
             <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
@@ -152,7 +152,7 @@ export default function DealsPipelinePage() {
                 {/* Column Header */}
                 <div className="p-4 border-b border-[#D8C7A5]">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-bold text-[#2C241A] uppercase tracking-wider font-serif">
+                    <h3 className="text-xs font-bold text-[#2C241A] uppercase tracking-wider">
                       {st.label}
                     </h3>
                     <span className={`px-2 py-0.5 text-[10px] font-bold rounded-md border border-[#D8C7A5] ${st.badge}`}>
@@ -173,7 +173,7 @@ export default function DealsPipelinePage() {
                       className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] hover:border-[#A37432] cursor-pointer shadow-[0_4px_16px_rgba(120,90,40,0.06)] hover:shadow-[0_8px_20px_rgba(163,116,50,0.12)] transition-all space-y-2.5 group"
                     >
                       <div className="flex items-start justify-between gap-1">
-                        <h4 className="text-xs font-serif font-bold text-[#2C241A] group-hover:text-[#7A5520] transition-colors line-clamp-1">
+                        <h4 className="text-xs font-bold text-[#2C241A] group-hover:text-[#7A5520] transition-colors line-clamp-1">
                           {deal.title}
                         </h4>
                         <span className="text-[10px] font-bold text-[#547A61] flex-shrink-0 bg-[#547A61]/10 px-1.5 py-0.5 rounded">
@@ -234,7 +234,7 @@ export default function DealsPipelinePage() {
         >
           <div className="space-y-6 text-xs sm:text-sm">
             <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-3">
-              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs font-serif">
+              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs">
                 Deal Parameters & Milestones
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
@@ -260,7 +260,7 @@ export default function DealsPipelinePage() {
             </div>
 
             <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
-              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs font-serif">
+              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs">
                 Deal Notes & Milestones
               </h4>
               <p className="text-xs text-[#2C241A] bg-[#F4EAD7] p-3 rounded-lg border border-[#D8C7A5]">

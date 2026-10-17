@@ -14,7 +14,7 @@ export default function TermsPage() {
       <main className="flex-1 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-sm text-[#6A5A44] leading-relaxed">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight font-serif">
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight">
               Terms of Service
             </h1>
             <p className="text-xs text-[#6A5A44] mt-2">Effective Date: September 16, 2026</p>

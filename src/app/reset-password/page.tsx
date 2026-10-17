@@ -71,7 +71,7 @@ function ResetPasswordForm() {
     <div className="w-full max-w-md bg-[#FFF9F0] border border-[#D8C7A5] rounded-2xl p-8 aurum-card-shadow space-y-6">
       <div className="text-center space-y-3">
         <VelvetCodeLogo size="md" className="justify-center" theme="light" />
-        <h1 className="text-2xl font-bold text-[#2C241A] tracking-tight font-serif">
+        <h1 className="text-2xl font-bold text-[#2C241A] tracking-tight">
           Create New Password
         </h1>
         <p className="text-xs text-[#6A5A44]">

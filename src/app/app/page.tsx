@@ -98,7 +98,7 @@ export default function DashboardPage() {
       {/* ========================================== */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
             Good morning, {currentUser.name} ðŸ‘‹
           </h1>
           <p className="text-xs sm:text-sm text-[#6A5A44] mt-1">

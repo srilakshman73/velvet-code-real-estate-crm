@@ -486,7 +486,7 @@ export default function LeadsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Lead Management
             </h1>
             <span className="px-2.5 py-0.5 text-xs font-bold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">

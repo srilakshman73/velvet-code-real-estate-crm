@@ -52,7 +52,7 @@ export default function AdminPlatformSettingsPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Platform Global Settings</h1>
+          <h1 className="text-3xl font-bold text-[#2C241A] tracking-tight">Platform Global Settings</h1>
           <p className="text-sm text-[#6A5A44] mt-1">
             Velvet Code SaaS platform environment configurations, payment gateway secrets, and AI keys.
           </p>
@@ -74,7 +74,7 @@ export default function AdminPlatformSettingsPage() {
         {/* Brand & Legal Entity Card */}
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-serif font-bold text-[#2C241A]">SaaS Provider Entity & Support Channel</h2>
+            <h2 className="text-lg font-bold text-[#2C241A]">SaaS Provider Entity & Support Channel</h2>
             <VelvetCodeLogo variant="horizontal" size="sm" />
           </div>
 
@@ -114,7 +114,7 @@ export default function AdminPlatformSettingsPage() {
 
         {/* Global API Gateway Keys */}
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
-          <h2 className="text-lg font-serif font-bold text-[#2C241A] mb-1">Global Gateway Credentials & Secrets</h2>
+          <h2 className="text-lg font-bold text-[#2C241A] mb-1">Global Gateway Credentials & Secrets</h2>
           <p className="text-xs text-[#6A5A44] mb-6">
             Platform-wide master credentials for Indian payment processing and AI inference orchestration.
           </p>
@@ -151,7 +151,7 @@ export default function AdminPlatformSettingsPage() {
 
         {/* System Operations & Maintenance */}
         <Card orientation="vertical" className="bg-[#FFF9F0] border-[#D8C7A5] shadow-[0_8px_24px_rgba(120,90,40,0.08)]">
-          <h2 className="text-lg font-serif font-bold text-[#2C241A] mb-1">System Operations & Trial Policies</h2>
+          <h2 className="text-lg font-bold text-[#2C241A] mb-1">System Operations & Trial Policies</h2>
           <p className="text-xs text-[#6A5A44] mb-6">
             Manage platform operational mode and tenant onboarding trial terms.
           </p>

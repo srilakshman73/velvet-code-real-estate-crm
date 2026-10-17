@@ -32,7 +32,7 @@ export default function PricingPage() {
           <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Simple & Predictable Pricing
           </span>
-          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#2C241A] mt-4 tracking-tight">
             Choose the Perfect Plan for Your Real Estate Business
           </h1>
           <p className="text-lg text-[#6A5A44] mt-4 leading-relaxed max-w-2xl mx-auto">
@@ -46,7 +46,7 @@ export default function PricingPage() {
         {/* Detailed Feature Matrix Table */}
         <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-[#D8C7A5]">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Compare Plan Features
             </h2>
             <p className="text-sm text-[#6A5A44] mt-2">

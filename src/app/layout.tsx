@@ -1,19 +1,23 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, Manrope } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { CRMStoreProvider } from '@/lib/store';
 import { FloatingWhatsAppButton } from '@/components/layout/FloatingWhatsAppButton';
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-serif',
-  display: 'swap',
-});
-
-const manrope = Manrope({
-  subsets: ['latin'],
+const inter = Inter({
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-sans',
   display: 'swap',
+  fallback: [
+    'system-ui',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Roboto',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ],
 });
 
 export const metadata: Metadata = {
@@ -61,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${manrope.variable} h-full bg-[#E9DFC8] text-[#2C241A]`}>
+    <html lang="en" className={`${inter.variable} h-full bg-[#E9DFC8] text-[#2C241A]`}>
       <body className="min-h-full flex flex-col font-sans antialiased bg-[#E9DFC8] text-[#2C241A] selection:bg-[#A37432]/20 selection:text-[#2C241A] relative">
         <CRMStoreProvider>
           <div className="relative z-10 flex flex-col min-h-full flex-1">

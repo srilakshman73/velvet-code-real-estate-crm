@@ -309,7 +309,7 @@ export default function CalendarPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Real Estate Activity &amp; Appointment Calendar
             </h1>
             <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
@@ -374,7 +374,7 @@ export default function CalendarPage() {
       <div className="rounded-2xl border border-[#D8C7A5] bg-[#FFF9F0] p-4 sm:p-6 shadow-[0_8px_24px_rgba(120,90,40,0.08)] space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#D8C7A5]">
           <div className="flex items-center gap-3">
-            <h2 className="text-xl font-serif font-bold text-[#2C241A]">{monthName}</h2>
+            <h2 className="text-xl font-bold text-[#2C241A]">{monthName}</h2>
             <div className="flex items-center gap-1">
               <button
                 onClick={handlePrevMonth}
@@ -562,7 +562,7 @@ export default function CalendarPage() {
                         <p className="text-[10px] font-bold uppercase text-[#6A5A44]">
                           {weekDay.toLocaleDateString('default', { weekday: 'short' })}
                         </p>
-                        <p className="text-base font-bold font-serif text-[#2C241A]">
+                        <p className="text-base font-bold text-[#2C241A]">
                           {weekDay.getDate()}
                         </p>
                       </div>
@@ -634,7 +634,7 @@ export default function CalendarPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#7A5520]">
                   Day Schedule
                 </span>
-                <h3 className="text-xl font-serif font-bold text-[#2C241A] mt-0.5">
+                <h3 className="text-xl font-bold text-[#2C241A] mt-0.5">
                   {currentDate.toLocaleDateString('default', {
                     weekday: 'long',
                     day: 'numeric',
@@ -666,7 +666,7 @@ export default function CalendarPage() {
                 return (
                   <div className="p-12 text-center text-[#6A5A44] bg-[#F4EAD7] rounded-2xl border border-[#D8C7A5] space-y-3">
                     <CalendarCheck className="w-10 h-10 text-[#A37432] mx-auto" />
-                    <h4 className="font-serif font-bold text-base text-[#2C241A]">
+                    <h4 className="font-bold text-base text-[#2C241A]">
                       No events scheduled for this day
                     </h4>
                     <p className="text-xs max-w-sm mx-auto">
@@ -702,7 +702,7 @@ export default function CalendarPage() {
                             </span>
                           </div>
 
-                          <h4 className="text-base font-bold font-serif text-[#2C241A] group-hover:text-[#7A5520] transition-colors">
+                          <h4 className="text-base font-bold text-[#2C241A] group-hover:text-[#7A5520] transition-colors">
                             {a.title}
                           </h4>
 

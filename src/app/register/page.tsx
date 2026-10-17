@@ -81,10 +81,10 @@ export default function RegisterPage() {
         </div>
 
         <div className="relative z-10 space-y-6 max-w-lg">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30 font-serif">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
             Create Your Workspace
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight leading-tight font-serif">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#2C241A] tracking-tight leading-tight">
             Deploy Your Agency's Complete CRM in 60 Seconds
           </h2>
           <p className="text-sm text-[#6A5A44] leading-relaxed">
@@ -123,7 +123,7 @@ export default function RegisterPage() {
 
         <div className="space-y-6">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight font-serif">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Create your workspace
             </h1>
             <p className="text-xs sm:text-sm text-[#8A7A63] mt-1">

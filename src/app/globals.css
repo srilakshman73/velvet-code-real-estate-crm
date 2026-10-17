@@ -1,7 +1,19 @@
 @import "tailwindcss";
+ 
+@theme {
+  --font-sans: var(--font-sans), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: var(--font-sans), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
 
 @layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+
   :root {
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-serif: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
     /* Velvet Code Champagne Gold Luxury Theme */
     --aurum-gold: #A37432;
     --aurum-gold-hover: #8A5E25;
@@ -54,17 +66,32 @@
     --rose-danger: #8B4A4A;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
   body {
     background-color: #E9DFC8;
     color: #2C241A;
-    font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-sans), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
     position: relative;
     min-height: 100vh;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
   }
 
-  h1, h2, h3, .font-serif-luxury {
-    font-family: var(--font-serif), 'Playfair Display', Georgia, serif;
+  /* Consistent luxury typography: clean, uniform, professional across headings, labels, and tables */
+  h1, h2, h3, h4, h5, h6, .font-serif, .font-serif-luxury {
+    font-family: var(--font-sans), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  }
+
+  button, input, select, textarea {
+    font-family: inherit;
   }
 
   /* Custom Luxury Gold Scrollbars */

@@ -37,7 +37,7 @@ export default function AdminPlansPage() {
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">SaaS Subscription Plans</h1>
+          <h1 className="text-3xl font-bold text-[#2C241A] tracking-tight">SaaS Subscription Plans</h1>
           <p className="text-sm text-[#6A5A44] mt-1">
             Configure pricing tiers, resource limits (Seats, Leads, Properties, AI Tokens), and feature entitlements.
           </p>
@@ -72,7 +72,7 @@ export default function AdminPlansPage() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-serif font-bold text-[#2C241A]">{plan.name}</h3>
+                    <h3 className="text-xl font-bold text-[#2C241A]">{plan.name}</h3>
                     <p className="text-xs text-[#6A5A44] font-mono">TIER: {plan.tier}</p>
                   </div>
                   <Badge variant={plan.tier === 'BUSINESS' ? 'gold' : plan.tier === 'PROFESSIONAL' ? 'info' : 'neutral'}>
@@ -83,7 +83,7 @@ export default function AdminPlansPage() {
                 {/* Pricing Block */}
                 <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] mb-6 space-y-2">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-bold font-serif text-[#2C241A]">{formatINR(plan.priceMonthlyINR)}</span>
+                    <span className="text-2xl font-bold text-[#2C241A]">{formatINR(plan.priceMonthlyINR)}</span>
                     <span className="text-xs text-[#6A5A44]">/ month</span>
                   </div>
                   <div className="text-xs text-[#6A5A44]">
@@ -139,7 +139,7 @@ export default function AdminPlansPage() {
 
                 {/* Included Features Bullet Points */}
                 <div className="space-y-1.5 mb-6">
-                  <span className="text-[11px] font-semibold text-[#2C241A] uppercase tracking-wider font-serif">Features Included:</span>
+                  <span className="text-[11px] font-semibold text-[#2C241A] uppercase tracking-wider">Features Included:</span>
                   {plan.features.map((feat, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs text-[#6A5A44]">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#A37432] shrink-0 mt-0.5" />

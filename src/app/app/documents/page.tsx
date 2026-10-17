@@ -128,7 +128,7 @@ export default function DocumentsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight flex items-center gap-2">
               <FileText className="w-6 h-6 text-[#A37432]" />
               Document Vault &amp; Legal KYC
             </h1>
@@ -216,7 +216,7 @@ export default function DocumentsPage() {
                     </span>
                   </div>
 
-                  <h3 className="text-sm font-serif font-bold text-[#2C241A] line-clamp-1 group-hover:text-[#7A5520] transition-colors">
+                  <h3 className="text-sm font-bold text-[#2C241A] line-clamp-1 group-hover:text-[#7A5520] transition-colors">
                     {doc.title}
                   </h3>
 

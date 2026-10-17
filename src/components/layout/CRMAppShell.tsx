@@ -183,10 +183,10 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
             </div>
 
             <div className="space-y-2">
-              <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#A37432]/15 text-[#7A5520] font-serif">
+              <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#A37432]/15 text-[#7A5520]">
                 Access Required
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#2C241A] font-serif leading-tight">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#2C241A] leading-tight">
                 7-Day Free Trial Ended
               </h3>
               <p className="text-xs sm:text-sm text-[#6A5A44] leading-relaxed">
@@ -289,7 +289,7 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
               {/* Org Switcher Dropdown */}
               {isOrgDropdownOpen && (
                 <div className="absolute top-full left-3 right-3 mt-1 bg-[#FFF9F0] border border-[#D8C7A5] rounded-xl shadow-2xl p-2 z-50 animate-in fade-in">
-                  <p className="text-[10px] font-bold text-[#8A7A63] uppercase tracking-wider px-2 py-1 font-serif">
+                  <p className="text-[10px] font-bold text-[#8A7A63] uppercase tracking-wider px-2 py-1">
                     Switch Workspace Tenant
                   </p>
                   {organizations.map((org) => (
@@ -329,7 +329,7 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
             {navGroups.map((grp, idx) => (
               <div key={idx}>
                 {!isCollapsed && (
-                  <p className="text-[10px] font-bold tracking-wider uppercase text-[#6A5A44] px-3 mb-1.5 font-serif">
+                  <p className="text-[10px] font-bold tracking-wider uppercase text-[#6A5A44] px-3 mb-1.5">
                     {grp.group}
                   </p>
                 )}
@@ -616,7 +616,7 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
                   <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#A37432]/15 text-[#7A5520] mb-3">
                     Subscription Required
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] font-serif mb-2">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] mb-2">
                     7-Day Free Trial Ended
                   </h2>
                   <p className="text-sm text-[#6A5A44] max-w-xl mx-auto mb-8 font-medium leading-relaxed">
@@ -627,7 +627,7 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
                     {/* Starter */}
                     <div className="p-5 rounded-2xl border border-[#D8C7A5] bg-[#F4EAD7]/50 flex flex-col justify-between">
                       <div>
-                        <div className="text-xs font-bold uppercase text-[#8A7A63] tracking-wider mb-1 font-serif">Starter</div>
+                        <div className="text-xs font-bold uppercase text-[#8A7A63] tracking-wider mb-1">Starter</div>
                         <p className="text-2xl font-bold text-[#7A5520]">₹1,999<span className="text-xs font-normal text-[#6A5A44]">/mo</span></p>
                         <p className="text-[11px] text-[#6A5A44] mt-1 mb-4">Solo agents and boutique consultants</p>
                         <ul className="text-xs text-[#2C241A] space-y-2">
@@ -651,7 +651,7 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
                         Recommended
                       </span>
                       <div>
-                        <div className="text-xs font-bold uppercase text-[#7A5520] tracking-wider mb-1 font-serif">Professional</div>
+                        <div className="text-xs font-bold uppercase text-[#7A5520] tracking-wider mb-1">Professional</div>
                         <p className="text-2xl font-bold text-[#7A5520]">₹5,999<span className="text-xs font-normal text-[#6A5A44]">/mo</span></p>
                         <p className="text-[11px] text-[#6A5A44] mt-1 mb-4">Growing brokerages and real estate teams</p>
                         <ul className="text-xs text-[#2C241A] space-y-2">
@@ -672,7 +672,7 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
                     {/* Business */}
                     <div className="p-5 rounded-2xl border border-[#D8C7A5] bg-[#F4EAD7]/50 flex flex-col justify-between">
                       <div>
-                        <div className="text-xs font-bold uppercase text-[#8A7A63] tracking-wider mb-1 font-serif">Business</div>
+                        <div className="text-xs font-bold uppercase text-[#8A7A63] tracking-wider mb-1">Business</div>
                         <p className="text-2xl font-bold text-[#7A5520]">₹9,999<span className="text-xs font-normal text-[#6A5A44]">/mo</span></p>
                         <p className="text-[11px] text-[#6A5A44] mt-1 mb-4">Established real estate firms and developers</p>
                         <ul className="text-xs text-[#2C241A] space-y-2">
@@ -767,7 +767,7 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
             <div className="py-4 flex-1 space-y-4">
               {navGroups.map((grp, i) => (
                 <div key={i}>
-                  <p className="text-[10px] font-bold text-[#8A7A63] uppercase tracking-wider mb-2 font-serif">
+                  <p className="text-[10px] font-bold text-[#8A7A63] uppercase tracking-wider mb-2">
                     {grp.group}
                   </p>
                   <div className="space-y-1">

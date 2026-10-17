@@ -90,10 +90,10 @@ export default function SiteVisitsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Site Visits Management
             </h1>
-            <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full font-serif">
+            <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
               {siteVisits.length} Recorded Visits
             </span>
           </div>
@@ -158,7 +158,7 @@ export default function SiteVisitsPage() {
                   </span>
                 </div>
 
-                <h3 className="text-base font-serif font-bold text-[#2C241A] leading-snug">
+                <h3 className="text-base font-bold text-[#2C241A] leading-snug">
                   {v.propertyName}
                 </h3>
 

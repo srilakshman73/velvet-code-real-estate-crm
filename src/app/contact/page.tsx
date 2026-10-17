@@ -38,7 +38,7 @@ export default function ContactPage() {
             <span className="text-xs font-bold uppercase tracking-widest text-[#7A5520] bg-[#A37432]/15 px-3.5 py-1 rounded-full border border-[#A37432]/30">
               Get in Touch
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold text-[#2C241A] mt-4 tracking-tight font-serif">
+            <h1 className="text-4xl sm:text-5xl font-bold text-[#2C241A] mt-4 tracking-tight">
               Contact Velvet Code Specialists
             </h1>
             <p className="text-base text-[#6A5A44] mt-3 leading-relaxed">
@@ -145,7 +145,7 @@ export default function ContactPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <h3 className="text-xl font-bold text-[#2C241A] mb-4 font-serif">
+                    <h3 className="text-xl font-bold text-[#2C241A] mb-4">
                       Request an Enterprise Consultation
                     </h3>
 

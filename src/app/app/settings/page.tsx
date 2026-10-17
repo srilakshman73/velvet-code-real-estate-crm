@@ -118,7 +118,7 @@ export default function SettingsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Organization Settings</h1>
+          <h1 className="text-3xl font-bold text-[#2C241A] tracking-tight">Organization Settings</h1>
           <p className="text-sm text-[#6A5A44] mt-1">
             Configure your workspace, WhatsApp Cloud API tokens, Realty AI parameters, and notifications.
           </p>
@@ -172,7 +172,7 @@ export default function SettingsPage() {
       {activeTab === 'general' && (
         <form onSubmit={handleSave} className="space-y-6">
           <Card orientation="vertical">
-            <h2 className="text-lg font-serif font-bold text-[#2C241A] mb-1">Company & Brand Identity</h2>
+            <h2 className="text-lg font-bold text-[#2C241A] mb-1">Company & Brand Identity</h2>
             <p className="text-xs text-[#6A5A44] mb-6">
               This information is reflected on client proposals, PDF brochures, invoice receipts, and WhatsApp message signatures.
             </p>
@@ -248,7 +248,7 @@ export default function SettingsPage() {
           </Card>
 
           <Card orientation="vertical">
-            <h2 className="text-lg font-serif font-bold text-[#2C241A] mb-1">Regional & Localization Preferences</h2>
+            <h2 className="text-lg font-bold text-[#2C241A] mb-1">Regional & Localization Preferences</h2>
             <p className="text-xs text-[#6A5A44] mb-6">
               Defaults used for lead budgets, deal currency conversions, and follow-up scheduling.
             </p>
@@ -291,7 +291,7 @@ export default function SettingsPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-serif font-bold text-[#2C241A]">Meta WhatsApp Cloud API Configuration</h2>
+                  <h2 className="text-lg font-bold text-[#2C241A]">Meta WhatsApp Cloud API Configuration</h2>
                   <Badge variant="success">Connected & Verified</Badge>
                 </div>
                 <p className="text-xs text-[#6A5A44] mt-1">
@@ -340,7 +340,7 @@ export default function SettingsPage() {
           </Card>
 
           <Card orientation="vertical">
-            <h2 className="text-lg font-serif font-bold text-[#2C241A] mb-1">Webhook Inbound Sync</h2>
+            <h2 className="text-lg font-bold text-[#2C241A] mb-1">Webhook Inbound Sync</h2>
             <p className="text-xs text-[#6A5A44] mb-6">
               Configure these endpoints in your Meta App Dashboard &gt; WhatsApp &gt; Configuration to receive incoming messages, read receipts, and delivery statuses.
             </p>
@@ -410,7 +410,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-serif font-bold text-[#2C241A]">Realty AI Autonomous Engine</h2>
+                  <h2 className="text-lg font-bold text-[#2C241A]">Realty AI Autonomous Engine</h2>
                   <Badge variant="gold">Active on {currentPlanLimits.tier}</Badge>
                 </div>
                 <p className="text-xs text-[#6A5A44] mt-1">
@@ -482,7 +482,7 @@ export default function SettingsPage() {
       {/* 4. NOTIFICATIONS TAB */}
       {activeTab === 'notifications' && (
         <Card orientation="vertical">
-          <h2 className="text-lg font-serif font-bold text-[#2C241A] mb-1">Notification Channels & Alerts</h2>
+          <h2 className="text-lg font-bold text-[#2C241A] mb-1">Notification Channels & Alerts</h2>
           <p className="text-xs text-[#6A5A44] mb-6">
             Choose when and where your sales agents and leadership receive system alerts.
           </p>
@@ -516,7 +516,7 @@ export default function SettingsPage() {
       {activeTab === 'security' && (
         <div className="space-y-6">
           <Card orientation="vertical">
-            <h2 className="text-lg font-serif font-bold text-[#2C241A] mb-1">Multi-Tenant Access & Role Permissions</h2>
+            <h2 className="text-lg font-bold text-[#2C241A] mb-1">Multi-Tenant Access & Role Permissions</h2>
             <p className="text-xs text-[#6A5A44] mb-6">
               Velvet Code isolates all records with row-level tenant security (<code>organization_id</code>).
             </p>
@@ -571,7 +571,7 @@ export default function SettingsPage() {
                     </div>
                     <Badge variant={int.connected ? 'success' : 'neutral'}>{int.status}</Badge>
                   </div>
-                  <h3 className="text-sm font-serif font-bold text-[#2C241A]">{int.name}</h3>
+                  <h3 className="text-sm font-bold text-[#2C241A]">{int.name}</h3>
                   <p className="text-xs text-[#6A5A44] mt-1">{int.desc}</p>
                 </div>
                 <div className="pt-4 mt-4 border-t border-[#D8C7A5] flex items-center justify-between">
@@ -597,7 +597,7 @@ export default function SettingsPage() {
             <Card orientation="vertical">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D8C7A5] pb-4 mb-4">
                 <div>
-                  <h2 className="text-lg font-serif font-bold text-[#2C241A] flex items-center gap-2">
+                  <h2 className="text-lg font-bold text-[#2C241A] flex items-center gap-2">
                     <HardDrive className="w-5 h-5 text-[#A37432]" />
                     Persistent Cloud Object Storage &amp; Plan Quota
                   </h2>
@@ -615,19 +615,19 @@ export default function SettingsPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-1">
                   <span className="text-xs font-semibold text-[#6A5A44]">Storage Used</span>
-                  <p className="text-2xl font-serif font-extrabold text-[#2C241A]">{usedMB} MB</p>
+                  <p className="text-2xl font-extrabold text-[#2C241A]">{usedMB} MB</p>
                   <p className="text-[10px] text-[#6A5A44]">Across images and PDF vault documents</p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-1">
                   <span className="text-xs font-semibold text-[#6A5A44]">Plan Allocation</span>
-                  <p className="text-2xl font-serif font-extrabold text-[#7A5520]">{limitGB} GB</p>
+                  <p className="text-2xl font-extrabold text-[#7A5520]">{limitGB} GB</p>
                   <p className="text-[10px] text-[#6A5A44]">Tier: {currentPlanLimits?.name} Plan</p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-[#F4EAD7] border border-[#D8C7A5] space-y-1">
                   <span className="text-xs font-semibold text-[#6A5A44]">Quota Utilization</span>
-                  <p className="text-2xl font-serif font-extrabold text-[#547A61]">{storagePercent.toFixed(1)}%</p>
+                  <p className="text-2xl font-extrabold text-[#547A61]">{storagePercent.toFixed(1)}%</p>
                   <div className="w-full h-2 bg-[#E9DFC8] rounded-full overflow-hidden border border-[#D8C7A5] mt-2">
                     <div
                       className={`h-full rounded-full transition-all ${

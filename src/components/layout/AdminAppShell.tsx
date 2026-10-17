@@ -52,7 +52,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
             <Lock className="w-8 h-8" />
           </div>
           <div>
-            <h1 className="text-2xl font-serif font-bold text-[#2C241A]">403 — Access Denied</h1>
+            <h1 className="text-2xl font-bold text-[#2C241A]">403 — Access Denied</h1>
             <p className="text-xs text-[#6A5A44] mt-2 leading-relaxed">
               The SaaS Master Admin Headquarters is strictly restricted to the <strong>Velvet Code Platform Owner</strong>.
             </p>
@@ -78,7 +78,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
       <header className="h-16 px-4 sm:px-8 bg-[#F4EAD7] border-b border-[#D8C7A5] flex items-center justify-between z-30 shadow-2xs">
         <div className="flex items-center gap-4">
           <VelvetCodeLogo variant="horizontal" href="/admin" size="sm" theme="light" />
-          <span className="hidden sm:inline-block px-2.5 py-1 text-[11px] font-bold tracking-widest uppercase bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-md font-serif">
+          <span className="hidden sm:inline-block px-2.5 py-1 text-[11px] font-bold tracking-widest uppercase bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-md">
             SaaS Master Console
           </span>
         </div>
@@ -113,7 +113,7 @@ export function AdminAppShell({ children }: AdminAppShellProps) {
         {/* Sidebar */}
         <aside className="hidden md:flex flex-col w-64 bg-[#D8C7A5] border-r border-[#D8C7A5] p-4 space-y-6">
           <div className="space-y-1">
-            <p className="text-[10px] font-bold text-[#6A5A44] uppercase tracking-wider px-3 mb-2 font-serif">
+            <p className="text-[10px] font-bold text-[#6A5A44] uppercase tracking-wider px-3 mb-2">
               SaaS Administration
             </p>
             {adminNav.map((item) => {

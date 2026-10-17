@@ -397,7 +397,7 @@ export default function PropertiesPage() {
           <Building2 className="w-6 h-6 text-[#A37432]" />
         </div>
         <div className="text-center px-4">
-          <span className="text-[11px] font-serif font-bold uppercase tracking-wider text-[#7A5520] block">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A5520] block">
             No Image Available
           </span>
           <span className="text-[9px] text-[#8A7A63]">Upload photo in property details</span>
@@ -412,7 +412,7 @@ export default function PropertiesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#2C241A] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C241A] tracking-tight">
               Property Inventory
             </h1>
             <span className="px-3 py-1 text-xs font-semibold bg-[#A37432]/15 text-[#7A5520] border border-[#A37432]/30 rounded-full">
@@ -540,7 +540,7 @@ export default function PropertiesPage() {
               {/* Body */}
               <div className="p-5 space-y-3">
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="text-base font-serif font-bold text-[#2C241A] group-hover:text-[#7A5520] transition-colors line-clamp-1">
+                  <h3 className="text-base font-bold text-[#2C241A] group-hover:text-[#7A5520] transition-colors line-clamp-1">
                     {prop.title}
                   </h3>
                   <button
@@ -612,7 +612,7 @@ export default function PropertiesPage() {
                   onClick={() => openDetail(prop)}
                   className="hover:bg-[#F7EEDC] cursor-pointer transition-colors"
                 >
-                  <td className="p-4 font-serif font-bold text-[#2C241A] hover:text-[#7A5520]">
+                  <td className="p-4 font-bold text-[#2C241A] hover:text-[#7A5520]">
                     <div className="flex items-center gap-3">
                       {prop.featuredImageUrl || (prop.images && prop.images[0]) ? (
                         <img
@@ -626,7 +626,7 @@ export default function PropertiesPage() {
                         </div>
                       )}
                       <div>
-                        <div className="font-serif font-bold text-[#2C241A]">{prop.title}</div>
+                        <div className="font-bold text-[#2C241A]">{prop.title}</div>
                         <div className="text-[10px] text-[#8A7A63] font-sans">{prop.furnishing || 'Standard'}</div>
                       </div>
                     </div>
@@ -697,7 +697,7 @@ export default function PropertiesPage() {
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-[#EFE6D5] via-[#E4D5BE] to-[#D8C7A5] flex flex-col items-center justify-center text-[#7A5520] gap-2 select-none">
                   <Building2 className="w-10 h-10 text-[#A37432]" />
-                  <span className="text-xs font-serif font-bold uppercase tracking-wider text-[#7A5520]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#7A5520]">
                     No Photo Uploaded
                   </span>
                 </div>
@@ -713,7 +713,7 @@ export default function PropertiesPage() {
             </div>
 
             <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-3">
-              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs font-serif">
+              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs">
                 Specifications & Layout
               </h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
@@ -748,7 +748,7 @@ export default function PropertiesPage() {
 
             {selectedProperty.ownerName && (
               <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
-                <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs font-serif">
+                <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs">
                   Property Ownership Contact
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
@@ -767,7 +767,7 @@ export default function PropertiesPage() {
             )}
 
             <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
-              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs font-serif">
+              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs">
                 Amenities & Features
               </h4>
               <div className="flex flex-wrap gap-2 pt-1">
@@ -784,7 +784,7 @@ export default function PropertiesPage() {
             </div>
 
             <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#D8C7A5] space-y-2">
-              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs font-serif">
+              <h4 className="font-bold text-[#7A5520] uppercase tracking-wider text-xs">
                 Description & Highlights
               </h4>
               <p className="text-xs text-[#2C241A] leading-relaxed bg-[#F4EAD7] p-3 rounded-lg border border-[#D8C7A5]">

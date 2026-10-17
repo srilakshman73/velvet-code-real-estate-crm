@@ -128,7 +128,7 @@ export default function AdminOrganizationsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-[#2C241A] tracking-tight">Organizations & Tenants</h1>
+          <h1 className="text-3xl font-bold text-[#2C241A] tracking-tight">Organizations & Tenants</h1>
           <p className="text-sm text-[#6A5A44] mt-1">
             Manage multi-tenant brokerages, isolated database partitions, subscription tiers, and tenant lifecycle.
           </p>
@@ -216,11 +216,11 @@ export default function AdminOrganizationsPage() {
                 <tr key={org.id} className="hover:bg-[#F7EEDC] transition-colors">
                   <td className="py-3 px-4 font-medium text-[#2C241A]">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#A37432]/15 border border-[#A37432]/30 text-[#7A5520] font-serif flex items-center justify-center font-bold text-xs">
+                      <div className="w-8 h-8 rounded-lg bg-[#A37432]/15 border border-[#A37432]/30 text-[#7A5520] flex items-center justify-center font-bold text-xs">
                         {org.name.charAt(0)}
                       </div>
                       <div>
-                        <div className="text-sm font-serif font-bold text-[#2C241A]">{org.name}</div>
+                        <div className="text-sm font-bold text-[#2C241A]">{org.name}</div>
                         <div className="text-[11px] text-[#6A5A44] font-mono">{org.id} &bull; {org.businessType}</div>
                       </div>
                     </div>
