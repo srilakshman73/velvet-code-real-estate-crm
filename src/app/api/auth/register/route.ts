@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     const existingUser = await serverDB.getUserByEmail(trimmedEmail);
     if (existingUser) {
       return NextResponse.json(
-        { error: 'An account with this email address already exists. Please sign in instead.' },
+        { error: 'This email is already registered. Please sign in or reset your password.' },
         { status: 409 }
       );
     }

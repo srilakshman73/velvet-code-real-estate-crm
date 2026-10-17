@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { serverDB } from '@/lib/server-db';
-import { getOwnerEmail, verifyPassword } from '@/lib/auth-server';
+import { getOwnerEmail, verifyPassword, hashPassword } from '@/lib/auth-server';
 import { verifyCustomerAccess } from '@/lib/subscription-gate';
 
 export async function POST(request: Request) {
@@ -95,11 +95,14 @@ export async function POST(request: Request) {
         const isMatch = verifyPassword(password, dbUser.passwordHash);
         if (!isMatch) {
           return NextResponse.json(
-            { error: 'Invalid email or password.' },
+            { error: 'Invalid email or password. Please check your credentials or reset your password.' },
             { status: 401 }
           );
         }
-      } else if (password.length < 6) {
+      } else if (password.length >= 6) {
+        // Upgrade legacy account to PBKDF2 hash
+        await serverDB.updateUserPassword(dbUser.email, hashPassword(password));
+      } else {
         return NextResponse.json(
           { error: 'Password must be at least 6 characters long' },
           { status: 401 }

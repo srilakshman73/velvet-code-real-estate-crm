@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { put, head } from '@vercel/blob';
 import {
   INITIAL_ORGANIZATIONS,
   INITIAL_USERS,
@@ -56,7 +57,11 @@ export interface VelvetDBSchema {
 
 declare global {
   var __velvetServerDB: VelvetDBSchema | undefined;
+  var __velvetLastCloudSync: number | undefined;
+  var __velvetCloudSyncPromise: Promise<void> | undefined;
 }
+
+const CLOUD_MASTER_KEY = 'velvet_db_cloud_master.json';
 
 function getPersistenceFilePath(): string {
   try {
@@ -83,6 +88,144 @@ function saveDBToDisk(db: VelvetDBSchema) {
   } catch (err) {
     // Read-only filesystem fallback
   }
+
+  // Persist to Vercel Blob cloud storage asynchronously
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (token && token.trim().length > 0) {
+    put(CLOUD_MASTER_KEY, JSON.stringify(db), {
+      access: 'public',
+      token,
+      addRandomSuffix: false,
+    }).catch(() => {
+      // Non-blocking background sync
+    });
+  }
+}
+
+export async function saveDBToDiskAndCloud(db: VelvetDBSchema) {
+  try {
+    const filePath = getPersistenceFilePath();
+    fs.writeFileSync(filePath, JSON.stringify(db, null, 2), 'utf-8');
+  } catch (err) {}
+
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (token && token.trim().length > 0) {
+    try {
+      await put(CLOUD_MASTER_KEY, JSON.stringify(db), {
+        access: 'public',
+        token,
+        addRandomSuffix: false,
+      });
+    } catch (err) {
+      console.warn('Vercel Blob cloud DB backup warning:', err);
+    }
+  }
+}
+
+export async function ensureCloudSynced(): Promise<void> {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token || token.trim().length === 0) return;
+
+  const now = Date.now();
+  if (global.__velvetLastCloudSync && now - global.__velvetLastCloudSync < 5000) {
+    return;
+  }
+
+  if (global.__velvetCloudSyncPromise) {
+    return global.__velvetCloudSyncPromise;
+  }
+
+  global.__velvetCloudSyncPromise = (async () => {
+    try {
+      const storeId = process.env.BLOB_STORE_ID;
+      const cloudUrl = storeId
+        ? `https://${storeId.replace('store_', '')}.public.blob.vercel-storage.com/${CLOUD_MASTER_KEY}?t=${now}`
+        : null;
+
+      if (cloudUrl) {
+        const res = await fetch(cloudUrl, { cache: 'no-store' });
+        if (res.ok) {
+          const cloudData: Partial<VelvetDBSchema> = await res.json();
+          if (cloudData && typeof cloudData === 'object') {
+            const db = initMemoryDB();
+            if (cloudData.users && Array.isArray(cloudData.users)) {
+              for (const u of cloudData.users) {
+                const idx = db.users.findIndex(
+                  (x) => x.id === u.id || x.email.toLowerCase() === u.email.toLowerCase()
+                );
+                if (idx >= 0) db.users[idx] = { ...db.users[idx], ...u };
+                else db.users.push(u);
+              }
+            }
+            if (cloudData.organizations && Array.isArray(cloudData.organizations)) {
+              for (const o of cloudData.organizations) {
+                const idx = db.organizations.findIndex((x) => x.id === o.id);
+                if (idx >= 0) db.organizations[idx] = { ...db.organizations[idx], ...o };
+                else db.organizations.push(o);
+              }
+            }
+            if (cloudData.subscriptions && Array.isArray(cloudData.subscriptions)) {
+              for (const s of cloudData.subscriptions) {
+                const idx = db.subscriptions.findIndex(
+                  (x) => x.id === s.id || x.organizationId === s.organizationId
+                );
+                if (idx >= 0) db.subscriptions[idx] = { ...db.subscriptions[idx], ...s };
+                else db.subscriptions.push(s);
+              }
+            }
+            if (cloudData.leads && Array.isArray(cloudData.leads)) {
+              for (const l of cloudData.leads) {
+                const idx = db.leads.findIndex((x) => x.id === l.id);
+                if (idx >= 0) db.leads[idx] = { ...db.leads[idx], ...l };
+                else db.leads.push(l);
+              }
+            }
+            if (cloudData.properties && Array.isArray(cloudData.properties)) {
+              for (const p of cloudData.properties) {
+                const idx = db.properties.findIndex((x) => x.id === p.id);
+                if (idx >= 0) db.properties[idx] = { ...db.properties[idx], ...p };
+                else db.properties.push(p);
+              }
+            }
+            if (cloudData.clients && Array.isArray(cloudData.clients)) {
+              for (const c of cloudData.clients) {
+                const idx = db.clients.findIndex((x) => x.id === c.id);
+                if (idx >= 0) db.clients[idx] = { ...db.clients[idx], ...c };
+                else db.clients.push(c);
+              }
+            }
+            if (cloudData.appointments && Array.isArray(cloudData.appointments)) {
+              for (const a of cloudData.appointments) {
+                const idx = db.appointments.findIndex((x) => x.id === a.id);
+                if (idx >= 0) db.appointments[idx] = { ...db.appointments[idx], ...a };
+                else db.appointments.push(a);
+              }
+            }
+            if (cloudData.documents && Array.isArray(cloudData.documents)) {
+              for (const d of cloudData.documents) {
+                const idx = db.documents.findIndex((x) => x.id === d.id);
+                if (idx >= 0) db.documents[idx] = { ...db.documents[idx], ...d };
+                else db.documents.push(d);
+              }
+            }
+            if (cloudData.storageAssets && Array.isArray(cloudData.storageAssets)) {
+              for (const a of cloudData.storageAssets) {
+                const idx = db.storageAssets.findIndex((x) => x.id === a.id);
+                if (idx >= 0) db.storageAssets[idx] = { ...db.storageAssets[idx], ...a };
+                else db.storageAssets.push(a);
+              }
+            }
+            global.__velvetLastCloudSync = now;
+          }
+        }
+      }
+    } catch {}
+    finally {
+      global.__velvetCloudSyncPromise = undefined;
+    }
+  })();
+
+  return global.__velvetCloudSyncPromise;
 }
 
 function loadDBFromDisk(): Partial<VelvetDBSchema> | null {
@@ -311,6 +454,7 @@ export const serverDB = {
         console.error('PostgreSQL getUserByEmail error:', err);
       }
     }
+    await ensureCloudSynced();
     const matched = initMemoryDB().users.find((u) => u.email.toLowerCase() === cleanEmail);
     return matched || null;
   },
@@ -2019,5 +2163,28 @@ export const serverDB = {
       db.processedWebhooks.push(eventId);
       saveDBToDisk(db);
     }
+  },
+
+  async updateUserPassword(email: string, passwordHash: string): Promise<boolean> {
+    const cleanEmail = email.trim().toLowerCase();
+    if (isPostgresConfigured()) {
+      await initPostgresSchema();
+      const pool = getPgPool()!;
+      try {
+        const res = await pool.query('UPDATE users SET password_hash = $1, updated_at = NOW() WHERE LOWER(email) = $2', [passwordHash, cleanEmail]);
+        if ((res.rowCount ?? 0) > 0) return true;
+      } catch (err) {
+        console.error('PostgreSQL updateUserPassword error:', err);
+      }
+    }
+
+    const db = initMemoryDB();
+    const user = db.users.find((u) => u.email.toLowerCase() === cleanEmail);
+    if (user) {
+      user.passwordHash = passwordHash;
+      await saveDBToDiskAndCloud(db);
+      return true;
+    }
+    return false;
   },
 };

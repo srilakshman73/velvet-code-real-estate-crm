@@ -382,6 +382,28 @@ export async function initPostgresSchema(): Promise<boolean> {
         );
       `);
 
+      // Idempotent migrations for existing production databases
+      await client.query(`
+        ALTER TABLE users ADD COLUMN IF NOT EXISTS password_hash TEXT;
+        ALTER TABLE users ADD COLUMN IF NOT EXISTS phone VARCHAR(50);
+        ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url TEXT;
+        ALTER TABLE users ADD COLUMN IF NOT EXISTS is_super_admin BOOLEAN DEFAULT FALSE;
+
+        ALTER TABLE organizations ADD COLUMN IF NOT EXISTS trial_starts_at TIMESTAMPTZ;
+        ALTER TABLE organizations ADD COLUMN IF NOT EXISTS trial_ends_at TIMESTAMPTZ;
+        ALTER TABLE organizations ADD COLUMN IF NOT EXISTS plan VARCHAR(50) DEFAULT 'STARTER';
+        ALTER TABLE organizations ADD COLUMN IF NOT EXISTS subscription_status VARCHAR(50) DEFAULT 'TRIALING';
+
+        ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS trial_starts_at TIMESTAMPTZ;
+        ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS trial_ends_at TIMESTAMPTZ;
+        ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS razorpay_subscription_id VARCHAR(100);
+        ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS razorpay_customer_id VARCHAR(100);
+        ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS usage_json JSONB DEFAULT '{}'::jsonb;
+
+        ALTER TABLE storage_assets ADD COLUMN IF NOT EXISTS binary_data BYTEA;
+        ALTER TABLE storage_assets ADD COLUMN IF NOT EXISTS deleted_at TIMESTAMPTZ;
+      `);
+
       await client.query('COMMIT');
 
       // Seed baseline master owner & demo org if table was completely empty

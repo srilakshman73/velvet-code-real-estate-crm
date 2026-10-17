@@ -58,6 +58,7 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isOrgDropdownOpen, setIsOrgDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const [showExpiryModal, setShowExpiryModal] = useState(true);
 
   const {
     currentOrg,
@@ -172,6 +173,66 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
       <NotificationDrawer isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />
       <RealtyAIFloatingWidget />
       <AppointmentReminderPopup />
+
+      {/* 7-Day Free Trial Expiry Payment Pop-up Modal */}
+      {isPaywalled && !isOwner && showExpiryModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2C241A]/75 backdrop-blur-sm animate-in fade-in">
+          <div className="max-w-md w-full bg-[#FFF9F0] border-2 border-[#D8C7A5] rounded-3xl p-6 sm:p-8 shadow-2xl text-center space-y-5 relative">
+            <div className="w-14 h-14 rounded-2xl bg-[#A37432]/15 text-[#7A5520] flex items-center justify-center mx-auto border border-[#A37432]/30 shadow-inner">
+              <CreditCard className="w-7 h-7" />
+            </div>
+
+            <div className="space-y-2">
+              <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#A37432]/15 text-[#7A5520] font-serif">
+                Access Required
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-[#2C241A] font-serif leading-tight">
+                7-Day Free Trial Ended
+              </h3>
+              <p className="text-xs sm:text-sm text-[#6A5A44] leading-relaxed">
+                Your 7-day free trial has ended. Subscribe to continue using Velvet Code Real Estate CRM. Your saved leads, properties, photos, and documents are safe and will not be deleted.
+              </p>
+            </div>
+
+            <div className="pt-2 space-y-2.5">
+              <Link href="/app/billing" className="block w-full">
+                <Button
+                  variant="gold"
+                  size="md"
+                  className="w-full font-bold shadow-md"
+                  onClick={() => setShowExpiryModal(false)}
+                >
+                  Choose a Plan
+                </Button>
+              </Link>
+              <Link href="/pricing" className="block w-full">
+                <Button
+                  variant="secondary"
+                  size="md"
+                  className="w-full font-bold border border-[#D8C7A5]"
+                  onClick={() => setShowExpiryModal(false)}
+                >
+                  View Subscription Plans
+                </Button>
+              </Link>
+            </div>
+
+            <div className="pt-3 border-t border-[#D8C7A5]/60 flex items-center justify-between text-[11px] text-[#8A7A63]">
+              <span className="flex items-center gap-1 text-[#547A61] font-semibold">
+                ✓ Saved data permanently safe
+              </span>
+              <button
+                onClick={async () => {
+                  await signOut();
+                }}
+                className="text-[#8B4A4A] hover:underline font-bold"
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="flex-1 flex overflow-hidden">
         {/* ========================================== */}
@@ -556,11 +617,10 @@ export function CRMAppShell({ children, serverAccess, serverSession }: CRMAppShe
                     Subscription Required
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-bold text-[#2C241A] font-serif mb-2">
-                    Unlock Velvet Code Real Estate CRM
+                    7-Day Free Trial Ended
                   </h2>
-                  <p className="text-sm text-[#6A5A44] max-w-xl mx-auto mb-8">
-                    Your 7-day free trial has expired or payment is required to access your CRM workspace.
-                    All your saved leads, clients, properties, and uploaded cloud documents remain permanently stored in your organization database.
+                  <p className="text-sm text-[#6A5A44] max-w-xl mx-auto mb-8 font-medium leading-relaxed">
+                    Your 7-day free trial has ended. Subscribe to continue using Velvet Code Real Estate CRM. Your saved leads, properties, photos, and documents are safe and will not be deleted.
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left mb-8">

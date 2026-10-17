@@ -132,9 +132,19 @@ export default function LoginPage() {
           </div>
 
           {errorMessage && (
-            <div className="p-3.5 rounded-xl bg-[#8B4A4A]/10 border border-[#8B4A4A]/30 text-[#8B4A4A] text-xs flex items-center gap-2 font-medium">
-              <AlertCircle className="w-4 h-4 shrink-0 text-[#8B4A4A]" />
-              <span>{errorMessage}</span>
+            <div className="p-3.5 rounded-xl bg-[#8B4A4A]/10 border border-[#8B4A4A]/30 text-[#8B4A4A] text-xs space-y-1 font-medium">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-[#8B4A4A]" />
+                <span>{errorMessage}</span>
+              </div>
+              <div className="pt-1 pl-6 flex gap-3 text-[11px] font-bold">
+                <Link href="/forgot-password" className="underline hover:text-[#2C241A]">
+                  Forgot password? Reset here
+                </Link>
+                <Link href="/register" className="underline hover:text-[#2C241A]">
+                  Register new workspace
+                </Link>
+              </div>
             </div>
           )}
 

@@ -411,6 +411,7 @@ export interface StorageAsset {
   createdAt: string;
   updatedAt: string;
   deletedAt?: string;
+  binaryData?: Buffer;
 }
 
 export interface StorageUsage {

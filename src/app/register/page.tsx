@@ -132,8 +132,18 @@ export default function RegisterPage() {
           </div>
 
           {errorMsg && (
-            <div className="p-3.5 rounded-xl bg-[#8B4A4A]/10 border border-[#8B4A4A]/30 text-[#8B4A4A] text-xs font-medium">
-              {errorMsg}
+            <div className="p-3.5 rounded-xl bg-[#8B4A4A]/10 border border-[#8B4A4A]/30 text-[#8B4A4A] text-xs font-medium space-y-1">
+              <div>{errorMsg}</div>
+              {errorMsg.includes('already registered') && (
+                <div className="pt-1 flex gap-3 text-[11px] font-bold">
+                  <Link href="/login" className="underline hover:text-[#2C241A]">
+                    → Sign in here
+                  </Link>
+                  <Link href="/forgot-password" className="underline hover:text-[#2C241A]">
+                    → Reset password
+                  </Link>
+                </div>
+              )}
             </div>
           )}
 
