@@ -2408,7 +2408,7 @@ export const serverDB = {
     await ensureCloudSynced(true);
     const db = initMemoryDB();
 
-    let allUsers = [...db.users];
+    const allUsers = [...db.users];
     if (isPostgresConfigured()) {
       try {
         const pgUsers = await this.getUsers();

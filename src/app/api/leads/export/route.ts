@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from '@/lib/auth-server';
 import { serverDB } from '@/lib/server-db';
-import { spawn } from 'child_process';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as os from 'os';
+import { generateLeadsWorkbookBuffer } from '@/lib/excel-service';
 
 export async function GET(request: NextRequest) {
   return handleExport(request);
@@ -15,9 +12,6 @@ export async function POST(request: NextRequest) {
 }
 
 async function handleExport(request: NextRequest) {
-  let tempJsonPath: string | null = null;
-  let tempXlsxPath: string | null = null;
-
   try {
     const session = await getServerSession(request);
     if (!session) {
@@ -27,7 +21,7 @@ async function handleExport(request: NextRequest) {
       );
     }
 
-    // Determine target organization
+    // Determine target organization strictly from authenticated session
     const effectiveOrgId = session.organizationId;
     const orgRecord = (await serverDB.getOrganizations()).find((o) => o.id === effectiveOrgId) || {
       name: session.organizationName || 'Velvet Code Real Estate CRM',
@@ -82,44 +76,12 @@ async function handleExport(request: NextRequest) {
       leads: finalLeads,
     };
 
-    // Write temp payload file
-    const randomSuffix = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
-    const tempDir = os.tmpdir();
-    tempJsonPath = path.join(tempDir, `leads_payload_${randomSuffix}.json`);
-    tempXlsxPath = path.join(tempDir, `leads_export_${randomSuffix}.xlsx`);
-
-    fs.writeFileSync(tempJsonPath, JSON.stringify(exportPayload, null, 2), 'utf8');
-
-    // Execute Python openpyxl generator script
-    const pythonScriptPath = path.resolve(process.cwd(), 'scripts', 'generate_leads_excel.py');
-
-    await new Promise<void>((resolve, reject) => {
-      const pythonProcess = spawn('python', [pythonScriptPath, tempJsonPath!, tempXlsxPath!]);
-
-      let stderrOutput = '';
-      pythonProcess.stderr.on('data', (data) => {
-        stderrOutput += data.toString();
-      });
-
-      pythonProcess.on('close', (code) => {
-        if (code === 0 && fs.existsSync(tempXlsxPath!)) {
-          resolve();
-        } else {
-          reject(new Error(`Python openpyxl generation failed with code ${code}: ${stderrOutput}`));
-        }
-      });
-
-      pythonProcess.on('error', (err) => {
-        reject(err);
-      });
-    });
-
-    // Read the generated binary Excel workbook
-    const xlsxBuffer = fs.readFileSync(tempXlsxPath);
+    // Generate native Excel workbook buffer in-memory
+    const xlsxBuffer = await generateLeadsWorkbookBuffer(exportPayload);
 
     const filename = `Velvet_Code_Real_Estate_Leads.xlsx`;
 
-    return new NextResponse(xlsxBuffer, {
+    return new NextResponse(new Uint8Array(xlsxBuffer), {
       status: 200,
       headers: {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -134,17 +96,5 @@ async function handleExport(request: NextRequest) {
       { error: 'Failed to generate Excel export workbook', details: error.message },
       { status: 500 }
     );
-  } finally {
-    // Cleanup temporary files
-    try {
-      if (tempJsonPath && fs.existsSync(tempJsonPath)) {
-        fs.unlinkSync(tempJsonPath);
-      }
-      if (tempXlsxPath && fs.existsSync(tempXlsxPath)) {
-        fs.unlinkSync(tempXlsxPath);
-      }
-    } catch {
-      // ignore cleanup errors
-    }
   }
 }

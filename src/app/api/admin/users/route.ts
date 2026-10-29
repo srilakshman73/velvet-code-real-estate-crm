@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
     const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
     const limit = Math.max(1, Math.min(100, parseInt(searchParams.get('limit') || '10', 10)));
 
-    let filtered = allUsers.filter((user) => {
+    const filtered = allUsers.filter((user) => {
       // Search filter across name, email, and organization
       if (search) {
         const matchesName = user.name.toLowerCase().includes(search);
